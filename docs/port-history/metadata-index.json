@@ -1,0 +1,873 @@
+[
+  {
+    "commit": "bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8",
+    "path": "stable.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8/stable.json",
+    "mirror": true,
+    "size": 377,
+    "sha256": "df09ada38faef8697ee5dc88977dc0f8340b1d4fa03743db60489efac8584290",
+    "status": "archived"
+  },
+  {
+    "commit": "bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8",
+    "path": "beta.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8/beta.json",
+    "mirror": true,
+    "size": 377,
+    "sha256": "df09ada38faef8697ee5dc88977dc0f8340b1d4fa03743db60489efac8584290",
+    "status": "archived"
+  },
+  {
+    "commit": "bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8",
+    "path": "canary.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8/canary.json",
+    "mirror": true,
+    "size": 358,
+    "sha256": "44ea0393c1931800388b252a0fb839f0ab7ff2d2e46d7b0ccb57f7cff9125b2f",
+    "status": "archived"
+  },
+  {
+    "commit": "bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8",
+    "path": "debug.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8/debug.json",
+    "mirror": true,
+    "size": 354,
+    "sha256": "72821b813ed1b27d34858bef065f5147cdc32745f14ee100daa24841dedd8b49",
+    "status": "archived"
+  },
+  {
+    "commit": "bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8",
+    "path": "note.md",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8/note.md",
+    "mirror": true,
+    "size": 2901,
+    "sha256": "86142544fb5793018c10d60a0194017cba87cf9fdac9bfa0dd5641a98da533b2",
+    "status": "archived"
+  },
+  {
+    "commit": "bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8",
+    "path": "canary_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8/canary_lite.json",
+    "mirror": true,
+    "status": "absent-at-commit",
+    "http_status": 404
+  },
+  {
+    "commit": "bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8",
+    "path": "debug_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8/debug_lite.json",
+    "mirror": true,
+    "status": "absent-at-commit",
+    "http_status": 404
+  },
+  {
+    "commit": "bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8",
+    "path": "note_lite.md",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8/note_lite.md",
+    "mirror": true,
+    "status": "absent-at-commit",
+    "http_status": 404
+  },
+  {
+    "commit": "51fad676c48c855d8e94ce054487dc4f00e4446a",
+    "path": "stable.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/51fad676c48c855d8e94ce054487dc4f00e4446a/stable.json",
+    "mirror": true,
+    "size": 377,
+    "sha256": "df09ada38faef8697ee5dc88977dc0f8340b1d4fa03743db60489efac8584290",
+    "status": "archived"
+  },
+  {
+    "commit": "51fad676c48c855d8e94ce054487dc4f00e4446a",
+    "path": "beta.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/51fad676c48c855d8e94ce054487dc4f00e4446a/beta.json",
+    "mirror": true,
+    "size": 377,
+    "sha256": "df09ada38faef8697ee5dc88977dc0f8340b1d4fa03743db60489efac8584290",
+    "status": "archived"
+  },
+  {
+    "commit": "51fad676c48c855d8e94ce054487dc4f00e4446a",
+    "path": "canary.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/51fad676c48c855d8e94ce054487dc4f00e4446a/canary.json",
+    "mirror": true,
+    "size": 358,
+    "sha256": "1eb964b4fb75c4951464259a8d7b873ee539bc97206bfe2671593eedcf7bd34e",
+    "status": "archived"
+  },
+  {
+    "commit": "51fad676c48c855d8e94ce054487dc4f00e4446a",
+    "path": "debug.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/51fad676c48c855d8e94ce054487dc4f00e4446a/debug.json",
+    "mirror": true,
+    "size": 354,
+    "sha256": "7b4b001af2dacb53cc72cf4465040912b8597493c1b607f766d0539f5ccb9463",
+    "status": "archived"
+  },
+  {
+    "commit": "51fad676c48c855d8e94ce054487dc4f00e4446a",
+    "path": "note.md",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/51fad676c48c855d8e94ce054487dc4f00e4446a/note.md",
+    "mirror": true,
+    "size": 2701,
+    "sha256": "5bb60dee357ef09b1ec7782a9f8b56227526a8ed74d60b96c121332b7f570791",
+    "status": "archived"
+  },
+  {
+    "commit": "51fad676c48c855d8e94ce054487dc4f00e4446a",
+    "path": "canary_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/51fad676c48c855d8e94ce054487dc4f00e4446a/canary_lite.json",
+    "mirror": true,
+    "status": "absent-at-commit",
+    "http_status": 404
+  },
+  {
+    "commit": "51fad676c48c855d8e94ce054487dc4f00e4446a",
+    "path": "debug_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/51fad676c48c855d8e94ce054487dc4f00e4446a/debug_lite.json",
+    "mirror": true,
+    "status": "absent-at-commit",
+    "http_status": 404
+  },
+  {
+    "commit": "51fad676c48c855d8e94ce054487dc4f00e4446a",
+    "path": "note_lite.md",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/51fad676c48c855d8e94ce054487dc4f00e4446a/note_lite.md",
+    "mirror": true,
+    "status": "absent-at-commit",
+    "http_status": 404
+  },
+  {
+    "commit": "02ba306efeb85827c83effa13b01ef0510192391",
+    "path": "stable.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/02ba306efeb85827c83effa13b01ef0510192391/stable.json",
+    "mirror": true,
+    "size": 377,
+    "sha256": "df09ada38faef8697ee5dc88977dc0f8340b1d4fa03743db60489efac8584290",
+    "status": "archived"
+  },
+  {
+    "commit": "02ba306efeb85827c83effa13b01ef0510192391",
+    "path": "beta.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/02ba306efeb85827c83effa13b01ef0510192391/beta.json",
+    "mirror": true,
+    "size": 377,
+    "sha256": "df09ada38faef8697ee5dc88977dc0f8340b1d4fa03743db60489efac8584290",
+    "status": "archived"
+  },
+  {
+    "commit": "02ba306efeb85827c83effa13b01ef0510192391",
+    "path": "canary.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/02ba306efeb85827c83effa13b01ef0510192391/canary.json",
+    "mirror": true,
+    "size": 358,
+    "sha256": "853273426368361ba1d6fb54197b37403f6019d871ec5582e6a36524a0efdf47",
+    "status": "archived"
+  },
+  {
+    "commit": "02ba306efeb85827c83effa13b01ef0510192391",
+    "path": "debug.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/02ba306efeb85827c83effa13b01ef0510192391/debug.json",
+    "mirror": true,
+    "size": 354,
+    "sha256": "344ab226332cc87b9bc9958384b2f44c8d85a42d8027709fe4c5519cd43db29d",
+    "status": "archived"
+  },
+  {
+    "commit": "02ba306efeb85827c83effa13b01ef0510192391",
+    "path": "note.md",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/02ba306efeb85827c83effa13b01ef0510192391/note.md",
+    "mirror": true,
+    "size": 2576,
+    "sha256": "fff94b16eb47782c013e66c003b5e364f330f2e9f23f9537362d945f177102f2",
+    "status": "archived"
+  },
+  {
+    "commit": "02ba306efeb85827c83effa13b01ef0510192391",
+    "path": "canary_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/02ba306efeb85827c83effa13b01ef0510192391/canary_lite.json",
+    "mirror": true,
+    "status": "absent-at-commit",
+    "http_status": 404
+  },
+  {
+    "commit": "02ba306efeb85827c83effa13b01ef0510192391",
+    "path": "debug_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/02ba306efeb85827c83effa13b01ef0510192391/debug_lite.json",
+    "mirror": true,
+    "status": "absent-at-commit",
+    "http_status": 404
+  },
+  {
+    "commit": "02ba306efeb85827c83effa13b01ef0510192391",
+    "path": "note_lite.md",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/02ba306efeb85827c83effa13b01ef0510192391/note_lite.md",
+    "mirror": true,
+    "status": "absent-at-commit",
+    "http_status": 404
+  },
+  {
+    "commit": "7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce",
+    "path": "stable.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce/stable.json",
+    "mirror": true,
+    "size": 377,
+    "sha256": "df09ada38faef8697ee5dc88977dc0f8340b1d4fa03743db60489efac8584290",
+    "status": "archived"
+  },
+  {
+    "commit": "7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce",
+    "path": "beta.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce/beta.json",
+    "mirror": true,
+    "size": 377,
+    "sha256": "df09ada38faef8697ee5dc88977dc0f8340b1d4fa03743db60489efac8584290",
+    "status": "archived"
+  },
+  {
+    "commit": "7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce",
+    "path": "canary.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce/canary.json",
+    "mirror": true,
+    "size": 358,
+    "sha256": "14635c849a20aa69f3846fc5bb59eec88e2eaf7857b72385a703bee4dc9cd442",
+    "status": "archived"
+  },
+  {
+    "commit": "7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce",
+    "path": "debug.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce/debug.json",
+    "mirror": true,
+    "size": 354,
+    "sha256": "cd9cfbceab1c984615ffc8f97f9a8411e52e1aff4db3b1500c319bd0f8e13ef2",
+    "status": "archived"
+  },
+  {
+    "commit": "7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce",
+    "path": "note.md",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce/note.md",
+    "mirror": true,
+    "size": 2582,
+    "sha256": "41d18b005efc36f734dea7b30432530a60d93473d855c26febdae56d0f37ceb7",
+    "status": "archived"
+  },
+  {
+    "commit": "7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce",
+    "path": "canary_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce/canary_lite.json",
+    "mirror": true,
+    "size": 378,
+    "sha256": "46b4e1431f2bae2b929cd9b1d3eb2257ff968b2c1fefb41a17121c26b3a07632",
+    "status": "archived"
+  },
+  {
+    "commit": "7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce",
+    "path": "debug_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce/debug_lite.json",
+    "mirror": true,
+    "size": 374,
+    "sha256": "195c953b870c72d29a043fb8484f35e4ce97115a0b802d04b2f682f18f024c4d",
+    "status": "archived"
+  },
+  {
+    "commit": "7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce",
+    "path": "note_lite.md",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce/note_lite.md",
+    "mirror": true,
+    "size": 656,
+    "sha256": "1ffc603d8b5a07330a9c2eefd2303d537bbef88ab09b27deb5834835855ae8c2",
+    "status": "archived"
+  },
+  {
+    "commit": "29aaacaa07f74e1838d7c199f4c437aeeeed4702",
+    "path": "stable.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/29aaacaa07f74e1838d7c199f4c437aeeeed4702/stable.json",
+    "mirror": true,
+    "size": 377,
+    "sha256": "df09ada38faef8697ee5dc88977dc0f8340b1d4fa03743db60489efac8584290",
+    "status": "archived"
+  },
+  {
+    "commit": "29aaacaa07f74e1838d7c199f4c437aeeeed4702",
+    "path": "beta.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/29aaacaa07f74e1838d7c199f4c437aeeeed4702/beta.json",
+    "mirror": true,
+    "size": 377,
+    "sha256": "df09ada38faef8697ee5dc88977dc0f8340b1d4fa03743db60489efac8584290",
+    "status": "archived"
+  },
+  {
+    "commit": "29aaacaa07f74e1838d7c199f4c437aeeeed4702",
+    "path": "canary.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/29aaacaa07f74e1838d7c199f4c437aeeeed4702/canary.json",
+    "mirror": true,
+    "size": 358,
+    "sha256": "5d1c7ccae4d2757412ec59191c423dd096520620c9eca211d3a0dec8237dc861",
+    "status": "archived"
+  },
+  {
+    "commit": "29aaacaa07f74e1838d7c199f4c437aeeeed4702",
+    "path": "debug.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/29aaacaa07f74e1838d7c199f4c437aeeeed4702/debug.json",
+    "mirror": true,
+    "size": 354,
+    "sha256": "c9793ac4c1cc02545a26f1c7b03617f68735f60bf5e1240bf9ac1165628cbf8b",
+    "status": "archived"
+  },
+  {
+    "commit": "29aaacaa07f74e1838d7c199f4c437aeeeed4702",
+    "path": "note.md",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/29aaacaa07f74e1838d7c199f4c437aeeeed4702/note.md",
+    "mirror": true,
+    "size": 2578,
+    "sha256": "b2c956b4d496a9a92e90c819af60670ab42b63516453b6f260fc045c66d23681",
+    "status": "archived"
+  },
+  {
+    "commit": "29aaacaa07f74e1838d7c199f4c437aeeeed4702",
+    "path": "canary_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/29aaacaa07f74e1838d7c199f4c437aeeeed4702/canary_lite.json",
+    "mirror": true,
+    "size": 378,
+    "sha256": "33e91466003066813a85d75366898f2a711639d623ec44445055c02e29807deb",
+    "status": "archived"
+  },
+  {
+    "commit": "29aaacaa07f74e1838d7c199f4c437aeeeed4702",
+    "path": "debug_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/29aaacaa07f74e1838d7c199f4c437aeeeed4702/debug_lite.json",
+    "mirror": true,
+    "size": 374,
+    "sha256": "19178c14d5c1a7d8877bb307afe57332d3dbeb826bf53b9cc1f8f059d73ae286",
+    "status": "archived"
+  },
+  {
+    "commit": "29aaacaa07f74e1838d7c199f4c437aeeeed4702",
+    "path": "note_lite.md",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/29aaacaa07f74e1838d7c199f4c437aeeeed4702/note_lite.md",
+    "mirror": true,
+    "size": 704,
+    "sha256": "7bbf202ea09b0c1ca133845090b6096072a04d7014ab48218b8ce8d3903a04b8",
+    "status": "archived"
+  },
+  {
+    "commit": "c5d500af33e829314c05e6a3f722061a0257f6b3",
+    "path": "stable.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/stable.json",
+    "mirror": true,
+    "size": 377,
+    "sha256": "df09ada38faef8697ee5dc88977dc0f8340b1d4fa03743db60489efac8584290",
+    "status": "archived"
+  },
+  {
+    "commit": "c5d500af33e829314c05e6a3f722061a0257f6b3",
+    "path": "beta.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/beta.json",
+    "mirror": true,
+    "size": 377,
+    "sha256": "df09ada38faef8697ee5dc88977dc0f8340b1d4fa03743db60489efac8584290",
+    "status": "archived"
+  },
+  {
+    "commit": "c5d500af33e829314c05e6a3f722061a0257f6b3",
+    "path": "canary.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/canary.json",
+    "mirror": true,
+    "size": 358,
+    "sha256": "3ce9411b44681101ad2870d85fca40741b0a271091cab94f6991024657be5002",
+    "status": "archived"
+  },
+  {
+    "commit": "c5d500af33e829314c05e6a3f722061a0257f6b3",
+    "path": "debug.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/debug.json",
+    "mirror": true,
+    "size": 354,
+    "sha256": "979cc712cd9052e9c2949079f633f742f2b544b7e56d1fc0dc84ee77d5e9e2eb",
+    "status": "archived"
+  },
+  {
+    "commit": "c5d500af33e829314c05e6a3f722061a0257f6b3",
+    "path": "note.md",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/note.md",
+    "mirror": true,
+    "size": 2625,
+    "sha256": "c1e2cce27eca83f9436dbc3d435db4688a99e3610fb651cb79c9be20fe52566c",
+    "status": "archived"
+  },
+  {
+    "commit": "c5d500af33e829314c05e6a3f722061a0257f6b3",
+    "path": "canary_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/canary_lite.json",
+    "mirror": true,
+    "size": 378,
+    "sha256": "33e91466003066813a85d75366898f2a711639d623ec44445055c02e29807deb",
+    "status": "archived"
+  },
+  {
+    "commit": "c5d500af33e829314c05e6a3f722061a0257f6b3",
+    "path": "debug_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/debug_lite.json",
+    "mirror": true,
+    "size": 374,
+    "sha256": "19178c14d5c1a7d8877bb307afe57332d3dbeb826bf53b9cc1f8f059d73ae286",
+    "status": "archived"
+  },
+  {
+    "commit": "c5d500af33e829314c05e6a3f722061a0257f6b3",
+    "path": "note_lite.md",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/note_lite.md",
+    "mirror": true,
+    "size": 704,
+    "sha256": "7bbf202ea09b0c1ca133845090b6096072a04d7014ab48218b8ce8d3903a04b8",
+    "status": "archived"
+  },
+  {
+    "commit": "2976a6f5ef29cac693764875dd4d68f1a19f6af6",
+    "path": "stable.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/2976a6f5ef29cac693764875dd4d68f1a19f6af6/stable.json",
+    "mirror": true,
+    "size": 377,
+    "sha256": "df09ada38faef8697ee5dc88977dc0f8340b1d4fa03743db60489efac8584290",
+    "status": "archived"
+  },
+  {
+    "commit": "2976a6f5ef29cac693764875dd4d68f1a19f6af6",
+    "path": "beta.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/2976a6f5ef29cac693764875dd4d68f1a19f6af6/beta.json",
+    "mirror": true,
+    "size": 377,
+    "sha256": "df09ada38faef8697ee5dc88977dc0f8340b1d4fa03743db60489efac8584290",
+    "status": "archived"
+  },
+  {
+    "commit": "2976a6f5ef29cac693764875dd4d68f1a19f6af6",
+    "path": "canary.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/2976a6f5ef29cac693764875dd4d68f1a19f6af6/canary.json",
+    "mirror": true,
+    "size": 358,
+    "sha256": "77dcab22716a4f88898bd40eff095488540b8ab87a2ea9456f058396a824887b",
+    "status": "archived"
+  },
+  {
+    "commit": "2976a6f5ef29cac693764875dd4d68f1a19f6af6",
+    "path": "debug.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/2976a6f5ef29cac693764875dd4d68f1a19f6af6/debug.json",
+    "mirror": true,
+    "size": 354,
+    "sha256": "6fadd3f7a2ae7c47099381ee5012aec2694cb991c9ae15ecb75d23c1497be95a",
+    "status": "archived"
+  },
+  {
+    "commit": "2976a6f5ef29cac693764875dd4d68f1a19f6af6",
+    "path": "note.md",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/2976a6f5ef29cac693764875dd4d68f1a19f6af6/note.md",
+    "mirror": true,
+    "size": 2271,
+    "sha256": "5eeadd0143b3e04e411e9471be445bc78a3ca6a881ec660330fea40be6ae1e83",
+    "status": "archived"
+  },
+  {
+    "commit": "2976a6f5ef29cac693764875dd4d68f1a19f6af6",
+    "path": "canary_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/2976a6f5ef29cac693764875dd4d68f1a19f6af6/canary_lite.json",
+    "mirror": true,
+    "size": 378,
+    "sha256": "33e91466003066813a85d75366898f2a711639d623ec44445055c02e29807deb",
+    "status": "archived"
+  },
+  {
+    "commit": "2976a6f5ef29cac693764875dd4d68f1a19f6af6",
+    "path": "debug_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/2976a6f5ef29cac693764875dd4d68f1a19f6af6/debug_lite.json",
+    "mirror": true,
+    "size": 374,
+    "sha256": "19178c14d5c1a7d8877bb307afe57332d3dbeb826bf53b9cc1f8f059d73ae286",
+    "status": "archived"
+  },
+  {
+    "commit": "2976a6f5ef29cac693764875dd4d68f1a19f6af6",
+    "path": "note_lite.md",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/2976a6f5ef29cac693764875dd4d68f1a19f6af6/note_lite.md",
+    "mirror": true,
+    "size": 704,
+    "sha256": "7bbf202ea09b0c1ca133845090b6096072a04d7014ab48218b8ce8d3903a04b8",
+    "status": "archived"
+  },
+  {
+    "commit": "05003cd38adc7613cbfe089bbfd233edd22debfc",
+    "path": "stable.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/05003cd38adc7613cbfe089bbfd233edd22debfc/stable.json",
+    "mirror": true,
+    "size": 377,
+    "sha256": "df09ada38faef8697ee5dc88977dc0f8340b1d4fa03743db60489efac8584290",
+    "status": "archived"
+  },
+  {
+    "commit": "05003cd38adc7613cbfe089bbfd233edd22debfc",
+    "path": "beta.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/05003cd38adc7613cbfe089bbfd233edd22debfc/beta.json",
+    "mirror": true,
+    "size": 377,
+    "sha256": "df09ada38faef8697ee5dc88977dc0f8340b1d4fa03743db60489efac8584290",
+    "status": "archived"
+  },
+  {
+    "commit": "05003cd38adc7613cbfe089bbfd233edd22debfc",
+    "path": "canary.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/05003cd38adc7613cbfe089bbfd233edd22debfc/canary.json",
+    "mirror": true,
+    "size": 358,
+    "sha256": "32cb0d0518dfb4f370689cf6b422e88741b02e236df6805e041cf6577b5f0670",
+    "status": "archived"
+  },
+  {
+    "commit": "05003cd38adc7613cbfe089bbfd233edd22debfc",
+    "path": "debug.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/05003cd38adc7613cbfe089bbfd233edd22debfc/debug.json",
+    "mirror": true,
+    "size": 354,
+    "sha256": "4aa278910dcf9548e2d9e954d9dbe8dcd29861b21f2ae322749a0c5de1abc033",
+    "status": "archived"
+  },
+  {
+    "commit": "05003cd38adc7613cbfe089bbfd233edd22debfc",
+    "path": "note.md",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/05003cd38adc7613cbfe089bbfd233edd22debfc/note.md",
+    "mirror": true,
+    "size": 2058,
+    "sha256": "2d09b14d5ad408a7f5a54e90b4a5e2379f1f244295cfe0781e78aed15c12f1a1",
+    "status": "archived"
+  },
+  {
+    "commit": "05003cd38adc7613cbfe089bbfd233edd22debfc",
+    "path": "canary_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/05003cd38adc7613cbfe089bbfd233edd22debfc/canary_lite.json",
+    "mirror": true,
+    "size": 378,
+    "sha256": "33e91466003066813a85d75366898f2a711639d623ec44445055c02e29807deb",
+    "status": "archived"
+  },
+  {
+    "commit": "05003cd38adc7613cbfe089bbfd233edd22debfc",
+    "path": "debug_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/05003cd38adc7613cbfe089bbfd233edd22debfc/debug_lite.json",
+    "mirror": true,
+    "size": 374,
+    "sha256": "19178c14d5c1a7d8877bb307afe57332d3dbeb826bf53b9cc1f8f059d73ae286",
+    "status": "archived"
+  },
+  {
+    "commit": "05003cd38adc7613cbfe089bbfd233edd22debfc",
+    "path": "note_lite.md",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/05003cd38adc7613cbfe089bbfd233edd22debfc/note_lite.md",
+    "mirror": true,
+    "size": 704,
+    "sha256": "7bbf202ea09b0c1ca133845090b6096072a04d7014ab48218b8ce8d3903a04b8",
+    "status": "archived"
+  },
+  {
+    "commit": "96724b2ee26f7ac537c37fb5298c2a7579a3d322",
+    "path": "stable.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/96724b2ee26f7ac537c37fb5298c2a7579a3d322/stable.json",
+    "mirror": true,
+    "size": 377,
+    "sha256": "df09ada38faef8697ee5dc88977dc0f8340b1d4fa03743db60489efac8584290",
+    "status": "archived"
+  },
+  {
+    "commit": "96724b2ee26f7ac537c37fb5298c2a7579a3d322",
+    "path": "beta.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/96724b2ee26f7ac537c37fb5298c2a7579a3d322/beta.json",
+    "mirror": true,
+    "size": 377,
+    "sha256": "df09ada38faef8697ee5dc88977dc0f8340b1d4fa03743db60489efac8584290",
+    "status": "archived"
+  },
+  {
+    "commit": "96724b2ee26f7ac537c37fb5298c2a7579a3d322",
+    "path": "canary.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/96724b2ee26f7ac537c37fb5298c2a7579a3d322/canary.json",
+    "mirror": true,
+    "size": 358,
+    "sha256": "853273426368361ba1d6fb54197b37403f6019d871ec5582e6a36524a0efdf47",
+    "status": "archived"
+  },
+  {
+    "commit": "96724b2ee26f7ac537c37fb5298c2a7579a3d322",
+    "path": "debug.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/96724b2ee26f7ac537c37fb5298c2a7579a3d322/debug.json",
+    "mirror": true,
+    "size": 354,
+    "sha256": "344ab226332cc87b9bc9958384b2f44c8d85a42d8027709fe4c5519cd43db29d",
+    "status": "archived"
+  },
+  {
+    "commit": "96724b2ee26f7ac537c37fb5298c2a7579a3d322",
+    "path": "note.md",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/96724b2ee26f7ac537c37fb5298c2a7579a3d322/note.md",
+    "mirror": true,
+    "size": 2576,
+    "sha256": "fff94b16eb47782c013e66c003b5e364f330f2e9f23f9537362d945f177102f2",
+    "status": "archived"
+  },
+  {
+    "commit": "96724b2ee26f7ac537c37fb5298c2a7579a3d322",
+    "path": "canary_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/96724b2ee26f7ac537c37fb5298c2a7579a3d322/canary_lite.json",
+    "mirror": true,
+    "size": 378,
+    "sha256": "46b4e1431f2bae2b929cd9b1d3eb2257ff968b2c1fefb41a17121c26b3a07632",
+    "status": "archived"
+  },
+  {
+    "commit": "96724b2ee26f7ac537c37fb5298c2a7579a3d322",
+    "path": "debug_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/96724b2ee26f7ac537c37fb5298c2a7579a3d322/debug_lite.json",
+    "mirror": true,
+    "size": 374,
+    "sha256": "195c953b870c72d29a043fb8484f35e4ce97115a0b802d04b2f682f18f024c4d",
+    "status": "archived"
+  },
+  {
+    "commit": "96724b2ee26f7ac537c37fb5298c2a7579a3d322",
+    "path": "note_lite.md",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/96724b2ee26f7ac537c37fb5298c2a7579a3d322/note_lite.md",
+    "mirror": true,
+    "size": 3144,
+    "sha256": "a420b85094c8d132eb042166b5c89cc7ae03fe1697e4279daa7e3c0c34f191d4",
+    "status": "archived"
+  },
+  {
+    "commit": "6440334763236cdc7ed30fbc6a98de13d324b5ea",
+    "path": "stable.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/6440334763236cdc7ed30fbc6a98de13d324b5ea/stable.json",
+    "mirror": true,
+    "size": 377,
+    "sha256": "df09ada38faef8697ee5dc88977dc0f8340b1d4fa03743db60489efac8584290",
+    "status": "archived"
+  },
+  {
+    "commit": "6440334763236cdc7ed30fbc6a98de13d324b5ea",
+    "path": "beta.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/6440334763236cdc7ed30fbc6a98de13d324b5ea/beta.json",
+    "mirror": true,
+    "size": 377,
+    "sha256": "df09ada38faef8697ee5dc88977dc0f8340b1d4fa03743db60489efac8584290",
+    "status": "archived"
+  },
+  {
+    "commit": "6440334763236cdc7ed30fbc6a98de13d324b5ea",
+    "path": "canary.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/6440334763236cdc7ed30fbc6a98de13d324b5ea/canary.json",
+    "mirror": true,
+    "size": 358,
+    "sha256": "14635c849a20aa69f3846fc5bb59eec88e2eaf7857b72385a703bee4dc9cd442",
+    "status": "archived"
+  },
+  {
+    "commit": "6440334763236cdc7ed30fbc6a98de13d324b5ea",
+    "path": "debug.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/6440334763236cdc7ed30fbc6a98de13d324b5ea/debug.json",
+    "mirror": true,
+    "size": 354,
+    "sha256": "cd9cfbceab1c984615ffc8f97f9a8411e52e1aff4db3b1500c319bd0f8e13ef2",
+    "status": "archived"
+  },
+  {
+    "commit": "6440334763236cdc7ed30fbc6a98de13d324b5ea",
+    "path": "note.md",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/6440334763236cdc7ed30fbc6a98de13d324b5ea/note.md",
+    "mirror": true,
+    "size": 2588,
+    "sha256": "ccfb08a06f4f9c66b4e39a516b3eb08ea2964d87a69cf24a905a816599f4471e",
+    "status": "archived"
+  },
+  {
+    "commit": "6440334763236cdc7ed30fbc6a98de13d324b5ea",
+    "path": "canary_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/6440334763236cdc7ed30fbc6a98de13d324b5ea/canary_lite.json",
+    "mirror": true,
+    "size": 378,
+    "sha256": "33e91466003066813a85d75366898f2a711639d623ec44445055c02e29807deb",
+    "status": "archived"
+  },
+  {
+    "commit": "6440334763236cdc7ed30fbc6a98de13d324b5ea",
+    "path": "debug_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/6440334763236cdc7ed30fbc6a98de13d324b5ea/debug_lite.json",
+    "mirror": true,
+    "size": 374,
+    "sha256": "19178c14d5c1a7d8877bb307afe57332d3dbeb826bf53b9cc1f8f059d73ae286",
+    "status": "archived"
+  },
+  {
+    "commit": "6440334763236cdc7ed30fbc6a98de13d324b5ea",
+    "path": "note_lite.md",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/6440334763236cdc7ed30fbc6a98de13d324b5ea/note_lite.md",
+    "mirror": true,
+    "size": 704,
+    "sha256": "7bbf202ea09b0c1ca133845090b6096072a04d7014ab48218b8ce8d3903a04b8",
+    "status": "archived"
+  },
+  {
+    "commit": "bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8",
+    "path": "stable_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8/stable_lite.json",
+    "mirror": true,
+    "status": "absent-at-commit",
+    "http_status": 404
+  },
+  {
+    "commit": "bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8",
+    "path": "beta_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8/beta_lite.json",
+    "mirror": true,
+    "status": "absent-at-commit",
+    "http_status": 404
+  },
+  {
+    "commit": "51fad676c48c855d8e94ce054487dc4f00e4446a",
+    "path": "stable_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/51fad676c48c855d8e94ce054487dc4f00e4446a/stable_lite.json",
+    "mirror": true,
+    "status": "absent-at-commit",
+    "http_status": 404
+  },
+  {
+    "commit": "51fad676c48c855d8e94ce054487dc4f00e4446a",
+    "path": "beta_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/51fad676c48c855d8e94ce054487dc4f00e4446a/beta_lite.json",
+    "mirror": true,
+    "status": "absent-at-commit",
+    "http_status": 404
+  },
+  {
+    "commit": "02ba306efeb85827c83effa13b01ef0510192391",
+    "path": "stable_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/02ba306efeb85827c83effa13b01ef0510192391/stable_lite.json",
+    "mirror": true,
+    "status": "absent-at-commit",
+    "http_status": 404
+  },
+  {
+    "commit": "02ba306efeb85827c83effa13b01ef0510192391",
+    "path": "beta_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/02ba306efeb85827c83effa13b01ef0510192391/beta_lite.json",
+    "mirror": true,
+    "status": "absent-at-commit",
+    "http_status": 404
+  },
+  {
+    "commit": "7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce",
+    "path": "stable_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce/stable_lite.json",
+    "mirror": true,
+    "status": "absent-at-commit",
+    "http_status": 404
+  },
+  {
+    "commit": "7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce",
+    "path": "beta_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce/beta_lite.json",
+    "mirror": true,
+    "status": "absent-at-commit",
+    "http_status": 404
+  },
+  {
+    "commit": "29aaacaa07f74e1838d7c199f4c437aeeeed4702",
+    "path": "stable_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/29aaacaa07f74e1838d7c199f4c437aeeeed4702/stable_lite.json",
+    "mirror": true,
+    "status": "absent-at-commit",
+    "http_status": 404
+  },
+  {
+    "commit": "29aaacaa07f74e1838d7c199f4c437aeeeed4702",
+    "path": "beta_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/29aaacaa07f74e1838d7c199f4c437aeeeed4702/beta_lite.json",
+    "mirror": true,
+    "status": "absent-at-commit",
+    "http_status": 404
+  },
+  {
+    "commit": "c5d500af33e829314c05e6a3f722061a0257f6b3",
+    "path": "stable_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/stable_lite.json",
+    "mirror": true,
+    "status": "absent-at-commit",
+    "http_status": 404
+  },
+  {
+    "commit": "c5d500af33e829314c05e6a3f722061a0257f6b3",
+    "path": "beta_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/beta_lite.json",
+    "mirror": true,
+    "status": "absent-at-commit",
+    "http_status": 404
+  },
+  {
+    "commit": "2976a6f5ef29cac693764875dd4d68f1a19f6af6",
+    "path": "stable_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/2976a6f5ef29cac693764875dd4d68f1a19f6af6/stable_lite.json",
+    "mirror": true,
+    "status": "absent-at-commit",
+    "http_status": 404
+  },
+  {
+    "commit": "2976a6f5ef29cac693764875dd4d68f1a19f6af6",
+    "path": "beta_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/2976a6f5ef29cac693764875dd4d68f1a19f6af6/beta_lite.json",
+    "mirror": true,
+    "status": "absent-at-commit",
+    "http_status": 404
+  },
+  {
+    "commit": "05003cd38adc7613cbfe089bbfd233edd22debfc",
+    "path": "stable_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/05003cd38adc7613cbfe089bbfd233edd22debfc/stable_lite.json",
+    "mirror": true,
+    "status": "absent-at-commit",
+    "http_status": 404
+  },
+  {
+    "commit": "05003cd38adc7613cbfe089bbfd233edd22debfc",
+    "path": "beta_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/05003cd38adc7613cbfe089bbfd233edd22debfc/beta_lite.json",
+    "mirror": true,
+    "status": "absent-at-commit",
+    "http_status": 404
+  },
+  {
+    "commit": "96724b2ee26f7ac537c37fb5298c2a7579a3d322",
+    "path": "stable_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/96724b2ee26f7ac537c37fb5298c2a7579a3d322/stable_lite.json",
+    "mirror": true,
+    "status": "absent-at-commit",
+    "http_status": 404
+  },
+  {
+    "commit": "96724b2ee26f7ac537c37fb5298c2a7579a3d322",
+    "path": "beta_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/96724b2ee26f7ac537c37fb5298c2a7579a3d322/beta_lite.json",
+    "mirror": true,
+    "status": "absent-at-commit",
+    "http_status": 404
+  },
+  {
+    "commit": "6440334763236cdc7ed30fbc6a98de13d324b5ea",
+    "path": "stable_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/6440334763236cdc7ed30fbc6a98de13d324b5ea/stable_lite.json",
+    "mirror": true,
+    "status": "absent-at-commit",
+    "http_status": 404
+  },
+  {
+    "commit": "6440334763236cdc7ed30fbc6a98de13d324b5ea",
+    "path": "beta_lite.json",
+    "url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/6440334763236cdc7ed30fbc6a98de13d324b5ea/beta_lite.json",
+    "mirror": true,
+    "status": "absent-at-commit",
+    "http_status": 404
+  }
+]

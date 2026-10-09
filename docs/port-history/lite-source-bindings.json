@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "bindings": [
+    {
+      "version": "R65B92427-kitsune-lite",
+      "apk_sha256": "b96bbf0111cd3770eda44588d2cbb28f86a50e94f718a31802147dcbc7696dd6",
+      "source_commit": "60e879a05b08b6d2bcf63f62227b8321d77042fb",
+      "util_functions": {
+        "apk_member": "assets/util_functions.sh",
+        "sha256": "6ed2be6fab6a58dd16c2d54ddc121bfe53b7d739073ed544a0685489d1c0582d",
+        "relationship": "exact after only documented product/version substitution"
+      },
+      "manager": {
+        "apk_member": "res/p9.sh",
+        "sha256": "4e5296b45d27dbe257633d6b0ad4df426f9270854d29053d2282571cc0b0fef6",
+        "relationship": "differs in missing-/sbin fallback; archived for explicit review",
+        "observation": "lite-manager-r65b92427"
+      },
+      "observed_dex_channels": [
+        "stable_lite.json",
+        "beta_lite.json",
+        "canary_lite.json",
+        "debug_lite.json"
+      ]
+    },
+    {
+      "version": "R65A8DA99-kitsune-lite",
+      "apk_sha256": "462d923d8c90c4f9f6f90ec7c02dcb8e14d8b3e4e9697f5c5eba83057eaa1d11",
+      "source_commit": "60e879a05b08b6d2bcf63f62227b8321d77042fb",
+      "util_functions": {
+        "apk_member": "assets/util_functions.sh",
+        "sha256": "f35277de05d6075d932a79ff0bd1d893b1d1b522297f71c3885b6e08b27988d4",
+        "relationship": "exact after only documented product/version substitution"
+      },
+      "manager": {
+        "apk_member": "res/p9.sh",
+        "sha256": "db4a9c99cc2a0fac07f536b6f43e1884c491ec2305ca35cbe0e93d3eae3af4c5",
+        "relationship": "exact bytes",
+        "observation": "lite-manager-r65a8da99"
+      },
+      "observed_dex_channels": [
+        "stable_lite.json",
+        "beta_lite.json",
+        "canary_lite.json",
+        "debug_lite.json"
+      ]
+    }
+  ],
+  "limits": "These matches bind the stated shell components. They do not prove that every compiled native/app member came from this source tip. The later Lite manager contains a real artifact-only change."
+}

@@ -1,0 +1,2680 @@
+{
+  "schema": 1,
+  "scope": "Every manager/stub reference in the frozen metadata. Git tree/blob equality binds repeated references to retained byte observations. Original stable mutable endpoints have explicit failed retrieval records and no inferred replacement-byte identity.",
+  "trees": [
+    {
+      "commit": "bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8",
+      "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/trees/bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8",
+      "tree_sha": "bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8",
+      "entries": [
+        {
+          "path": "README.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "dcb28775d97e503000096b52cd53555b29c14c99",
+          "size": 5379,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/dcb28775d97e503000096b52cd53555b29c14c99"
+        },
+        {
+          "path": "app-debug.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "36a693d531190a69ee1376bc5e71e36501fc295c",
+          "size": 20937825,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/36a693d531190a69ee1376bc5e71e36501fc295c"
+        },
+        {
+          "path": "app-release.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "d1dd40c0dbbaa258daedfc6b2f31aff01905b067",
+          "size": 12751676,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/d1dd40c0dbbaa258daedfc6b2f31aff01905b067"
+        },
+        {
+          "path": "beta.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "81a5a792d9b93ed876dc9223b28510e225291182",
+          "size": 377,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/81a5a792d9b93ed876dc9223b28510e225291182"
+        },
+        {
+          "path": "canary.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "673c07200a584343055f2f27b064886b6f147a9f",
+          "size": 358,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/673c07200a584343055f2f27b064886b6f147a9f"
+        },
+        {
+          "path": "debug.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "12bd0a39db9a81b0f429d019110832d2059adb0d",
+          "size": 354,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/12bd0a39db9a81b0f429d019110832d2059adb0d"
+        },
+        {
+          "path": "images",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "5339b1e334a6d4aebd12e1d87c300b6ee3c03ae0",
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/trees/5339b1e334a6d4aebd12e1d87c300b6ee3c03ae0"
+        },
+        {
+          "path": "logo.png",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "747a7707a3af108e5fb955f8e17a326eae10f29a",
+          "size": 123512,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/747a7707a3af108e5fb955f8e17a326eae10f29a"
+        },
+        {
+          "path": "note.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "9b7b14864c1e1539f4ab5468a0c222662a07e4ab",
+          "size": 2901,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/9b7b14864c1e1539f4ab5468a0c222662a07e4ab"
+        },
+        {
+          "path": "stable.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "81a5a792d9b93ed876dc9223b28510e225291182",
+          "size": 377,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/81a5a792d9b93ed876dc9223b28510e225291182"
+        },
+        {
+          "path": "stub-debug.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "9bb3610cf0c979bd9afdad05f01b1df431301d6c",
+          "size": 41354,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/9bb3610cf0c979bd9afdad05f01b1df431301d6c"
+        },
+        {
+          "path": "stub-release.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "67b025b7ba5ab4b444588bbd05efb53d4a714ceb",
+          "size": 29066,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/67b025b7ba5ab4b444588bbd05efb53d4a714ceb"
+        }
+      ]
+    },
+    {
+      "commit": "51fad676c48c855d8e94ce054487dc4f00e4446a",
+      "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/trees/51fad676c48c855d8e94ce054487dc4f00e4446a",
+      "tree_sha": "51fad676c48c855d8e94ce054487dc4f00e4446a",
+      "entries": [
+        {
+          "path": "README.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "dcb28775d97e503000096b52cd53555b29c14c99",
+          "size": 5379,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/dcb28775d97e503000096b52cd53555b29c14c99"
+        },
+        {
+          "path": "app-debug.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "a99b2df01c0a19aaccd41f6aa744dc40051b57f8",
+          "size": 21078040,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/a99b2df01c0a19aaccd41f6aa744dc40051b57f8"
+        },
+        {
+          "path": "app-release.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "0acc0858e69b16fa735aabc89626ccd7f50f7e27",
+          "size": 12866953,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/0acc0858e69b16fa735aabc89626ccd7f50f7e27"
+        },
+        {
+          "path": "beta.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "81a5a792d9b93ed876dc9223b28510e225291182",
+          "size": 377,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/81a5a792d9b93ed876dc9223b28510e225291182"
+        },
+        {
+          "path": "canary.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "601f9b233be6f4d8df3ee80acdd5180324cad836",
+          "size": 358,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/601f9b233be6f4d8df3ee80acdd5180324cad836"
+        },
+        {
+          "path": "debug.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "4d8d76635515192b439ba67875df8dd3258aedb0",
+          "size": 354,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/4d8d76635515192b439ba67875df8dd3258aedb0"
+        },
+        {
+          "path": "images",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "5339b1e334a6d4aebd12e1d87c300b6ee3c03ae0",
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/trees/5339b1e334a6d4aebd12e1d87c300b6ee3c03ae0"
+        },
+        {
+          "path": "logo.png",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "747a7707a3af108e5fb955f8e17a326eae10f29a",
+          "size": 123512,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/747a7707a3af108e5fb955f8e17a326eae10f29a"
+        },
+        {
+          "path": "note.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "16f9f5ec96198c2a92e95c888b1320cb0014461c",
+          "size": 2701,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/16f9f5ec96198c2a92e95c888b1320cb0014461c"
+        },
+        {
+          "path": "stable.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "81a5a792d9b93ed876dc9223b28510e225291182",
+          "size": 377,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/81a5a792d9b93ed876dc9223b28510e225291182"
+        },
+        {
+          "path": "stub-debug.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "9bb3610cf0c979bd9afdad05f01b1df431301d6c",
+          "size": 41354,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/9bb3610cf0c979bd9afdad05f01b1df431301d6c"
+        },
+        {
+          "path": "stub-release.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "67b025b7ba5ab4b444588bbd05efb53d4a714ceb",
+          "size": 29066,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/67b025b7ba5ab4b444588bbd05efb53d4a714ceb"
+        }
+      ]
+    },
+    {
+      "commit": "02ba306efeb85827c83effa13b01ef0510192391",
+      "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/trees/02ba306efeb85827c83effa13b01ef0510192391",
+      "tree_sha": "02ba306efeb85827c83effa13b01ef0510192391",
+      "entries": [
+        {
+          "path": "README.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "dcb28775d97e503000096b52cd53555b29c14c99",
+          "size": 5379,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/dcb28775d97e503000096b52cd53555b29c14c99"
+        },
+        {
+          "path": "app-debug.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "759187c2a7c76ea5a1d89b9d313e7e233cc3f84b",
+          "size": 21078040,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/759187c2a7c76ea5a1d89b9d313e7e233cc3f84b"
+        },
+        {
+          "path": "app-release.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "232447ed4e60f3444308d7dc3237e1142923084b",
+          "size": 12871049,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/232447ed4e60f3444308d7dc3237e1142923084b"
+        },
+        {
+          "path": "beta.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "81a5a792d9b93ed876dc9223b28510e225291182",
+          "size": 377,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/81a5a792d9b93ed876dc9223b28510e225291182"
+        },
+        {
+          "path": "canary.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "8c343c6e51b217f24b3a38a38a5514f787ccbc3b",
+          "size": 358,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/8c343c6e51b217f24b3a38a38a5514f787ccbc3b"
+        },
+        {
+          "path": "debug.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "3c3c61a6c58db2ad93bca0f3d6c3c6235356deb1",
+          "size": 354,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/3c3c61a6c58db2ad93bca0f3d6c3c6235356deb1"
+        },
+        {
+          "path": "images",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "5339b1e334a6d4aebd12e1d87c300b6ee3c03ae0",
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/trees/5339b1e334a6d4aebd12e1d87c300b6ee3c03ae0"
+        },
+        {
+          "path": "logo.png",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "747a7707a3af108e5fb955f8e17a326eae10f29a",
+          "size": 123512,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/747a7707a3af108e5fb955f8e17a326eae10f29a"
+        },
+        {
+          "path": "note.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "e8eb5fffc77c3caf73b95d069b64e4f0fb0f68cc",
+          "size": 2576,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/e8eb5fffc77c3caf73b95d069b64e4f0fb0f68cc"
+        },
+        {
+          "path": "stable.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "81a5a792d9b93ed876dc9223b28510e225291182",
+          "size": 377,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/81a5a792d9b93ed876dc9223b28510e225291182"
+        },
+        {
+          "path": "stub-debug.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "9bb3610cf0c979bd9afdad05f01b1df431301d6c",
+          "size": 41354,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/9bb3610cf0c979bd9afdad05f01b1df431301d6c"
+        },
+        {
+          "path": "stub-release.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "67b025b7ba5ab4b444588bbd05efb53d4a714ceb",
+          "size": 29066,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/67b025b7ba5ab4b444588bbd05efb53d4a714ceb"
+        }
+      ]
+    },
+    {
+      "commit": "7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce",
+      "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/trees/7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce",
+      "tree_sha": "7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce",
+      "entries": [
+        {
+          "path": "README.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "02945841171dfdf6584c3a2c2c02e862786a8c5f",
+          "size": 5668,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/02945841171dfdf6584c3a2c2c02e862786a8c5f"
+        },
+        {
+          "path": "app-debug-lite.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "1f0e32f077c17e203081ada1538bfbac8a17f72f",
+          "size": 20759608,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/1f0e32f077c17e203081ada1538bfbac8a17f72f"
+        },
+        {
+          "path": "app-debug.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "881502d217e2663b70525cf5347fc108c62f4365",
+          "size": 21078040,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/881502d217e2663b70525cf5347fc108c62f4365"
+        },
+        {
+          "path": "app-release-lite.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "bd10b76393ae695d770fbcaf2937e01d52e29969",
+          "size": 12569035,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/bd10b76393ae695d770fbcaf2937e01d52e29969"
+        },
+        {
+          "path": "app-release.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "e44957ea66d280d05b3dc1fb65673fe6c2ab0025",
+          "size": 12871049,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/e44957ea66d280d05b3dc1fb65673fe6c2ab0025"
+        },
+        {
+          "path": "beta.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "81a5a792d9b93ed876dc9223b28510e225291182",
+          "size": 377,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/81a5a792d9b93ed876dc9223b28510e225291182"
+        },
+        {
+          "path": "canary.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "40abc4502975103b67b19c5164463846db99d27f",
+          "size": 358,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/40abc4502975103b67b19c5164463846db99d27f"
+        },
+        {
+          "path": "canary_lite.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "2327773feae735fbae97784655bbd6c909b71b3b",
+          "size": 378,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/2327773feae735fbae97784655bbd6c909b71b3b"
+        },
+        {
+          "path": "debug.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "03bcd6f42647c8147cb78ab44ca46a9ba1a72395",
+          "size": 354,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/03bcd6f42647c8147cb78ab44ca46a9ba1a72395"
+        },
+        {
+          "path": "debug_lite.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "74044f61ba12d1e730cb7232493cc8f1857282a4",
+          "size": 374,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/74044f61ba12d1e730cb7232493cc8f1857282a4"
+        },
+        {
+          "path": "images",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "5339b1e334a6d4aebd12e1d87c300b6ee3c03ae0",
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/trees/5339b1e334a6d4aebd12e1d87c300b6ee3c03ae0"
+        },
+        {
+          "path": "note.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "2dfb46cc30839bb7771bccdbeebdec8a6b74434b",
+          "size": 2582,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/2dfb46cc30839bb7771bccdbeebdec8a6b74434b"
+        },
+        {
+          "path": "note_lite.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "f4eec0ced381bf22b3fd1dd54e97b03354ed3e61",
+          "size": 656,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/f4eec0ced381bf22b3fd1dd54e97b03354ed3e61"
+        },
+        {
+          "path": "stable.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "81a5a792d9b93ed876dc9223b28510e225291182",
+          "size": 377,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/81a5a792d9b93ed876dc9223b28510e225291182"
+        },
+        {
+          "path": "stub-debug-lite.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "7a29bcccdc133fa0803347072f379b0397cd690e",
+          "size": 41359,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/7a29bcccdc133fa0803347072f379b0397cd690e"
+        },
+        {
+          "path": "stub-debug.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "9bb3610cf0c979bd9afdad05f01b1df431301d6c",
+          "size": 41354,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/9bb3610cf0c979bd9afdad05f01b1df431301d6c"
+        },
+        {
+          "path": "stub-release-lite.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "f0db818d04487d61bf0db091aabfc8709842879f",
+          "size": 33167,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/f0db818d04487d61bf0db091aabfc8709842879f"
+        },
+        {
+          "path": "stub-release.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "67b025b7ba5ab4b444588bbd05efb53d4a714ceb",
+          "size": 29066,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/67b025b7ba5ab4b444588bbd05efb53d4a714ceb"
+        }
+      ]
+    },
+    {
+      "commit": "29aaacaa07f74e1838d7c199f4c437aeeeed4702",
+      "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/trees/29aaacaa07f74e1838d7c199f4c437aeeeed4702",
+      "tree_sha": "29aaacaa07f74e1838d7c199f4c437aeeeed4702",
+      "entries": [
+        {
+          "path": ".github",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "dbbf0216d21875053d6d31736446021ea1009a56",
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/trees/dbbf0216d21875053d6d31736446021ea1009a56"
+        },
+        {
+          "path": "README.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "ddba4a5bdda2974a14f31011f641104fdc432bba",
+          "size": 5185,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/ddba4a5bdda2974a14f31011f641104fdc432bba"
+        },
+        {
+          "path": "app-debug-lite.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "25f89a758dc71cebae47452197d7eabd857cd788",
+          "size": 20759608,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/25f89a758dc71cebae47452197d7eabd857cd788"
+        },
+        {
+          "path": "app-debug.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "6e5ff0f0d3a55a5fe6b2d873f6eccf0e3f7d8dbd",
+          "size": 21091379,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/6e5ff0f0d3a55a5fe6b2d873f6eccf0e3f7d8dbd"
+        },
+        {
+          "path": "app-release-lite.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "fba1177b8bb6b139f61f386f8afa9cad99b10579",
+          "size": 12569035,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/fba1177b8bb6b139f61f386f8afa9cad99b10579"
+        },
+        {
+          "path": "app-release.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "7fc0bfd0dfc663a45d8ddab7366cdfaf815297b3",
+          "size": 12872134,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/7fc0bfd0dfc663a45d8ddab7366cdfaf815297b3"
+        },
+        {
+          "path": "beta.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "81a5a792d9b93ed876dc9223b28510e225291182",
+          "size": 377,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/81a5a792d9b93ed876dc9223b28510e225291182"
+        },
+        {
+          "path": "canary.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "8e19f9aede27426e31bb84dd4556199fd1ae47d4",
+          "size": 358,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/8e19f9aede27426e31bb84dd4556199fd1ae47d4"
+        },
+        {
+          "path": "canary_lite.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "0f0a040bd273ef5d628659de3f882639616cb6a1",
+          "size": 378,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/0f0a040bd273ef5d628659de3f882639616cb6a1"
+        },
+        {
+          "path": "debug.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "417fa9ade52a7a75036098e43369cd1d1ff6ae7c",
+          "size": 354,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/417fa9ade52a7a75036098e43369cd1d1ff6ae7c"
+        },
+        {
+          "path": "debug_lite.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "c0dabc19b7452f19d2845068b50fa12b164f9dba",
+          "size": 374,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/c0dabc19b7452f19d2845068b50fa12b164f9dba"
+        },
+        {
+          "path": "images",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "5339b1e334a6d4aebd12e1d87c300b6ee3c03ae0",
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/trees/5339b1e334a6d4aebd12e1d87c300b6ee3c03ae0"
+        },
+        {
+          "path": "note.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "22dd14944a00edfb1b93007c3b46a043ab92db37",
+          "size": 2578,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/22dd14944a00edfb1b93007c3b46a043ab92db37"
+        },
+        {
+          "path": "note_lite.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "4d80f5d2ee542985ec501a5393e70bc5ae9fb9da",
+          "size": 704,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/4d80f5d2ee542985ec501a5393e70bc5ae9fb9da"
+        },
+        {
+          "path": "stable.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "81a5a792d9b93ed876dc9223b28510e225291182",
+          "size": 377,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/81a5a792d9b93ed876dc9223b28510e225291182"
+        },
+        {
+          "path": "stub-debug-lite.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "7a29bcccdc133fa0803347072f379b0397cd690e",
+          "size": 41359,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/7a29bcccdc133fa0803347072f379b0397cd690e"
+        },
+        {
+          "path": "stub-debug.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "9bb3610cf0c979bd9afdad05f01b1df431301d6c",
+          "size": 41354,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/9bb3610cf0c979bd9afdad05f01b1df431301d6c"
+        },
+        {
+          "path": "stub-release-lite.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "f0db818d04487d61bf0db091aabfc8709842879f",
+          "size": 33167,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/f0db818d04487d61bf0db091aabfc8709842879f"
+        },
+        {
+          "path": "stub-release.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "67b025b7ba5ab4b444588bbd05efb53d4a714ceb",
+          "size": 29066,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/67b025b7ba5ab4b444588bbd05efb53d4a714ceb"
+        }
+      ]
+    },
+    {
+      "commit": "c5d500af33e829314c05e6a3f722061a0257f6b3",
+      "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/trees/c5d500af33e829314c05e6a3f722061a0257f6b3",
+      "tree_sha": "c5d500af33e829314c05e6a3f722061a0257f6b3",
+      "entries": [
+        {
+          "path": ".github",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "dbbf0216d21875053d6d31736446021ea1009a56",
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/trees/dbbf0216d21875053d6d31736446021ea1009a56"
+        },
+        {
+          "path": "README.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "ddba4a5bdda2974a14f31011f641104fdc432bba",
+          "size": 5185,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/ddba4a5bdda2974a14f31011f641104fdc432bba"
+        },
+        {
+          "path": "app-debug-lite.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "25f89a758dc71cebae47452197d7eabd857cd788",
+          "size": 20759608,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/25f89a758dc71cebae47452197d7eabd857cd788"
+        },
+        {
+          "path": "app-debug.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "d6452fea45bbf827657267d3196924a99e9637b7",
+          "size": 21091379,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/d6452fea45bbf827657267d3196924a99e9637b7"
+        },
+        {
+          "path": "app-release-lite.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "fba1177b8bb6b139f61f386f8afa9cad99b10579",
+          "size": 12569035,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/fba1177b8bb6b139f61f386f8afa9cad99b10579"
+        },
+        {
+          "path": "app-release.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "6d46455f9c0828dea4012d23586794719be0e1f2",
+          "size": 12872134,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/6d46455f9c0828dea4012d23586794719be0e1f2"
+        },
+        {
+          "path": "beta.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "81a5a792d9b93ed876dc9223b28510e225291182",
+          "size": 377,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/81a5a792d9b93ed876dc9223b28510e225291182"
+        },
+        {
+          "path": "canary.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "eec06de60675d77dcee1d2cf8b8443425cd5789d",
+          "size": 358,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/eec06de60675d77dcee1d2cf8b8443425cd5789d"
+        },
+        {
+          "path": "canary_lite.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "0f0a040bd273ef5d628659de3f882639616cb6a1",
+          "size": 378,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/0f0a040bd273ef5d628659de3f882639616cb6a1"
+        },
+        {
+          "path": "debug.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "d464aabb604f21c078ab9587660c5cfc80eeac90",
+          "size": 354,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/d464aabb604f21c078ab9587660c5cfc80eeac90"
+        },
+        {
+          "path": "debug_lite.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "c0dabc19b7452f19d2845068b50fa12b164f9dba",
+          "size": 374,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/c0dabc19b7452f19d2845068b50fa12b164f9dba"
+        },
+        {
+          "path": "images",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "5339b1e334a6d4aebd12e1d87c300b6ee3c03ae0",
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/trees/5339b1e334a6d4aebd12e1d87c300b6ee3c03ae0"
+        },
+        {
+          "path": "module-template.zip",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "6c76c2453e90aca989cdac2e88cd7a1a9c0a3e8b",
+          "size": 8537,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/6c76c2453e90aca989cdac2e88cd7a1a9c0a3e8b"
+        },
+        {
+          "path": "note.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "00ab9693d391e363b6969834465a5b3f39c96536",
+          "size": 2625,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/00ab9693d391e363b6969834465a5b3f39c96536"
+        },
+        {
+          "path": "note_lite.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "4d80f5d2ee542985ec501a5393e70bc5ae9fb9da",
+          "size": 704,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/4d80f5d2ee542985ec501a5393e70bc5ae9fb9da"
+        },
+        {
+          "path": "stable.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "81a5a792d9b93ed876dc9223b28510e225291182",
+          "size": 377,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/81a5a792d9b93ed876dc9223b28510e225291182"
+        },
+        {
+          "path": "stub-debug-lite.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "7a29bcccdc133fa0803347072f379b0397cd690e",
+          "size": 41359,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/7a29bcccdc133fa0803347072f379b0397cd690e"
+        },
+        {
+          "path": "stub-debug.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "9bb3610cf0c979bd9afdad05f01b1df431301d6c",
+          "size": 41354,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/9bb3610cf0c979bd9afdad05f01b1df431301d6c"
+        },
+        {
+          "path": "stub-release-lite.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "f0db818d04487d61bf0db091aabfc8709842879f",
+          "size": 33167,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/f0db818d04487d61bf0db091aabfc8709842879f"
+        },
+        {
+          "path": "stub-release.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "67b025b7ba5ab4b444588bbd05efb53d4a714ceb",
+          "size": 29066,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/67b025b7ba5ab4b444588bbd05efb53d4a714ceb"
+        }
+      ]
+    },
+    {
+      "commit": "2976a6f5ef29cac693764875dd4d68f1a19f6af6",
+      "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/trees/2976a6f5ef29cac693764875dd4d68f1a19f6af6",
+      "tree_sha": "2976a6f5ef29cac693764875dd4d68f1a19f6af6",
+      "entries": [
+        {
+          "path": ".github",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "dbbf0216d21875053d6d31736446021ea1009a56",
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/trees/dbbf0216d21875053d6d31736446021ea1009a56"
+        },
+        {
+          "path": "README.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "77ad38550c3ea279b232707a475c98a42a220210",
+          "size": 5417,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/77ad38550c3ea279b232707a475c98a42a220210"
+        },
+        {
+          "path": "app-debug-lite.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "25f89a758dc71cebae47452197d7eabd857cd788",
+          "size": 20759608,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/25f89a758dc71cebae47452197d7eabd857cd788"
+        },
+        {
+          "path": "app-debug.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "fdd0f1ae5b689d7477bd66a9d4a147896340ae31",
+          "size": 21091379,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/fdd0f1ae5b689d7477bd66a9d4a147896340ae31"
+        },
+        {
+          "path": "app-release-lite.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "fba1177b8bb6b139f61f386f8afa9cad99b10579",
+          "size": 12569035,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/fba1177b8bb6b139f61f386f8afa9cad99b10579"
+        },
+        {
+          "path": "app-release.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "2a1ca1f17c26cb967a138d8b48ec992acc4f3c51",
+          "size": 12872134,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/2a1ca1f17c26cb967a138d8b48ec992acc4f3c51"
+        },
+        {
+          "path": "beta.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "81a5a792d9b93ed876dc9223b28510e225291182",
+          "size": 377,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/81a5a792d9b93ed876dc9223b28510e225291182"
+        },
+        {
+          "path": "canary.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "f84526905963bb76a2f23cee0e390066313f2177",
+          "size": 358,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/f84526905963bb76a2f23cee0e390066313f2177"
+        },
+        {
+          "path": "canary_lite.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "0f0a040bd273ef5d628659de3f882639616cb6a1",
+          "size": 378,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/0f0a040bd273ef5d628659de3f882639616cb6a1"
+        },
+        {
+          "path": "debug.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "eea17fc49ed2cc08a49d7700c207d552fd7f66bb",
+          "size": 354,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/eea17fc49ed2cc08a49d7700c207d552fd7f66bb"
+        },
+        {
+          "path": "debug_lite.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "c0dabc19b7452f19d2845068b50fa12b164f9dba",
+          "size": 374,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/c0dabc19b7452f19d2845068b50fa12b164f9dba"
+        },
+        {
+          "path": "images",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "5339b1e334a6d4aebd12e1d87c300b6ee3c03ae0",
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/trees/5339b1e334a6d4aebd12e1d87c300b6ee3c03ae0"
+        },
+        {
+          "path": "module-template.zip",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "6c76c2453e90aca989cdac2e88cd7a1a9c0a3e8b",
+          "size": 8537,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/6c76c2453e90aca989cdac2e88cd7a1a9c0a3e8b"
+        },
+        {
+          "path": "note.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "538262944b17664ea7604c8db1dee661c1aa3865",
+          "size": 2271,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/538262944b17664ea7604c8db1dee661c1aa3865"
+        },
+        {
+          "path": "note_lite.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "4d80f5d2ee542985ec501a5393e70bc5ae9fb9da",
+          "size": 704,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/4d80f5d2ee542985ec501a5393e70bc5ae9fb9da"
+        },
+        {
+          "path": "stable.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "81a5a792d9b93ed876dc9223b28510e225291182",
+          "size": 377,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/81a5a792d9b93ed876dc9223b28510e225291182"
+        },
+        {
+          "path": "stub-debug-lite.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "7a29bcccdc133fa0803347072f379b0397cd690e",
+          "size": 41359,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/7a29bcccdc133fa0803347072f379b0397cd690e"
+        },
+        {
+          "path": "stub-debug.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "9bb3610cf0c979bd9afdad05f01b1df431301d6c",
+          "size": 41354,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/9bb3610cf0c979bd9afdad05f01b1df431301d6c"
+        },
+        {
+          "path": "stub-release-lite.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "f0db818d04487d61bf0db091aabfc8709842879f",
+          "size": 33167,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/f0db818d04487d61bf0db091aabfc8709842879f"
+        },
+        {
+          "path": "stub-release.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "67b025b7ba5ab4b444588bbd05efb53d4a714ceb",
+          "size": 29066,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/67b025b7ba5ab4b444588bbd05efb53d4a714ceb"
+        }
+      ]
+    },
+    {
+      "commit": "05003cd38adc7613cbfe089bbfd233edd22debfc",
+      "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/trees/05003cd38adc7613cbfe089bbfd233edd22debfc",
+      "tree_sha": "05003cd38adc7613cbfe089bbfd233edd22debfc",
+      "entries": [
+        {
+          "path": ".github",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "c3621ce90b1099db057d5ee14a80524fd746a766",
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/trees/c3621ce90b1099db057d5ee14a80524fd746a766"
+        },
+        {
+          "path": "README.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "77ad38550c3ea279b232707a475c98a42a220210",
+          "size": 5417,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/77ad38550c3ea279b232707a475c98a42a220210"
+        },
+        {
+          "path": "app-debug-lite.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "25f89a758dc71cebae47452197d7eabd857cd788",
+          "size": 20759608,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/25f89a758dc71cebae47452197d7eabd857cd788"
+        },
+        {
+          "path": "app-debug.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "314c6037850b20f94d90f21ecbc128a012ce5602",
+          "size": 21095475,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/314c6037850b20f94d90f21ecbc128a012ce5602"
+        },
+        {
+          "path": "app-release-lite.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "fba1177b8bb6b139f61f386f8afa9cad99b10579",
+          "size": 12569035,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/fba1177b8bb6b139f61f386f8afa9cad99b10579"
+        },
+        {
+          "path": "app-release.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "a501f86b7925ee175a3b98151067502ecab53775",
+          "size": 12880326,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/a501f86b7925ee175a3b98151067502ecab53775"
+        },
+        {
+          "path": "beta.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "81a5a792d9b93ed876dc9223b28510e225291182",
+          "size": 377,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/81a5a792d9b93ed876dc9223b28510e225291182"
+        },
+        {
+          "path": "canary.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "638ed395d7d59c993ede4a702926a4470093acf7",
+          "size": 358,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/638ed395d7d59c993ede4a702926a4470093acf7"
+        },
+        {
+          "path": "canary_lite.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "0f0a040bd273ef5d628659de3f882639616cb6a1",
+          "size": 378,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/0f0a040bd273ef5d628659de3f882639616cb6a1"
+        },
+        {
+          "path": "debug.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "154f3b0b7ca1ef21ef27d5c46b0f4d491a899a77",
+          "size": 354,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/154f3b0b7ca1ef21ef27d5c46b0f4d491a899a77"
+        },
+        {
+          "path": "debug_lite.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "c0dabc19b7452f19d2845068b50fa12b164f9dba",
+          "size": 374,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/c0dabc19b7452f19d2845068b50fa12b164f9dba"
+        },
+        {
+          "path": "images",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "5339b1e334a6d4aebd12e1d87c300b6ee3c03ae0",
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/trees/5339b1e334a6d4aebd12e1d87c300b6ee3c03ae0"
+        },
+        {
+          "path": "module-template.zip",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "6c76c2453e90aca989cdac2e88cd7a1a9c0a3e8b",
+          "size": 8537,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/6c76c2453e90aca989cdac2e88cd7a1a9c0a3e8b"
+        },
+        {
+          "path": "note.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "6ed87ec0e60c8482c4ac980b2abeb5687a796e9e",
+          "size": 2058,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/6ed87ec0e60c8482c4ac980b2abeb5687a796e9e"
+        },
+        {
+          "path": "note_lite.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "4d80f5d2ee542985ec501a5393e70bc5ae9fb9da",
+          "size": 704,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/4d80f5d2ee542985ec501a5393e70bc5ae9fb9da"
+        },
+        {
+          "path": "stable.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "81a5a792d9b93ed876dc9223b28510e225291182",
+          "size": 377,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/81a5a792d9b93ed876dc9223b28510e225291182"
+        },
+        {
+          "path": "stub-debug-lite.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "7a29bcccdc133fa0803347072f379b0397cd690e",
+          "size": 41359,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/7a29bcccdc133fa0803347072f379b0397cd690e"
+        },
+        {
+          "path": "stub-debug.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "9bb3610cf0c979bd9afdad05f01b1df431301d6c",
+          "size": 41354,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/9bb3610cf0c979bd9afdad05f01b1df431301d6c"
+        },
+        {
+          "path": "stub-release-lite.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "f0db818d04487d61bf0db091aabfc8709842879f",
+          "size": 33167,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/f0db818d04487d61bf0db091aabfc8709842879f"
+        },
+        {
+          "path": "stub-release.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "67b025b7ba5ab4b444588bbd05efb53d4a714ceb",
+          "size": 29066,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/67b025b7ba5ab4b444588bbd05efb53d4a714ceb"
+        }
+      ]
+    },
+    {
+      "commit": "96724b2ee26f7ac537c37fb5298c2a7579a3d322",
+      "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/trees/96724b2ee26f7ac537c37fb5298c2a7579a3d322",
+      "tree_sha": "96724b2ee26f7ac537c37fb5298c2a7579a3d322",
+      "entries": [
+        {
+          "path": "README.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "f1973b1b184c49574d54f2af734f2cf686bf0a13",
+          "size": 5615,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/f1973b1b184c49574d54f2af734f2cf686bf0a13"
+        },
+        {
+          "path": "app-debug-lite.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "1f0e32f077c17e203081ada1538bfbac8a17f72f",
+          "size": 20759608,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/1f0e32f077c17e203081ada1538bfbac8a17f72f"
+        },
+        {
+          "path": "app-debug.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "759187c2a7c76ea5a1d89b9d313e7e233cc3f84b",
+          "size": 21078040,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/759187c2a7c76ea5a1d89b9d313e7e233cc3f84b"
+        },
+        {
+          "path": "app-release-lite.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "bd10b76393ae695d770fbcaf2937e01d52e29969",
+          "size": 12569035,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/bd10b76393ae695d770fbcaf2937e01d52e29969"
+        },
+        {
+          "path": "app-release.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "232447ed4e60f3444308d7dc3237e1142923084b",
+          "size": 12871049,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/232447ed4e60f3444308d7dc3237e1142923084b"
+        },
+        {
+          "path": "beta.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "81a5a792d9b93ed876dc9223b28510e225291182",
+          "size": 377,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/81a5a792d9b93ed876dc9223b28510e225291182"
+        },
+        {
+          "path": "canary.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "8c343c6e51b217f24b3a38a38a5514f787ccbc3b",
+          "size": 358,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/8c343c6e51b217f24b3a38a38a5514f787ccbc3b"
+        },
+        {
+          "path": "canary_lite.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "2327773feae735fbae97784655bbd6c909b71b3b",
+          "size": 378,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/2327773feae735fbae97784655bbd6c909b71b3b"
+        },
+        {
+          "path": "debug.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "3c3c61a6c58db2ad93bca0f3d6c3c6235356deb1",
+          "size": 354,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/3c3c61a6c58db2ad93bca0f3d6c3c6235356deb1"
+        },
+        {
+          "path": "debug_lite.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "74044f61ba12d1e730cb7232493cc8f1857282a4",
+          "size": 374,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/74044f61ba12d1e730cb7232493cc8f1857282a4"
+        },
+        {
+          "path": "images",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "5339b1e334a6d4aebd12e1d87c300b6ee3c03ae0",
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/trees/5339b1e334a6d4aebd12e1d87c300b6ee3c03ae0"
+        },
+        {
+          "path": "logo.png",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "747a7707a3af108e5fb955f8e17a326eae10f29a",
+          "size": 123512,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/747a7707a3af108e5fb955f8e17a326eae10f29a"
+        },
+        {
+          "path": "note.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "e8eb5fffc77c3caf73b95d069b64e4f0fb0f68cc",
+          "size": 2576,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/e8eb5fffc77c3caf73b95d069b64e4f0fb0f68cc"
+        },
+        {
+          "path": "note_lite.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "d1ad1eb86a94e549cb7554ed842a9af610903a33",
+          "size": 3144,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/d1ad1eb86a94e549cb7554ed842a9af610903a33"
+        },
+        {
+          "path": "stable.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "81a5a792d9b93ed876dc9223b28510e225291182",
+          "size": 377,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/81a5a792d9b93ed876dc9223b28510e225291182"
+        },
+        {
+          "path": "stub-debug-lite.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "7a29bcccdc133fa0803347072f379b0397cd690e",
+          "size": 41359,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/7a29bcccdc133fa0803347072f379b0397cd690e"
+        },
+        {
+          "path": "stub-debug.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "9bb3610cf0c979bd9afdad05f01b1df431301d6c",
+          "size": 41354,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/9bb3610cf0c979bd9afdad05f01b1df431301d6c"
+        },
+        {
+          "path": "stub-release-lite.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "f0db818d04487d61bf0db091aabfc8709842879f",
+          "size": 33167,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/f0db818d04487d61bf0db091aabfc8709842879f"
+        },
+        {
+          "path": "stub-release.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "67b025b7ba5ab4b444588bbd05efb53d4a714ceb",
+          "size": 29066,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/67b025b7ba5ab4b444588bbd05efb53d4a714ceb"
+        }
+      ]
+    },
+    {
+      "commit": "6440334763236cdc7ed30fbc6a98de13d324b5ea",
+      "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/trees/6440334763236cdc7ed30fbc6a98de13d324b5ea",
+      "tree_sha": "6440334763236cdc7ed30fbc6a98de13d324b5ea",
+      "entries": [
+        {
+          "path": "README.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "02945841171dfdf6584c3a2c2c02e862786a8c5f",
+          "size": 5668,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/02945841171dfdf6584c3a2c2c02e862786a8c5f"
+        },
+        {
+          "path": "app-debug-lite.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "25f89a758dc71cebae47452197d7eabd857cd788",
+          "size": 20759608,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/25f89a758dc71cebae47452197d7eabd857cd788"
+        },
+        {
+          "path": "app-debug.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "881502d217e2663b70525cf5347fc108c62f4365",
+          "size": 21078040,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/881502d217e2663b70525cf5347fc108c62f4365"
+        },
+        {
+          "path": "app-release-lite.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "fba1177b8bb6b139f61f386f8afa9cad99b10579",
+          "size": 12569035,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/fba1177b8bb6b139f61f386f8afa9cad99b10579"
+        },
+        {
+          "path": "app-release.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "e44957ea66d280d05b3dc1fb65673fe6c2ab0025",
+          "size": 12871049,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/e44957ea66d280d05b3dc1fb65673fe6c2ab0025"
+        },
+        {
+          "path": "beta.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "81a5a792d9b93ed876dc9223b28510e225291182",
+          "size": 377,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/81a5a792d9b93ed876dc9223b28510e225291182"
+        },
+        {
+          "path": "canary.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "40abc4502975103b67b19c5164463846db99d27f",
+          "size": 358,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/40abc4502975103b67b19c5164463846db99d27f"
+        },
+        {
+          "path": "canary_lite.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "0f0a040bd273ef5d628659de3f882639616cb6a1",
+          "size": 378,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/0f0a040bd273ef5d628659de3f882639616cb6a1"
+        },
+        {
+          "path": "debug.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "03bcd6f42647c8147cb78ab44ca46a9ba1a72395",
+          "size": 354,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/03bcd6f42647c8147cb78ab44ca46a9ba1a72395"
+        },
+        {
+          "path": "debug_lite.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "c0dabc19b7452f19d2845068b50fa12b164f9dba",
+          "size": 374,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/c0dabc19b7452f19d2845068b50fa12b164f9dba"
+        },
+        {
+          "path": "images",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "5339b1e334a6d4aebd12e1d87c300b6ee3c03ae0",
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/trees/5339b1e334a6d4aebd12e1d87c300b6ee3c03ae0"
+        },
+        {
+          "path": "note.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "ef852c51af8860be0bdbd185070517265955bf81",
+          "size": 2588,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/ef852c51af8860be0bdbd185070517265955bf81"
+        },
+        {
+          "path": "note_lite.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "4d80f5d2ee542985ec501a5393e70bc5ae9fb9da",
+          "size": 704,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/4d80f5d2ee542985ec501a5393e70bc5ae9fb9da"
+        },
+        {
+          "path": "stable.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "81a5a792d9b93ed876dc9223b28510e225291182",
+          "size": 377,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/81a5a792d9b93ed876dc9223b28510e225291182"
+        },
+        {
+          "path": "stub-debug-lite.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "7a29bcccdc133fa0803347072f379b0397cd690e",
+          "size": 41359,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/7a29bcccdc133fa0803347072f379b0397cd690e"
+        },
+        {
+          "path": "stub-debug.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "9bb3610cf0c979bd9afdad05f01b1df431301d6c",
+          "size": 41354,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/9bb3610cf0c979bd9afdad05f01b1df431301d6c"
+        },
+        {
+          "path": "stub-release-lite.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "f0db818d04487d61bf0db091aabfc8709842879f",
+          "size": 33167,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/f0db818d04487d61bf0db091aabfc8709842879f"
+        },
+        {
+          "path": "stub-release.apk",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "67b025b7ba5ab4b444588bbd05efb53d4a714ceb",
+          "size": 29066,
+          "url": "https://api.github.com/repos/os-fork/HuskyDG-magisk-files/git/blobs/67b025b7ba5ab4b444588bbd05efb53d4a714ceb"
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "metadata_commit": "bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8",
+      "metadata_path": "stable.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/26.4-kitsune-2.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8",
+      "metadata_path": "stable.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/stub-release.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8",
+      "metadata_path": "beta.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/26.4-kitsune-2.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8",
+      "metadata_path": "beta.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/stub-release.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8",
+      "metadata_path": "canary.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-release.apk",
+      "status": "archived",
+      "git_blob": "d1dd40c0dbbaa258daedfc6b2f31aff01905b067",
+      "size": 12751676,
+      "sha256": "f631f9dbb73e8f5a928fc0480f726ee40e50056bafbd33fb09b730ecd2c2b45d",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8/app-release.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8",
+      "metadata_path": "canary.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-release.apk",
+      "status": "archived",
+      "git_blob": "67b025b7ba5ab4b444588bbd05efb53d4a714ceb",
+      "size": 29066,
+      "sha256": "0f75b6b64470d4c4c128e7b0dc6a03897a100d17444ca6be750b118e5a99e217",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/stub-release.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8",
+      "metadata_path": "debug.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-debug.apk",
+      "status": "archived",
+      "git_blob": "36a693d531190a69ee1376bc5e71e36501fc295c",
+      "size": 20937825,
+      "sha256": "f57f5da2ee9a96d75c30dcff8ad9f3ba94c2554624544ced9e5d5bebedbf664f",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8/app-debug.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8",
+      "metadata_path": "debug.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-debug.apk",
+      "status": "archived",
+      "git_blob": "9bb3610cf0c979bd9afdad05f01b1df431301d6c",
+      "size": 41354,
+      "sha256": "e7c7200b58c2708a87ed9be004d137b2b46ed75c6dbbca34da585f12c50d06cd",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/stub-debug.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "51fad676c48c855d8e94ce054487dc4f00e4446a",
+      "metadata_path": "stable.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/26.4-kitsune-2.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "51fad676c48c855d8e94ce054487dc4f00e4446a",
+      "metadata_path": "stable.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/stub-release.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "51fad676c48c855d8e94ce054487dc4f00e4446a",
+      "metadata_path": "beta.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/26.4-kitsune-2.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "51fad676c48c855d8e94ce054487dc4f00e4446a",
+      "metadata_path": "beta.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/stub-release.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "51fad676c48c855d8e94ce054487dc4f00e4446a",
+      "metadata_path": "canary.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-release.apk",
+      "status": "archived",
+      "git_blob": "0acc0858e69b16fa735aabc89626ccd7f50f7e27",
+      "size": 12866953,
+      "sha256": "86a1dedb54a4d1da2b9de429902c5d2b503a96b6ed5cbbd29aecc1ea270d7d14",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/51fad676c48c855d8e94ce054487dc4f00e4446a/app-release.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "51fad676c48c855d8e94ce054487dc4f00e4446a",
+      "metadata_path": "canary.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-release.apk",
+      "status": "archived",
+      "git_blob": "67b025b7ba5ab4b444588bbd05efb53d4a714ceb",
+      "size": 29066,
+      "sha256": "0f75b6b64470d4c4c128e7b0dc6a03897a100d17444ca6be750b118e5a99e217",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/stub-release.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "51fad676c48c855d8e94ce054487dc4f00e4446a",
+      "metadata_path": "debug.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-debug.apk",
+      "status": "archived",
+      "git_blob": "a99b2df01c0a19aaccd41f6aa744dc40051b57f8",
+      "size": 21078040,
+      "sha256": "f97c1546c933a9ee3fc8b05968752a5a85c4322715de22758e6088e5ce355dab",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/51fad676c48c855d8e94ce054487dc4f00e4446a/app-debug.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "51fad676c48c855d8e94ce054487dc4f00e4446a",
+      "metadata_path": "debug.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-debug.apk",
+      "status": "archived",
+      "git_blob": "9bb3610cf0c979bd9afdad05f01b1df431301d6c",
+      "size": 41354,
+      "sha256": "e7c7200b58c2708a87ed9be004d137b2b46ed75c6dbbca34da585f12c50d06cd",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/stub-debug.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "02ba306efeb85827c83effa13b01ef0510192391",
+      "metadata_path": "stable.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/26.4-kitsune-2.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "02ba306efeb85827c83effa13b01ef0510192391",
+      "metadata_path": "stable.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/stub-release.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "02ba306efeb85827c83effa13b01ef0510192391",
+      "metadata_path": "beta.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/26.4-kitsune-2.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "02ba306efeb85827c83effa13b01ef0510192391",
+      "metadata_path": "beta.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/stub-release.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "02ba306efeb85827c83effa13b01ef0510192391",
+      "metadata_path": "canary.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-release.apk",
+      "status": "archived",
+      "git_blob": "232447ed4e60f3444308d7dc3237e1142923084b",
+      "size": 12871049,
+      "sha256": "e5246e95933111d818b01d925dfdb375f5fc129416783b515b5d959e269189af",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/02ba306efeb85827c83effa13b01ef0510192391/app-release.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "02ba306efeb85827c83effa13b01ef0510192391",
+      "metadata_path": "canary.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-release.apk",
+      "status": "archived",
+      "git_blob": "67b025b7ba5ab4b444588bbd05efb53d4a714ceb",
+      "size": 29066,
+      "sha256": "0f75b6b64470d4c4c128e7b0dc6a03897a100d17444ca6be750b118e5a99e217",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/stub-release.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "02ba306efeb85827c83effa13b01ef0510192391",
+      "metadata_path": "debug.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-debug.apk",
+      "status": "archived",
+      "git_blob": "759187c2a7c76ea5a1d89b9d313e7e233cc3f84b",
+      "size": 21078040,
+      "sha256": "f91f5bc88d0742d27717d5c170893c64482d4dac1b381c9b45cd64e48e6823c1",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/02ba306efeb85827c83effa13b01ef0510192391/app-debug.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "02ba306efeb85827c83effa13b01ef0510192391",
+      "metadata_path": "debug.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-debug.apk",
+      "status": "archived",
+      "git_blob": "9bb3610cf0c979bd9afdad05f01b1df431301d6c",
+      "size": 41354,
+      "sha256": "e7c7200b58c2708a87ed9be004d137b2b46ed75c6dbbca34da585f12c50d06cd",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/stub-debug.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce",
+      "metadata_path": "stable.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/26.4-kitsune-2.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce",
+      "metadata_path": "stable.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/stub-release.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce",
+      "metadata_path": "beta.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/26.4-kitsune-2.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce",
+      "metadata_path": "beta.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/stub-release.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce",
+      "metadata_path": "canary.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-release.apk",
+      "status": "archived",
+      "git_blob": "e44957ea66d280d05b3dc1fb65673fe6c2ab0025",
+      "size": 12871049,
+      "sha256": "50e512b48a79d862f5beacb4bb9b7304d95d8e959d22cc59cfa8bc4767909c03",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce/app-release.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce",
+      "metadata_path": "canary.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-release.apk",
+      "status": "archived",
+      "git_blob": "67b025b7ba5ab4b444588bbd05efb53d4a714ceb",
+      "size": 29066,
+      "sha256": "0f75b6b64470d4c4c128e7b0dc6a03897a100d17444ca6be750b118e5a99e217",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/stub-release.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce",
+      "metadata_path": "debug.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-debug.apk",
+      "status": "archived",
+      "git_blob": "881502d217e2663b70525cf5347fc108c62f4365",
+      "size": 21078040,
+      "sha256": "7ac57c5c447c54d2d494286a87ab19a7128ecaa4df2d08bf7b76139e40351f32",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce/app-debug.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce",
+      "metadata_path": "debug.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-debug.apk",
+      "status": "archived",
+      "git_blob": "9bb3610cf0c979bd9afdad05f01b1df431301d6c",
+      "size": 41354,
+      "sha256": "e7c7200b58c2708a87ed9be004d137b2b46ed75c6dbbca34da585f12c50d06cd",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/stub-debug.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce",
+      "metadata_path": "canary_lite.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-release-lite.apk",
+      "status": "archived",
+      "git_blob": "bd10b76393ae695d770fbcaf2937e01d52e29969",
+      "size": 12569035,
+      "sha256": "462d923d8c90c4f9f6f90ec7c02dcb8e14d8b3e4e9697f5c5eba83057eaa1d11",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/96724b2ee26f7ac537c37fb5298c2a7579a3d322/app-release-lite.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce",
+      "metadata_path": "canary_lite.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-release-lite.apk",
+      "status": "archived",
+      "git_blob": "f0db818d04487d61bf0db091aabfc8709842879f",
+      "size": 33167,
+      "sha256": "7bdd433872060efddf64a826607bc85c2e75cdc6e0616984200b788b01ba2c4f",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/96724b2ee26f7ac537c37fb5298c2a7579a3d322/stub-release-lite.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce",
+      "metadata_path": "debug_lite.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-debug-lite.apk",
+      "status": "archived",
+      "git_blob": "1f0e32f077c17e203081ada1538bfbac8a17f72f",
+      "size": 20759608,
+      "sha256": "a701633d75cf64bca59f815561ac88405837b5f88f0528166050735fc1cc9d0d",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/96724b2ee26f7ac537c37fb5298c2a7579a3d322/app-debug-lite.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce",
+      "metadata_path": "debug_lite.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-debug-lite.apk",
+      "status": "archived",
+      "git_blob": "7a29bcccdc133fa0803347072f379b0397cd690e",
+      "size": 41359,
+      "sha256": "8ca96fd68f849d2f772b3bd9b17d59262d1af8375cb0cb47dac9e128c6b2e530",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/96724b2ee26f7ac537c37fb5298c2a7579a3d322/stub-debug-lite.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "29aaacaa07f74e1838d7c199f4c437aeeeed4702",
+      "metadata_path": "stable.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/26.4-kitsune-2.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "29aaacaa07f74e1838d7c199f4c437aeeeed4702",
+      "metadata_path": "stable.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/stub-release.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "29aaacaa07f74e1838d7c199f4c437aeeeed4702",
+      "metadata_path": "beta.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/26.4-kitsune-2.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "29aaacaa07f74e1838d7c199f4c437aeeeed4702",
+      "metadata_path": "beta.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/stub-release.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "29aaacaa07f74e1838d7c199f4c437aeeeed4702",
+      "metadata_path": "canary.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-release.apk",
+      "status": "archived",
+      "git_blob": "7fc0bfd0dfc663a45d8ddab7366cdfaf815297b3",
+      "size": 12872134,
+      "sha256": "af26d6133f5729cfb029d129ca8bab77e9d7bb2903565ba2389f657e7d1e2a91",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/29aaacaa07f74e1838d7c199f4c437aeeeed4702/app-release.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "29aaacaa07f74e1838d7c199f4c437aeeeed4702",
+      "metadata_path": "canary.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-release.apk",
+      "status": "archived",
+      "git_blob": "67b025b7ba5ab4b444588bbd05efb53d4a714ceb",
+      "size": 29066,
+      "sha256": "0f75b6b64470d4c4c128e7b0dc6a03897a100d17444ca6be750b118e5a99e217",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/stub-release.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "29aaacaa07f74e1838d7c199f4c437aeeeed4702",
+      "metadata_path": "debug.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-debug.apk",
+      "status": "archived",
+      "git_blob": "6e5ff0f0d3a55a5fe6b2d873f6eccf0e3f7d8dbd",
+      "size": 21091379,
+      "sha256": "8a99140cc8302cd4f97f4bbb6254b5fcf7b560657f44d8f286b0ba4ea0f8d914",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/29aaacaa07f74e1838d7c199f4c437aeeeed4702/app-debug.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "29aaacaa07f74e1838d7c199f4c437aeeeed4702",
+      "metadata_path": "debug.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-debug.apk",
+      "status": "archived",
+      "git_blob": "9bb3610cf0c979bd9afdad05f01b1df431301d6c",
+      "size": 41354,
+      "sha256": "e7c7200b58c2708a87ed9be004d137b2b46ed75c6dbbca34da585f12c50d06cd",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/stub-debug.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "29aaacaa07f74e1838d7c199f4c437aeeeed4702",
+      "metadata_path": "canary_lite.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-release-lite.apk",
+      "status": "archived",
+      "git_blob": "fba1177b8bb6b139f61f386f8afa9cad99b10579",
+      "size": 12569035,
+      "sha256": "b96bbf0111cd3770eda44588d2cbb28f86a50e94f718a31802147dcbc7696dd6",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/6440334763236cdc7ed30fbc6a98de13d324b5ea/app-release-lite.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "29aaacaa07f74e1838d7c199f4c437aeeeed4702",
+      "metadata_path": "canary_lite.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-release-lite.apk",
+      "status": "archived",
+      "git_blob": "f0db818d04487d61bf0db091aabfc8709842879f",
+      "size": 33167,
+      "sha256": "7bdd433872060efddf64a826607bc85c2e75cdc6e0616984200b788b01ba2c4f",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/96724b2ee26f7ac537c37fb5298c2a7579a3d322/stub-release-lite.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "29aaacaa07f74e1838d7c199f4c437aeeeed4702",
+      "metadata_path": "debug_lite.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-debug-lite.apk",
+      "status": "archived",
+      "git_blob": "25f89a758dc71cebae47452197d7eabd857cd788",
+      "size": 20759608,
+      "sha256": "0353dbb4189429be5c170b1d547beab41c4a8fe9e87151d37015822b09ede1a6",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/6440334763236cdc7ed30fbc6a98de13d324b5ea/app-debug-lite.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "29aaacaa07f74e1838d7c199f4c437aeeeed4702",
+      "metadata_path": "debug_lite.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-debug-lite.apk",
+      "status": "archived",
+      "git_blob": "7a29bcccdc133fa0803347072f379b0397cd690e",
+      "size": 41359,
+      "sha256": "8ca96fd68f849d2f772b3bd9b17d59262d1af8375cb0cb47dac9e128c6b2e530",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/96724b2ee26f7ac537c37fb5298c2a7579a3d322/stub-debug-lite.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "c5d500af33e829314c05e6a3f722061a0257f6b3",
+      "metadata_path": "stable.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/26.4-kitsune-2.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "c5d500af33e829314c05e6a3f722061a0257f6b3",
+      "metadata_path": "stable.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/stub-release.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "c5d500af33e829314c05e6a3f722061a0257f6b3",
+      "metadata_path": "beta.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/26.4-kitsune-2.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "c5d500af33e829314c05e6a3f722061a0257f6b3",
+      "metadata_path": "beta.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/stub-release.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "c5d500af33e829314c05e6a3f722061a0257f6b3",
+      "metadata_path": "canary.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-release.apk",
+      "status": "archived",
+      "git_blob": "6d46455f9c0828dea4012d23586794719be0e1f2",
+      "size": 12872134,
+      "sha256": "96d80844f7a73984d40d904e31f7134458bb8827cc89daa11517ed2b0d59e844",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/app-release.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "c5d500af33e829314c05e6a3f722061a0257f6b3",
+      "metadata_path": "canary.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-release.apk",
+      "status": "archived",
+      "git_blob": "67b025b7ba5ab4b444588bbd05efb53d4a714ceb",
+      "size": 29066,
+      "sha256": "0f75b6b64470d4c4c128e7b0dc6a03897a100d17444ca6be750b118e5a99e217",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/stub-release.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "c5d500af33e829314c05e6a3f722061a0257f6b3",
+      "metadata_path": "debug.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-debug.apk",
+      "status": "archived",
+      "git_blob": "d6452fea45bbf827657267d3196924a99e9637b7",
+      "size": 21091379,
+      "sha256": "c55a30c5bec526de9cc452cd0908b875739a91b01e239291c3473fe86414fe74",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/app-debug.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "c5d500af33e829314c05e6a3f722061a0257f6b3",
+      "metadata_path": "debug.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-debug.apk",
+      "status": "archived",
+      "git_blob": "9bb3610cf0c979bd9afdad05f01b1df431301d6c",
+      "size": 41354,
+      "sha256": "e7c7200b58c2708a87ed9be004d137b2b46ed75c6dbbca34da585f12c50d06cd",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/stub-debug.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "c5d500af33e829314c05e6a3f722061a0257f6b3",
+      "metadata_path": "canary_lite.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-release-lite.apk",
+      "status": "archived",
+      "git_blob": "fba1177b8bb6b139f61f386f8afa9cad99b10579",
+      "size": 12569035,
+      "sha256": "b96bbf0111cd3770eda44588d2cbb28f86a50e94f718a31802147dcbc7696dd6",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/6440334763236cdc7ed30fbc6a98de13d324b5ea/app-release-lite.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "c5d500af33e829314c05e6a3f722061a0257f6b3",
+      "metadata_path": "canary_lite.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-release-lite.apk",
+      "status": "archived",
+      "git_blob": "f0db818d04487d61bf0db091aabfc8709842879f",
+      "size": 33167,
+      "sha256": "7bdd433872060efddf64a826607bc85c2e75cdc6e0616984200b788b01ba2c4f",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/96724b2ee26f7ac537c37fb5298c2a7579a3d322/stub-release-lite.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "c5d500af33e829314c05e6a3f722061a0257f6b3",
+      "metadata_path": "debug_lite.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-debug-lite.apk",
+      "status": "archived",
+      "git_blob": "25f89a758dc71cebae47452197d7eabd857cd788",
+      "size": 20759608,
+      "sha256": "0353dbb4189429be5c170b1d547beab41c4a8fe9e87151d37015822b09ede1a6",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/6440334763236cdc7ed30fbc6a98de13d324b5ea/app-debug-lite.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "c5d500af33e829314c05e6a3f722061a0257f6b3",
+      "metadata_path": "debug_lite.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-debug-lite.apk",
+      "status": "archived",
+      "git_blob": "7a29bcccdc133fa0803347072f379b0397cd690e",
+      "size": 41359,
+      "sha256": "8ca96fd68f849d2f772b3bd9b17d59262d1af8375cb0cb47dac9e128c6b2e530",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/96724b2ee26f7ac537c37fb5298c2a7579a3d322/stub-debug-lite.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "2976a6f5ef29cac693764875dd4d68f1a19f6af6",
+      "metadata_path": "stable.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/26.4-kitsune-2.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "2976a6f5ef29cac693764875dd4d68f1a19f6af6",
+      "metadata_path": "stable.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/stub-release.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "2976a6f5ef29cac693764875dd4d68f1a19f6af6",
+      "metadata_path": "beta.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/26.4-kitsune-2.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "2976a6f5ef29cac693764875dd4d68f1a19f6af6",
+      "metadata_path": "beta.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/stub-release.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "2976a6f5ef29cac693764875dd4d68f1a19f6af6",
+      "metadata_path": "canary.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-release.apk",
+      "status": "archived",
+      "git_blob": "2a1ca1f17c26cb967a138d8b48ec992acc4f3c51",
+      "size": 12872134,
+      "sha256": "6b557be3c75de371fed1ac8719c32208f16130b8d3c560b8e4b2a7447b661e1e",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/2976a6f5ef29cac693764875dd4d68f1a19f6af6/app-release.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "2976a6f5ef29cac693764875dd4d68f1a19f6af6",
+      "metadata_path": "canary.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-release.apk",
+      "status": "archived",
+      "git_blob": "67b025b7ba5ab4b444588bbd05efb53d4a714ceb",
+      "size": 29066,
+      "sha256": "0f75b6b64470d4c4c128e7b0dc6a03897a100d17444ca6be750b118e5a99e217",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/stub-release.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "2976a6f5ef29cac693764875dd4d68f1a19f6af6",
+      "metadata_path": "debug.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-debug.apk",
+      "status": "archived",
+      "git_blob": "fdd0f1ae5b689d7477bd66a9d4a147896340ae31",
+      "size": 21091379,
+      "sha256": "0acd5919430c7583cb274abb33ccef64ca8e2537ef5d3ecf489f8d76734158d0",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/2976a6f5ef29cac693764875dd4d68f1a19f6af6/app-debug.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "2976a6f5ef29cac693764875dd4d68f1a19f6af6",
+      "metadata_path": "debug.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-debug.apk",
+      "status": "archived",
+      "git_blob": "9bb3610cf0c979bd9afdad05f01b1df431301d6c",
+      "size": 41354,
+      "sha256": "e7c7200b58c2708a87ed9be004d137b2b46ed75c6dbbca34da585f12c50d06cd",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/stub-debug.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "2976a6f5ef29cac693764875dd4d68f1a19f6af6",
+      "metadata_path": "canary_lite.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-release-lite.apk",
+      "status": "archived",
+      "git_blob": "fba1177b8bb6b139f61f386f8afa9cad99b10579",
+      "size": 12569035,
+      "sha256": "b96bbf0111cd3770eda44588d2cbb28f86a50e94f718a31802147dcbc7696dd6",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/6440334763236cdc7ed30fbc6a98de13d324b5ea/app-release-lite.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "2976a6f5ef29cac693764875dd4d68f1a19f6af6",
+      "metadata_path": "canary_lite.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-release-lite.apk",
+      "status": "archived",
+      "git_blob": "f0db818d04487d61bf0db091aabfc8709842879f",
+      "size": 33167,
+      "sha256": "7bdd433872060efddf64a826607bc85c2e75cdc6e0616984200b788b01ba2c4f",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/96724b2ee26f7ac537c37fb5298c2a7579a3d322/stub-release-lite.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "2976a6f5ef29cac693764875dd4d68f1a19f6af6",
+      "metadata_path": "debug_lite.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-debug-lite.apk",
+      "status": "archived",
+      "git_blob": "25f89a758dc71cebae47452197d7eabd857cd788",
+      "size": 20759608,
+      "sha256": "0353dbb4189429be5c170b1d547beab41c4a8fe9e87151d37015822b09ede1a6",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/6440334763236cdc7ed30fbc6a98de13d324b5ea/app-debug-lite.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "2976a6f5ef29cac693764875dd4d68f1a19f6af6",
+      "metadata_path": "debug_lite.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-debug-lite.apk",
+      "status": "archived",
+      "git_blob": "7a29bcccdc133fa0803347072f379b0397cd690e",
+      "size": 41359,
+      "sha256": "8ca96fd68f849d2f772b3bd9b17d59262d1af8375cb0cb47dac9e128c6b2e530",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/96724b2ee26f7ac537c37fb5298c2a7579a3d322/stub-debug-lite.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "05003cd38adc7613cbfe089bbfd233edd22debfc",
+      "metadata_path": "stable.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/26.4-kitsune-2.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "05003cd38adc7613cbfe089bbfd233edd22debfc",
+      "metadata_path": "stable.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/stub-release.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "05003cd38adc7613cbfe089bbfd233edd22debfc",
+      "metadata_path": "beta.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/26.4-kitsune-2.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "05003cd38adc7613cbfe089bbfd233edd22debfc",
+      "metadata_path": "beta.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/stub-release.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "05003cd38adc7613cbfe089bbfd233edd22debfc",
+      "metadata_path": "canary.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-release.apk",
+      "status": "archived",
+      "git_blob": "a501f86b7925ee175a3b98151067502ecab53775",
+      "size": 12880326,
+      "sha256": "5a3e77d28d4ead274e39b83fa7a4c60d201c43b2d665b30955685179c77d53e7",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/05003cd38adc7613cbfe089bbfd233edd22debfc/app-release.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "05003cd38adc7613cbfe089bbfd233edd22debfc",
+      "metadata_path": "canary.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-release.apk",
+      "status": "archived",
+      "git_blob": "67b025b7ba5ab4b444588bbd05efb53d4a714ceb",
+      "size": 29066,
+      "sha256": "0f75b6b64470d4c4c128e7b0dc6a03897a100d17444ca6be750b118e5a99e217",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/stub-release.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "05003cd38adc7613cbfe089bbfd233edd22debfc",
+      "metadata_path": "debug.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-debug.apk",
+      "status": "archived",
+      "git_blob": "314c6037850b20f94d90f21ecbc128a012ce5602",
+      "size": 21095475,
+      "sha256": "9a670805dd52433214fb18cbebda5a428ae795bc46b2e995f0adc09b0d8c8397",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/05003cd38adc7613cbfe089bbfd233edd22debfc/app-debug.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "05003cd38adc7613cbfe089bbfd233edd22debfc",
+      "metadata_path": "debug.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-debug.apk",
+      "status": "archived",
+      "git_blob": "9bb3610cf0c979bd9afdad05f01b1df431301d6c",
+      "size": 41354,
+      "sha256": "e7c7200b58c2708a87ed9be004d137b2b46ed75c6dbbca34da585f12c50d06cd",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/stub-debug.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "05003cd38adc7613cbfe089bbfd233edd22debfc",
+      "metadata_path": "canary_lite.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-release-lite.apk",
+      "status": "archived",
+      "git_blob": "fba1177b8bb6b139f61f386f8afa9cad99b10579",
+      "size": 12569035,
+      "sha256": "b96bbf0111cd3770eda44588d2cbb28f86a50e94f718a31802147dcbc7696dd6",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/6440334763236cdc7ed30fbc6a98de13d324b5ea/app-release-lite.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "05003cd38adc7613cbfe089bbfd233edd22debfc",
+      "metadata_path": "canary_lite.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-release-lite.apk",
+      "status": "archived",
+      "git_blob": "f0db818d04487d61bf0db091aabfc8709842879f",
+      "size": 33167,
+      "sha256": "7bdd433872060efddf64a826607bc85c2e75cdc6e0616984200b788b01ba2c4f",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/96724b2ee26f7ac537c37fb5298c2a7579a3d322/stub-release-lite.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "05003cd38adc7613cbfe089bbfd233edd22debfc",
+      "metadata_path": "debug_lite.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-debug-lite.apk",
+      "status": "archived",
+      "git_blob": "25f89a758dc71cebae47452197d7eabd857cd788",
+      "size": 20759608,
+      "sha256": "0353dbb4189429be5c170b1d547beab41c4a8fe9e87151d37015822b09ede1a6",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/6440334763236cdc7ed30fbc6a98de13d324b5ea/app-debug-lite.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "05003cd38adc7613cbfe089bbfd233edd22debfc",
+      "metadata_path": "debug_lite.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-debug-lite.apk",
+      "status": "archived",
+      "git_blob": "7a29bcccdc133fa0803347072f379b0397cd690e",
+      "size": 41359,
+      "sha256": "8ca96fd68f849d2f772b3bd9b17d59262d1af8375cb0cb47dac9e128c6b2e530",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/96724b2ee26f7ac537c37fb5298c2a7579a3d322/stub-debug-lite.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "96724b2ee26f7ac537c37fb5298c2a7579a3d322",
+      "metadata_path": "stable.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/26.4-kitsune-2.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "96724b2ee26f7ac537c37fb5298c2a7579a3d322",
+      "metadata_path": "stable.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/stub-release.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "96724b2ee26f7ac537c37fb5298c2a7579a3d322",
+      "metadata_path": "beta.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/26.4-kitsune-2.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "96724b2ee26f7ac537c37fb5298c2a7579a3d322",
+      "metadata_path": "beta.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/stub-release.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "96724b2ee26f7ac537c37fb5298c2a7579a3d322",
+      "metadata_path": "canary.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-release.apk",
+      "status": "archived",
+      "git_blob": "232447ed4e60f3444308d7dc3237e1142923084b",
+      "size": 12871049,
+      "sha256": "e5246e95933111d818b01d925dfdb375f5fc129416783b515b5d959e269189af",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/02ba306efeb85827c83effa13b01ef0510192391/app-release.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "96724b2ee26f7ac537c37fb5298c2a7579a3d322",
+      "metadata_path": "canary.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-release.apk",
+      "status": "archived",
+      "git_blob": "67b025b7ba5ab4b444588bbd05efb53d4a714ceb",
+      "size": 29066,
+      "sha256": "0f75b6b64470d4c4c128e7b0dc6a03897a100d17444ca6be750b118e5a99e217",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/stub-release.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "96724b2ee26f7ac537c37fb5298c2a7579a3d322",
+      "metadata_path": "debug.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-debug.apk",
+      "status": "archived",
+      "git_blob": "759187c2a7c76ea5a1d89b9d313e7e233cc3f84b",
+      "size": 21078040,
+      "sha256": "f91f5bc88d0742d27717d5c170893c64482d4dac1b381c9b45cd64e48e6823c1",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/02ba306efeb85827c83effa13b01ef0510192391/app-debug.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "96724b2ee26f7ac537c37fb5298c2a7579a3d322",
+      "metadata_path": "debug.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-debug.apk",
+      "status": "archived",
+      "git_blob": "9bb3610cf0c979bd9afdad05f01b1df431301d6c",
+      "size": 41354,
+      "sha256": "e7c7200b58c2708a87ed9be004d137b2b46ed75c6dbbca34da585f12c50d06cd",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/stub-debug.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "96724b2ee26f7ac537c37fb5298c2a7579a3d322",
+      "metadata_path": "canary_lite.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-release-lite.apk",
+      "status": "archived",
+      "git_blob": "bd10b76393ae695d770fbcaf2937e01d52e29969",
+      "size": 12569035,
+      "sha256": "462d923d8c90c4f9f6f90ec7c02dcb8e14d8b3e4e9697f5c5eba83057eaa1d11",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/96724b2ee26f7ac537c37fb5298c2a7579a3d322/app-release-lite.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "96724b2ee26f7ac537c37fb5298c2a7579a3d322",
+      "metadata_path": "canary_lite.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-release-lite.apk",
+      "status": "archived",
+      "git_blob": "f0db818d04487d61bf0db091aabfc8709842879f",
+      "size": 33167,
+      "sha256": "7bdd433872060efddf64a826607bc85c2e75cdc6e0616984200b788b01ba2c4f",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/96724b2ee26f7ac537c37fb5298c2a7579a3d322/stub-release-lite.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "96724b2ee26f7ac537c37fb5298c2a7579a3d322",
+      "metadata_path": "debug_lite.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-debug-lite.apk",
+      "status": "archived",
+      "git_blob": "1f0e32f077c17e203081ada1538bfbac8a17f72f",
+      "size": 20759608,
+      "sha256": "a701633d75cf64bca59f815561ac88405837b5f88f0528166050735fc1cc9d0d",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/96724b2ee26f7ac537c37fb5298c2a7579a3d322/app-debug-lite.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "96724b2ee26f7ac537c37fb5298c2a7579a3d322",
+      "metadata_path": "debug_lite.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-debug-lite.apk",
+      "status": "archived",
+      "git_blob": "7a29bcccdc133fa0803347072f379b0397cd690e",
+      "size": 41359,
+      "sha256": "8ca96fd68f849d2f772b3bd9b17d59262d1af8375cb0cb47dac9e128c6b2e530",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/96724b2ee26f7ac537c37fb5298c2a7579a3d322/stub-debug-lite.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "6440334763236cdc7ed30fbc6a98de13d324b5ea",
+      "metadata_path": "stable.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/26.4-kitsune-2.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "6440334763236cdc7ed30fbc6a98de13d324b5ea",
+      "metadata_path": "stable.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/stub-release.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "6440334763236cdc7ed30fbc6a98de13d324b5ea",
+      "metadata_path": "beta.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/26.4-kitsune-2.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "6440334763236cdc7ed30fbc6a98de13d324b5ea",
+      "metadata_path": "beta.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/download/raw/main/magisk/stub-release.apk",
+      "status": "lost-mutable-endpoint",
+      "http_status": 404,
+      "evidence": "original-stable",
+      "owner_pr": 10,
+      "disposition": "Retire endpoint; recovered manager and embedded stub remain separately digested observations, without asserting lost endpoint byte identity."
+    },
+    {
+      "metadata_commit": "6440334763236cdc7ed30fbc6a98de13d324b5ea",
+      "metadata_path": "canary.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-release.apk",
+      "status": "archived",
+      "git_blob": "e44957ea66d280d05b3dc1fb65673fe6c2ab0025",
+      "size": 12871049,
+      "sha256": "50e512b48a79d862f5beacb4bb9b7304d95d8e959d22cc59cfa8bc4767909c03",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce/app-release.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "6440334763236cdc7ed30fbc6a98de13d324b5ea",
+      "metadata_path": "canary.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-release.apk",
+      "status": "archived",
+      "git_blob": "67b025b7ba5ab4b444588bbd05efb53d4a714ceb",
+      "size": 29066,
+      "sha256": "0f75b6b64470d4c4c128e7b0dc6a03897a100d17444ca6be750b118e5a99e217",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/stub-release.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "6440334763236cdc7ed30fbc6a98de13d324b5ea",
+      "metadata_path": "debug.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-debug.apk",
+      "status": "archived",
+      "git_blob": "881502d217e2663b70525cf5347fc108c62f4365",
+      "size": 21078040,
+      "sha256": "7ac57c5c447c54d2d494286a87ab19a7128ecaa4df2d08bf7b76139e40351f32",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce/app-debug.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "6440334763236cdc7ed30fbc6a98de13d324b5ea",
+      "metadata_path": "debug.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-debug.apk",
+      "status": "archived",
+      "git_blob": "9bb3610cf0c979bd9afdad05f01b1df431301d6c",
+      "size": 41354,
+      "sha256": "e7c7200b58c2708a87ed9be004d137b2b46ed75c6dbbca34da585f12c50d06cd",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/stub-debug.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "6440334763236cdc7ed30fbc6a98de13d324b5ea",
+      "metadata_path": "canary_lite.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-release-lite.apk",
+      "status": "archived",
+      "git_blob": "fba1177b8bb6b139f61f386f8afa9cad99b10579",
+      "size": 12569035,
+      "sha256": "b96bbf0111cd3770eda44588d2cbb28f86a50e94f718a31802147dcbc7696dd6",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/6440334763236cdc7ed30fbc6a98de13d324b5ea/app-release-lite.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "6440334763236cdc7ed30fbc6a98de13d324b5ea",
+      "metadata_path": "canary_lite.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-release-lite.apk",
+      "status": "archived",
+      "git_blob": "f0db818d04487d61bf0db091aabfc8709842879f",
+      "size": 33167,
+      "sha256": "7bdd433872060efddf64a826607bc85c2e75cdc6e0616984200b788b01ba2c4f",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/96724b2ee26f7ac537c37fb5298c2a7579a3d322/stub-release-lite.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "6440334763236cdc7ed30fbc6a98de13d324b5ea",
+      "metadata_path": "debug_lite.json",
+      "role": "magisk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-debug-lite.apk",
+      "status": "archived",
+      "git_blob": "25f89a758dc71cebae47452197d7eabd857cd788",
+      "size": 20759608,
+      "sha256": "0353dbb4189429be5c170b1d547beab41c4a8fe9e87151d37015822b09ede1a6",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/6440334763236cdc7ed30fbc6a98de13d324b5ea/app-debug-lite.apk",
+      "evidence": "full-lite-assets"
+    },
+    {
+      "metadata_commit": "6440334763236cdc7ed30fbc6a98de13d324b5ea",
+      "metadata_path": "debug_lite.json",
+      "role": "stub",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-debug-lite.apk",
+      "status": "archived",
+      "git_blob": "7a29bcccdc133fa0803347072f379b0397cd690e",
+      "size": 41359,
+      "sha256": "8ca96fd68f849d2f772b3bd9b17d59262d1af8375cb0cb47dac9e128c6b2e530",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/96724b2ee26f7ac537c37fb5298c2a7579a3d322/stub-debug-lite.apk",
+      "evidence": "full-lite-assets"
+    }
+  ]
+}

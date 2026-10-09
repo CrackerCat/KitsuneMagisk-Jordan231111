@@ -3,14 +3,16 @@
 `records/` contains sanitized observations conforming to the versioned characterization schema.
 Synthetic classifier fixtures live under `tools/system_mode/fixtures` and are never support claims.
 
-The initial required lanes are LDPlayer, MuMu, Nox, BlueStacks, and one immutable negative image.
+The initial required lanes are LDPlayer, MuMu, BlueStacks, and one immutable negative image.
 PR3 recorded the connected MuMu 12 environment without mutating it. PR5A/PR5B add an experimental
 MuMuPlayer 1.4.46 lifecycle record backed by a verified external image restore; it remains
 experimental because the starting image contained a legacy System Mode installation and the exact
 final artifact did not repeat every predecessor module/failure-injection subcase. PR4A also recorded
 fresh Android Studio API 35 (16 KiB pages) and API 36 immutable images as real fail-closed negative
-evidence. LDPlayer and Nox remain `not_run`; no lane may be converted to `supported` from brand
-strings or synthetic data.
+evidence. PR8 adds paired Windows LDPlayer 14 and MuMu Global Android 12 records, plus the
+reason-coded blocked BlueStacks 5.22.265.1013 target. These three emulator families form the Windows matrix requested on 2026-10-08. No lane may be converted to `supported` from
+brand strings or synthetic data. See the [Windows lab record](../docs/system-mode/pr8-windows-2026-10-08.md)
+for exact artifacts, preparations, failures and remaining limits.
 
 Support requires a clean snapshot plus install, three cold boots, upgrade, reinstall, module/root
 smoke, uninstall, and snapshot restore on the exact artifact. Records intentionally preserve

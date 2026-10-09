@@ -304,6 +304,9 @@ class SystemModeAuthorizationTest(unittest.TestCase):
             with HostLease(authorization_id, lambda: calls.append("verified"), timeout=5) as lease:
                 noisy = socket.create_connection(("127.0.0.1", lease.host_port), timeout=2)
                 noisy.sendall(b"incomplete")
+                noisy.shutdown(socket.SHUT_WR)
+                while noisy.recv(4096):
+                    pass
                 noisy.close()
                 wrong = f"http://127.0.0.1:{lease.host_port}/wrong"
                 with self.assertRaises(urllib.error.HTTPError) as error:

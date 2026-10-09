@@ -1,0 +1,388 @@
+{
+  "schema_version": 1,
+  "record_id": "2026-10-08-ldplayer14-pr8",
+  "qualification_status": "experimental",
+  "clean_snapshot": true,
+  "artifact": {
+    "identity_status": "known",
+    "branch": "next-system",
+    "commit": "99ab2c55d4441bab2dbd3327e7705ac1d43abe47",
+    "apk_sha256": "7bb316529133f17006c0ca20b58f64daad756b5ae56f06a24f48d4b443a61d51"
+  },
+  "doctor": {
+    "assessment": {
+      "primary_reason": "SUPPORTED",
+      "reason_codes": [
+        "SUPPORTED",
+        "AVB_STATE_UNKNOWN",
+        "SELINUX_NOT_ENFORCING"
+      ],
+      "verdict": "supported",
+      "warnings": [
+        "AVB_STATE_UNKNOWN",
+        "SELINUX_NOT_ENFORCING"
+      ]
+    },
+    "bootstrap": {
+      "adb_uid": 2000,
+      "magisk_version": null,
+      "magisk_version_code": null,
+      "root_available": true,
+      "root_context": "u:r:su:s0",
+      "root_uid": 0,
+      "transport": "vendor_su"
+    },
+    "device": {
+      "abis": [
+        "x86_64",
+        "arm64-v8a",
+        "x86",
+        "armeabi-v7a",
+        "armeabi"
+      ],
+      "android_release": "14",
+      "api": 34,
+      "boot_id_sha256": "cdff3ba3cd70e7c155cad2745fb1c56384e38ed44005ff5c724d70fe857dc638",
+      "brand": "OnePlus",
+      "build_id": "UQ1A.240205.06151050",
+      "build_incremental": "lee.20260615.105024",
+      "device": "unicorn",
+      "emulator_product": null,
+      "emulator_product_property": null,
+      "emulator_version": null,
+      "emulator_version_property": null,
+      "fingerprint_sha256": "1c5673700ed4dc77aebb82cd8d2230b281678a7801324cf0b68eca0c876bdb58",
+      "kernel": "Linux localhost 5.15.178+ #1 SMP PREEMPT Mon Jun 15 10:52:12 CST 2026 x86_64 Toybox",
+      "manufacturer": "OnePlus",
+      "model": "PJD110",
+      "page_size": 4096,
+      "product": "PJD110",
+      "vendor": "oneplus",
+      "vendor_evidence": [
+        "manufacturer:oneplus"
+      ]
+    },
+    "existing_install": {
+      "active_magisk": false,
+      "config_path": null,
+      "detected": false,
+      "manifest_path": null,
+      "manifest_present": false,
+      "ordinary_magisk": false,
+      "system_mode": false
+    },
+    "generated_at": "2026-10-08T12:19:55Z",
+    "init": {
+      "candidate_directories": [
+        {
+          "exists": true,
+          "kind": "directory",
+          "mode": "0755",
+          "path": "/system/etc/init",
+          "permission_writable": true,
+          "readable": true,
+          "resolved_path": "/system/etc/init",
+          "uid": 0
+        },
+        {
+          "exists": true,
+          "kind": "directory",
+          "mode": "0755",
+          "path": "/system/etc/init/hw",
+          "permission_writable": true,
+          "readable": true,
+          "resolved_path": "/system/etc/init/hw",
+          "uid": 0
+        }
+      ],
+      "import_proof": "proven",
+      "selected_directory": "/system/etc/init"
+    },
+    "layout": {
+      "avb_state": "unknown",
+      "device_mapper": {
+        "layers": [],
+        "probe": "not_applicable"
+      },
+      "dm_verity": false,
+      "dynamic_partitions": false,
+      "ext4_features": [
+        "ext_attr",
+        "dir_index",
+        "filetype",
+        "meta_bg",
+        "extent",
+        "sparse_super",
+        "large_file",
+        "huge_file",
+        "uninit_bg",
+        "dir_nlink",
+        "extra_isize"
+      ],
+      "ext4_features_method": "tune2fs",
+      "ext4_features_probe": "observed",
+      "ext4_ro_compat_flags": null,
+      "overlayfs": false,
+      "shared_blocks": false,
+      "slot_suffix": "",
+      "system_fs_type": "ext4",
+      "system_source": "/dev/block/sda2",
+      "system_target": "/system",
+      "system_writable_backing": true,
+      "system_writable_view": true
+    },
+    "mounts": [
+      {
+        "exists": true,
+        "fs_type": "ext4",
+        "major_minor": "8:2",
+        "mount_options": [
+          "rw",
+          "nodev",
+          "relatime"
+        ],
+        "mount_point": "/",
+        "resolved_path": "/",
+        "root": "/",
+        "source": "/dev/block/sda2",
+        "super_options": [
+          "rw",
+          "seclabel",
+          "errors=panic"
+        ],
+        "target": "/",
+        "writable_backing": true,
+        "writable_view": true
+      },
+      {
+        "exists": true,
+        "fs_type": "ext4",
+        "major_minor": "8:2",
+        "mount_options": [
+          "rw",
+          "nodev",
+          "relatime"
+        ],
+        "mount_point": "/",
+        "resolved_path": "/system",
+        "root": "/",
+        "source": "/dev/block/sda2",
+        "super_options": [
+          "rw",
+          "seclabel",
+          "errors=panic"
+        ],
+        "target": "/system",
+        "writable_backing": true,
+        "writable_view": true
+      },
+      {
+        "exists": true,
+        "fs_type": "ext4",
+        "major_minor": "8:2",
+        "mount_options": [
+          "rw",
+          "nodev",
+          "relatime"
+        ],
+        "mount_point": "/",
+        "resolved_path": "/system/vendor",
+        "root": "/",
+        "source": "/dev/block/sda2",
+        "super_options": [
+          "rw",
+          "seclabel",
+          "errors=panic"
+        ],
+        "target": "/vendor",
+        "writable_backing": true,
+        "writable_view": true
+      },
+      {
+        "exists": true,
+        "fs_type": "ext4",
+        "major_minor": "8:2",
+        "mount_options": [
+          "rw",
+          "nodev",
+          "relatime"
+        ],
+        "mount_point": "/",
+        "resolved_path": "/odm",
+        "root": "/",
+        "source": "/dev/block/sda2",
+        "super_options": [
+          "rw",
+          "seclabel",
+          "errors=panic"
+        ],
+        "target": "/odm",
+        "writable_backing": true,
+        "writable_view": true
+      },
+      {
+        "exists": true,
+        "fs_type": "ext4",
+        "major_minor": "8:2",
+        "mount_options": [
+          "rw",
+          "nodev",
+          "relatime"
+        ],
+        "mount_point": "/",
+        "resolved_path": "/system/product",
+        "root": "/",
+        "source": "/dev/block/sda2",
+        "super_options": [
+          "rw",
+          "seclabel",
+          "errors=panic"
+        ],
+        "target": "/product",
+        "writable_backing": true,
+        "writable_view": true
+      },
+      {
+        "exists": true,
+        "fs_type": "ext4",
+        "major_minor": "8:2",
+        "mount_options": [
+          "rw",
+          "nodev",
+          "relatime"
+        ],
+        "mount_point": "/",
+        "resolved_path": "/system/system_ext",
+        "root": "/",
+        "source": "/dev/block/sda2",
+        "super_options": [
+          "rw",
+          "seclabel",
+          "errors=panic"
+        ],
+        "target": "/system_ext",
+        "writable_backing": true,
+        "writable_view": true
+      }
+    ],
+    "persistence": {
+      "backing_write_probe": "passed",
+      "cold_boots": 3,
+      "host_restarts": 0,
+      "proven": true
+    },
+    "probe_version": "1.0.0",
+    "recovery": {
+      "adapter_id": "generic-in-guest",
+      "backup_digest": "2f140aeec7c87c82b5dcfc8787e78485bf8f9c03959991f1414efb3e0f89c957",
+      "backup_location": "/c/Users/Jordan/Documents/KitsuneMagisk/out/pr8/ld14-test-backups/qualified-prepared",
+      "instance_identity_sha256": "c9ec2af15a6b09258cdc506d6d5a1877f45ca932ecaf9fd78936965837d75c68",
+      "qualification_record": "/kitsune-pr8/ld14/qualification-prepared.json",
+      "qualification_sha256": "10eaf3156775177506abf8facdbb622059f47de04a34594a784a7bfcde377d08",
+      "restore_command": "/kitsune-pr8/ld14/restore.sh /c/Users/Jordan/Documents/KitsuneMagisk/out/pr8/ld14-test-backups/qualified-prepared",
+      "snapshot_id": "ld14-pr8-prepared",
+      "verified": true
+    },
+    "schema_version": 1,
+    "selinux": {
+      "enabled": true,
+      "policy_candidates": [
+        {
+          "exists": true,
+          "kind": "file",
+          "mode": "0644",
+          "path": "/vendor/etc/selinux/precompiled_sepolicy",
+          "permission_writable": true,
+          "readable": true,
+          "resolved_path": "/system/vendor/etc/selinux/precompiled_sepolicy",
+          "sha256": "a303c1c8aad763cf3c12fde1055c5e5d683b4a58e7ece2b5aa0d9cfc1a18e4b4",
+          "size": 650485,
+          "uid": 0
+        },
+        {
+          "exists": true,
+          "kind": "file",
+          "mode": "0644",
+          "path": "/system/etc/selinux/plat_sepolicy.cil",
+          "permission_writable": true,
+          "readable": true,
+          "resolved_path": "/system/etc/selinux/plat_sepolicy.cil",
+          "sha256": "2c37bd24a5019391af2d283efd3a9b6845aeddb41522ba50c0e0cc0d6b079d8a",
+          "size": 2133538,
+          "uid": 0
+        },
+        {
+          "exists": true,
+          "kind": "directory",
+          "mode": "0755",
+          "path": "/system/etc/selinux/mapping",
+          "permission_writable": true,
+          "readable": true,
+          "resolved_path": "/system/etc/selinux/mapping",
+          "sha256": null,
+          "size": null,
+          "uid": 0
+        },
+        {
+          "exists": true,
+          "kind": "file",
+          "mode": "0644",
+          "path": "/vendor/etc/selinux/vendor_sepolicy.cil",
+          "permission_writable": true,
+          "readable": true,
+          "resolved_path": "/system/vendor/etc/selinux/vendor_sepolicy.cil",
+          "sha256": "b5a820b68476d79c9e1e0d0907e8f4dffd572241a5eed87d9ef7bc919e9d0ef5",
+          "size": 172476,
+          "uid": 0
+        },
+        {
+          "exists": true,
+          "kind": "file",
+          "mode": "0644",
+          "path": "/vendor/etc/selinux/precompiled_sepolicy.plat_sepolicy_and_mapping.sha256",
+          "permission_writable": true,
+          "readable": true,
+          "resolved_path": "/system/vendor/etc/selinux/precompiled_sepolicy.plat_sepolicy_and_mapping.sha256",
+          "sha256": "fac1b8b7aa439f1113cb0158dc752b92863d6fb108022caf8cbd93c4b89c4275",
+          "size": 65,
+          "uid": 0
+        }
+      ],
+      "state": "permissive",
+      "strategy": "precompiled"
+    },
+    "source": {
+      "kind": "adb",
+      "probe_sha256": "ca411767141b0a5fd617e773b398cd323f8c6d36a50641663b82af915bd5ea95",
+      "read_only": true,
+      "repository_commit": "99ab2c55d4441bab2dbd3327e7705ac1d43abe47",
+      "repository_dirty": false,
+      "serial_sha256": "3fe4fe755f333a1432e872cb71a3de712c6eee094ae8d74acb413d2773f0f1aa"
+    },
+    "staging": {
+      "available_bytes": 22988046336,
+      "path": "/data/local/tmp",
+      "required_bytes": 33554432,
+      "sufficient": true
+    }
+  },
+  "lifecycle": {
+    "install": "passed",
+    "cold_boots": 3,
+    "upgrade": "not_run",
+    "reinstall": "passed",
+    "module_smoke": "passed",
+    "root_policy_smoke": "passed",
+    "uninstall": "passed",
+    "snapshot_restore": "passed"
+  },
+  "notes": [
+    "ldplayer14 14.0.9.2; exact source/artifact and detailed limits: docs/system-mode/pr8-windows-2026-10-08.md.",
+    "Disposable instance 1 required its private standalone system VDI expanded to 3 GiB and the recorded LDPlayerRoot ldinit anti-scrub preparation. This is not stock-capacity compatibility.",
+    "The exact APK passed manager installation, three vendor-root-off cold boots, module install/disable/re-enable/remove, 48 SU requests with eight clients, same-version reinstall and backend exact uninstall. UI complete-uninstall and a post-uninstall cold boot were not established in this lane.",
+    "A separate-version upgrade was not run. Root policy coverage is deny then allow plus concurrent SU; revoke-latency and broader shared-UID/multiuser cases remain unqualified.",
+    "Current-line b416c8ddd900023c8b9dd8d5569395d91bd0dc4c / APK 7a915aff4437f55f7bac4a5b004601c66d80b18a87c34952a6ce30d776c9e8f8 failed at runtime metadata normalization on the same restored baseline. Rollback and complete offline-hash-verified external restore passed.",
+    "The original user-owned instance 0 was separately backed up, challenged, restored and stopped. Both LDPlayer instances are stopped. Prepared permissive emulator evidence does not qualify enforcing devices or physical phones.",
+    "Vendor-root-off runtime boot IDs: ed559963-cc2b-4cef-a582-8fb42de0c973, 100767db-5776-4070-8fd4-7359ffd3861e, 18f8d59c-954f-4b6c-9a48-2f475fd23eef."
+  ]
+}

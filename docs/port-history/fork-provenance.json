@@ -1,0 +1,75 @@
+{
+  "schema": 1,
+  "retrieved_at": "2026-10-08T15:41:35.894644+00:00",
+  "api": "https://api.github.com/repos/{full_name}",
+  "repositories": [
+    {
+      "full_name": "os-fork/HuskyDG-magisk-files",
+      "id": 747123981,
+      "fork": true,
+      "default_branch": "main",
+      "parent": {
+        "full_name": "HuskyDG/magisk-files",
+        "id": 722709822,
+        "html_url": "https://github.com/HuskyDG/magisk-files"
+      },
+      "source": {
+        "full_name": "HuskyDG/magisk-files",
+        "id": 722709822,
+        "html_url": "https://github.com/HuskyDG/magisk-files"
+      }
+    },
+    {
+      "full_name": "NotMaybe/magiskdelta",
+      "id": 752511673,
+      "fork": true,
+      "default_branch": "main",
+      "parent": {
+        "full_name": "HuskyDG/magisk-files",
+        "id": 722709822,
+        "html_url": "https://github.com/HuskyDG/magisk-files"
+      },
+      "source": {
+        "full_name": "HuskyDG/magisk-files",
+        "id": 722709822,
+        "html_url": "https://github.com/HuskyDG/magisk-files"
+      }
+    },
+    {
+      "full_name": "Bemly/kokoro-no-kitsune",
+      "id": 866202546,
+      "fork": true,
+      "default_branch": "kitsune",
+      "parent": {
+        "full_name": "KitsuneMagisk/Magisk",
+        "id": 738957110,
+        "html_url": "https://github.com/KitsuneMagisk/Magisk"
+      },
+      "source": {
+        "full_name": "topjohnwu/Magisk",
+        "id": 67702184,
+        "html_url": "https://github.com/topjohnwu/Magisk"
+      }
+    },
+    {
+      "full_name": "Robotition/MagiskDelta",
+      "id": 769746571,
+      "fork": true,
+      "default_branch": "master",
+      "parent": {
+        "full_name": "KitsuneMagisk/Magisk",
+        "id": 738957110,
+        "html_url": "https://github.com/KitsuneMagisk/Magisk"
+      },
+      "source": {
+        "full_name": "topjohnwu/Magisk",
+        "id": 67702184,
+        "html_url": "https://github.com/topjohnwu/Magisk"
+      }
+    }
+  ],
+  "limits": [
+    "GitHub records identify the surviving forks and their parent/source repository IDs. The original HuskyDG/magisk-files and KitsuneMagisk/Magisk URLs currently return 404.",
+    "A fork-network relationship does not authenticate every fork modification or bind an APK to compiled source. Exact commit/blob/APK digests remain required."
+  ]
+}

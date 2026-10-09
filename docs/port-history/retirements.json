@@ -1,0 +1,154 @@
+{
+  "schema": 1,
+  "scope": "Retirement of unsafe or misleading historical mechanisms, not removal of the useful root/manager use cases. Replacement migration and release qualification remain with the numbered owners.",
+  "decisions": [
+    {
+      "feature": "SYS-008",
+      "decision": "Retire implicit privileged activation through the systemmagisk filename. The maintained flow requires the explicit System Mode action and bound one-shot authorization; the legacy-filename regression is retained.",
+      "migration": "Use the explicit qualified System Mode action. Renaming a ZIP must never grant permission to mutate system partitions.",
+      "source_evidence": [
+        {
+          "commit": "dd5ca5c12e8447344eef5e89f6080e9e2a0d04c8",
+          "path": "scripts/flash_script.sh",
+          "sha256": "e7e1a9577ea4f49d0f8005fdf8c4d5a71e606efaba9ed4f03444f32b44c317b6"
+        },
+        {
+          "commit": "dd5ca5c12e8447344eef5e89f6080e9e2a0d04c8",
+          "path": "scripts/kitsune_system_install.sh",
+          "sha256": "0fc1c83399e527d23ae2ce0665deabcba0fa2362db7971768943e83795cceb1f"
+        },
+        {
+          "commit": "dd5ca5c12e8447344eef5e89f6080e9e2a0d04c8",
+          "path": "tests/system_mode/test_installer_safety.py",
+          "sha256": "67e22d8751cc02347df3a270c7481bd1852851e7edc1c3c9f4bfcd08afa792e4"
+        }
+      ],
+      "validation": "PR7A final build/artifact/ordinary matrix run 34476924390; PR8 host suite and exact Windows APK results, within their documented scope."
+    },
+    {
+      "feature": "SEC-001",
+      "decision": "Retire the historical debug-shell auto-grant. Default su-check-db remains required by the source gate; the exact Next Windows debug APK denied Shell before approval on both LDPlayer and MuMu, then passed explicit-policy root stress.",
+      "migration": "Grant or revoke Shell through the manager policy. Lab bootstrap root remains an explicit vendor/adapter prerequisite; no published product may silently auto-grant shell root.",
+      "source_evidence": [
+        {
+          "commit": "dd5ca5c12e8447344eef5e89f6080e9e2a0d04c8",
+          "path": "native/src/core/su/daemon.rs",
+          "sha256": "057b3dc81a21b4c4e8a0240f94d4ede08a4246041fc06be28f5a89082561b837"
+        },
+        {
+          "commit": "dd5ca5c12e8447344eef5e89f6080e9e2a0d04c8",
+          "path": "native/src/core/Cargo.toml",
+          "sha256": "9f8069de419b44f6521971fdde616cddaf25442be164c923f27701884b44af5d"
+        },
+        {
+          "commit": "dd5ca5c12e8447344eef5e89f6080e9e2a0d04c8",
+          "path": "tools/next_system_baseline.py",
+          "sha256": "85f523dac3570640bf76b17375becc280967f82c7ca3035fe5efcb62ebd85d8b"
+        }
+      ],
+      "validation": "PR7A final build/artifact/ordinary matrix run 34476924390; PR8 host suite and exact Windows APK results, within their documented scope."
+    },
+    {
+      "feature": "SEC-002",
+      "decision": "Retire the public production signing key and global signature bypass. Maintained default features require release signature enforcement, the artifact gate rejects forbidden public/debug release signers, and CI uses a disposable release key.",
+      "migration": "PR10 supplies the owned signer and tested manager/stub migration. Retain the existing qualified manager until that path is available; never accept an arbitrary APK merely because it bears the old package name.",
+      "source_evidence": [
+        {
+          "commit": "dd5ca5c12e8447344eef5e89f6080e9e2a0d04c8",
+          "path": "native/src/core/package.rs",
+          "sha256": "3732bea0e3e0a3766f4edd2b575d1aa30f0bf8d20c6657035f1447face1a79b0"
+        },
+        {
+          "commit": "dd5ca5c12e8447344eef5e89f6080e9e2a0d04c8",
+          "path": "native/src/core/Cargo.toml",
+          "sha256": "9f8069de419b44f6521971fdde616cddaf25442be164c923f27701884b44af5d"
+        },
+        {
+          "commit": "dd5ca5c12e8447344eef5e89f6080e9e2a0d04c8",
+          "path": "tools/next_system_baseline.py",
+          "sha256": "85f523dac3570640bf76b17375becc280967f82c7ca3035fe5efcb62ebd85d8b"
+        },
+        {
+          "commit": "dd5ca5c12e8447344eef5e89f6080e9e2a0d04c8",
+          "path": "docs/next-system-baseline.json",
+          "sha256": "526529d1654c1524e74e6b293514d7d09b8092474bb8adfdbf404e392b859188"
+        },
+        {
+          "commit": "dd5ca5c12e8447344eef5e89f6080e9e2a0d04c8",
+          "path": ".github/workflows/build.yml",
+          "sha256": "3b179ebe10cc43ce057204ad01c970e2ad635e52b0f47f730641ece5ed9a1aad"
+        }
+      ],
+      "validation": "PR7A final build/artifact/ordinary matrix run 34476924390; PR8 host suite and exact Windows APK results, within their documented scope."
+    },
+    {
+      "feature": "APP-003",
+      "decision": "Retire globally disabled manager/stub signature checking; retain maintained release enforcement and the separately identified debug test flavor. PR7A all-ABI artifact/signer gates and hosted manager lifecycle are the foundation evidence.",
+      "migration": "Use manager and stub artifacts signed by the selected owned key. PR10/PR13 must qualify signer changes and hidden-manager recovery; unsigned/repacked managers are not a supported bypass.",
+      "source_evidence": [
+        {
+          "commit": "dd5ca5c12e8447344eef5e89f6080e9e2a0d04c8",
+          "path": "native/src/core/package.rs",
+          "sha256": "3732bea0e3e0a3766f4edd2b575d1aa30f0bf8d20c6657035f1447face1a79b0"
+        },
+        {
+          "commit": "dd5ca5c12e8447344eef5e89f6080e9e2a0d04c8",
+          "path": "native/src/core/Cargo.toml",
+          "sha256": "9f8069de419b44f6521971fdde616cddaf25442be164c923f27701884b44af5d"
+        },
+        {
+          "commit": "dd5ca5c12e8447344eef5e89f6080e9e2a0d04c8",
+          "path": "tools/next_system_baseline.py",
+          "sha256": "85f523dac3570640bf76b17375becc280967f82c7ca3035fe5efcb62ebd85d8b"
+        }
+      ],
+      "validation": "PR7A final build/artifact/ordinary matrix run 34476924390; PR8 host suite and exact Windows APK results, within their documented scope."
+    },
+    {
+      "feature": "APP-012",
+      "decision": "Retire blanket release obfuscation/optimization disablement. Both maintained release modules enable minification; CI retains mapping/native symbols and the built artifacts pass the inherited manager/stub tests.",
+      "migration": "Use source and matching symbol/mapping artifacts for debugging. Release internals are not a stable reflection API; supported module/provider APIs retain their explicit compatibility contracts.",
+      "source_evidence": [
+        {
+          "commit": "dd5ca5c12e8447344eef5e89f6080e9e2a0d04c8",
+          "path": "app/apk/build.gradle.kts",
+          "sha256": "d9c85e3df888249548ee6d5658fad680998d4c7898f16841aafebdd12e979a7f"
+        },
+        {
+          "commit": "dd5ca5c12e8447344eef5e89f6080e9e2a0d04c8",
+          "path": "app/stub/build.gradle.kts",
+          "sha256": "8ac689635f1f771784403f8ad4eaf88724dea42401eb8b99ab83aa05e46c3d11"
+        },
+        {
+          "commit": "dd5ca5c12e8447344eef5e89f6080e9e2a0d04c8",
+          "path": ".github/workflows/build.yml",
+          "sha256": "3b179ebe10cc43ce057204ad01c970e2ad635e52b0f47f730641ece5ed9a1aad"
+        }
+      ],
+      "validation": "PR7A final build/artifact/ordinary matrix run 34476924390; PR8 host suite and exact Windows APK results, within their documented scope."
+    },
+    {
+      "feature": "ID-002",
+      "decision": "Retire false upstream identity. The selected code actually descends from official v31.0 and its source/artifact gate binds the upstream base, commit and version. This does not complete PR9 compatibility/protocol/build-info separation.",
+      "migration": "Use the actual upstream base and source identity. PR9 must define the upgrade/compatibility fields for installations carrying historical 29999/31000 labels; never infer code compatibility from those labels alone.",
+      "source_evidence": [
+        {
+          "commit": "dd5ca5c12e8447344eef5e89f6080e9e2a0d04c8",
+          "path": "app/gradle.properties",
+          "sha256": "be28ba74d7fafc59dceda2c12ceb4c68c7ce0a34fddf304ed49455e22f14a050"
+        },
+        {
+          "commit": "dd5ca5c12e8447344eef5e89f6080e9e2a0d04c8",
+          "path": "docs/next-system-baseline.json",
+          "sha256": "526529d1654c1524e74e6b293514d7d09b8092474bb8adfdbf404e392b859188"
+        },
+        {
+          "commit": "dd5ca5c12e8447344eef5e89f6080e9e2a0d04c8",
+          "path": "tools/next_system_baseline.py",
+          "sha256": "85f523dac3570640bf76b17375becc280967f82c7ca3035fe5efcb62ebd85d8b"
+        }
+      ],
+      "validation": "PR7A final build/artifact/ordinary matrix run 34476924390; PR8 host suite and exact Windows APK results, within their documented scope."
+    }
+  ]
+}

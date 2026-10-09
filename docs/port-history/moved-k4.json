@@ -1,0 +1,97 @@
+{
+  "schema": 1,
+  "artifacts": [
+    {
+      "filename": "Kitsune.Magisk.debug.v27.2-kitsune-4.apk",
+      "origin": "https://github.com/AndnixSH/KitsuneMagisk/releases/download/backup/Kitsune.Magisk.debug.v27.2-kitsune-4.apk",
+      "size": 21337293,
+      "sha256": "f7e8c0235ddaaa2f4044ed6e9db03b300127a3414fb449a6ebf8f77ffb4d0896",
+      "source_binding": "The manager shell matches the surviving d5b60627 incarnation exactly and differs from inherited 1279a82c in rootfs mirror and /sbin handling. Util functions match both after version substitution. Compiled native/app members remain unbound.",
+      "label": "v27.2-kitsune-4 surviving archive",
+      "signature_valid": true,
+      "certificate_sha256": [
+        "a9342f305e5d7ecc0245f86c931226267389358c48139f5d7ed6a80cd4329629"
+      ],
+      "packaged_script_comparisons": [
+        {
+          "source_observation": "k27-2-4-inherited",
+          "source_path": "app/src/main/res/raw/manager.sh",
+          "apk_member": "res/raw/manager.sh",
+          "source_sha256": "c1817adfe2268648ac1b6af17d22410ac0237da23f97b355ed5524080ac8410d",
+          "apk_member_sha256": "9401e885a32431e935345e6cc3161b7f65226431d6ddc8d18e81591f4f1de11e",
+          "matches_after_version_substitution": false
+        },
+        {
+          "source_observation": "k27-2-4-inherited",
+          "source_path": "scripts/util_functions.sh",
+          "apk_member": "assets/util_functions.sh",
+          "source_sha256": "2b13d08bde50755baa2c55186523d3693f93e2da3392dfe906fbb08c28f2a0e4",
+          "apk_member_sha256": "0f6fdd1c95e1286db774adc71fd83c8bc35b5a70924763365a5759f170f99a2e",
+          "matches_after_version_substitution": true
+        },
+        {
+          "source_observation": "k27-2-4-archive",
+          "source_path": "app/src/main/res/raw/manager.sh",
+          "apk_member": "res/raw/manager.sh",
+          "source_sha256": "9401e885a32431e935345e6cc3161b7f65226431d6ddc8d18e81591f4f1de11e",
+          "apk_member_sha256": "9401e885a32431e935345e6cc3161b7f65226431d6ddc8d18e81591f4f1de11e",
+          "matches_after_version_substitution": true
+        },
+        {
+          "source_observation": "k27-2-4-archive",
+          "source_path": "scripts/util_functions.sh",
+          "apk_member": "assets/util_functions.sh",
+          "source_sha256": "2b13d08bde50755baa2c55186523d3693f93e2da3392dfe906fbb08c28f2a0e4",
+          "apk_member_sha256": "0f6fdd1c95e1286db774adc71fd83c8bc35b5a70924763365a5759f170f99a2e",
+          "matches_after_version_substitution": true
+        }
+      ]
+    },
+    {
+      "filename": "Kitsune.Magisk.release.v27.2-kitsune-4.apk",
+      "origin": "https://github.com/AndnixSH/KitsuneMagisk/releases/download/backup/Kitsune.Magisk.release.v27.2-kitsune-4.apk",
+      "size": 12770643,
+      "sha256": "818cfa02783ddae573cc953450fbc39ec3e5164b66e517c657ba11cf90963a89",
+      "source_binding": "The manager shell matches the surviving d5b60627 incarnation exactly and differs from inherited 1279a82c in rootfs mirror and /sbin handling. Util functions match both after version substitution. Compiled native/app members remain unbound.",
+      "label": "v27.2-kitsune-4 surviving archive",
+      "signature_valid": true,
+      "certificate_sha256": [
+        "a9342f305e5d7ecc0245f86c931226267389358c48139f5d7ed6a80cd4329629"
+      ],
+      "packaged_script_comparisons": [
+        {
+          "source_observation": "k27-2-4-inherited",
+          "source_path": "app/src/main/res/raw/manager.sh",
+          "apk_member": "res/p9.sh",
+          "source_sha256": "c1817adfe2268648ac1b6af17d22410ac0237da23f97b355ed5524080ac8410d",
+          "apk_member_sha256": "9401e885a32431e935345e6cc3161b7f65226431d6ddc8d18e81591f4f1de11e",
+          "matches_after_version_substitution": false
+        },
+        {
+          "source_observation": "k27-2-4-inherited",
+          "source_path": "scripts/util_functions.sh",
+          "apk_member": "assets/util_functions.sh",
+          "source_sha256": "2b13d08bde50755baa2c55186523d3693f93e2da3392dfe906fbb08c28f2a0e4",
+          "apk_member_sha256": "0f6fdd1c95e1286db774adc71fd83c8bc35b5a70924763365a5759f170f99a2e",
+          "matches_after_version_substitution": true
+        },
+        {
+          "source_observation": "k27-2-4-archive",
+          "source_path": "app/src/main/res/raw/manager.sh",
+          "apk_member": "res/p9.sh",
+          "source_sha256": "9401e885a32431e935345e6cc3161b7f65226431d6ddc8d18e81591f4f1de11e",
+          "apk_member_sha256": "9401e885a32431e935345e6cc3161b7f65226431d6ddc8d18e81591f4f1de11e",
+          "matches_after_version_substitution": true
+        },
+        {
+          "source_observation": "k27-2-4-archive",
+          "source_path": "scripts/util_functions.sh",
+          "apk_member": "assets/util_functions.sh",
+          "source_sha256": "2b13d08bde50755baa2c55186523d3693f93e2da3392dfe906fbb08c28f2a0e4",
+          "apk_member_sha256": "0f6fdd1c95e1286db774adc71fd83c8bc35b5a70924763365a5759f170f99a2e",
+          "matches_after_version_substitution": true
+        }
+      ]
+    }
+  ]
+}

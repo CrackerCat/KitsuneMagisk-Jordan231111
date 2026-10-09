@@ -1,0 +1,727 @@
+{
+  "schema": 1,
+  "repository": "https://github.com/os-fork/HuskyDG-magisk-files",
+  "role": "surviving mirror; signer observations do not prove source or original publisher",
+  "artifacts": [
+    {
+      "metadata_commit": "02ba306efeb85827c83effa13b01ef0510192391",
+      "file": "app-release.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-release.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/02ba306efeb85827c83effa13b01ef0510192391/app-release.apk",
+      "version": "R65A24840-kitsune",
+      "role": "magisk",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "e5246e95933111d818b01d925dfdb375f5fc129416783b515b5d959e269189af",
+      "size": 12871049,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk' versionCode='26404' versionName='R65A24840-kitsune' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "02ba306efeb85827c83effa13b01ef0510192391",
+      "file": "stub-release.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-release.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/02ba306efeb85827c83effa13b01ef0510192391/stub-release.apk",
+      "version": "R65A24840-kitsune",
+      "role": "stub",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "0f75b6b64470d4c4c128e7b0dc6a03897a100d17444ca6be750b118e5a99e217",
+      "size": 29066,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk' versionCode='1' versionName='1.0' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "02ba306efeb85827c83effa13b01ef0510192391",
+      "file": "app-debug.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-debug.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/02ba306efeb85827c83effa13b01ef0510192391/app-debug.apk",
+      "version": "R65A24840-kitsune",
+      "role": "magisk",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "f91f5bc88d0742d27717d5c170893c64482d4dac1b381c9b45cd64e48e6823c1",
+      "size": 21078040,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk' versionCode='26404' versionName='R65A24840-kitsune' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "02ba306efeb85827c83effa13b01ef0510192391",
+      "file": "stub-debug.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-debug.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/02ba306efeb85827c83effa13b01ef0510192391/stub-debug.apk",
+      "version": "R65A24840-kitsune",
+      "role": "stub",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "e7c7200b58c2708a87ed9be004d137b2b46ed75c6dbbca34da585f12c50d06cd",
+      "size": 41354,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk' versionCode='1' versionName='1.0' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "05003cd38adc7613cbfe089bbfd233edd22debfc",
+      "file": "app-release.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-release.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/05003cd38adc7613cbfe089bbfd233edd22debfc/app-release.apk",
+      "version": "R6687BB53-kitsune",
+      "role": "magisk",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "5a3e77d28d4ead274e39b83fa7a4c60d201c43b2d665b30955685179c77d53e7",
+      "size": 12880326,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk' versionCode='27001' versionName='R6687BB53-kitsune' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "05003cd38adc7613cbfe089bbfd233edd22debfc",
+      "file": "stub-release.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-release.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/05003cd38adc7613cbfe089bbfd233edd22debfc/stub-release.apk",
+      "version": "R6687BB53-kitsune",
+      "role": "stub",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "0f75b6b64470d4c4c128e7b0dc6a03897a100d17444ca6be750b118e5a99e217",
+      "size": 29066,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk' versionCode='1' versionName='1.0' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "05003cd38adc7613cbfe089bbfd233edd22debfc",
+      "file": "app-debug.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-debug.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/05003cd38adc7613cbfe089bbfd233edd22debfc/app-debug.apk",
+      "version": "R6687BB53-kitsune",
+      "role": "magisk",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "9a670805dd52433214fb18cbebda5a428ae795bc46b2e995f0adc09b0d8c8397",
+      "size": 21095475,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk' versionCode='27001' versionName='R6687BB53-kitsune' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "05003cd38adc7613cbfe089bbfd233edd22debfc",
+      "file": "stub-debug.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-debug.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/05003cd38adc7613cbfe089bbfd233edd22debfc/stub-debug.apk",
+      "version": "R6687BB53-kitsune",
+      "role": "stub",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "e7c7200b58c2708a87ed9be004d137b2b46ed75c6dbbca34da585f12c50d06cd",
+      "size": 41354,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk' versionCode='1' versionName='1.0' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "2976a6f5ef29cac693764875dd4d68f1a19f6af6",
+      "file": "app-release.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-release.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/2976a6f5ef29cac693764875dd4d68f1a19f6af6/app-release.apk",
+      "version": "R65C33E4F-kitsune",
+      "role": "magisk",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "6b557be3c75de371fed1ac8719c32208f16130b8d3c560b8e4b2a7447b661e1e",
+      "size": 12872134,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk' versionCode='27001' versionName='R65C33E4F-kitsune' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "2976a6f5ef29cac693764875dd4d68f1a19f6af6",
+      "file": "stub-release.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-release.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/2976a6f5ef29cac693764875dd4d68f1a19f6af6/stub-release.apk",
+      "version": "R65C33E4F-kitsune",
+      "role": "stub",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "0f75b6b64470d4c4c128e7b0dc6a03897a100d17444ca6be750b118e5a99e217",
+      "size": 29066,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk' versionCode='1' versionName='1.0' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "2976a6f5ef29cac693764875dd4d68f1a19f6af6",
+      "file": "app-debug.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-debug.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/2976a6f5ef29cac693764875dd4d68f1a19f6af6/app-debug.apk",
+      "version": "R65C33E4F-kitsune",
+      "role": "magisk",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "0acd5919430c7583cb274abb33ccef64ca8e2537ef5d3ecf489f8d76734158d0",
+      "size": 21091379,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk' versionCode='27001' versionName='R65C33E4F-kitsune' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "2976a6f5ef29cac693764875dd4d68f1a19f6af6",
+      "file": "stub-debug.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-debug.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/2976a6f5ef29cac693764875dd4d68f1a19f6af6/stub-debug.apk",
+      "version": "R65C33E4F-kitsune",
+      "role": "stub",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "e7c7200b58c2708a87ed9be004d137b2b46ed75c6dbbca34da585f12c50d06cd",
+      "size": 41354,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk' versionCode='1' versionName='1.0' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "29aaacaa07f74e1838d7c199f4c437aeeeed4702",
+      "file": "app-release.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-release.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/29aaacaa07f74e1838d7c199f4c437aeeeed4702/app-release.apk",
+      "version": "R65C0A20A-kitsune",
+      "role": "magisk",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "af26d6133f5729cfb029d129ca8bab77e9d7bb2903565ba2389f657e7d1e2a91",
+      "size": 12872134,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk' versionCode='27001' versionName='R65C0A20A-kitsune' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "29aaacaa07f74e1838d7c199f4c437aeeeed4702",
+      "file": "stub-release.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-release.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/29aaacaa07f74e1838d7c199f4c437aeeeed4702/stub-release.apk",
+      "version": "R65C0A20A-kitsune",
+      "role": "stub",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "0f75b6b64470d4c4c128e7b0dc6a03897a100d17444ca6be750b118e5a99e217",
+      "size": 29066,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk' versionCode='1' versionName='1.0' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "29aaacaa07f74e1838d7c199f4c437aeeeed4702",
+      "file": "app-debug.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-debug.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/29aaacaa07f74e1838d7c199f4c437aeeeed4702/app-debug.apk",
+      "version": "R65C0A20A-kitsune",
+      "role": "magisk",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "8a99140cc8302cd4f97f4bbb6254b5fcf7b560657f44d8f286b0ba4ea0f8d914",
+      "size": 21091379,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk' versionCode='27001' versionName='R65C0A20A-kitsune' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "29aaacaa07f74e1838d7c199f4c437aeeeed4702",
+      "file": "stub-debug.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-debug.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/29aaacaa07f74e1838d7c199f4c437aeeeed4702/stub-debug.apk",
+      "version": "R65C0A20A-kitsune",
+      "role": "stub",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "e7c7200b58c2708a87ed9be004d137b2b46ed75c6dbbca34da585f12c50d06cd",
+      "size": 41354,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk' versionCode='1' versionName='1.0' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "51fad676c48c855d8e94ce054487dc4f00e4446a",
+      "file": "app-release.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-release.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/51fad676c48c855d8e94ce054487dc4f00e4446a/app-release.apk",
+      "version": "R659E930C-kitsune",
+      "role": "magisk",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "86a1dedb54a4d1da2b9de429902c5d2b503a96b6ed5cbbd29aecc1ea270d7d14",
+      "size": 12866953,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk' versionCode='26404' versionName='R659E930C-kitsune' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "51fad676c48c855d8e94ce054487dc4f00e4446a",
+      "file": "stub-release.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-release.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/51fad676c48c855d8e94ce054487dc4f00e4446a/stub-release.apk",
+      "version": "R659E930C-kitsune",
+      "role": "stub",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "0f75b6b64470d4c4c128e7b0dc6a03897a100d17444ca6be750b118e5a99e217",
+      "size": 29066,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk' versionCode='1' versionName='1.0' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "51fad676c48c855d8e94ce054487dc4f00e4446a",
+      "file": "app-debug.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-debug.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/51fad676c48c855d8e94ce054487dc4f00e4446a/app-debug.apk",
+      "version": "R659E930C-kitsune",
+      "role": "magisk",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "f97c1546c933a9ee3fc8b05968752a5a85c4322715de22758e6088e5ce355dab",
+      "size": 21078040,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk' versionCode='26404' versionName='R659E930C-kitsune' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "51fad676c48c855d8e94ce054487dc4f00e4446a",
+      "file": "stub-debug.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-debug.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/51fad676c48c855d8e94ce054487dc4f00e4446a/stub-debug.apk",
+      "version": "R659E930C-kitsune",
+      "role": "stub",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "e7c7200b58c2708a87ed9be004d137b2b46ed75c6dbbca34da585f12c50d06cd",
+      "size": 41354,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk' versionCode='1' versionName='1.0' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "6440334763236cdc7ed30fbc6a98de13d324b5ea",
+      "file": "app-release-lite.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-release-lite.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/6440334763236cdc7ed30fbc6a98de13d324b5ea/app-release-lite.apk",
+      "version": "R65B92427-kitsune-lite",
+      "role": "magisk",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "b96bbf0111cd3770eda44588d2cbb28f86a50e94f718a31802147dcbc7696dd6",
+      "size": 12569035,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk.lite' versionCode='26404' versionName='R65B92427-kitsune-lite' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "6440334763236cdc7ed30fbc6a98de13d324b5ea",
+      "file": "stub-release-lite.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-release-lite.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/6440334763236cdc7ed30fbc6a98de13d324b5ea/stub-release-lite.apk",
+      "version": "R65B92427-kitsune-lite",
+      "role": "stub",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "7bdd433872060efddf64a826607bc85c2e75cdc6e0616984200b788b01ba2c4f",
+      "size": 33167,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk.lite' versionCode='1' versionName='1.0' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "6440334763236cdc7ed30fbc6a98de13d324b5ea",
+      "file": "app-debug-lite.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-debug-lite.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/6440334763236cdc7ed30fbc6a98de13d324b5ea/app-debug-lite.apk",
+      "version": "R65B92427-kitsune-lite",
+      "role": "magisk",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "0353dbb4189429be5c170b1d547beab41c4a8fe9e87151d37015822b09ede1a6",
+      "size": 20759608,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk.lite' versionCode='26404' versionName='R65B92427-kitsune-lite' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "6440334763236cdc7ed30fbc6a98de13d324b5ea",
+      "file": "stub-debug-lite.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-debug-lite.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/6440334763236cdc7ed30fbc6a98de13d324b5ea/stub-debug-lite.apk",
+      "version": "R65B92427-kitsune-lite",
+      "role": "stub",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "8ca96fd68f849d2f772b3bd9b17d59262d1af8375cb0cb47dac9e128c6b2e530",
+      "size": 41359,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk.lite' versionCode='1' versionName='1.0' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce",
+      "file": "app-release.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-release.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce/app-release.apk",
+      "version": "R65B8FE82-kitsune",
+      "role": "magisk",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "50e512b48a79d862f5beacb4bb9b7304d95d8e959d22cc59cfa8bc4767909c03",
+      "size": 12871049,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk' versionCode='26404' versionName='R65B8FE82-kitsune' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce",
+      "file": "stub-release.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-release.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce/stub-release.apk",
+      "version": "R65B8FE82-kitsune",
+      "role": "stub",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "0f75b6b64470d4c4c128e7b0dc6a03897a100d17444ca6be750b118e5a99e217",
+      "size": 29066,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk' versionCode='1' versionName='1.0' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce",
+      "file": "app-debug.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-debug.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce/app-debug.apk",
+      "version": "R65B8FE82-kitsune",
+      "role": "magisk",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "7ac57c5c447c54d2d494286a87ab19a7128ecaa4df2d08bf7b76139e40351f32",
+      "size": 21078040,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk' versionCode='26404' versionName='R65B8FE82-kitsune' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce",
+      "file": "stub-debug.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-debug.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/7fd85617f9a71d744ff49e8de4dcd8a9e33e53ce/stub-debug.apk",
+      "version": "R65B8FE82-kitsune",
+      "role": "stub",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "e7c7200b58c2708a87ed9be004d137b2b46ed75c6dbbca34da585f12c50d06cd",
+      "size": 41354,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk' versionCode='1' versionName='1.0' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "96724b2ee26f7ac537c37fb5298c2a7579a3d322",
+      "file": "app-release-lite.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-release-lite.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/96724b2ee26f7ac537c37fb5298c2a7579a3d322/app-release-lite.apk",
+      "version": "R65A8DA99-kitsune-lite",
+      "role": "magisk",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "462d923d8c90c4f9f6f90ec7c02dcb8e14d8b3e4e9697f5c5eba83057eaa1d11",
+      "size": 12569035,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk.lite' versionCode='26404' versionName='R65A8DA99-kitsune-lite' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "96724b2ee26f7ac537c37fb5298c2a7579a3d322",
+      "file": "stub-release-lite.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-release-lite.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/96724b2ee26f7ac537c37fb5298c2a7579a3d322/stub-release-lite.apk",
+      "version": "R65A8DA99-kitsune-lite",
+      "role": "stub",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "7bdd433872060efddf64a826607bc85c2e75cdc6e0616984200b788b01ba2c4f",
+      "size": 33167,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk.lite' versionCode='1' versionName='1.0' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "96724b2ee26f7ac537c37fb5298c2a7579a3d322",
+      "file": "app-debug-lite.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-debug-lite.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/96724b2ee26f7ac537c37fb5298c2a7579a3d322/app-debug-lite.apk",
+      "version": "R65A8DA99-kitsune-lite",
+      "role": "magisk",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "a701633d75cf64bca59f815561ac88405837b5f88f0528166050735fc1cc9d0d",
+      "size": 20759608,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk.lite' versionCode='26404' versionName='R65A8DA99-kitsune-lite' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "96724b2ee26f7ac537c37fb5298c2a7579a3d322",
+      "file": "stub-debug-lite.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-debug-lite.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/96724b2ee26f7ac537c37fb5298c2a7579a3d322/stub-debug-lite.apk",
+      "version": "R65A8DA99-kitsune-lite",
+      "role": "stub",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "8ca96fd68f849d2f772b3bd9b17d59262d1af8375cb0cb47dac9e128c6b2e530",
+      "size": 41359,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk.lite' versionCode='1' versionName='1.0' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8",
+      "file": "app-release.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-release.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8/app-release.apk",
+      "version": "R65976974-kitsune",
+      "role": "magisk",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "f631f9dbb73e8f5a928fc0480f726ee40e50056bafbd33fb09b730ecd2c2b45d",
+      "size": 12751676,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk' versionCode='26404' versionName='R65976974-kitsune' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8",
+      "file": "stub-release.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-release.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8/stub-release.apk",
+      "version": "R65976974-kitsune",
+      "role": "stub",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "0f75b6b64470d4c4c128e7b0dc6a03897a100d17444ca6be750b118e5a99e217",
+      "size": 29066,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk' versionCode='1' versionName='1.0' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8",
+      "file": "app-debug.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-debug.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8/app-debug.apk",
+      "version": "R65976974-kitsune",
+      "role": "magisk",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "f57f5da2ee9a96d75c30dcff8ad9f3ba94c2554624544ced9e5d5bebedbf664f",
+      "size": 20937825,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk' versionCode='26404' versionName='R65976974-kitsune' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8",
+      "file": "stub-debug.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-debug.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/bb4af859f1ac6ed8a500ccbaf587411fa00f0bc8/stub-debug.apk",
+      "version": "R65976974-kitsune",
+      "role": "stub",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "e7c7200b58c2708a87ed9be004d137b2b46ed75c6dbbca34da585f12c50d06cd",
+      "size": 41354,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk' versionCode='1' versionName='1.0' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "c5d500af33e829314c05e6a3f722061a0257f6b3",
+      "file": "app-release.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-release.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/app-release.apk",
+      "version": "R65C0CF63-kitsune",
+      "role": "magisk",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "96d80844f7a73984d40d904e31f7134458bb8827cc89daa11517ed2b0d59e844",
+      "size": 12872134,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk' versionCode='27001' versionName='R65C0CF63-kitsune' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "c5d500af33e829314c05e6a3f722061a0257f6b3",
+      "file": "stub-release.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-release.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/stub-release.apk",
+      "version": "R65C0CF63-kitsune",
+      "role": "stub",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "0f75b6b64470d4c4c128e7b0dc6a03897a100d17444ca6be750b118e5a99e217",
+      "size": 29066,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk' versionCode='1' versionName='1.0' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "c5d500af33e829314c05e6a3f722061a0257f6b3",
+      "file": "app-debug.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/app-debug.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/app-debug.apk",
+      "version": "R65C0CF63-kitsune",
+      "role": "magisk",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "c55a30c5bec526de9cc452cd0908b875739a91b01e239291c3473fe86414fe74",
+      "size": 21091379,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk' versionCode='27001' versionName='R65C0CF63-kitsune' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    },
+    {
+      "metadata_commit": "c5d500af33e829314c05e6a3f722061a0257f6b3",
+      "file": "stub-debug.apk",
+      "advertised_url": "https://github.com/HuskyDG/magisk-files/raw/main/stub-debug.apk",
+      "archive_url": "https://raw.githubusercontent.com/os-fork/HuskyDG-magisk-files/c5d500af33e829314c05e6a3f722061a0257f6b3/stub-debug.apk",
+      "version": "R65C0CF63-kitsune",
+      "role": "stub",
+      "source_binding": "unverified",
+      "signer_binding": "observed-on-archived-bytes",
+      "status": "archived",
+      "sha256": "e7c7200b58c2708a87ed9be004d137b2b46ed75c6dbbca34da585f12c50d06cd",
+      "size": 41354,
+      "signature_valid": true,
+      "certificate_sha256": [
+        "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282"
+      ],
+      "package_badging": "package: name='io.github.huskydg.magisk' versionCode='1' versionName='1.0' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'"
+    }
+  ]
+}

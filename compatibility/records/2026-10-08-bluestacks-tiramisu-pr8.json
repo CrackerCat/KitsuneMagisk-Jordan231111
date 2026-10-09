@@ -1,0 +1,384 @@
+{
+  "schema_version": 1,
+  "record_id": "2026-10-08-bluestacks-tiramisu-pr8",
+  "qualification_status": "blocked",
+  "clean_snapshot": false,
+  "artifact": {
+    "identity_status": "known",
+    "branch": "next-system",
+    "commit": "99ab2c55d4441bab2dbd3327e7705ac1d43abe47",
+    "apk_sha256": "7bb316529133f17006c0ca20b58f64daad756b5ae56f06a24f48d4b443a61d51"
+  },
+  "doctor": {
+    "assessment": {
+      "primary_reason": "READ_ONLY_FS",
+      "reason_codes": [
+        "READ_ONLY_FS",
+        "EXT4_FEATURES_UNPROVEN",
+        "SELINUX_STATE_UNKNOWN",
+        "INIT_PATH_UNAVAILABLE",
+        "NO_RECOVERY_PATH",
+        "PERSISTENT_WRITABILITY_UNPROVEN",
+        "AVB_STATE_UNKNOWN",
+        "SYSTEM_MODE_ALREADY_INSTALLED",
+        "LEGACY_INSTALL_NO_MANIFEST"
+      ],
+      "verdict": "blocked",
+      "warnings": [
+        "AVB_STATE_UNKNOWN",
+        "SYSTEM_MODE_ALREADY_INSTALLED",
+        "LEGACY_INSTALL_NO_MANIFEST"
+      ]
+    },
+    "bootstrap": {
+      "adb_uid": 2000,
+      "magisk_version": "31.0-kitsune:MAGISK:R",
+      "magisk_version_code": 31000,
+      "root_available": true,
+      "root_context": null,
+      "root_uid": 0,
+      "transport": "magisk_su"
+    },
+    "device": {
+      "abis": [
+        "x86_64",
+        "x86",
+        "arm64-v8a",
+        "armeabi-v7a",
+        "armeabi"
+      ],
+      "android_release": "13",
+      "api": 33,
+      "boot_id_sha256": "3363c928de08b0ca7976c010acf6ad1e1e5fab05f1dd06a59a21b61c8a2fd622",
+      "brand": "samsung",
+      "build_id": "TQ2B.230505.005.A1",
+      "build_incremental": "jenkins08312143",
+      "device": "p3s",
+      "emulator_product": null,
+      "emulator_product_property": null,
+      "emulator_version": null,
+      "emulator_version_property": null,
+      "fingerprint_sha256": "2b719a429e9167c9434ae10e8914f4def777dad09705707f6a9c8b939f035eaf",
+      "kernel": "Linux localhost 5.15.119+ #1 SMP PREEMPT Fri Sep 11 02:07:13 IST 2026 x86_64 Toybox",
+      "manufacturer": "samsung",
+      "model": "SM-G998B",
+      "page_size": 4096,
+      "product": "p3sxxx",
+      "vendor": "bluestacks",
+      "vendor_evidence": [
+        "bluestacks",
+        "bstsharedfolder"
+      ]
+    },
+    "existing_install": {
+      "active_magisk": true,
+      "config_path": "/system/etc/init/magisk/config",
+      "detected": true,
+      "manifest_path": null,
+      "manifest_present": false,
+      "ordinary_magisk": false,
+      "system_mode": true
+    },
+    "generated_at": "2026-10-08T14:55:50Z",
+    "init": {
+      "candidate_directories": [
+        {
+          "exists": true,
+          "kind": "directory",
+          "mode": "0775",
+          "path": "/system/etc/init",
+          "permission_writable": false,
+          "readable": true,
+          "resolved_path": "/system/etc/init",
+          "uid": 1000
+        },
+        {
+          "exists": true,
+          "kind": "directory",
+          "mode": "0775",
+          "path": "/system/etc/init/hw",
+          "permission_writable": false,
+          "readable": true,
+          "resolved_path": "/system/etc/init/hw",
+          "uid": 1000
+        }
+      ],
+      "import_proof": "observed_existing_install",
+      "selected_directory": null
+    },
+    "layout": {
+      "avb_state": "unknown",
+      "device_mapper": {
+        "layers": [],
+        "probe": "not_applicable"
+      },
+      "dm_verity": false,
+      "dynamic_partitions": false,
+      "ext4_features": [],
+      "ext4_features_method": null,
+      "ext4_features_probe": "unavailable",
+      "ext4_ro_compat_flags": null,
+      "overlayfs": false,
+      "shared_blocks": null,
+      "slot_suffix": "",
+      "system_fs_type": "ext4",
+      "system_source": "/dev/sda1",
+      "system_target": "/system",
+      "system_writable_backing": false,
+      "system_writable_view": false
+    },
+    "mounts": [
+      {
+        "exists": true,
+        "fs_type": "rootfs",
+        "major_minor": "0:2",
+        "mount_options": [
+          "ro"
+        ],
+        "mount_point": "/",
+        "resolved_path": "/",
+        "root": "/",
+        "source": "rootfs",
+        "super_options": [
+          "ro",
+          "seclabel",
+          "size=1016604k",
+          "nr_inodes=254151"
+        ],
+        "target": "/",
+        "writable_backing": false,
+        "writable_view": false
+      },
+      {
+        "exists": true,
+        "fs_type": "ext4",
+        "major_minor": "8:1",
+        "mount_options": [
+          "ro",
+          "relatime"
+        ],
+        "mount_point": "/system",
+        "resolved_path": "/system",
+        "root": "/android/system",
+        "source": "/dev/sda1",
+        "super_options": [
+          "ro",
+          "seclabel"
+        ],
+        "target": "/system",
+        "writable_backing": false,
+        "writable_view": false
+      },
+      {
+        "exists": true,
+        "fs_type": "ext4",
+        "major_minor": "8:1",
+        "mount_options": [
+          "ro",
+          "relatime"
+        ],
+        "mount_point": "/system",
+        "resolved_path": "/system/vendor",
+        "root": "/android/system",
+        "source": "/dev/sda1",
+        "super_options": [
+          "ro",
+          "seclabel"
+        ],
+        "target": "/vendor",
+        "writable_backing": false,
+        "writable_view": false
+      },
+      {
+        "exists": true,
+        "fs_type": "rootfs",
+        "major_minor": "0:2",
+        "mount_options": [
+          "ro"
+        ],
+        "mount_point": "/",
+        "resolved_path": "/odm",
+        "root": "/",
+        "source": "rootfs",
+        "super_options": [
+          "ro",
+          "seclabel",
+          "size=1016604k",
+          "nr_inodes=254151"
+        ],
+        "target": "/odm",
+        "writable_backing": false,
+        "writable_view": false
+      },
+      {
+        "exists": true,
+        "fs_type": "ext4",
+        "major_minor": "8:1",
+        "mount_options": [
+          "ro",
+          "relatime"
+        ],
+        "mount_point": "/system",
+        "resolved_path": "/system/product",
+        "root": "/android/system",
+        "source": "/dev/sda1",
+        "super_options": [
+          "ro",
+          "seclabel"
+        ],
+        "target": "/product",
+        "writable_backing": false,
+        "writable_view": false
+      },
+      {
+        "exists": true,
+        "fs_type": "ext4",
+        "major_minor": "8:1",
+        "mount_options": [
+          "ro",
+          "relatime"
+        ],
+        "mount_point": "/system",
+        "resolved_path": "/system/system_ext",
+        "root": "/android/system",
+        "source": "/dev/sda1",
+        "super_options": [
+          "ro",
+          "seclabel"
+        ],
+        "target": "/system_ext",
+        "writable_backing": false,
+        "writable_view": false
+      }
+    ],
+    "persistence": {
+      "backing_write_probe": "not_run",
+      "cold_boots": 0,
+      "host_restarts": 0,
+      "proven": false
+    },
+    "probe_version": "1.0.0",
+    "recovery": {
+      "adapter_id": null,
+      "backup_digest": null,
+      "backup_location": null,
+      "instance_identity_sha256": null,
+      "qualification_record": null,
+      "qualification_sha256": null,
+      "restore_command": null,
+      "snapshot_id": null,
+      "verified": false
+    },
+    "schema_version": 1,
+    "selinux": {
+      "enabled": true,
+      "policy_candidates": [
+        {
+          "exists": true,
+          "kind": "file",
+          "mode": "0644",
+          "path": "/sepolicy",
+          "permission_writable": false,
+          "readable": true,
+          "resolved_path": "/sepolicy",
+          "sha256": "70dcb5da27aa199d366bf0f2fbea747090be12a0b708f3e7b17755eb80d5190b",
+          "size": 621843,
+          "uid": 0
+        },
+        {
+          "exists": true,
+          "kind": "file",
+          "mode": "0664",
+          "path": "/vendor/etc/selinux/precompiled_sepolicy",
+          "permission_writable": false,
+          "readable": true,
+          "resolved_path": "/system/vendor/etc/selinux/precompiled_sepolicy",
+          "sha256": "70dcb5da27aa199d366bf0f2fbea747090be12a0b708f3e7b17755eb80d5190b",
+          "size": 621843,
+          "uid": 1000
+        },
+        {
+          "exists": true,
+          "kind": "file",
+          "mode": "0664",
+          "path": "/system/etc/selinux/plat_sepolicy.cil",
+          "permission_writable": false,
+          "readable": true,
+          "resolved_path": "/system/etc/selinux/plat_sepolicy.cil",
+          "sha256": "a2e54cce37d1ef0f9ddf82ab5d6760109e6454ad6f1e051406ecf4e0ab488bc3",
+          "size": 2095880,
+          "uid": 1000
+        },
+        {
+          "exists": true,
+          "kind": "directory",
+          "mode": "0775",
+          "path": "/system/etc/selinux/mapping",
+          "permission_writable": false,
+          "readable": true,
+          "resolved_path": "/system/etc/selinux/mapping",
+          "sha256": null,
+          "size": null,
+          "uid": 1000
+        },
+        {
+          "exists": true,
+          "kind": "file",
+          "mode": "0664",
+          "path": "/vendor/etc/selinux/vendor_sepolicy.cil",
+          "permission_writable": false,
+          "readable": true,
+          "resolved_path": "/system/vendor/etc/selinux/vendor_sepolicy.cil",
+          "sha256": "e0e4fc1358ade51c4cb5e7cc7a3d07a108ad0ab1f26cc8523701084e20ffcada",
+          "size": 95427,
+          "uid": 1000
+        },
+        {
+          "exists": true,
+          "kind": "file",
+          "mode": "0664",
+          "path": "/vendor/etc/selinux/precompiled_sepolicy.plat_sepolicy_and_mapping.sha256",
+          "permission_writable": false,
+          "readable": true,
+          "resolved_path": "/system/vendor/etc/selinux/precompiled_sepolicy.plat_sepolicy_and_mapping.sha256",
+          "sha256": "093b44b8d59c533f38921c202f77f30bf93466699265584d1ed09ed25c3fb7ca",
+          "size": 65,
+          "uid": 1000
+        }
+      ],
+      "state": "unknown",
+      "strategy": "monolithic"
+    },
+    "source": {
+      "kind": "adb",
+      "probe_sha256": "7073264a9d95455be612fb12847c70f82985b1e4ed637dc3596933b21260b177",
+      "read_only": true,
+      "repository_commit": "99ab2c55d4441bab2dbd3327e7705ac1d43abe47",
+      "repository_dirty": false,
+      "serial_sha256": "6460677a198b1872315bae7231fb6131092f3569882742677a6ee620177b668b"
+    },
+    "staging": {
+      "available_bytes": 124718874624,
+      "path": "/data/local/tmp",
+      "required_bytes": 33554432,
+      "sufficient": true
+    }
+  },
+  "lifecycle": {
+    "install": "not_run",
+    "upgrade": "not_run",
+    "reinstall": "not_run",
+    "module_smoke": "not_run",
+    "root_policy_smoke": "not_run",
+    "uninstall": "not_run",
+    "snapshot_restore": "not_run",
+    "cold_boots": 0
+  },
+  "notes": [
+    "BlueStacks 5.22.265.1013, Tiramisu64, Android 13, x86_64, 4 KiB. Read-only preflight with the common host driver and the named clean candidate source root; the candidate APK was not installed.",
+    "Existing released Kitsune root was available with vendor root disabled: 31.0-kitsune:MAGISK:R, manager SHA-256 fac319d2de262fcfff1684e13e1a5c61c486d2a773a7a8ffcfdbfe6f763a7fd4; system magisk64 SHA-256 89b47cfb41e4e7d256e2e86d8d6a1199b1195e6e84eb2730c1716e8fcac6bc53.",
+    "Both candidate source roots produced the same blocked assessment against this existing target. /system is read-only, init directories are UID 1000 mode 0775, ext4 feature proof is unavailable, and the legacy installation has no versioned manifest.",
+    "getenforce reports Disabled while selinuxfs/enforce exists and reads 0. The doctor preserves this conflict as unknown rather than inferring an executable Magisk-domain boot proof.",
+    "Missing capability: a qualified stopped-image/bootstrap adapter with independently verified init/policy behavior, plus a clean-install or explicitly supported migration path. PR15 owns this exact target. Existing root was preserved and the guest was shut down gracefully; no candidate lifecycle support is claimed."
+  ]
+}
