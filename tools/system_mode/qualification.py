@@ -1925,8 +1925,15 @@ def qualify_target(
         # state, and create a separate final backup with zero qualification
         # files or property residue.
         cleanup_live_without_restore()
-        if _inventory_digest(_boot_critical_inventory(client, selected_init)) != baseline_inventory_sha256:
-            raise ProbeError("challenge cleanup did not return boot-critical baseline state")
+        cleaned_inventory = _boot_critical_inventory(client, selected_init)
+        if _inventory_digest(cleaned_inventory) != baseline_inventory_sha256:
+            before = {node["path"]: node for node in baseline_inventory}
+            after = {node["path"]: node for node in cleaned_inventory}
+            changed = sorted(path for path in before.keys() | after.keys()
+                             if path not in before or path not in after
+                             or _inventory_digest([before[path]]) != _inventory_digest([after[path]]))
+            raise ProbeError("challenge cleanup did not return boot-critical baseline state: "
+                             + ", ".join(changed[:8]))
         clean_report = candidate_report()
         if stable_target_digest(clean_report) != baseline_digest:
             raise ProbeError("challenge cleanup did not return the baseline target contract")
