@@ -75,14 +75,20 @@ class BuildInfoTest(unittest.TestCase):
                 build_info.identity()
 
     def test_fork_clone_does_not_require_upstream_tags(self):
-        real_git = build_info.git
-        def without_tags(root, *args):
-            if args[0] == "rev-parse" and args[1].startswith("v"):
-                raise subprocess.CalledProcessError(128, ["git", *args])
-            return real_git(root, *args)
-        with mock.patch.object(build_info, "git", side_effect=without_tags):
-            identity = build_info.identity()
-        self.assertEqual(identity["upstream_commit"], build_info.read_spec()["upstream_commit"])
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            spec = build_info.read_spec()
+            (root / "app").mkdir()
+            (root / "app/gradle.properties").write_text(
+                f'magisk.versionCode={spec["compat_version_code"]}\n')
+            subprocess.run(["git", "init", "-q", str(root)], check=True)
+            subprocess.run(["git", "add", "app/gradle.properties"], cwd=root, check=True)
+            subprocess.run(["git", "-c", "user.name=Fixture", "-c", "user.email=fixture@example.invalid",
+                            "commit", "-qm", "Upstream fixture"], cwd=root, check=True)
+            spec["upstream_commit"] = build_info.git(root, "rev-parse", "HEAD").decode().strip()
+            (root / "kitsune-build.json").write_text(json.dumps(spec))
+            identity = build_info.identity(root)
+            self.assertEqual(identity["upstream_commit"], spec["upstream_commit"])
 
     def test_dirty_build_id_changes_when_contents_change_at_same_head(self):
         for field in ("source_digest", "source_commit", "protocol_version"):
