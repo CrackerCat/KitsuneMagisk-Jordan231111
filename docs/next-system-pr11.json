@@ -253,6 +253,7 @@
     "tests/system_mode/test_installer_safety.py",
     "tests/system_mode/test_launcher_recovery.py",
     "tests/system_mode/test_mumu_identity.py",
+    "tests/system_mode/test_mumu_macos_identity.py",
     "tests/system_mode/test_qualification.py",
     "tests/system_mode/test_transaction.py",
     "tests/test_build_info.py",

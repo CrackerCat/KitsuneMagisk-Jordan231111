@@ -153,8 +153,8 @@ class MaintainedBaseSystemModeSafetyTest(unittest.TestCase):
                 (temporary / "jni_hooks.hpp").read_bytes(),
             )
 
-        self.assertIn("std::array<JNINativeMethod, 13> fork_app_methods", generated)
-        self.assertIn("std::array<JNINativeMethod, 8> specialize_app_methods", generated)
+        self.assertIn("std::array<JNINativeMethod, 15> fork_app_methods", generated)
+        self.assertIn("std::array<JNINativeMethod, 10> specialize_app_methods", generated)
         fork = generated[
             generated.index("// nativeForkAndSpecialize_c") :
             generated.index("// nativeForkAndSpecialize_samsung_m")

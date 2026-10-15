@@ -63,7 +63,7 @@ class AdditionalTest : BaseTest {
 
     @Test
     fun testModuleCount() {
-        var expected = 10
+        var expected = 11
         if (Environment.mount()) expected++
         if (Environment.preinit()) expected++
         if (Environment.lsposed()) expected++

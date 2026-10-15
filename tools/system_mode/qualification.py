@@ -291,6 +291,10 @@ def instance_identity(path: Path, kind: str = "file") -> dict[str, Any]:
         from tools.system_mode.host_identity import mumu_identity
 
         return mumu_identity(path)
+    if kind == "mumu-macos-v1":
+        from tools.system_mode.host_identity import mumu_macos_identity
+
+        return mumu_macos_identity(path)
     if kind != "file":
         raise ValueError("unknown host instance identity kind")
 
@@ -1632,6 +1636,9 @@ def qualify_target(
     elif instance_kind == "mumu-v1":
         if client.resolve_serial() != f"127.0.0.1:{identity['adb_port']}":
             raise ValueError("ADB transport does not belong to the selected MuMu instance")
+    elif instance_kind == "mumu-macos-v1":
+        if client.resolve_serial() not in {f"127.0.0.1:{port}" for port in identity["adb_ports"]}:
+            raise ValueError("ADB transport does not belong to the selected Mac MuMu instance")
 
     def candidate_report() -> dict[str, Any]:
         options = {} if repository_root is None else {"repository_root": repository_root}

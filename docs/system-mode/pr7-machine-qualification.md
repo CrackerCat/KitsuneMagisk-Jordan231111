@@ -121,6 +121,19 @@ including `PATHEXT`, and verify stopped/running postconditions rather than trust
 alone. The Windows matrix covers LDPlayer, MuMu Android 12 and BlueStacks. The exact paired
 results and restored baselines are recorded in [the PR8 lab](pr8-windows-2026-10-08.md).
 
+PR11 adds `--instance-kind mumu-macos-v1` for the observed MuMuPlayer Pro 1.9 standalone
+QCOW2 layout. Select the real `bundles/mumu_N_YYYYMMDD_HHMMSS.gmad/setting/vm.json`.
+The adapter binds the bundle path/index, hardware, vendor version, controller and VM engine,
+and both private disks' immutable layout fields. It rejects backing chains, encryption,
+internal snapshots, external data files, corrupt/unknown formats, links and shared inodes.
+It permits vendor metadata rewrites, UI changes, vendor-root toggling and the observed pair
+of automatic ADB ports. A fixed custom ADB port is also bound when configured.
+Lifecycle wrappers must wait for the old VM process to exit before opening it, resolve the
+new endpoint through `mumutool info`, and verify the same named bundle before connecting.
+The backup still contains both complete disks with byte-verified restore; metadata tolerance
+does not waive the guest inventory, three-boot or restore challenges. This is an explicit
+adapter, not a relaxation of generic file identity.
+
 Use `--source-root /absolute/clean/candidate-worktree` on `qualify`, `doctor`, and `authorize` to
 compare clean candidates with one host driver. The candidate commit must still match the APK's
 embedded clean source identity. All host modules, schemas/contracts, and the artifact verifier are
