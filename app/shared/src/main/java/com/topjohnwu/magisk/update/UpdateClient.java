@@ -124,8 +124,7 @@ public final class UpdateClient {
                     UpdateFiles.regular(file);
                     Map<String, Object> saved = UpdateMetadata.parse(UpdateMetadata.utf8(
                             UpdateFiles.read(new FileInputStream(file), 16384)));
-                    UpdateMetadata.keys(saved, "schema", "clock", "highest_code", "highest_hash", "stable_sequence", "stable_hash",
-                            "beta_sequence", "beta_hash", "canary_sequence", "canary_hash");
+                    if (saved.size() != 10) throw new IOException("Missing or unknown update state fields");
                     UpdateMetadata.number(saved, "schema", 1, 1);
                     UpdateMetadata.number(saved, "clock", 0, Long.MAX_VALUE - UpdateMetadata.CLOCK_SKEW);
                     UpdateMetadata.number(saved, "highest_code", 0, 2100000000);

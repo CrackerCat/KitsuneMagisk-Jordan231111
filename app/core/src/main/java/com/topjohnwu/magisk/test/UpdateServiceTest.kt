@@ -292,10 +292,20 @@ class UpdateServiceTest : BaseTest {
 
     @Test fun corruptStateIsNotReset() {
         val state = File(isolated.filesDir, "updates/state.json")
+        val saved = state.readText()
+        val invalid = mutableListOf("{}", JSONObject(saved).put("unexpected", 0).toString())
+        for (name in JSONObject(saved).keys()) {
+            val changed = JSONObject(saved)
+            changed.remove(name)
+            invalid += changed.toString()
+            invalid += changed.put("unexpected", 0).toString()
+        }
         assertTrue(state.setWritable(true))
-        state.writeText("{}")
-        rejects { client().accept(envelope("valid"), "beta") }
-        assertEquals("{}", state.readText())
+        for (value in invalid) {
+            state.writeText(value)
+            rejects { client().accept(envelope("valid"), "beta") }
+            assertEquals(value, state.readText())
+        }
     }
 
     @Test fun metadataServiceUnavailableDoesNotFallBack() {
