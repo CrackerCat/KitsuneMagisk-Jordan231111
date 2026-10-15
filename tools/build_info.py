@@ -88,8 +88,12 @@ def identity(root: Path = ROOT) -> dict:
     match = re.search(r"(?m)^magisk.versionCode=([0-9]+)$", upstream_props)
     if match is None or int(match[1]) != data["compat_version_code"]:
         raise ValueError("Compatibility epoch must match the selected upstream base")
-    tag = git(root, "rev-parse", f'v{data["upstream_version"]}^{{commit}}').decode().strip()
-    if tag != data["upstream_commit"]:
+    # A fork clone contains the pinned ancestor, but need not contain upstream tags.
+    try:
+        tag = git(root, "rev-parse", f'v{data["upstream_version"]}^{{commit}}').decode().strip()
+    except subprocess.CalledProcessError:
+        tag = None
+    if tag is not None and tag != data["upstream_commit"]:
         raise ValueError("Upstream version does not identify the selected source")
     data.update(source_state(root))
     data["version_name"] = (f'{data["product_version"]}-kitsune.{data["source_commit"][:8]}'

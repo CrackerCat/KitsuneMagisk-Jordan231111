@@ -19,8 +19,10 @@ overrides in `config.prop` or `magisk.versionCode` are rejected.
 | Tags | `kitsune-canary-<full-commit>` for development; `kitsune-v<product-version>` otherwise |
 | Signer | Actual verified certificate SHA-256 in the artifact report, together with APK hash/size |
 
-The generator checks the upstream tag/commit and reads its compatibility code from the historical
-source. It rejects dirty submodules. Re-editing a file at the same HEAD changes the build ID.
+The generator verifies the pinned upstream ancestor and its compatibility code, and checks the
+upstream tag when present. Fresh fork clones need no separately fetched tags; the artifact gate
+also checks the version/commit against the reviewed baseline. It rejects dirty submodules.
+Re-editing a file at the same HEAD changes the build ID.
 Generated files are rewritten only when their content changes. Packaging rejects native binaries
 from a different source state or variant. The final artifact verifier compares the generated JSON,
 manifest, shell variables, every ABI's native identity, APK comments, embedded stub and signers.

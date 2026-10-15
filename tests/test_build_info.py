@@ -74,6 +74,16 @@ class BuildInfoTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "Upstream version"):
                 build_info.identity()
 
+    def test_fork_clone_does_not_require_upstream_tags(self):
+        real_git = build_info.git
+        def without_tags(root, *args):
+            if args[0] == "rev-parse" and args[1].startswith("v"):
+                raise subprocess.CalledProcessError(128, ["git", *args])
+            return real_git(root, *args)
+        with mock.patch.object(build_info, "git", side_effect=without_tags):
+            identity = build_info.identity()
+        self.assertEqual(identity["upstream_commit"], build_info.read_spec()["upstream_commit"])
+
     def test_dirty_build_id_changes_when_contents_change_at_same_head(self):
         for field in ("source_digest", "source_commit", "protocol_version"):
             with self.subTest(field=field):

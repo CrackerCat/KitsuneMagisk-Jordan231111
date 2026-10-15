@@ -286,6 +286,7 @@ def verify_source(root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
                 spec["application_id"] != identity["application_id"] or
                 spec["channel"] != identity["channel"] or
                 spec["product_name"] != identity["display_name"] or
+                spec["upstream_version"] != manifest["upstream"]["release"].removeprefix("v") or
                 spec["upstream_commit"] != upstream):
             raise BaselineError("PR9 build specification disagrees with the reviewed baseline")
         expected_contracts[plugin] = ["tools/build_info.py", 'findProperty("expectedSourceCommit")']
