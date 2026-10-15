@@ -472,6 +472,10 @@ def _run_host(
                 os.killpg(process.pid, 0)
             except ProcessLookupError:
                 pass
+            except PermissionError as exc:
+                raise IndeterminateLifecycleError(
+                    f"{purpose} process group could not be proven stopped"
+                ) from exc
             else:
                 # A lifecycle wrapper is a synchronous transaction boundary.
                 # Same-session descendants after the wrapper exits make the
@@ -480,6 +484,10 @@ def _run_host(
                     os.killpg(process.pid, signal.SIGKILL)
                 except ProcessLookupError:
                     pass
+                except PermissionError as exc:
+                    raise IndeterminateLifecycleError(
+                        f"{purpose} process group could not be proven stopped"
+                    ) from exc
                 if not _wait_process_group_gone(process.pid):
                     raise IndeterminateLifecycleError(
                         f"{purpose} command left a process group that could not be proven stopped"
@@ -493,6 +501,10 @@ def _run_host(
                     os.killpg(process.pid, signal.SIGTERM)
                 except ProcessLookupError:
                     pass
+                except PermissionError as stop_error:
+                    raise IndeterminateLifecycleError(
+                        f"{purpose} process group could not be proven stopped"
+                    ) from stop_error
                 try:
                     process.communicate(timeout=5)
                 except subprocess.TimeoutExpired:
@@ -504,6 +516,10 @@ def _run_host(
                     os.killpg(process.pid, signal.SIGKILL)
                 except ProcessLookupError:
                     pass
+                except PermissionError as stop_error:
+                    raise IndeterminateLifecycleError(
+                        f"{purpose} process group could not be proven stopped"
+                    ) from stop_error
                 try:
                     process.communicate(timeout=PROCESS_GROUP_KILL_WAIT_SECONDS)
                 except subprocess.TimeoutExpired:

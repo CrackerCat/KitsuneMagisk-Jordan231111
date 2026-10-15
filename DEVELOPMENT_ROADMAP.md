@@ -20,7 +20,8 @@
 > with subsequent test-harness fixes; [GitHub PR #30](https://github.com/Jordan231111/KitsuneMagisk/pull/30)
 > records the accepted v31.0 update. PR8 is complete locally on `codex/pr8-parity`; its
 > [decision](docs/pr8-branch-decision.md) retains production promotion gates. PR9 is implemented and locally verified on `codex/pr9-build-info`;
-> [its identity/migration record](docs/build-info.md) preserves the remaining release gates. PR10 is next.
+> [its identity/migration record](docs/build-info.md) preserves the remaining release gates. PR10 is
+> implemented locally; publication and successful live clean-stub acceptance remain open.
 >
 > Product charter: KitsuneMagisk provides reliable Magisk root on real phones and emulators while
 > preserving useful Kitsune-specific early mounting, hiding/SuList, provider, and module capabilities.
@@ -77,9 +78,10 @@ execution order.
 | 11 | Roadmap PR7A — official v31.0 prerelease update | **Complete; merged by GitHub #30** | Preserve the exact v31.0 acceptance below; proceed to PR8 parity. |
 | 12 | Roadmap PR8 — parity and historical feature audit | **Complete locally; production promotion remains gated** | Preserve the [port ledger](docs/port-ledger.md), exact paired outcomes and [reversible development-line decision](docs/pr8-branch-decision.md). |
 | 13 | Roadmap PR9 — version/build-info separation | **Implemented and locally verified on `codex/pr9-build-info`, based on PR8 `27ce1f436`** | Preserve the [shared identity and migration contract](docs/build-info.md), artifact gates and MuMu manager-update evidence. |
-| 14 | Roadmap PR10–PR16 — remaining historical features, qualification, and release | **Not started** | Close every feature-ledger row by PR16; no historical behavior may become an unnamed follow-up. |
+| 14 | Roadmap PR10 — authenticated update service and stub | **Implemented locally on `codex/pr10-update-service`; activation pending** | Preserve the [shared update contract and local tests](docs/update-service.md); publish and verify the exact assets, then complete live clean-stub acceptance. |
+| 15 | Roadmap PR11–PR16 — remaining historical features, qualification, and release | **Not started** | Close every feature-ledger row by PR16; no historical behavior may become an unnamed follow-up. |
 
-The next planned engineering task is **PR10**, continuing the PR8/PR9 work on the maintained
+The current task is **PR10 activation**, continuing the PR8/PR9 work on the maintained
 `next-system` foundation; those development branches are not yet merged there. PR8 selected the v31.0-based
 development foundation while retaining historical-feature and release qualification gates. PR7A completed the upstream
 update and inherited lifecycle gates. PR6 established the exact v30.7 baseline, and
@@ -921,36 +923,38 @@ The inherited app and stub trusted prior-maintainer infrastructure:
 All returned HTTP 404 during the original audit. PR4 removed the built-in requests and made the app
 and stub return an explicit project-service-unavailable result. PR #26 additionally requires an
 HTTPS custom metadata URL, rejects cleartext redirects, requires a SHA-256 digest, verifies the
-downloaded bytes, and atomically publishes the verified APK. No project-owned default service exists
-yet, so containment is complete but update ownership is not.
+downloaded bytes, and atomically publishes the verified APK. PR10 now implements the shared signed
+contract and project-owned GitHub routes locally; publication and live acceptance remain open.
 
 ### TODO
 
-- [ ] Move all default update metadata and APK URLs under an account/organization controlled by the current project.
+- [x] Configure all default update metadata and APK URLs under the current project's GitHub account.
+- [ ] Publish the authenticated experimental feed and verify its actual downloaded artifacts.
 - [x] Point `SOURCE_CODE_URL` at this repository and remove active built-in requests to the dead
   channel/stub URLs.
-- [ ] Prefer immutable GitHub Release asset URLs for APKs, with a project-owned small metadata endpoint for channel discovery.
-- [ ] Define one versioned update schema containing at minimum:
+- [x] Require immutable GitHub Release assets in the publication verifier, with a small project-owned metadata endpoint for channel discovery.
+- [x] Define one versioned update schema containing at minimum:
   - product name and channel;
   - product version and monotonic Android build code;
   - upstream base tag and commit;
   - exact source commit;
   - APK URL, byte length, and SHA-256 digest;
-  - minimum supported Android/API and migration notes;
-  - release notes URL;
+  - minimum supported Android/API;
+  - authenticated inline release notes, including migration guidance;
   - schema version.
 - [x] Verify the APK digest before install or dynamic load for explicitly configured custom metadata.
-- [ ] Make the project-owned stub and full app consume the same final PR10 metadata schema.
+- [x] Make the project-owned stub and full app consume the same final PR10 metadata schema.
 - [x] Make unavailable built-in service, missing digest, malformed metadata, cleartext URL/redirect,
   truncated APK, and digest mismatch fail closed with an actionable result.
-- [ ] Add the remaining rollback-metadata, authenticated-project-metadata, post-release, and channel-switching tests with PR10.
-- [x] Require an explicit HTTPS custom channel and digest validation; continue to warn that this
-  validates supplied bytes but does not make an arbitrary server project-trusted.
-- [ ] Add an automated post-release probe that downloads metadata and each asset exactly as the installed app/stub would.
+- [x] Add rollback-metadata, authenticated-project-metadata, channel-switching and interrupted-download tests.
+- [x] Require an explicit HTTPS custom channel, the pinned project signature and APK digest validation.
+- [x] Add an automated post-release probe that verifies metadata, immutable release/tag identity and actual APK bytes/signers.
+- [ ] Run that probe against the published candidate and complete the successful clean-stub download.
 
 ### Acceptance criteria
 
-- Stable, beta/candidate, canary, and debug URLs resolve and are controlled by this project.
+- Published beta/candidate and canary feeds resolve under this project; stable promotion remains gated
+  by PR16. The public debug channel is retired, with old selections mapped to the default beta feed.
 - A released stub can download the matching full manager in a clean emulator.
 - Tampered metadata or APK bytes are rejected before install/load.
 - An older metadata `versionCode` cannot silently roll a user back.
@@ -1121,8 +1125,8 @@ The remaining release operation should stay deliberately simple:
   present: `keyStore`, `keyStorePass`, `keyAlias`, and `keyPass`.
 - [x] Reject a release config or keystore located inside the source checkout.
 - [x] Reject the former public test certificate in final artifact checks.
-- [ ] Before the first production candidate, create exactly one long-lived maintainer keystore
-  outside this repository and record only its public certificate digest in release evidence.
+- [x] Create exactly one long-lived maintainer keystore outside this repository and record only its
+  public certificate digest in [the PR10 contract](docs/update-service.md).
 - [ ] Decide the transition for installations signed with the historical public certificate:
   verified reinstall, one narrowly scoped authenticated migration build, or an explicitly supported
   package-identity change. Test Android package replacement and daemon/manager trust end to end.
@@ -2679,8 +2683,11 @@ numbers never imply a different source version.
 
 ## PR 10 — Project-owned update service and stub
 
-**Implementation status: not started; inherited-service containment and transport/artifact
-verification are present, but no project trust root exists.**
+**Implementation status: implemented and locally verified on `codex/pr10-update-service`.
+The [shared contract and test record](docs/update-service.md) use one external production key and
+project-owned GitHub metadata/assets. Four-ABI release/debug builds, artifact checks, lint, legacy
+compilation, host tests and 22 second-instance MuMu tests pass. Publication, verification of actual
+public assets and successful live clean-stub acceptance remain open; PR10 has not exited.**
 
 - Implement metadata schema, digest validation, owned endpoints, and failure tests.
 - Prefer a small static, versioned, authenticated metadata service under this project's ownership
@@ -2968,11 +2975,12 @@ in the detail:
   [runtime-specific evidence and limits](docs/system-mode/mumu-pr7-2026-09-09.md); this is not the complete Kitsune port.
 - **Done — PR7A:** the actual official v31.0 prerelease, Compose System Mode UI and inherited
   lifecycle gates passed; preserve the exact runtime and CI evidence above.
-- **Open next — PR8:** run identical snapshots against current and next implementations and select the
-  future main line only at the parity gate.
+- **Done locally — PR8:** the paired evidence and historical ledger select the maintained v31.0
+  development line while retaining the remaining feature and production-promotion gates.
 - **Done locally — PR9:** separate truthful product/app/upstream/module/protocol fields and test
-  the explicit manager upgrade/capability contract. **Open — PR10/P0.7:** establish the production
-  signing identity/transition and project-owned update service before a public candidate.
+  the explicit manager upgrade/capability contract. **Local implementation done — PR10:** the external
+  signing identity and authenticated updater are tested. **Open — PR10/P0.7:** publication/live
+  clean-stub acceptance, protected independent key backups and production transition qualification.
 - **Open — PR11–PR14:** port the chosen Zygisk contract, Hide/SuList, focused manager UI, and
   early-mount only after System Mode parity—not before it.
 - **Open — PR15/PR16:** complete commercial-emulator and advertised physical-device recovery

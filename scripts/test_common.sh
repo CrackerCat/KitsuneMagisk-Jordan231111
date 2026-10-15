@@ -193,6 +193,13 @@ run_tests() {
   local stub="repackaged.$pkg/com.topjohnwu.magisk.test.AppTestRunner"
 
   # Run app tests
+  [ -f "$MAGISK_OUT_DIR/update-fixtures/valid.json" ] || {
+    print_error "Missing signed update fixtures; run tools/update_service.py test-fixtures first"
+    return 1
+  }
+  adb shell mkdir -p /data/local/tmp/kitsune-update-fixtures
+  adb push "$MAGISK_OUT_DIR/update-fixtures/." /data/local/tmp/kitsune-update-fixtures/ >/dev/null
+  am_instrument '.UpdateServiceTest' $app
   am_instrument '.MagiskAppTest,.AdditionalTest,.TerminalTest,.FlashIntentTest,.BuildInfoTest' $app
 
   # Test app hiding

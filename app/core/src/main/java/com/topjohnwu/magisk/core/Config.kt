@@ -113,15 +113,17 @@ object Config : PreferenceConfig, DBConfig {
     var themeOrdinal by preference(Key.THEME_ORDINAL, 0)
     var colorMode by preference(Key.COLOR_MODE, ColorMode.MONET_SYSTEM.value)
 
-    // PR6 has no project-owned release endpoint. Keep upstream channels available
-    // for explicit development use, but never opt an experimental install in.
+    // Existing experimental installs remain opted out of background update checks.
     private var checkUpdatePrefs by preference(Key.CHECK_UPDATES, false)
     private var localePrefs by preference(Key.LOCALE, "")
     var doh by preference(Key.DOH, false)
-    var updateChannel by preference(Key.RELEASE_CHANNEL, Value.DEFAULT_CHANNEL)
+    private var updateChannelPrefs by preference(Key.RELEASE_CHANNEL, Value.DEFAULT_CHANNEL)
+    var updateChannel: Int
+        get() = if (updateChannelPrefs == Value.DEBUG_CHANNEL) Value.DEFAULT_CHANNEL else updateChannelPrefs
+        set(value) { updateChannelPrefs = if (value == Value.DEBUG_CHANNEL) Value.DEFAULT_CHANNEL else value }
     val updateChannelIndex get() = when (updateChannel) {
         Value.DEFAULT_CHANNEL ->
-            if (BuildConfig.DEBUG) Value.DEBUG_CHANNEL else Value.STABLE_CHANNEL
+            Value.BETA_CHANNEL
         else -> updateChannel
     }
     var customChannelUrl by preference(Key.CUSTOM_CHANNEL, "")

@@ -20,6 +20,19 @@ def encoded(value: object) -> str:
     return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=True)
 
 
+def validate_signing_config(config: dict, path: Path, root: Path = ROOT) -> None:
+    fields = ("keyStore", "keyStorePass", "keyAlias", "keyPass")
+    if any(not config.get(key) for key in fields):
+        raise ValueError("Release APKs require all four external signing properties")
+    if str(config["keyAlias"]).lower() == "androiddebugkey":
+        raise ValueError("The Android debug key cannot sign release APKs")
+    for file in (path, root / config["keyStore"]):
+        if file.absolute().is_relative_to(root) or file.resolve().is_relative_to(root):
+            raise ValueError("Release signing configuration and keystore must be outside the checkout")
+        if not file.is_file():
+            raise ValueError("External release signing file is missing")
+
+
 def git(root: Path, *args: str) -> bytes:
     return subprocess.check_output(["git", *args], cwd=root, stderr=subprocess.PIPE)
 

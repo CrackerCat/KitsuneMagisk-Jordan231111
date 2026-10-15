@@ -280,7 +280,7 @@ def verify_source(root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
     expected_contracts.setdefault("scripts/env.py" if modern else "build.py", []).append(
         'error("Requires Python 3.9+")'
     )
-    if phase == "PR9":
+    if phase == "PR9" or manifest.get("build_info_schema") == 1:
         spec = build_info.read_spec(root)
         if (spec["app_version_code"] != identity["version_code"] or
                 spec["application_id"] != identity["application_id"] or
@@ -288,12 +288,15 @@ def verify_source(root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
                 spec["product_name"] != identity["display_name"] or
                 spec["upstream_version"] != manifest["upstream"]["release"].removeprefix("v") or
                 spec["upstream_commit"] != upstream):
-            raise BaselineError("PR9 build specification disagrees with the reviewed baseline")
+            raise BaselineError("Build specification disagrees with the reviewed baseline")
         expected_contracts[plugin] = ["tools/build_info.py", 'findProperty("expectedSourceCommit")']
         expected_contracts["build.py"] = ["build_info.generate(repo_root)",
                                          "Git source state changed while building the APK"]
         expected_contracts["native/src/include/consts.hpp"] = ["#include <flags.h>"]
         expected_contracts["native/src/include/consts.rs"] = ["pub use flags::*;"]
+    if "update_trust_sha256" in manifest:
+        if sha256(root / "updates/trust.json") != manifest["update_trust_sha256"]:
+            raise BaselineError("Update trust root differs from the reviewed source identity")
     for path, values in expected_contracts.items():
         for value in values:
             expect_text(root, path, value)
@@ -599,8 +602,15 @@ def inspect_apk(
             raise BaselineError(f"{apk} ZIP comment does not match its protocol/build identity")
 
     certificate = signer_certificate(apksigner, apk)
+    if "update_trust_sha256" in manifest:
+        with zipfile.ZipFile(apk) as archive:
+            if hashlib.sha256(archive.read("assets/manager-cert.der")).hexdigest() != certificate:
+                raise BaselineError("Manager certificate asset differs from the actual APK signer")
+            if hashlib.sha256(archive.read("assets/update-trust.json")).hexdigest() != manifest["update_trust_sha256"]:
+                raise BaselineError("Packaged update trust root differs from the reviewed source")
     return {
         "build_info": expected_info,
+        "update_trust_sha256": manifest.get("update_trust_sha256"),
         "path": str(apk.resolve()),
         "sha256": sha256(apk),
         "size": apk.stat().st_size,
@@ -754,6 +764,12 @@ def inspect_stub_apk(
     certificate = signer_certificate(apksigner, apk)
     if certificate != manager["certificate_sha256"]:
         raise BaselineError(f"standalone stub signer differs from manager: {apk}")
+    if manager.get("update_trust_sha256"):
+        with zipfile.ZipFile(apk) as archive:
+            if hashlib.sha256(archive.read("assets/manager-cert.der")).hexdigest() != certificate:
+                raise BaselineError("Stub certificate asset differs from its actual signer")
+            if hashlib.sha256(archive.read("assets/update-trust.json")).hexdigest() != manager["update_trust_sha256"]:
+                raise BaselineError("Stub and manager update trust roots differ")
     return {
         "path": str(apk.resolve()),
         "sha256": hashlib.sha256(standalone).hexdigest(),
@@ -783,7 +799,7 @@ def verify_artifacts(
     aapt: Path,
     apksigner: Path,
 ) -> dict[str, Any]:
-    info = build_info.identity(root) if manifest.get("phase") == "PR9" else None
+    info = build_info.identity(root) if manifest.get("phase") == "PR9" or manifest.get("build_info_schema") == 1 else None
     expected_version = info["version_name"] if info else expected_source_version(root, manifest["upstream"]["release"])
     debug = inspect_apk(
         outdir / "app-debug.apk", "debug", aapt, apksigner, manifest,

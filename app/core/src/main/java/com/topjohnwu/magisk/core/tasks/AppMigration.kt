@@ -24,6 +24,7 @@ import com.topjohnwu.magisk.utils.APKInstall
 import com.topjohnwu.superuser.Shell
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.runInterruptible
 import timber.log.Timber
 import java.io.File
 import java.io.IOException
@@ -284,10 +285,10 @@ object AppMigration {
         val label = context.applicationInfo.nonLocalizedLabel
         val pkg = context.packageName
         val session = APKInstall.startSession(context)
-        return withContext(Dispatchers.IO) {
+        return runInterruptible(Dispatchers.IO) {
             session.openStream(context).use {
                 if (!patch(context, apk, it, pkg, label)) {
-                    return@withContext null
+                    return@runInterruptible null
                 }
             }
             session.waitIntent()

@@ -1025,6 +1025,19 @@ class QualificationTest(unittest.TestCase):
                 ):
                     _run_host(command, "cold boot", 1)
 
+    def test_lifecycle_signal_permission_failure_is_indeterminate(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="kitsune-command-permission-") as temp:
+            wrapper = Path(temp).resolve() / "timeout.sh"
+            wrapper.write_text("#!/bin/sh\nsleep 60\n", encoding="ascii")
+            wrapper.chmod(0o700)
+            command = _checked_command(str(wrapper), "cold boot")
+            process = mock.Mock(pid=12345)
+            process.communicate.side_effect = subprocess.TimeoutExpired(command, 1)
+            with mock.patch("tools.system_mode.qualification.subprocess.Popen", return_value=process), \
+                 mock.patch("tools.system_mode.qualification.os.killpg", side_effect=PermissionError):
+                with self.assertRaisesRegex(IndeterminateLifecycleError, "could not be proven stopped"):
+                    _run_host(command, "cold boot", 1)
+
     def test_record_rejects_inventory_escape_and_reused_domain_proof(self) -> None:
         with tempfile.TemporaryDirectory(prefix="kitsune-inventory-record-") as temp:
             record, _, _, _ = self.record(Path(temp))

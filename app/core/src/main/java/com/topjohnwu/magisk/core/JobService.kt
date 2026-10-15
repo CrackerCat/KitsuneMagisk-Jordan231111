@@ -15,13 +15,18 @@ import com.topjohnwu.magisk.core.download.DownloadSession
 import com.topjohnwu.magisk.core.download.Subject
 import com.topjohnwu.magisk.view.Notifications
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
 class JobService : BaseJobService() {
 
     private var mSession: Session? = null
+    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+    private var updateJob: Job? = null
 
     @TargetApi(value = 34)
     inner class Session(
@@ -54,7 +59,22 @@ class JobService : BaseJobService() {
         }
     }
 
-    override fun onStopJob(params: JobParameters?) = false
+    override fun onStopJob(params: JobParameters?): Boolean {
+        when (params?.jobId) {
+            Const.ID.CHECK_UPDATE_JOB_ID -> updateJob?.cancel()
+            Const.ID.DOWNLOAD_JOB_ID -> {
+                mSession?.engine?.cancel()
+                mSession = null
+            }
+        }
+        return false
+    }
+
+    override fun onDestroy() {
+        mSession?.engine?.cancel()
+        scope.cancel()
+        super.onDestroy()
+    }
 
     @TargetApi(value = 34)
     private fun downloadFile(params: JobParameters): Boolean {
@@ -73,12 +93,14 @@ class JobService : BaseJobService() {
         return true
     }
 
-    @OptIn(kotlinx.coroutines.DelicateCoroutinesApi::class)
     private fun checkUpdate(params: JobParameters): Boolean {
-        GlobalScope.launch(Dispatchers.IO) {
-            Info.fetchUpdate(ServiceLocator.networkService)?.let {
-                if (Info.env.isActive && BuildConfig.APP_VERSION_CODE < it.versionCode)
-                    Notifications.updateAvailable()
+        updateJob = scope.launch {
+            try {
+                Info.fetchUpdate(ServiceLocator.networkService)?.let {
+                    if (Info.env.isActive && BuildConfig.APP_VERSION_CODE < it.versionCode)
+                        Notifications.updateAvailable()
+                }
+            } finally {
                 jobFinished(params, false)
             }
         }

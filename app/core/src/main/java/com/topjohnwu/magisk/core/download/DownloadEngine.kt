@@ -27,9 +27,12 @@ import com.topjohnwu.magisk.core.ktx.set
 import com.topjohnwu.magisk.core.utils.ProgressInputStream
 import com.topjohnwu.magisk.view.Notifications
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.ensureActive
 import okhttp3.ResponseBody
 import timber.log.Timber
 import java.io.InputStream
@@ -145,12 +148,35 @@ class DownloadEngine(session: DownloadSession) : DownloadSession by session, Dow
     private val processor = DownloadProcessor(this)
     private val network get() = ServiceLocator.networkService
 
+    @Synchronized
+    fun cancel() {
+        job.cancel()
+        for (index in 0 until notifications.size())
+            Notifications.mgr.cancel(notifications.keyAt(index))
+        notifications.clear()
+        attachedId = -1
+    }
+
     fun download(subject: Subject) {
+        if (!job.isActive) return
         notifyUpdate(subject.notifyId)
         CoroutineScope(job + Dispatchers.IO).launch {
             try {
-                val stream = network.fetchFile(subject.url).toProgressStream(subject)
-                processor.handle(stream, subject)
+                if (subject is Subject.App) {
+                    val coroutine = currentCoroutineContext()
+                    processor.handleApp(subject) { current, total ->
+                        coroutine.ensureActive()
+                        broadcast(current.toFloat() / total, subject)
+                        notifyUpdate(subject.notifyId) {
+                            it.setContentTitle(subject.title)
+                                .setProgress(1000, (current * 1000 / total).toInt(), false)
+                        }
+                    }
+                } else {
+                    val stream = network.fetchFile(subject.url).toProgressStream(subject)
+                    processor.handle(stream, subject)
+                }
+                currentCoroutineContext().ensureActive()
                 val activity = AppContext.foregroundActivity
                 if (activity != null && subject.autoLaunch) {
                     notifyRemove(subject.notifyId)
@@ -158,6 +184,8 @@ class DownloadEngine(session: DownloadSession) : DownloadSession by session, Dow
                 } else {
                     notifyFinish(subject)
                 }
+            } catch (_: CancellationException) {
+                notifyRemove(subject.notifyId)
             } catch (e: Exception) {
                 Timber.e(e)
                 notifyFail(subject)
@@ -176,6 +204,7 @@ class DownloadEngine(session: DownloadSession) : DownloadSession by session, Dow
         attachNotification(id, notification)
     }
 
+    @Synchronized
     private fun finalNotify(id: Int, editor: (Notification.Builder) -> Unit): Int {
         val notification = notifyRemove(id)?.also(editor) ?: return -1
         val newId = Notifications.nextId()
@@ -203,6 +232,7 @@ class DownloadEngine(session: DownloadSession) : DownloadSession by session, Dow
 
     @Synchronized
     override fun notifyUpdate(id: Int, editor: (Notification.Builder) -> Unit) {
+        if (!job.isActive) return
         val notification = (notifications[id] ?: Notifications.startProgress("").also {
             notifications[id] = it
         }).apply(editor)

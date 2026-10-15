@@ -13,14 +13,11 @@ android {
     namespace = "com.topjohnwu.magisk"
     enableKotlin = false
 
-    val base = "https://github.com/topjohnwu/Magisk/releases/download/"
-    val url = base + "v${Config.version}/Magisk-v${Config.version}.apk"
-
     defaultConfig {
         applicationId = APP_ID
         versionCode = 1
         versionName = "1.0"
-        buildConfigField("String", "APK_URL", "\"$url\"")
+        buildConfigField("int", "MANAGER_VERSION_CODE", "${Config.versionCode}")
         buildConfigField("int", "STUB_VERSION", Config.stubVersion)
     }
 

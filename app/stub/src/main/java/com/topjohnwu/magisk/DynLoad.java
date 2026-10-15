@@ -14,7 +14,8 @@ import android.content.pm.ServiceInfo;
 import android.os.Build;
 import android.util.Log;
 
-import com.topjohnwu.magisk.utils.APKInstall;
+import com.topjohnwu.magisk.update.UpdateFiles;
+import com.topjohnwu.magisk.update.UpdateMetadata;
 import com.topjohnwu.magisk.utils.DynamicClassLoader;
 
 import java.io.File;
@@ -54,61 +55,57 @@ public class DynLoad {
     static DynamicClassLoader loadApk(Context context) {
         File apk = StubApk.current(context);
         File update = StubApk.update(context);
-
-        if (update.exists()) {
-            // Rename from update
-            update.renameTo(apk);
+        final String certificate;
+        try {
+            certificate = UpdateMetadata.sha256(UpdateFiles.ownAsset(context, "manager-cert.der", 8192));
+        } catch (IOException e) {
+            Log.e(DynLoad.class.getSimpleName(), "Missing manager identity", e);
+            return null;
         }
-
-        // Copy from external for easier development
+        if (update.exists()) {
+            try {
+                UpdateFiles.verifyManager(context, update, APPLICATION_ID,
+                        BuildConfig.MANAGER_VERSION_CODE, certificate, null);
+                UpdateFiles.publish(update, apk);
+            } catch (IOException e) {
+                Log.e(DynLoad.class.getSimpleName(), "Rejected manager update", e);
+                update.delete();
+            }
+        }
         if (BuildConfig.DEBUG) {
             try {
                 File external = new File(context.getExternalFilesDir(null), "magisk.apk");
                 if (external.exists()) {
-                    apk.delete();
-                    try {
-                        var in = new FileInputStream(external);
-                        var out = new FileOutputStream(apk);
-                        apk.setReadOnly();
-                        try (in; out) {
-                            APKInstall.transfer(in, out);
-                        }
-                    } catch (IOException e) {
-                        Log.e(DynLoad.class.getSimpleName(), "", e);
-                        apk.delete();
-                    } finally {
-                        external.delete();
-                    }
+                    UpdateFiles.copyVerified(context, external, apk, APPLICATION_ID,
+                            BuildConfig.MANAGER_VERSION_CODE, certificate);
+                    external.delete();
                 }
-            } catch (SecurityException e) {
-                // Do not crash in root service
+            } catch (IOException | SecurityException e) {
+                Log.e(DynLoad.class.getSimpleName(), "Rejected development manager", e);
             }
         }
-
         if (apk.exists()) {
-            apk.setReadOnly();
-            return new DynamicClassLoader(apk);
+            try {
+                UpdateFiles.verifyManager(context, apk, APPLICATION_ID,
+                        BuildConfig.MANAGER_VERSION_CODE, certificate, null);
+                if (!apk.setReadOnly()) throw new IOException("Cannot protect manager code");
+                return new DynamicClassLoader(apk);
+            } catch (IOException e) {
+                Log.e(DynLoad.class.getSimpleName(), "Rejected current manager", e);
+                apk.delete();
+            }
         }
-
-        // If no APK is loaded, attempt to copy from previous app
         if (!context.getPackageName().equals(APPLICATION_ID)) {
             try {
                 var info = context.getPackageManager().getApplicationInfo(APPLICATION_ID, 0);
-                apk.delete();
-                var src = new FileInputStream(info.sourceDir);
-                var out = new FileOutputStream(apk);
-                apk.setReadOnly();
-                try (src; out) {
-                    APKInstall.transfer(src, out);
-                }
+                UpdateFiles.copyVerified(context, new File(info.sourceDir), apk, APPLICATION_ID,
+                        BuildConfig.MANAGER_VERSION_CODE, certificate);
                 return new DynamicClassLoader(apk);
             } catch (PackageManager.NameNotFoundException ignored) {
             } catch (IOException e) {
-                Log.e(DynLoad.class.getSimpleName(), "", e);
-                apk.delete();
+                Log.e(DynLoad.class.getSimpleName(), "Cannot seed hidden manager", e);
             }
         }
-
         return null;
     }
 

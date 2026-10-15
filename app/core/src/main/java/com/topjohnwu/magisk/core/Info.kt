@@ -24,6 +24,8 @@ object Info {
         private set
 
     suspend fun fetchUpdate(svc: NetworkService): UpdateInfo? {
+        if (update.expiresAt > 0 && update.expiresAt <= System.currentTimeMillis() / 1000)
+            update = EMPTY_UPDATE
         return if (update === EMPTY_UPDATE) {
             svc.fetchUpdate()?.apply { update = this }
         } else update

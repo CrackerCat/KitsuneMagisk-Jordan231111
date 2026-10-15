@@ -38,10 +38,10 @@ abstract class Subject : Parcelable {
 
     @Parcelize
     class App(
-        private val json: UpdateInfo = Info.update,
+        val json: UpdateInfo = Info.update,
         override val notifyId: Int = Notifications.nextId()
     ) : Subject() {
-        override val title: String get() = "Magisk-${json.version}(${json.versionCode})"
+        override val title: String get() = "KitsuneMagisk-${json.version}(${json.versionCode})"
         override val url: String get() = json.link
 
         @IgnoredOnParcel

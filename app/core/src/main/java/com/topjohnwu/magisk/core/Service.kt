@@ -36,4 +36,9 @@ class Service : BaseService(), DownloadSession {
     override fun onDownloadComplete() {
         ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
     }
+
+    override fun onDestroy() {
+        mEngine?.cancel()
+        super.onDestroy()
+    }
 }
