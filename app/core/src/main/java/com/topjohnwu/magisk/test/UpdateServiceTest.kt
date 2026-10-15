@@ -1,5 +1,6 @@
 package com.topjohnwu.magisk.test
 
+import android.app.Notification
 import android.content.Context
 import android.content.ContextWrapper
 import android.os.Build
@@ -9,6 +10,17 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.topjohnwu.magisk.update.UpdateClient
 import com.topjohnwu.magisk.update.UpdateFiles
 import com.topjohnwu.magisk.update.UpdateMetadata
+import com.topjohnwu.magisk.core.download.DownloadEngine
+import com.topjohnwu.magisk.core.download.DownloadSession
+import com.topjohnwu.magisk.core.download.Subject
+import com.topjohnwu.magisk.core.model.UpdateInfo
+import com.topjohnwu.magisk.utils.APKInstall
+import com.topjohnwu.magisk.view.Notifications
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancelAndJoin
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.runInterruptible
 import org.json.JSONObject
 import org.junit.After
 import org.junit.Assert.*
@@ -26,6 +38,9 @@ import java.io.SequenceInputStream
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.UUID
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.atomic.AtomicInteger
 import java.util.concurrent.atomic.AtomicLong
 
 @Keep
@@ -37,6 +52,13 @@ class UpdateServiceTest : BaseTest {
     private lateinit var trust: Map<String, Any>
     private lateinit var metadata: UpdateMetadata
     private lateinit var now: AtomicLong
+
+    private class Session(override val context: Context) : DownloadSession {
+        val attached = AtomicInteger()
+        val finished = CountDownLatch(1)
+        override fun attachNotification(id: Int, builder: Notification.Builder) { attached.incrementAndGet() }
+        override fun onDownloadComplete() { finished.countDown() }
+    }
 
     @Before
     fun prepare() {
@@ -198,6 +220,74 @@ class UpdateServiceTest : BaseTest {
         val target = File(root, "manager.apk").apply { writeText("previous") }
         rejects { client().download(metadata, target) { _, _ -> throw InterruptedIOException("cancelled") } }
         assertEquals("previous", target.readText())
+    }
+
+    @Test fun coroutineCancellationInterruptsTransfer() = runBlocking {
+        val target = File(root, "manager.apk").apply { writeText("previous") }
+        val started = CountDownLatch(1)
+        val blocked = CountDownLatch(1)
+        val transfer = launch(Dispatchers.IO) {
+            runInterruptible {
+                client().download(metadata, target) { _, _ ->
+                    started.countDown()
+                    blocked.await(10, TimeUnit.SECONDS)
+                }
+            }
+        }
+        try {
+            assertTrue("Transfer did not start", started.await(5, TimeUnit.SECONDS))
+            transfer.cancelAndJoin()
+            assertEquals("previous", target.readText())
+            assertFalse(root.listFiles()!!.any { it.name.endsWith(".part") })
+        } finally {
+            transfer.cancelAndJoin()
+            blocked.countDown()
+        }
+    }
+
+    @Test fun rejectedUpdateFinishesDownloadSession() {
+        val before = Notifications.mgr.activeNotifications.map { it.id }.toSet()
+        val session = Session(isolated)
+        val engine = DownloadEngine(session)
+        val subject = Subject.App(UpdateInfo(signedMetadata = "{}", channel = "beta"))
+        try {
+            engine.download(subject)
+            assertTrue("Failed update left the session running", session.finished.await(5, TimeUnit.SECONDS))
+            assertEquals(1, session.attached.get())
+            assertNull(subject.intent)
+        } finally {
+            engine.cancel()
+            Notifications.mgr.activeNotifications.filter { it.id !in before }
+                .forEach { Notifications.mgr.cancel(it.id) }
+        }
+    }
+
+    @Test fun stoppedDownloadSessionCannotRestart() {
+        val session = Session(isolated)
+        val engine = DownloadEngine(session)
+        engine.notifyUpdate(Notifications.nextId()) {}
+        assertEquals(1, session.attached.get())
+        engine.cancel()
+        engine.reattach()
+        engine.download(Subject.App(UpdateInfo(signedMetadata = "{}", channel = "beta")))
+        assertEquals(1, session.attached.get())
+    }
+
+    @Test fun interruptedInstallAbandonsSession() {
+        val installer = appContext.packageManager.packageInstaller
+        val before = installer.mySessions.map { it.sessionId }.toSet()
+        val stream = APKInstall.startSession(appContext).openStream(appContext)
+        stream.write(byteArrayOf(1, 2, 3))
+        try {
+            Thread.currentThread().interrupt()
+            rejects { stream.close() }
+        } finally {
+            Thread.interrupted()
+        }
+        val deadline = android.os.SystemClock.elapsedRealtime() + 2000
+        while (installer.mySessions.any { it.sessionId !in before } &&
+            android.os.SystemClock.elapsedRealtime() < deadline) android.os.SystemClock.sleep(20)
+        assertEquals(before, installer.mySessions.map { it.sessionId }.toSet())
     }
 
     @Test fun corruptStateIsNotReset() {

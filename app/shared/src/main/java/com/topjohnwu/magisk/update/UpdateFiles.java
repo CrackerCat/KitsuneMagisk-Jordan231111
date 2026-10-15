@@ -143,12 +143,14 @@ public final class UpdateFiles {
     }
 
     public static void publish(File temporary, File destination) throws IOException {
+        if (Thread.currentThread().isInterrupted()) throw new InterruptedIOException("Update cancelled");
         regular(temporary);
         if (!temporary.getParentFile().getCanonicalFile().equals(destination.getParentFile().getCanonicalFile()))
             throw new IOException("Update publication requires one private directory");
         if (destination.exists()) regular(destination);
         try {
             if (!temporary.setReadOnly()) throw new IOException("Cannot protect downloaded code");
+            if (Thread.currentThread().isInterrupted()) throw new InterruptedIOException("Update cancelled");
             Os.rename(temporary.getPath(), destination.getPath());
             syncDirectory(destination.getParentFile());
         } catch (ErrnoException e) {

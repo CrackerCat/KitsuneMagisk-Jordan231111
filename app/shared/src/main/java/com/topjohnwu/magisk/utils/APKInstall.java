@@ -20,6 +20,7 @@ import java.io.FileInputStream;
 import java.io.FilterOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InterruptedIOException;
 import java.io.OutputStream;
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
@@ -159,15 +160,44 @@ public final class APKInstall {
             var session = installer.openSession(installer.createSession(params));
             var out = session.openWrite(sessionId, 0, -1);
             return new FilterOutputStream(out) {
+                private boolean failed;
+
+                @Override
+                public void write(int value) throws IOException {
+                    write(new byte[]{(byte) value}, 0, 1);
+                }
+
                 @Override
                 public void write(byte[] b, int off, int len) throws IOException {
-                    out.write(b, off, len);
+                    try {
+                        if (Thread.currentThread().isInterrupted())
+                            throw new InterruptedIOException("APK installation cancelled");
+                        out.write(b, off, len);
+                    } catch (IOException e) {
+                        failed = true;
+                        throw e;
+                    }
                 }
                 @Override
                 public void close() throws IOException {
-                    super.close();
-                    session.commit(pending.getIntentSender());
-                    session.close();
+                    try {
+                        super.close();
+                        if (Thread.currentThread().isInterrupted())
+                            throw new InterruptedIOException("APK installation cancelled");
+                        if (!failed) session.commit(pending.getIntentSender());
+                    } catch (IOException | RuntimeException e) {
+                        failed = true;
+                        throw e;
+                    } finally {
+                        if (failed) {
+                            session.abandon();
+                            try {
+                                context.getApplicationContext().unregisterReceiver(InstallReceiver.this);
+                            } catch (IllegalArgumentException ignored) {}
+                            latch.countDown();
+                        }
+                        session.close();
+                    }
                 }
             };
         }

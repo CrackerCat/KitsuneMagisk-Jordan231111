@@ -16,6 +16,9 @@ import com.topjohnwu.magisk.core.ktx.writeTo
 import com.topjohnwu.magisk.core.tasks.AppMigration
 import com.topjohnwu.magisk.core.utils.MediaStoreUtils.outputStream
 import com.topjohnwu.magisk.utils.APKInstall
+import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.ensureActive
+import kotlinx.coroutines.runInterruptible
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry
 import org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream
 import org.apache.commons.compress.archivers.zip.ZipFile
@@ -41,14 +44,19 @@ class DownloadProcessor(notifier: DownloadNotifier) : DownloadNotifier by notifi
         val metadata = client.accept(subject.json.signedMetadata, subject.json.channel)
         val downloaded = File.createTempFile("verified-update-", ".apk", context.cacheDir)
         try {
-            client.download(metadata, downloaded, progress)
-            downloaded.inputStream().use { input ->
-                subject.file.outputStream().use { input.copyTo(it) }
+            runInterruptible {
+                client.download(metadata, downloaded, progress)
+                downloaded.inputStream().use { input ->
+                    subject.file.outputStream().use { input.copyTo(it) }
+                }
             }
+            currentCoroutineContext().ensureActive()
             if (isRunningAsStub) {
                 val updateApk = StubApk.update(context)
-                UpdateFiles.copyVerified(context, downloaded, updateApk, BuildConfig.APP_PACKAGE_NAME,
-                    BuildConfig.APP_VERSION_CODE, metadata.fields["certificate_sha256"] as String)
+                runInterruptible {
+                    UpdateFiles.copyVerified(context, downloaded, updateApk, BuildConfig.APP_PACKAGE_NAME,
+                        BuildConfig.APP_VERSION_CODE, metadata.fields["certificate_sha256"] as String)
+                }
                 try {
                     notifyUpdate(subject.notifyId) {
                         it.setProgress(0, 0, true)
@@ -68,11 +76,13 @@ class DownloadProcessor(notifier: DownloadNotifier) : DownloadNotifier by notifi
                     throw e
                 }
             } else {
-                val session = APKInstall.startSession(context)
-                downloaded.inputStream().use { input ->
-                    session.openStream(context).use { input.copyTo(it) }
+                subject.intent = runInterruptible {
+                    val session = APKInstall.startSession(context)
+                    downloaded.inputStream().use { input ->
+                        session.openStream(context).use { input.copyTo(it) }
+                    }
+                    session.waitIntent()
                 }
-                subject.intent = session.waitIntent()
             }
         } finally {
             downloaded.delete()

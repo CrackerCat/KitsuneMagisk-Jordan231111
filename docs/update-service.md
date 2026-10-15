@@ -69,6 +69,8 @@ timeouts; slow trickles cannot hold a downloader indefinitely. Metadata redirect
 the selected HTTPS host. APK descriptors must name this repository's release/tag, and redirects are
 limited to GitHub and its release-asset host. Credentials, plaintext redirects, unexpected encoding
 and excessive redirect chains are rejected. Streams are length/hash checked before any installation.
+Stopped jobs/services cancel their downloads, interrupted APK writes abandon the installer session,
+and unsuccessful metadata checks still finish their scheduler job.
 
 The platform verifies the APK signature and exact signer/package/version; the APK's build info and
 embedded stub must also match the signed record. Files are written to private temporary paths,
@@ -133,18 +135,18 @@ Independent protected key backup remains a production-promotion requirement unde
 ## Local evidence
 
 The four-ABI production-signed and debug artifacts passed the identity/signature/alignment gate.
-The shared verifier passed 16 instrumentation tests (multiple fault cases per test), including
+The shared verifier and download lifecycle passed 20 instrumentation tests (multiple fault cases per test), including
 real platform APK signature rejection, on MuMuPlayer Pro 1.9.2 / Android 12 ARM64. After the user
 selected the second instance, VM 0's original manager/root were restored and its test files removed.
 Remaining work uses VM 1 only (`127.0.0.1:26656`); it started without a Magisk package. The clean
 production stub showed a verification error for the unpublished feed and remained at version code 1.
-A manual same-signer install then retained its UID while updating to code 31002, and all 18 update
+A manual same-signer install then retained its UID while updating to code 31002, and all 22 update
 and build-identity tests passed on that clean instance. This is not yet the successful live-feed
 acceptance result. No `adb reboot` or persistent root installation was used.
 
 The host suite exposed a macOS process-signal permission error in the inherited qualification
 harness. It is now an explicit indeterminate lifecycle result, so recovery cannot proceed without
 proof that the process group stopped; a focused injected-denial regression covers it.
-The complete host suite passed 270 tests with one Linux-only skip. App/stub lint and the legacy
+The complete host suite passed 271 tests with one Linux-only skip. App/stub lint and the legacy
 app's Kotlin compilation passed. These local checks precede public activation and its separate
 download/clean-stub acceptance record.

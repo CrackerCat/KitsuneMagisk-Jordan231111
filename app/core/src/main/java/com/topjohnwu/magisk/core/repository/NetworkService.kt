@@ -11,14 +11,14 @@ import com.topjohnwu.magisk.core.data.RawUrl
 import com.topjohnwu.magisk.core.model.UpdateInfo
 import retrofit2.HttpException
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.runInterruptible
 import timber.log.Timber
 import java.io.IOException
 
 class NetworkService(
     private val raw: RawUrl,
 ) {
-    suspend fun fetchUpdate() = withContext(Dispatchers.IO) { safe {
+    suspend fun fetchUpdate() = runInterruptible(Dispatchers.IO) { safe {
         val client = VerifiedUpdates.client(com.topjohnwu.magisk.core.AppContext)
         val channel = when (Config.updateChannel) {
             STABLE_CHANNEL -> "stable"

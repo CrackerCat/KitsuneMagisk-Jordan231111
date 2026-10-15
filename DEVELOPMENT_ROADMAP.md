@@ -2686,7 +2686,7 @@ numbers never imply a different source version.
 **Implementation status: implemented and locally verified on `codex/pr10-update-service`.
 The [shared contract and test record](docs/update-service.md) use one external production key and
 project-owned GitHub metadata/assets. Four-ABI release/debug builds, artifact checks, lint, legacy
-compilation, host tests and 18 second-instance MuMu tests pass. Publication, verification of actual
+compilation, host tests and 22 second-instance MuMu tests pass. Publication, verification of actual
 public assets and successful live clean-stub acceptance remain open; PR10 has not exited.**
 
 - Implement metadata schema, digest validation, owned endpoints, and failure tests.
