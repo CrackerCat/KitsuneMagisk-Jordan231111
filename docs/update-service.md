@@ -147,6 +147,6 @@ acceptance result. No `adb reboot` or persistent root installation was used.
 The host suite exposed a macOS process-signal permission error in the inherited qualification
 harness. It is now an explicit indeterminate lifecycle result, so recovery cannot proceed without
 proof that the process group stopped; a focused injected-denial regression covers it.
-The complete host suite passed 271 tests with one Linux-only skip. App/stub lint and the legacy
+The complete host suite passed 274 tests with one Linux-only skip. App/stub lint and the legacy
 app's Kotlin compilation passed. These local checks precede public activation and its separate
 download/clean-stub acceptance record.

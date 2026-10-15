@@ -826,7 +826,10 @@ def load_config():
         config.update(parse_props(args.config))
     if any(key in config for key in ("version", "versionCode", "magisk.versionCode")):
         error("Set product identity in kitsune-build.json, not config.prop")
-    if args.release and args.func in {build_all, build_app, build_stub, build_app_legacy, build_test}:
+    builds_apk = args.func in {
+        build_all, build_app, build_stub, build_app_legacy, build_test,
+    } or getattr(args, "build", False)
+    if args.release and builds_apk:
         try:
             build_info.validate_signing_config(config, args.config, repo_root)
         except ValueError as exc:

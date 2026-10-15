@@ -157,6 +157,19 @@ class BuildInfoTest(unittest.TestCase):
             build_info.write_if_changed(path, "same\n")
             self.assertEqual(before, path.stat().st_mtime_ns)
 
+    def test_release_emulator_build_requires_signing_before_identity(self):
+        def fail(message):
+            raise ValueError(message)
+        with tempfile.TemporaryDirectory() as directory:
+            with mock.patch.object(build, "args", SimpleNamespace(func=build.patch_avd_file,
+                                   build=True, release=True, config=Path(directory) / "missing.prop"), create=True), \
+                 mock.patch.object(build, "config", {}), \
+                 mock.patch.object(build_info, "generate") as generate, \
+                 mock.patch.object(build, "error", side_effect=fail), \
+                 self.assertRaisesRegex(ValueError, "all four external signing properties"):
+                build.load_config()
+            generate.assert_not_called()
+
     def test_release_signing_requires_external_complete_identity(self):
         with tempfile.TemporaryDirectory() as directory:
             parent = Path(directory)
