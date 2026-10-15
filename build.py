@@ -832,13 +832,18 @@ def load_config():
         if key.startswith("magisk."):
             config[key[7:]] = value
 
-    try:
-        info = build_info.generate(repo_root)
-    except (ValueError, OSError, subprocess.CalledProcessError) as exc:
-        error(f"Cannot generate build identity: {exc}")
-    config["buildInfo"] = info
-    config["version"] = info["version_name"]
-    config["versionCode"] = info["compat_version_code"]
+    builds_code = args.func in {
+        build_all, build_native, build_app, build_app_legacy, build_stub, build_test,
+        gen_ide, cargo_cli, clippy_cli,
+    } or getattr(args, "build", False)
+    if builds_code:
+        try:
+            info = build_info.generate(repo_root)
+        except (ValueError, OSError, subprocess.CalledProcessError) as exc:
+            error(f"Cannot generate build identity: {exc}")
+        config["buildInfo"] = info
+        config["version"] = info["version_name"]
+        config["versionCode"] = info["compat_version_code"]
 
     config["outdir"] = Path(config["outdir"])
     config["outdir"].mkdir(mode=0o755, parents=True, exist_ok=True)
