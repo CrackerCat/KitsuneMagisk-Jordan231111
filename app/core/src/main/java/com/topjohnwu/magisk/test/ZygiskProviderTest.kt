@@ -4,6 +4,9 @@ import androidx.annotation.Keep
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.topjohnwu.magisk.core.Config
 import com.topjohnwu.superuser.Shell
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withTimeout
 import org.json.JSONObject
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -18,6 +21,12 @@ class ZygiskProviderTest : BaseTest {
         val result = Shell.cmd("magisk --zygisk-status").exec()
         assertTrue(result.isSuccess)
         return JSONObject(result.out.joinToString("\n"))
+    }
+
+    private fun awaitConfigured(value: Boolean) = runBlocking {
+        withTimeout(10_000) {
+            while (status().getBoolean("builtin_configured") != value) delay(50)
+        }
     }
 
     @Test
@@ -44,6 +53,7 @@ class ZygiskProviderTest : BaseTest {
         val original = before.getBoolean("builtin_configured")
         try {
             Config.zygisk = !original
+            awaitConfigured(!original)
             val changed = status()
             assertEquals(!original, changed.getBoolean("builtin_configured"))
             assertEquals(before.getBoolean("builtin_enabled"), changed.getBoolean("builtin_enabled"))
@@ -53,6 +63,7 @@ class ZygiskProviderTest : BaseTest {
             }
         } finally {
             Config.zygisk = original
+            awaitConfigured(original)
         }
     }
 

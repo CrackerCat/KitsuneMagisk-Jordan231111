@@ -81,11 +81,14 @@ class MuMuMacIdentityTest(unittest.TestCase):
     def test_custom_port_is_bound(self):
         self.settings.update(customAdbPort=37731, adbPort=37731)
         self.write_settings()
-        self.assertEqual([37731], mumu_macos_identity(self.path)["adb_ports"])
+        identity = mumu_macos_identity(self.path)
+        self.assertEqual([37731], identity["adb_ports"])
         self.settings["adbPort"] = 26656
         self.write_settings()
-        with self.assertRaises(ValueError):
-            mumu_macos_identity(self.path)
+        self.assertEqual(identity, mumu_macos_identity(self.path))
+        self.settings["customAdbPort"] = 37732
+        self.write_settings()
+        self.assertNotEqual(identity, mumu_macos_identity(self.path))
 
     def test_disk_replacement_during_header_read_is_rejected(self):
         disk = self.bundle / "system.qcow2"

@@ -235,7 +235,9 @@ def mumu_macos_identity(path: Path) -> dict[str, object]:
         if type(custom) is not int or custom != 0 and not 1024 <= custom <= 65535:
             raise ValueError("invalid Mac MuMu custom ADB port")
         ports = [custom] if custom else [26624 + 32 * index, 26625 + 32 * index]
-        if type(config["adbPort"]) is not int or config["adbPort"] not in ports or max(ports) > 65535:
+        # adbPort retains the automatic allocation even when customAdbPort overrides it.
+        if (type(config["adbPort"]) is not int or not 1024 <= config["adbPort"] <= 65535
+                or not custom and config["adbPort"] not in ports or max(ports) > 65535):
             raise ValueError("Mac MuMu ADB port is outside the observed instance range")
     except (KeyError, TypeError, UnicodeError, json.JSONDecodeError) as exc:
         raise ValueError("cannot parse Mac MuMu vendor metadata") from exc
