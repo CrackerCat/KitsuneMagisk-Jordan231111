@@ -10,9 +10,16 @@ struct Applet {
     int (*fn)(int, char *[]);
 };
 
+static int magiskhide_main(int argc, char *argv[]) {
+    rust::Vec<rust::String> args;
+    for (int i = 1; i < argc; ++i) args.emplace_back(argv[i]);
+    return hide_cli(args);
+}
+
 constexpr Applet applets[] = {
     { "su", su_client_main },
     { "resetprop", resetprop_main },
+    { "magiskhide", magiskhide_main },
 };
 
 constexpr Applet private_applets[] = {

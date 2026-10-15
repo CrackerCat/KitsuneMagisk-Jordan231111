@@ -10,6 +10,13 @@
 
     <application tools:node="replace">
         <uses-library android:name="android.test.runner" />
+        <service android:name="com.topjohnwu.magisk.test.HideProbeService"
+            android:process=":hide_probe" android:exported="false" />
+        <service android:name="com.topjohnwu.magisk.test.HideIsolatedService"
+            android:process=":hide_isolated" android:isolatedProcess="true" android:exported="false" />
+        <service android:name="com.topjohnwu.magisk.test.HideAppZygoteService"
+            android:process=":hide_appzygote" android:isolatedProcess="true"
+            android:useAppZygote="true" android:exported="false" />
     </application>
 
     <instrumentation

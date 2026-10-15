@@ -5,7 +5,7 @@ use base::const_format::concatcp;
 mod flags;
 
 pub const POST_FS_DATA_WAIT_TIME: i32 = 40;
-pub const APPLET_NAMES: &[&str] = &["su", "resetprop"];
+pub const APPLET_NAMES: &[&str] = &["su", "resetprop", "magiskhide"];
 
 // versions
 pub use flags::*;

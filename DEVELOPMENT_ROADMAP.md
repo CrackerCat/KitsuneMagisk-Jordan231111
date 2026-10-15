@@ -2729,8 +2729,9 @@ support and the separately named PR12–PR15 gates remain open; no PR11 feature 
 
 ## PR 12 — MagiskHide/SuList core and DB migration
 
-**Implementation status: not started on `next-system`. The current-line v12 compatibility
-reconciliation in PR #26 is input evidence, not completion of this feature PR.**
+**Implementation status: in progress on `next-system`. The [v1 core contract](docs/hide-policy.md)
+records the implementation and explicit provider/namespace semantics; runtime qualification and
+merge are still required. The current-line PR #26 reconciliation remains migration input evidence.**
 
 - Port current behavior onto upstream core.
 - Define the new line's schema and upgrade/downgrade path; add CLI tests, namespace checks, process

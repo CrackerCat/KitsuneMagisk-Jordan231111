@@ -4,6 +4,23 @@ use base::{Directory, FsPathBuilder, LoggedResult, ResultExt, Utf8CStr, Utf8CStr
 use nix::fcntl::OFlag;
 use std::io::Write;
 
+pub(crate) fn selinux_disabled() -> bool {
+    // Permission and I/O errors are not evidence that SELinux is disabled.
+    for path in ["/sys/fs/selinux/enforce", "/selinux/enforce"] {
+        match std::fs::metadata(path) {
+            Err(e) if e.kind() == std::io::ErrorKind::NotFound => {}
+            _ => return false,
+        }
+    }
+    match std::fs::read_to_string("/proc/self/attr/current") {
+        Ok(context) => context.trim_matches(['\0', '\n']).is_empty(),
+        Err(e) => matches!(
+            e.raw_os_error(),
+            Some(libc::ENOENT | libc::EINVAL | libc::ENODEV)
+        ),
+    }
+}
+
 const UNLABEL_CON: &Utf8CStr = cstr!("u:object_r:unlabeled:s0");
 const SYSTEM_CON: &Utf8CStr = cstr!("u:object_r:system_file:s0");
 const ADB_CON: &Utf8CStr = cstr!("u:object_r:adb_data_file:s0");
@@ -52,6 +69,10 @@ fn restore_syscon(path: &mut dyn Utf8CStrBuf) -> LoggedResult<()> {
 }
 
 pub(crate) fn restorecon() {
+    unsafe { libc::chmod(cstr!(MAGISKDB).as_ptr(), 0o000) };
+    if selinux_disabled() {
+        return;
+    }
     if let Ok(mut file) = cstr!("/sys/fs/selinux/context")
         .open(OFlag::O_WRONLY | OFlag::O_CLOEXEC)
         .log()
@@ -73,6 +94,9 @@ pub(crate) fn restorecon() {
 }
 
 pub(crate) fn restore_tmpcon() -> LoggedResult<()> {
+    if selinux_disabled() {
+        return Ok(());
+    }
     let tmp = get_magisk_tmp();
     if tmp == "/sbin" {
         tmp.set_secontext(ROOT_CON)?;
@@ -102,5 +126,5 @@ pub(crate) fn lgetfilecon(path: &Utf8CStr, con: &mut [u8]) -> bool {
 }
 
 pub(crate) fn setfilecon(path: &Utf8CStr, con: &Utf8CStr) -> bool {
-    path.follow_link().set_secontext(con).is_ok()
+    selinux_disabled() || path.follow_link().set_secontext(con).is_ok()
 }

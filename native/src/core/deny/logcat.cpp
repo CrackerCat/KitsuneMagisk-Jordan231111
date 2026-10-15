@@ -1,6 +1,9 @@
 #include <unistd.h>
 #include <android/log.h>
 #include <sys/syscall.h>
+#include <sys/mount.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include <string>
 #include <map>
 
@@ -86,214 +89,174 @@ extern "C" {
 
 }
 
-// zygote pid -> mnt ns
-static map<int, struct stat> zygote_map;
-bool logcat_exit;
 
-static int read_ns(const int pid, struct stat *st) {
-    char path[32];
-    sprintf(path, "/proc/%d/ns/mnt", pid);
-    return stat(path, st);
+// One reader for the daemon lifetime. Disabling enforcement leaves it dormant;
+// re-enabling never creates another blocked logd reader or a duplicate worker.
+static atomic<bool> monitor_started = false;
+static map<int, struct stat> zygotes;
+
+static sFILE open_file_at(int dir, const char *path, const char *mode) {
+    int fd = openat(dir, path, O_RDONLY | O_CLOEXEC);
+    FILE *fp = fd < 0 ? nullptr : fdopen(fd, mode);
+    if (!fp && fd >= 0) close(fd);
+    return make_file(fp);
 }
 
-static int parse_ppid(int pid) {
-    char path[32];
-    int ppid;
-    sprintf(path, "/proc/%d/stat", pid);
-    auto stat = open_file(path, "re");
-    if (!stat) return -1;
-    // PID COMM STATE PPID .....
-    fscanf(stat.get(), "%*d %*s %*c %d", &ppid);
+static int parent_pid(int proc) {
+    auto fp = open_file_at(proc, "stat", "re");
+    if (!fp) return -1;
+    char line[4096]{};
+    if (!fgets(line, sizeof(line), fp.get())) return -1;
+    // comm may contain spaces or ')'; PPID starts after the final ') STATE '.
+    char *end = strrchr(line, ')');
+    int ppid = -1;
+    if (end) sscanf(end + 1, " %*c %d", &ppid);
     return ppid;
 }
 
-static void check_zygote() {
-    zygote_map.clear();
-    int proc = open("/proc", O_RDONLY | O_CLOEXEC);
-    auto proc_dir = xopen_dir(proc);
-    if (!proc_dir) return;
+static bool zygote_identity(int pid, int proc) {
     struct stat st{};
-    for (dirent *entry; (entry = readdir(proc_dir.get()));) {
+    if (fstat(proc, &st) || st.st_uid != 0 || parent_pid(proc) != 1) return false;
+    char name[128]{};
+    auto fp = open_file_at(proc, "cmdline", "re");
+    if (!fp || !fgets(name, sizeof(name), fp.get())) return false;
+    if (strcmp(name, "zygote") && strcmp(name, "zygote64") && strcmp(name, "zygote32")) return false;
+    if (!selinux_disabled()) return proc_context_match(pid, "u:r:zygote:s0");
+    char exe[PATH_MAX]{};
+    ssize_t len = readlinkat(proc, "exe", exe, sizeof(exe) - 1);
+    if (len <= 0) return false;
+    exe[len] = '\0';
+    return string_view(exe).starts_with("/system/bin/app_process") ||
+           string_view(exe).starts_with("/apex/com.android.art/bin/app_process");
+}
+
+static void check_zygote() {
+    zygotes.clear();
+    auto proc = xopen_dir("/proc");
+    if (!proc) return;
+    for (dirent *entry; (entry = xreaddir(proc.get()));) {
         int pid = parse_int(entry->d_name);
-        if (pid <= 0) continue;
-        if (fstatat(proc, entry->d_name, &st, 0)) continue;
-        if (st.st_uid != 0) continue;
-        if (proc_context_match(pid, "u:r:zygote:s0") && parse_ppid(pid) == 1) {
-            if (read_ns(pid, &st) == 0) {
-                LOGI("logcat: zygote PID=[%d]\n", pid);
-                zygote_map[pid] = st;
-            }
-        }
+        if (pid <= 1) continue;
+        int fd = openat(dirfd(proc.get()), entry->d_name, O_RDONLY | O_DIRECTORY | O_CLOEXEC);
+        if (fd < 0) continue;
+        struct stat st{};
+        if (zygote_identity(pid, fd) && fstatat(fd, "ns/mnt", &st, 0) == 0) zygotes[pid] = st;
+        close(fd);
     }
 }
 
-static void process_main_buffer(struct log_msg *msg) {
+static void clean_process(int pid, int uid, string_view name, bool app_zygote = false) {
+    if (!denylist_enforced || pid <= 1 || !is_deny_target(uid, name)) return;
+    char path[64];
+    ssprintf(path, sizeof(path), "/proc/%d", pid);
+    int proc = open(path, O_RDONLY | O_DIRECTORY | O_CLOEXEC);
+    if (proc < 0) return;
+    // An open proc directory anchors the process, even if its numeric PID is reused.
+    int ppid = parent_pid(proc);
+    if (!zygotes.contains(ppid)) check_zygote();
+    auto parent = zygotes.find(ppid);
+    if (parent == zygotes.end()) { LOGD("hide: parent not verified\n"); close(proc); return; }
+    ssprintf(path, sizeof(path), "/proc/%d", ppid);
+    int parent_proc = open(path, O_RDONLY | O_DIRECTORY | O_CLOEXEC);
+    struct stat parent_ns{}, init_ns{};
+    bool trusted = parent_proc >= 0 && zygote_identity(ppid, parent_proc) &&
+        fstatat(parent_proc, "ns/mnt", &parent_ns, 0) == 0 && stat("/proc/1/ns/mnt", &init_ns) == 0;
+    if (parent_proc >= 0) close(parent_proc);
+    if (!trusted) { close(proc); return; }
+    int fd = -1;
+    // ActivityManager can publish am_proc_start before specialization finishes.
+    // Wait for both the requested identity and a private namespace, with a hard
+    // deadline. The proc directory stays open throughout, so PID reuse is safe.
+    for (int attempt = 0; attempt < 100; ++attempt) {
+        struct stat st{}, ns{};
+        char command[256]{};
+        auto fp = open_file_at(proc, "cmdline", "re");
+        if (!fp || fstat(proc, &st) || parent_pid(proc) != ppid) break;
+        if (fgets(command, sizeof(command), fp.get()) && name == command &&
+            st.st_uid == static_cast<uid_t>(uid) &&
+            (!app_zygote || selinux_disabled() || proc_context_match(pid, "u:r:app_zygote:s0"))) {
+            fd = openat(proc, "ns/mnt", O_RDONLY | O_CLOEXEC);
+            if (fd >= 0 && fstat(fd, &ns) == 0 &&
+                (ns.st_ino != parent_ns.st_ino || ns.st_dev != parent_ns.st_dev) &&
+                (ns.st_ino != init_ns.st_ino || ns.st_dev != init_ns.st_dev)) break;
+            if (fd >= 0) close(fd);
+            fd = -1;
+        }
+        usleep(2000);
+    }
+    close(proc);
+    if (fd < 0) { LOGD("hide: specialization deadline exceeded\n"); return; }
+    if (!denylist_enforced || !is_deny_target(uid, name)) { close(fd); return; }
+    // Never stop app threads: failure to fork, switch namespaces or unmount must
+    // not leave a SIGSTOP'ed app behind. The log engine is asynchronous by design.
+    if (fork_dont_care() == 0) {
+        if (setns(fd, CLONE_NEWNS) == 0 &&
+            mount(nullptr, "/", nullptr, MS_PRIVATE | MS_REC, nullptr) == 0) revert_unmount();
+        else PLOGE("hide: namespace cleanup");
+        _exit(0);
+    }
+    close(fd);
+}
+
+static void process_events_buffer(const log_msg &msg, size_t size) {
+    if (msg.entry.uid != 1000 || size < sizeof(android_event_header_t)) return;
+    const auto *data = msg.buf + msg.entry.hdr_size;
+    int32_t tag;
+    memcpy(&tag, data, sizeof(tag));
+    if (tag == 3040) { check_zygote(); scan_deny_apps(); return; }
+    if (tag != 30014 || size < sizeof(android_event_am_proc_start)) return;
+    const auto *event = reinterpret_cast<const android_event_am_proc_start *>(data);
+    if (event->list.type != 3 || event->list.element_count < 4 ||
+        event->user.type != 0 || event->pid.type != 0 || event->uid.type != 0 ||
+        event->process_name.type != 2) return;
+    int length = event->process_name.length;
+    if (length <= 0 || length > 255 ||
+        static_cast<size_t>(length) > size - sizeof(android_event_am_proc_start)) return;
+    string_view name(event->process_name.data, length);
+    if (name.find('\0') != string_view::npos) return;
+    clean_process(event->pid.data, event->uid.data, name);
+}
+
+static void process_main_buffer(log_msg &msg) {
     AndroidLogEntry entry{};
-    if (android_log_processLogBuffer(&msg->entry, &entry) < 0) return;
-    entry.tagLen--;
-    auto tag = string_view(entry.tag, entry.tagLen);
-    auto revert = [](int pid, const char *name, int uid) {
-        kill(pid, SIGSTOP);
-        if (fork_dont_care() == 0) {
-            LOGI("logcat: revert [%s] PID=[%d] UID=[%d]\n", name, pid, uid);
-            revert_unmount(pid);
-            kill(pid, SIGCONT);
-            _exit(0);
-        }
-    };
-
-    // Unlike app zygote, webview zygote UID is fixed. This means we don't have to
-    // handle edge cases where apps print logs themselves and lead us into a honeycomb
-    if (tag == "WebViewZygoteInit") {
-        int pid = msg->entry.pid;
-        if (entry.uid != WEBVIEW_ZYGOTE_UID || entry.message[0] != 'S') {
-            return;
-        }
-
-        if (is_deny_target(WEBVIEW_ZYGOTE_UID, WEBVIEW_ZYGOTE_MAGIC)) {
-            revert(pid, WEBVIEW_ZYGOTE_MAGIC, WEBVIEW_ZYGOTE_UID);
-        } else {
-            LOGD("logcat: skip [%s] PID=[%d] UID=[%d]\n",
-                 WEBVIEW_ZYGOTE_MAGIC, pid, WEBVIEW_ZYGOTE_UID);
-        }
-        return;
-    }
-
-    static bool ready = false;
-    if (tag == "AppZygote") {
-        if (entry.uid != 1000) return;
-        if (entry.message[0] == 'S') {
-            ready = true;
-        } else {
-            ready = false;
-        }
-        return;
-    }
-
-    if (!ready || tag != "AppZygoteInit") return;
-    if (!proc_context_match(msg->entry.pid, "u:r:app_zygote:s0")) return;
-    ready = false;
-
-    char cmdline[1024];
-    sprintf(cmdline, "/proc/%d/cmdline", msg->entry.pid);
-    if (auto f = open_file(cmdline, "re")) {
-        fgets(cmdline, sizeof(cmdline), f.get());
-    } else {
-        return;
-    }
-
-    if (is_deny_target(entry.uid, cmdline)) {
-        int pid = msg->entry.pid;
-        revert(pid, cmdline, entry.uid);
-    } else {
-        LOGD("logcat: skip [%s] PID=[%d] UID=[%d]\n", cmdline, msg->entry.pid, entry.uid);
-    }
-}
-
-static void process_events_buffer(struct log_msg *msg) {
-    if (msg->entry.uid != 1000) return;
-    auto event_data = &msg->buf[msg->entry.hdr_size];
-    auto event_header = reinterpret_cast<const android_event_header_t *>(event_data);
-    if (event_header->tag == 30014) {
-        auto am_proc_start = reinterpret_cast<const android_event_am_proc_start *>(event_data);
-        auto proc = string_view(am_proc_start->process_name.data,
-                                am_proc_start->process_name.length);
-        if (is_deny_target(am_proc_start->uid.data, proc)) {
-            int pid = am_proc_start->pid.data;
-            if (fork_dont_care() == 0) {
-                int ppid = parse_ppid(pid);
-                auto it = zygote_map.find(ppid);
-                if (it == zygote_map.end()) {
-                    LOGW("logcat: skip [%.*s] PID=[%d] UID=[%d] PPID=[%d]; parent not zygote\n",
-                         (int) proc.length(), proc.data(),
-                         pid, am_proc_start->uid.data, ppid);
-                    _exit(0);
-                }
-
-                char path[16];
-                ssprintf(path, sizeof(path), "/proc/%d", pid);
-                struct stat st{};
-                int fd = syscall(__NR_pidfd_open, pid, 0);
-                if (fd > 0 && setns(fd, CLONE_NEWNS) == 0) {
-                    pid = getpid();
-                } else {
-                    close(fd);
-                    fd = -1;
-                }
-                while (read_ns(pid, &st) == 0 && it->second.st_ino == st.st_ino) {
-                    if (stat(path, &st) == 0 && st.st_uid == 0) {
-                        usleep(10 * 1000);
-                    } else {
-                        LOGW("logcat: skip [%.*s] PID=[%s] UID=[%d]; namespace not isolated\n",
-                             (int) proc.length(), proc.data(),
-                             path + 6, am_proc_start->uid.data);
-                        _exit(0);
-                    }
-                    if (fd > 0) setns(fd, CLONE_NEWNS);
-                }
-                close(fd);
-
-                LOGI("logcat: revert [%.*s] PID=[%d] UID=[%d]\n",
-                     (int) proc.length(), proc.data(), pid, am_proc_start->uid.data);
-                revert_unmount(pid);
-                _exit(0);
-            }
-        } else {
-            LOGD("logcat: skip [%.*s] PID=[%d] UID=[%d]\n",
-                 (int) proc.length(), proc.data(),
-                 am_proc_start->pid.data, am_proc_start->uid.data);
-        }
-        return;
-    }
-    if (event_header->tag == 3040) {
-        LOGD("logcat: soft reboot\n");
-        check_zygote();
-    }
-}
-
-[[noreturn]] void run() {
-    while (true) {
-        const unique_ptr<logger_list, decltype(&android_logger_list_free)> logger_list{
-            android_logger_list_alloc(0, 1, 0), &android_logger_list_free};
-
-        for (log_id id: {LOG_ID_MAIN, LOG_ID_EVENTS}) {
-            auto *logger = android_logger_open(logger_list.get(), id);
-            if (logger == nullptr) continue;
-        }
-
-        struct log_msg msg{};
-        while (true) {
-            if (!denylist_enforced) {
-                break;
-            }
-
-            if (android_logger_list_read(logger_list.get(), &msg) <= 0) {
-                break;
-            }
-
-            switch (msg.entry.lid) {
-                case LOG_ID_EVENTS:
-                    process_events_buffer(&msg);
-                    break;
-                case LOG_ID_MAIN:
-                    process_main_buffer(&msg);
-                default:
-                    break;
-            }
-        }
-
-        if (!denylist_enforced) {
-            break;
-        }
-
-        sleep(1);
-    }
-
-    LOGD("logcat: terminate\n");
-    pthread_exit(nullptr);
+    if (android_log_processLogBuffer(&msg.entry, &entry) < 0 || entry.tagLen == 0) return;
+    string_view tag(entry.tag, strnlen(entry.tag, entry.tagLen));
+    if (tag != "AppZygoteInit" && tag != "WebViewZygoteInit") return;
+    if (tag == "WebViewZygoteInit" && entry.uid != WEBVIEW_ZYGOTE_UID) return;
+    char path[64], name[256]{};
+    ssprintf(path, sizeof(path), "/proc/%d/cmdline", msg.entry.pid);
+    auto fp = open_file(path, "re");
+    if (fp && fgets(name, sizeof(name), fp.get()))
+        clean_process(msg.entry.pid, entry.uid, name, tag == "AppZygoteInit");
 }
 
 void *logcat(void *) {
     check_zygote();
-    run();
+    for (;;) {
+        const unique_ptr<logger_list, decltype(&android_logger_list_free)> reader{
+            android_logger_list_alloc(0, 1, 0), &android_logger_list_free};
+        if (!reader) { sleep(1); continue; }
+        android_logger_open(reader.get(), LOG_ID_MAIN);
+        android_logger_open(reader.get(), LOG_ID_EVENTS);
+        log_msg msg{};
+        int bytes;
+        while ((bytes = android_logger_list_read(reader.get(), &msg)) > 0) {
+            if (!denylist_enforced || msg.entry.hdr_size < sizeof(logger_entry) ||
+                msg.entry.hdr_size > bytes || msg.entry.len > bytes - msg.entry.hdr_size ||
+                static_cast<size_t>(bytes) > sizeof(msg.buf)) continue;
+            if (msg.entry.lid == LOG_ID_EVENTS) process_events_buffer(msg, msg.entry.len);
+            else if (msg.entry.lid == LOG_ID_MAIN) process_main_buffer(msg);
+        }
+        LOGD("hide: log reader reconnect (%d)\n", bytes);
+        sleep(1);
+    }
+}
+
+bool start_hide_monitor() {
+    if (monitor_started) return true;
+    if (!android_logger_list_alloc || !android_logger_list_free || !android_logger_list_read ||
+        !android_logger_open || !android_log_processLogBuffer) return false;
+    if (monitor_started.exchange(true)) return true;
+    if (new_daemon_thread(&logcat)) { monitor_started = false; return false; }
+    return true;
 }

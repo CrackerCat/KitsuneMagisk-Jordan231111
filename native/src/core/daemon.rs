@@ -125,6 +125,9 @@ impl MagiskD {
             RequestCode::DENYLIST => {
                 denylist_handler(client.into_raw_fd());
             }
+            RequestCode::HIDE => {
+                crate::ffi::hide_handler(client.into_raw_fd());
+            }
             RequestCode::SUPERUSER => {
                 self.su_daemon_handler(client, cred);
             }
@@ -204,7 +207,10 @@ impl MagiskD {
 
         let is_root = cred.uid == 0;
         let is_shell = cred.uid == 2000;
-        let is_zygote = &context == "u:r:zygote:s0";
+        let is_zygote = &context == "u:r:zygote:s0"
+            || (is_root
+                && crate::selinux::selinux_disabled()
+                && is_disabled_selinux_zygote(cred.pid.unwrap_or(-1)));
 
         if !is_root && !is_zygote && !self.is_client(cred.pid.unwrap_or(-1)) {
             // Unsupported client state
@@ -216,7 +222,8 @@ impl MagiskD {
         client.read_pod(&mut code).ok();
         if (!(0..RequestCode::END.repr).contains(&code)
             && code != RequestCode::CHECK_BUILD_INFO.repr
-            && code != RequestCode::ZYGISK_STATUS.repr)
+            && code != RequestCode::ZYGISK_STATUS.repr
+            && code != RequestCode::HIDE.repr)
             || code == RequestCode::_SYNC_BARRIER_.repr
             || code == RequestCode::_STAGE_BARRIER_.repr
         {
@@ -234,6 +241,7 @@ impl MagiskD {
             | RequestCode::ZYGOTE_RESTART
             | RequestCode::SQLITE_CMD
             | RequestCode::ZYGISK_STATUS
+            | RequestCode::HIDE
             | RequestCode::DENYLIST
             | RequestCode::STOP_DAEMON
                 if !is_root =>
@@ -260,7 +268,10 @@ impl MagiskD {
 
         if code.repr < RequestCode::_SYNC_BARRIER_.repr || code == RequestCode::CHECK_BUILD_INFO {
             self.handle_request_sync(client, code)
-        } else if code.repr < RequestCode::_STAGE_BARRIER_.repr || code == RequestCode::ZYGISK_STATUS {
+        } else if code.repr < RequestCode::_STAGE_BARRIER_.repr
+            || code == RequestCode::ZYGISK_STATUS
+            || code == RequestCode::HIDE
+        {
             ThreadPool::exec_task(move || {
                 self.handle_request_async(client, code, cred);
             })
@@ -270,6 +281,41 @@ impl MagiskD {
             })
         }
     }
+}
+
+fn is_disabled_selinux_zygote(pid: i32) -> bool {
+    if pid <= 1 {
+        return false;
+    }
+    let path = format!("/proc/{pid}");
+    let Ok(name) = std::fs::read(format!("{path}/cmdline")) else {
+        return false;
+    };
+    let name = name.split(|b| *b == 0).next().unwrap_or_default();
+    if !matches!(name, b"zygote" | b"zygote32" | b"zygote64") {
+        return false;
+    }
+    let Ok(exe) = std::fs::read_link(format!("{path}/exe")) else {
+        return false;
+    };
+    if !matches!(
+        exe.to_str(),
+        Some(
+            "/system/bin/app_process32"
+                | "/system/bin/app_process64"
+                | "/system/bin/app_process"
+                | "/apex/com.android.art/bin/app_process32"
+                | "/apex/com.android.art/bin/app_process64"
+        )
+    ) {
+        return false;
+    }
+    let Ok(stat) = std::fs::read_to_string(format!("{path}/stat")) else {
+        return false;
+    };
+    stat.rsplit_once(") ")
+        .and_then(|(_, fields)| fields.split_whitespace().nth(1))
+        == Some("1")
 }
 
 fn switch_cgroup(cgroup: &str, pid: i32) {
