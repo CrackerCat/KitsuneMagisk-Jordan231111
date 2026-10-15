@@ -57,6 +57,8 @@ token, atomic provider-switch operation, process-injection attestation, or exter
 check. Root can change configuration immediately after a query. Boot scripts must tolerate
 `boot_ready=false` without waiting for boot completion inside post-fs-data; otherwise they
 would block the very stage they are waiting on. Database read failure fails the command.
+`boot_ready` is not Android boot completion or permission to cache a namespace forever;
+late module scripts and later mounts still require the provider's own invalidation strategy.
 
 Adapters must obtain the application ID from `--daemon-version-json`, not from the lowercase
 `kitsune` compatibility marker. A hidden manager is resolved using the existing `strings`
@@ -102,3 +104,44 @@ SELinux-disabled/Waydroid targets. An unsupported security mode must stay unclai
 The existing [feature ledger](../port-ledger.md) retains exact historical sources and all
 remaining owners. PR11 completion does not imply PR12 feature completion or PR16 production
 promotion. Only evidence-backed entries may be closed.
+
+## PR11 acceptance and limits
+
+The [runtime record](../zygisk-pr11.json) pins artifacts and source commits. Ordinary API 35
+and Android 17/16 KiB ARM64 debug/release lanes passed patch/boot, manager, module, update-fault
+and hidden-manager tests. The enforcing API 35 lane also recovered from an actual zygote
+termination and reconnected the API v5 companion. Hosted checks cover the additional x86 and
+x86_64 lanes; four-ABI compilation is not physical ARM32 qualification.
+
+MuMuPlayer Pro 1.9.2, instance 1, Android 12 ARM64 completed a qualified clean System Mode
+install, distinct-source upgrade, three final-runtime cold boots, vendor-root-off operation,
+48 root requests at concurrency 16, exact uninstall and byte-verified external restoration.
+The final probe proves resident memfd loading and actual `DLCLOSE_MODULE_LIBRARY` unmapping.
+The original VM disks, settings and manager were restored; temporary AVDs were deleted.
+
+| Provider | Tested tuples | API v5 / companion | Selected module mount | Selected process injection | Next manager |
+|---|---|---|---|---|---|
+| Maintained built-in | Ordinary enforcing AVDs; permissive MuMu System Mode | Passed | Removed with core enforcement | Suppressed with core enforcement | Normal and hidden passed |
+| Jordan231111/ReZygisk v1.0.0-554 | Android 12 MuMu and enforcing API 35, ARM64 | Passed | Removed with core enforcement off | Still injected | Normal package unrecognized; hidden create/launch/restore passed |
+| NeoZygisk v2.4-289 | Same two ARM64 tuples | Passed | Removed with core enforcement off | Still injected | Same normal-package limitation; hidden create/launch/restore passed |
+
+These external outcomes are comparisons, not production parity. Both adapters still fall back
+to `io.github.huskydg.magisk` for a non-hidden manager. PR12's `ZYG-007-adapter` owns Next-manager
+discovery and process/Hide/SuList integration. Do not recommend hiding the manager merely to
+work around an unqualified adapter. ReZygisk's pinned ZIP also retains an upstream module-update
+URL; its fork-specific behavior must not be assumed to survive an unreviewed module update.
+
+PR11 caught and fixed two PR9 identity regressions: System Mode boot verification compared the
+app upgrade code with the daemon compatibility epoch, and the host doctor made the same
+comparison when recognizing an installed runtime. Boot now checks the native version/source/
+variant; doctor uses the structured daemon identity for split-code receipts. Existing receipt
+format and ownership checks remain intact. Denied or malformed DenyList CLI commands now fail
+normally instead of continuing with an invalid socket or missing selection.
+
+Qualification and uninstall intentionally refuse mounted snapshot views. Pause modules that
+mount the init filesystem, cold boot, and retry. The lab also removed its external test modules
+before upgrade qualification because ReZygisk rewrote `module.prop` timestamps while disabled.
+No inventory comparison was relaxed. A MuMu startup timeout and an unreproduced API 25 hidden-
+manager TLS crash are retained in the evidence; neither permits a production/device support
+claim. Physical GrapheneOS, ARM32, SELinux-disabled targets and full Hide/SuList remain explicitly
+owned qualification/integration gates.

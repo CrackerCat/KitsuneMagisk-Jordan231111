@@ -11,8 +11,8 @@ feature completion and production qualification remain gated by the [roadmap](DE
 The manager installs as `io.github.huskydg.magisk.next`, reports a
 `0.1.0-dev-kitsune.<source>` version, and uses the `next-system-experimental` channel identity. It
 uses a separate package from official Magisk and the prior Kitsune manager. Automatic update checks remain off during
-qualification. The [authenticated update service](docs/update-service.md) is being implemented;
-public activation remains gated.
+qualification. The [authenticated experimental beta](docs/update-service.md) is published;
+production promotion remains gated.
 
 ## Important status
 
@@ -21,15 +21,15 @@ public activation remains gated.
   after machine qualification of the exact writable target and its external recovery copy. See
   [the qualification guide](docs/system-mode/pr7-machine-qualification.md).
 - Early/pre-init mounting and MagiskHide/SuList are required Kitsune capabilities whose ports
-  remain in the roadmap. Built-in Zygisk and ReZygisk module combinations are tested in PR7A;
-  the broader provider contract remains PR11 work.
+  remain in the roadmap. [PR11's provider decision](docs/adr/0001-zygisk-provider.md) retains
+  maintained built-in Zygisk, an explicit external opt-out, and version-pinned comparison limits.
 - Normal upstream Select-and-Patch, Direct Install, inactive-slot, recovery, emulator live setup,
   MagiskSU, modules, and built-in Zygisk remain in scope and must stay green.
 
 The exact upstream commit, submodule pins, toolchain, advisories, reviewed source delta, and local
 PR6 qualification evidence are recorded in
 [`docs/next-system-baseline.md`](docs/next-system-baseline.md). The current machine-readable contract is
-[`docs/next-system-pr8.json`](docs/next-system-pr8.json), inheriting PR7A's runtime baseline.
+[`docs/next-system-pr11.json`](docs/next-system-pr11.json), inheriting PR7A's runtime baseline.
 
 ## Building
 

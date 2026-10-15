@@ -136,6 +136,16 @@ The backup still contains both complete disks with byte-verified restore; metada
 does not waive the guest inventory, three-boot or restore challenges. This is an explicit
 adapter, not a relaxation of generic file identity.
 
+Qualify upgrades and uninstall from a quiescent view of the persistent init filesystem.
+Temporarily disable modules mounting `/system/etc`, cold boot, and retry a mounted-view refusal.
+If an attempted operation already stopped Magisk, restart first to regain root. A disabled
+provider can still rewrite metadata through its global service script: the PR11 lab uninstalled
+its test providers when ReZygisk kept changing `module.prop` timestamps. Keep the byte and
+metadata checks; do not reinterpret a module overlay as persistent storage. Lifecycle wrappers
+should flush the guest, wait for the old process to exit, and require stable Android/ADB
+readiness before returning. Retain and classify player startup errors separately from guest
+and Magisk failures.
+
 Use `--source-root /absolute/clean/candidate-worktree` on `qualify`, `doctor`, and `authorize` to
 compare clean candidates with one host driver. The candidate commit must still match the APK's
 embedded clean source identity. All host modules, schemas/contracts, and the artifact verifier are

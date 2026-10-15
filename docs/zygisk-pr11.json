@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "phase": "PR11",
-  "status": "qualification-in-progress",
+  "status": "complete",
   "base_commit": "5cea9f709baaee7d803e8fb76a8c97048bdb379c",
   "decision": "Retain maintained built-in Zygisk with a single-provider-per-boot external opt-out",
   "adr": "docs/adr/0001-zygisk-provider.md",
@@ -31,11 +31,367 @@
     "rezygisk_upstream_main": "b5aa415c2ce1161ab807578ce0414129fbfc6313",
     "zygisknext_latest": "v1.5.2 (not selected; no redistribution or source reuse)"
   },
-  "tests": {},
+  "tests": {
+    "mumu_root_stress": {
+      "requests": 48,
+      "parallel": 16,
+      "passed": true,
+      "boot_id": "f2af1e13-dc5d-443c-96cd-152da4c5feed",
+      "selinux": "Permissive"
+    },
+    "avd_root_stress": {
+      "requests": 48,
+      "parallel": 16,
+      "passed": true,
+      "boot_id": "80bbc9c7-633f-4ef5-a863-0c8c37264af9",
+      "selinux": "Enforcing"
+    },
+    "providers": [
+      {
+        "target": "mumu",
+        "provider": "rezygisk",
+        "runtime_source": "bd71b5dc34d24f8764f272bfed1c764a75582fb3",
+        "selinux": "Permissive",
+        "boot_id": "b0a22ad2-9ded-4d87-8775-39532050bb8a",
+        "core_status": {
+          "schema": 1,
+          "model": "single-provider",
+          "module_api": 5,
+          "boot_ready": true,
+          "builtin_configured": false,
+          "builtin_enabled": false,
+          "injection_requested": false,
+          "denylist_enforced": false,
+          "external_preconditions_met": true,
+          "hide_supported": false,
+          "sulist_supported": false
+        },
+        "api5_companion_probe_passed": true,
+        "normal_manager_recognized": false,
+        "selected_module_mount_visible": false,
+        "selected_magisk_overlay_mounts": 0,
+        "selected_process_still_injected": true,
+        "hidden_manager_checks_passed": true,
+        "hidden_manager_restore_passed": true
+      },
+      {
+        "target": "mumu",
+        "provider": "neozygisk",
+        "runtime_source": "bd71b5dc34d24f8764f272bfed1c764a75582fb3",
+        "selinux": "Permissive",
+        "boot_id": "f2af1e13-dc5d-443c-96cd-152da4c5feed",
+        "core_status": {
+          "schema": 1,
+          "model": "single-provider",
+          "module_api": 5,
+          "boot_ready": true,
+          "builtin_configured": false,
+          "builtin_enabled": false,
+          "injection_requested": false,
+          "denylist_enforced": false,
+          "external_preconditions_met": true,
+          "hide_supported": false,
+          "sulist_supported": false
+        },
+        "api5_companion_probe_passed": true,
+        "normal_manager_recognized": false,
+        "selected_module_mount_visible": false,
+        "selected_magisk_overlay_mounts": 0,
+        "selected_process_still_injected": true,
+        "hidden_manager_checks_passed": true,
+        "hidden_manager_restore_passed": true
+      },
+      {
+        "target": "avd",
+        "provider": "rezygisk",
+        "runtime_source": "bd71b5dc34d24f8764f272bfed1c764a75582fb3",
+        "selinux": "Enforcing",
+        "boot_id": "c3a355a2-c79f-40ab-a767-3705b4dc49e3",
+        "core_status": {
+          "schema": 1,
+          "model": "single-provider",
+          "module_api": 5,
+          "boot_ready": true,
+          "builtin_configured": false,
+          "builtin_enabled": false,
+          "injection_requested": false,
+          "denylist_enforced": false,
+          "external_preconditions_met": true,
+          "hide_supported": false,
+          "sulist_supported": false
+        },
+        "api5_companion_probe_passed": true,
+        "normal_manager_recognized": false,
+        "selected_module_mount_visible": false,
+        "selected_magisk_overlay_mounts": 0,
+        "selected_process_still_injected": true,
+        "hidden_manager_checks_passed": true,
+        "hidden_manager_restore_passed": true
+      },
+      {
+        "target": "avd",
+        "provider": "neozygisk",
+        "runtime_source": "bd71b5dc34d24f8764f272bfed1c764a75582fb3",
+        "selinux": "Enforcing",
+        "boot_id": "80bbc9c7-633f-4ef5-a863-0c8c37264af9",
+        "core_status": {
+          "schema": 1,
+          "model": "single-provider",
+          "module_api": 5,
+          "boot_ready": true,
+          "builtin_configured": false,
+          "builtin_enabled": false,
+          "injection_requested": false,
+          "denylist_enforced": false,
+          "external_preconditions_met": true,
+          "hide_supported": false,
+          "sulist_supported": false
+        },
+        "api5_companion_probe_passed": true,
+        "normal_manager_recognized": false,
+        "selected_module_mount_visible": false,
+        "selected_magisk_overlay_mounts": 0,
+        "selected_process_still_injected": true,
+        "hidden_manager_checks_passed": true,
+        "hidden_manager_restore_passed": true
+      }
+    ],
+    "zygote_restart": {
+      "boot": "9926e2e8-0aed-4649-9f01-00d525b90b80",
+      "status": {
+        "schema": 1,
+        "model": "single-provider",
+        "module_api": 5,
+        "boot_ready": true,
+        "builtin_configured": true,
+        "builtin_enabled": true,
+        "injection_requested": true,
+        "denylist_enforced": false,
+        "external_preconditions_met": false,
+        "hide_supported": false,
+        "sulist_supported": false
+      },
+      "selinux": "Enforcing",
+      "old_zygote": "3310",
+      "new_zygote": "5687",
+      "probe_before": "com.topjohnwu.magisk.test.ZygiskModuleTest:.\n\nTime: 0.002\n\nOK (1 test)",
+      "probe_after": "com.topjohnwu.magisk.test.ZygiskModuleTest:.\n\nTime: 0.002\n\nOK (1 test)",
+      "root": "uid=0(root) gid=0(root) groups=0(root) context=u:r:magisk:s0",
+      "restart_callback_observed": true,
+      "restart_log": [
+        "10-15 02:24:49.634   359   361 I Magisk  : ** zygote restarted",
+        "10-15 02:25:53.968   359   361 I Magisk  : ** zygote restarted"
+      ]
+    },
+    "ordinary_avds": {
+      "source_commit": "bc196eb6bf1c2c3848776d09ec92e16a2ab19a73",
+      "lanes": [
+        {
+          "api": 35,
+          "abi": "arm64-v8a",
+          "image": "google_apis",
+          "variants": [
+            "debug",
+            "release"
+          ],
+          "passed": true
+        },
+        {
+          "api": 37,
+          "abi": "arm64-v8a",
+          "image": "google_apis_ps16k",
+          "page_size": 16384,
+          "variants": [
+            "debug",
+            "release"
+          ],
+          "passed": true
+        }
+      ],
+      "scope": "Patched ramdisk, manager setup, reboot, API5 probe, update faults, modules, hidden-manager creation/launch/restoration; owned AVDs deleted."
+    },
+    "ci": {
+      "run": 38694479266,
+      "source_commit": "7d78a69abbc8919c632b1286c5ebd434f3d90193",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/38694479266",
+      "passed": 33,
+      "conclusion": "success",
+      "attempt": 2,
+      "retry": "API25 x86 hidden-manager run had a native SSL_shutdown crash; exact artifact rerun passed. No exception or gate change."
+    },
+    "regressions": {
+      "system_mode_version_comparison": "Old code fails when app upgrade code differs from native epoch; native version/source/variant comparison passes. Clean MuMu BD install reached BOOT_VERIFIED.",
+      "doctor_split_identity": "Recognizes app 31002 / native 31000 via validated daemon build identity; mismatched source/base/variant/dirty cases remain refused.",
+      "denylist_cli": "Unprivileged old CLI returned success despite root-required refusal; new CLI exits 1 and rejects missing add/rm selection."
+    },
+    "host": {
+      "tests": 286,
+      "known_skip": 1,
+      "passed": true
+    },
+    "mumu_upgrade": {
+      "from_source": "bd71b5dc34d24f8764f272bfed1c764a75582fb3",
+      "to_source": "131a6e963ccb01b42aa6021b89d1f5957f7c0260",
+      "passed": true,
+      "qualification_record_sha256": "2d14c8a1016b5852d4ac4177aecc00c910011d52d8fa13b5c6b9107f035fe1ee",
+      "boot_checks": {
+        "source_commit": "131a6e963ccb01b42aa6021b89d1f5957f7c0260",
+        "boot_ids": [
+          "10a6efbf-2343-470d-92d6-4eb24b6beec5",
+          "4400c0e0-07ab-4fe1-aeae-d9ab958291c7",
+          "e11ecb97-4ca6-4966-b1ac-da7eacbefc71"
+        ],
+        "root_stress": {
+          "requests": 48,
+          "parallel": 16,
+          "passed": true
+        },
+        "transaction": "STATE=BOOT_VERIFIED\nSOURCE_COMMIT=131a6e963ccb01b42aa6021b89d1f5957f7c0260",
+        "vendor_root_enabled": false
+      },
+      "permission_tests": 4,
+      "permission_tests_passed": true
+    },
+    "memfd_and_unloading": {
+      "source_commit": "131a6e963ccb01b42aa6021b89d1f5957f7c0260",
+      "status": {
+        "schema": 1,
+        "model": "single-provider",
+        "module_api": 5,
+        "boot_ready": true,
+        "builtin_configured": true,
+        "builtin_enabled": true,
+        "injection_requested": true,
+        "denylist_enforced": false,
+        "external_preconditions_met": false,
+        "hide_supported": false,
+        "sulist_supported": false
+      },
+      "boot_id": "4400c0e0-07ab-4fe1-aeae-d9ab958291c7",
+      "module_sizes": {
+        "zygisk_probe": 6992,
+        "unload_probe": 4864
+      },
+      "memfd_inodes": {
+        "zygisk_probe": [
+          16555
+        ],
+        "unload_probe": [
+          16556
+        ]
+      },
+      "resident_mapped": true,
+      "dlclose_unmapped": true,
+      "probe": "com.topjohnwu.magisk.test.ZygiskModuleTest:.\n\nTime: 0.001\n\nOK (1 test)",
+      "vendor_root_enabled": false,
+      "adbd_identity": "uid=2000(shell) gid=2000(shell) groups=2000(shell),1004(input),1007(log),1011(adb),1015(sdcard_rw),1028(sdcard_r),1078(ext_data_rw),1079(ext_obb_rw),3001(net_bt_admin),3002(net_bt),3003(inet),3006(net_bw_stats),3009(readproc),3011(uhid),3012(readtracefs) context=u:r:adbd:s0",
+      "magisk_identity": "uid=0(root) gid=0(root) groups=0(root) context=u:r:magisk:s0",
+      "transaction": "STATE=BOOT_VERIFIED"
+    },
+    "uninstall": {
+      "passed": true,
+      "bootstrap_and_transaction_absent": true,
+      "user_modules_and_database_preserved": true,
+      "output": "EXACT_UNINSTALL_OK\ne19bbaef-15aa-42a5-b315-4de2624c65b9\n",
+      "precondition": "System-mounting test module disabled; full MuMu close/open before retry."
+    },
+    "original_restore": {
+      "passed": true,
+      "instance": 1,
+      "name": "Android Device-1",
+      "system_and_data_byte_match_before_open": true,
+      "settings_restored": {
+        "customAdbPort": 0,
+        "vmRootEnable": true
+      },
+      "original_manager_present": true
+    },
+    "temporary_avds_deleted": [
+      "kitsune-pr11-api35",
+      "kitsune-pr11-api37",
+      "kitsune-pr11-lifecycle"
+    ],
+    "stock_sdk_control": {
+      "run": 38703270686,
+      "source_commit": "e7e8bb5147338023b4c053cfebbb759141363861",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/38703270686",
+      "result": "Four unmodified API25 x86 boots did not reproduce the earlier media-extractor failure; media.extractor was not registered in those samples. No crash-gate exception was added."
+    },
+    "negative_controls": [
+      "System Mode refused a mounted /system/etc view before persistent changes; the exact uninstall passed after pausing the test module and cold booting.",
+      "Qualification rejected ReZygisk module.prop timestamp rewrites even while disabled; test providers were uninstalled for the quiescent upgrade qualification.",
+      "The old System Mode verifier rejected different app/native codes; the new verifier accepts matching native source/variant and refuses mismatches."
+    ],
+    "neozygisk_startup_measurement": {
+      "wall_ms": {
+        "unselected": [
+          1588.4,
+          1617.4,
+          1570.9
+        ],
+        "selected": [
+          1511.5,
+          1586.8,
+          1606.2
+        ]
+      },
+      "measurement": "Host wall time including ADB, app specialization, module/companion probe and instrumentation. One warmup, three samples per condition; not isolated unmount CPU time.",
+      "boot_id": "f2af1e13-dc5d-443c-96cd-152da4c5feed",
+      "selinux": "Permissive"
+    },
+    "build_and_lint": {
+      "four_abi_debug_release_builds": true,
+      "artifact_identity_signer_and_16k_checks": true,
+      "arm64_debug_release_clippy": true,
+      "android_lint_zero_errors": true,
+      "jvm_tests": true,
+      "legacy_manager_compile": true
+    }
+  },
   "limits": [
     "PR12 owns classic Hide/SuList and their namespace/database migration.",
     "GrapheneOS signature fixtures do not qualify a physical GrapheneOS device.",
     "API 23/29 and other ABIs need the hosted lanes; local ARM64 is not their runtime evidence.",
-    "Production promotion and physical-device support remain PR15/PR16 gates."
-  ]
+    "Production promotion and physical-device support remain PR15/PR16 gates.",
+    "A MuMu startup timeout 10002 occurred during repeated lab cycles; failed disks/logs retained and the verified image restored. It is not a qualified hardware-support claim.",
+    "The single API25 x86 TLS crash was not reproduced on exact-head retry; retain legacy hidden-manager/TLS lifecycle qualification under PR13/PR15.",
+    "Current external releases still use the historical manager package fallback and do not establish Next SuList or built-in-equivalent injection exclusion. PR12 owns adapter integration."
+  ],
+  "runtime_artifacts": {
+    "bd71b5dc": {
+      "app-debug.apk": {
+        "sha256": "3f4aec8cd24810df1a1ec6a6eeb0579202e81133ee27ba37573a06353e013d60",
+        "source_commit": "bd71b5dc34d24f8764f272bfed1c764a75582fb3",
+        "build_id": "695afe81f9ba3c084c7dc6b9a938005fb4ab6f473a7bb7afcfc1b45763f3d625",
+        "source_dirty": false
+      },
+      "app-release.apk": {
+        "sha256": "727e7c64a6463fcb8afffc98e1f3e944108328fed1237355c212d634f62ae10c",
+        "source_commit": "bd71b5dc34d24f8764f272bfed1c764a75582fb3",
+        "build_id": "4cb87012fcf783ebaa949a48da31c391a42bfda5816df4fca1953adfffea84bd",
+        "source_dirty": false
+      }
+    },
+    "131a6e96": {
+      "app-debug.apk": {
+        "sha256": "55ff7fb9bb59bb5008b15aa4c0a11937f160a5822919e93b895fcd5620fca9dd",
+        "source_commit": "131a6e963ccb01b42aa6021b89d1f5957f7c0260",
+        "build_id": "339790f5cc815db3aed144b5ac53f180e658958ecd45bd7f733005550959339a",
+        "source_dirty": false
+      },
+      "app-release.apk": {
+        "sha256": "4768393a62f36a075c249650bb8ff92750e560460fcaea84d04c00627ee6b19a",
+        "source_commit": "131a6e963ccb01b42aa6021b89d1f5957f7c0260",
+        "build_id": "f405dacf3c291fa6fce402d94b9d6d5f0605ef1c1d9f2fe4432d4bffe2426a30",
+        "source_dirty": false
+      }
+    }
+  },
+  "completed_at": "2026-10-15",
+  "upstream_rechecked": {
+    "stable": "v30.7",
+    "maintained_base": "v31.0",
+    "prerelease": true,
+    "checked_at": "2026-10-15"
+  }
 }

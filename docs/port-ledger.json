@@ -2739,7 +2739,7 @@
     },
     {
       "id": "ZYG-001",
-      "behavior": "Older-tag built-in API v5, module loading, companion IPC, memfd loading, Riru exclusion, and Hide integration",
+      "behavior": "Older-tag built-in API v5, module loading, companion IPC, memfd loading, unloading and Riru exclusion",
       "historical_status": [
         "O"
       ],
@@ -2808,11 +2808,11 @@
         "k27-2-4-archive",
         "shipment-source-review"
       ],
-      "upstream_overlap": "Official v31.0 retains built-in Zygisk with its maintained specialization, module and companion interfaces. The historical ptrace-init/GrapheneOS/Futile-Hide changes and later built-in removal are not automatically inherited. PR11 must select the provider architecture using exact module/provider tests; Next currently keeps the official built-in provider.",
-      "decision": "deferred-to-PR11",
+      "upstream_overlap": "Maintained v31.0 core retained, with PR11 historical descriptor restoration and a versioned single-provider boundary. API5 callbacks, module directory and root companion IPC pass on the ordinary AVD and persistent MuMu routes. The final MuMu run identifies the resident memfd mapping and proves the unload fixture is unmapped; Riru exclusion is tested separately.",
+      "decision": "inherited-and-tested",
       "owner_pr": 11,
       "affected_users": "Kitsune users relying on older-tag built-in API v5, module loading, companion IPC, memfd loading, Riru exclusion, and Hide integration.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "Use maintained built-in Zygisk. Hide/SuList is retained as ZYG-001-hide/PR12, not implied by module API compatibility.",
       "first_shipped": "b149cd26",
       "last_shipped": "k27-2-4-archive",
       "upstream_evidence": [
@@ -2824,7 +2824,101 @@
         "record": "shipment-source-review",
         "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
-      }
+      },
+      "split_into": [
+        "ZYG-001-hide"
+      ],
+      "acceptance_evidence": "docs/adr/0001-zygisk-provider.md; docs/zygisk-pr11.json. API5 callbacks, module directory and root companion IPC pass on the ordinary AVD and persistent MuMu routes. The final MuMu run identifies the resident memfd mapping and proves the unload fixture is unmapped; Riru exclusion is tested separately."
+    },
+    {
+      "id": "ZYG-001-hide",
+      "behavior": "Older-tag built-in Zygisk integration with classic Hide/SuList",
+      "historical_status": [
+        "O"
+      ],
+      "commits": [
+        "d4a2ccd9b364b526db7922e9533071ae1dcc9326",
+        "92c0777eaee30aa2cc7662666d53924c59acd8b7",
+        "1eecd4b8223a6ccae4006ec2267a44c95b62ecae",
+        "7e1fba0d27970836bd2814df32adf36fe96ec6b2"
+      ],
+      "paths": [
+        ".gitmodules",
+        "app/src/main/java/com/topjohnwu/magisk/core/Config.kt",
+        "app/src/main/java/com/topjohnwu/magisk/core/Info.kt",
+        "app/src/main/java/com/topjohnwu/magisk/core/utils/ShellInit.kt",
+        "app/src/main/java/com/topjohnwu/magisk/ui/deny/DenyListFragment.kt",
+        "app/src/main/java/com/topjohnwu/magisk/ui/deny/DenyListRvItem.kt",
+        "app/src/main/java/com/topjohnwu/magisk/ui/deny/DenyListViewModel.kt",
+        "app/src/main/java/com/topjohnwu/magisk/ui/settings/SettingsItems.kt",
+        "app/src/main/java/com/topjohnwu/magisk/ui/settings/SettingsViewModel.kt",
+        "app/src/main/res/raw/manager.sh",
+        "app/src/main/res/values/strings.xml",
+        "native/src/Android.mk",
+        "native/src/base/Android.mk",
+        "native/src/base/cus.cpp",
+        "native/src/base/cus.hpp",
+        "native/src/base/include/base.hpp",
+        "native/src/base/logging.cpp",
+        "native/src/base/logging.hpp",
+        "native/src/core/applets.cpp",
+        "native/src/core/bootstages.cpp",
+        "native/src/core/daemon.cpp",
+        "native/src/core/db.cpp",
+        "native/src/core/deny/cli.cpp",
+        "native/src/core/deny/deny.hpp",
+        "native/src/core/deny/ptrace.cpp",
+        "native/src/core/deny/revert.cpp",
+        "native/src/core/deny/utils.cpp",
+        "native/src/core/include/core.hpp",
+        "native/src/core/include/db.hpp",
+        "native/src/core/magisk.cpp",
+        "native/src/core/module.cpp",
+        "native/src/core/zygisk/entry.cpp",
+        "native/src/core/zygisk/gen_jni_hooks.py",
+        "native/src/core/zygisk/hook.cpp",
+        "native/src/core/zygisk/jni_hooks.hpp",
+        "native/src/core/zygisk/memory.cpp",
+        "native/src/core/zygisk/memory.hpp",
+        "native/src/core/zygisk/module.cpp",
+        "native/src/core/zygisk/module.hpp",
+        "native/src/core/zygisk/proc_monitor.cpp",
+        "native/src/core/zygisk/ptrace.cpp",
+        "native/src/core/zygisk/zygisk.hpp",
+        "native/src/external/Android.mk",
+        "native/src/external/cxx-rs",
+        "native/src/external/lsplt",
+        "native/src/external/parallel-hashmap"
+      ],
+      "evidence": [
+        "pre-maintenance",
+        "b149cd26",
+        "k27-1",
+        "k27-2-1",
+        "k27-2-2",
+        "k27-2-3",
+        "k27-2-4-inherited",
+        "k27-2-4-archive",
+        "shipment-source-review"
+      ],
+      "upstream_overlap": "PR11 defines the provider boundary; this separately named behavior remains behind its original integration/device qualification gate.",
+      "decision": "deferred-to-PR12",
+      "owner_pr": 12,
+      "affected_users": "Kitsune users relying on older-tag built-in API v5, module loading, companion IPC, memfd loading, Riru exclusion, and Hide integration.",
+      "migration": "Retain the qualified historical line when classic Hide/SuList is required. PR12 must implement and test the versioned core/provider selection and namespace semantics; ordinary DenyList is not SuList.",
+      "first_shipped": "b149cd26",
+      "last_shipped": "k27-2-4-archive",
+      "upstream_evidence": [
+        "https://github.com/topjohnwu/Magisk/blob/96221b69fae9910b1c0c75c2f92a4ebb2c2dc698/native/src/core/zygisk/api.hpp (SHA-256 9c8c60aaac6947a05b73889345ebd972ca5858eb0c5505f64715bcf0a2a1cb33)",
+        "https://github.com/topjohnwu/Magisk/blob/96221b69fae9910b1c0c75c2f92a4ebb2c2dc698/native/src/core/zygisk/hook.cpp (SHA-256 5c2d17bffb4bd5f013616fdf715d211df78e0d36b4f42f1d18fa1ca333a5765c)",
+        "https://github.com/topjohnwu/Magisk/blob/96221b69fae9910b1c0c75c2f92a4ebb2c2dc698/native/src/core/zygisk/module.cpp (SHA-256 83f3279696f4f33d1b375ef191d241df6610f281dc0bcac9e31048651b8e9e4c)"
+      ],
+      "shipment_review": {
+        "record": "shipment-source-review",
+        "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
+        "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
+      },
+      "parent_feature": "ZYG-001"
     },
     {
       "id": "ZYG-002",
@@ -2863,11 +2957,11 @@
         "k27-2-4-archive",
         "shipment-source-review"
       ],
-      "upstream_overlap": "Official v31.0 retains built-in Zygisk with its maintained specialization, module and companion interfaces. The historical ptrace-init/GrapheneOS/Futile-Hide changes and later built-in removal are not automatically inherited. PR11 must select the provider architecture using exact module/provider tests; Next currently keeps the official built-in provider.",
-      "decision": "deferred-to-PR11",
+      "upstream_overlap": "Maintained v31.0 core retained, with PR11 historical descriptor restoration and a versioned single-provider boundary. The maintained loader passes patched-boot, zygote-restart and System Mode gates without reintroducing the old ptrace-init engine. Pinned external ptrace providers pass module probes, with their limitations explicitly recorded.",
+      "decision": "retired-with-evidence",
       "owner_pr": 11,
       "affected_users": "Kitsune users relying on ptrace-init injection architecture.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "The old embedded ptrace engine is retired. Use built-in by default, or qualify a pinned external provider with built-in and core enforcement disabled; do not enable two injectors.",
       "first_shipped": "original-stable",
       "last_shipped": "k27-2-4-archive",
       "upstream_evidence": [
@@ -2879,11 +2973,12 @@
         "record": "shipment-source-review",
         "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
-      }
+      },
+      "acceptance_evidence": "docs/adr/0001-zygisk-provider.md; docs/zygisk-pr11.json. The maintained loader passes patched-boot, zygote-restart and System Mode gates without reintroducing the old ptrace-init engine. Pinned external ptrace providers pass module probes, with their limitations explicitly recorded."
     },
     {
       "id": "ZYG-003",
-      "behavior": "GrapheneOS Android 14/QPR2 specialization compatibility",
+      "behavior": "GrapheneOS Android 14/QPR2 JNI specialization descriptors",
       "historical_status": [
         "O"
       ],
@@ -2907,11 +3002,11 @@
         "shipment-source-review",
         "metadata-bb4af859-note-md"
       ],
-      "upstream_overlap": "Official v31.0 retains built-in Zygisk with its maintained specialization, module and companion interfaces. The historical ptrace-init/GrapheneOS/Futile-Hide changes and later built-in removal are not automatically inherited. PR11 must select the provider architecture using exact module/provider tests; Next currently keeps the official built-in provider.",
-      "decision": "deferred-to-PR11",
+      "upstream_overlap": "Maintained v31.0 core retained, with PR11 historical descriptor restoration and a versioned single-provider boundary. Frozen signatures and argument types from ed27581a and 3f2e5b42 are reproduced by the generated C++ table, forwarded unchanged and compiled for all four ABIs. Physical qualification is ZYG-003-device/PR15.",
+      "decision": "ported-and-tested-in-PR11",
       "owner_pr": 11,
       "affected_users": "Kitsune users relying on grapheneOS Android 14/QPR2 specialization compatibility.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "Both shipped Android 14 descriptors are present. Device support still requires the separately named physical qualification, not an assumption from compilation.",
       "first_shipped": "metadata-bb4af859-note-md",
       "last_shipped": "k27-2-4-archive",
       "upstream_evidence": [
@@ -2923,7 +3018,56 @@
         "record": "shipment-source-review",
         "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
-      }
+      },
+      "split_into": [
+        "ZYG-003-device"
+      ],
+      "acceptance_evidence": "docs/adr/0001-zygisk-provider.md; docs/zygisk-pr11.json. Frozen signatures and argument types from ed27581a and 3f2e5b42 are reproduced by the generated C++ table, forwarded unchanged and compiled for all four ABIs. Physical qualification is ZYG-003-device/PR15."
+    },
+    {
+      "id": "ZYG-003-device",
+      "behavior": "Physical GrapheneOS Android 14/QPR2 injection and recovery qualification",
+      "historical_status": [
+        "O"
+      ],
+      "commits": [
+        "ed27581a0f6bd890ebe51108cf0e1c6d21797b0a",
+        "3f2e5b4275c7bf67dd02822b8f4ceb774da93efa"
+      ],
+      "paths": [
+        "native/src/core/zygisk/gen_jni_hooks.py",
+        "native/src/core/zygisk/jni_hooks.hpp"
+      ],
+      "evidence": [
+        "pre-maintenance",
+        "b149cd26",
+        "k27-1",
+        "k27-2-1",
+        "k27-2-2",
+        "k27-2-3",
+        "k27-2-4-inherited",
+        "k27-2-4-archive",
+        "shipment-source-review",
+        "metadata-bb4af859-note-md"
+      ],
+      "upstream_overlap": "PR11 defines the provider boundary; this separately named behavior remains behind its original integration/device qualification gate.",
+      "decision": "deferred-to-PR15",
+      "owner_pr": 15,
+      "affected_users": "Kitsune users relying on grapheneOS Android 14/QPR2 specialization compatibility.",
+      "migration": "The four restored JNI descriptors are tested in PR11; do not advertise physical GrapheneOS support from descriptor fixtures. PR15 must qualify the exact OS/device and recovery route.",
+      "first_shipped": "metadata-bb4af859-note-md",
+      "last_shipped": "k27-2-4-archive",
+      "upstream_evidence": [
+        "https://github.com/topjohnwu/Magisk/blob/96221b69fae9910b1c0c75c2f92a4ebb2c2dc698/native/src/core/zygisk/api.hpp (SHA-256 9c8c60aaac6947a05b73889345ebd972ca5858eb0c5505f64715bcf0a2a1cb33)",
+        "https://github.com/topjohnwu/Magisk/blob/96221b69fae9910b1c0c75c2f92a4ebb2c2dc698/native/src/core/zygisk/hook.cpp (SHA-256 5c2d17bffb4bd5f013616fdf715d211df78e0d36b4f42f1d18fa1ca333a5765c)",
+        "https://github.com/topjohnwu/Magisk/blob/96221b69fae9910b1c0c75c2f92a4ebb2c2dc698/native/src/core/zygisk/module.cpp (SHA-256 83f3279696f4f33d1b375ef191d241df6610f281dc0bcac9e31048651b8e9e4c)"
+      ],
+      "shipment_review": {
+        "record": "shipment-source-review",
+        "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
+        "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
+      },
+      "parent_feature": "ZYG-003"
     },
     {
       "id": "ZYG-004",
@@ -2954,11 +3098,11 @@
         "k27-2-4-archive",
         "shipment-source-review"
       ],
-      "upstream_overlap": "Official v31.0 retains built-in Zygisk with its maintained specialization, module and companion interfaces. The historical ptrace-init/GrapheneOS/Futile-Hide changes and later built-in removal are not automatically inherited. PR11 must select the provider architecture using exact module/provider tests; Next currently keeps the official built-in provider.",
-      "decision": "deferred-to-PR11",
+      "upstream_overlap": "Maintained v31.0 core retained, with PR11 historical descriptor restoration and a versioned single-provider boundary. ADR 0001 reviews 2202d71b: broad fixed remapping of matching module mappings and unchecked remap/protection failures are not a stable linker contract. Current tests prove supported unload behavior and non-injection for core-enforced selections; no equivalent global cloaking claim is made.",
+      "decision": "retired-with-evidence",
       "owner_pr": 11,
       "affected_users": "Kitsune users relying on futile Hide handling for Zygisk module libraries.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "Automatic Futile Hide remapping/solist editing is retired. Keep a qualified historical installation if that detection behavior is essential, or qualify an external provider. Module authors may use supported unloading only when their hooks do not require the library to remain mapped.",
       "first_shipped": "b149cd26",
       "last_shipped": "k27-2-4-archive",
       "upstream_evidence": [
@@ -2970,7 +3114,8 @@
         "record": "shipment-source-review",
         "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
-      }
+      },
+      "acceptance_evidence": "docs/adr/0001-zygisk-provider.md; docs/zygisk-pr11.json. ADR 0001 reviews 2202d71b: broad fixed remapping of matching module mappings and unchecked remap/protection failures are not a stable linker contract. Current tests prove supported unload behavior and non-injection for core-enforced selections; no equivalent global cloaking claim is made."
     },
     {
       "id": "ZYG-005",
@@ -2998,11 +3143,11 @@
         "k27-2-4-archive",
         "shipment-source-review"
       ],
-      "upstream_overlap": "Official v31.0 retains built-in Zygisk with its maintained specialization, module and companion interfaces. The historical ptrace-init/GrapheneOS/Futile-Hide changes and later built-in removal are not automatically inherited. PR11 must select the provider architecture using exact module/provider tests; Next currently keeps the official built-in provider.",
-      "decision": "deferred-to-PR11",
+      "upstream_overlap": "Maintained v31.0 core retained, with PR11 historical descriptor restoration and a versioned single-provider boundary. The PR26 recorded stale cached-namespace mount leak and the forked ReZygisk boot-timed cache repair establish the correctness risk. PR11 verifies selected-process mount removal and records bounded end-to-end process/probe timings, without claiming an isolated unmount speedup.",
+      "decision": "retired-with-evidence",
       "owner_pr": 11,
       "affected_users": "Kitsune users relying on faster revert/unmount path from `7072f9e9`.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "The old permanent clean-namespace cache is retired. Retain current-namespace unmounting; any future cache needs explicit invalidation and measured correctness before optimization.",
       "first_shipped": "b149cd26",
       "last_shipped": "k27-2-4-archive",
       "upstream_evidence": [
@@ -3014,7 +3159,8 @@
         "record": "shipment-source-review",
         "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
-      }
+      },
+      "acceptance_evidence": "docs/adr/0001-zygisk-provider.md; docs/zygisk-pr11.json. The PR26 recorded stale cached-namespace mount leak and the forked ReZygisk boot-timed cache repair establish the correctness risk. PR11 verifies selected-process mount removal and records bounded end-to-end process/probe timings, without claiming an isolated unmount speedup."
     },
     {
       "id": "ZYG-006",
@@ -3039,11 +3185,11 @@
         "k31-25fa2159",
         "shipment-source-review"
       ],
-      "upstream_overlap": "Official v31.0 retains built-in Zygisk with its maintained specialization, module and companion interfaces. The historical ptrace-init/GrapheneOS/Futile-Hide changes and later built-in removal are not automatically inherited. PR11 must select the provider architecture using exact module/provider tests; Next currently keeps the official built-in provider.",
-      "decision": "deferred-to-PR11",
+      "upstream_overlap": "Maintained v31.0 core retained, with PR11 historical descriptor restoration and a versioned single-provider boundary. The corrected init onrestart format remains present. On the enforcing API35 patched AVD, terminating zygote produced a new PID, an observed daemon restart callback, successful root and a working API5 companion probe afterward.",
+      "decision": "inherited-and-tested",
       "owner_pr": 11,
       "affected_users": "Kitsune users relying on zygote restart-monitor reliability fix from `be732edb`.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "No separate old restart monitor is needed for built-in. External provider lifecycle remains version-specific and must not imply Hide/SuList support.",
       "first_shipped": "k27-2-1",
       "last_shipped": "k31-25fa2159",
       "upstream_evidence": [
@@ -3055,11 +3201,12 @@
         "record": "shipment-source-review",
         "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
-      }
+      },
+      "acceptance_evidence": "docs/adr/0001-zygisk-provider.md; docs/zygisk-pr11.json. The corrected init onrestart format remains present. On the enforcing API35 patched AVD, terminating zygote produced a new PID, an observed daemon restart callback, successful root and a working API5 companion probe afterward."
     },
     {
       "id": "ZYG-007",
-      "behavior": "Built-in removal, external-only direction, and exact provider/Hide/SuList migration contract",
+      "behavior": "Built-in removal, mandatory external-only direction and provider boundary",
       "historical_status": [
         "E"
       ],
@@ -3103,11 +3250,11 @@
         "k31-25fa2159",
         "shipment-source-review"
       ],
-      "upstream_overlap": "Official v31.0 retains built-in Zygisk with its maintained specialization, module and companion interfaces. The historical ptrace-init/GrapheneOS/Futile-Hide changes and later built-in removal are not automatically inherited. PR11 must select the provider architecture using exact module/provider tests; Next currently keeps the official built-in provider.",
-      "decision": "deferred-to-PR11",
+      "upstream_overlap": "Maintained v31.0 core retained, with PR11 historical descriptor restoration and a versioned single-provider boundary. ADR 0001 selects one provider per boot with maintained built-in as the supported baseline; native status and permission/transition tests define the external opt-out. Both external release comparisons expose normal Next-manager lookup and selection-semantic differences.",
+      "decision": "retired-with-evidence",
       "owner_pr": 11,
       "affected_users": "Kitsune users relying on built-in removal, external-only direction, and exact provider/Hide/SuList migration contract.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "Mandatory external-only deletion is retired. Preserve explicit disabled choices, use the documented opt-out for experiments, and close ZYG-007-adapter in PR12 before claiming Next external-provider parity.",
       "first_shipped": "k31-70068d25",
       "last_shipped": "k31-25fa2159",
       "upstream_evidence": [
@@ -3119,7 +3266,76 @@
         "record": "shipment-source-review",
         "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
-      }
+      },
+      "split_into": [
+        "ZYG-007-adapter"
+      ],
+      "acceptance_evidence": "docs/adr/0001-zygisk-provider.md; docs/zygisk-pr11.json. ADR 0001 selects one provider per boot with maintained built-in as the supported baseline; native status and permission/transition tests define the external opt-out. Both external release comparisons expose normal Next-manager lookup and selection-semantic differences."
+    },
+    {
+      "id": "ZYG-007-adapter",
+      "behavior": "External-provider Next-manager discovery, Hide/SuList and process-selection integration",
+      "historical_status": [
+        "E"
+      ],
+      "commits": [
+        "2ef8f002a0ffb151e9e52e220261cf8ffa7c5e38",
+        "bf20079f4fd81db70d7837b6e2c0cc6c1fdf1976"
+      ],
+      "paths": [
+        ".github/workflows/android.yml",
+        ".gitmodules",
+        "app/src/main/java/com/topjohnwu/magisk/core/su/TestHandler.kt",
+        "app/src/main/java/com/topjohnwu/magisk/ui/settings/SettingsViewModel.kt",
+        "native/src/Android.mk",
+        "native/src/core/applets.cpp",
+        "native/src/core/bootstages.cpp",
+        "native/src/core/daemon.cpp",
+        "native/src/core/include/core.hpp",
+        "native/src/core/module.cpp",
+        "native/src/core/zygisk/api.hpp",
+        "native/src/core/zygisk/entry.cpp",
+        "native/src/core/zygisk/gen_jni_hooks.py",
+        "native/src/core/zygisk/hook.cpp",
+        "native/src/core/zygisk/jni_hooks.hpp",
+        "native/src/core/zygisk/main.cpp",
+        "native/src/core/zygisk/memory.cpp",
+        "native/src/core/zygisk/memory.hpp",
+        "native/src/core/zygisk/module.hpp",
+        "native/src/core/zygisk/proc_monitor.cpp",
+        "native/src/core/zygisk/ptrace.cpp",
+        "native/src/core/zygisk/ptrace_utils.cpp",
+        "native/src/core/zygisk/ptrace_utils.hpp",
+        "native/src/core/zygisk/solist.hpp",
+        "native/src/core/zygisk/zygisk.hpp",
+        "native/src/external/Android.mk",
+        "native/src/external/lsplt",
+        "scripts/avd_test.sh"
+      ],
+      "evidence": [
+        "pre-maintenance",
+        "k31-70068d25",
+        "k31-25fa2159",
+        "shipment-source-review"
+      ],
+      "upstream_overlap": "PR11 defines the provider boundary; this separately named behavior remains behind its original integration/device qualification gate.",
+      "decision": "deferred-to-PR12",
+      "owner_pr": 12,
+      "affected_users": "Kitsune users relying on built-in removal, external-only direction, and exact provider/Hide/SuList migration contract.",
+      "migration": "Pinned external builds pass API5 and mount probes but still fall back to the historical manager package, and keep injecting selected processes. PR12 must adapt manager discovery and prove process/Hide/SuList semantics before a compatibility claim; hidden-manager tests are not a blanket workaround recommendation.",
+      "first_shipped": "k31-70068d25",
+      "last_shipped": "k31-25fa2159",
+      "upstream_evidence": [
+        "https://github.com/topjohnwu/Magisk/blob/96221b69fae9910b1c0c75c2f92a4ebb2c2dc698/native/src/core/zygisk/api.hpp (SHA-256 9c8c60aaac6947a05b73889345ebd972ca5858eb0c5505f64715bcf0a2a1cb33)",
+        "https://github.com/topjohnwu/Magisk/blob/96221b69fae9910b1c0c75c2f92a4ebb2c2dc698/native/src/core/zygisk/hook.cpp (SHA-256 5c2d17bffb4bd5f013616fdf715d211df78e0d36b4f42f1d18fa1ca333a5765c)",
+        "https://github.com/topjohnwu/Magisk/blob/96221b69fae9910b1c0c75c2f92a4ebb2c2dc698/native/src/core/zygisk/module.cpp (SHA-256 83f3279696f4f33d1b375ef191d241df6610f281dc0bcac9e31048651b8e9e4c)"
+      ],
+      "shipment_review": {
+        "record": "shipment-source-review",
+        "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
+        "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
+      },
+      "parent_feature": "ZYG-007"
     },
     {
       "id": "ZYG-008",
@@ -3160,11 +3376,11 @@
         "metadata-96724b2e-note_lite-md",
         "shipment-source-review"
       ],
-      "upstream_overlap": "Official built-in Zygisk is available; Lite deliberately omitted it. Availability differs from enabling it for a migrated user. PR11 must preserve the selected provider setting or publish explicit product retirement guidance.",
-      "decision": "deferred-to-PR11",
+      "upstream_overlap": "Maintained v31.0 core retained, with PR11 historical descriptor restoration and a versioned single-provider boundary. An absent setting now defaults off in both native and manager code on every target. The no-injection profile retains root with a Zygisk test module installed; explicit saved choices persist across boots and upgrades.",
+      "decision": "ported-and-tested-in-PR11",
       "owner_pr": 11,
       "affected_users": "Published Kitsune Lite users.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "Keep built-in off and install no external injector for no-Zygisk operation. This does not turn Next into the historical Lite product; always-SuList, no-modules and distribution migration remain DIST-004 and their PR12\u2013PR14 owners.",
       "first_shipped": "metadata-96724b2e-note_lite-md",
       "last_shipped": "metadata-64403347-note_lite-md",
       "upstream_evidence": [
@@ -3175,7 +3391,8 @@
         "record": "shipment-source-review",
         "basis": "Both Lite publication notes specify the contract. Recovered source and exact packaged shell bindings supplement the notes. Modules-unsupported is a published support contract, not proof that module code was absent.",
         "limit": "Observed publication/source bounds; no runtime acceptance or globally earliest release is inferred."
-      }
+      },
+      "acceptance_evidence": "docs/adr/0001-zygisk-provider.md; docs/zygisk-pr11.json. An absent setting now defaults off in both native and manager code on every target. The no-injection profile retains root with a Zygisk test module installed; explicit saved choices persist across boots and upgrades."
     },
     {
       "id": "MOD-001",
