@@ -2,6 +2,7 @@ package com.topjohnwu.magisk.test
 
 import androidx.annotation.Keep
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.topjohnwu.magisk.core.Config
 import com.topjohnwu.superuser.Shell
 import org.json.JSONObject
 import org.junit.Assert.assertEquals
@@ -13,11 +14,15 @@ import org.junit.runner.RunWith
 @Keep
 @RunWith(AndroidJUnit4::class)
 class ZygiskProviderTest : BaseTest {
-    @Test
-    fun testRunningProviderContract() {
+    private fun status(): JSONObject {
         val result = Shell.cmd("magisk --zygisk-status").exec()
         assertTrue(result.isSuccess)
-        val status = JSONObject(result.out.joinToString("\n"))
+        return JSONObject(result.out.joinToString("\n"))
+    }
+
+    @Test
+    fun testRunningProviderContract() {
+        val status = status()
         assertEquals(1, status.getInt("schema"))
         assertEquals("single-provider", status.getString("model"))
         assertEquals(5, status.getInt("module_api"))
@@ -31,6 +36,24 @@ class ZygiskProviderTest : BaseTest {
         )
         assertFalse(status.getBoolean("hide_supported"))
         assertFalse(status.getBoolean("sulist_supported"))
+    }
+
+    @Test
+    fun testSettingChangeRequiresAnotherBoot() {
+        val before = status()
+        val original = before.getBoolean("builtin_configured")
+        try {
+            Config.zygisk = !original
+            val changed = status()
+            assertEquals(!original, changed.getBoolean("builtin_configured"))
+            assertEquals(before.getBoolean("builtin_enabled"), changed.getBoolean("builtin_enabled"))
+            assertEquals(before.getBoolean("injection_requested"), changed.getBoolean("injection_requested"))
+            if (changed.getBoolean("builtin_configured") || changed.getBoolean("builtin_enabled")) {
+                assertFalse(changed.getBoolean("external_preconditions_met"))
+            }
+        } finally {
+            Config.zygisk = original
+        }
     }
 
     @Test

@@ -12,6 +12,8 @@ canonical `denylist(package_name, process)` selection. A selected injection prov
 Zygisk callbacks, module loading and companion IPC. Exactly one engine may inject a process.
 Built-in DenyList enforcement and an external provider's unmount engine must not run together.
 Installing an external module never silently changes the core's settings or enables SuList.
+An absent `zygisk` setting defaults to off on both phones and emulators. Existing explicit
+choices are preserved; the test harness enables its own built-in configuration deliberately.
 
 The maintained built-in implementation is the supported baseline. External providers are
 optional, independently installed root modules. Each release needs its own evidence; a

@@ -144,7 +144,7 @@ object Config : PreferenceConfig, DBConfig {
             LocaleSetting.instance.setLocale(value)
         }
 
-    var zygisk by dbSettings(Key.ZYGISK, Info.isEmulator)
+    var zygisk by dbSettings(Key.ZYGISK, false)
     var suManager by dbStrings(Key.SU_MANAGER, "", true)
     var keyStoreRaw by dbStrings(Key.KEYSTORE, "", true)
 
