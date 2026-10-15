@@ -1,6 +1,6 @@
 # KitsuneMagisk development roadmap
 
-> Roadmap last reconciled: 2026-10-14 UTC
+> Roadmap last reconciled: 2026-10-15 UTC
 >
 > Post-PR2 audit snapshot (not the fidelity boundary): `kitsune` at
 > `cf149fcf734539f6077cd6b349d9ffc2496c56ca`
@@ -18,10 +18,12 @@
 > Current maintained-base branch: `next-system`. PR6/PR7 v30.7 records remain historical.
 > **PR7A is complete at production runtime `0d71d9f9742f2cc258e75d74ce90c2b5d6ad3c5c`,**
 > with subsequent test-harness fixes; [GitHub PR #30](https://github.com/Jordan231111/KitsuneMagisk/pull/30)
-> records the accepted v31.0 update. PR8 is complete locally on `codex/pr8-parity`; its
-> [decision](docs/pr8-branch-decision.md) retains production promotion gates. PR9 is implemented and locally verified on `codex/pr9-build-info`;
-> [its identity/migration record](docs/build-info.md) preserves the remaining release gates. PR10 is
-> implemented locally; publication and successful live clean-stub acceptance remain open.
+> records the accepted v31.0 update. PR8–PR10 are complete and merged into `next-system` by
+> [#31](https://github.com/Jordan231111/KitsuneMagisk/pull/31),
+> [#32](https://github.com/Jordan231111/KitsuneMagisk/pull/32), and
+> [#33](https://github.com/Jordan231111/KitsuneMagisk/pull/33). The
+> [authenticated beta acceptance](docs/update-service-acceptance.json) records the exact public
+> assets and successful clean-stub update. PR11 is next; production promotion remains gated.
 >
 > Product charter: KitsuneMagisk provides reliable Magisk root on real phones and emulators while
 > preserving useful Kitsune-specific early mounting, hiding/SuList, provider, and module capabilities.
@@ -63,7 +65,7 @@ This section is the authoritative answer to “where am I now?” The detailed P
 below remain the source of acceptance criteria; their historical audit statements are not a second
 execution order.
 
-| Order | Work unit | State on 2026-10-14 | Required next decision or exit |
+| Order | Work unit | State on 2026-10-15 | Required next decision or exit |
 |---:|---|---|---|
 | 1 | Roadmap PR1 / GitHub #22 — product charter and release freeze | **Merged** | Preserve the product charter and experimental-release boundary. |
 | 2 | Roadmap PR2 / GitHub #23 — CI product gate | **Merged** | Keep pull-request build/test publication gates green. |
@@ -76,13 +78,13 @@ execution order.
 | 9 | Roadmap PR6 — pristine official-v30.7 maintained base | **Complete on `next-system` at `eab2968c9`** | Preserve the recorded source/submodule/build identity and ordinary Magisk baseline. |
 | 10 | Roadmap PR7 — System Mode vertical slice | **Complete on the exact prepared MuMu target; experimental** | Preserve the [qualification, upgrade, module, SU, uninstall and restore evidence](docs/system-mode/mumu-pr7-2026-09-09.md). Release/phone/parity claims remain gated. |
 | 11 | Roadmap PR7A — official v31.0 prerelease update | **Complete; merged by GitHub #30** | Preserve the exact v31.0 acceptance below; proceed to PR8 parity. |
-| 12 | Roadmap PR8 — parity and historical feature audit | **Complete locally; production promotion remains gated** | Preserve the [port ledger](docs/port-ledger.md), exact paired outcomes and [reversible development-line decision](docs/pr8-branch-decision.md). |
-| 13 | Roadmap PR9 — version/build-info separation | **Implemented and locally verified on `codex/pr9-build-info`, based on PR8 `27ce1f436`** | Preserve the [shared identity and migration contract](docs/build-info.md), artifact gates and MuMu manager-update evidence. |
-| 14 | Roadmap PR10 — authenticated update service and stub | **Implemented locally on `codex/pr10-update-service`; activation pending** | Preserve the [shared update contract and local tests](docs/update-service.md); publish and verify the exact assets, then complete live clean-stub acceptance. |
+| 12 | Roadmap PR8 — parity and historical feature audit | **Complete; merged by GitHub #31; production promotion remains gated** | Preserve the [port ledger](docs/port-ledger.md), exact paired outcomes and [reversible development-line decision](docs/pr8-branch-decision.md). |
+| 13 | Roadmap PR9 — version/build-info separation | **Complete; merged by GitHub #32** | Preserve the [shared identity and migration contract](docs/build-info.md), artifact gates and MuMu manager-update evidence. |
+| 14 | Roadmap PR10 — authenticated update service and stub | **Complete; merged by GitHub #33; experimental beta published** | Preserve the [shared update contract](docs/update-service.md) and [public-download/clean-stub acceptance](docs/update-service-acceptance.json); stable promotion remains PR16. |
 | 15 | Roadmap PR11–PR16 — remaining historical features, qualification, and release | **Not started** | Close every feature-ledger row by PR16; no historical behavior may become an unnamed follow-up. |
 
-The current task is **PR10 activation**, continuing the PR8/PR9 work on the maintained
-`next-system` foundation; those development branches are not yet merged there. PR8 selected the v31.0-based
+The next task is **PR11**, on the maintained `next-system` foundation with PR8–PR10 merged.
+PR8 selected the v31.0-based
 development foundation while retaining historical-feature and release qualification gates. PR7A completed the upstream
 update and inherited lifecycle gates. PR6 established the exact v30.7 baseline, and
 [PR7 completed its prepared-MuMu lifecycle](docs/system-mode/mumu-pr7-2026-09-09.md). PR5A used only MuMu VM index 0, restored the same byte-verified baseline between
@@ -924,19 +926,20 @@ All returned HTTP 404 during the original audit. PR4 removed the built-in reques
 and stub return an explicit project-service-unavailable result. PR #26 additionally requires an
 HTTPS custom metadata URL, rejects cleartext redirects, requires a SHA-256 digest, verifies the
 downloaded bytes, and atomically publishes the verified APK. PR10 now implements the shared signed
-contract and project-owned GitHub routes locally; publication and live acceptance remain open.
+contract and project-owned GitHub routes. The [published acceptance](docs/update-service-acceptance.json)
+verifies both feeds, the immutable APK pair, and the clean-stub installation on MuMu VM 1.
 
 ### TODO
 
 - [x] Configure all default update metadata and APK URLs under the current project's GitHub account.
-- [ ] Publish the authenticated experimental feed and verify its actual downloaded artifacts.
+- [x] Publish the authenticated experimental feed and verify its actual downloaded artifacts.
 - [x] Point `SOURCE_CODE_URL` at this repository and remove active built-in requests to the dead
   channel/stub URLs.
 - [x] Require immutable GitHub Release assets in the publication verifier, with a small project-owned metadata endpoint for channel discovery.
 - [x] Define one versioned update schema containing at minimum:
-  - product name and channel;
+  - project/package identity and channel;
   - product version and monotonic Android build code;
-  - upstream base tag and commit;
+  - upstream base version and commit;
   - exact source commit;
   - APK URL, byte length, and SHA-256 digest;
   - minimum supported Android/API;
@@ -949,7 +952,7 @@ contract and project-owned GitHub routes locally; publication and live acceptanc
 - [x] Add rollback-metadata, authenticated-project-metadata, channel-switching and interrupted-download tests.
 - [x] Require an explicit HTTPS custom channel, the pinned project signature and APK digest validation.
 - [x] Add an automated post-release probe that verifies metadata, immutable release/tag identity and actual APK bytes/signers.
-- [ ] Run that probe against the published candidate and complete the successful clean-stub download.
+- [x] Run that probe against the published candidate and complete the successful clean-stub download.
 
 ### Acceptance criteria
 
@@ -2608,7 +2611,7 @@ PR16; passing this PR does not establish complete Kitsune parity or production-p
 
 ## PR 8 — Branch parity decision
 
-**Implementation status: complete locally from `next-system` at `dd5ca5c12`.** The
+**Implementation status: complete; merged into `next-system` by GitHub #31.** The
 [reversible decision](docs/pr8-branch-decision.md) selects Next for continued development and keeps
 production promotion held. The [port ledger](docs/port-ledger.md) accounts for 192 commits,
 726 commit/path changes, 69 stable-source deltas, 102 atomic rows and all frozen asset references.
@@ -2663,11 +2666,11 @@ route cases; PR14 owns runtime implementation and timing proof. No production AP
 
 ## PR 9 — Version/build-info separation
 
-**Implementation status: implemented and locally verified on `codex/pr9-build-info`, based on
-PR8 `27ce1f436`; uncommitted work is not a published candidate. The [identity and test record](docs/build-info.md)
+**Implementation status: complete; merged into `next-system` by GitHub #32.
+The [identity and test record](docs/build-info.md)
 covers generated fields, all-ABI artifacts, protocol/capability checks and the same-signer MuMu
-manager update from 31000 to 31001. Production signer/hidden-manager transitions remain with their
-existing PR10/PR13/PR16 owners.**
+manager update from 31000 to 31001. PR10 establishes the owned production signer; historical
+signer/hidden-manager state transitions remain with PR13/PR16.**
 
 - Add product, app upgrade, upstream base, compatibility, protocol, commit, and channel fields.
 - Add metadata consistency tests and truthful tags.
@@ -2683,11 +2686,13 @@ numbers never imply a different source version.
 
 ## PR 10 — Project-owned update service and stub
 
-**Implementation status: implemented and locally verified on `codex/pr10-update-service`.
-The [shared contract and test record](docs/update-service.md) use one external production key and
-project-owned GitHub metadata/assets. Four-ABI release/debug builds, artifact checks, lint, legacy
-compilation, host tests and 22 second-instance MuMu tests pass. Publication, verification of actual
-public assets and successful live clean-stub acceptance remain open; PR10 has not exited.**
+**Implementation status: complete; merged into `next-system` by GitHub #33.
+The [shared contract](docs/update-service.md) and [acceptance record](docs/update-service-acceptance.json)
+bind the external signer, immutable experimental release, and authenticated beta/canary feeds.
+Four-ABI release/debug builds, artifact checks, lint, legacy compilation, 274 host tests, 22 MuMu
+tests and all 33 hosted checks pass. On MuMu VM 1, a clean published stub downloaded and installed
+the exact published manager; the full manager also completed its real update flow. Stable promotion,
+independent key backup and remaining feature/device qualification retain their PR11–PR16 gates.**
 
 - Implement metadata schema, digest validation, owned endpoints, and failure tests.
 - Prefer a small static, versioned, authenticated metadata service under this project's ownership
@@ -2975,12 +2980,12 @@ in the detail:
   [runtime-specific evidence and limits](docs/system-mode/mumu-pr7-2026-09-09.md); this is not the complete Kitsune port.
 - **Done — PR7A:** the actual official v31.0 prerelease, Compose System Mode UI and inherited
   lifecycle gates passed; preserve the exact runtime and CI evidence above.
-- **Done locally — PR8:** the paired evidence and historical ledger select the maintained v31.0
+- **Done and merged — PR8:** the paired evidence and historical ledger select the maintained v31.0
   development line while retaining the remaining feature and production-promotion gates.
-- **Done locally — PR9:** separate truthful product/app/upstream/module/protocol fields and test
-  the explicit manager upgrade/capability contract. **Local implementation done — PR10:** the external
-  signing identity and authenticated updater are tested. **Open — PR10/P0.7:** publication/live
-  clean-stub acceptance, protected independent key backups and production transition qualification.
+- **Done and merged — PR9:** separate truthful product/app/upstream/module/protocol fields and test
+  the explicit manager upgrade/capability contract. **Done and merged — PR10:** the authenticated
+  experimental beta is published; public-byte verification and clean-stub acceptance pass.
+  **Open — P0.7/PR16:** protected independent key backups and production transition qualification.
 - **Open — PR11–PR14:** port the chosen Zygisk contract, Hide/SuList, focused manager UI, and
   early-mount only after System Mode parity—not before it.
 - **Open — PR15/PR16:** complete commercial-emulator and advertised physical-device recovery

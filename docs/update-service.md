@@ -1,8 +1,9 @@
 # Authenticated manager and stub updates (PR10)
 
-PR10 replaces the inherited manager/stub update routes with one authenticated contract. Production
-activation is still pending publication and the live clean-stub acceptance test. It does not close
-the remaining root, hiding, module or physical-device release gates.
+PR10 replaces the inherited manager/stub update routes with one authenticated contract. The
+experimental beta and canary feeds are active; the [acceptance record](update-service-acceptance.json)
+binds the public APKs, hosted checks and clean-stub installation. Remaining root, hiding, module
+and physical-device production gates stay with PR11–PR16.
 
 ## Ownership and identity
 
@@ -36,7 +37,7 @@ Debug and disposable CI builds cannot silently update to another signer. Histori
 installations and engineering `.next` installations signed with the debug key require an explicit
 backup/reinstall transition before production adoption. No public historical key or signature
 bypass is restored. The owner must retain independent protected backups of the production key and
-password before distribution; another folder on the same disk is not disaster recovery.
+password before production promotion; another folder on the same disk is not disaster recovery.
 
 ## Wire contract
 
@@ -104,8 +105,9 @@ requires the legacy flag to collect and verify certificates even when modern sig
    debug/instrumentation APKs, signing configs, private keys or `out/update-fixtures`. Never replace tested bytes.
 5. Commit the signed channel file to the separate `update-feed` branch after its assets exist.
    Preserve the previous channel files and compare the remote sequence before changing a feed.
-   A metadata refresh uses the same APK bytes and a higher sequence; new APK bytes require a higher
-   Android code. Repository/branch publication is an explicit maintainer operation.
+   For a metadata refresh, check out the published source tag and use its exact published APKs
+   with a higher sequence. Do not rebuild them; new APK bytes require a higher Android code.
+   Repository/branch publication is an explicit maintainer operation.
 6. Download and verify the actual public files, then install a clean production stub on the test
    emulator and verify that it obtains exactly the advertised manager:
 
@@ -130,25 +132,30 @@ The [historical module template](port-history/module-template.json) retains its 
 digest and immutable archive locator. It is an archival reference for the old module API, not an
 advertised installer/template for the new runtime. PR14 owns that API's tested migration.
 
-Live feed publication and successful clean-stub download evidence remain PR10 activation gates.
-Independent protected key backup remains a production-promotion requirement under P0.7/PR16. This document must not be read as proof of production-phone root qualification.
+The [experimental release](https://github.com/Jordan231111/KitsuneMagisk/releases/tag/kitsune-canary-a95795049614bd09019af69ddd9c968586ae8f6f)
+passed public-feed/asset verification and the clean-stub and manager update flows on MuMu VM 1.
+Independent protected key backup remains a production-promotion requirement under P0.7/PR16.
+This is not proof of physical-phone root qualification.
 
-
-## Local evidence
+## Acceptance evidence
 
 The four-ABI production-signed and debug artifacts passed the identity/signature/alignment gate.
 The shared verifier and download lifecycle passed 20 instrumentation tests (multiple fault cases per test), including
 real platform APK signature rejection, on MuMuPlayer Pro 1.9.2 / Android 12 ARM64. After the user
 selected the second instance, VM 0's original manager/root were restored and its test files removed.
-Remaining work uses VM 1 only (`127.0.0.1:26656`); it started without a Magisk package. The clean
-production stub showed a verification error for the unpublished feed and remained at version code 1.
-A manual same-signer install then retained its UID while updating to code 31002, and all 22 update
-and build-identity tests passed on that clean instance. This is not yet the successful live-feed
-acceptance result. No `adb reboot` or persistent root installation was used.
+All subsequent tests used VM 1, which started without a Magisk package. The clean published
+stub at code 1 downloaded and installed the exact published manager at code 31002 through
+Android's installer, preserving its UID. The installed APK hash and signer matched the public
+asset. The full manager also fetched the authenticated feed and completed a reinstall through
+its update UI. No `adb reboot` or persistent root installation was used.
 
 The host suite exposed a macOS process-signal permission error in the inherited qualification
 harness. It is now an explicit indeterminate lifecycle result, so recovery cannot proceed without
 proof that the process group stopped; a focused injected-denial regression covers it.
 The complete host suite passed 274 tests with one Linux-only skip. App/stub lint and the legacy
-app's Kotlin compilation passed. These local checks precede public activation and its separate
-download/clean-stub acceptance record.
+app's Kotlin compilation passed. All 33 hosted checks passed on the accepted source, including
+API 23–37.1 release/debug coverage, hide/restore and Cuttlefish. That matrix exposed and verified
+fixes for Android 9–10 archive-signature collection and Android 6 release-mode saved-state validation.
+The [acceptance record](update-service-acceptance.json) identifies the exact run, public bytes,
+feed commits and clean-stub/full-manager observations. Source is retained by the immutable tag;
+`mapping-release.txt.gz` contains the matching release R8 mapping.

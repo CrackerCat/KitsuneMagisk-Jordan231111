@@ -30,7 +30,7 @@ git fetch --no-tags docs/port-history/original-lite.bundle refs/audit/pr8/origin
 
 ## Archive dispositions
 
-- **original-binary-source (PR10):** Fork-network IDs, immutable metadata, full byte digests and signer checks establish the retained observations. They do not authenticate the original publisher or bind every compiled member to a source tree. A historical Lite rebuild did not reproduce native text sections. Archive as evidence only. Build future managers/stubs from owned pinned source and signing keys; do not redistribute these bytes as a verified product. PR10 must close the upgrade/signer/channel migration.
+- **original-binary-source (PR10):** Fork-network IDs, immutable metadata, full byte digests and signer checks establish the retained observations. They do not authenticate the original publisher or bind every compiled member to a source tree. A historical Lite rebuild did not reproduce native text sections. Archive as evidence only. Build future managers/stubs from owned pinned source and signing keys; do not redistribute these bytes as a verified product. PR10 supplies owned signed distribution; historical signer/state transition qualification remains PR13/PR16.
 - **stable-mutable-stub (PR10):** The original stable manager/stub download URLs return 404. The recovered stable APK and its independently signature-verified embedded stub have exact digests. The lost standalone stub URL is not byte-bound to that embedded member. Retire the dead endpoint. Use the owned PR10 clean-stub download contract with verified full-manager bytes and an explicit migration path; never label the embedded member as a recovered endpoint download.
 - **moved-k4-compiled-source (PR10):** Both source incarnations and APK flavors are separately digested. Both APK manager scripts match d5b60627 and differ from 1279a82c in rootfs mirroring and /sbin handling; util functions match both after version substitution. Compiled native/app source correspondence is not established by these shell matches. Keep both observations and their 16 KiB/libsu differences. Do not restore a mutable tag or publish either archived APK as the selected candidate; PR10 owns signer/update migration.
 - **lite-later-source (PR15):** The later Lite APK has a directly reviewed missing-/sbin shell change absent from the recovered Git tip. No complete later Lite native/app source binding is established. Preserve the artifact-only behavior in SYS-011 and test the retained capability on a qualified target in PR15. Do not infer compiled behavior from the earlier Lite source.
@@ -100,7 +100,7 @@ selects the development foundation while retaining these explicit product gates.
 | `MOD-018` | E | `.magisk/block` to `.magisk/device` layout compatibility | `b149cd26` → `k31-25fa2159` | `deferred-to-PR14` | PR14 |
 | `MOD-019` | O | `/apex` peer-group propagation and its namespace/detection behavior | `metadata-96724b2e-note_lite-md` → `metadata-7fd85617-note-md` | `deferred-to-PR14` | PR14 |
 | `MOD-020` | E | Correct symlink handling distinct from `REMOVE` whiteout character devices, including upgrade from the shipped bug | `metadata-bb4af859-note-md` → `k31-25fa2159` | `deferred-to-PR14` | PR14 |
-| `MOD-021` | O | Historical module-template ZIP bytes, endpoint, guards, extended APIs and author migration | `module-template` → `module-template` | `deferred-to-PR10` | PR10 |
+| `MOD-021` | O | Historical module-template ZIP bytes, endpoint, guards, extended APIs and author migration | `module-template` → `module-template` | `deferred-to-PR14` | PR14 |
 | `MOD-022` | O | Lite product's published modules-unsupported contract and user migration | `metadata-96724b2e-note_lite-md` → `metadata-64403347-note_lite-md` | `deferred-to-PR14` | PR14 |
 | `SU-001` | E | Disabled, system-credential, and manager biometric authentication modes | `metadata-51fad676-note-md` → `k31-25fa2159` | `deferred-to-PR13` | PR13 |
 | `SU-002` | E | Prompt/allow/deny/revoke/timeout, namespace, shared UID, multiuser, and no-manager lifecycle | `original-stable` → `k31-25fa2159` | `deferred-to-PR13` | PR13 |
@@ -110,9 +110,9 @@ selects the development foundation while retaining these explicit product gates.
 | `APP-001` | E | Kitsune Mask name, labels, logos/colors, attribution, and unofficial-build warning | `original-stable` → `k31-25fa2159` | `deferred-to-PR13` | PR13 |
 | `APP-002` | E | Hidden-manager create/launch/upgrade/restore plus `com.*` random package generation | `k27-2-4-inherited` → `k31-25fa2159` | `deferred-to-PR13` | PR13 |
 | `APP-003` | E | Manager/stub signature enforcement and retirement of the global bypass | `metadata-29aaacaa-note-md` → `k31-25fa2159` | `retired-with-evidence` | PR10 |
-| `APP-004` | E | API 34 download engine, user-initiated jobs, foreground-service behavior, and suspendable I/O | `k27-2-1` → `k31-25fa2159` | `deferred-to-PR10` | PR10 |
-| `APP-005` | E | Stub API 34 loading, expected-version self-repair, and manager-driven stub upgrade | `original-stable` → `k31-25fa2159` | `deferred-to-PR10` | PR10 |
-| `APP-006` | E | HuskyDG/1q23 endpoints, channels, full-manager/stub URL migration, and failure behavior | `original-stable` → `k31-25fa2159` | `deferred-to-PR10` | PR10 |
+| `APP-004` | E | API 34 download engine, user-initiated jobs, foreground-service behavior, and suspendable I/O | `k27-2-1` → `k31-25fa2159` | `ported-and-tested-in-PR10` | PR10 |
+| `APP-005` | E | Stub API 34 loading, expected-version self-repair, and manager-driven stub upgrade | `original-stable` → `k31-25fa2159` | `ported-and-tested-in-PR10` | PR10 |
+| `APP-006` | E | HuskyDG/1q23 endpoints, channels, full-manager/stub URL migration, and failure behavior | `original-stable` → `k31-25fa2159` | `ported-and-tested-in-PR10` | PR10 |
 | `APP-007` | E | FakeGMS ProviderInstaller restricted to system GMS | `b149cd26` → `k31-25fa2159` | `deferred-to-PR13` | PR13 |
 | `APP-008` | E | Inactive-slot OTA prompt requiring the System Updates Restart action | `k27-2-1` → `k31-25fa2159` | `deferred-to-PR13` | PR13 |
 | `APP-009` | E | Module-action close/focus/auto-close behavior | `k27-2-3` → `k31-25fa2159` | `deferred-to-PR13` | PR13 |
@@ -123,10 +123,10 @@ selects the development foundation while retaining these explicit product gates.
 | `ID-002` | E | Fake `29999`/`31000` identity and migration to truthful compatibility fields | `k31-70068d25` → `k31-25fa2159` | `retired-with-evidence` | PR9 |
 | `SEC-001` | E | Debug ADB-shell automatic root, confined to a non-publishable lab flavor or retired | `metadata-51fad676-note-md` → `k31-25fa2159` | `retired-with-evidence` | PR15 |
 | `SEC-002` | E | Public `TestKey-2024.jks`, runtime signature bypass, and production-signer migration | `metadata-29aaacaa-note-md` → `k31-25fa2159` | `retired-with-evidence` | PR10 |
-| `DIST-001` | E | v31 debug/release manager-and-stub four-APK asset surface and source/tag provenance | `k31-70068d25` → `k31-25fa2159` | `deferred-to-PR10` | PR10 |
-| `DIST-002` | E | Both observed `v27.2-kitsune-4` source/release incarnations and intervening behavior | `k27-2-4-inherited` → `k27-2-4-archive` | `deferred-to-PR10` | PR10 |
-| `DIST-003` | O | Original Full stable/R65/R66 manager-stub channels, assets and upgrade migration | `original-stable` → `metadata-05003cd3-note-md` | `deferred-to-PR10` | PR10 |
-| `DIST-004` | O | Original Lite always-SuList/no-Zygisk/no-modules/log-monitoring product and migration/retirement | `metadata-96724b2e-note_lite-md` → `metadata-64403347-note_lite-md` | `deferred-to-PR10` | PR10 |
+| `DIST-001` | E | v31 debug/release manager-and-stub four-APK asset surface and source/tag provenance | `k31-70068d25` → `k31-25fa2159` | `ported-and-tested-in-PR10` | PR10 |
+| `DIST-002` | E | Both observed `v27.2-kitsune-4` source/release incarnations and intervening behavior | `k27-2-4-inherited` → `k27-2-4-archive` | `ported-and-tested-in-PR10` | PR10 |
+| `DIST-003` | O | Original Full stable/R65/R66 manager-stub channels, assets and upgrade migration | `original-stable` → `metadata-05003cd3-note-md` | `deferred-to-PR13` | PR13 |
+| `DIST-004` | O | Original Lite always-SuList/no-Zygisk/no-modules/log-monitoring product and migration/retirement | `metadata-96724b2e-note_lite-md` → `metadata-64403347-note_lite-md` | `deferred-to-PR12` | PR12 |
 | `BOOT-001` | E | P-521 boot-image signing and verification | `k27-2-4-inherited` → `k31-25fa2159` | `deferred-to-PR15` | PR15 |
 | `BOOT-002` | E | 16 KiB binary/ZIP/runtime support, including disable/re-enable history | `k27-2-4-inherited` → `k31-25fa2159` | `deferred-to-PR15` | PR15 |
 | `BOOT-003` | E | Tar input/output with entries larger than 8 GiB | `k27-2-1` → `k31-25fa2159` | `deferred-to-PR15` | PR15 |

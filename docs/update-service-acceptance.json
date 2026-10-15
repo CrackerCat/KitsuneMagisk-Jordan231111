@@ -1,0 +1,137 @@
+{
+  "schema": 1,
+  "accepted_at": "2026-10-15T04:54:53.270744+00:00",
+  "source_commit": "a95795049614bd09019af69ddd9c968586ae8f6f",
+  "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+  "pull_requests": {
+    "PR8": 31,
+    "PR9": 32,
+    "PR10": 33
+  },
+  "merge_commits": {
+    "PR8": "b3c6a1017bbb1f495761c1086fdc41c8ddf1e04b",
+    "PR9": "ab6fdb4d9ad091159367c3c16ccec0a0ff43de85",
+    "PR10": "e1fedb619ac69a888e3a94ac948a8791876f7c9a"
+  },
+  "release": {
+    "id": 413409258,
+    "tag": "kitsune-canary-a95795049614bd09019af69ddd9c968586ae8f6f",
+    "url": "https://github.com/Jordan231111/KitsuneMagisk/releases/tag/kitsune-canary-a95795049614bd09019af69ddd9c968586ae8f6f",
+    "immutable": true,
+    "prerelease": true,
+    "artifacts": {
+      "app-release.apk": {
+        "sha256": "a2aaac23cdeba88313982c7cf263a0b6edd8c8dfe22da0df64869ad89e842c64",
+        "size": 11323370,
+        "certificate_sha256": "9b09eb317c96036185884700d9584e63cc4a2a288825a0172633ba7bfe222ec6",
+        "package": "io.github.huskydg.magisk.next",
+        "version_code": 31002,
+        "version_name": "0.1.0-dev-kitsune.a9579504",
+        "min_sdk": 23,
+        "target_sdk": 37
+      },
+      "stub-release.apk": {
+        "sha256": "f14f2f8e19c3aeeac1556033c4b72d2f11d730415052091945b71462ef49f5ba",
+        "size": 45689,
+        "certificate_sha256": "9b09eb317c96036185884700d9584e63cc4a2a288825a0172633ba7bfe222ec6",
+        "package": "io.github.huskydg.magisk.next",
+        "version_code": 1,
+        "version_name": "1.0",
+        "min_sdk": 23,
+        "target_sdk": 37
+      }
+    },
+    "mapping": {
+      "file": "mapping-release.txt.gz",
+      "sha256": "67ddcb260817e34612d1d212bbcf8ef73a048e58f42bfa0b394ffadbb6bf1160",
+      "dex_map_id": "ee7d597da9c954130fc9c2e98ba852d92295e39125078eed5b373751c00394b1"
+    }
+  },
+  "feeds": {
+    "commit": "076e60d9c0775799ff2d8ca9edf212cc52a76baa",
+    "channels": {
+      "beta": {
+        "sequence": 1,
+        "envelope_sha256": "b005258f6c3389d8d4e8c2b30c9bd7198c12e4d1a62139addd83d9453f79edda",
+        "issued_at": 1792037451,
+        "expires_at": 1793247051,
+        "source_commit": "a95795049614bd09019af69ddd9c968586ae8f6f",
+        "url": "https://raw.githubusercontent.com/Jordan231111/KitsuneMagisk/update-feed/v1/beta.json",
+        "public_verification_passed": true
+      },
+      "canary": {
+        "sequence": 1,
+        "envelope_sha256": "dc353456cfaeda6f34393f5d55014e4007f6b79cade3c72e43523da82d360561",
+        "issued_at": 1792037452,
+        "expires_at": 1793247052,
+        "source_commit": "a95795049614bd09019af69ddd9c968586ae8f6f",
+        "url": "https://raw.githubusercontent.com/Jordan231111/KitsuneMagisk/update-feed/v1/canary.json",
+        "public_verification_passed": true
+      }
+    },
+    "stable_promotion": "gated by PR16"
+  },
+  "ci": {
+    "run": 38678947686,
+    "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/38678947686",
+    "attempt": 2,
+    "conclusion": "success",
+    "passed": 33,
+    "retry": "GitHub-hosted test dependency fetch failed during attempt 1; same source rerun without weakening gates"
+  },
+  "local_tests": {
+    "host": {
+      "run": 274,
+      "skipped": 1
+    },
+    "android": {
+      "run": 22,
+      "emulator": "MuMuPlayer Pro 1.9.2",
+      "android_api": 32,
+      "abi": "arm64-v8a",
+      "persistent_root_modified": false
+    },
+    "lint_and_legacy_compile": "passed"
+  },
+  "artifact_checks": {
+    "passed": true,
+    "abis": [
+      "arm64-v8a",
+      "armeabi-v7a",
+      "x86",
+      "x86_64"
+    ],
+    "zip_16k_aligned": true,
+    "elf_alignment_valid_for_abi": true,
+    "matching_embedded_stub": true
+  },
+  "clean_stub": {
+    "passed": true,
+    "instance": 1,
+    "api": 32,
+    "stub_version_code": 1,
+    "manager_version_code": 31002,
+    "uid_preserved": true,
+    "installed_apk_sha256": "a2aaac23cdeba88313982c7cf263a0b6edd8c8dfe22da0df64869ad89e842c64",
+    "flow": "Public stub downloaded the public manager and Android PackageInstaller updated it; no ADB manager installation",
+    "persistent_root_modified": false
+  },
+  "manager_update": {
+    "passed": true,
+    "instance": 1,
+    "android_api": 32,
+    "flow": "Full manager fetched signed beta through its actual network adapter, then App/Reinstall downloaded and installed the manager through Android PackageInstaller",
+    "app_version_code": 31002,
+    "uid_preserved": true,
+    "installed_apk_sha256": "a2aaac23cdeba88313982c7cf263a0b6edd8c8dfe22da0df64869ad89e842c64",
+    "first_install_time_preserved": true,
+    "last_update_time_advanced": true,
+    "persistent_root_modified": false
+  },
+  "limits": [
+    "Live public-network installation was tested on MuMuPlayer Pro 1.9.2, Android 12 ARM64, instance 1.",
+    "No adb reboot or persistent root installation was performed in these acceptance flows.",
+    "This closes PR10 distribution and updater acceptance; historical features, cross-signer state transitions and physical-phone qualification remain with PR11-PR16.",
+    "Independent protected production-key/password backup remains a P0.7/PR16 promotion requirement."
+  ]
+}

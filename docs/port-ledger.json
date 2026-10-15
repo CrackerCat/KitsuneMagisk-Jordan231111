@@ -4102,10 +4102,10 @@
         "shipment-source-review"
       ],
       "upstream_overlap": "Official manager detects action.sh and supplies its action execution surface plus standard module installation. That does not cover the externally shipped Kitsune template guards, extended early-mount/root APIs or endpoint bytes; PR10 and PR14 retain separate ownership for that asset.",
-      "decision": "deferred-to-PR10",
-      "owner_pr": 10,
+      "decision": "deferred-to-PR14",
+      "owner_pr": 14,
       "affected_users": "Module authors and users relying on the original early-mount, initrc.d, root/*, REMOVE and REQUIRED_KITSUNE_MAGISK template API.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "PR10 preserves the historical template ZIP digest and immutable archive locator in docs/port-history/module-template.json; it is not advertised as a current-runtime template. PR14 owns its extended module API, timing guards and tested author migration.",
       "first_shipped": "module-template",
       "last_shipped": "module-template",
       "upstream_evidence": [
@@ -4565,11 +4565,11 @@
         "metadata-29aaacaa-note-md",
         "retirement-review"
       ],
-      "upstream_overlap": "Official builds and APK validation supply the maintained signer foundation. The historical global signature bypass and public TestKey-2024 are not acceptable production trust anchors. PR10 must give existing users an explicit signer/package migration without silently accepting arbitrary replacement managers.",
+      "upstream_overlap": "Official builds and APK validation supply the maintained signer foundation. PR10 replaces the historical public key/global bypass with an owned external signer and authenticated distribution. Historical signer/package state transitions retain PR13/PR16 qualification.",
       "decision": "retired-with-evidence",
       "owner_pr": 10,
       "affected_users": "Kitsune users relying on manager/stub signature enforcement and retirement of the global bypass.",
-      "migration": "Use manager and stub artifacts signed by the selected owned key. PR10/PR13 must qualify signer changes and hidden-manager recovery; unsigned/repacked managers are not a supported bypass.",
+      "migration": "The owned signer is pinned by the manager and stub. Restore a historical hidden manager first and use the documented backup/reinstall transition; PR13/PR16 retain historical state-transition qualification. Arbitrary replacement managers are rejected.",
       "first_shipped": "metadata-29aaacaa-note-md",
       "last_shipped": "k31-25fa2159",
       "upstream_evidence": [
@@ -4581,7 +4581,7 @@
         "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
       },
-      "acceptance_evidence": "docs/port-history/retirements.json: Retire globally disabled manager/stub signature checking; retain maintained release enforcement and the separately identified debug test flavor. PR7A all-ABI artifact/signer gates and hosted manager lifecycle are the foundation evidence."
+      "acceptance_evidence": "docs/port-history/retirements.json: Retire globally disabled manager/stub signature checking; retain maintained release enforcement and the separately identified debug test flavor. PR7A all-ABI artifact/signer gates and hosted manager lifecycle are the foundation evidence. docs/update-service.md and docs/update-service-acceptance.json: Wrong-signer/package and tampered-APK tests passed; the public clean stub installed only the exact pinned candidate."
     },
     {
       "id": "APP-004",
@@ -4645,11 +4645,11 @@
         "k31-25fa2159",
         "shipment-source-review"
       ],
-      "upstream_overlap": "Official DownloadEngine schedules user-initiated jobs on API 34 and keeps the corresponding job/service implementations. This is direct source overlap with the historical transition; cancellation, foreground lifecycle, digest failures and atomic publication still require PR10 tests.",
-      "decision": "deferred-to-PR10",
+      "upstream_overlap": "Official DownloadEngine schedules user-initiated jobs on API 34 and retains the corresponding job/service implementations. PR10 adds verified publication, cancellation and failure completion to this maintained lifecycle; its acceptance evidence covers those changes.",
+      "decision": "ported-and-tested-in-PR10",
       "owner_pr": 10,
       "affected_users": "Kitsune users relying on aPI 34 download engine, user-initiated jobs, foreground-service behavior, and suspendable I/O.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "Keep opt-in background checks and the maintained API 34 job/service behavior. Stopping a download cancels I/O; failures finish the job and interrupted installs abandon their session.",
       "first_shipped": "k27-2-1",
       "last_shipped": "k31-25fa2159",
       "upstream_evidence": [
@@ -4661,7 +4661,8 @@
         "record": "shipment-source-review",
         "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
-      }
+      },
+      "acceptance_evidence": "docs/update-service.md and docs/update-service-acceptance.json: Cross-API release/debug matrix, cancellation/failed-job/abandoned-installer tests, and the real full-manager update flow passed."
     },
     {
       "id": "APP-005",
@@ -4700,11 +4701,11 @@
         "k31-25fa2159",
         "shipment-source-review"
       ],
-      "upstream_overlap": "Official dynamic stub loading and manager migration are retained. PR10 must compare API 34 loading, expected-version repair and manager-driven stub replacement, including the historical Full/Lite stub/signature observations.",
-      "decision": "deferred-to-PR10",
+      "upstream_overlap": "Official dynamic stub loading and manager migration are retained. PR10 verifies owned APKs before loading or replacement and preserves API 34 readonly loading. Historical Full/Lite signer/state migration breadth remains with PR13/PR16.",
+      "decision": "ported-and-tested-in-PR10",
       "owner_pr": 10,
       "affected_users": "Kitsune users relying on stub API 34 loading, expected-version self-repair, and manager-driven stub upgrade.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "Keep the maintained hidden-stub/self-repair path with signer checks before loading and verified embedded-stub upgrades. Historical cross-signer hidden-manager transition qualification remains PR13/PR16.",
       "first_shipped": "original-stable",
       "last_shipped": "k31-25fa2159",
       "upstream_evidence": [
@@ -4715,7 +4716,8 @@
         "record": "shipment-source-review",
         "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
-      }
+      },
+      "acceptance_evidence": "docs/update-service.md and docs/update-service-acceptance.json: API 34+ readonly loading, cross-API hide/restore, current-APK tamper rejection and successful clean published stub-to-manager installation passed."
     },
     {
       "id": "APP-006",
@@ -4748,11 +4750,11 @@
         "k31-25fa2159",
         "shipment-source-review"
       ],
-      "upstream_overlap": "Official update endpoints and assets serve official Magisk, not the archived HuskyDG/1q23 Full/Lite products. PR10 must own project metadata, package/signer checks, immutable downloads and explicit Lite migration/retirement. Archived version labels do not prove source commits.",
-      "decision": "deferred-to-PR10",
+      "upstream_overlap": "Official update endpoints serve official Magisk. PR10 supplies owned signed metadata, package/signer checks and immutable assets for Next. Archived Full/Lite labels do not prove source commits or provide automatic cross-package/signer migration; the remaining feature/state gates retain their named owners.",
+      "decision": "ported-and-tested-in-PR10",
       "owner_pr": 10,
       "affected_users": "Kitsune users relying on huskyDG/1q23 endpoints, channels, full-manager/stub URL migration, and failure behavior.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "Use the owned signed beta/canary feeds. Stable remains PR16-gated. Old public Debug selections map to beta; unsigned/dead historical endpoints cannot redirect into the trust boundary.",
       "first_shipped": "original-stable",
       "last_shipped": "k31-25fa2159",
       "upstream_evidence": [
@@ -4763,7 +4765,8 @@
         "record": "shipment-source-review",
         "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
-      }
+      },
+      "acceptance_evidence": "docs/update-service.md and docs/update-service-acceptance.json: Both live feeds and immutable assets passed the public verifier; clean-stub and full-manager network/install flows passed. The signed fault corpus rejects tampering, replay, expiry, wrong package/signer and transport faults."
     },
     {
       "id": "APP-007",
@@ -4999,7 +5002,7 @@
         "shipment-source-review",
         "retirement-review"
       ],
-      "upstream_overlap": "Official build logic controls optimization and generated stub naming. The fork's historical no-obfuscation choice is a distribution decision, not runtime compatibility proof. PR10 must document the final reproducibility/debugging and source-publication policy.",
+      "upstream_overlap": "Official build logic controls optimization and generated stub naming. PR10 retains the immutable source tag and matching release R8 mapping; obfuscated internals are not a supported reflection API.",
       "decision": "retired-with-evidence",
       "owner_pr": 10,
       "affected_users": "Kitsune users relying on historical non-obfuscated manager/stub disposition.",
@@ -5015,7 +5018,7 @@
         "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
       },
-      "acceptance_evidence": "docs/port-history/retirements.json: Retire blanket release obfuscation/optimization disablement. Both maintained release modules enable minification; CI retains mapping/native symbols and the built artifacts pass the inherited manager/stub tests."
+      "acceptance_evidence": "docs/port-history/retirements.json: Retire blanket release obfuscation/optimization disablement. Both maintained release modules enable minification; CI retains mapping/native symbols and the built artifacts pass the inherited manager/stub tests. docs/update-service.md and docs/update-service-acceptance.json: The immutable source tag and matching mapping-release.txt.gz are retained with the published production APKs."
     },
     {
       "id": "APP-013",
@@ -5181,11 +5184,11 @@
         "metadata-29aaacaa-note-md",
         "retirement-review"
       ],
-      "upstream_overlap": "Official builds and APK validation supply the maintained signer foundation. The historical global signature bypass and public TestKey-2024 are not acceptable production trust anchors. PR10 must give existing users an explicit signer/package migration without silently accepting arbitrary replacement managers.",
+      "upstream_overlap": "Official builds and APK validation supply the maintained signer foundation. PR10 replaces the historical public key/global bypass with an owned external signer and authenticated distribution. Historical signer/package state transitions retain PR13/PR16 qualification.",
       "decision": "retired-with-evidence",
       "owner_pr": 10,
       "affected_users": "Kitsune users relying on public `TestKey-2024.jks`, runtime signature bypass, and production-signer migration.",
-      "migration": "PR10 supplies the owned signer and tested manager/stub migration. Retain the existing qualified manager until that path is available; never accept an arbitrary APK merely because it bears the old package name.",
+      "migration": "Use the owned external signer and published certificate digest. Historical public-key/debug-key installations need the documented backup and clean reinstall; hidden-manager state qualification remains PR13/PR16. Independent protected key backup remains a production-promotion gate.",
       "first_shipped": "metadata-29aaacaa-note-md",
       "last_shipped": "k31-25fa2159",
       "upstream_evidence": [
@@ -5197,7 +5200,7 @@
         "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
       },
-      "acceptance_evidence": "docs/port-history/retirements.json: Retire the public production signing key and global signature bypass. Maintained default features require release signature enforcement, the artifact gate rejects forbidden public/debug release signers, and CI uses a disposable release key."
+      "acceptance_evidence": "docs/port-history/retirements.json: Retire the public production signing key and global signature bypass. Maintained default features require release signature enforcement, the artifact gate rejects forbidden public/debug release signers, and CI uses a disposable release key. docs/update-service.md and docs/update-service-acceptance.json: Production APK/feed signatures and the actual public clean-stub update were verified; private signing material stays outside the checkout and CI."
     },
     {
       "id": "DIST-001",
@@ -5223,10 +5226,10 @@
         "shipment-source-review"
       ],
       "upstream_overlap": "Official workflows do not establish provenance of Kitsune's four-APK surface or the moved k4 tag. Preserve both exact k4 source observations, APK digests and signer records; PR10 owns coherent artifact identity and update distribution.",
-      "decision": "deferred-to-PR10",
+      "decision": "ported-and-tested-in-PR10",
       "owner_pr": 10,
       "affected_users": "Kitsune users relying on v31 debug/release manager-and-stub four-APK asset surface and source/tag provenance.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "The immutable release distributes the production manager/stub pair, source identity, checksums and matching R8 mapping. Debug manager/stub APKs remain local/CI lab artifacts under separate signing; the public debug update channel is retired.",
       "first_shipped": "k31-70068d25",
       "last_shipped": "k31-25fa2159",
       "upstream_evidence": [
@@ -5237,7 +5240,8 @@
         "record": "shipment-source-review",
         "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
-      }
+      },
+      "acceptance_evidence": "docs/update-service.md and docs/update-service-acceptance.json: All four ABI release/debug builds and signature/identity/alignment checks passed. Public verification permits exactly the two production APK assets."
     },
     {
       "id": "DIST-002",
@@ -5266,10 +5270,10 @@
         "shipment-source-review"
       ],
       "upstream_overlap": "Official workflows do not establish provenance of Kitsune's four-APK surface or the moved k4 tag. Preserve both exact k4 source observations, APK digests and signer records; PR10 owns coherent artifact identity and update distribution.",
-      "decision": "deferred-to-PR10",
+      "decision": "ported-and-tested-in-PR10",
       "owner_pr": 10,
       "affected_users": "Kitsune users relying on both observed `v27.2-kitsune-4` source/release incarnations and intervening behavior.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "Preserve both historical observations and their archive limits. Current releases use unique source-commit tags and immutable assets; matching old labels do not authorize an update or imply historical runtime parity.",
       "first_shipped": "k27-2-4-inherited",
       "last_shipped": "k27-2-4-archive",
       "upstream_evidence": [
@@ -5280,7 +5284,8 @@
         "record": "shipment-source-review",
         "basis": "Two distinct source observations share the release name. The second disables the earlier 16 KiB flag and restores the custom libsu executor. Both APK incarnations are separately digested; complete compiled-source bindings are not asserted.",
         "limit": "Observed publication/source bounds; no runtime acceptance or globally earliest release is inferred."
-      }
+      },
+      "acceptance_evidence": "docs/update-service.md and docs/update-service-acceptance.json: The published verifier checked immutable release state, exact tag/source identity, APK bytes and signer; historical moved-tag evidence remains in the ledger."
     },
     {
       "id": "DIST-003",
@@ -5297,11 +5302,11 @@
         "metadata-05003cd3-note-md",
         "shipment-source-review"
       ],
-      "upstream_overlap": "Official update endpoints and assets serve official Magisk, not the archived HuskyDG/1q23 Full/Lite products. PR10 must own project metadata, package/signer checks, immutable downloads and explicit Lite migration/retirement. Archived version labels do not prove source commits.",
-      "decision": "deferred-to-PR10",
-      "owner_pr": 10,
+      "upstream_overlap": "Official update endpoints serve official Magisk. PR10 supplies owned signed metadata, package/signer checks and immutable assets for Next. Archived Full/Lite labels do not prove source commits or provide automatic cross-package/signer migration; the remaining feature/state gates retain their named owners.",
+      "decision": "deferred-to-PR13",
+      "owner_pr": 13,
       "affected_users": "Kitsune users relying on original Full stable/R65/R66 manager-stub channels, assets and upgrade migration.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "PR10 closes endpoint ownership, signed distribution and the clean Next stub/manager flow. Original Full packages/signers require a verified backup and explicit reinstall, never an automatic trust bypass. PR13 owns historical/hidden-manager state transition qualification, with PR16 release acceptance; retain the qualified existing setup until then.",
       "first_shipped": "original-stable",
       "last_shipped": "metadata-05003cd3-note-md",
       "upstream_evidence": [
@@ -5354,11 +5359,11 @@
         "metadata-96724b2e-note_lite-md",
         "shipment-source-review"
       ],
-      "upstream_overlap": "Official update endpoints and assets serve official Magisk, not the archived HuskyDG/1q23 Full/Lite products. PR10 must own project metadata, package/signer checks, immutable downloads and explicit Lite migration/retirement. Archived version labels do not prove source commits.",
-      "decision": "deferred-to-PR10",
-      "owner_pr": 10,
+      "upstream_overlap": "Official update endpoints serve official Magisk. PR10 supplies owned signed metadata, package/signer checks and immutable assets for Next. Archived Full/Lite labels do not prove source commits or provide automatic cross-package/signer migration; the remaining feature/state gates retain their named owners.",
+      "decision": "deferred-to-PR12",
+      "owner_pr": 12,
       "affected_users": "Published Kitsune Lite users.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "PR10 supplies owned authenticated distribution without claiming Lite parity. Preserve the existing Lite setup. PR12 owns always-enforced inverse SuList and log monitoring, with PR11 provider decisions, PR13 manager migration, PR14 module disposition and PR16 qualification.",
       "first_shipped": "metadata-96724b2e-note_lite-md",
       "last_shipped": "metadata-64403347-note_lite-md",
       "upstream_evidence": [
@@ -13356,7 +13361,7 @@
         "lite-source-bindings"
       ],
       "finding": "Fork-network IDs, immutable metadata, full byte digests and signer checks establish the retained observations. They do not authenticate the original publisher or bind every compiled member to a source tree. A historical Lite rebuild did not reproduce native text sections.",
-      "disposition": "Archive as evidence only. Build future managers/stubs from owned pinned source and signing keys; do not redistribute these bytes as a verified product. PR10 must close the upgrade/signer/channel migration."
+      "disposition": "Archive as evidence only. Build future managers/stubs from owned pinned source and signing keys; do not redistribute these bytes as a verified product. PR10 supplies owned signed distribution; historical signer/state transition qualification remains PR13/PR16."
     },
     {
       "id": "stable-mutable-stub",

@@ -8,7 +8,7 @@ overrides in `config.prop` or `magisk.versionCode` are rejected.
 | Field | Current contract |
 |---|---|
 | Product version | `0.1.0-dev`; the new maintained Kitsune product sequence |
-| Android app code | `31001`, above the inherited `31000`; increase for each distributed update |
+| Android app code | `31002` in PR10; PR9 established `31001` above inherited `31000`; increase for new distributed bytes |
 | Package | `io.github.huskydg.magisk.next`; retain the installed Next package |
 | Upstream | Official `v31.0`, commit `96221b69fae9910b1c0c75c2f92a4ebb2c2dc698` |
 | Module compatibility epoch | `31000`, matching that actual upstream implementation |
@@ -73,9 +73,9 @@ base and its tested compatibility epoch together.
    installation. Retain supported user module/settings data as described by the existing uninstall
    contract. No automatic legacy payload or database conversion is introduced.
 3. If Android reports a signer mismatch, do not bypass verification or reuse the historical public
-   key. Production signer transitions, hidden-manager migration breadth and authenticated update
-   delivery remain PR10/PR13/PR16 gates. Users relying on unported Kitsune features should retain
-   their existing qualified setup until those feature gates close.
+   key. PR10 supplies the [owned signer and authenticated update service](update-service.md).
+   Historical signer/hidden-manager state transitions remain PR13/PR16 gates. Users relying on
+   unported Kitsune features should retain their existing qualified setup until those gates close.
 4. A local dirty build is diagnostic evidence only. Persistent System Mode continues to reject it;
    no clean-commit claim is synthesized to permit installation.
 
@@ -108,5 +108,6 @@ embedded/standalone stubs and signer-matched test APKs. Native Clippy and Androi
 the legacy manager still compiles. Host regressions include the production Rust APK parser's
 compatible, old-code and wrong/missing-protocol cases, plus variant, dirty-content and upstream
 identity checks. The normal emulator suite now asserts the running daemon's complete JSON against
-the manager's generated identity. CI/physical-device breadth and production signing stay with
-their existing roadmap gates.
+the manager's generated identity. PR9 and PR10 subsequently passed all 33 hosted checks, and
+[PR10 acceptance](update-service-acceptance.json) records the owned signer and live update flows.
+Physical-device breadth and historical state transitions retain their later roadmap gates.
