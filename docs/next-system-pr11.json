@@ -209,6 +209,7 @@
     "native/src/Cargo.toml",
     "native/src/base/Cargo.toml",
     "native/src/core/daemon.rs",
+    "native/src/core/db.rs",
     "native/src/core/include/core.hpp",
     "native/src/core/lib.rs",
     "native/src/core/logging.rs",

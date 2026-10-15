@@ -127,7 +127,9 @@ The adapter binds the bundle path/index, hardware, vendor version, controller an
 and both private disks' immutable layout fields. It rejects backing chains, encryption,
 internal snapshots, external data files, corrupt/unknown formats, links and shared inodes.
 It permits vendor metadata rewrites, UI changes, vendor-root toggling and the observed pair
-of automatic ADB ports. A fixed custom ADB port is also bound when configured.
+of automatic ADB ports. Rapid cycles can exceed that pair and are then refused. Use MuMu's
+`config` command to assign a free fixed `customAdbPort` for repeated qualification; retain
+and restore the user's original setting afterward. The fixed port is bound in the record.
 Lifecycle wrappers must wait for the old VM process to exit before opening it, resolve the
 new endpoint through `mumutool info`, and verify the same named bundle before connecting.
 The backup still contains both complete disks with byte-verified restore; metadata tolerance

@@ -78,6 +78,30 @@ class MuMuMacIdentityTest(unittest.TestCase):
         self.controller.write_bytes(b"new-controller")
         self.assertNotEqual(identity, mumu_macos_identity(self.path))
 
+    def test_custom_port_is_bound(self):
+        self.settings.update(customAdbPort=37731, adbPort=37731)
+        self.write_settings()
+        self.assertEqual([37731], mumu_macos_identity(self.path)["adb_ports"])
+        self.settings["adbPort"] = 26656
+        self.write_settings()
+        with self.assertRaises(ValueError):
+            mumu_macos_identity(self.path)
+
+    def test_disk_replacement_during_header_read_is_rejected(self):
+        disk = self.bundle / "system.qcow2"
+        pread = os.pread
+
+        def replace(fd, size, offset):
+            data = pread(fd, size, offset)
+            replacement = disk.with_suffix(".new")
+            replacement.write_bytes(self.header)
+            replacement.replace(disk)
+            return data
+
+        with mock.patch("tools.system_mode.host_identity.os.pread", side_effect=replace):
+            with self.assertRaises(ValueError):
+                mumu_macos_identity(self.path)
+
     def test_shared_redirected_truncated_and_external_disks_are_refused(self):
         disk = self.bundle / "system.qcow2"
         for offset, fmt, value in ((8, ">Q", 128), (16, ">I", 3), (32, ">I", 1),

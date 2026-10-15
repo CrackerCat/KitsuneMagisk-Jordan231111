@@ -175,7 +175,8 @@ def _private_qcow2(path: Path) -> dict[str, object]:
                 or refcount != 4 or length not in (104, 112) or before.st_size < length):
             raise ValueError("unsupported MuMu QCOW2 backing or feature layout")
         current = path.lstat()
-        if (current.st_dev, current.st_ino) != (before.st_dev, before.st_ino):
+        if (path.resolve(strict=True) != path or current.st_nlink != 1
+                or (current.st_dev, current.st_ino) != (before.st_dev, before.st_ino)):
             raise ValueError("MuMu disk replaced while reading its layout")
         # Metadata updates elsewhere in a running QCOW2 are expected, but the fields
         # used above must come from one coherent header.
