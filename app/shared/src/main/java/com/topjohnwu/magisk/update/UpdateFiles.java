@@ -87,7 +87,9 @@ public final class UpdateFiles {
         if (file.length() > UpdateMetadata.MAX_APK) throw new IOException("APK exceeds its size limit");
         // GET_SIGNATURES/GET_SIGNING_CERTIFICATES request full platform signature verification,
         // not just manifest parsing or an unverified certificate copied from a ZIP entry.
-        int flags = Build.VERSION.SDK_INT >= 28 ? PackageManager.GET_SIGNING_CERTIFICATES : PackageManager.GET_SIGNATURES;
+        // Android 9-10 only collect certificates when the legacy flag is also set.
+        int flags = PackageManager.GET_SIGNATURES;
+        if (Build.VERSION.SDK_INT >= 28) flags |= PackageManager.GET_SIGNING_CERTIFICATES;
         PackageInfo info = context.getPackageManager().getPackageArchiveInfo(file.getPath(), flags);
         if (info == null || !pkg.equals(info.packageName)) throw new IOException("Invalid APK or wrong package");
         var signers = Build.VERSION.SDK_INT >= 28 && info.signingInfo != null

@@ -79,6 +79,8 @@ Unfinished `.part` files are never loadable. Hidden-manager current/update/devel
 verified before creating a classloader, independently of whether they arrived through this client.
 This uses the platform's certificate collection with verification enabled, as in
 [AOSP PackageManager](https://android.googlesource.com/platform/frameworks/base/+/4be0bf277e19be48f68bb50904ecbd9e872c751e/core/java/android/content/pm/PackageManager.java).
+API 28+ requests both signature flags: [Android 9-10's archive parser](https://android.googlesource.com/platform/frameworks/base/+/android-10.0.0_r47/core/java/android/content/pm/PackageManager.java)
+requires the legacy flag to collect and verify certificates even when modern signing information is requested.
 
 ## Candidate preparation and publication
 
