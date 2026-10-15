@@ -64,7 +64,7 @@ index f3c8fe3..5d55c93 100644
    /* INFO: The modules may request that although the process is NOT in
                the DenyList, it has its mount namespace switched to the clean
 diff --git a/loader/src/injector/module.h b/loader/src/injector/module.h
-index afec450..0bc14d5 100644
+index afec450..7e4747a 100644
 --- a/loader/src/injector/module.h
 +++ b/loader/src/injector/module.h
 @@ -14,6 +14,7 @@
@@ -75,6 +75,15 @@ index afec450..0bc14d5 100644
  
    PROCESS_IS_MANAGER = (1u << 27),
    PROCESS_ROOT_IS_APATCH = (1u << 28),
+@@ -21,7 +22,7 @@ enum rezygiskd_flags : uint32_t {
+   PROCESS_ROOT_IS_MAGISK = (1u << 30),
+   PROCESS_IS_FIRST_STARTED = (1u << 31),
+ 
+-  PRIVATE_MASK = PROCESS_IS_FIRST_STARTED
++  PRIVATE_MASK = PROCESS_IS_FIRST_STARTED | PROCESS_KITSUNE_HIDE
+ };
+ 
+ struct app_specialize_args_v1 {
 diff --git a/module/src/customize.sh b/module/src/customize.sh
 index cc999f6..db122cf 100644
 --- a/module/src/customize.sh

@@ -1,0 +1,1076 @@
+{
+  "schema": 1,
+  "phase": "PR12",
+  "status": "complete",
+  "code_commit": "7cb16c7e7478d8d333bc583cc000f2b5074ffc44",
+  "contract": "docs/hide-policy.md",
+  "artifacts": {
+    "app-debug.apk": {
+      "sha256": "8814f109e20ba22b5a6fb720bfac9bdd8c047bc7694b47983643ac74892670d4",
+      "bytes": 40641109
+    },
+    "app-release.apk": {
+      "sha256": "5f2115f1c69507e9dc6b2788eda77c260e06bbfc7bc93a3508f6eaa807722a68",
+      "bytes": 11380714
+    }
+  },
+  "adapter": {
+    "base_commit": "c9b7dc0761b8bbff1b3216a45cb6234a19b6310c",
+    "patch": "tools/zygisk-adapters/rezygisk-hide-v1.patch",
+    "patch_sha256": "a8e3a0befebd7ea7ced56578a4fe8298c05670286aaace865a3327375bf804e0",
+    "build_abis": [
+      "arm64-v8a",
+      "armeabi-v7a",
+      "x86",
+      "x86_64"
+    ],
+    "runtime_abis": [
+      "arm64-v8a"
+    ],
+    "runtime_zip_sha256": "cb11d1d4d40dfe0a360a9a04197fab7ccbb073c7d6005090b132339fb1532926",
+    "final_zip_sha256": "bd09313c99ffe109bf1660affcd1f7cb366ac216e5a84c351ff722110852ecf3",
+    "final_api_mask_validation": {
+      "target": "MuMu 1.9.2 Android 12 ARM64",
+      "exact_source_function": "api_get_flags",
+      "tested_bits": 32,
+      "null_context": true,
+      "all_bits": true,
+      "result": "PRIVATE_FLAGS_FILTERED",
+      "scope": "Exact callback and enum compiled with the module NDK toolchain; the preceding full provider integration remains unchanged."
+    },
+    "scope": "Full Android integration used runtime_zip_sha256; the final private API flag mask was then rebuilt for four ABIs and its exact callback/enum tested on Android. No external binary is published or promoted by PR12."
+  },
+  "tests": {
+    "external-final-hide": {
+      "status": {
+        "schema": 1,
+        "database_version": 12,
+        "boot_ready": true,
+        "enabled": true,
+        "mode": "hide",
+        "configured_mode": "hide",
+        "reboot_required": false,
+        "selection_table": "denylist",
+        "engine": "external",
+        "configured_provider": "external",
+        "external_sulist_supported": true
+      },
+      "boot_id": "46eb753a-4454-48cf-bf22-3b2436da0288",
+      "tests": [
+        {
+          "method": "HideVisibilityTest#testModuleVisibility",
+          "visible": true,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 233.9
+        },
+        {
+          "method": "ZygiskModuleTest#testInjected",
+          "visible": null,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 205.9
+        },
+        {
+          "method": "HideVisibilityTest#testModuleVisibility",
+          "visible": false,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 229.5
+        },
+        {
+          "method": "ZygiskModuleTest#testNotInjected",
+          "visible": null,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 225.8
+        },
+        {
+          "method": "HideVisibilityTest#testModuleVisibility",
+          "visible": true,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 218.7
+        },
+        {
+          "method": "HideVisibilityTest#testServiceVisibility",
+          "visible": false,
+          "service": "remote",
+          "passed": true,
+          "elapsed_ms": 282.9
+        },
+        {
+          "method": "HideVisibilityTest#testServiceVisibility",
+          "visible": true,
+          "service": "remote",
+          "passed": true,
+          "elapsed_ms": 274.9
+        },
+        {
+          "method": "HideVisibilityTest#testServiceVisibility",
+          "visible": false,
+          "service": "isolated",
+          "passed": true,
+          "elapsed_ms": 275.2
+        },
+        {
+          "method": "HideVisibilityTest#testServiceVisibility",
+          "visible": true,
+          "service": "isolated",
+          "passed": true,
+          "elapsed_ms": 288.3
+        },
+        {
+          "method": "HideVisibilityTest#testServiceVisibility",
+          "visible": false,
+          "service": "nested",
+          "passed": true,
+          "elapsed_ms": 278.6
+        },
+        {
+          "method": "HideVisibilityTest#testServiceVisibility",
+          "visible": true,
+          "service": "nested",
+          "passed": true,
+          "elapsed_ms": 289.6
+        },
+        {
+          "method": "HideVisibilityTest#testServiceVisibility",
+          "visible": false,
+          "service": "appzygote",
+          "passed": true,
+          "elapsed_ms": 314.5
+        },
+        {
+          "method": "HideVisibilityTest#testServiceVisibility",
+          "visible": true,
+          "service": "appzygote",
+          "passed": true,
+          "elapsed_ms": 337.5
+        }
+      ]
+    },
+    "external-sulist": {
+      "status": {
+        "schema": 1,
+        "database_version": 12,
+        "boot_ready": true,
+        "enabled": true,
+        "mode": "sulist",
+        "configured_mode": "sulist",
+        "reboot_required": false,
+        "selection_table": "sulist",
+        "engine": "external",
+        "configured_provider": "external",
+        "external_sulist_supported": true
+      },
+      "boot_id": "9e724971-c3d0-401d-8290-28341895544b",
+      "tests": [
+        {
+          "method": "HideVisibilityTest#testModuleVisibility",
+          "visible": false,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 173.8
+        },
+        {
+          "method": "ZygiskModuleTest#testNotInjected",
+          "visible": null,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 149.4
+        },
+        {
+          "method": "HideVisibilityTest#testModuleVisibility",
+          "visible": true,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 163.8
+        },
+        {
+          "method": "ZygiskModuleTest#testInjected",
+          "visible": null,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 155.5
+        },
+        {
+          "method": "HideVisibilityTest#testModuleVisibility",
+          "visible": false,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 148.7
+        }
+      ]
+    },
+    "logcat-sulist-c983": {
+      "status": {
+        "schema": 1,
+        "database_version": 12,
+        "boot_ready": true,
+        "enabled": true,
+        "mode": "sulist",
+        "configured_mode": "sulist",
+        "reboot_required": false,
+        "selection_table": "sulist",
+        "engine": "logcat",
+        "configured_provider": "core",
+        "external_sulist_supported": false
+      },
+      "boot_id": "50cbe603-538d-4ddd-8b58-57f637bef661",
+      "tests": [
+        {
+          "method": "HideVisibilityTest#testModuleVisibility",
+          "visible": false,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 283.2
+        },
+        {
+          "method": "ZygiskModuleTest#testNotInjected",
+          "visible": null,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 214.2
+        },
+        {
+          "method": "HideVisibilityTest#testModuleVisibility",
+          "visible": true,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 216.3
+        },
+        {
+          "method": "ZygiskModuleTest#testNotInjected",
+          "visible": null,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 204.9
+        },
+        {
+          "method": "HideVisibilityTest#testModuleVisibility",
+          "visible": false,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 207.3
+        }
+      ]
+    },
+    "logging-stress": {
+      "root_requests": 64,
+      "parallel": 16,
+      "namespace_launches": 12,
+      "all_passed": true,
+      "remaining_magiskd_processes": 1,
+      "identity": {
+        "app_version_code": 31002,
+        "application_id": "io.github.huskydg.magisk.next",
+        "build_id": "92c7c38ebd34612b880c6fecf4475880172fb85eaa7b7151eb324870567861f4",
+        "capabilities": [
+          "kitsune.build-info.v1",
+          "kitsune.hide.v1",
+          "kitsune.system-mode.transaction.v1",
+          "kitsune.zygisk-provider.v1"
+        ],
+        "channel": "next-system-experimental",
+        "compat_version_code": 31000,
+        "product_name": "KitsuneMagisk Next",
+        "product_version": "0.1.0-dev",
+        "protocol_version": 1,
+        "release_tag": "kitsune-canary-7cb16c7e7478d8d333bc583cc000f2b5074ffc44",
+        "schema": 1,
+        "source_commit": "7cb16c7e7478d8d333bc583cc000f2b5074ffc44",
+        "source_digest": "7e7c638e1045d2a13dbc2f9891a252e21f98ed3bace9861c3bae548ae83075a2",
+        "source_dirty": false,
+        "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+        "upstream_version": "31.0",
+        "variant": "debug",
+        "version_name": "0.1.0-dev-kitsune.7cb16c7e"
+      }
+    },
+    "running-process": {
+      "pids": [
+        4782,
+        4781
+      ],
+      "alive_after_selection": [
+        false,
+        true
+      ],
+      "new_process_output": "INSTRUMENTATION_RESULT: uid=10123\nINSTRUMENTATION_RESULT: visible=false\nINSTRUMENTATION_CODE: -1\n"
+    },
+    "release-sulist-final": {
+      "status": {
+        "schema": 1,
+        "database_version": 12,
+        "boot_ready": true,
+        "enabled": true,
+        "mode": "sulist",
+        "configured_mode": "sulist",
+        "reboot_required": false,
+        "selection_table": "sulist",
+        "engine": "builtin",
+        "configured_provider": "core",
+        "external_sulist_supported": false
+      },
+      "boot_id": "e11d48a5-4657-4c49-b99f-c4edeb1dd493",
+      "tests": [
+        {
+          "method": "HideVisibilityTest#testModuleVisibility",
+          "visible": false,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 323.1
+        },
+        {
+          "method": "ZygiskModuleTest#testNotInjected",
+          "visible": null,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 292.9
+        },
+        {
+          "method": "HideVisibilityTest#testModuleVisibility",
+          "visible": true,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 223.0
+        },
+        {
+          "method": "ZygiskModuleTest#testInjected",
+          "visible": null,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 222.1
+        },
+        {
+          "method": "HideVisibilityTest#testModuleVisibility",
+          "visible": false,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 282.8
+        }
+      ]
+    },
+    "release-logcat-sulist-final": {
+      "status": {
+        "schema": 1,
+        "database_version": 12,
+        "boot_ready": true,
+        "enabled": true,
+        "mode": "sulist",
+        "configured_mode": "sulist",
+        "reboot_required": false,
+        "selection_table": "sulist",
+        "engine": "logcat",
+        "configured_provider": "core",
+        "external_sulist_supported": false
+      },
+      "boot_id": "c747863f-5d77-466d-adb9-47c354b22d56",
+      "tests": [
+        {
+          "method": "HideVisibilityTest#testModuleVisibility",
+          "visible": false,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 573.3
+        },
+        {
+          "method": "ZygiskModuleTest#testNotInjected",
+          "visible": null,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 448.0
+        },
+        {
+          "method": "HideVisibilityTest#testModuleVisibility",
+          "visible": true,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 692.4
+        },
+        {
+          "method": "ZygiskModuleTest#testNotInjected",
+          "visible": null,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 349.6
+        },
+        {
+          "method": "HideVisibilityTest#testModuleVisibility",
+          "visible": false,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 325.5
+        }
+      ]
+    },
+    "mumu-builtin-c983": {
+      "status": {
+        "schema": 1,
+        "database_version": 12,
+        "boot_ready": true,
+        "enabled": true,
+        "mode": "hide",
+        "configured_mode": "hide",
+        "reboot_required": false,
+        "selection_table": "denylist",
+        "engine": "builtin",
+        "configured_provider": "core",
+        "external_sulist_supported": false
+      },
+      "boot_id": "1f28e537-9128-4413-9563-1f8910077f9c",
+      "tests": [
+        {
+          "method": "HideVisibilityTest#testModuleVisibility",
+          "visible": true,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 1701.5
+        },
+        {
+          "method": "ZygiskModuleTest#testInjected",
+          "visible": null,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 1581.4
+        },
+        {
+          "method": "HideVisibilityTest#testModuleVisibility",
+          "visible": false,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 1619.9
+        },
+        {
+          "method": "ZygiskModuleTest#testNotInjected",
+          "visible": null,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 1664.7
+        },
+        {
+          "method": "HideVisibilityTest#testModuleVisibility",
+          "visible": true,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 1547.2
+        },
+        {
+          "method": "HideVisibilityTest#testServiceVisibility",
+          "visible": false,
+          "service": "remote",
+          "passed": true,
+          "elapsed_ms": 2015.7
+        },
+        {
+          "method": "HideVisibilityTest#testServiceVisibility",
+          "visible": true,
+          "service": "remote",
+          "passed": true,
+          "elapsed_ms": 1882.8
+        },
+        {
+          "method": "HideVisibilityTest#testServiceVisibility",
+          "visible": false,
+          "service": "isolated",
+          "passed": true,
+          "elapsed_ms": 1982.4
+        },
+        {
+          "method": "HideVisibilityTest#testServiceVisibility",
+          "visible": true,
+          "service": "isolated",
+          "passed": true,
+          "elapsed_ms": 1893.3
+        },
+        {
+          "method": "HideVisibilityTest#testServiceVisibility",
+          "visible": false,
+          "service": "nested",
+          "passed": true,
+          "elapsed_ms": 1997.8
+        },
+        {
+          "method": "HideVisibilityTest#testServiceVisibility",
+          "visible": true,
+          "service": "nested",
+          "passed": true,
+          "elapsed_ms": 1824.7
+        },
+        {
+          "method": "HideVisibilityTest#testServiceVisibility",
+          "visible": false,
+          "service": "appzygote",
+          "passed": true,
+          "elapsed_ms": 2137.3
+        },
+        {
+          "method": "HideVisibilityTest#testServiceVisibility",
+          "visible": true,
+          "service": "appzygote",
+          "passed": true,
+          "elapsed_ms": 2029.0
+        }
+      ]
+    },
+    "mumu-sulist-c983": {
+      "status": {
+        "schema": 1,
+        "database_version": 12,
+        "boot_ready": true,
+        "enabled": true,
+        "mode": "sulist",
+        "configured_mode": "sulist",
+        "reboot_required": false,
+        "selection_table": "sulist",
+        "engine": "builtin",
+        "configured_provider": "core",
+        "external_sulist_supported": false
+      },
+      "boot_id": "e9f4f1c4-7544-438b-a128-5dfc6bfb9c10",
+      "tests": [
+        {
+          "method": "HideVisibilityTest#testModuleVisibility",
+          "visible": false,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 1182.1
+        },
+        {
+          "method": "ZygiskModuleTest#testNotInjected",
+          "visible": null,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 1158.9
+        },
+        {
+          "method": "HideVisibilityTest#testModuleVisibility",
+          "visible": true,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 1047.7
+        },
+        {
+          "method": "ZygiskModuleTest#testInjected",
+          "visible": null,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 1053.9
+        },
+        {
+          "method": "HideVisibilityTest#testModuleVisibility",
+          "visible": false,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 1151.7
+        }
+      ]
+    },
+    "mumu-final-logcat": {
+      "status": {
+        "schema": 1,
+        "database_version": 12,
+        "boot_ready": true,
+        "enabled": true,
+        "mode": "hide",
+        "configured_mode": "hide",
+        "reboot_required": false,
+        "selection_table": "denylist",
+        "engine": "logcat",
+        "configured_provider": "core",
+        "external_sulist_supported": false
+      },
+      "boot_id": "420bb6ae-eb33-4dad-be12-28f8ead03aa8",
+      "tests": [
+        {
+          "method": "HideVisibilityTest#testModuleVisibility",
+          "visible": true,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 1087.5
+        },
+        {
+          "method": "HideVisibilityTest#testModuleVisibility",
+          "visible": false,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 1080.3
+        },
+        {
+          "method": "HideVisibilityTest#testModuleVisibility",
+          "visible": true,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 1063.9
+        }
+      ]
+    },
+    "mumu-final-sulist": {
+      "status": {
+        "schema": 1,
+        "database_version": 12,
+        "boot_ready": true,
+        "enabled": true,
+        "mode": "sulist",
+        "configured_mode": "sulist",
+        "reboot_required": false,
+        "selection_table": "sulist",
+        "engine": "logcat",
+        "configured_provider": "core",
+        "external_sulist_supported": false
+      },
+      "boot_id": "9fb83ec1-92d1-4071-819e-fe73bee4ef95",
+      "tests": [
+        {
+          "method": "HideVisibilityTest#testModuleVisibility",
+          "visible": false,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 1094.5
+        },
+        {
+          "method": "ZygiskModuleTest#testNotInjected",
+          "visible": null,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 1078.3
+        },
+        {
+          "method": "HideVisibilityTest#testModuleVisibility",
+          "visible": true,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 1060.6
+        },
+        {
+          "method": "ZygiskModuleTest#testNotInjected",
+          "visible": null,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 1069.6
+        },
+        {
+          "method": "HideVisibilityTest#testModuleVisibility",
+          "visible": false,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 1122.0
+        }
+      ]
+    },
+    "mumu-final-external": {
+      "status": {
+        "schema": 1,
+        "database_version": 12,
+        "boot_ready": true,
+        "enabled": true,
+        "mode": "sulist",
+        "configured_mode": "sulist",
+        "reboot_required": false,
+        "selection_table": "sulist",
+        "engine": "external",
+        "configured_provider": "external",
+        "external_sulist_supported": true
+      },
+      "boot_id": "fa1ce55f-a56f-490d-bd63-73f56a2b77e1",
+      "tests": [
+        {
+          "method": "HideVisibilityTest#testModuleVisibility",
+          "visible": false,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 1131.8
+        },
+        {
+          "method": "ZygiskModuleTest#testNotInjected",
+          "visible": null,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 1089.2
+        },
+        {
+          "method": "HideVisibilityTest#testModuleVisibility",
+          "visible": true,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 1068.0
+        },
+        {
+          "method": "ZygiskModuleTest#testInjected",
+          "visible": null,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 1063.0
+        },
+        {
+          "method": "HideVisibilityTest#testModuleVisibility",
+          "visible": false,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 1065.9
+        }
+      ]
+    },
+    "zygote-restart": {
+      "old_pid": "3451",
+      "new_pid": "6181",
+      "namespace_test": "\ncom.topjohnwu.magisk.test.HideVisibilityTest:.\n\nTime: 0.067\n\nOK (1 test)\n\n\n",
+      "identity": {
+        "app_version_code": 31002,
+        "application_id": "io.github.huskydg.magisk.next",
+        "build_id": "818529ae9385e91892427005acea8c3b06c0739aeb790863f264514f29ac620c",
+        "capabilities": [
+          "kitsune.build-info.v1",
+          "kitsune.hide.v1",
+          "kitsune.zygisk-provider.v1"
+        ],
+        "channel": "next-system-experimental",
+        "compat_version_code": 31000,
+        "product_name": "KitsuneMagisk Next",
+        "product_version": "0.1.0-dev",
+        "protocol_version": 1,
+        "release_tag": "kitsune-canary-7cb16c7e7478d8d333bc583cc000f2b5074ffc44",
+        "schema": 1,
+        "source_commit": "7cb16c7e7478d8d333bc583cc000f2b5074ffc44",
+        "source_digest": "7e7c638e1045d2a13dbc2f9891a252e21f98ed3bace9861c3bae548ae83075a2",
+        "source_dirty": false,
+        "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+        "upstream_version": "31.0",
+        "variant": "release",
+        "version_name": "0.1.0-dev-kitsune.7cb16c7e"
+      },
+      "mode": {
+        "schema": 1,
+        "database_version": 12,
+        "boot_ready": true,
+        "enabled": true,
+        "mode": "sulist",
+        "configured_mode": "hide",
+        "reboot_required": true,
+        "selection_table": "sulist",
+        "engine": "logcat",
+        "configured_provider": "core",
+        "external_sulist_supported": false
+      }
+    },
+    "release_hidden_manager": {
+      "create": true,
+      "policy_tests": true,
+      "restore": true,
+      "wrong_signer": [
+        {
+          "schema": 1,
+          "unmount": false,
+          "su_eligible": false,
+          "manager": false
+        },
+        {
+          "schema": 1,
+          "unmount": false,
+          "su_eligible": true,
+          "manager": true
+        }
+      ]
+    },
+    "monitor_cycles": {
+      "cycles": 64,
+      "threads_before": 4,
+      "threads_after": 4,
+      "fds_before": 9,
+      "fds_after": 9
+    },
+    "pid_limit_retirement": {
+      "historical_endpoint": "8e854f378ebabe427f02d65615ddee57af5b53d0",
+      "pid": 32769,
+      "result": "AddressSanitizer stack-buffer-overflow",
+      "fixture": "Historical pid_set indexing; only the const accessor typedef adapted to the host libc++"
+    },
+    "ci": {
+      "run": 38774381117,
+      "attempt": 2,
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/38774381117",
+      "checks": 32,
+      "conclusion": "success",
+      "reruns": [
+        "API25 x86_64: Binder shutdown SIGSEGV in a root process; exact-artifact rerun passed.",
+        "API29 x86_64: Launcher graphics allocation SIGSEGV; exact-artifact rerun passed."
+      ],
+      "crash_filter_changed": false
+    },
+    "release-builtin-final": {
+      "status": {
+        "schema": 1,
+        "database_version": 12,
+        "boot_ready": true,
+        "enabled": true,
+        "mode": "hide",
+        "configured_mode": "hide",
+        "reboot_required": false,
+        "selection_table": "denylist",
+        "engine": "builtin",
+        "configured_provider": "core",
+        "external_sulist_supported": false
+      },
+      "boot_id": "fa638462-5f17-48fb-b49f-566f1b4526f1",
+      "tests": [
+        {
+          "method": "HideVisibilityTest#testModuleVisibility",
+          "visible": true,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 837.4
+        },
+        {
+          "method": "ZygiskModuleTest#testInjected",
+          "visible": null,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 829.5
+        },
+        {
+          "method": "HideVisibilityTest#testModuleVisibility",
+          "visible": false,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 797.9
+        },
+        {
+          "method": "ZygiskModuleTest#testNotInjected",
+          "visible": null,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 576.8
+        },
+        {
+          "method": "HideVisibilityTest#testModuleVisibility",
+          "visible": true,
+          "service": null,
+          "passed": true,
+          "elapsed_ms": 430.3
+        },
+        {
+          "method": "HideVisibilityTest#testServiceVisibility",
+          "visible": false,
+          "service": "remote",
+          "passed": true,
+          "elapsed_ms": 883.7
+        },
+        {
+          "method": "HideVisibilityTest#testServiceVisibility",
+          "visible": true,
+          "service": "remote",
+          "passed": true,
+          "elapsed_ms": 547.5
+        },
+        {
+          "method": "HideVisibilityTest#testServiceVisibility",
+          "visible": false,
+          "service": "isolated",
+          "passed": true,
+          "elapsed_ms": 468.4
+        },
+        {
+          "method": "HideVisibilityTest#testServiceVisibility",
+          "visible": true,
+          "service": "isolated",
+          "passed": true,
+          "elapsed_ms": 422.9
+        },
+        {
+          "method": "HideVisibilityTest#testServiceVisibility",
+          "visible": false,
+          "service": "nested",
+          "passed": true,
+          "elapsed_ms": 509.8
+        },
+        {
+          "method": "HideVisibilityTest#testServiceVisibility",
+          "visible": true,
+          "service": "nested",
+          "passed": true,
+          "elapsed_ms": 375.7
+        },
+        {
+          "method": "HideVisibilityTest#testServiceVisibility",
+          "visible": false,
+          "service": "appzygote",
+          "passed": true,
+          "elapsed_ms": 519.9
+        },
+        {
+          "method": "HideVisibilityTest#testServiceVisibility",
+          "visible": true,
+          "service": "appzygote",
+          "passed": true,
+          "elapsed_ms": 307.7
+        }
+      ]
+    },
+    "usap": {
+      "passed": true,
+      "cases": [
+        {
+          "selected": true,
+          "pool_before": [
+            "2803",
+            "3143",
+            "3144"
+          ],
+          "pid": "2803",
+          "log": "10-15 14:19:33.448  2803  2803 I PR12_USAP: pid=2803 visible=false"
+        },
+        {
+          "selected": false,
+          "pool_before": [
+            "3143",
+            "3144"
+          ],
+          "pid": "3143",
+          "log": "10-15 14:19:33.961  3143  3143 I PR12_USAP: pid=3143 visible=true"
+        }
+      ],
+      "identity": {
+        "app_version_code": 31002,
+        "application_id": "io.github.huskydg.magisk.next",
+        "build_id": "818529ae9385e91892427005acea8c3b06c0739aeb790863f264514f29ac620c",
+        "capabilities": [
+          "kitsune.build-info.v1",
+          "kitsune.hide.v1",
+          "kitsune.zygisk-provider.v1"
+        ],
+        "channel": "next-system-experimental",
+        "compat_version_code": 31000,
+        "product_name": "KitsuneMagisk Next",
+        "product_version": "0.1.0-dev",
+        "protocol_version": 1,
+        "release_tag": "kitsune-canary-7cb16c7e7478d8d333bc583cc000f2b5074ffc44",
+        "schema": 1,
+        "source_commit": "7cb16c7e7478d8d333bc583cc000f2b5074ffc44",
+        "source_digest": "7e7c638e1045d2a13dbc2f9891a252e21f98ed3bace9861c3bae548ae83075a2",
+        "source_dirty": false,
+        "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+        "upstream_version": "31.0",
+        "variant": "release",
+        "version_name": "0.1.0-dev-kitsune.7cb16c7e"
+      }
+    },
+    "unsupported-provider": {
+      "code": 9,
+      "output": {
+        "schema": 1,
+        "code": 9
+      },
+      "passed": true
+    },
+    "host": {
+      "tests": 296,
+      "passed": true,
+      "known_skip": 1,
+      "scope": "296-test host suite including actual native migration and activation-failure functions, policy bounds, and the held-log-lock fork regression."
+    },
+    "build": {
+      "all_four_abi_debug_release": true,
+      "artifact_identity_signer_16k_checks": true,
+      "clippy_debug_release_all_abis": true,
+      "android_lint_zero_errors": true,
+      "jvm_tests": true,
+      "legacy_compile": true,
+      "lint_reports": {
+        "apk": {
+          "errors": 0,
+          "issues": 93
+        },
+        "shared": {
+          "errors": 0,
+          "issues": 3
+        },
+        "stub": {
+          "errors": 0,
+          "issues": 10
+        },
+        "test": {
+          "errors": 0,
+          "issues": 4
+        }
+      }
+    },
+    "lite_profile": {
+      "configuration": "SuList; built-in off; external absent; all modules disabled",
+      "passed": true,
+      "source": "Original Lite 669d2da1b47c72e4317457416abe730e82416156 always enabled SuList without requiring a persisted setting. Persist the explicit choice before upgrading."
+    },
+    "mumu_system_mode": {
+      "player": "MuMuPlayer Pro 1.9.2",
+      "instance": 1,
+      "name": "Android Device-1",
+      "api": 32,
+      "abi": "arm64-v8a",
+      "kernel": "4.19.195-android-arm64-gedae1315d023",
+      "page_size": 4096,
+      "selinux": "Permissive",
+      "fresh_install_source": "c9837b2eeeb87e79632c30c09f3c28d36a7c3ad6",
+      "upgrade_source": "7cb16c7e7478d8d333bc583cc000f2b5074ffc44",
+      "fresh_install_and_upgrade": "BOOT_VERIFIED",
+      "vendor_root_disabled": true,
+      "qualified_cold_boots": 3,
+      "qualified_external_restore": true,
+      "uninstall": "EXACT_UNINSTALL_OK",
+      "database_byte_preserved": true,
+      "modules_preserved": true,
+      "uninstall_cold_boot": true,
+      "original_restore": {
+        "instance": 1,
+        "name": "Android Device-1",
+        "state": "running",
+        "restored_settings": {
+          "customAdbPort": 0,
+          "vmRootEnable": true
+        },
+        "system_and_data_verified_before_open": true
+      },
+      "qualification_record_sha256": "9f2ff74cf8dd2543096c6c750be078a89e76da141aabd719c0bb7a1209936680",
+      "transport_failures": "Early qualification attempts saw startup timeout, automatic-port drift and a transient offline transport. Exact failed-run probes were removed; a fixed guest port and task-owned ADB server completed qualification. Original settings were restored."
+    },
+    "unsupported_provider": {
+      "code": 9,
+      "output": {
+        "schema": 1,
+        "code": 9
+      },
+      "passed": true
+    },
+    "daemon_reconnect": {
+      "requests": 16,
+      "same_daemon": true
+    }
+  },
+  "historical_decisions": {
+    "HID-008": "Retire the historical fixed-PID ptrace monitor. Use maintained built-in specialization or the bounded no-Zygisk log monitor; the pinned external adapter remains an explicit ptrace-provider option. No first-instruction hiding promise is made for the log engine.",
+    "HID-011": "Retire the historical daemon-namespace divergence. Keep the maintained daemon view and isolate cleanup in the selected process or exec namespace; module/companion and parent-namespace tests cover the supported uses.",
+    "HID-012": "Retire the unconditional custom /system/bin overlay and its separate zygote-restart unmount. The maintained PATH injection supplies SU/applets and is removed by namespace cleanup. Use PATH or magisk --path instead of a hard-coded historical location.",
+    "HID-013": "Retire randomized daemon/FIFO endpoint compatibility. Keep the owned runtime socket, credential/executable/operation checks, and maintained request transport. Use CLI/Zygisk APIs; endpoint naming is not authorization.",
+    "HID-016": "Retire the series of unconditional /system/bin and APEX relocations and debug_ramdisk fallbacks as separate mechanisms. Use the maintained PATH-selected exposure, qualified with root and namespace tests; update scripts that hard-code a historical location.",
+    "HID-017": "Retire the boot-complete-only SU exposure delay. Keep maintained post-fs-data root for scripts and modules, with per-process cleanup. Cold-boot and root tests retain the functional rooting use case.",
+    "DIST-004": "Retire the separate Lite APK/update channel. Preserve its no-injection/inverse-policy configuration in the maintained product. Before upgrading original Lite, explicitly persist its always-on choice with magiskhide sulist enable and disable existing modules/providers; the sulist rows are preserved. PR13 owns the UI and PR16 the signed release transition."
+  },
+  "limits": [
+    "Production promotion remains gated by PR13-PR16.",
+    "Physical devices and exact SELinux-disabled/Waydroid runtime qualification remain PR15. Both installed AVD kernels stayed permissive despite disabled/selinux=0 requests; no disabled-kernel pass is claimed.",
+    "No-Zygisk cleanup is asynchronous; no universal hiding or attestation guarantee.",
+    "External compatibility applies only to the pinned source adapter, not stock ReZygisk/NeoZygisk releases."
+  ],
+  "completed_at": "2026-10-15",
+  "pull_request": "https://github.com/Jordan231111/KitsuneMagisk/pull/35",
+  "cleanup": {
+    "temporary_avds": {
+      "deleted": [
+        "kitsune-pr12",
+        "kitsune-pr12-api29"
+      ],
+      "all_passed": true
+    },
+    "mumu_original_restored": true,
+    "probe_artifacts": "Removed after retaining this summarized evidence; no raw user disks, private signing keys or probe ZIPs are committed."
+  }
+}

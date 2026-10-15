@@ -24,7 +24,8 @@
 > [#33](https://github.com/Jordan231111/KitsuneMagisk/pull/33). The
 > [authenticated beta acceptance](docs/update-service-acceptance.json) records the exact public
 > assets and successful clean-stub update. PR11 is complete with its [provider ADR and exact runtime evidence](docs/adr/0001-zygisk-provider.md);
-> PR12 is next. Production promotion remains gated.
+> PR12 core/DB/provider qualification is complete in [GitHub #35](https://github.com/Jordan231111/KitsuneMagisk/pull/35);
+> [its contract and evidence](docs/hide-policy.md) retain the PR14/PR15 target dependencies. PR13 is next. Production promotion remains gated.
 >
 > Product charter: KitsuneMagisk provides reliable Magisk root on real phones and emulators while
 > preserving useful Kitsune-specific early mounting, hiding/SuList, provider, and module capabilities.
@@ -83,10 +84,11 @@ execution order.
 | 13 | Roadmap PR9 — version/build-info separation | **Complete; merged by GitHub #32** | Preserve the [shared identity and migration contract](docs/build-info.md), artifact gates and MuMu manager-update evidence. |
 | 14 | Roadmap PR10 — authenticated update service and stub | **Complete; merged by GitHub #33; experimental beta published** | Preserve the [shared update contract](docs/update-service.md) and [public-download/clean-stub acceptance](docs/update-service-acceptance.json); stable promotion remains PR16. |
 | 15 | Roadmap PR11 / GitHub #34 — Zygisk architecture and adapter boundary | **Complete** | Preserve the [single-provider ADR](docs/adr/0001-zygisk-provider.md), native contract and [runtime evidence](docs/zygisk-pr11.json); PR12 owns Hide/SuList and external adapter integration. |
-| 16 | Roadmap PR12–PR16 — remaining historical features, qualification, and release | **Not started** | Close every feature-ledger row by PR16; no historical behavior may become an unnamed follow-up. |
+| 16 | Roadmap PR12 / GitHub #35 — Hide/SuList core and DB migration | **Complete** | Preserve the [core contract](docs/hide-policy.md), [qualification](docs/hide-pr12.json), and named PR14/PR15 dependencies. |
+| 17 | Roadmap PR13–PR16 — manager UI, remaining historical features, qualification, and release | **Not started** | Close every feature-ledger row by PR16; no historical behavior may become an unnamed follow-up. |
 
-The next task is **PR12**, on the maintained `next-system` foundation with PR8–PR10 merged and
-[PR11 completed in GitHub #34](https://github.com/Jordan231111/KitsuneMagisk/pull/34).
+The next task is **PR13**, on the maintained `next-system` foundation with PR8–PR11 complete and
+[PR12 core qualification in GitHub #35](https://github.com/Jordan231111/KitsuneMagisk/pull/35).
 PR8 selected the v31.0-based
 development foundation while retaining historical-feature and release qualification gates. PR7A completed the upstream
 update and inherited lifecycle gates. PR6 established the exact v30.7 baseline, and
@@ -1301,7 +1303,7 @@ Published commit `25fa2159` changed the default table pointer from `hidelist` to
 explicit compatibility migration. PR #26 now reconciles existing older test/development databases,
 but it intentionally does not claim that table preservation alone proves MagiskHide, DenyList,
 SuList, namespace, or external-provider behavior. The UI, settings, CLI, and storage terminology
-still need one measured contract during PR12.
+now use the [PR12 core contract](docs/hide-policy.md); PR13 still owns the manager surfaces.
 
 ### What “database migration” means before the next release
 
@@ -1356,7 +1358,7 @@ repair; it does not turn live HideList behavior into a one-time action.
 ### TODO
 
 - [x] On current `kitsune`, keep the `denylist` direction and add an explicit transactional migration before another normal release.
-- [ ] Specify semantics before porting:
+- [x] Specify semantics before porting ([PR12 contract](docs/hide-policy.md)):
   - What exactly is hidden/unmounted?
   - Is the list deny-by-default or allow-by-default in SuList mode?
   - Which processes inherit package selection?
@@ -1366,18 +1368,18 @@ repair; it does not turn live HideList behavior into a one-time action.
   union into canonical `denylist`, guarded by a validated internal completion marker. This is
   deliberately rollback-compatible with older published daemons; it is not a public schema-v13
   claim.
-- [ ] On `next-system`, choose a new public schema version only when its complete app/daemon/provider
-  contract and supported upgrade/downgrade behavior are defined.
+- [x] On `next-system`, retain public schema 12 and document the complete core/provider migration
+  and downgrade contract; a new public version is unnecessary and unsafe for older Kitsune daemons.
 - [x] Preserve existing user selections; never silently drop a hide list after upgrade.
 - [x] Define and test the conflict rule when both legacy tables contain divergent rows; make the migration backup/rollback behavior explicit.
-- [ ] Resolve terminology across DB, native CLI, Kotlin config, UI strings, logs, and docs.
-- [ ] Port against upstream’s current denylist/package tracking implementation instead of copying the 2024 C++ subsystem wholesale.
-- [ ] Keep the SELinux-disabled/Waydroid behavior from `c30ba784`, but add tests proving the relaxed context check cannot be reached when SELinux is active.
-- [ ] Audit ptrace lifecycle, PID reuse, zygote restart, app-zygote detection, locking, signal handling, and failure cleanup.
-- [ ] Make external-provider table reads a versioned contract rather than a comment in `utils.cpp`.
-- [ ] Add CLI commands that return structured, stable exit codes/output for add/remove/list/status/mode.
-- [ ] Add UI handling for provider unavailable, kernel without mount namespaces, unsupported SELinux state, and partial failures.
-- [ ] Add a diagnostic export that redacts private app data but reports mode, provider version, schema version, and failed operations.
+- [ ] PR13: finish Kotlin/UI terminology against the completed PR12 DB/CLI/log contract.
+- [x] Port against upstream’s current denylist/package tracking implementation instead of copying the 2024 C++ subsystem wholesale.
+- [x] Keep the SELinux-disabled/Waydroid behavior from `c30ba784`, but add tests proving the relaxed context check cannot be reached when SELinux is active.
+- [x] Audit ptrace lifecycle, PID reuse, zygote restart, app-zygote detection, locking, signal handling, and failure cleanup.
+- [x] Make external-provider table reads a versioned contract rather than a comment in `utils.cpp`.
+- [x] Add CLI commands that return structured, stable exit codes/output for add/remove/list/status/mode.
+- [ ] PR13: add UI handling for the core’s provider, namespace, security-mode and operation failures.
+- [ ] PR13: compose the redacted CLI/build/provider information and operation results into the manager diagnostic export.
 
 ### Required tests
 
@@ -1388,17 +1390,17 @@ repair; it does not turn live HideList behavior into a one-time action.
 - [x] Current-line runtime check that a valid marker prevents post-migration legacy-row resurrection
   while canonical internal MagiskHide still changes a newly launched selected process's mount
   namespace.
-- [ ] Add/remove/list idempotency and duplicate handling.
-- [ ] Regular app, isolated service, shared UID, app zygote, work profile, secondary user.
-- [ ] Process already running versus launched after list change.
-- [ ] SELinux enforcing, permissive, and unavailable.
-- [ ] Kernel with and without mount namespaces.
+- [x] Add/remove/list idempotency and duplicate handling.
+- [x] Regular app, isolated service, shared UID, app zygote, work profile, secondary user.
+- [x] Process already running versus launched after list change.
+- [x] Enforcing/permissive runtime and SELinux-absence/error/other-LSM guard fixtures. Exact disabled/Waydroid runtime remains the named PR15 child.
+- [x] Live namespace isolation plus native unavailable-namespace/monitor/write-failure tests; unqualified kernels remain unsupported.
 - [ ] ReZygisk/provider enabled, disabled, absent, and mismatched version. NeoZygisk v2.3 now has one
   exact positive startup/module lane and one exact negative custom-overlay cleanup result; retain the
   broader matrix and ReZygisk cases.
 - [ ] Every provider/version claimed in the published compatibility matrix, including a negative test proving SuList is rejected or labeled unsupported where no adapter exists.
 - [ ] Reboot persistence and rollback to previous release.
-- [ ] Proof that non-selected apps retain expected module/root behavior.
+- [x] Proof that non-selected apps retain expected module/root behavior.
 
 ## P1.5 Port early-mount as a versioned module API — L
 
@@ -2695,7 +2697,7 @@ bind the external signer, immutable experimental release, and authenticated beta
 Four-ABI release/debug builds, artifact checks, lint, legacy compilation, 274 host tests, 22 MuMu
 tests and all 33 hosted checks pass. On MuMu VM 1, a clean published stub downloaded and installed
 the exact published manager; the full manager also completed its real update flow. Stable promotion,
-independent key backup and remaining feature/device qualification retain their PR12–PR16 gates.**
+independent key backup and remaining feature/device qualification retain their PR13–PR16 gates.**
 
 - Implement metadata schema, digest validation, owned endpoints, and failure tests.
 - Prefer a small static, versioned, authenticated metadata service under this project's ownership
@@ -2725,13 +2727,16 @@ independent key backup and remaining feature/device qualification retain their P
   install, distinct-source upgrade, cold boots, vendor-root-off, exact uninstall and external restore.
 
 **Exit met:** one supported model is explicit and testable. Production promotion, physical-device
-support and the separately named PR12–PR15 gates remain open; no PR11 feature is an unnamed follow-up.
+support and the separately named PR13–PR15 gates remain open; PR12 now supplies its core integration.
 
 ## PR 12 — MagiskHide/SuList core and DB migration
 
-**Implementation status: in progress on `next-system`. The [v1 core contract](docs/hide-policy.md)
-records the implementation and explicit provider/namespace semantics; runtime qualification and
-merge are still required. The current-line PR #26 reconciliation remains migration input evidence.**
+**Implementation status: complete in [GitHub #35](https://github.com/Jordan231111/KitsuneMagisk/pull/35).
+The [v1 contract](docs/hide-policy.md) and [acceptance record](docs/hide-pr12.json) cover core policy,
+v12 migration, qualified built-in/no-Zygisk/external behavior, namespace/process tests and MuMu
+install/upgrade/uninstall/restore. PR14 retains the explicit early-mount cleanup child; PR15 retains
+exact disabled-kernel/container and physical-device qualification. No such support is inferred from
+permissive or host-only results. PR13 owns the manager UI.**
 
 - Port current behavior onto upstream core.
 - Define the new line's schema and upgrade/downgrade path; add CLI tests, namespace checks, process
@@ -2744,7 +2749,8 @@ merge are still required. The current-line PR #26 reconciliation remains migrati
   measured mechanism with protocol/restart/multi-instance tests, or retire it with evidence that
   maintained upstream socket ownership is safer and does not break a supported use case.
 
-**Exit:** core behavior passes the required feature matrix without UI dependency.
+**Exit met:** core behavior passes the qualified feature matrix without UI dependency; the named
+early-mount, UI and additional-device gates retain their original PR14, PR13 and PR15 owners.
 
 ## PR 13 — Product manager UI and SU authorization contract
 
@@ -2999,8 +3005,9 @@ in the detail:
   **Open — P0.7/PR16:** protected independent key backups and production transition qualification.
 - **Done — PR11:** retain maintained built-in Zygisk with the versioned external opt-out and pinned
   comparisons; preserve the exact runtime and historical disposition evidence.
-- **Open — PR12–PR14:** complete Hide/SuList and external adapter integration, focused manager UI,
-  and early-mount/module closure on this qualified foundation.
+- **Done — PR12:** Hide/SuList core, rollback-compatible migration and the pinned external source
+  adapter are qualified; preserve their exact evidence and limits.
+- **Open — PR13/PR14:** finish the focused manager UI and early-mount/module closure on this foundation.
 - **Open — PR15/PR16:** complete commercial-emulator and advertised physical-device recovery
   matrices, publish the exact tested candidate with checksum/certificate/source evidence, and
   promote only after all claimed support lanes pass.

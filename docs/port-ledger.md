@@ -10,8 +10,8 @@ of published contracts and associated source, with per-row evidence limits. They
 globally earliest release dates or compiled-APK/runtime attestations. Discontinuous changes
 remain visible in the per-observation [source review](port-history/shipment-source-review.json).
 
-Recorded source comparisons: 105/105. Reviewed shipment ranges:
-105/105. These are source observations, not runtime acceptance.
+Recorded source comparisons: 108/108. Reviewed shipment ranges:
+108/108. These are source observations, not runtime acceptance.
 The JSON retains exact historical paths/commits, upstream blob digests, affected users,
 migration guidance and observation links for every row.
 
@@ -53,27 +53,27 @@ selects the development foundation while retaining these explicit product gates.
 | `SYS-008` | E | Implicit privileged `systemmagisk` filename trigger | `original-stable` → `k31-25fa2159` | `retired-with-evidence` | PR15 |
 | `SYS-009` | E | Custom-ROM OTA/`addon.d` survival | `original-stable` → `k31-25fa2159` | `deferred-to-PR15` | PR15 |
 | `SYS-010` | E | Historical API 23-24 System Mode availability/claim | `original-stable` → `k31-25fa2159` | `deferred-to-PR15` | PR15 |
-| `HID-001` | E | Classic MagiskHide enable/disable/status independent of SuList and built-in Zygisk | `original-stable` → `k31-25fa2159` | `deferred-to-PR12` | PR12 |
-| `HID-002` | E | Per-package/process add/remove/list persistence and CLI | `original-stable` → `k31-25fa2159` | `deferred-to-PR12` | PR12 |
+| `HID-001` | E | Classic MagiskHide enable/disable/status independent of SuList and built-in Zygisk | `original-stable` → `k31-25fa2159` | `ported-and-tested-in-PR12` | PR12 |
+| `HID-002` | E | Per-package/process add/remove/list persistence and CLI | `original-stable` → `k31-25fa2159` | `ported-and-tested-in-PR12` | PR12 |
 | `HID-003` | E | Manager list/filter/system-app/expansion/per-process selection UI | `original-stable` → `k31-25fa2159` | `deferred-to-PR13` | PR13 |
-| `HID-004` | E | `magiskhide exec` isolated mount-namespace command | `original-stable` → `k31-25fa2159` | `deferred-to-PR12` | PR12 |
-| `HID-005` | E | SuList enable/disable, Hide dependency, reboot-only transition, and live-disable refusal | `original-stable` → `k31-25fa2159` | `deferred-to-PR12` | PR12 |
+| `HID-004` | E | `magiskhide exec` isolated mount-namespace command | `original-stable` → `k31-25fa2159` | `ported-and-tested-in-PR12` | PR12 |
+| `HID-005` | E | SuList enable/disable, Hide dependency, reboot-only transition, and live-disable refusal | `original-stable` → `k31-25fa2159` | `ported-and-tested-in-PR12` | PR12 |
 | `HID-006` | E | SuList settings/list UI and reboot-mismatch messaging | `original-stable` → `k31-25fa2159` | `deferred-to-PR13` | PR13 |
-| `HID-007` | E | Inverse root/module visibility plus automatic manager/SystemUI/Settings enrollment | `original-stable` → `k31-25fa2159` | `deferred-to-PR12` | PR12 |
-| `HID-008` | E | Ptrace zygote/fork monitor, USAP, preinitialized processes, app zygotes, and restarts | `original-stable` → `k31-25fa2159` | `deferred-to-PR12` | PR12 |
-| `HID-009` | E | Isolated/prefix matching, shared UID, secondary users/work profiles, and package rescans | `original-stable` → `k31-25fa2159` | `deferred-to-PR12` | PR12 |
-| `HID-010` | E | Per-process cleanup of Magisk/module/early-mount/injected visibility | `original-stable` → `k31-25fa2159` | `deferred-to-PR12` | PR12 |
-| `HID-011` | E | Daemon's own internal namespace visibility after `ba6ed414` | `original-stable` → `k31-25fa2159` | `deferred-to-PR12` | PR12 |
-| `HID-012` | E | Dynamic `/system/bin` MagiskSU/applet exposure and zygote-restart unmount | `b149cd26` → `k31-25fa2159` | `deferred-to-PR12` | PR12 |
-| `HID-013` | E | Randomized `/dev` daemon socket and SU-request FIFO endpoints | `b149cd26` → `k31-25fa2159` | `deferred-to-PR12` | PR12 |
-| `HID-014` | E | Enforcing/permissive/disabled-SELinux and Waydroid-style zygote operation | `k31-70068d25` → `k31-25fa2159` | `deferred-to-PR12` | PR12 |
-| `HID-015` | E | `hidelist`/`sulist`/`denylist` schemas, settings, CLI/provider source of truth, and rollback migration | `original-stable` → `k31-25fa2159` | `deferred-to-PR12` | PR12 |
-| `HID-016` | O | Published SU injection relocation from /system/bin to /apex/com.android.runtime/bin, /debug_ramdisk/su fallback, and compatibility-driven reversion | `metadata-bb4af859-note-md` → `metadata-2976a6f5-note-md` | `deferred-to-PR12` | PR12 |
-| `HID-017` | E | MagiskSU exposure delayed until boot complete | `metadata-2976a6f5-note-md` → `k31-25fa2159` | `deferred-to-PR12` | PR12 |
-| `HID-018` | O | Lite product's always-enforced inverse SuList/whitelist and migration to the selected product | `metadata-96724b2e-note_lite-md` → `metadata-64403347-note_lite-md` | `deferred-to-PR12` | PR12 |
-| `HID-019` | O | Lite product's log-based process monitoring lifecycle and visibility contract | `metadata-96724b2e-note_lite-md` → `metadata-64403347-note_lite-md` | `deferred-to-PR12` | PR12 |
+| `HID-007` | E | Inverse root/module visibility plus automatic manager/SystemUI/Settings enrollment | `original-stable` → `k31-25fa2159` | `ported-and-tested-in-PR12` | PR12 |
+| `HID-008` | E | Ptrace zygote/fork monitor, USAP, preinitialized processes, app zygotes, and restarts | `original-stable` → `k31-25fa2159` | `retired-with-evidence` | PR12 |
+| `HID-009` | E | Isolated/prefix matching, shared UID, secondary users/work profiles, and package rescans | `original-stable` → `k31-25fa2159` | `ported-and-tested-in-PR12` | PR12 |
+| `HID-010` | E | Per-process cleanup of current Magisk/module/injected mounts; PR14 early-mount API is HID-010-early | `original-stable` → `k31-25fa2159` | `ported-and-tested-in-PR12` | PR12 |
+| `HID-011` | E | Daemon's own internal namespace visibility after `ba6ed414` | `original-stable` → `k31-25fa2159` | `retired-with-evidence` | PR12 |
+| `HID-012` | E | Dynamic `/system/bin` MagiskSU/applet exposure and zygote-restart unmount | `b149cd26` → `k31-25fa2159` | `retired-with-evidence` | PR12 |
+| `HID-013` | E | Randomized `/dev` daemon socket and SU-request FIFO endpoints | `b149cd26` → `k31-25fa2159` | `retired-with-evidence` | PR12 |
+| `HID-014` | E | Core enforcing/permissive/SELinux-absence guards; exact disabled/container runtime is HID-014-device | `k31-70068d25` → `k31-25fa2159` | `ported-and-tested-in-PR12` | PR12 |
+| `HID-015` | E | `hidelist`/`sulist`/`denylist` schemas, settings, CLI/provider source of truth, and rollback migration | `original-stable` → `k31-25fa2159` | `ported-and-tested-in-PR12` | PR12 |
+| `HID-016` | O | Published SU injection relocation from /system/bin to /apex/com.android.runtime/bin, /debug_ramdisk/su fallback, and compatibility-driven reversion | `metadata-bb4af859-note-md` → `metadata-2976a6f5-note-md` | `retired-with-evidence` | PR12 |
+| `HID-017` | E | MagiskSU exposure delayed until boot complete | `metadata-2976a6f5-note-md` → `k31-25fa2159` | `retired-with-evidence` | PR12 |
+| `HID-018` | O | Lite product's always-enforced inverse SuList/whitelist and migration to the selected product | `metadata-96724b2e-note_lite-md` → `metadata-64403347-note_lite-md` | `ported-and-tested-in-PR12` | PR12 |
+| `HID-019` | O | Lite product's log-based process monitoring lifecycle and visibility contract | `metadata-96724b2e-note_lite-md` → `metadata-64403347-note_lite-md` | `ported-and-tested-in-PR12` | PR12 |
 | `ZYG-001` | O | Older-tag built-in API v5, module loading, companion IPC, memfd loading, unloading and Riru exclusion | `b149cd26` → `k27-2-4-archive` | `inherited-and-tested` | PR11 |
-| `ZYG-001-hide` | O | Older-tag built-in Zygisk integration with classic Hide/SuList | `b149cd26` → `k27-2-4-archive` | `deferred-to-PR12` | PR12 |
+| `ZYG-001-hide` | O | Older-tag built-in Zygisk integration with classic Hide/SuList | `b149cd26` → `k27-2-4-archive` | `ported-and-tested-in-PR12` | PR12 |
 | `ZYG-002` | O | Ptrace-init injection architecture | `original-stable` → `k27-2-4-archive` | `retired-with-evidence` | PR11 |
 | `ZYG-003` | O | GrapheneOS Android 14/QPR2 JNI specialization descriptors | `metadata-bb4af859-note-md` → `k27-2-4-archive` | `ported-and-tested-in-PR11` | PR11 |
 | `ZYG-003-device` | O | Physical GrapheneOS Android 14/QPR2 injection and recovery qualification | `metadata-bb4af859-note-md` → `k27-2-4-archive` | `deferred-to-PR15` | PR15 |
@@ -81,7 +81,7 @@ selects the development foundation while retaining these explicit product gates.
 | `ZYG-005` | O | Faster revert/unmount path from `7072f9e9` | `b149cd26` → `k27-2-4-archive` | `retired-with-evidence` | PR11 |
 | `ZYG-006` | E | Zygote restart-monitor reliability fix from `be732edb` | `k27-2-1` → `k31-25fa2159` | `inherited-and-tested` | PR11 |
 | `ZYG-007` | E | Built-in removal, mandatory external-only direction and provider boundary | `k31-70068d25` → `k31-25fa2159` | `retired-with-evidence` | PR11 |
-| `ZYG-007-adapter` | E | External-provider Next-manager discovery, Hide/SuList and process-selection integration | `k31-70068d25` → `k31-25fa2159` | `deferred-to-PR12` | PR12 |
+| `ZYG-007-adapter` | E | External-provider Next-manager discovery, Hide/SuList and process-selection integration | `k31-70068d25` → `k31-25fa2159` | `ported-and-tested-in-PR12` | PR12 |
 | `ZYG-008` | O | Lite product's explicitly no-Zygisk behavior and migration/retirement impact | `metadata-96724b2e-note_lite-md` → `metadata-64403347-note_lite-md` | `ported-and-tested-in-PR11` | PR11 |
 | `MOD-001` | E | Global early-mount files and ordering | `original-stable` → `k31-25fa2159` | `deferred-to-PR14` | PR14 |
 | `MOD-002` | E | Per-module `early-mount` storage, install, disable, and removal | `original-stable` → `k31-25fa2159` | `deferred-to-PR14` | PR14 |
@@ -108,7 +108,7 @@ selects the development foundation while retaining these explicit product gates.
 | `SU-001` | E | Disabled, system-credential, and manager biometric authentication modes | `metadata-51fad676-note-md` → `k31-25fa2159` | `deferred-to-PR13` | PR13 |
 | `SU-002` | E | Prompt/allow/deny/revoke/timeout, namespace, shared UID, multiuser, and no-manager lifecycle | `original-stable` → `k31-25fa2159` | `deferred-to-PR13` | PR13 |
 | `SU-003` | E | Deterministic manager policy-row retrieval (`LIMIT 1`) | `k27-2-4-inherited` → `k31-25fa2159` | `deferred-to-PR13` | PR13 |
-| `SU-004` | E | Daemon/client authorization, `restorecon`, and SU execution with SELinux disabled | `original-stable` → `k31-25fa2159` | `deferred-to-PR12` | PR12 |
+| `SU-004` | E | Core authorization/restorecon behavior and SELinux-absence checks; exact disabled targets are SU-004-device | `original-stable` → `k31-25fa2159` | `ported-and-tested-in-PR12` | PR12 |
 | `ID-001` | E | Kitsune package/application identity and upgrade path from `io.github.huskydg.magisk` | `original-stable` → `k31-25fa2159` | `ported-and-tested-in-PR9` | PR9 |
 | `APP-001` | E | Kitsune Mask name, labels, logos/colors, attribution, and unofficial-build warning | `original-stable` → `k31-25fa2159` | `deferred-to-PR13` | PR13 |
 | `APP-002` | E | Hidden-manager create/launch/upgrade/restore plus `com.*` random package generation | `k27-2-4-inherited` → `k31-25fa2159` | `deferred-to-PR13` | PR13 |
@@ -129,7 +129,7 @@ selects the development foundation while retaining these explicit product gates.
 | `DIST-001` | E | v31 debug/release manager-and-stub four-APK asset surface and source/tag provenance | `k31-70068d25` → `k31-25fa2159` | `ported-and-tested-in-PR10` | PR10 |
 | `DIST-002` | E | Both observed `v27.2-kitsune-4` source/release incarnations and intervening behavior | `k27-2-4-inherited` → `k27-2-4-archive` | `ported-and-tested-in-PR10` | PR10 |
 | `DIST-003` | O | Original Full stable/R65/R66 manager-stub channels, assets and upgrade migration | `original-stable` → `metadata-05003cd3-note-md` | `deferred-to-PR13` | PR13 |
-| `DIST-004` | O | Original Lite always-SuList/no-Zygisk/no-modules/log-monitoring product and migration/retirement | `metadata-96724b2e-note_lite-md` → `metadata-64403347-note_lite-md` | `deferred-to-PR12` | PR12 |
+| `DIST-004` | O | Original Lite always-SuList/no-Zygisk/no-modules/log-monitoring product and migration/retirement | `metadata-96724b2e-note_lite-md` → `metadata-64403347-note_lite-md` | `retired-with-evidence` | PR12 |
 | `BOOT-001` | E | P-521 boot-image signing and verification | `k27-2-4-inherited` → `k31-25fa2159` | `deferred-to-PR15` | PR15 |
 | `BOOT-002` | E | 16 KiB binary/ZIP/runtime support, including disable/re-enable history | `k27-2-4-inherited` → `k31-25fa2159` | `deferred-to-PR15` | PR15 |
 | `BOOT-003` | E | Tar input/output with entries larger than 8 GiB | `k27-2-1` → `k31-25fa2159` | `deferred-to-PR15` | PR15 |
@@ -148,6 +148,9 @@ selects the development foundation while retaining these explicit product gates.
 | `ORD-007` | E | Read-only resetprop serial-counter behavior and property waiter/override semantics | `metadata-02ba306e-note-md` → `k31-25fa2159` | `deferred-to-PR15` | PR15 |
 | `BOOT-007` | E | Require the full /system/etc/init/hw/init.rc path before selecting the Android 11 init-RC location | `metadata-51fad676-note-md` → `k31-25fa2159` | `deferred-to-PR15` | PR15 |
 | `SYS-011` | O | Later Lite selects existing /debug_ramdisk when /sbin is absent instead of creating /sbin | `metadata-64403347-note_lite-md` → `metadata-64403347-note_lite-md` | `deferred-to-PR15` | PR15 |
+| `HID-010-early` | E | Cleanup of the separately implemented PR14 early-mount and expanded-partition API | `original-stable` → `k31-25fa2159` | `deferred-to-PR14` | PR14 |
+| `HID-014-device` | E | Exact SELinux-disabled/Waydroid runtime qualification | `k31-70068d25` → `k31-25fa2159` | `deferred-to-PR15` | PR15 |
+| `SU-004-device` | E | SU and restorecon on exact SELinux-disabled/container targets | `original-stable` → `k31-25fa2159` | `deferred-to-PR15` | PR15 |
 
 ## Archive limits
 

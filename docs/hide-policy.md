@@ -1,8 +1,9 @@
 # Kitsune Hide/SuList v1
 
 PR12 supplies the core policy and migration independently of the PR13 manager
-screens. Qualification is in progress; the existing production and physical-device
-release gates remain in force. The binary advertises `kitsune.hide.v1` and the
+screens. The [acceptance record](hide-pr12.json) covers the qualified emulator
+tuples and explicit limitations. Production and physical-device release gates
+remain in force. The binary advertises `kitsune.hide.v1` and the
 running daemon exposes a root-only request at `0x4b490003`. Old daemons reject it.
 
 ## Selection and ownership
@@ -51,8 +52,7 @@ anchors `/proc` and namespace descriptors, rechecks the parent, rejects init's
 namespace, never SIGSTOPs apps, and has one log reader across enable/disable
 cycles. Cleanup workers use the daemon's existing logging lock when forking,
 so they cannot inherit that mutex from another thread. This engine does not
-promise cleanup before the first instruction or
-callback. A missing log event or expired deadline is not reported as successful
+promise cleanup before the first instruction or callback. A missing log event or expired deadline is not reported as successful
 cleanup. Relaunch after policy changes. On pidfd-capable kernels the core also
 terminates affected ordinary app processes by pidfd; older kernels require an
 explicit relaunch. Zygotes/system_server are not killed by list editing.
@@ -161,3 +161,29 @@ The separate obsolete Lite APK/update channel is not restored; PR13 owns its
 manager-facing migration and PR16 owns release delivery. PR14 still owns the
 separate early-mount/module APIs; PR12 cannot claim those mounts were tested
 before they are implemented.
+
+
+## Qualified configurations and remaining gates
+
+| Engine | Exact runtime coverage | Selection and module callbacks | Manager |
+|---|---|---|---|
+| Maintained built-in | API 35 ARM64 enforcing debug/release; MuMu Pro 1.9.2 API 32 ARM64 permissive System Mode | Normal Hide and inverse SuList; selected/remote/isolated/nested/app-zygote cases; USAP pool consumption | Normal and hidden; bootstrap, wrong-signer refusal and restore |
+| Core log monitor, Zygisk off | API 35 ARM64 enforcing debug/release; same MuMu tuple | Asynchronous normal/inverse namespace cleanup, no injection; bounded lifecycle/resource checks | Verified manager and bootstrap visibility retained |
+| Pinned ReZygisk + v1 source adapter | API 35 ARM64 and same MuMu tuple; four-ABI compilation | Core policy query, inverse selection, per-process cleanup and callback suppression; final private-flag mask has an Android callback test | Core-verified UID, including hidden bootstrap/restore |
+| Stock ReZygisk/NeoZygisk/ZygiskNext | Not qualified for this v1 contract | No automatic SuList compatibility claim; missing adapter is refused | PR11 comparisons remain historical evidence |
+
+The record distinguishes the full provider integration ZIP from the final
+private-flag mask cleanup and its exact Android callback test. No provider binary
+is published here. PR16 must qualify the exact bytes of any release artifact.
+
+Original Lite (`669d2da1`) forces SuList in code and may not persist its choice.
+Before upgrading, run `magiskhide sulist enable` on that installation, preserve
+its `sulist` rows, and disable existing modules/providers for the equivalent
+no-module/no-injection configuration. Do not infer Lite from a table name: Full
+also has a `sulist` table. Recheck broad legacy isolated prefixes against the new
+process-name boundary and select full process prefixes where needed.
+
+PR14 owns cleanup tests for its new early mounts. PR15 owns real phones and an
+actual SELinux-disabled/Waydroid target. Both installed AVD kernels stayed
+permissive despite disabled requests; only the absence/error/other-LSM guards
+are claimed tested for that branch. Manager screens and diagnostics remain PR13.

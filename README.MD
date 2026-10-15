@@ -20,16 +20,17 @@ production promotion remains gated.
 - Direct-System/System Mode is one Kitsune installation capability, available only in debug builds
   after machine qualification of the exact writable target and its external recovery copy. See
   [the qualification guide](docs/system-mode/pr7-machine-qualification.md).
-- Early/pre-init mounting and MagiskHide/SuList are required Kitsune capabilities whose ports
-  remain in the roadmap. [PR11's provider decision](docs/adr/0001-zygisk-provider.md) retains
-  maintained built-in Zygisk, an explicit external opt-out, and version-pinned comparison limits.
+- [Hide/SuList core and migration](docs/hide-policy.md) are implemented and qualified on the
+  recorded emulator tuples. PR13 owns manager UI integration; early/pre-init mounting remains PR14.
+  [The provider decision](docs/adr/0001-zygisk-provider.md) retains maintained built-in Zygisk
+  and an explicit, versioned external adapter boundary.
 - Normal upstream Select-and-Patch, Direct Install, inactive-slot, recovery, emulator live setup,
   MagiskSU, modules, and built-in Zygisk remain in scope and must stay green.
 
 The exact upstream commit, submodule pins, toolchain, advisories, reviewed source delta, and local
 PR6 qualification evidence are recorded in
 [`docs/next-system-baseline.md`](docs/next-system-baseline.md). The current machine-readable contract is
-[`docs/next-system-pr11.json`](docs/next-system-pr11.json), inheriting PR7A's runtime baseline.
+[`docs/next-system-pr12.json`](docs/next-system-pr12.json), inheriting PR7A's runtime baseline.
 
 ## Building
 
@@ -38,7 +39,7 @@ Follow this branch's [build and development guide](docs/build.md), then run:
 ```sh
 ./build.py -v all
 ./build.py -vr -c /path/to/external-signing-config.prop all
-python3 tools/next_system_baseline.py --manifest docs/next-system-pr8.json --source --artifacts out
+python3 tools/next_system_baseline.py --manifest docs/next-system-pr12.json --source --artifacts out
 ```
 
 A release test build must use an external, disposable or production-controlled signing key. The

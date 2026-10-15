@@ -1544,10 +1544,10 @@
         "shipment-source-review"
       ],
       "upstream_overlap": "v31.0 DenyList has enable/disable/status and package/process persistence, including a logcat monitor when built-in Zygisk is off. It is not the historical inverse SuList contract: no sulist CLI/state or automatic whitelist migration exists. Compare the actual independent-monitor behavior before porting the old ptrace implementation.",
-      "decision": "deferred-to-PR12",
+      "decision": "ported-and-tested-in-PR12",
       "owner_pr": 12,
       "affected_users": "Kitsune users relying on classic MagiskHide enable/disable/status independent of SuList and built-in Zygisk.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "Use the versioned Hide/SuList CLI contract in docs/hide-policy.md. Preserve separate denylist/sulist rows, keep database version 12, and cold boot for mode/provider changes. PR13 owns UI integration; PR15 owns additional physical/unsupported target qualification.",
       "first_shipped": "original-stable",
       "last_shipped": "k31-25fa2159",
       "upstream_evidence": [
@@ -1559,7 +1559,8 @@
         "record": "shipment-source-review",
         "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
-      }
+      },
+      "acceptance_evidence": "docs/hide-pr12.json and docs/hide-policy.md: exact runtime, failure, migration, provider and historical-mechanism decisions."
     },
     {
       "id": "HID-002",
@@ -1626,10 +1627,10 @@
         "shipment-source-review"
       ],
       "upstream_overlap": "v31.0 DenyList has enable/disable/status and package/process persistence, including a logcat monitor when built-in Zygisk is off. It is not the historical inverse SuList contract: no sulist CLI/state or automatic whitelist migration exists. Compare the actual independent-monitor behavior before porting the old ptrace implementation.",
-      "decision": "deferred-to-PR12",
+      "decision": "ported-and-tested-in-PR12",
       "owner_pr": 12,
       "affected_users": "Kitsune users relying on per-package/process add/remove/list persistence and CLI.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "Use the versioned Hide/SuList CLI contract in docs/hide-policy.md. Preserve separate denylist/sulist rows, keep database version 12, and cold boot for mode/provider changes. PR13 owns UI integration; PR15 owns additional physical/unsupported target qualification.",
       "first_shipped": "original-stable",
       "last_shipped": "k31-25fa2159",
       "upstream_evidence": [
@@ -1641,7 +1642,8 @@
         "record": "shipment-source-review",
         "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
-      }
+      },
+      "acceptance_evidence": "docs/hide-pr12.json and docs/hide-policy.md: exact runtime, failure, migration, provider and historical-mechanism decisions."
     },
     {
       "id": "HID-003",
@@ -1786,10 +1788,10 @@
         "shipment-source-review"
       ],
       "upstream_overlap": "Official --denylist exec unshares the mount namespace, makes root mounts private, invokes revert_unmount and execs the command. This is a close semantic overlap, but the magiskhide spelling, return codes and interaction with inverse visibility still need paired acceptance.",
-      "decision": "deferred-to-PR12",
+      "decision": "ported-and-tested-in-PR12",
       "owner_pr": 12,
       "affected_users": "Kitsune users relying on `magiskhide exec` isolated mount-namespace command.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "Use the versioned Hide/SuList CLI contract in docs/hide-policy.md. Preserve separate denylist/sulist rows, keep database version 12, and cold boot for mode/provider changes. PR13 owns UI integration; PR15 owns additional physical/unsupported target qualification.",
       "first_shipped": "original-stable",
       "last_shipped": "k31-25fa2159",
       "upstream_evidence": [
@@ -1799,7 +1801,8 @@
         "record": "shipment-source-review",
         "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
-      }
+      },
+      "acceptance_evidence": "docs/hide-pr12.json and docs/hide-policy.md: exact runtime, failure, migration, provider and historical-mechanism decisions."
     },
     {
       "id": "HID-005",
@@ -1866,10 +1869,10 @@
         "shipment-source-review"
       ],
       "upstream_overlap": "v31.0 DenyList has enable/disable/status and package/process persistence, including a logcat monitor when built-in Zygisk is off. It is not the historical inverse SuList contract: no sulist CLI/state or automatic whitelist migration exists. Compare the actual independent-monitor behavior before porting the old ptrace implementation.",
-      "decision": "deferred-to-PR12",
+      "decision": "ported-and-tested-in-PR12",
       "owner_pr": 12,
       "affected_users": "Kitsune users relying on suList enable/disable, Hide dependency, reboot-only transition, and live-disable refusal.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "Use the versioned Hide/SuList CLI contract in docs/hide-policy.md. Preserve separate denylist/sulist rows, keep database version 12, and cold boot for mode/provider changes. PR13 owns UI integration; PR15 owns additional physical/unsupported target qualification.",
       "first_shipped": "original-stable",
       "last_shipped": "k31-25fa2159",
       "upstream_evidence": [
@@ -1881,7 +1884,8 @@
         "record": "shipment-source-review",
         "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
-      }
+      },
+      "acceptance_evidence": "docs/hide-pr12.json and docs/hide-policy.md: exact runtime, failure, migration, provider and historical-mechanism decisions."
     },
     {
       "id": "HID-006",
@@ -2029,10 +2033,10 @@
         "shipment-source-review"
       ],
       "upstream_overlap": "Official DenyList selects processes for cleanup; it does not invert root/module access or automatically enroll manager, SystemUI and Settings as the historical SuList did. Keep SU authorization distinct from namespace visibility.",
-      "decision": "deferred-to-PR12",
+      "decision": "ported-and-tested-in-PR12",
       "owner_pr": 12,
       "affected_users": "Kitsune users relying on inverse root/module visibility plus automatic manager/SystemUI/Settings enrollment.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "Use the versioned Hide/SuList CLI contract in docs/hide-policy.md. Preserve separate denylist/sulist rows, keep database version 12, and cold boot for mode/provider changes. PR13 owns UI integration; PR15 owns additional physical/unsupported target qualification.",
       "first_shipped": "original-stable",
       "last_shipped": "k31-25fa2159",
       "upstream_evidence": [
@@ -2043,7 +2047,8 @@
         "record": "shipment-source-review",
         "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
-      }
+      },
+      "acceptance_evidence": "docs/hide-pr12.json and docs/hide-policy.md: exact runtime, failure, migration, provider and historical-mechanism decisions."
     },
     {
       "id": "HID-008",
@@ -2107,10 +2112,10 @@
         "shipment-source-review"
       ],
       "upstream_overlap": "Official matching includes app IDs and isolated-process prefixes and has built-in Zygisk plus logcat-based monitoring. Historical ptrace/USAP/app-zygote and disabled-SELinux behavior is a separate contract; shared UID, secondary users, restart and namespace timing require PR12/PR15 tests.",
-      "decision": "deferred-to-PR12",
+      "decision": "retired-with-evidence",
       "owner_pr": 12,
       "affected_users": "Kitsune users relying on ptrace zygote/fork monitor, USAP, preinitialized processes, app zygotes, and restarts.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "Retire the historical fixed-PID ptrace monitor. Use maintained built-in specialization or the bounded no-Zygisk log monitor; the pinned external adapter remains an explicit ptrace-provider option. No first-instruction hiding promise is made for the log engine.",
       "first_shipped": "original-stable",
       "last_shipped": "k31-25fa2159",
       "upstream_evidence": [
@@ -2122,7 +2127,8 @@
         "record": "shipment-source-review",
         "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
-      }
+      },
+      "acceptance_evidence": "docs/hide-pr12.json and docs/hide-policy.md: exact runtime, failure, migration, provider and historical-mechanism decisions."
     },
     {
       "id": "HID-009",
@@ -2186,10 +2192,10 @@
         "shipment-source-review"
       ],
       "upstream_overlap": "Official matching includes app IDs and isolated-process prefixes and has built-in Zygisk plus logcat-based monitoring. Historical ptrace/USAP/app-zygote and disabled-SELinux behavior is a separate contract; shared UID, secondary users, restart and namespace timing require PR12/PR15 tests.",
-      "decision": "deferred-to-PR12",
+      "decision": "ported-and-tested-in-PR12",
       "owner_pr": 12,
       "affected_users": "Kitsune users relying on isolated/prefix matching, shared UID, secondary users/work profiles, and package rescans.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "Use the versioned Hide/SuList CLI contract in docs/hide-policy.md. Preserve separate denylist/sulist rows, keep database version 12, and cold boot for mode/provider changes. PR13 owns UI integration; PR15 owns additional physical/unsupported target qualification.",
       "first_shipped": "original-stable",
       "last_shipped": "k31-25fa2159",
       "upstream_evidence": [
@@ -2201,11 +2207,12 @@
         "record": "shipment-source-review",
         "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
-      }
+      },
+      "acceptance_evidence": "docs/hide-pr12.json and docs/hide-policy.md: exact runtime, failure, migration, provider and historical-mechanism decisions."
     },
     {
       "id": "HID-010",
-      "behavior": "Per-process cleanup of Magisk/module/early-mount/injected visibility",
+      "behavior": "Per-process cleanup of current Magisk/module/injected mounts; PR14 early-mount API is HID-010-early",
       "historical_status": [
         "E"
       ],
@@ -2274,10 +2281,10 @@
         "shipment-source-review"
       ],
       "upstream_overlap": "Official mount cleanup and namespace isolation are reusable primitives. Their visible mount set is not proof of the historical daemon-internal visibility change or cleanup of Kitsune early mounts and injected paths. Measure both internal and app namespaces.",
-      "decision": "deferred-to-PR12",
+      "decision": "ported-and-tested-in-PR12",
       "owner_pr": 12,
       "affected_users": "Kitsune users relying on per-process cleanup of Magisk/module/early-mount/injected visibility.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "Use the versioned Hide/SuList CLI contract in docs/hide-policy.md. Preserve separate denylist/sulist rows, keep database version 12, and cold boot for mode/provider changes. PR13 owns UI integration; PR15 owns additional physical/unsupported target qualification.",
       "first_shipped": "original-stable",
       "last_shipped": "k31-25fa2159",
       "upstream_evidence": [
@@ -2288,7 +2295,8 @@
         "record": "shipment-source-review",
         "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
-      }
+      },
+      "acceptance_evidence": "docs/hide-pr12.json and docs/hide-policy.md: exact runtime, failure, migration, provider and historical-mechanism decisions."
     },
     {
       "id": "HID-011",
@@ -2320,10 +2328,10 @@
         "shipment-source-review"
       ],
       "upstream_overlap": "Official mount cleanup and namespace isolation are reusable primitives. Their visible mount set is not proof of the historical daemon-internal visibility change or cleanup of Kitsune early mounts and injected paths. Measure both internal and app namespaces.",
-      "decision": "deferred-to-PR12",
+      "decision": "retired-with-evidence",
       "owner_pr": 12,
       "affected_users": "Kitsune users relying on daemon's own internal namespace visibility after `ba6ed414`.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "Retire the historical daemon-namespace divergence. Keep the maintained daemon view and isolate cleanup in the selected process or exec namespace; module/companion and parent-namespace tests cover the supported uses.",
       "first_shipped": "original-stable",
       "last_shipped": "k31-25fa2159",
       "upstream_evidence": [
@@ -2334,7 +2342,8 @@
         "record": "shipment-source-review",
         "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
-      }
+      },
+      "acceptance_evidence": "docs/hide-pr12.json and docs/hide-policy.md: exact runtime, failure, migration, provider and historical-mechanism decisions."
     },
     {
       "id": "HID-012",
@@ -2369,10 +2378,10 @@
         "shipment-source-review"
       ],
       "upstream_overlap": "Official module mounting exposes command-line tools into PATH. It does not document the Full/Lite /system/bin-to-APEX-to-/debug_ramdisk transitions or delayed boot-complete exposure as one compatibility promise. PR12 must choose tested locations/timing and document affected terminal/root apps.",
-      "decision": "deferred-to-PR12",
+      "decision": "retired-with-evidence",
       "owner_pr": 12,
       "affected_users": "Kitsune users relying on dynamic `/system/bin` MagiskSU/applet exposure and zygote-restart unmount.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "Retire the unconditional custom /system/bin overlay and its separate zygote-restart unmount. The maintained PATH injection supplies SU/applets and is removed by namespace cleanup. Use PATH or magisk --path instead of a hard-coded historical location.",
       "first_shipped": "b149cd26",
       "last_shipped": "k31-25fa2159",
       "upstream_evidence": [
@@ -2383,7 +2392,8 @@
         "record": "shipment-source-review",
         "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
-      }
+      },
+      "acceptance_evidence": "docs/hide-pr12.json and docs/hide-policy.md: exact runtime, failure, migration, provider and historical-mechanism decisions."
     },
     {
       "id": "HID-013",
@@ -2419,10 +2429,10 @@
         "shipment-source-review"
       ],
       "upstream_overlap": "The maintained daemon and SU transport have evolved independently of the historical randomized /dev endpoints. Preserve protocol authorization and request isolation; randomized names alone are neither parity nor concealment evidence.",
-      "decision": "deferred-to-PR12",
+      "decision": "retired-with-evidence",
       "owner_pr": 12,
       "affected_users": "Kitsune users relying on randomized `/dev` daemon socket and SU-request FIFO endpoints.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "Retire randomized daemon/FIFO endpoint compatibility. Keep the owned runtime socket, credential/executable/operation checks, and maintained request transport. Use CLI/Zygisk APIs; endpoint naming is not authorization.",
       "first_shipped": "b149cd26",
       "last_shipped": "k31-25fa2159",
       "upstream_evidence": [
@@ -2433,11 +2443,12 @@
         "record": "shipment-source-review",
         "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
-      }
+      },
+      "acceptance_evidence": "docs/hide-pr12.json and docs/hide-policy.md: exact runtime, failure, migration, provider and historical-mechanism decisions."
     },
     {
       "id": "HID-014",
-      "behavior": "Enforcing/permissive/disabled-SELinux and Waydroid-style zygote operation",
+      "behavior": "Core enforcing/permissive/SELinux-absence guards; exact disabled/container runtime is HID-014-device",
       "historical_status": [
         "E"
       ],
@@ -2463,10 +2474,10 @@
         "shipment-source-review"
       ],
       "upstream_overlap": "Official matching includes app IDs and isolated-process prefixes and has built-in Zygisk plus logcat-based monitoring. Historical ptrace/USAP/app-zygote and disabled-SELinux behavior is a separate contract; shared UID, secondary users, restart and namespace timing require PR12/PR15 tests.",
-      "decision": "deferred-to-PR12",
+      "decision": "ported-and-tested-in-PR12",
       "owner_pr": 12,
       "affected_users": "Kitsune users relying on enforcing/permissive/disabled-SELinux and Waydroid-style zygote operation.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "Use the versioned Hide/SuList CLI contract in docs/hide-policy.md. Preserve separate denylist/sulist rows, keep database version 12, and cold boot for mode/provider changes. PR13 owns UI integration; PR15 owns additional physical/unsupported target qualification.",
       "first_shipped": "k31-70068d25",
       "last_shipped": "k31-25fa2159",
       "upstream_evidence": [
@@ -2478,7 +2489,8 @@
         "record": "shipment-source-review",
         "basis": "The older disabled-SELinux daemon/SU path belongs to SU-004. The context-optional zygote/Waydroid variant is first located in the frozen k31 sources; do not backdate that fix to the original stable release.",
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
-      }
+      },
+      "acceptance_evidence": "docs/hide-pr12.json and docs/hide-policy.md: exact runtime, failure, migration, provider and historical-mechanism decisions."
     },
     {
       "id": "HID-015",
@@ -2546,10 +2558,10 @@
         "shipment-source-review"
       ],
       "upstream_overlap": "v31.0 DenyList has enable/disable/status and package/process persistence, including a logcat monitor when built-in Zygisk is off. It is not the historical inverse SuList contract: no sulist CLI/state or automatic whitelist migration exists. Compare the actual independent-monitor behavior before porting the old ptrace implementation.",
-      "decision": "deferred-to-PR12",
+      "decision": "ported-and-tested-in-PR12",
       "owner_pr": 12,
       "affected_users": "Kitsune users relying on `hidelist`/`sulist`/`denylist` schemas, settings, CLI/provider source of truth, and rollback migration.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "Use the versioned Hide/SuList CLI contract in docs/hide-policy.md. Preserve separate denylist/sulist rows, keep database version 12, and cold boot for mode/provider changes. PR13 owns UI integration; PR15 owns additional physical/unsupported target qualification.",
       "first_shipped": "original-stable",
       "last_shipped": "k31-25fa2159",
       "upstream_evidence": [
@@ -2561,7 +2573,8 @@
         "record": "shipment-source-review",
         "basis": "Both hidelist and later denylist spellings coexist with sulist across different frozen observations. Endpoint behavior is not inferred from one table name.",
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
-      }
+      },
+      "acceptance_evidence": "docs/hide-pr12.json and docs/hide-policy.md: exact runtime, failure, migration, provider and historical-mechanism decisions."
     },
     {
       "id": "HID-016",
@@ -2578,10 +2591,10 @@
         "shipment-source-review"
       ],
       "upstream_overlap": "Official module mounting exposes command-line tools into PATH. It does not document the Full/Lite /system/bin-to-APEX-to-/debug_ramdisk transitions or delayed boot-complete exposure as one compatibility promise. PR12 must choose tested locations/timing and document affected terminal/root apps.",
-      "decision": "deferred-to-PR12",
+      "decision": "retired-with-evidence",
       "owner_pr": 12,
       "affected_users": "Users and modules depending on the location and timing of the injected su applet.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "Retire the series of unconditional /system/bin and APEX relocations and debug_ramdisk fallbacks as separate mechanisms. Use the maintained PATH-selected exposure, qualified with root and namespace tests; update scripts that hard-code a historical location.",
       "first_shipped": "metadata-bb4af859-note-md",
       "last_shipped": "metadata-2976a6f5-note-md",
       "upstream_evidence": [
@@ -2592,7 +2605,8 @@
         "record": "shipment-source-review",
         "basis": "Published APEX relocation and fallback, then explicit compatibility-driven reversion at R65C33E4F; later dynamic system/bin exposure is HID-012.",
         "limit": "Observed publication/source bounds; no runtime acceptance or globally earliest release is inferred."
-      }
+      },
+      "acceptance_evidence": "docs/hide-pr12.json and docs/hide-policy.md: exact runtime, failure, migration, provider and historical-mechanism decisions."
     },
     {
       "id": "HID-017",
@@ -2609,10 +2623,10 @@
         "shipment-source-review"
       ],
       "upstream_overlap": "Official module mounting exposes command-line tools into PATH. It does not document the Full/Lite /system/bin-to-APEX-to-/debug_ramdisk transitions or delayed boot-complete exposure as one compatibility promise. PR12 must choose tested locations/timing and document affected terminal/root apps.",
-      "decision": "deferred-to-PR12",
+      "decision": "retired-with-evidence",
       "owner_pr": 12,
       "affected_users": "Kitsune users relying on magiskSU exposure delayed until boot complete.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "Retire the boot-complete-only SU exposure delay. Keep maintained post-fs-data root for scripts and modules, with per-process cleanup. Cold-boot and root tests retain the functional rooting use case.",
       "first_shipped": "metadata-2976a6f5-note-md",
       "last_shipped": "k31-25fa2159",
       "upstream_evidence": [
@@ -2623,7 +2637,8 @@
         "record": "shipment-source-review",
         "basis": "R65C33E4F explicitly delays SU mounts until boot completion; endpoint boot_complete calls mount_su.",
         "limit": "Observed publication/source bounds; no runtime acceptance or globally earliest release is inferred."
-      }
+      },
+      "acceptance_evidence": "docs/hide-pr12.json and docs/hide-policy.md: exact runtime, failure, migration, provider and historical-mechanism decisions."
     },
     {
       "id": "HID-018",
@@ -2672,10 +2687,10 @@
         "shipment-source-review"
       ],
       "upstream_overlap": "Official logcat monitoring is relevant to Lite, but DenyList is not Lite's always-enforced inverse whitelist. A shared mechanism name does not establish Lite process visibility or migration. PR12 owns those explicit contracts.",
-      "decision": "deferred-to-PR12",
+      "decision": "ported-and-tested-in-PR12",
       "owner_pr": 12,
       "affected_users": "Published Kitsune Lite users.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "Original Lite forces SuList in code and may not save its mode: run magiskhide sulist enable before upgrading, retain sulist rows, and disable modules/providers for the no-module/no-injection profile. The new line requires an explicit mode; no ambiguous flavor inference is made.",
       "first_shipped": "metadata-96724b2e-note_lite-md",
       "last_shipped": "metadata-64403347-note_lite-md",
       "upstream_evidence": [
@@ -2686,7 +2701,8 @@
         "record": "shipment-source-review",
         "basis": "Both Lite publication notes specify the contract. Recovered source and exact packaged shell bindings supplement the notes. Modules-unsupported is a published support contract, not proof that module code was absent.",
         "limit": "Observed publication/source bounds; no runtime acceptance or globally earliest release is inferred."
-      }
+      },
+      "acceptance_evidence": "docs/hide-pr12.json and docs/hide-policy.md: exact runtime, failure, migration, provider and historical-mechanism decisions."
     },
     {
       "id": "HID-019",
@@ -2721,10 +2737,10 @@
         "shipment-source-review"
       ],
       "upstream_overlap": "Official logcat monitoring is relevant to Lite, but DenyList is not Lite's always-enforced inverse whitelist. A shared mechanism name does not establish Lite process visibility or migration. PR12 owns those explicit contracts.",
-      "decision": "deferred-to-PR12",
+      "decision": "ported-and-tested-in-PR12",
       "owner_pr": 12,
       "affected_users": "Published Kitsune Lite users.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "Use the versioned Hide/SuList CLI contract in docs/hide-policy.md. Preserve separate denylist/sulist rows, keep database version 12, and cold boot for mode/provider changes. PR13 owns UI integration; PR15 owns additional physical/unsupported target qualification.",
       "first_shipped": "metadata-96724b2e-note_lite-md",
       "last_shipped": "metadata-64403347-note_lite-md",
       "upstream_evidence": [
@@ -2735,7 +2751,8 @@
         "record": "shipment-source-review",
         "basis": "Both Lite publication notes specify the contract. Recovered source and exact packaged shell bindings supplement the notes. Modules-unsupported is a published support contract, not proof that module code was absent.",
         "limit": "Observed publication/source bounds; no runtime acceptance or globally earliest release is inferred."
-      }
+      },
+      "acceptance_evidence": "docs/hide-pr12.json and docs/hide-policy.md: exact runtime, failure, migration, provider and historical-mechanism decisions."
     },
     {
       "id": "ZYG-001",
@@ -2902,10 +2919,10 @@
         "shipment-source-review"
       ],
       "upstream_overlap": "PR11 defines the provider boundary; this separately named behavior remains behind its original integration/device qualification gate.",
-      "decision": "deferred-to-PR12",
+      "decision": "ported-and-tested-in-PR12",
       "owner_pr": 12,
       "affected_users": "Kitsune users relying on older-tag built-in API v5, module loading, companion IPC, memfd loading, Riru exclusion, and Hide integration.",
-      "migration": "Retain the qualified historical line when classic Hide/SuList is required. PR12 must implement and test the versioned core/provider selection and namespace semantics; ordinary DenyList is not SuList.",
+      "migration": "Use the versioned Hide/SuList CLI contract in docs/hide-policy.md. Preserve separate denylist/sulist rows, keep database version 12, and cold boot for mode/provider changes. PR13 owns UI integration; PR15 owns additional physical/unsupported target qualification.",
       "first_shipped": "b149cd26",
       "last_shipped": "k27-2-4-archive",
       "upstream_evidence": [
@@ -2918,7 +2935,8 @@
         "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
       },
-      "parent_feature": "ZYG-001"
+      "parent_feature": "ZYG-001",
+      "acceptance_evidence": "docs/hide-pr12.json and docs/hide-policy.md: exact runtime, failure, migration, provider and historical-mechanism decisions."
     },
     {
       "id": "ZYG-002",
@@ -3319,10 +3337,10 @@
         "shipment-source-review"
       ],
       "upstream_overlap": "PR11 defines the provider boundary; this separately named behavior remains behind its original integration/device qualification gate.",
-      "decision": "deferred-to-PR12",
+      "decision": "ported-and-tested-in-PR12",
       "owner_pr": 12,
       "affected_users": "Kitsune users relying on built-in removal, external-only direction, and exact provider/Hide/SuList migration contract.",
-      "migration": "Pinned external builds pass API5 and mount probes but still fall back to the historical manager package, and keep injecting selected processes. PR12 must adapt manager discovery and prove process/Hide/SuList semantics before a compatibility claim; hidden-manager tests are not a blanket workaround recommendation.",
+      "migration": "Use the versioned Hide/SuList CLI contract in docs/hide-policy.md. Preserve separate denylist/sulist rows, keep database version 12, and cold boot for mode/provider changes. PR13 owns UI integration; PR15 owns additional physical/unsupported target qualification.",
       "first_shipped": "k31-70068d25",
       "last_shipped": "k31-25fa2159",
       "upstream_evidence": [
@@ -3335,7 +3353,8 @@
         "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
       },
-      "parent_feature": "ZYG-007"
+      "parent_feature": "ZYG-007",
+      "acceptance_evidence": "docs/hide-pr12.json and docs/hide-policy.md: exact runtime, failure, migration, provider and historical-mechanism decisions."
     },
     {
       "id": "ZYG-008",
@@ -3380,7 +3399,7 @@
       "decision": "ported-and-tested-in-PR11",
       "owner_pr": 11,
       "affected_users": "Published Kitsune Lite users.",
-      "migration": "Keep built-in off and install no external injector for no-Zygisk operation. This does not turn Next into the historical Lite product; always-SuList, no-modules and distribution migration remain DIST-004 and their PR12\u2013PR14 owners.",
+      "migration": "Keep built-in off and install no external injector for no-Zygisk operation. This does not turn Next into the historical Lite product; always-SuList, no-modules and distribution migration remain DIST-004 and their PR12–PR14 owners.",
       "first_shipped": "metadata-96724b2e-note_lite-md",
       "last_shipped": "metadata-64403347-note_lite-md",
       "upstream_evidence": [
@@ -4511,7 +4530,7 @@
     },
     {
       "id": "SU-004",
-      "behavior": "Daemon/client authorization, `restorecon`, and SU execution with SELinux disabled",
+      "behavior": "Core authorization/restorecon behavior and SELinux-absence checks; exact disabled targets are SU-004-device",
       "historical_status": [
         "E"
       ],
@@ -4545,10 +4564,10 @@
         "shipment-source-review"
       ],
       "upstream_overlap": "Official daemon authorization, restorecon and SU execution are maintained implementations. They do not establish the fork's SELinux-disabled compatibility. The current-line restorecon failure in the paired LDPlayer run is a concrete reason to keep this row separate from ordinary permissive-root success.",
-      "decision": "deferred-to-PR12",
+      "decision": "ported-and-tested-in-PR12",
       "owner_pr": 12,
       "affected_users": "Kitsune users relying on daemon/client authorization, `restorecon`, and SU execution with SELinux disabled.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "Use the versioned Hide/SuList CLI contract in docs/hide-policy.md. Preserve separate denylist/sulist rows, keep database version 12, and cold boot for mode/provider changes. PR13 owns UI integration; PR15 owns additional physical/unsupported target qualification.",
       "first_shipped": "original-stable",
       "last_shipped": "k31-25fa2159",
       "upstream_evidence": [
@@ -4560,7 +4579,8 @@
         "record": "shipment-source-review",
         "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
-      }
+      },
+      "acceptance_evidence": "docs/hide-pr12.json and docs/hide-policy.md: exact runtime, failure, migration, provider and historical-mechanism decisions."
     },
     {
       "id": "ID-001",
@@ -5577,10 +5597,10 @@
         "shipment-source-review"
       ],
       "upstream_overlap": "Official update endpoints serve official Magisk. PR10 supplies owned signed metadata, package/signer checks and immutable assets for Next. Archived Full/Lite labels do not prove source commits or provide automatic cross-package/signer migration; the remaining feature/state gates retain their named owners.",
-      "decision": "deferred-to-PR12",
+      "decision": "retired-with-evidence",
       "owner_pr": 12,
       "affected_users": "Published Kitsune Lite users.",
-      "migration": "PR10 supplies owned authenticated distribution without claiming Lite parity. Preserve the existing Lite setup. PR12 owns always-enforced inverse SuList and log monitoring, with PR11 provider decisions, PR13 manager migration, PR14 module disposition and PR16 qualification.",
+      "migration": "Retire the separate Lite APK/update channel. Preserve its no-injection/inverse-policy configuration in the maintained product. Before upgrading original Lite, explicitly persist its always-on choice with magiskhide sulist enable and disable existing modules/providers; the sulist rows are preserved. PR13 owns the UI and PR16 the signed release transition.",
       "first_shipped": "metadata-96724b2e-note_lite-md",
       "last_shipped": "metadata-64403347-note_lite-md",
       "upstream_evidence": [
@@ -5591,7 +5611,8 @@
         "record": "shipment-source-review",
         "basis": "Both Lite publication notes specify the contract. Recovered source and exact packaged shell bindings supplement the notes. Modules-unsupported is a published support contract, not proof that module code was absent.",
         "limit": "Observed publication/source bounds; no runtime acceptance or globally earliest release is inferred."
-      }
+      },
+      "acceptance_evidence": "docs/hide-pr12.json and docs/hide-policy.md: exact runtime, failure, migration, provider and historical-mechanism decisions."
     },
     {
       "id": "BOOT-001",
@@ -6372,6 +6393,194 @@
         "basis": "Directly recovered later Lite manager shell has two changed fallback blocks relative to the first Lite script; no source commit is invented.",
         "limit": "Observed publication/source bounds; no runtime acceptance or globally earliest release is inferred."
       }
+    },
+    {
+      "id": "HID-010-early",
+      "behavior": "Cleanup of the separately implemented PR14 early-mount and expanded-partition API",
+      "historical_status": [
+        "E"
+      ],
+      "commits": [
+        "92c0777eaee30aa2cc7662666d53924c59acd8b7",
+        "10634bab26573c1a0535315bd2b3a20b3af50437",
+        "004da1fbd547ca5413c5585723b2c690f77ce144",
+        "ef83274361e5b402b7da08d066363175d6e8780d"
+      ],
+      "paths": [
+        "app/src/main/java/com/topjohnwu/magisk/core/Config.kt",
+        "app/src/main/java/com/topjohnwu/magisk/core/Info.kt",
+        "app/src/main/java/com/topjohnwu/magisk/core/utils/ShellInit.kt",
+        "app/src/main/java/com/topjohnwu/magisk/ui/deny/DenyListFragment.kt",
+        "app/src/main/java/com/topjohnwu/magisk/ui/deny/DenyListRvItem.kt",
+        "app/src/main/java/com/topjohnwu/magisk/ui/deny/DenyListViewModel.kt",
+        "app/src/main/java/com/topjohnwu/magisk/ui/settings/SettingsItems.kt",
+        "app/src/main/java/com/topjohnwu/magisk/ui/settings/SettingsViewModel.kt",
+        "app/src/main/res/raw/manager.sh",
+        "app/src/main/res/values/strings.xml",
+        "native/src/Android.mk",
+        "native/src/base/Android.mk",
+        "native/src/base/cus.cpp",
+        "native/src/base/cus.hpp",
+        "native/src/base/include/base.hpp",
+        "native/src/base/logging.cpp",
+        "native/src/base/logging.hpp",
+        "native/src/core/applets.cpp",
+        "native/src/core/bootstages.cpp",
+        "native/src/core/daemon.cpp",
+        "native/src/core/db.cpp",
+        "native/src/core/deny/cli.cpp",
+        "native/src/core/deny/deny.hpp",
+        "native/src/core/deny/ptrace.cpp",
+        "native/src/core/deny/revert.cpp",
+        "native/src/core/deny/utils.cpp",
+        "native/src/core/include/core.hpp",
+        "native/src/core/include/db.hpp",
+        "native/src/core/magisk.cpp",
+        "native/src/core/module.cpp",
+        "native/src/core/zygisk/entry.cpp",
+        "native/src/core/zygisk/hook.cpp",
+        "native/src/core/zygisk/module.hpp",
+        "native/src/core/zygisk/proc_monitor.cpp",
+        "native/src/core/zygisk/ptrace.cpp",
+        "native/src/core/zygisk/zygisk.hpp",
+        "native/src/include/consts.hpp",
+        "native/src/init/mount.cpp",
+        "scripts/util_functions.sh",
+        "native/src/core/node.hpp"
+      ],
+      "evidence": [
+        "pre-maintenance",
+        "original-lite-source",
+        "original-lite-bundle",
+        "original-stable",
+        "b149cd26",
+        "k27-1",
+        "k27-2-1",
+        "k27-2-2",
+        "k27-2-3",
+        "k27-2-4-inherited",
+        "k27-2-4-archive",
+        "k31-70068d25",
+        "k31-25fa2159",
+        "shipment-source-review"
+      ],
+      "upstream_overlap": "Official mount cleanup and namespace isolation are reusable primitives. Their visible mount set is not proof of the historical daemon-internal visibility change or cleanup of Kitsune early mounts and injected paths. Measure both internal and app namespaces.",
+      "decision": "deferred-to-PR14",
+      "owner_pr": 14,
+      "affected_users": "Kitsune users relying on per-process cleanup of Magisk/module/early-mount/injected visibility.",
+      "migration": "PR14 must qualify every new early mount label/source against the PR12 cleanup contract before enabling the API.",
+      "first_shipped": "original-stable",
+      "last_shipped": "k31-25fa2159",
+      "upstream_evidence": [
+        "https://github.com/topjohnwu/Magisk/blob/96221b69fae9910b1c0c75c2f92a4ebb2c2dc698/native/src/core/mount.rs (SHA-256 acd571cd0005c32db9c1f69a82dcb25f6b524b4984c55d59836d773e24c11e16)",
+        "https://github.com/topjohnwu/Magisk/blob/96221b69fae9910b1c0c75c2f92a4ebb2c2dc698/native/src/core/deny/cli.cpp (SHA-256 61c56f3ff5ca1427ca9d3209da3a8c807d35eace2ae08ada35c1bfef8609fdee)"
+      ],
+      "shipment_review": {
+        "record": "shipment-source-review",
+        "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
+        "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
+      },
+      "parent_feature": "HID-010"
+    },
+    {
+      "id": "HID-014-device",
+      "behavior": "Exact SELinux-disabled/Waydroid runtime qualification",
+      "historical_status": [
+        "E"
+      ],
+      "commits": [
+        "9fe558afa1e648790de51732de404ab78a71acfb",
+        "c30ba784ca42da45977bc5ffeeda6e59cf9f7a47",
+        "8eaa0e80c0c3dcf1516781a3e2f33ce25958e4fc"
+      ],
+      "paths": [
+        "native/src/base/cus.cpp",
+        "native/src/base/cus.hpp",
+        "native/src/core/daemon.cpp",
+        "native/src/core/deny/ptrace.cpp",
+        "native/src/core/selinux.cpp",
+        "native/src/core/su/su_daemon.cpp"
+      ],
+      "evidence": [
+        "pre-maintenance",
+        "original-lite-source",
+        "original-lite-bundle",
+        "k31-70068d25",
+        "k31-25fa2159",
+        "shipment-source-review"
+      ],
+      "upstream_overlap": "Official matching includes app IDs and isolated-process prefixes and has built-in Zygisk plus logcat-based monitoring. Historical ptrace/USAP/app-zygote and disabled-SELinux behavior is a separate contract; shared UID, secondary users, restart and namespace timing require PR12/PR15 tests.",
+      "decision": "deferred-to-PR15",
+      "owner_pr": 15,
+      "affected_users": "Kitsune users relying on enforcing/permissive/disabled-SELinux and Waydroid-style zygote operation.",
+      "migration": "Core guards are tested; both available AVD kernels remained permissive despite disabled requests. Qualify an actual disabled/container target before claiming support.",
+      "first_shipped": "k31-70068d25",
+      "last_shipped": "k31-25fa2159",
+      "upstream_evidence": [
+        "https://github.com/topjohnwu/Magisk/blob/96221b69fae9910b1c0c75c2f92a4ebb2c2dc698/native/src/core/deny/utils.cpp (SHA-256 e7a9c0611796aa59fbdf2e7edd5931be0431392883d37c5356e97a183c2547ee)",
+        "https://github.com/topjohnwu/Magisk/blob/96221b69fae9910b1c0c75c2f92a4ebb2c2dc698/native/src/core/deny/logcat.cpp (SHA-256 43ecf6c10e6b8282f36e8a685271b9fa0bb774c063f3642455dfcf53cb28659e)",
+        "https://github.com/topjohnwu/Magisk/blob/96221b69fae9910b1c0c75c2f92a4ebb2c2dc698/native/src/core/zygisk/hook.cpp (SHA-256 5c2d17bffb4bd5f013616fdf715d211df78e0d36b4f42f1d18fa1ca333a5765c)"
+      ],
+      "shipment_review": {
+        "record": "shipment-source-review",
+        "basis": "The older disabled-SELinux daemon/SU path belongs to SU-004. The context-optional zygote/Waydroid variant is first located in the frozen k31 sources; do not backdate that fix to the original stable release.",
+        "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
+      },
+      "parent_feature": "HID-014"
+    },
+    {
+      "id": "SU-004-device",
+      "behavior": "SU and restorecon on exact SELinux-disabled/container targets",
+      "historical_status": [
+        "E"
+      ],
+      "commits": [
+        "9fe558afa1e648790de51732de404ab78a71acfb",
+        "c30ba784ca42da45977bc5ffeeda6e59cf9f7a47",
+        "8eaa0e80c0c3dcf1516781a3e2f33ce25958e4fc"
+      ],
+      "paths": [
+        "native/src/base/cus.cpp",
+        "native/src/base/cus.hpp",
+        "native/src/core/daemon.cpp",
+        "native/src/core/deny/ptrace.cpp",
+        "native/src/core/selinux.cpp",
+        "native/src/core/su/su_daemon.cpp"
+      ],
+      "evidence": [
+        "pre-maintenance",
+        "original-lite-source",
+        "original-lite-bundle",
+        "original-stable",
+        "b149cd26",
+        "k27-1",
+        "k27-2-1",
+        "k27-2-2",
+        "k27-2-3",
+        "k27-2-4-inherited",
+        "k27-2-4-archive",
+        "k31-70068d25",
+        "k31-25fa2159",
+        "shipment-source-review"
+      ],
+      "upstream_overlap": "Official daemon authorization, restorecon and SU execution are maintained implementations. They do not establish the fork's SELinux-disabled compatibility. The current-line restorecon failure in the paired LDPlayer run is a concrete reason to keep this row separate from ordinary permissive-root success.",
+      "decision": "deferred-to-PR15",
+      "owner_pr": 15,
+      "affected_users": "Kitsune users relying on daemon/client authorization, `restorecon`, and SU execution with SELinux disabled.",
+      "migration": "Retain the tested refusal guards and qualify actual disabled-kernel authorization and restoration under PR15.",
+      "first_shipped": "original-stable",
+      "last_shipped": "k31-25fa2159",
+      "upstream_evidence": [
+        "https://github.com/topjohnwu/Magisk/blob/96221b69fae9910b1c0c75c2f92a4ebb2c2dc698/native/src/core/daemon.rs (SHA-256 9b5c9727e76b6b3a4d0a2e398be277d9b49e804dd03bf96a9738ba67bc342e93)",
+        "https://github.com/topjohnwu/Magisk/blob/96221b69fae9910b1c0c75c2f92a4ebb2c2dc698/native/src/core/selinux.rs (SHA-256 a04272d83c6a4204c7056c156068eb05f597a7878e4e39ff2cf1a7a899492d5e)",
+        "https://github.com/topjohnwu/Magisk/blob/96221b69fae9910b1c0c75c2f92a4ebb2c2dc698/native/src/core/su/daemon.rs (SHA-256 5151979f34d4c8c2f348b87c5623f8d9f6cc5d5940895ff9b1d6d478317bafd3)"
+      ],
+      "shipment_review": {
+        "record": "shipment-source-review",
+        "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
+        "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
+      },
+      "parent_feature": "SU-004"
     }
   ],
   "path_reviews": [
