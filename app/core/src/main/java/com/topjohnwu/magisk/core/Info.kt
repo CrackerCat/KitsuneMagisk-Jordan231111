@@ -77,15 +77,18 @@ object Info {
     class Env(
         val versionString: String = "",
         val isDebug: Boolean = false,
-        code: Int = -1
+        code: Int = -1,
+        val identity: RuntimeIdentity? = null,
     ) {
         val versionCode = when {
             code < Const.Version.MIN_VERCODE -> -1
             isRooted -> code
             else -> -1
         }
-        val isUnsupported = code > 0 && code < Const.Version.MIN_VERCODE
-        val isActive = versionCode > 0
+        val isUnsupported = code > 0 && (code < Const.Version.MIN_VERCODE ||
+            identity?.isCompatible == false)
+        val isActive = versionCode > 0 && !isUnsupported
+        val matchesApp get() = identity?.matchesApp == true
     }
 
     fun init(shell: Shell) {
@@ -96,7 +99,8 @@ object Info {
             val versionCode = runCatching { fastCmd("magisk -V").toInt() }.getOrDefault(-1)
             env = Env(
                 v[0], v.size >= 3 && v[2] == "D",
-                versionCode
+                versionCode,
+                RuntimeIdentity.parse(fastCmd(shell, "magisk --daemon-version-json 2>/dev/null"))
             )
             Config.denyList = fastCmdResult(shell, "magisk --denylist status")
             hasMagiskState = versionCode > 0 || fastCmdResult(

@@ -4416,10 +4416,10 @@
         "shipment-source-review"
       ],
       "upstream_overlap": "Official identity reflects its upstream product/version. Kitsune's package and inherited fake 29999/31000 compatibility identity are not upstream behavior. PR9 must separate product, upstream, protocol and module compatibility without a downgrade of installed managers.",
-      "decision": "deferred-to-PR9",
+      "decision": "ported-and-tested-in-PR9",
       "owner_pr": 9,
       "affected_users": "Kitsune users relying on kitsune package/application identity and upgrade path from `io.github.huskydg.magisk`.",
-      "migration": "Keep the historical implementation available until the numbered owner supplies tested retention or explicit affected-user migration guidance.",
+      "migration": "Existing Next managers update in place with the same signer. Historical io.github.huskydg.magisk, Lite and randomized packages are not cross-package upgrades: restore the original manager, preserve recovery evidence, uninstall old System Mode with its owner and qualify a clean Next installation. Do not bypass signer checks or automatically convert legacy databases/payloads. See docs/build-info.md.",
       "first_shipped": "original-stable",
       "last_shipped": "k31-25fa2159",
       "upstream_evidence": [
@@ -4431,7 +4431,8 @@
         "record": "shipment-source-review",
         "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
-      }
+      },
+      "acceptance_evidence": "docs/build-info.md: MuMuPlayer Pro 1.9.2 retained Next package UID 10101 across the same-signer 31000 to 31001 manager update. Historical/hidden packages and signer changes require the documented explicit migration; PR10/PR13 retain their separate signer/stub gates."
     },
     {
       "id": "APP-001",
@@ -5090,7 +5091,7 @@
       "decision": "retired-with-evidence",
       "owner_pr": 9,
       "affected_users": "Kitsune users relying on fake `29999`/`31000` identity and migration to truthful compatibility fields.",
-      "migration": "Use the actual upstream base and source identity. PR9 must define the upgrade/compatibility fields for installations carrying historical 29999/31000 labels; never infer code compatibility from those labels alone.",
+      "migration": "PR9 uses product 0.1.0-dev, app upgrade code 31001, the actual official v31.0 base, module epoch 31000 and protocol 1. Query --version-json/--features instead of inferring fork extensions from version numbers; see docs/build-info.md for upgrade/reinstall rules.",
       "first_shipped": "k31-70068d25",
       "last_shipped": "k31-25fa2159",
       "upstream_evidence": [
@@ -5103,7 +5104,7 @@
         "basis": "Reviewed source signatures and, where earlier, the preserved published contract.",
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
       },
-      "acceptance_evidence": "docs/port-history/retirements.json: Retire false upstream identity. The selected code actually descends from official v31.0 and its source/artifact gate binds the upstream base, commit and version. This does not complete PR9 compatibility/protocol/build-info separation."
+      "acceptance_evidence": "docs/port-history/retirements.json retires false upstream identity. docs/build-info.md and kitsune-build.json define the tested PR9 replacement: generated app/native/shell identity, actual upstream provenance, independent Android/module/protocol fields and exact artifact verification."
     },
     {
       "id": "SEC-001",

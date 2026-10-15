@@ -1,4 +1,4 @@
-use crate::consts::{APP_PACKAGE_NAME, MAGISK_VER_CODE};
+use crate::consts::{APP_PACKAGE_NAME, APP_VERSION_CODE, PROTOCOL_VERSION};
 use crate::daemon::{AID_APP_END, AID_APP_START, AID_USER_OFFSET, MagiskD, to_app_id};
 use crate::ffi::{DbEntryKey, get_magisk_tmp, install_apk, uninstall_pkg};
 use base::WalkResult::{Abort, Continue, Skip};
@@ -48,105 +48,112 @@ macro_rules! bad_apk {
  * This method extracts the first certificate of the first signer
  * within the APK v2 signature block.
  */
-fn read_certificate(apk: &mut File, version: i32) -> Vec<u8> {
-    let res = || -> io::Result<Vec<u8>> {
-        let mut u32_val = 0u32;
-        let mut u64_val = 0u64;
+fn read_certificate(apk: &mut File, version: i32) -> io::Result<Vec<u8>> {
+    let mut u32_val = 0u32;
+    let mut u64_val = 0u64;
 
-        // Find EOCD
-        for i in 0u16.. {
-            let mut comment_sz = 0u16;
-            apk.seek(SeekFrom::End(-(size_of_val(&comment_sz) as i64) - i as i64))?;
-            apk.read_pod(&mut comment_sz)?;
+    // Find EOCD
+    for i in 0u16.. {
+        let mut comment_sz = 0u16;
+        apk.seek(SeekFrom::End(-(size_of_val(&comment_sz) as i64) - i as i64))?;
+        apk.read_pod(&mut comment_sz)?;
 
-            if comment_sz == i {
-                apk.seek(SeekFrom::Current(-22))?;
-                let mut magic = 0u32;
-                apk.read_pod(&mut magic)?;
-                if magic == EOCD_MAGIC {
-                    break;
-                }
-            }
-            if i == 0xffff {
-                Err(bad_apk!("invalid APK format"))?;
+        if comment_sz == i {
+            apk.seek(SeekFrom::Current(-22))?;
+            let mut magic = 0u32;
+            apk.read_pod(&mut magic)?;
+            if magic == EOCD_MAGIC {
+                break;
             }
         }
+        if i == 0xffff {
+            Err(bad_apk!("invalid APK format"))?;
+        }
+    }
 
-        // We are now at EOCD + sizeof(magic)
-        // Seek and read central_dir_off to find the start of the central directory
-        let mut central_dir_off = 0u32;
-        apk.seek(SeekFrom::Current(12))?;
-        apk.read_pod(&mut central_dir_off)?;
+    // We are now at EOCD + sizeof(magic)
+    // Seek and read central_dir_off to find the start of the central directory
+    let mut central_dir_off = 0u32;
+    apk.seek(SeekFrom::Current(12))?;
+    apk.read_pod(&mut central_dir_off)?;
 
-        // Code for parse APK comment to get version code
-        if version >= 0 {
-            let mut comment_sz = 0u16;
-            apk.read_pod(&mut comment_sz)?;
-            let mut comment = vec![0u8; comment_sz as usize];
-            apk.read_exact(&mut comment)?;
-            let mut comment = Cursor::new(&comment);
-            let mut apk_ver = 0;
-            comment.for_each_prop(|k, v| {
-                if k == "versionCode" {
-                    apk_ver = v.parse::<i32>().unwrap_or(0);
-                    false
-                } else {
-                    true
-                }
-            });
-            if version > apk_ver {
-                Err(bad_apk!("APK version too low"))?;
+    // Code for parse APK comment to get version code
+    if version >= 0 {
+        let mut comment_sz = 0u16;
+        apk.read_pod(&mut comment_sz)?;
+        let mut comment = vec![0u8; comment_sz as usize];
+        apk.read_exact(&mut comment)?;
+        let mut comment = Cursor::new(&comment);
+        let mut apk_ver = 0;
+        let mut protocol = 0;
+        comment.for_each_prop(|k, v| {
+            if k == "versionCode" {
+                apk_ver = v.parse::<i32>().unwrap_or(0);
+            } else if k == "protocolVersion" {
+                protocol = v.parse::<i32>().unwrap_or(0);
             }
+            true
+        });
+        if version > apk_ver {
+            Err(io::Error::new(
+                io::ErrorKind::Unsupported,
+                "APK version too low",
+            ))?;
+        }
+        if protocol != PROTOCOL_VERSION {
+            Err(io::Error::new(
+                io::ErrorKind::Unsupported,
+                "incompatible manager protocol",
+            ))?;
+        }
+    }
+
+    // Next, find the start of the APK signing block
+    apk.seek(SeekFrom::Start((central_dir_off - 24) as u64))?;
+    apk.read_pod(&mut u64_val)?; // u64_value = block_sz_
+    let mut magic = [0u8; 16];
+    apk.read_exact(&mut magic)?;
+    if magic != APK_SIGNING_BLOCK_MAGIC {
+        Err(bad_apk!("invalid signing block magic"))?;
+    }
+    let mut signing_blk_sz = 0u64;
+    apk.seek(SeekFrom::Current(
+        -(u64_val as i64) - (size_of_val(&signing_blk_sz) as i64),
+    ))?;
+    apk.read_pod(&mut signing_blk_sz)?;
+    if signing_blk_sz != u64_val {
+        Err(bad_apk!("invalid signing block size"))?;
+    }
+
+    // Finally, we are now at the beginning of the id-value pair sequence
+    loop {
+        apk.read_pod(&mut u64_val)?; // id-value pair length
+        if u64_val == signing_blk_sz {
+            Err(bad_apk!("cannot find certificate"))?;
         }
 
-        // Next, find the start of the APK signing block
-        apk.seek(SeekFrom::Start((central_dir_off - 24) as u64))?;
-        apk.read_pod(&mut u64_val)?; // u64_value = block_sz_
-        let mut magic = [0u8; 16];
-        apk.read_exact(&mut magic)?;
-        if magic != APK_SIGNING_BLOCK_MAGIC {
-            Err(bad_apk!("invalid signing block magic"))?;
+        let mut id = 0u32;
+        apk.read_pod(&mut id)?;
+        if id == SIGNATURE_SCHEME_V2_MAGIC {
+            // Skip [signer sequence length] + [1st signer length] + [signed data length]
+            apk.seek(SeekFrom::Current((size_of_val(&u32_val) * 3) as i64))?;
+
+            apk.read_pod(&mut u32_val)?; // digest sequence length
+            apk.seek(SeekFrom::Current(u32_val as i64))?; // skip all digests
+
+            apk.seek(SeekFrom::Current(size_of_val(&u32_val) as i64))?; // cert sequence length
+            apk.read_pod(&mut u32_val)?; // 1st cert length
+
+            let mut cert = vec![0; u32_val as usize];
+            apk.read_exact(cert.as_mut())?;
+            break Ok(cert);
+        } else {
+            // Skip this id-value pair
+            apk.seek(SeekFrom::Current(
+                u64_val as i64 - (size_of_val(&id) as i64),
+            ))?;
         }
-        let mut signing_blk_sz = 0u64;
-        apk.seek(SeekFrom::Current(
-            -(u64_val as i64) - (size_of_val(&signing_blk_sz) as i64),
-        ))?;
-        apk.read_pod(&mut signing_blk_sz)?;
-        if signing_blk_sz != u64_val {
-            Err(bad_apk!("invalid signing block size"))?;
-        }
-
-        // Finally, we are now at the beginning of the id-value pair sequence
-        loop {
-            apk.read_pod(&mut u64_val)?; // id-value pair length
-            if u64_val == signing_blk_sz {
-                Err(bad_apk!("cannot find certificate"))?;
-            }
-
-            let mut id = 0u32;
-            apk.read_pod(&mut id)?;
-            if id == SIGNATURE_SCHEME_V2_MAGIC {
-                // Skip [signer sequence length] + [1st signer length] + [signed data length]
-                apk.seek(SeekFrom::Current((size_of_val(&u32_val) * 3) as i64))?;
-
-                apk.read_pod(&mut u32_val)?; // digest sequence length
-                apk.seek(SeekFrom::Current(u32_val as i64))?; // skip all digests
-
-                apk.seek(SeekFrom::Current(size_of_val(&u32_val) as i64))?; // cert sequence length
-                apk.read_pod(&mut u32_val)?; // 1st cert length
-
-                let mut cert = vec![0; u32_val as usize];
-                apk.read_exact(cert.as_mut())?;
-                break Ok(cert);
-            } else {
-                // Skip this id-value pair
-                apk.seek(SeekFrom::Current(
-                    u64_val as i64 - (size_of_val(&id) as i64),
-                ))?;
-            }
-        }
-    }();
-    res.log().unwrap_or(vec![])
+    }
 }
 
 fn find_apk_path(pkg: &str) -> LoggedResult<Utf8CString> {
@@ -176,6 +183,7 @@ enum Status {
     Installed,
     NotInstalled,
     CertMismatch,
+    Incompatible,
 }
 
 pub struct ManagerInfo {
@@ -243,7 +251,17 @@ impl ManagerInfo {
                 uid = fd_get_attr(fd.as_raw_fd())
                     .map(|attr| attr.st.st_uid as i32)
                     .unwrap_or(-1);
-                read_certificate(&mut fd, MAGISK_VER_CODE)
+                match read_certificate(&mut fd, APP_VERSION_CODE) {
+                    Ok(cert) => cert,
+                    Err(e) if e.kind() == io::ErrorKind::Unsupported => {
+                        warn!("pkg: {}", e);
+                        return Status::Incompatible;
+                    }
+                    Err(e) => {
+                        warn!("pkg: {}", e);
+                        vec![]
+                    }
+                }
             }
             Err(_) => {
                 warn!("pkg: no dyn APK, ignore");
@@ -271,7 +289,7 @@ impl ManagerInfo {
         };
 
         let cert = match apk.open(OFlag::O_RDONLY | OFlag::O_CLOEXEC) {
-            Ok(mut fd) => read_certificate(&mut fd, -1),
+            Ok(mut fd) => read_certificate(&mut fd, -1).log().unwrap_or_default(),
             Err(_) => return Status::NotInstalled,
         };
 
@@ -294,7 +312,17 @@ impl ManagerInfo {
         };
 
         let cert = match apk.open(OFlag::O_RDONLY | OFlag::O_CLOEXEC) {
-            Ok(mut fd) => read_certificate(&mut fd, MAGISK_VER_CODE),
+            Ok(mut fd) => match read_certificate(&mut fd, APP_VERSION_CODE) {
+                Ok(cert) => cert,
+                Err(e) if e.kind() == io::ErrorKind::Unsupported => {
+                    warn!("pkg: {}", e);
+                    return Status::Incompatible;
+                }
+                Err(e) => {
+                    warn!("pkg: {}", e);
+                    vec![]
+                }
+            },
             Err(_) => return Status::NotInstalled,
         };
 
@@ -400,6 +428,7 @@ impl ManagerInfo {
                     install = true;
                     daemon.rm_db_string(DbEntryKey::SuManager).ok();
                 }
+                Status::Incompatible => return (-1, ""),
             }
         }
 
@@ -416,6 +445,8 @@ impl ManagerInfo {
                 };
             }
             Status::CertMismatch => install = true,
+            // A valid but incompatible manager must not be uninstalled or replaced.
+            Status::Incompatible => return (-1, ""),
             Status::NotInstalled => {}
         }
 
@@ -449,7 +480,9 @@ impl MagiskD {
             .join_path("stub.apk");
 
         if let Ok(mut fd) = apk.open(OFlag::O_RDONLY | OFlag::O_CLOEXEC) {
-            info.trusted_cert = read_certificate(&mut fd, MAGISK_VER_CODE);
+            info.trusted_cert = read_certificate(&mut fd, APP_VERSION_CODE)
+                .log()
+                .unwrap_or_default();
             // Seek the fd back to start
             fd.seek(SeekFrom::Start(0)).log_ok();
             info.stub_apk_fd = Some(fd);

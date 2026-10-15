@@ -106,7 +106,7 @@ selects the development foundation while retaining these explicit product gates.
 | `SU-002` | E | Prompt/allow/deny/revoke/timeout, namespace, shared UID, multiuser, and no-manager lifecycle | `original-stable` → `k31-25fa2159` | `deferred-to-PR13` | PR13 |
 | `SU-003` | E | Deterministic manager policy-row retrieval (`LIMIT 1`) | `k27-2-4-inherited` → `k31-25fa2159` | `deferred-to-PR13` | PR13 |
 | `SU-004` | E | Daemon/client authorization, `restorecon`, and SU execution with SELinux disabled | `original-stable` → `k31-25fa2159` | `deferred-to-PR12` | PR12 |
-| `ID-001` | E | Kitsune package/application identity and upgrade path from `io.github.huskydg.magisk` | `original-stable` → `k31-25fa2159` | `deferred-to-PR9` | PR9 |
+| `ID-001` | E | Kitsune package/application identity and upgrade path from `io.github.huskydg.magisk` | `original-stable` → `k31-25fa2159` | `ported-and-tested-in-PR9` | PR9 |
 | `APP-001` | E | Kitsune Mask name, labels, logos/colors, attribution, and unofficial-build warning | `original-stable` → `k31-25fa2159` | `deferred-to-PR13` | PR13 |
 | `APP-002` | E | Hidden-manager create/launch/upgrade/restore plus `com.*` random package generation | `k27-2-4-inherited` → `k31-25fa2159` | `deferred-to-PR13` | PR13 |
 | `APP-003` | E | Manager/stub signature enforcement and retirement of the global bypass | `metadata-29aaacaa-note-md` → `k31-25fa2159` | `retired-with-evidence` | PR10 |

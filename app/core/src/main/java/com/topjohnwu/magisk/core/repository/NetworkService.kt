@@ -31,7 +31,7 @@ class NetworkService(
             CUSTOM_CHANNEL -> fetchCustomUpdate(Config.customChannelUrl)
             else -> throw IllegalArgumentException()
         }
-        if (info.versionCode < Info.env.versionCode &&
+        if (info.versionCode < BuildConfig.APP_VERSION_CODE &&
             Config.updateChannel == DEFAULT_CHANNEL &&
             !BuildConfig.DEBUG
         ) {

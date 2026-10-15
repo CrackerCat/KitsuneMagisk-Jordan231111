@@ -1,6 +1,6 @@
 #pragma once
 
-#define JAVA_PACKAGE_NAME "io.github.huskydg.magisk.next"
+#include <flags.h>
 #define SECURE_DIR      "/data/adb"
 #define MODULEROOT      SECURE_DIR "/modules"
 #define DATABIN         SECURE_DIR "/magisk"

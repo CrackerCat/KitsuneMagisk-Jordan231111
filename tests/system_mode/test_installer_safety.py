@@ -70,11 +70,11 @@ class MaintainedBaseSystemModeSafetyTest(unittest.TestCase):
         self.assertLess(install.index("ks_validate_debug_payload"), install.index("sm_begin_transaction"))
 
     def test_persistent_mode_rejects_a_dirty_source_identity(self) -> None:
-        self.assertIn("sourceTreeDirty = gitTreeDirty", self.plugin)
-        self.assertIn('"status", "--porcelain=v1"', self.plugin)
-        self.assertIn("check(process.waitFor() == 0)", self.plugin)
+        generator = (ROOT / "tools/build_info.py").read_text()
+        self.assertIn('"status", "--porcelain=v1"', generator)
+        self.assertIn("check(generator.waitFor() == 0)", self.plugin)
         self.assertIn('findProperty("expectedSourceCommit")', self.plugin)
-        self.assertIn("KITSUNE_SOURCE_DIRTY=${Config.sourceDirty}", self.setup)
+        self.assertIn('"KITSUNE_SOURCE_DIRTY": str(data["source_dirty"]).lower()', generator)
         validate = function_body(self.installer, "ks_validate_identity")
         self.assertIn('KITSUNE_SOURCE_DIRTY:-true', validate)
         self.assertIn("exact clean commit", validate)

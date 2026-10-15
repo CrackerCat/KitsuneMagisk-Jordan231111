@@ -2,6 +2,7 @@
 import argparse
 import functools
 import glob
+import json
 import os
 import re
 import shutil
@@ -15,6 +16,7 @@ from zipfile import BadZipFile, ZipFile
 
 sys.dont_write_bytecode = True
 from scripts.env import *
+from tools import build_info
 
 repo_root = Path(__file__).resolve().parent
 
@@ -174,7 +176,11 @@ def git_source_state():
     match = re.search(r"(?m)^# branch\.oid ([a-f0-9]{40})$", proc.stdout)
     if match is None:
         raise RuntimeError("Cannot bind Git source state to one commit")
-    return match.group(1), proc.stdout
+    try:
+        digest = build_info.source_state(repo_root)["source_digest"]
+    except (OSError, ValueError, subprocess.CalledProcessError) as exc:
+        raise RuntimeError(f"Cannot fingerprint Git source state: {exc}") from exc
+    return match.group(1), proc.stdout + digest
 
 
 def verify_source_state(expected, source, target):
@@ -379,10 +385,13 @@ def write_if_diff(file_name: Path, text: str):
 
 
 def dump_flags_native():
+    info = build_info.variant_info(config["buildInfo"], "release" if args.release else "debug")
     flag_txt = "#pragma once\n"
     flag_txt += f'#define MAGISK_VERSION      "{config["version"]}"\n'
     flag_txt += f'#define MAGISK_VER_CODE     {config["versionCode"]}\n'
     flag_txt += f"#define MAGISK_DEBUG        {0 if args.release else 1}\n"
+    flag_txt += f'#define JAVA_PACKAGE_NAME {json.dumps(info["application_id"])}\n'
+    flag_txt += f'#define KITSUNE_APP_VERSION_CODE {info["app_version_code"]}\n'
 
     native_gen_path = Path("native", "out", "generated")
     native_gen_path.mkdir(mode=0o755, parents=True, exist_ok=True)
@@ -390,6 +399,11 @@ def dump_flags_native():
 
     rust_flag_txt = f'pub const MAGISK_VERSION: &str = "{config["version"]}";\n'
     rust_flag_txt += f'pub const MAGISK_VER_CODE: i32 = {config["versionCode"]};\n'
+    rust_flag_txt += f'pub const APP_VERSION_CODE: i32 = {info["app_version_code"]};\n'
+    rust_flag_txt += f'pub const APP_PACKAGE_NAME: &str = {json.dumps(info["application_id"])};\n'
+    rust_flag_txt += f'pub const PROTOCOL_VERSION: i32 = {info["protocol_version"]};\n'
+    rust_flag_txt += f'pub const BUILD_INFO: &str = r#"{build_info.encoded(info)}"#;\n'
+    rust_flag_txt += f'pub const BUILD_FEATURES: &str = {json.dumps(chr(10).join(info["capabilities"]))};\n'
     write_if_diff(native_gen_path / "flags.rs", rust_flag_txt)
 
 
@@ -418,7 +432,8 @@ def build_native():
 def dump_flags_app():
     flag_txt = f"abiList={','.join(build_abis.keys())}\n"
     flag_txt += f"version={config['version']}\n"
-    flag_txt += f"versionCode={config['versionCode']}\n"
+    flag_txt += f"versionCode={config['buildInfo']['app_version_code']}\n"
+    flag_txt += f"compatVersionCode={config['versionCode']}\n"
 
     app_build_dir = Path("app", "build")
     app_build_dir.mkdir(parents=True, exist_ok=True)
@@ -449,6 +464,7 @@ def build_apk(module: str, output_name=None):
             f"-PconfigPath={props}",
             f"-PabiList={','.join(build_abis.keys())}",
             f"-PexpectedSourceCommit={source_state[0]}",
+            f"-PpythonExecutable={sys.executable}",
         ],
     )
     os.chdir("..")
@@ -802,16 +818,14 @@ def set_build_abis(abis: set[str]):
 
 
 def load_config():
-    commit_hash = cmd_out(["git", "rev-parse", "--short=8", "HEAD"])
-
     # Default values
-    config["version"] = f"31.0-kitsune-next.{commit_hash}"
-    config["versionCode"] = 1000000
     config["outdir"] = "out"
 
     # Load config.prop
     if args.config.exists():
         config.update(parse_props(args.config))
+    if any(key in config for key in ("version", "versionCode", "magisk.versionCode")):
+        error("Set product identity in kitsune-build.json, not config.prop")
 
     gradle_props = Path("app", "gradle.properties")
     for key, value in parse_props(gradle_props).items():
@@ -819,9 +833,12 @@ def load_config():
             config[key[7:]] = value
 
     try:
-        config["versionCode"] = int(config["versionCode"])
-    except ValueError:
-        error('Config error: "versionCode" is required to be an integer')
+        info = build_info.generate(repo_root)
+    except (ValueError, OSError, subprocess.CalledProcessError) as exc:
+        error(f"Cannot generate build identity: {exc}")
+    config["buildInfo"] = info
+    config["version"] = info["version_name"]
+    config["versionCode"] = info["compat_version_code"]
 
     config["outdir"] = Path(config["outdir"])
     config["outdir"].mkdir(mode=0o755, parents=True, exist_ok=True)

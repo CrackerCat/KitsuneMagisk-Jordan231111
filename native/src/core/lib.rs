@@ -67,6 +67,9 @@ pub mod ffi {
         BOOT_COMPLETE,
 
         END,
+
+        // Old daemons reject this without interpreting a privileged fork request.
+        CHECK_BUILD_INFO = 0x4b490001,
     }
 
     #[repr(i32)]

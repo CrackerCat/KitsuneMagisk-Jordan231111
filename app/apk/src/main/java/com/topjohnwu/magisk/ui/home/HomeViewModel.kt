@@ -58,7 +58,7 @@ class HomeViewModel(
         fun computeMagiskState() = when {
             Info.isRooted && Info.env.isUnsupported -> State.OUTDATED
             !Info.env.isActive -> State.INVALID
-            Info.env.versionCode < BuildConfig.APP_VERSION_CODE -> State.OUTDATED
+            !Info.env.matchesApp -> State.OUTDATED
             else -> State.UP_TO_DATE
         }
 
@@ -157,7 +157,10 @@ class HomeViewModel(
 
     private suspend fun ensureEnv() {
         if (magiskState == State.INVALID || checkedEnv) return
-        val cmd = "env_check ${Info.env.versionString} ${Info.env.versionCode}"
+        val version = "'" + Info.env.versionString.replace("'", "'\\''") + "'"
+        val identity = Info.env.identity
+        val cmd = "env_check $version ${Info.env.versionCode}" +
+            if (identity == null) "" else " ${identity.protocolVersion} ${identity.buildId}"
         val code = Shell.cmd(cmd).await().code
         if (code != 0) {
             _uiState.update { it.copy(envFixCode = code) }

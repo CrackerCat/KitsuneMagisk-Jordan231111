@@ -10,6 +10,8 @@ run_delay() {
 
 # $1 = version string
 # $2 = version code
+# $3 = protocol version (absent on pre-PR9 daemons)
+# $4 = build ID
 env_check() {
   local receipt=/data/adb/kitsune/system-mode/transaction.env
   for file in busybox magiskboot magiskinit util_functions.sh boot_patch.sh; do
@@ -37,6 +39,10 @@ env_check() {
   fi
   grep -xqF "MAGISK_VER='$1'" "$MAGISKBIN/util_functions.sh" || return 3
   grep -xqF "MAGISK_VER_CODE=$2" "$MAGISKBIN/util_functions.sh" || return 3
+  if [ -n "${3:-}" ]; then
+    grep -xqF "KITSUNE_PROTOCOL_VERSION=$3" "$MAGISKBIN/util_functions.sh" || return 3
+    grep -xqF "KITSUNE_BUILD_ID='$4'" "$MAGISKBIN/util_functions.sh" || return 3
+  fi
   return 0
 }
 

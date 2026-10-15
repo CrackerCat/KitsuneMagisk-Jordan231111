@@ -940,8 +940,7 @@ private fun EnvFixComposableDialog(
     modifier: Modifier = Modifier
 ) {
     val needsFullFix = Info.isSystemMode || code == 2 ||
-        Info.env.versionCode != BuildConfig.APP_VERSION_CODE ||
-        Info.env.versionString != BuildConfig.APP_VERSION_NAME
+        !Info.env.matchesApp
 
     MagiskDialog(
         modifier = modifier,
