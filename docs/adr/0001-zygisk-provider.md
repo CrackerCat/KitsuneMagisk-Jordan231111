@@ -141,7 +141,10 @@ normally instead of continuing with an invalid socket or missing selection.
 Qualification and uninstall intentionally refuse mounted snapshot views. Pause modules that
 mount the init filesystem, cold boot, and retry. The lab also removed its external test modules
 before upgrade qualification because ReZygisk rewrote `module.prop` timestamps while disabled.
-No inventory comparison was relaxed. A MuMu startup timeout and an unreproduced API 25 hidden-
-manager TLS crash are retained in the evidence; neither permits a production/device support
-claim. Physical GrapheneOS, ARM32, SELinux-disabled targets and full Hide/SuList remain explicitly
-owned qualification/integration gates.
+No inventory comparison was relaxed. Repeated legacy hidden-manager TLS cleanup failures led
+to a fix in the manager's update adapter: completed responses are closed without cancelling
+their already-consumed calls. Consumed, unread, interrupted and failed-exchange regressions
+retain normal cleanup and interruption without changing TLS validation. The MuMu startup
+timeout and legacy failure traces remain in the evidence. Physical GrapheneOS, ARM32,
+SELinux-disabled targets and full Hide/SuList remain explicitly owned qualification/integration
+gates; these emulator results do not permit a production/device support claim.

@@ -18,16 +18,22 @@ import org.junit.Assert.fail
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.io.IOException
+import java.io.InterruptedIOException
 import java.net.URL
 
 @Keep
 @RunWith(AndroidJUnit4::class)
 class VerifiedUpdatesTest {
-    private fun checkResponseCleanup(consume: Boolean) {
+    private fun checkResponseCleanup(consume: Boolean, interrupted: Boolean = false) {
         var cancellations = 0
         var closes = 0
         val body = object : ResponseBody() {
             private val content = object : ForwardingSource(Buffer().writeUtf8("test")) {
+                override fun read(sink: Buffer, byteCount: Long): Long {
+                    if (interrupted) throw InterruptedIOException("expected interruption")
+                    return super.read(sink, byteCount)
+                }
+
                 override fun close() {
                     closes++
                     super.close()
@@ -46,7 +52,14 @@ class VerifiedUpdatesTest {
         }.build()
         val connection = VerifiedUpdates.Connection(URL("https://example.invalid/"), client)
         assertEquals(200, connection.responseCode)
-        if (consume) connection.inputStream.use { assertEquals("test", it.reader().readText()) }
+        if (consume) {
+            try {
+                connection.inputStream.use { assertEquals("test", it.reader().readText()) }
+                if (interrupted) fail("The read interruption must propagate")
+            } catch (e: InterruptedIOException) {
+                if (!interrupted) throw e
+            }
+        }
         connection.disconnect()
         connection.disconnect()
         assertEquals("The body must have one cleanup owner", 1, closes)
@@ -58,6 +71,9 @@ class VerifiedUpdatesTest {
 
     @Test
     fun testUnreadResponseIsClosedOnce() = checkResponseCleanup(false)
+
+    @Test
+    fun testInterruptedResponseIsClosedOnce() = checkResponseCleanup(true, true)
 
     @Test
     fun testFailedExecutionIsNotCancelledAgain() {

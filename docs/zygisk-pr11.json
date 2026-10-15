@@ -222,7 +222,8 @@
     "regressions": {
       "system_mode_version_comparison": "Old code fails when app upgrade code differs from native epoch; native version/source/variant comparison passes. Clean MuMu BD install reached BOOT_VERIFIED.",
       "doctor_split_identity": "Recognizes app 31002 / native 31000 via validated daemon build identity; mismatched source/base/variant/dirty cases remain refused.",
-      "denylist_cli": "Unprivileged old CLI returned success despite root-required refusal; new CLI exits 1 and rejects missing add/rm selection."
+      "denylist_cli": "Unprivileged old CLI returned success despite root-required refusal; new CLI exits 1 and rejects missing add/rm selection.",
+      "update_response_cleanup": "Legacy hidden-manager runs reached SSL_shutdown/SSL_free failures. The synchronous OkHttp adapter no longer cancels a completed call after its response body is consumed; consumed, unread, interrupted and failed exchanges have explicit cleanup regressions. TLS validation and timeouts are unchanged."
     },
     "host": {
       "tests": 286,
@@ -354,7 +355,7 @@
     "API 23/29 and other ABIs need the hosted lanes; local ARM64 is not their runtime evidence.",
     "Production promotion and physical-device support remain PR15/PR16 gates.",
     "A MuMu startup timeout 10002 occurred during repeated lab cycles; failed disks/logs retained and the verified image restored. It is not a qualified hardware-support claim.",
-    "The single API25 x86 TLS crash was not reproduced on exact-head retry; retain legacy hidden-manager/TLS lifecycle qualification under PR13/PR15.",
+    "Legacy API25/26 hidden-manager TLS traces prompted the response-ownership fix; retain physical legacy hidden-manager/TLS qualification under PR13/PR15.",
     "Current external releases still use the historical manager package fallback and do not establish Next SuList or built-in-equivalent injection exclusion. PR12 owns adapter integration."
   ],
   "runtime_artifacts": {
