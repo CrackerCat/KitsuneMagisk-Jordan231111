@@ -50,6 +50,18 @@ index afec450..0bc14d5 100644
  
    PROCESS_IS_MANAGER = (1u << 27),
    PROCESS_ROOT_IS_APATCH = (1u << 28),
+diff --git a/module/src/customize.sh b/module/src/customize.sh
+index cc999f6..db122cf 100644
+--- a/module/src/customize.sh
++++ b/module/src/customize.sh
+@@ -94,6 +94,7 @@ fi
+ 
+ ui_print "- Extracting module files"
+ extract "$ZIPFILE" 'module.prop'     "$MODPATH"
++extract "$ZIPFILE" 'kitsune-hide-v1'  "$MODPATH"
+ extract "$ZIPFILE" 'post-fs-data.sh' "$MODPATH"
+ extract "$ZIPFILE" 'service.sh'      "$MODPATH"
+ extract "$ZIPFILE" 'uninstall.sh'    "$MODPATH"
 diff --git a/module/src/module.prop b/module/src/module.prop
 index 08fd81a..3911036 100644
 --- a/module/src/module.prop
