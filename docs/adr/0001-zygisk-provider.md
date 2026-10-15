@@ -148,3 +148,13 @@ retain normal cleanup and interruption without changing TLS validation. The MuMu
 timeout and legacy failure traces remain in the evidence. Physical GrapheneOS, ARM32,
 SELinux-disabled targets and full Hide/SuList remain explicitly owned qualification/integration
 gates; these emulator results do not permit a production/device support claim.
+
+
+## PR12 extension
+
+The [Hide/SuList contract](../hide-policy.md) and [acceptance record](../hide-pr12.json)
+now define the core policy, bootstrap visibility and pinned external adapter.
+`hide_supported` and `sulist_supported` are true on this core. The old v1
+`external_preconditions_met` remains a negative-list-only observation: SuList
+adapters must use the explicit Hide provider/mode contract. PR11's stock ZIP
+comparisons above remain historical; they are not the newly patched adapter.

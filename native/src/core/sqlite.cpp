@@ -1,8 +1,12 @@
 #include <dlfcn.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 #include <consts.hpp>
 #include <base.hpp>
 #include <sqlite.hpp>
+#include "db_migrations.hpp"
 
 using namespace std;
 
@@ -24,6 +28,10 @@ static const char *(*sqlite3_column_text)(sqlite3_stmt*, int iCol);
 static int (*sqlite3_column_int)(sqlite3_stmt*, int iCol);
 static int (*sqlite3_step)(sqlite3_stmt*);
 static int (*sqlite3_finalize)(sqlite3_stmt *pStmt);
+struct sqlite3_backup;
+static sqlite3_backup *(*sqlite3_backup_init)(sqlite3*, const char*, sqlite3*, const char*);
+static int (*sqlite3_backup_step)(sqlite3_backup*, int);
+static int (*sqlite3_backup_finish)(sqlite3_backup*);
 
 // Internal Android linker APIs
 
@@ -88,6 +96,9 @@ static bool load_sqlite() {
     DLOAD(sqlite, sqlite3_column_text);
     DLOAD(sqlite, sqlite3_column_int);
     DLOAD(sqlite, sqlite3_finalize);
+    DLOAD(sqlite, sqlite3_backup_init);
+    DLOAD(sqlite, sqlite3_backup_step);
+    DLOAD(sqlite, sqlite3_backup_finish);
 
     dl_init = 1;
     return true;
@@ -154,7 +165,8 @@ int DbValues::get_int(int index) const {
 }
 
 const char *DbValues::get_text(int index) const {
-    return sqlite3_column_text((sqlite3_stmt*) this, index);
+    const char *text = sqlite3_column_text((sqlite3_stmt*) this, index);
+    return text ? text : "";
 }
 
 int DbStatement::bind_int64(int index, int64_t val) {
@@ -171,6 +183,105 @@ int DbStatement::bind_text(int index, rust::Str val) {
 }
 
 #define sql_chk_log(fn, ...) sql_chk_log_ret(nullptr, fn, __VA_ARGS__)
+
+// Keep the first online snapshot, including committed WAL data. Never follow a
+// symlink or replace a previous backup: a failed upgrade must remain recoverable.
+static bool backup_hide_database(sqlite3 *source) {
+    string path = string(MAGISKDB) + ".hide-v1.bak";
+    string temp = path + ".tmp";
+    auto safe = [](const struct stat &st) {
+        return S_ISREG(st.st_mode) && st.st_uid == geteuid() &&
+               (st.st_mode & 0777) == 0600 && st.st_nlink == 1;
+    };
+    struct stat st{};
+    if (lstat(path.c_str(), &st) != 0) {
+        if (errno != ENOENT) return false;
+        if (lstat(temp.c_str(), &st) == 0) {
+            if (!safe(st) || unlink(temp.c_str())) return false;
+        } else if (errno != ENOENT) {
+            return false;
+        }
+        int fd = open(temp.c_str(), O_WRONLY | O_CREAT | O_EXCL | O_CLOEXEC | O_NOFOLLOW, 0600);
+        if (fd < 0) return false;
+        close(fd);
+        sqlite3 *raw = nullptr;
+        int rc = sqlite3_open_v2(temp.c_str(), &raw, SQLITE_OPEN_READWRITE, nullptr);
+        unique_ptr<sqlite3, decltype(sqlite3_close)> dest(raw, sqlite3_close);
+        if (rc != SQLITE_OK) return false;
+        auto copy = sqlite3_backup_init(dest.get(), "main", source, "main");
+        if (!copy) return false;
+        rc = sqlite3_backup_step(copy, -1);
+        int finish = sqlite3_backup_finish(copy);
+        dest.reset();
+        if (rc != SQLITE_DONE || finish != SQLITE_OK) return false;
+        fd = open(temp.c_str(), O_RDONLY | O_CLOEXEC | O_NOFOLLOW);
+        if (fd < 0) return false;
+        bool synced = fsync(fd) == 0;
+        close(fd);
+        if (!synced || link(temp.c_str(), path.c_str()) || unlink(temp.c_str())) return false;
+        if (lstat(path.c_str(), &st)) return false;
+    }
+    // Recover a process death between link and unlink, without accepting aliases.
+    if (st.st_nlink == 2) {
+        struct stat other{};
+        if (lstat(temp.c_str(), &other) || other.st_dev != st.st_dev ||
+            other.st_ino != st.st_ino || !S_ISREG(st.st_mode) ||
+            st.st_uid != geteuid() || (st.st_mode & 0777) != 0600 || unlink(temp.c_str()) ||
+            lstat(path.c_str(), &st)) return false;
+    }
+    if (!safe(st)) return false;
+    sqlite3 *raw = nullptr;
+    int rc = sqlite3_open_v2(path.c_str(), &raw, 0x00000001 /* READONLY */, nullptr);
+    unique_ptr<sqlite3, decltype(sqlite3_close)> backup(raw, sqlite3_close);
+    if (rc != SQLITE_OK) return false;
+    bool valid = false;
+    auto check = [](void *out, auto, const DbValues &v) {
+        *static_cast<bool *>(out) = string_view(v.get_text(0)) == "ok";
+    };
+    if (sql_exec_impl(raw, "PRAGMA quick_check", nullptr, nullptr, check, &valid) || !valid)
+        return false;
+    int fd = open(path.c_str(), O_RDONLY | O_CLOEXEC | O_NOFOLLOW);
+    if (fd < 0) return false;
+    bool synced = fsync(fd) == 0;
+    close(fd);
+    string parent = path.substr(0, path.rfind('/'));
+    fd = open(parent.c_str(), O_RDONLY | O_DIRECTORY | O_CLOEXEC);
+    if (fd < 0) return false;
+    synced = fsync(fd) == 0 && synced;
+    close(fd);
+    return synced;
+}
+
+static bool migrate_hide(sqlite3 *db, bool fresh) {
+    int exists = 0;
+    auto count = [](void *out, auto, const DbValues &v) { *static_cast<int *>(out) = v.get_int(0); };
+    if (sql_exec_impl(db, "SELECT COUNT(*) FROM sqlite_master WHERE name='hide_migration_v13'",
+                     nullptr, nullptr, count, &exists)) return false;
+    if (exists) {
+        int rows = 0, valid = 0;
+        if (sql_exec_impl(db, "SELECT COUNT(*) FROM hide_migration_v13", nullptr, nullptr, count, &rows) ||
+            sql_exec_impl(db,
+                "SELECT COUNT(*) FROM hide_migration_v13 WHERE id=1 "
+                "AND strategy='union-preserve-legacy' AND source_hidelist_rows>=0 "
+                "AND source_denylist_rows>=0 AND source_sulist_rows>=0 AND overlap_rows>=0 "
+                "AND migrated_rows>=0 AND malformed_hidelist_rows>=0 AND sulist_enabled IN (0,1) "
+                "AND source_hidelist_rows=malformed_hidelist_rows+overlap_rows+migrated_rows "
+                "AND overlap_rows<=source_denylist_rows",
+                nullptr, nullptr, count, &valid)) return false;
+        // A valid previous reconciliation must never resurrect removed selections.
+        return rows == 1 && valid == 1;
+    }
+    if (!fresh && !backup_hide_database(db)) return false;
+    if (sql_exec_impl(db, HIDE_TABLE_COMPAT_MIGRATION) ||
+        sql_exec_impl(db, HIDE_TABLE_RECONCILE) ||
+        sql_exec_impl(db,
+            "INSERT OR IGNORE INTO settings(key,value) "
+            "SELECT 'denylist',value FROM settings WHERE key='magiskhide';COMMIT;")) {
+        sql_exec_impl(db, "ROLLBACK");
+        return false;
+    }
+    return true;
+}
 
 sqlite3 *open_and_init_db() {
     if (!load_sqlite()) {
@@ -198,6 +309,10 @@ sqlite3 *open_and_init_db() {
         LOGE("sqlite3: Downgrading database is not supported\n");
         return nullptr;
     }
+    int tables = 0;
+    sql_chk_log(sql_exec_impl, db.get(),
+                "SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'",
+                nullptr, nullptr, ver_cb, &tables);
 
     auto create_policy = [&] {
         return sql_exec_impl(db.get(),
@@ -273,9 +388,7 @@ sqlite3 *open_and_init_db() {
         upgrade = true;
     }
     if (ver == 10) {
-        sql_chk_log(sql_exec_impl, db.get(),
-                "DROP TABLE IF EXISTS hidelist;"
-                "DELETE FROM settings WHERE key='magiskhide';");
+        // Preserve historical selections and settings for the one-time union.
         sql_chk_log(create_denylist);
         ver = 11;
         upgrade = true;
@@ -298,6 +411,11 @@ sqlite3 *open_and_init_db() {
     if (upgrade) {
         // Set version
         sql_chk_log(sql_exec_impl, db.get(), "PRAGMA user_version=" DB_VERSION_STR);
+    }
+
+    if (!migrate_hide(db.get(), tables == 0)) {
+        LOGE("sqlite3: Hide migration failed; database preserved\n");
+        return nullptr;
     }
 
     return db.release();

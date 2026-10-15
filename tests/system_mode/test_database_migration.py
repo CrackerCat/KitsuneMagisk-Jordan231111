@@ -18,7 +18,7 @@ class DatabaseVersionTest(unittest.TestCase):
         cls.temporary = tempfile.TemporaryDirectory(prefix="kitsune-native-sqlite-")
         cls.binary = Path(cls.temporary.name) / "database"
         source = (ROOT / "native/src/core/sqlite.cpp").read_text()
-        native = source[source.index("sqlite3 *open_and_init_db()"):source.index("// Exported from Rust")]
+        native = source[source.index("// Keep the first online snapshot"):source.index("// Exported from Rust")]
         support = r'''
 #include <sqlite3.h>
 #include <cstdio>
@@ -26,15 +26,29 @@ class DatabaseVersionTest(unittest.TestCase):
 #include <memory>
 #include <string>
 #include <string_view>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <cerrno>
+#include <csignal>
+#include "db_migrations.hpp"
 using namespace std;
 struct DbValues {
     sqlite3_stmt *statement;
     int get_int(int column) const { return sqlite3_column_int(statement, column); }
+    const char *get_text(int column) const {
+        auto text = sqlite3_column_text(statement, column);
+        return text ? reinterpret_cast<const char *>(text) : "";
+    }
 };
 using Callback = void (*)(void *, int, const DbValues &);
 int sql_exec_impl(sqlite3 *db, string_view sql, void * = nullptr, void * = nullptr,
                   Callback callback = nullptr, void *cookie = nullptr) {
-    if (const char *fail = getenv("FAIL_SQL"); fail && sql == fail) return SQLITE_IOERR;
+    if (const char *kill = getenv("KILL_SQL"); kill && sql == kill) raise(SIGKILL);
+    if (const char *fail = getenv("FAIL_SQL"); fail && sql == fail) {
+        const char *code = getenv("FAIL_SQL_CODE");
+        return code ? atoi(code) : SQLITE_IOERR;
+    }
     string text(sql);
     const char *cursor = text.c_str();
     while (*cursor) {
@@ -72,7 +86,8 @@ int main(int argc, char **argv) {
 '''
         path = cls.binary.with_suffix(".cpp")
         path.write_text(program)
-        subprocess.run(["c++", "-std=c++20", str(path), "-lsqlite3", "-o", str(cls.binary)],
+        subprocess.run(["c++", "-std=c++20", str(path),
+                        "-I", str(ROOT / "native/src/core"), "-lsqlite3", "-o", str(cls.binary)],
                        check=True, capture_output=True, text=True)
 
     @classmethod
@@ -106,10 +121,11 @@ INSERT INTO hide_migration_v13 VALUES(1,'union-preserve-legacy',2,1,1,1,1,0,1);
             self.assertEqual("ok", db.execute("PRAGMA integrity_check").fetchone()[0])
             return list(db.iterdump()), db.execute("PRAGMA user_version").fetchone()[0]
 
-    def run_native(self, path, failure=None):
+    def run_native(self, path, failure=None, extra_env=None):
         env = dict(os.environ)
         if failure:
             env["FAIL_SQL"] = failure
+        env.update(extra_env or {})
         return subprocess.run([str(self.binary), str(path)], env=env,
                               capture_output=True, text=True, timeout=10)
 
@@ -140,6 +156,102 @@ INSERT INTO hide_migration_v13 VALUES(1,'union-preserve-legacy',2,1,1,1,1,0,1);
             self.database(path, 12)
             before = path.read_bytes()
             self.assertEqual(0, self.run_native(path).returncode)
+            self.assertEqual(before, path.read_bytes())
+
+    def test_fresh_has_no_backup_and_separate_empty_lists(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "magisk.db"
+            self.assertEqual(0, self.run_native(path).returncode)
+            self.assertFalse(path.with_suffix(".db.hide-v1.bak").exists())
+            with closing(sqlite3.connect(path)) as db:
+                self.assertEqual(12, db.execute("PRAGMA user_version").fetchone()[0])
+                for table in ("denylist", "hidelist", "sulist"):
+                    self.assertEqual([], db.execute(f"SELECT * FROM {table}").fetchall())
+                self.assertEqual(1, db.execute("SELECT COUNT(*) FROM hide_migration_v13").fetchone()[0])
+
+    def test_legacy_union_backup_and_no_resurrection(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "magisk.db"
+            self.database(path, 12)
+            with closing(sqlite3.connect(path)) as db, db:
+                db.execute("DROP TABLE hide_migration_v13")
+                db.execute("INSERT INTO hidelist VALUES('legacy.app','legacy.app')")
+                db.execute("INSERT INTO hidelist VALUES(NULL,'bad')")
+                db.execute("INSERT INTO hidelist VALUES('','')")
+            self.assertEqual(0, self.run_native(path).returncode)
+            backup = Path(str(path) + ".hide-v1.bak")
+            self.assertEqual(0o600, backup.stat().st_mode & 0o777)
+            original = backup.read_bytes()
+            with closing(sqlite3.connect(path)) as db, db:
+                self.assertIn(('legacy.app', 'legacy.app'), db.execute("SELECT * FROM denylist").fetchall())
+                self.assertEqual([('allowed', 'allowed')], db.execute("SELECT * FROM sulist").fetchall())
+                self.assertNotIn(('allowed', 'allowed'), db.execute("SELECT * FROM denylist").fetchall())
+                db.execute("DELETE FROM denylist WHERE package_name='legacy.app'")
+            self.assertEqual(0, self.run_native(path).returncode)
+            self.assertEqual(original, backup.read_bytes())
+            with closing(sqlite3.connect(path)) as db:
+                self.assertEqual(0, db.execute("SELECT COUNT(*) FROM denylist WHERE package_name='legacy.app'").fetchone()[0])
+
+    def test_invalid_marker_and_unsafe_backup_fail_without_union(self):
+        for fault in ("marker", "symlink", "permissions", "corrupt"):
+            with self.subTest(fault=fault), tempfile.TemporaryDirectory() as temporary:
+                path = Path(temporary) / "magisk.db"
+                self.database(path, 12)
+                with closing(sqlite3.connect(path)) as db, db:
+                    if fault == "marker":
+                        db.execute("UPDATE hide_migration_v13 SET migrated_rows=999")
+                    else:
+                        db.execute("DROP TABLE hide_migration_v13")
+                backup = Path(str(path) + ".hide-v1.bak")
+                if fault == "symlink": backup.symlink_to(path)
+                if fault in ("permissions", "corrupt"):
+                    backup.write_bytes(b"invalid database")
+                    backup.chmod(0o644 if fault == "permissions" else 0o600)
+                before = path.read_bytes()
+                self.assertNotEqual(0, self.run_native(path).returncode)
+                self.assertEqual(before, path.read_bytes())
+
+    def test_failed_transaction_does_not_publish_partial_union(self):
+        source = (ROOT / "native/src/core/db_migrations.hpp").read_text()
+        reconcile = source.split('HIDE_TABLE_RECONCILE[] = R"sql(', 1)[1].split(')sql";', 1)[0]
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "magisk.db"
+            self.database(path, 12)
+            with closing(sqlite3.connect(path)) as db, db:
+                db.execute("DROP TABLE hide_migration_v13")
+                db.execute("INSERT INTO hidelist VALUES('new.app','new.app')")
+            before = self.dump(path)
+            self.assertNotEqual(0, self.run_native(path, reconcile).returncode)
+            self.assertEqual(before, self.dump(path))
+            self.assertEqual(0, self.run_native(path).returncode)
+
+    def test_full_database_and_process_death_leave_recoverable_state(self):
+        source = (ROOT / "native/src/core/db_migrations.hpp").read_text()
+        reconcile = source.split('HIDE_TABLE_RECONCILE[] = R"sql(', 1)[1].split(')sql";', 1)[0]
+        for fault in ("full", "death"):
+            with self.subTest(fault=fault), tempfile.TemporaryDirectory() as temporary:
+                path = Path(temporary) / "magisk.db"
+                self.database(path, 12)
+                with closing(sqlite3.connect(path)) as db, db:
+                    db.execute("DROP TABLE hide_migration_v13")
+                    db.execute("INSERT INTO hidelist VALUES('new.app','new.app')")
+                before = self.dump(path)
+                env = ({"FAIL_SQL": reconcile, "FAIL_SQL_CODE": "13"} if fault == "full"
+                       else {"KILL_SQL": reconcile})
+                self.assertNotEqual(0, self.run_native(path, extra_env=env).returncode)
+                self.assertEqual(before, self.dump(path))
+                self.assertEqual(0, self.run_native(path).returncode)
+
+    @unittest.skipIf(os.geteuid() == 0, "root bypasses file permissions")
+    def test_readonly_database_is_preserved(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "magisk.db"
+            self.database(path, 12)
+            with closing(sqlite3.connect(path)) as db, db:
+                db.execute("DROP TABLE hide_migration_v13")
+            before = path.read_bytes()
+            path.chmod(0o400)
+            self.assertNotEqual(0, self.run_native(path).returncode)
             self.assertEqual(before, path.read_bytes())
 
 

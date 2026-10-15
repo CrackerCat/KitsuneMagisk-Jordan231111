@@ -75,11 +75,17 @@ void clear_pkg(const char *pkg, int user_id);
 extern std::atomic<bool> denylist_enforced;
 inline bool is_denylist_enforced() { return denylist_enforced.load(); }
 int denylist_cli(rust::Vec<rust::String> &args);
+int hide_cli(rust::Vec<rust::String> &args);
+int legacy_hide_cli(rust::Vec<rust::String> &args);
+void hide_handler(int client);
+bool sulist_allows_uid(int uid);
+bool is_sulist_enabled();
 void denylist_handler(int client);
 void initialize_denylist();
 void scan_deny_apps();
 bool is_deny_target(int uid, std::string_view process);
 void revert_unmount(int pid = -1) noexcept;
+bool revert_unmount_checked(int pid = -1) noexcept;
 void update_deny_flags(int uid, rust::Str process, uint32_t &flags);
 
 // MagiskSU

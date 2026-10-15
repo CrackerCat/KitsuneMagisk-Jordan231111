@@ -11,11 +11,13 @@
 use crate::ffi::SuRequest;
 use crate::socket::{Decodable, Encodable};
 use daemon::{MagiskD, connect_daemon_for_cxx};
-use logging::{android_logging, zygisk_close_logd, zygisk_get_logd, zygisk_logging};
+use logging::{
+    android_logging, fork_with_logging_lock, zygisk_close_logd, zygisk_get_logd, zygisk_logging,
+};
 use magisk::magisk_main;
-use mount::revert_unmount;
+use mount::{revert_unmount, revert_unmount_checked};
 use resetprop::{get_prop, resetprop_main};
-use selinux::{lgetfilecon, setfilecon};
+use selinux::{lgetfilecon, selinux_disabled, setfilecon};
 use socket::{recv_fd, recv_fds, send_fd};
 use std::fs::File;
 use std::mem::ManuallyDrop;
@@ -71,6 +73,7 @@ pub mod ffi {
         // Old daemons reject this without interpreting a privileged fork request.
         CHECK_BUILD_INFO = 0x4b490001,
         ZYGISK_STATUS = 0x4b490002,
+        HIDE = 0x4b490003,
     }
 
     #[repr(i32)]
@@ -168,6 +171,10 @@ pub mod ffi {
 
         // Denylist
         fn denylist_cli(args: &mut Vec<String>) -> i32;
+        fn hide_cli(args: &mut Vec<String>) -> i32;
+        fn hide_handler(client: i32);
+        fn sulist_allows_uid(uid: i32) -> bool;
+        fn is_sulist_enabled() -> bool;
         fn denylist_handler(client: i32);
         fn scan_deny_apps();
 
@@ -188,10 +195,12 @@ pub mod ffi {
 
     extern "Rust" {
         fn android_logging();
+        fn fork_with_logging_lock() -> i32;
         fn zygisk_logging();
         fn zygisk_close_logd();
         fn zygisk_get_logd() -> i32;
         fn revert_unmount(pid: i32);
+        fn revert_unmount_checked(pid: i32) -> bool;
         fn zygisk_should_load_module(flags: u32) -> bool;
         fn send_fd(socket: i32, fd: i32) -> bool;
         fn recv_fd(socket: i32) -> i32;
@@ -201,6 +210,7 @@ pub mod ffi {
         fn get_pty_num(fd: i32) -> i32;
         fn lgetfilecon(path: Utf8CStrRef, con: &mut [u8]) -> bool;
         fn setfilecon(path: Utf8CStrRef, con: Utf8CStrRef) -> bool;
+        fn selinux_disabled() -> bool;
 
         fn get_prop(name: Utf8CStrRef) -> String;
         unsafe fn resetprop_main(argc: i32, argv: *mut *mut c_char) -> i32;
@@ -222,6 +232,8 @@ pub mod ffi {
         type MagiskD;
         fn sdk_int(&self) -> i32;
         fn zygisk_enabled(&self) -> bool;
+        fn get_manager_uid(&self, user: i32) -> i32;
+        fn manager_needs_mounts(&self, uid: i32) -> bool;
         fn get_db_setting(&self, key: DbEntryKey) -> i32;
         #[cxx_name = "set_db_setting"]
         fn set_db_setting_for_cxx(&self, key: DbEntryKey, value: i32) -> bool;

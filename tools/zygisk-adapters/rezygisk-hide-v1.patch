@@ -1,0 +1,274 @@
+diff --git a/Makefile b/Makefile
+index e2e40ad..25d7dcf 100644
+--- a/Makefile
++++ b/Makefile
+@@ -72,7 +72,7 @@ $(MODULE_DONE): $(LOADER_DONE) $(ZYGISKD_DONE) $(MODULE_INPUTS)
+ 
+ 
+ 	@echo "Copying module files..."
+-	@cp module/src/verify.sh module/src/sepolicy.rule module/src/rezygisk.sh $(MODULE_OUT)/
++	@cp module/src/verify.sh module/src/sepolicy.rule module/src/rezygisk.sh module/src/kitsune-hide-v1 $(MODULE_OUT)/
+ 
+ 	@echo "Customizing module.prop..."
+ 	@sed -e 's/$${moduleId}/$(MODULE_ID)/g'                                             \
+diff --git a/loader/src/injector/hook.c b/loader/src/injector/hook.c
+index f3c8fe3..5d55c93 100644
+--- a/loader/src/injector/hook.c
++++ b/loader/src/injector/hook.c
+@@ -1010,7 +1010,8 @@ static void rz_run_modules_post(struct zygisk_context *ctx) {
+   for (size_t i = 0; i < zygisk_module_length; i++) {
+     struct rezygisk_module *m = &zygisk_modules[i];
+ 
+-    if (FLAG_GET(ctx, APP_SPECIALIZE)) rz_module_call_post_app_specialize(m, ctx->args.app);
++    if (FLAG_GET(ctx, APP_SPECIALIZE) && !((ctx->info_flags & PROCESS_KITSUNE_HIDE) &&
++        (ctx->info_flags & PROCESS_ON_DENYLIST))) rz_module_call_post_app_specialize(m, ctx->args.app);
+     else if (FLAG_GET(ctx, SERVER_FORK_AND_SPECIALIZE)) rz_module_call_post_server_specialize(m, ctx->args.server);
+ 
+     if (!m->unload) {
+@@ -1050,7 +1051,8 @@ static void rz_app_specialize_pre(struct zygisk_context *ctx) {
+              any area.
+   */
+   uid_t uid = *ctx->args.app->uid;
+-  if (IS_ISOLATED_SERVICE(uid) && ctx->args.app->app_data_dir) {
++  ctx->info_flags = rezygiskd_get_process_flags(uid, ctx->process);
++  if (!(ctx->info_flags & PROCESS_KITSUNE_HIDE) && IS_ISOLATED_SERVICE(uid) && ctx->args.app->app_data_dir) {
+     /* INFO: If the app is an isolated service, we use the UID of the
+                app's process data directory, which is the UID of the
+                app itself, which root implementations actually use.
+@@ -1072,12 +1074,13 @@ static void rz_app_specialize_pre(struct zygisk_context *ctx) {
+     }
+ 
+     uid = st.st_uid;
++    uint32_t first = ctx->info_flags & PROCESS_IS_FIRST_STARTED;
++    ctx->info_flags = rezygiskd_get_process_flags(uid, ctx->process) | first;
+     LOGD("Isolated service being related to UID %d, app data dir: %s", uid, data_dir);
+ 
+     (*ctx->env)->ReleaseStringUTFChars(ctx->env, *ctx->args.app->app_data_dir, data_dir);
+   }
+ 
+-  ctx->info_flags = rezygiskd_get_process_flags(uid, ctx->process);
+   /* INFO: To ensure we are really using a clean mount namespace, we use
+               the first process it as reference for clean mount namespace,
+               before it even does something, so that it will be clean yet
+@@ -1132,7 +1135,11 @@ static void rz_app_specialize_pre(struct zygisk_context *ctx) {
+   /* INFO: Executed after setns to ensure a module can update the mounts of an
+               application without worrying about it being overwritten by setns.
+   */
+-  rz_run_modules_pre(ctx);
++  if ((ctx->info_flags & PROCESS_KITSUNE_HIDE) && in_denylist) {
++    for (size_t i = 0; i < zygisk_module_length; i++) zygisk_modules[i].unload = true;
++  } else {
++    rz_run_modules_pre(ctx);
++  }
+ 
+   /* INFO: The modules may request that although the process is NOT in
+               the DenyList, it has its mount namespace switched to the clean
+diff --git a/loader/src/injector/module.h b/loader/src/injector/module.h
+index afec450..7e4747a 100644
+--- a/loader/src/injector/module.h
++++ b/loader/src/injector/module.h
+@@ -14,6 +14,7 @@
+ enum rezygiskd_flags : uint32_t {
+   PROCESS_GRANTED_ROOT = (1u << 0),
+   PROCESS_ON_DENYLIST = (1u << 1),
++  PROCESS_KITSUNE_HIDE = (1u << 26),
+ 
+   PROCESS_IS_MANAGER = (1u << 27),
+   PROCESS_ROOT_IS_APATCH = (1u << 28),
+@@ -21,7 +22,7 @@ enum rezygiskd_flags : uint32_t {
+   PROCESS_ROOT_IS_MAGISK = (1u << 30),
+   PROCESS_IS_FIRST_STARTED = (1u << 31),
+ 
+-  PRIVATE_MASK = PROCESS_IS_FIRST_STARTED
++  PRIVATE_MASK = PROCESS_IS_FIRST_STARTED | PROCESS_KITSUNE_HIDE
+ };
+ 
+ struct app_specialize_args_v1 {
+diff --git a/module/src/customize.sh b/module/src/customize.sh
+index cc999f6..db122cf 100644
+--- a/module/src/customize.sh
++++ b/module/src/customize.sh
+@@ -94,6 +94,7 @@ fi
+ 
+ ui_print "- Extracting module files"
+ extract "$ZIPFILE" 'module.prop'     "$MODPATH"
++extract "$ZIPFILE" 'kitsune-hide-v1'  "$MODPATH"
+ extract "$ZIPFILE" 'post-fs-data.sh' "$MODPATH"
+ extract "$ZIPFILE" 'service.sh'      "$MODPATH"
+ extract "$ZIPFILE" 'uninstall.sh'    "$MODPATH"
+diff --git a/module/src/module.prop b/module/src/module.prop
+index 08fd81a..3911036 100644
+--- a/module/src/module.prop
++++ b/module/src/module.prop
+@@ -4,5 +4,4 @@ version=${versionName}
+ versionCode=${versionCode}
+ author=The PerformanC Organization
+ description=Standalone implementation of Zygisk.
+-updateJson=https://raw.githubusercontent.com/ThePedroo/RemoteFiles/refs/heads/main/ReZygisk/update.json
+ managedFeatures=kernel_umount
+diff --git a/zygiskd/src/constants.h b/zygiskd/src/constants.h
+index 7d34c88..de99676 100644
+--- a/zygiskd/src/constants.h
++++ b/zygiskd/src/constants.h
+@@ -25,6 +25,7 @@ enum DaemonSocketAction {
+ enum ProcessFlags: uint32_t {
+   PROCESS_GRANTED_ROOT = (1u << 0),
+   PROCESS_ON_DENYLIST = (1u << 1),
++  PROCESS_KITSUNE_HIDE = (1u << 26),
+   PROCESS_IS_MANAGER = (1u << 27),
+   PROCESS_ROOT_IS_APATCH = (1u << 28),
+   PROCESS_ROOT_IS_KSU = (1u << 29),
+diff --git a/zygiskd/src/root_impl/common.c b/zygiskd/src/root_impl/common.c
+index 49bcf2f..01cbbd2 100644
+--- a/zygiskd/src/root_impl/common.c
++++ b/zygiskd/src/root_impl/common.c
+@@ -103,7 +103,7 @@ bool uid_should_umount(uid_t uid, const char *const process) {
+       return apatch_uid_should_umount(uid, process);
+     }
+     case Magisk: {
+-      return magisk_uid_should_umount(process);
++      return magisk_uid_should_umount(uid, process);
+     }
+     default: {
+       return false;
+diff --git a/zygiskd/src/root_impl/magisk.c b/zygiskd/src/root_impl/magisk.c
+index fcd6e1f..f80d474 100644
+--- a/zygiskd/src/root_impl/magisk.c
++++ b/zygiskd/src/root_impl/magisk.c
+@@ -27,6 +27,21 @@ static enum magisk_variants variant = MOfficial;
+ /* INFO: Longest path */
+ static char path_to_magisk[sizeof(DEBUG_RAMDISK_MAGISK)] = { 0 };
+ bool is_using_sulist = false;
++static bool kitsune_hide_v1 = false;
++bool magisk_has_hide_v1(void) { return kitsune_hide_v1; }
++
++static bool kitsune_check(uid_t uid, const char *process, const char *field, bool fallback) {
++  char id[16], output[256], needle[64];
++  snprintf(id, sizeof(id), "%u", uid);
++  const char *const args[] = { "magisk", "--hide", "check", id, process, NULL };
++  if (!exec_command(output, sizeof(output), path_to_magisk, args) ||
++      strncmp(output, "{\"schema\":1,", strlen("{\"schema\":1,")) != 0) return fallback;
++  snprintf(needle, sizeof(needle), "\"%s\":true", field);
++  if (strstr(output, needle)) return true;
++  snprintf(needle, sizeof(needle), "\"%s\":false", field);
++  if (strstr(output, needle)) return false;
++  return fallback;
++}
+ 
+ void magisk_get_existence(struct root_impl_state *state) {
+   const char *magisk_files[] = {
+@@ -83,6 +98,21 @@ void magisk_get_existence(struct root_impl_state *state) {
+     return;
+   }
+ 
++  const char *const hide_args[] = { "magisk", "--hide", "status", NULL };
++  char hide_status[1024];
++  if (exec_command(hide_status, sizeof(hide_status), path_to_magisk, hide_args) &&
++      strncmp(hide_status, "{\"schema\":1,", strlen("{\"schema\":1,")) == 0) {
++    kitsune_hide_v1 = true;
++    if (!strstr(hide_status, "\"engine\":\"external\"")) {
++      LOGE("Select the Kitsune external Hide provider and cold boot first");
++      state->state = Abnormal;
++      return;
++    }
++    is_using_sulist = strstr(hide_status, "\"mode\":\"sulist\"") != NULL;
++    state->state = Supported;
++    return;
++  }
++
+   /* INFO: Magisk Kitsune has a feature called SuList, which is a whitelist of
+              which processes are allowed to see root. Although only Kitsune has
+              this option, there are Kitsune forks without "-kitsune" suffix, so
+@@ -108,6 +138,7 @@ void magisk_get_existence(struct root_impl_state *state) {
+ }
+ 
+ bool magisk_uid_granted_root(uid_t uid) {
++  if (kitsune_hide_v1 && !kitsune_check(uid, "su", "su_eligible", false)) return false;
+   char sqlite_cmd[256];
+   snprintf(sqlite_cmd, sizeof(sqlite_cmd), "select 1 from policies where uid=%d and policy=2 limit 1", uid);
+ 
+@@ -123,7 +154,8 @@ bool magisk_uid_granted_root(uid_t uid) {
+   return result[0] != '\0';
+ }
+ 
+-bool magisk_uid_should_umount(const char *const process) {
++bool magisk_uid_should_umount(uid_t uid, const char *const process) {
++  if (kitsune_hide_v1) return kitsune_check(uid, process, "unmount", true);
+   /* INFO: PROCESS_NAME_MAX_LEN already has a +1 for NULL */
+   char sqlite_cmd[59 + PROCESS_NAME_MAX_LEN];
+   if (is_using_sulist)
+@@ -144,6 +176,7 @@ bool magisk_uid_should_umount(const char *const process) {
+ }
+ 
+ bool magisk_uid_is_manager(uid_t uid) {
++  if (kitsune_hide_v1) return kitsune_check(uid, "manager", "manager", false);
+   const char *const argv[] = { "magisk", "--sqlite", "select value from strings where key=\"requester\" limit 1", NULL };
+ 
+   char output[128];
+diff --git a/zygiskd/src/root_impl/magisk.h b/zygiskd/src/root_impl/magisk.h
+index 445959a..d32805a 100644
+--- a/zygiskd/src/root_impl/magisk.h
++++ b/zygiskd/src/root_impl/magisk.h
+@@ -8,11 +8,13 @@ enum magisk_variants {
+   MKitsune
+ };
+ 
++bool magisk_has_hide_v1(void);
++
+ void magisk_get_existence(struct root_impl_state *state);
+ 
+ bool magisk_uid_granted_root(uid_t uid);
+ 
+-bool magisk_uid_should_umount(const char *const process);
++bool magisk_uid_should_umount(uid_t uid, const char *const process);
+ 
+ bool magisk_uid_is_manager(uid_t uid);
+ 
+diff --git a/zygiskd/src/zygiskd.c b/zygiskd/src/zygiskd.c
+index 4d45f6f..beda505 100644
+--- a/zygiskd/src/zygiskd.c
++++ b/zygiskd/src/zygiskd.c
+@@ -1,3 +1,5 @@
++#include "root_impl/magisk.h"
++#include <sys/stat.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+@@ -88,13 +90,20 @@ static void load_modules(struct Context *restrict context) {
+ 
+     if (access(disabled, F_OK) == 0) continue;
+ 
+-    int lib_fd = open(so_path, O_RDONLY | O_CLOEXEC);
++    int lib_fd = open(so_path, O_RDONLY | O_CLOEXEC | O_NOFOLLOW | O_NONBLOCK);
+     if (lib_fd == -1) {
+       LOGE("Failed loading module \"%s\"", name);
+ 
+       continue;
+     }
+ 
++    struct stat library;
++    if (fstat(lib_fd, &library) != 0 || !S_ISREG(library.st_mode) || library.st_size <= 0) {
++      LOGE("Rejecting non-regular or empty module library");
++      close(lib_fd);
++      continue;
++    }
++
+     struct Module *tmp_modules = realloc(context->modules, (context->len + 1) * sizeof(struct Module));
+     if (tmp_modules == NULL) {
+       LOGE("Failed reallocating memory for modules.");
+@@ -465,6 +474,8 @@ void zygiskd_start(char *restrict argv[]) {
+           }
+         }
+ 
++        if (impl.impl == Magisk && magisk_has_hide_v1()) flags |= PROCESS_KITSUNE_HIDE;
++
+         ret = write_uint32_t(client_fd, flags);
+         ASSURE_SIZE_WRITE("GetProcessFlags", "flags", ret, sizeof(flags), break);
+ 
+diff --git a/module/src/kitsune-hide-v1 b/module/src/kitsune-hide-v1
+new file mode 100644
+index 000000000..d00491fd7
+--- /dev/null
++++ b/module/src/kitsune-hide-v1
+@@ -0,0 +1 @@
++1

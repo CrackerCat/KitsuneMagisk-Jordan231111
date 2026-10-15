@@ -204,6 +204,11 @@ impl MagiskD {
     }
 
     fn get_su_info(&self, uid: i32) -> Arc<SuInfo> {
+        // Apply the live allowlist before the policy cache. A removal must revoke
+        // a cached grant immediately, including callers with an absolute su path.
+        if !crate::ffi::sulist_allows_uid(uid) {
+            return Arc::new(SuInfo::deny(uid));
+        }
         if uid == AID_ROOT {
             return Arc::new(SuInfo::allow(AID_ROOT));
         }

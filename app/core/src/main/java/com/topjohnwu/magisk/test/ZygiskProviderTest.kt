@@ -43,8 +43,8 @@ class ZygiskProviderTest : BaseTest {
                 !status.getBoolean("denylist_enforced"),
             status.getBoolean("external_preconditions_met")
         )
-        assertFalse(status.getBoolean("hide_supported"))
-        assertFalse(status.getBoolean("sulist_supported"))
+        assertTrue(status.getBoolean("hide_supported"))
+        assertTrue(status.getBoolean("sulist_supported"))
     }
 
     @Test
@@ -70,7 +70,8 @@ class ZygiskProviderTest : BaseTest {
     @Test
     fun testProviderCommandsRequireRoot() {
         val path = Shell.cmd("magisk --path").exec().out.single()
-        for (args in listOf(listOf("--zygisk-status"), listOf("--denylist", "status"))) {
+        for (args in listOf(listOf("--zygisk-status"), listOf("--denylist", "status"),
+            listOf("--hide", "status"))) {
             val process = ProcessBuilder(listOf("$path/magisk") + args)
                 .redirectErrorStream(true).start()
             val output = process.inputStream.bufferedReader().use { it.readText() }

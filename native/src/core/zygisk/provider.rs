@@ -1,5 +1,5 @@
 use crate::daemon::MagiskD;
-use crate::ffi::is_denylist_enforced;
+use crate::ffi::{is_denylist_enforced, is_sulist_enabled};
 use crate::socket::IpcWrite;
 use base::{LoggedResult, ResultExt};
 use std::os::unix::net::UnixStream;
@@ -14,7 +14,13 @@ impl MagiskD {
         let enabled = self.zygisk_enabled.load(Ordering::Acquire);
         let injection = !self.zygisk.lock().lib_name.is_empty();
         let enforced = is_denylist_enforced();
-        let external = boot_ready && !settings.zygisk && !enabled && !injection && !enforced;
+        let external = boot_ready
+            && !settings.zygisk
+            && !enabled
+            && !injection
+            && !enforced
+            && !is_sulist_enabled()
+            && !settings.sulist;
 
         // These are daemon observations, not proof that any app or external provider injected.
         // Keep the module API synchronized with api.hpp; the contract test pins that boundary.
@@ -23,8 +29,8 @@ impl MagiskD {
                 "{{\"schema\":1,\"model\":\"single-provider\",\"module_api\":5,",
                 "\"boot_ready\":{},\"builtin_configured\":{},\"builtin_enabled\":{},",
                 "\"injection_requested\":{},\"denylist_enforced\":{},",
-                "\"external_preconditions_met\":{},\"hide_supported\":false,",
-                "\"sulist_supported\":false}}"
+                "\"external_preconditions_met\":{},\"hide_supported\":true,",
+                "\"sulist_supported\":true}}"
             ),
             boot_ready, settings.zygisk, enabled, injection, enforced, external
         );

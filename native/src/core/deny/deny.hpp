@@ -15,6 +15,10 @@ enum : int {
     LIST,
     STATUS,
 
+    MODE,
+    CHECK,
+    PROVIDER,
+
     END
 };
 }
@@ -30,6 +34,9 @@ enum : int {
     NO_NS,
     ERROR,
 
+    REBOOT_REQUIRED,
+    UNSUPPORTED_PROVIDER,
+
     END
 };
 }
@@ -44,3 +51,12 @@ void ls_list(int client);
 bool proc_context_match(int pid, std::string_view context);
 void *logcat(void *arg);
 extern bool logcat_exit;
+bool start_hide_monitor();
+bool is_sulist_enabled();
+bool is_hide_ready();
+int change_list(int client, bool remove, bool use_allow);
+void list_selection(int client, bool use_allow);
+int set_hide_mode(bool sulist);
+int set_hide_provider(bool external);
+bool is_external_hide();
+bool is_hide_enabled();
