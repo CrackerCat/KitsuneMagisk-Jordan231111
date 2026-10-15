@@ -15,6 +15,8 @@
 /docs/port-history/*.bundle binary
 # Original APK scripts retain their byte-for-byte historical whitespace.
 /docs/port-history/asset-scripts/** -whitespace
+# Unified diffs preserve upstream blank context lines.
+/tools/zygisk-adapters/*.patch -whitespace
 /tools/futility binary
 *.jar binary
 *.exe binary

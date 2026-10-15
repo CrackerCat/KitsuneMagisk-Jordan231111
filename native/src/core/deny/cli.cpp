@@ -231,7 +231,7 @@ void hide_handler(int client) {
     close(client);
 }
 
-int hide_cli(rust::Vec<rust::String> &args) {
+static int hide_cli_impl(rust::Vec<rust::String> &args, bool legacy) {
     auto usage = [] {
         fprintf(stderr,
             "Usage: magisk --hide status|enable|disable|ls\n"
@@ -249,7 +249,7 @@ int hide_cli(rust::Vec<rust::String> &args) {
         if (args.size() < 2) return usage();
         // Never unmount the caller's namespace if isolation or propagation fails.
         if (unshare(CLONE_NEWNS) || mount(nullptr, "/", nullptr, MS_PRIVATE | MS_REC, nullptr)) return 1;
-        revert_unmount();
+        if (!revert_unmount_checked()) return DenyResponse::ERROR;
         vector<char *> argv;
         for (size_t i = 1; i < args.size(); ++i) argv.push_back(const_cast<char *>(args[i].c_str()));
         argv.push_back(nullptr);
@@ -304,12 +304,22 @@ int hide_cli(rust::Vec<rust::String> &args) {
         } else if (req == DenyRequest::STATUS || req == DenyRequest::CHECK) {
             string out;
             if (!read_string(fd, out) || out.empty()) res = DenyResponse::ERROR;
-            else printf("%s\n", out.c_str());
+            else {
+                printf("%s\n", out.c_str());
+                if (legacy && req == DenyRequest::STATUS) {
+                    close(fd);
+                    return out.find(action == "sulist" ? "\"mode\":\"sulist\"" :
+                                    "\"enabled\":true") == string::npos;
+                }
+            }
         }
     }
     close(fd);
     if (res != DenyResponse::OK ||
         (req != DenyRequest::STATUS && req != DenyRequest::CHECK && req != DenyRequest::LIST))
         printf("{\"schema\":1,\"code\":%d}\n", res);
-    return res;
+    return legacy ? res != DenyResponse::OK : res;
 }
+
+int hide_cli(rust::Vec<rust::String> &args) { return hide_cli_impl(args, false); }
+int legacy_hide_cli(rust::Vec<rust::String> &args) { return hide_cli_impl(args, true); }

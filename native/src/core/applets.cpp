@@ -13,7 +13,7 @@ struct Applet {
 static int magiskhide_main(int argc, char *argv[]) {
     rust::Vec<rust::String> args;
     for (int i = 1; i < argc; ++i) args.emplace_back(argv[i]);
-    return hide_cli(args);
+    return legacy_hide_cli(args);
 }
 
 constexpr Applet applets[] = {

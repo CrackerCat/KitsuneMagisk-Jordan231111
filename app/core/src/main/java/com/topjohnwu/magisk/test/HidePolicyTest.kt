@@ -26,6 +26,10 @@ class HidePolicyTest : BaseTest {
         assertEquals(1, before.getInt("schema"))
         assertEquals(12, before.getInt("database_version"))
         assertTrue(before.getBoolean("boot_ready"))
+        assertEquals(if (before.getBoolean("enabled")) 0 else 1,
+            Shell.cmd("magisk magiskhide status").exec().code)
+        assertEquals(if (before.getString("mode") == "sulist") 0 else 1,
+            Shell.cmd("magisk magiskhide sulist").exec().code)
         val original = before.getString("configured_mode")
         try {
             val next = if (original == "hide") "sulist" else "hide"
@@ -43,6 +47,7 @@ class HidePolicyTest : BaseTest {
     fun testSelectionPersistenceAndInvalidInput() {
         val pkg = "io.github.kitsune.pr12.fixture"
         val process = "$pkg:worker"
+        assertEquals(listOf("value="), Shell.cmd("magisk --sqlite 'SELECT NULL AS value'").exec().out)
         try {
             Shell.cmd("magisk --denylist rm $pkg").exec()
             assertEquals(0, Shell.cmd("magisk --denylist add $pkg $process").exec().code)

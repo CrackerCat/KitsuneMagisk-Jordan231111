@@ -12,7 +12,7 @@ index e2e40ad..25d7dcf 100644
  	@echo "Customizing module.prop..."
  	@sed -e 's/$${moduleId}/$(MODULE_ID)/g'                                             \
 diff --git a/loader/src/injector/hook.c b/loader/src/injector/hook.c
-index f3c8fe3..a0a7d4f 100644
+index f3c8fe3..5d55c93 100644
 --- a/loader/src/injector/hook.c
 +++ b/loader/src/injector/hook.c
 @@ -1010,7 +1010,8 @@ static void rz_run_modules_post(struct zygisk_context *ctx) {
@@ -25,7 +25,32 @@ index f3c8fe3..a0a7d4f 100644
      else if (FLAG_GET(ctx, SERVER_FORK_AND_SPECIALIZE)) rz_module_call_post_server_specialize(m, ctx->args.server);
  
      if (!m->unload) {
-@@ -1132,7 +1133,11 @@ static void rz_app_specialize_pre(struct zygisk_context *ctx) {
+@@ -1050,7 +1051,8 @@ static void rz_app_specialize_pre(struct zygisk_context *ctx) {
+              any area.
+   */
+   uid_t uid = *ctx->args.app->uid;
+-  if (IS_ISOLATED_SERVICE(uid) && ctx->args.app->app_data_dir) {
++  ctx->info_flags = rezygiskd_get_process_flags(uid, ctx->process);
++  if (!(ctx->info_flags & PROCESS_KITSUNE_HIDE) && IS_ISOLATED_SERVICE(uid) && ctx->args.app->app_data_dir) {
+     /* INFO: If the app is an isolated service, we use the UID of the
+                app's process data directory, which is the UID of the
+                app itself, which root implementations actually use.
+@@ -1072,12 +1074,13 @@ static void rz_app_specialize_pre(struct zygisk_context *ctx) {
+     }
+ 
+     uid = st.st_uid;
++    uint32_t first = ctx->info_flags & PROCESS_IS_FIRST_STARTED;
++    ctx->info_flags = rezygiskd_get_process_flags(uid, ctx->process) | first;
+     LOGD("Isolated service being related to UID %d, app data dir: %s", uid, data_dir);
+ 
+     (*ctx->env)->ReleaseStringUTFChars(ctx->env, *ctx->args.app->app_data_dir, data_dir);
+   }
+ 
+-  ctx->info_flags = rezygiskd_get_process_flags(uid, ctx->process);
+   /* INFO: To ensure we are really using a clean mount namespace, we use
+               the first process it as reference for clean mount namespace,
+               before it even does something, so that it will be clean yet
+@@ -1132,7 +1135,11 @@ static void rz_app_specialize_pre(struct zygisk_context *ctx) {
    /* INFO: Executed after setns to ensure a module can update the mounts of an
                application without worrying about it being overwritten by setns.
    */
@@ -191,15 +216,38 @@ index 445959a..d32805a 100644
  bool magisk_uid_is_manager(uid_t uid);
  
 diff --git a/zygiskd/src/zygiskd.c b/zygiskd/src/zygiskd.c
-index 4d45f6f..2acd5de 100644
+index 4d45f6f..beda505 100644
 --- a/zygiskd/src/zygiskd.c
 +++ b/zygiskd/src/zygiskd.c
-@@ -1,3 +1,4 @@
+@@ -1,3 +1,5 @@
 +#include "root_impl/magisk.h"
++#include <sys/stat.h>
  #include <stdio.h>
  #include <stdlib.h>
  #include <string.h>
-@@ -465,6 +466,8 @@ void zygiskd_start(char *restrict argv[]) {
+@@ -88,13 +90,20 @@ static void load_modules(struct Context *restrict context) {
+ 
+     if (access(disabled, F_OK) == 0) continue;
+ 
+-    int lib_fd = open(so_path, O_RDONLY | O_CLOEXEC);
++    int lib_fd = open(so_path, O_RDONLY | O_CLOEXEC | O_NOFOLLOW | O_NONBLOCK);
+     if (lib_fd == -1) {
+       LOGE("Failed loading module \"%s\"", name);
+ 
+       continue;
+     }
+ 
++    struct stat library;
++    if (fstat(lib_fd, &library) != 0 || !S_ISREG(library.st_mode) || library.st_size <= 0) {
++      LOGE("Rejecting non-regular or empty module library");
++      close(lib_fd);
++      continue;
++    }
++
+     struct Module *tmp_modules = realloc(context->modules, (context->len + 1) * sizeof(struct Module));
+     if (tmp_modules == NULL) {
+       LOGE("Failed reallocating memory for modules.");
+@@ -465,6 +474,8 @@ void zygiskd_start(char *restrict argv[]) {
            }
          }
  

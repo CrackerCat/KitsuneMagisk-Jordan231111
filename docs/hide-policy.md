@@ -54,7 +54,8 @@ explicit relaunch. Zygotes/system_server are not killed by list editing.
 
 ## CLI and provider contract
 
-`magiskhide` and `magisk --hide` are equivalent. `add PKG [PROCESS]`,
+`magiskhide` retains the historical success/failure exits, including disabled
+`status`/`sulist` returning 1. `magisk --hide` provides the structured v1 exits. `add PKG [PROCESS]`,
 `rm PKG [PROCESS]`, and `ls` operate on the **running mode's** table. An omitted
 process defaults to the package for add, and removes that package's rows for rm.
 Lists use `package|process` lines. Status/check and mutation results use JSON
@@ -143,7 +144,9 @@ public provider API.
 When SELinux is active, including permissive mode, the zygote context check is
 mandatory. Only positively absent SELinux enables the root-peer fallback, which
 also requires the zygote name, approved app_process executable and init parent.
-Permission/I/O errors cannot enable it. Disabled-policy runtime qualification is
+Permission/I/O errors cannot enable it. The kernel
+[active-LSM list](https://docs.kernel.org/admin-guide/LSM/index.html) distinguishes
+AppArmor container contexts from SELinux when that interface is available. Disabled-policy runtime qualification is
 separate from enforcing/permissive testing; physical Waydroid/OEM qualification
 remains PR15.
 

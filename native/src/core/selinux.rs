@@ -12,6 +12,21 @@ pub(crate) fn selinux_disabled() -> bool {
             _ => return false,
         }
     }
+    // Containers can expose another LSM's attr/current (for example AppArmor).
+    // The kernel's active-LSM list distinguishes that from hidden SELinux state.
+    match std::fs::read_to_string("/sys/kernel/security/lsm") {
+        Ok(lsms) => {
+            let lsms = lsms.trim();
+            return !lsms.is_empty()
+                && lsms.split(',').all(|name| {
+                    !name.is_empty()
+                        && name != "selinux"
+                        && name.bytes().all(|b| b.is_ascii_lowercase() || b == b'_')
+                });
+        }
+        Err(e) if e.kind() == std::io::ErrorKind::NotFound => {}
+        Err(_) => return false,
+    }
     match std::fs::read_to_string("/proc/self/attr/current") {
         Ok(context) => context.trim_matches(['\0', '\n']).is_empty(),
         Err(e) => matches!(

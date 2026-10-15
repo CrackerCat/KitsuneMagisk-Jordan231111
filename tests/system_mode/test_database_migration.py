@@ -30,6 +30,7 @@ class DatabaseVersionTest(unittest.TestCase):
 #include <fcntl.h>
 #include <unistd.h>
 #include <cerrno>
+#include <csignal>
 #include "db_migrations.hpp"
 using namespace std;
 struct DbValues {
@@ -43,7 +44,11 @@ struct DbValues {
 using Callback = void (*)(void *, int, const DbValues &);
 int sql_exec_impl(sqlite3 *db, string_view sql, void * = nullptr, void * = nullptr,
                   Callback callback = nullptr, void *cookie = nullptr) {
-    if (const char *fail = getenv("FAIL_SQL"); fail && sql == fail) return SQLITE_IOERR;
+    if (const char *kill = getenv("KILL_SQL"); kill && sql == kill) raise(SIGKILL);
+    if (const char *fail = getenv("FAIL_SQL"); fail && sql == fail) {
+        const char *code = getenv("FAIL_SQL_CODE");
+        return code ? atoi(code) : SQLITE_IOERR;
+    }
     string text(sql);
     const char *cursor = text.c_str();
     while (*cursor) {
@@ -116,10 +121,11 @@ INSERT INTO hide_migration_v13 VALUES(1,'union-preserve-legacy',2,1,1,1,1,0,1);
             self.assertEqual("ok", db.execute("PRAGMA integrity_check").fetchone()[0])
             return list(db.iterdump()), db.execute("PRAGMA user_version").fetchone()[0]
 
-    def run_native(self, path, failure=None):
+    def run_native(self, path, failure=None, extra_env=None):
         env = dict(os.environ)
         if failure:
             env["FAIL_SQL"] = failure
+        env.update(extra_env or {})
         return subprocess.run([str(self.binary), str(path)], env=env,
                               capture_output=True, text=True, timeout=10)
 
@@ -218,6 +224,35 @@ INSERT INTO hide_migration_v13 VALUES(1,'union-preserve-legacy',2,1,1,1,1,0,1);
             self.assertNotEqual(0, self.run_native(path, reconcile).returncode)
             self.assertEqual(before, self.dump(path))
             self.assertEqual(0, self.run_native(path).returncode)
+
+    def test_full_database_and_process_death_leave_recoverable_state(self):
+        source = (ROOT / "native/src/core/db_migrations.hpp").read_text()
+        reconcile = source.split('HIDE_TABLE_RECONCILE[] = R"sql(', 1)[1].split(')sql";', 1)[0]
+        for fault in ("full", "death"):
+            with self.subTest(fault=fault), tempfile.TemporaryDirectory() as temporary:
+                path = Path(temporary) / "magisk.db"
+                self.database(path, 12)
+                with closing(sqlite3.connect(path)) as db, db:
+                    db.execute("DROP TABLE hide_migration_v13")
+                    db.execute("INSERT INTO hidelist VALUES('new.app','new.app')")
+                before = self.dump(path)
+                env = ({"FAIL_SQL": reconcile, "FAIL_SQL_CODE": "13"} if fault == "full"
+                       else {"KILL_SQL": reconcile})
+                self.assertNotEqual(0, self.run_native(path, extra_env=env).returncode)
+                self.assertEqual(before, self.dump(path))
+                self.assertEqual(0, self.run_native(path).returncode)
+
+    @unittest.skipIf(os.geteuid() == 0, "root bypasses file permissions")
+    def test_readonly_database_is_preserved(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "magisk.db"
+            self.database(path, 12)
+            with closing(sqlite3.connect(path)) as db, db:
+                db.execute("DROP TABLE hide_migration_v13")
+            before = path.read_bytes()
+            path.chmod(0o400)
+            self.assertNotEqual(0, self.run_native(path).returncode)
+            self.assertEqual(before, path.read_bytes())
 
 
 if __name__ == "__main__":

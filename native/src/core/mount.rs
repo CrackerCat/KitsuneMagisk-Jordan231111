@@ -226,9 +226,13 @@ pub fn find_preinit_device() -> String {
 }
 
 pub fn revert_unmount(pid: i32) {
+    revert_unmount_checked(pid);
+}
+
+pub fn revert_unmount_checked(pid: i32) -> bool {
     if pid > 0 {
         if switch_mnt_ns(pid) != 0 {
-            return;
+            return false;
         }
         debug!("denylist: handling PID=[{}]", pid);
     }
@@ -236,14 +240,18 @@ pub fn revert_unmount(pid: i32) {
     let mut targets = Vec::new();
 
     // Unmount Magisk tmpfs and mounts from module files
-    for info in parse_mount_info("self") {
+    let mounts = parse_mount_info("self");
+    if mounts.is_empty() {
+        return false;
+    }
+    for info in mounts {
         if info.source == "magisk" || info.root.starts_with("/adb/modules") {
             targets.push(info.target);
         }
     }
 
     if targets.is_empty() {
-        return;
+        return true;
     }
 
     let mut prev: Option<PathBuf> = None;
@@ -258,10 +266,15 @@ pub fn revert_unmount(pid: i32) {
         true
     });
 
+    let mut clean = true;
     for mut target in targets {
         let target = Utf8CStr::from_string(&mut target);
         if target.unmount().is_ok() {
             debug!("denylist: Unmounted ({})", target);
+        } else {
+            warn!("denylist: Cannot unmount ({})", target);
+            clean = false;
         }
     }
+    clean
 }

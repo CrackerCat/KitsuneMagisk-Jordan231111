@@ -13,7 +13,7 @@ use crate::socket::{Decodable, Encodable};
 use daemon::{MagiskD, connect_daemon_for_cxx};
 use logging::{android_logging, zygisk_close_logd, zygisk_get_logd, zygisk_logging};
 use magisk::magisk_main;
-use mount::revert_unmount;
+use mount::{revert_unmount, revert_unmount_checked};
 use resetprop::{get_prop, resetprop_main};
 use selinux::{lgetfilecon, selinux_disabled, setfilecon};
 use socket::{recv_fd, recv_fds, send_fd};
@@ -197,6 +197,7 @@ pub mod ffi {
         fn zygisk_close_logd();
         fn zygisk_get_logd() -> i32;
         fn revert_unmount(pid: i32);
+        fn revert_unmount_checked(pid: i32) -> bool;
         fn zygisk_should_load_module(flags: u32) -> bool;
         fn send_fd(socket: i32, fd: i32) -> bool;
         fn recv_fd(socket: i32) -> i32;
