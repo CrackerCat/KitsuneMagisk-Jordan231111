@@ -57,6 +57,7 @@
     "app/core/src/main/java/com/topjohnwu/magisk/test/Environment.kt",
     "app/core/src/main/java/com/topjohnwu/magisk/test/MagiskAppTest.kt",
     "app/core/src/main/java/com/topjohnwu/magisk/test/UpdateServiceTest.kt",
+    "app/core/src/main/java/com/topjohnwu/magisk/test/VerifiedUpdatesTest.kt",
     "app/core/src/main/java/com/topjohnwu/magisk/test/ZygiskProviderTest.kt",
     "app/core/src/main/res/values/resources.xml",
     "app/core/src/main/res/values/strings.xml",
