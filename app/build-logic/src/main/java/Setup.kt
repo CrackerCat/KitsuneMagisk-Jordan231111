@@ -148,9 +148,16 @@ fun Project.setupCoreLib() {
                 include(abiList.map { "$it/libbusybox.so" })
                 from(zipTree(downloadFile(BOOTCTL_DOWNLOAD_URL, BOOTCTL_ZIP_CHECKSUM)))
                 include(abiList.map { "$it/libbootctl.so" })
+                inputs.property("buildInfo", Config.buildInfo(variant.buildType!!))
                 onlyIf {
                     if (inputs.sourceFiles.files.size != abiList.size * 7)
                         throw StopExecutionException("Please build binaries first! (./build.py binary)")
+                    for (abi in abiList) {
+                        val binary = rootFile("native/out/$abi/magisk").readBytes()
+                        check(binary.toString(Charsets.ISO_8859_1).contains(Config.buildInfo(variant.buildType!!))) {
+                            "Stale $abi native build identity; run ./build.py native for this source and variant"
+                        }
+                    }
                     true
                 }
             }
@@ -180,6 +187,10 @@ fun Project.setupCoreLib() {
 
                 inputs.property("version", Config.version)
                 inputs.property("versionCode", Config.versionCode)
+                inputs.property("buildInfo", Config.buildInfo(variant.buildType!!))
+                from(File(Config.generatedDir, "build-info-${variant.buildType}.json")) {
+                    rename { "build-info.json" }
+                }
                 from(rootFile("scripts")) {
                     include("util_functions.sh", "boot_patch.sh", "addon.d.sh",
                         "app_functions.sh", "uninstaller.sh", "module_installer.sh",
@@ -201,11 +212,7 @@ fun Project.setupCoreLib() {
                     filter {
                         it.replace(
                             "#MAGISK_VERSION_STUB",
-                            "MAGISK_VER='${Config.version}'\n" +
-                                "MAGISK_VER_CODE=${Config.versionCode}\n" +
-                                "KITSUNE_SOURCE_COMMIT='${Config.sourceCommit}'\n" +
-                                "KITSUNE_SOURCE_DIRTY=${Config.sourceDirty}\n" +
-                                "KITSUNE_UPSTREAM_BASE='$UPSTREAM_BASE'"
+                            Config.shellInfo(variant.buildType!!)
                         )
                     }
                     filter<FixCrLfFilter>("eol" to FixCrLfFilter.CrLf.newInstance("lf"))
@@ -284,6 +291,8 @@ fun Project.setupAppCommon() {
                 this.transformations.add {
                     it.eocdComment = ("version=${Config.version}\n" +
                             "versionCode=${Config.versionCode}\n" +
+                            "protocolVersion=${Config.protocolVersion}\n" +
+                            "buildId=${Config.buildId(variant.buildType!!)}\n" +
                             "stubVersion=${Config.stubVersion}\n").toByteArray()
                 }
             }

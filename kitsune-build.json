@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "product_version": "0.1.0-dev",
+  "app_version_code": 31001,
+  "application_id": "io.github.huskydg.magisk.next",
+  "product_name": "KitsuneMagisk Next",
+  "channel": "next-system-experimental",
+  "upstream_version": "31.0",
+  "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+  "compat_version_code": 31000,
+  "protocol_version": 1,
+  "capabilities": ["kitsune.build-info.v1"],
+  "debug_capabilities": ["kitsune.system-mode.transaction.v1"]
+}

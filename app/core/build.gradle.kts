@@ -26,6 +26,8 @@ android {
         buildConfigField("String", "PRODUCT_CHANNEL", "\"$PRODUCT_CHANNEL\"")
         buildConfigField("String", "PRODUCT_NAME", "\"$PRODUCT_NAME\"")
         buildConfigField("String", "UPSTREAM_BASE", "\"$UPSTREAM_BASE\"")
+        buildConfigField("int", "MAGISK_COMPAT_VERSION_CODE", "${Config.compatVersionCode}")
+        buildConfigField("int", "PROTOCOL_VERSION", "${Config.protocolVersion}")
         buildConfigField("int", "STUB_VERSION", Config.stubVersion)
         consumerProguardFile("proguard-rules.pro")
     }
@@ -33,6 +35,13 @@ android {
     buildFeatures {
         aidl = true
         buildConfig = true
+    }
+
+    buildTypes {
+        all {
+            buildConfigField("String", "BUILD_ID", "\"${Config.buildId(name)}\"")
+            buildConfigField("String", "BUILD_INFO_JSON", groovy.json.JsonOutput.toJson(Config.buildInfo(name)))
+        }
     }
 
     compileOptions {

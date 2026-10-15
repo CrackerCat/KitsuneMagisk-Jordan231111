@@ -2624,7 +2624,7 @@ sm_begin_transaction() {
   local requested_source_commit="${KITSUNE_SOURCE_COMMIT:-}"
   local requested_upstream_base="${KITSUNE_UPSTREAM_BASE:-}"
   local requested_product_version="${MAGISK_VER:-unknown-kitsune}"
-  local requested_version_code="${MAGISK_VER_CODE:-}"
+  local requested_version_code="${KITSUNE_APP_VERSION_CODE:-${MAGISK_VER_CODE:-}}"
   SM_ARTIFACT_PATH="${1:-}"
   case "$requested_source_commit" in *[!a-f0-9]*|'') sm_log "! Missing full source identity"; return 1 ;; esac
   [ "${#requested_source_commit}" -eq 40 ] || { sm_log "! Invalid source identity"; return 1; }

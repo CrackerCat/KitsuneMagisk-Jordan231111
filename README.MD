@@ -9,7 +9,7 @@ and qualification tools. PR7A passed its prepared-MuMu and ordinary emulator gat
 feature completion and production qualification remain gated by the [roadmap](DEVELOPMENT_ROADMAP.md).
 
 The manager installs as `io.github.huskydg.magisk.next`, reports a
-`31.0-kitsune-next.<source>` version, and uses the `next-system-experimental` channel identity. It
+`0.1.0-dev-kitsune.<source>` version, and uses the `next-system-experimental` channel identity. It
 uses a separate package from official Magisk and the prior Kitsune manager. Automatic update checks default
 to off because this branch does not yet have a project-owned update endpoint.
 

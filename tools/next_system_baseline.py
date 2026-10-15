@@ -17,6 +17,11 @@ import sys
 from typing import Any, Iterable, Optional
 import zipfile
 
+try:
+    from tools import build_info
+except ImportError:
+    import build_info
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_MANIFEST = ROOT / "docs" / "next-system-baseline.json"
@@ -275,6 +280,20 @@ def verify_source(root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
     expected_contracts.setdefault("scripts/env.py" if modern else "build.py", []).append(
         'error("Requires Python 3.9+")'
     )
+    if phase == "PR9":
+        spec = build_info.read_spec(root)
+        if (spec["app_version_code"] != identity["version_code"] or
+                spec["application_id"] != identity["application_id"] or
+                spec["channel"] != identity["channel"] or
+                spec["product_name"] != identity["display_name"] or
+                spec["upstream_version"] != manifest["upstream"]["release"].removeprefix("v") or
+                spec["upstream_commit"] != upstream):
+            raise BaselineError("PR9 build specification disagrees with the reviewed baseline")
+        expected_contracts[plugin] = ["tools/build_info.py", 'findProperty("expectedSourceCommit")']
+        expected_contracts["build.py"] = ["build_info.generate(repo_root)",
+                                         "Git source state changed while building the APK"]
+        expected_contracts["native/src/include/consts.hpp"] = ["#include <flags.h>"]
+        expected_contracts["native/src/include/consts.rs"] = ["pub use flags::*;"]
     for path, values in expected_contracts.items():
         for value in values:
             expect_text(root, path, value)
@@ -459,6 +478,7 @@ def inspect_apk(
     apksigner: Path,
     manifest: dict[str, Any],
     expected_version: str,
+    expected_info: Optional[dict[str, Any]] = None,
 ) -> dict[str, Any]:
     if not apk.is_file():
         raise BaselineError(f"missing {variant} APK: {apk}")
@@ -479,7 +499,7 @@ def inspect_apk(
         raise BaselineError(f"unexpected manager package in {apk}: {package_name}")
     if int(version_code) != identity["version_code"]:
         raise BaselineError(f"unexpected versionCode in {apk}: {version_code}")
-    if not VERSION_PATTERN.fullmatch(version_name) or version_name != expected_version:
+    if version_name != expected_version or (expected_info is None and not VERSION_PATTERN.fullmatch(version_name)):
         raise BaselineError(f"untruthful experimental versionName in {apk}: {version_name}")
     if sdk_match.group(1) != str(manifest["android"]["min_sdk"]):
         raise BaselineError(f"unexpected minSdk in {apk}: {sdk_match.group(1)}")
@@ -507,11 +527,22 @@ def inspect_apk(
         utility_version, utility_code = parse_utility_identity(
             archive.read("assets/util_functions.sh")
         )
-        if (utility_version, utility_code) != (version_name, int(version_code)):
+        compat_code = expected_info["compat_version_code"] if expected_info else int(version_code)
+        if (utility_version, utility_code) != (version_name, compat_code):
             raise BaselineError(
                 f"manager/native utility identity mismatch in {apk}: "
                 f"{utility_version}/{utility_code}"
             )
+        if expected_info is not None:
+            try:
+                info = json.loads(archive.read("assets/build-info.json"))
+            except (KeyError, ValueError) as exc:
+                raise BaselineError(f"missing or malformed build identity in {apk}") from exc
+            if info != expected_info:
+                raise BaselineError(f"stale or contradictory build identity in {apk}")
+            script = archive.read("assets/util_functions.sh").decode()
+            if build_info.shell_info(expected_info) not in script:
+                raise BaselineError(f"shell build identity does not match {apk}")
         for name in sorted(item for item in names if item.startswith("lib/") and item.endswith(".so")):
             parts = Path(name).parts
             if len(parts) != 3 or parts[1] not in ABI_ELF_IDENTITIES:
@@ -540,6 +571,8 @@ def inspect_apk(
             native[name] = alignments
             if Path(name).name == "libmagisk.so":
                 daemon_identities[abi] = parse_daemon_identity(data)
+                if expected_info and build_info.encoded(expected_info).encode() not in data:
+                    raise BaselineError(f"{apk}:{name} has stale native build information")
         for abi, libraries in REQUIRED_LIBRARIES.items():
             libraries = libraries | set(manifest.get("additional_native_libraries", []))
             packaged = {
@@ -548,7 +581,7 @@ def inspect_apk(
             missing_libraries = sorted(libraries - packaged)
             if missing_libraries:
                 raise BaselineError(f"{apk} is missing {abi} libraries: {missing_libraries}")
-        expected_daemon = (version_name, int(version_code), expected_mode)
+        expected_daemon = (version_name, compat_code, expected_mode)
         if set(daemon_identities.values()) != {expected_daemon}:
             raise BaselineError(
                 f"{apk} daemon identities do not match {expected_daemon}: {daemon_identities}"
@@ -559,9 +592,15 @@ def inspect_apk(
             raise BaselineError(f"{apk} has a non-UTF-8 identity comment") from exc
         if f"version={version_name}\n" not in comment or f"versionCode={version_code}\n" not in comment:
             raise BaselineError(f"{apk} ZIP comment does not match its manifest identity")
+        if expected_info and (
+            f'protocolVersion={expected_info["protocol_version"]}\n' not in comment or
+            f'buildId={expected_info["build_id"]}\n' not in comment
+        ):
+            raise BaselineError(f"{apk} ZIP comment does not match its protocol/build identity")
 
     certificate = signer_certificate(apksigner, apk)
     return {
+        "build_info": expected_info,
         "path": str(apk.resolve()),
         "sha256": sha256(apk),
         "size": apk.stat().st_size,
@@ -744,14 +783,17 @@ def verify_artifacts(
     aapt: Path,
     apksigner: Path,
 ) -> dict[str, Any]:
-    expected_version = expected_source_version(root, manifest["upstream"]["release"])
+    info = build_info.identity(root) if manifest.get("phase") == "PR9" else None
+    expected_version = info["version_name"] if info else expected_source_version(root, manifest["upstream"]["release"])
     debug = inspect_apk(
         outdir / "app-debug.apk", "debug", aapt, apksigner, manifest,
         expected_version,
+        build_info.variant_info(info, "debug") if info else None,
     )
     release = inspect_apk(
         outdir / "app-release.apk", "release", aapt, apksigner, manifest,
         expected_version,
+        build_info.variant_info(info, "release") if info else None,
     )
     stub_debug = inspect_stub_apk(
         outdir / "stub-debug.apk",

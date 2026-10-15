@@ -1,6 +1,6 @@
 use crate::bootstages::BootState;
 use crate::consts::{
-    MAGISK_FILE_CON, MAGISK_FULL_VER, MAGISK_PROC_CON, MAGISK_VER_CODE, MAGISK_VERSION,
+    BUILD_INFO, MAGISK_FILE_CON, MAGISK_FULL_VER, MAGISK_PROC_CON, MAGISK_VER_CODE, MAGISK_VERSION,
     MAIN_CONFIG, MAIN_SOCKET, ROOTMNT, ROOTOVL,
 };
 use crate::db::Sqlite3;
@@ -87,6 +87,9 @@ impl MagiskD {
 
     fn handle_request_sync(&self, mut client: UnixStream, code: RequestCode) {
         match code {
+            RequestCode::CHECK_BUILD_INFO => {
+                client.write_encodable(BUILD_INFO).log_ok();
+            }
             RequestCode::CHECK_VERSION => {
                 #[cfg(debug_assertions)]
                 let s = concatcp!(MAGISK_VERSION, ":MAGISK:D");
@@ -208,7 +211,8 @@ impl MagiskD {
 
         let mut code = -1;
         client.read_pod(&mut code).ok();
-        if !(0..RequestCode::END.repr).contains(&code)
+        if (!(0..RequestCode::END.repr).contains(&code)
+            && code != RequestCode::CHECK_BUILD_INFO.repr)
             || code == RequestCode::_SYNC_BARRIER_.repr
             || code == RequestCode::_STAGE_BARRIER_.repr
         {
@@ -249,7 +253,7 @@ impl MagiskD {
             return;
         }
 
-        if code.repr < RequestCode::_SYNC_BARRIER_.repr {
+        if code.repr < RequestCode::_SYNC_BARRIER_.repr || code == RequestCode::CHECK_BUILD_INFO {
             self.handle_request_sync(client, code)
         } else if code.repr < RequestCode::_STAGE_BARRIER_.repr {
             ThreadPool::exec_task(move || {

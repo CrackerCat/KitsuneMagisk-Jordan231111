@@ -90,6 +90,7 @@ class LogViewModel(
 
                 file.write("\n---Manager Logs---\n")
                 file.write("${BuildConfig.APP_VERSION_NAME} (${BuildConfig.APP_VERSION_CODE})\n\n")
+                file.write("${BuildConfig.BUILD_INFO_JSON}\n\n")
                 ProcessBuilder("logcat", "-d").start()
                     .inputStream.reader().use { it.copyTo(file) }
             }

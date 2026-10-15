@@ -271,10 +271,12 @@ int main() {
         failed = subprocess.CompletedProcess(
             ["git", "status"], 128, "", "not a repository"
         )
-        with mock.patch.object(build.subprocess, "run", return_value=clean):
-            self.assertEqual((commit, clean_output), build.git_source_state())
-        with mock.patch.object(build.subprocess, "run", return_value=dirty):
-            self.assertNotEqual((commit, clean_output), build.git_source_state())
+        with (mock.patch.object(build.subprocess, "run", return_value=clean),
+              mock.patch.object(build.build_info, "source_state", return_value={"source_digest": "digest"})):
+            self.assertEqual((commit, clean_output + "digest"), build.git_source_state())
+        with (mock.patch.object(build.subprocess, "run", return_value=dirty),
+              mock.patch.object(build.build_info, "source_state", return_value={"source_digest": "digest"})):
+            self.assertNotEqual((commit, clean_output + "digest"), build.git_source_state())
         with mock.patch.object(build.subprocess, "run", return_value=failed):
             with self.assertRaisesRegex(RuntimeError, "not a repository"):
                 build.git_source_state()
@@ -909,10 +911,10 @@ raise SystemExit(2)
             encoding="utf-8"
         )
         self.assertIn(
-            '"git", "status", "--porcelain=v1", "--untracked-files=normal"',
-            plugin,
+            '"status", "--porcelain=v1", "--untracked-files=normal"',
+            Path("tools/build_info.py").read_text(),
         )
-        self.assertIn("check(process.waitFor() == 0)", plugin)
+        self.assertIn("check(generator.waitFor() == 0)", plugin)
         self.assertIn('findProperty("expectedSourceCommit")', plugin)
         self.assertNotIn('findProperty("sourceDirty")', plugin)
 

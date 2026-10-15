@@ -1,6 +1,6 @@
 # KitsuneMagisk development roadmap
 
-> Roadmap last reconciled: 2026-10-08 UTC
+> Roadmap last reconciled: 2026-10-14 UTC
 >
 > Post-PR2 audit snapshot (not the fidelity boundary): `kitsune` at
 > `cf149fcf734539f6077cd6b349d9ffc2496c56ca`
@@ -19,7 +19,8 @@
 > **PR7A is complete at production runtime `0d71d9f9742f2cc258e75d74ce90c2b5d6ad3c5c`,**
 > with subsequent test-harness fixes; [GitHub PR #30](https://github.com/Jordan231111/KitsuneMagisk/pull/30)
 > records the accepted v31.0 update. PR8 is complete locally on `codex/pr8-parity`; its
-> [decision](docs/pr8-branch-decision.md) retains production promotion gates. PR9 is next.
+> [decision](docs/pr8-branch-decision.md) retains production promotion gates. PR9 is implemented and locally verified on `codex/pr9-build-info`;
+> [its identity/migration record](docs/build-info.md) preserves the remaining release gates. PR10 is next.
 >
 > Product charter: KitsuneMagisk provides reliable Magisk root on real phones and emulators while
 > preserving useful Kitsune-specific early mounting, hiding/SuList, provider, and module capabilities.
@@ -61,7 +62,7 @@ This section is the authoritative answer to “where am I now?” The detailed P
 below remain the source of acceptance criteria; their historical audit statements are not a second
 execution order.
 
-| Order | Work unit | State on 2026-10-08 | Required next decision or exit |
+| Order | Work unit | State on 2026-10-14 | Required next decision or exit |
 |---:|---|---|---|
 | 1 | Roadmap PR1 / GitHub #22 — product charter and release freeze | **Merged** | Preserve the product charter and experimental-release boundary. |
 | 2 | Roadmap PR2 / GitHub #23 — CI product gate | **Merged** | Keep pull-request build/test publication gates green. |
@@ -75,9 +76,11 @@ execution order.
 | 10 | Roadmap PR7 — System Mode vertical slice | **Complete on the exact prepared MuMu target; experimental** | Preserve the [qualification, upgrade, module, SU, uninstall and restore evidence](docs/system-mode/mumu-pr7-2026-09-09.md). Release/phone/parity claims remain gated. |
 | 11 | Roadmap PR7A — official v31.0 prerelease update | **Complete; merged by GitHub #30** | Preserve the exact v31.0 acceptance below; proceed to PR8 parity. |
 | 12 | Roadmap PR8 — parity and historical feature audit | **Complete locally; production promotion remains gated** | Preserve the [port ledger](docs/port-ledger.md), exact paired outcomes and [reversible development-line decision](docs/pr8-branch-decision.md). |
-| 13 | Roadmap PR9–PR16 — remaining historical features, qualification, and release | **Not started** | Close every feature-ledger row by PR16; no historical behavior may become an unnamed follow-up. |
+| 13 | Roadmap PR9 — version/build-info separation | **Implemented and locally verified on `codex/pr9-build-info`, based on PR8 `27ce1f436`** | Preserve the [shared identity and migration contract](docs/build-info.md), artifact gates and MuMu manager-update evidence. |
+| 14 | Roadmap PR10–PR16 — remaining historical features, qualification, and release | **Not started** | Close every feature-ledger row by PR16; no historical behavior may become an unnamed follow-up. |
 
-The next planned engineering task is **PR9** on `next-system`. PR8 selected the v31.0-based
+The next planned engineering task is **PR10**, continuing the PR8/PR9 work on the maintained
+`next-system` foundation; those development branches are not yet merged there. PR8 selected the v31.0-based
 development foundation while retaining historical-feature and release qualification gates. PR7A completed the upstream
 update and inherited lifecycle gates. PR6 established the exact v30.7 baseline, and
 [PR7 completed its prepared-MuMu lifecycle](docs/system-mode/mumu-pr7-2026-09-09.md). PR5A used only MuMu VM index 0, restored the same byte-verified baseline between
@@ -2656,8 +2659,11 @@ route cases; PR14 owns runtime implementation and timing proof. No production AP
 
 ## PR 9 — Version/build-info separation
 
-**Implementation status: not started; PR #26 provides only source-identity and artifact-consistency
-foundations.**
+**Implementation status: implemented and locally verified on `codex/pr9-build-info`, based on
+PR8 `27ce1f436`; uncommitted work is not a published candidate. The [identity and test record](docs/build-info.md)
+covers generated fields, all-ABI artifacts, protocol/capability checks and the same-signer MuMu
+manager update from 31000 to 31001. Production signer/hidden-manager transitions remain with their
+existing PR10/PR13/PR16 owners.**
 
 - Add product, app upgrade, upstream base, compatibility, protocol, commit, and channel fields.
 - Add metadata consistency tests and truthful tags.
@@ -2964,9 +2970,9 @@ in the detail:
   lifecycle gates passed; preserve the exact runtime and CI evidence above.
 - **Open next — PR8:** run identical snapshots against current and next implementations and select the
   future main line only at the parity gate.
-- **Open — PR9/PR10/P0.7:** separate truthful version/protocol/capability fields, create one simple
-  production signing identity/transition, and establish a project-owned update service before a
-  public candidate.
+- **Done locally — PR9:** separate truthful product/app/upstream/module/protocol fields and test
+  the explicit manager upgrade/capability contract. **Open — PR10/P0.7:** establish the production
+  signing identity/transition and project-owned update service before a public candidate.
 - **Open — PR11–PR14:** port the chosen Zygisk contract, Hide/SuList, focused manager UI, and
   early-mount only after System Mode parity—not before it.
 - **Open — PR15/PR16:** complete commercial-emulator and advertised physical-device recovery

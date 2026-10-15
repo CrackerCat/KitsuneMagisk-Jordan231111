@@ -5,6 +5,7 @@ import android.content.IntentFilter
 import android.os.ParcelFileDescriptor.AutoCloseInputStream
 import androidx.annotation.Keep
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.topjohnwu.magisk.core.BuildConfig
 import com.topjohnwu.magisk.core.Config
 import com.topjohnwu.magisk.core.Info
 import com.topjohnwu.magisk.core.di.ServiceLocator
@@ -30,6 +31,13 @@ class MagiskAppTest : BaseTest {
         @BeforeClass
         @JvmStatic
         fun before() = BaseTest.prerequisite()
+    }
+
+    @Test
+    fun testBuildIdentity() {
+        assertEquals(BuildConfig.BUILD_INFO_JSON, fastCmd("magisk --version-json"))
+        assertEquals(BuildConfig.BUILD_INFO_JSON, fastCmd("magisk --daemon-version-json"))
+        assertEquals(BuildConfig.MAGISK_COMPAT_VERSION_CODE.toString(), fastCmd("magisk -V"))
     }
 
     @Test

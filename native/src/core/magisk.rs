@@ -1,4 +1,6 @@
-use crate::consts::{APPLET_NAMES, MAGISK_VER_CODE, MAGISK_VERSION, POST_FS_DATA_WAIT_TIME};
+use crate::consts::{
+    APPLET_NAMES, BUILD_FEATURES, BUILD_INFO, MAGISK_VER_CODE, MAGISK_VERSION, POST_FS_DATA_WAIT_TIME,
+};
 use crate::daemon::connect_daemon;
 use crate::ffi::{RequestCode, denylist_cli, get_magisk_tmp, install_module, unlock_blocks};
 use crate::mount::find_preinit_device;
@@ -22,6 +24,9 @@ Options:
    -c                        print current binary version
    -v                        print running daemon version
    -V                        print running daemon version code
+   --version-json            print this binary's build identity
+   --daemon-version-json     print the running daemon's build identity
+   --features                list this binary's compiled Kitsune capabilities
    --list                    list all available applets
    --remove-modules [-n]     remove all modules, reboot if -n is not provided
    --install-module ZIP      install a module zip file
@@ -59,6 +64,9 @@ enum MagiskAction {
     LocalVersion(LocalVersion),
     Version(Version),
     VersionCode(VersionCode),
+    BuildInfo(BuildInfo),
+    DaemonBuildInfo(DaemonBuildInfo),
+    Features(Features),
     List(ListApplets),
     RemoveModules(RemoveModules),
     InstallModule(InstallModule),
@@ -89,6 +97,18 @@ struct Version {}
 #[derive(FromArgs)]
 #[argh(subcommand, name = "-V")]
 struct VersionCode {}
+
+#[derive(FromArgs)]
+#[argh(subcommand, name = "--version-json")]
+struct BuildInfo {}
+
+#[derive(FromArgs)]
+#[argh(subcommand, name = "--daemon-version-json")]
+struct DaemonBuildInfo {}
+
+#[derive(FromArgs)]
+#[argh(subcommand, name = "--features")]
+struct Features {}
 
 #[derive(FromArgs)]
 #[argh(subcommand, name = "--list")]
@@ -184,6 +204,13 @@ impl MagiskAction {
     fn exec(self) -> LoggedResult<i32> {
         use MagiskAction::*;
         match self {
+            BuildInfo(_) => println!("{BUILD_INFO}"),
+            Features(_) => println!("{BUILD_FEATURES}"),
+            DaemonBuildInfo(_) => {
+                let mut fd = connect_daemon(RequestCode::CHECK_BUILD_INFO, false)?;
+                let info = String::decode(&mut fd)?;
+                println!("{info}");
+            }
             LocalVersion(_) => {
                 #[cfg(debug_assertions)]
                 println!("{MAGISK_VERSION}:MAGISK:D ({MAGISK_VER_CODE})");
