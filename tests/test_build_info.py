@@ -6,8 +6,10 @@ from pathlib import Path
 import subprocess
 import tempfile
 import unittest
+from types import SimpleNamespace
 from unittest import mock
 
+import build
 from tools import build_info
 
 
@@ -89,6 +91,34 @@ class BuildInfoTest(unittest.TestCase):
             (root / "kitsune-build.json").write_text(json.dumps(spec))
             identity = build_info.identity(root)
             self.assertEqual(identity["upstream_commit"], spec["upstream_commit"])
+
+    def test_existing_apk_tools_do_not_regenerate_identity(self):
+        with tempfile.TemporaryDirectory() as directory:
+            config = Path(directory) / "config.prop"
+            config.write_text(f"outdir={directory}/out\n")
+            for action in (build.patch_avd_file, build.setup_avd, build.setup_ndk, build.cleanup):
+                with self.subTest(action=action.__name__), \
+                     mock.patch.object(build, "args", SimpleNamespace(func=action, build=False,
+                                       release=False, config=config), create=True), \
+                     mock.patch.object(build, "config", {}), \
+                     mock.patch.object(build, "build_abis", {}, create=True), \
+                     mock.patch.object(build_info, "generate", side_effect=AssertionError("Source build attempted")):
+                    build.load_config()
+                    self.assertNotIn("buildInfo", build.config)
+
+    def test_building_before_patch_still_validates_source(self):
+        def fail(message):
+            raise ValueError(message)
+        with tempfile.TemporaryDirectory() as directory:
+            config = Path(directory) / "config.prop"
+            config.write_text(f"outdir={directory}/out\n")
+            with mock.patch.object(build, "args", SimpleNamespace(func=build.patch_avd_file,
+                                   build=True, release=False, config=config), create=True), \
+                 mock.patch.object(build, "config", {}), \
+                 mock.patch.object(build_info, "generate", side_effect=ValueError("Missing source history")), \
+                 mock.patch.object(build, "error", side_effect=fail), \
+                 self.assertRaisesRegex(ValueError, "Missing source history"):
+                build.load_config()
 
     def test_dirty_build_id_changes_when_contents_change_at_same_head(self):
         for field in ("source_digest", "source_commit", "protocol_version"):
