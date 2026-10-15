@@ -759,12 +759,33 @@ def _versioned_install_config(
     product = manifest["product"]
     if (
         manifest["state"] != "BOOT_VERIFIED"
-        or product["version_code"] != version_code
         or version not in (
             product["version"] + ":MAGISK:D", product["version"] + ":MAGISK:R"
         )
     ):
         return None
+    if product["version_code"] != version_code:
+        # New receipts contain the app upgrade code, while -V is the native
+        # compatibility epoch. Older receipts used one value for both.
+        result = client.shell("magisk --daemon-version-json 2>/dev/null", root=root)
+        try:
+            identity = json.loads(result.stdout, object_pairs_hook=unique_object)
+        except ValueError:
+            return None
+        if (result.returncode != 0 or not isinstance(identity, dict)
+                or type(identity.get("schema")) is not int or identity["schema"] != 1
+                or type(identity.get("app_version_code")) is not int
+                or identity["app_version_code"] != product["version_code"]
+                or type(identity.get("compat_version_code")) is not int
+                or identity["compat_version_code"] != version_code
+                or identity.get("source_commit") != product["source_commit"]
+                or identity.get("upstream_commit") != product["upstream_base"]
+                or identity.get("version_name") != product["version"]
+                or identity.get("source_dirty") is not False
+                or identity.get("variant") not in ("debug", "release")
+                or version != product["version"] + ":MAGISK:" + (
+                    "D" if identity["variant"] == "debug" else "R")):
+            return None
     path = manifest["strategies"]["active_payload"] + "/config"
     record = _probe_paths(client, (path,), root=root).get(path, {})
     if not trusted_file(record, path):
