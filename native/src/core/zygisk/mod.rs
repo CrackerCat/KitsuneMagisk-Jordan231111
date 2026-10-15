@@ -1,4 +1,5 @@
 mod daemon;
+mod provider;
 
 use crate::thread::ThreadPool;
 use base::{fd_get_attr, libc};

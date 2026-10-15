@@ -238,6 +238,7 @@ class Environment : BaseTest {
 
     private fun setupValidZygiskModule(root: ExtendedFile) {
         setupZygiskTestModule(root, VALID_ZYGISK, "libzygisk_test.so")
+        setupZygiskTestModule(root, "zygisk_probe", "libzygisk_probe.so")
     }
 
     private fun setupUnloadZygiskModule(root: ExtendedFile) {

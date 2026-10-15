@@ -23,7 +23,7 @@
 > [#32](https://github.com/Jordan231111/KitsuneMagisk/pull/32), and
 > [#33](https://github.com/Jordan231111/KitsuneMagisk/pull/33). The
 > [authenticated beta acceptance](docs/update-service-acceptance.json) records the exact public
-> assets and successful clean-stub update. PR11 is next; production promotion remains gated.
+> assets and successful clean-stub update. PR11 is in progress; production promotion remains gated.
 >
 > Product charter: KitsuneMagisk provides reliable Magisk root on real phones and emulators while
 > preserving useful Kitsune-specific early mounting, hiding/SuList, provider, and module capabilities.
@@ -81,9 +81,10 @@ execution order.
 | 12 | Roadmap PR8 — parity and historical feature audit | **Complete; merged by GitHub #31; production promotion remains gated** | Preserve the [port ledger](docs/port-ledger.md), exact paired outcomes and [reversible development-line decision](docs/pr8-branch-decision.md). |
 | 13 | Roadmap PR9 — version/build-info separation | **Complete; merged by GitHub #32** | Preserve the [shared identity and migration contract](docs/build-info.md), artifact gates and MuMu manager-update evidence. |
 | 14 | Roadmap PR10 — authenticated update service and stub | **Complete; merged by GitHub #33; experimental beta published** | Preserve the [shared update contract](docs/update-service.md) and [public-download/clean-stub acceptance](docs/update-service-acceptance.json); stable promotion remains PR16. |
-| 15 | Roadmap PR11–PR16 — remaining historical features, qualification, and release | **Not started** | Close every feature-ledger row by PR16; no historical behavior may become an unnamed follow-up. |
+| 15 | Roadmap PR11 — Zygisk architecture and adapter boundary | **In progress** | Retain maintained built-in Zygisk; qualify the versioned opt-out contract and pinned external providers. |
+| 16 | Roadmap PR12–PR16 — remaining historical features, qualification, and release | **Not started** | Close every feature-ledger row by PR16; no historical behavior may become an unnamed follow-up. |
 
-The next task is **PR11**, on the maintained `next-system` foundation with PR8–PR10 merged.
+The current task is **PR11**, on the maintained `next-system` foundation with PR8–PR10 merged.
 PR8 selected the v31.0-based
 development foundation while retaining historical-feature and release qualification gates. PR7A completed the upstream
 update and inherited lifecycle gates. PR6 established the exact v30.7 baseline, and
@@ -2706,8 +2707,9 @@ independent key backup and remaining feature/device qualification retain their P
 
 ## PR 11 — Zygisk architecture ADR and adapter boundary
 
-**Implementation status: not started. Depends on System Mode parity; keep PR6/PR7 built-in Zygisk
-unchanged until this decision.**
+**Implementation status: in progress. [ADR 0001](docs/adr/0001-zygisk-provider.md) retains maintained
+built-in Zygisk and a versioned external opt-out. Qualification is tracked in
+[the PR11 evidence](docs/zygisk-pr11.json).**
 
 - Keep baseline built-in implementation until the ADR is approved.
 - Add provider abstraction/contract tests if external-only is chosen.

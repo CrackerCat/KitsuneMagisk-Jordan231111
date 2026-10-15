@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "phase": "PR11",
+  "status": "qualification-in-progress",
+  "base_commit": "5cea9f709baaee7d803e8fb76a8c97048bdb379c",
+  "decision": "Retain maintained built-in Zygisk with a single-provider-per-boot external opt-out",
+  "adr": "docs/adr/0001-zygisk-provider.md",
+  "provider_pins": [
+    {
+      "name": "Jordan231111/ReZygisk",
+      "tag": "v1.0.0-554",
+      "commit": "c9b7dc0761b8bbff1b3216a45cb6234a19b6310c",
+      "asset": "ReZygisk-v1.0.0-554-c9b7dc0-release.zip",
+      "sha256": "e15d13a400956358ced06af44bcc7daeb25813f5f1005a71f00b5c8f910d7b94",
+      "source_license": "GPL-3.0",
+      "release": "https://github.com/Jordan231111/ReZygisk/releases/tag/v1.0.0-554"
+    },
+    {
+      "name": "JingMatrix/NeoZygisk",
+      "tag": "v2.4",
+      "commit": "08080ef775c7fbbd1ad5c4a5d837f81933437abd",
+      "asset": "NeoZygisk-v2.4-289-release.zip",
+      "sha256": "93a1425c67bb89f58a0dcb9fc823ec93f6472214f221e667a70b67c6a6e061a1",
+      "source_license": "GPL-3.0",
+      "release": "https://github.com/JingMatrix/NeoZygisk/releases/tag/v2.4"
+    }
+  ],
+  "source_review": {
+    "checked_at": "2026-10-15",
+    "neozygisk_master": "225b32b802cff876c09a4a8ec4a1677ce0538c39",
+    "rezygisk_upstream_main": "b5aa415c2ce1161ab807578ce0414129fbfc6313",
+    "zygisknext_latest": "v1.5.2 (not selected; no redistribution or source reuse)"
+  },
+  "tests": {},
+  "limits": [
+    "PR12 owns classic Hide/SuList and their namespace/database migration.",
+    "GrapheneOS signature fixtures do not qualify a physical GrapheneOS device.",
+    "API 23/29 and other ABIs need the hosted lanes; local ARM64 is not their runtime evidence.",
+    "Production promotion and physical-device support remain PR15/PR16 gates."
+  ]
+}

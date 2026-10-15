@@ -3,7 +3,7 @@
 Development uses `next-system`. PR7A ports the qualified System Mode slice onto official
 **v31.0 prerelease**, including its Compose manager. See the
 [execution checkpoint](../DEVELOPMENT_ROADMAP.md#current-execution-checkpoint--start-here) and
-[current source contract](next-system-pr10.json). PR7's v30.7 artifacts remain historical evidence;
+[current source contract](next-system-pr11.json). PR7's v30.7 artifacts remain historical evidence;
 PR8 selected this foundation; [PR9 build identity](build-info.md) separates the product, Android
 upgrade, module compatibility and protocol fields. Builds report the actual base
 and source commit; physical-phone and full historical-feature qualification remain release gates.

@@ -150,6 +150,9 @@ impl MagiskD {
             RequestCode::ZYGISK => {
                 self.zygisk_handler(client);
             }
+            RequestCode::ZYGISK_STATUS => {
+                self.zygisk_status(client).log_ok();
+            }
             _ => {}
         }
     }
@@ -212,7 +215,8 @@ impl MagiskD {
         let mut code = -1;
         client.read_pod(&mut code).ok();
         if (!(0..RequestCode::END.repr).contains(&code)
-            && code != RequestCode::CHECK_BUILD_INFO.repr)
+            && code != RequestCode::CHECK_BUILD_INFO.repr
+            && code != RequestCode::ZYGISK_STATUS.repr)
             || code == RequestCode::_SYNC_BARRIER_.repr
             || code == RequestCode::_STAGE_BARRIER_.repr
         {
@@ -229,6 +233,7 @@ impl MagiskD {
             | RequestCode::BOOT_COMPLETE
             | RequestCode::ZYGOTE_RESTART
             | RequestCode::SQLITE_CMD
+            | RequestCode::ZYGISK_STATUS
             | RequestCode::DENYLIST
             | RequestCode::STOP_DAEMON
                 if !is_root =>
@@ -255,7 +260,7 @@ impl MagiskD {
 
         if code.repr < RequestCode::_SYNC_BARRIER_.repr || code == RequestCode::CHECK_BUILD_INFO {
             self.handle_request_sync(client, code)
-        } else if code.repr < RequestCode::_STAGE_BARRIER_.repr {
+        } else if code.repr < RequestCode::_STAGE_BARRIER_.repr || code == RequestCode::ZYGISK_STATUS {
             ThreadPool::exec_task(move || {
                 self.handle_request_async(client, code, cred);
             })
