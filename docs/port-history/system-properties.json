@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "source_observations": [
+    {
+      "repository": "https://github.com/topjohnwu/system_properties",
+      "commit": "049ceb6791e0a590a9a73b7fa1a3d952a791df91",
+      "path": "system_properties.cpp",
+      "sha256": "8cd25416a7a7f79b1345254ec27de65430fb3b1e6d1629bcd87e287d24d70975",
+      "size": 12912
+    },
+    {
+      "repository": "https://github.com/topjohnwu/system_properties",
+      "commit": "14b35941f4437a06685daee4464acea58a87ad57",
+      "path": "system_properties.cpp",
+      "sha256": "47866751701de451e4a0944ca6295ad2eb7e442971e9e1284ca8b57d300930cb",
+      "size": 13327
+    },
+    {
+      "repository": "https://github.com/topjohnwu/system_properties",
+      "commit": "2bf706b2a72caaf105d45e5929bb246068be4edc",
+      "path": "system_properties.cpp",
+      "sha256": "2c56373794d338dc3a5db218ec3e59fd19853f11342208279ab914f58475a106",
+      "size": 20149
+    }
+  ],
+  "review": [
+    "The parent commit d4a2ccd9b364b526db7922e9533071ae1dcc9326 is titled Revert zygisk changes but also moves system_properties from 049ceb679 to 14b35941. That path belongs to resetprop compatibility, not only Zygisk.",
+    "At 14b35941, Update takes a special ro. branch that writes length bits without advancing the low serial counter, then returns before the property/global futex notification path. The archived R65A24840 notes explicitly advertise the read-only property behavior.",
+    "The official v31.0 pin 2bf706b2 uses a different sequence: update and wake, including appcompat override contexts, then restore the previous low serial counter. Similar final serial values do not prove equivalent waiter/global-counter behavior.",
+    "PR15 must compare short/long read-only values, mutable properties, property waiters, global counters and override contexts before accepting this historical row. No runtime parity is inferred from a matching name."
+  ]
+}

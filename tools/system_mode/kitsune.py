@@ -54,6 +54,22 @@ def _endpoint(value: str) -> str:
     return f"127.0.0.1:{value}" if value.isdigit() else value
 
 
+def _source_root(args: argparse.Namespace) -> Path | None:
+    value = getattr(args, "source_root", None)
+    if value is None:
+        return None
+    path = Path(value).expanduser()
+    if not path.is_absolute() or not path.is_dir():
+        raise ValueError("candidate source root must be an absolute worktree directory")
+    return path.resolve(strict=True)
+
+
+def _collect(args: argparse.Namespace, client: AdbClient, evidence: QualificationEvidence) -> dict:
+    source = _source_root(args)
+    options = {} if source is None else {"repository_root": source}
+    return collect_report(client, evidence, **options)
+
+
 def _doctor(args: argparse.Namespace) -> int:
     try:
         client = AdbClient(adb=args.adb, serial=args.serial, timeout=args.timeout)
@@ -68,7 +84,7 @@ def _doctor(args: argparse.Namespace) -> int:
             )
         else:
             evidence = QualificationEvidence()
-        report = collect_report(client, evidence)
+        report = _collect(args, client, evidence)
         if qualification_record is not None:
             verify_report_qualification_evidence(
                 report,
@@ -192,7 +208,8 @@ def _authorize(args: argparse.Namespace) -> int:
             record_path,
             seal_key_path=seal_key,
         )
-        fresh = collect_report(
+        fresh = _collect(
+            args,
             client,
             fresh_evidence,
         )
@@ -225,7 +242,8 @@ def _authorize(args: argparse.Namespace) -> int:
                 raise ValueError("authorized manager APK changed before installer handoff")
             if client.resolve_serial() != exact_serial:
                 raise ValueError("ADB transport changed before installer handoff")
-            handoff = collect_report(
+            handoff = _collect(
+                args,
                 client,
                 handoff_evidence,
             )
@@ -305,6 +323,8 @@ def _qualify(args: argparse.Namespace) -> int:
             endpoint=endpoint,
             lifecycle_timeout=args.lifecycle_timeout,
             artifact_path=Path(args.artifact).expanduser().absolute() if args.artifact else None,
+            instance_kind=getattr(args, "instance_kind", "file"),
+            repository_root=_source_root(args),
         )
     except (OSError, ProbeError, ValueError, TypeError, KeyError, json.JSONDecodeError) as exc:
         print(f"qualification failed: {exc}", file=sys.stderr)
@@ -364,6 +384,8 @@ def build_parser() -> argparse.ArgumentParser:
         help="prove init import, three cold boots, and an exact external restore",
     )
     qualify.add_argument("--artifact", help="exact candidate APK; required when bootstrap root lacks the Magisk policy domain")
+    qualify.add_argument("--instance-kind", choices=("file", "ldplayer-v1", "mumu-v1"), default="file",
+                         help="exact file identity, or qualified vendor identifiers")
     qualify.add_argument("--output", required=True, help="new qualification record path")
     qualify.add_argument("--backup-location", required=True, help="absolute external backup file/tree")
     qualify.add_argument("--snapshot-id", required=True)
@@ -439,6 +461,11 @@ def build_parser() -> argparse.ArgumentParser:
     )
     adapters.add_argument("--json", action="store_true")
     adapters.set_defaults(handler=_list_adapters)
+    for command in (doctor, qualify, authorize):
+        command.add_argument(
+            "--source-root",
+            help="absolute clean candidate worktree; the host driver is separately digest-bound",
+        )
     return parser
 
 

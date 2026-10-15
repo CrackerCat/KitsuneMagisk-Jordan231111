@@ -42,7 +42,13 @@
         "baseline_inventory_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
       }
     },
-    "instance_identity": {"$ref": "#/$defs/hostFile"},
+    "instance_identity": {
+      "oneOf": [
+        {"$ref": "#/$defs/hostFile"},
+        {"$ref": "#/$defs/ldplayerIdentity"},
+        {"$ref": "#/$defs/mumuIdentity"}
+      ]
+    },
     "commands": {
       "type": "object",
       "additionalProperties": false,
@@ -164,6 +170,89 @@
     }
   },
   "$defs": {
+    "mumuIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "path",
+        "configuration_path",
+        "controller_path",
+        "controller_sha256",
+        "index",
+        "machine_uuid",
+        "hardware_sha256",
+        "media_sha256",
+        "sha256",
+        "adb_port"
+      ],
+      "properties": {
+        "kind": {
+          "const": "mumu-v1"
+        },
+        "path": {
+          "type": "string",
+          "pattern": "^/",
+          "minLength": 2
+        },
+        "configuration_path": {
+          "type": "string",
+          "pattern": "^/",
+          "minLength": 2
+        },
+        "controller_path": {
+          "type": "string",
+          "pattern": "^/",
+          "minLength": 2
+        },
+        "controller_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "machine_uuid": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "hardware_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "media_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "adb_port": {
+          "type": "integer",
+          "minimum": 1024,
+          "maximum": 65535
+        }
+      }
+    },
+    "ldplayerIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "path", "configuration_path", "controller_path", "controller_sha256", "index", "machine_uuid", "hardware_sha256", "media_sha256", "sha256"],
+      "properties": {
+        "kind": {"const": "ldplayer-v1"},
+        "path": {"type": "string", "pattern": "^/", "minLength": 2},
+        "configuration_path": {"type": "string", "pattern": "^/", "minLength": 2},
+        "controller_path": {"type": "string", "pattern": "^/", "minLength": 2},
+        "controller_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "index": {"type": "integer", "minimum": 0},
+        "machine_uuid": {"type": "string", "format": "uuid"},
+        "hardware_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "media_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      }
+    },
     "hostFile": {
       "type": "object",
       "additionalProperties": false,

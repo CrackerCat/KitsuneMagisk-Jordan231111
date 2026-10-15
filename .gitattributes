@@ -12,6 +12,9 @@
 
 # Denote all files that are truly binary and should not be modified.
 /tools/keys/** binary
+/docs/port-history/*.bundle binary
+# Original APK scripts retain their byte-for-byte historical whitespace.
+/docs/port-history/asset-scripts/** -whitespace
 /tools/futility binary
 *.jar binary
 *.exe binary

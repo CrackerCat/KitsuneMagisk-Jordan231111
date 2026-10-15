@@ -1,0 +1,379 @@
+{
+  "schema_version": 1,
+  "record_id": "2026-10-08-mumu12-windows-pr8",
+  "qualification_status": "experimental",
+  "clean_snapshot": true,
+  "artifact": {
+    "identity_status": "known",
+    "branch": "next-system",
+    "commit": "99ab2c55d4441bab2dbd3327e7705ac1d43abe47",
+    "apk_sha256": "7bb316529133f17006c0ca20b58f64daad756b5ae56f06a24f48d4b443a61d51"
+  },
+  "doctor": {
+    "assessment": {
+      "primary_reason": "SUPPORTED",
+      "reason_codes": [
+        "SUPPORTED",
+        "AVB_STATE_UNKNOWN",
+        "SELINUX_NOT_ENFORCING"
+      ],
+      "verdict": "supported",
+      "warnings": [
+        "AVB_STATE_UNKNOWN",
+        "SELINUX_NOT_ENFORCING"
+      ]
+    },
+    "bootstrap": {
+      "adb_uid": 2000,
+      "magisk_version": null,
+      "magisk_version_code": null,
+      "root_available": true,
+      "root_context": "u:r:su:s0",
+      "root_uid": 0,
+      "transport": "vendor_su"
+    },
+    "device": {
+      "abis": [
+        "x86_64",
+        "arm64-v8a",
+        "x86",
+        "armeabi-v7a",
+        "armeabi"
+      ],
+      "android_release": "12",
+      "api": 32,
+      "boot_id_sha256": "c4019878f44aade7c51daba9e3f54de8fdeeb50c8eb51c8317ee713512884bf9",
+      "brand": "Asus",
+      "build_id": "V417IR",
+      "build_incremental": "626",
+      "device": "AI2501",
+      "emulator_product": null,
+      "emulator_product_property": null,
+      "emulator_version": null,
+      "emulator_version_property": null,
+      "fingerprint_sha256": "bc138f6be66e4234dbb37e86ca84e3f7e33f2c6259c1a6d8ff15e7035c433a98",
+      "kernel": "Linux localhost 5.4.32-perf-gda349bfae95e #1 SMP PREEMPT Tue Sep 22 13:55:37 UTC 2026 aarch64",
+      "manufacturer": "Asus",
+      "model": "ASUSAI2501B",
+      "page_size": 4096,
+      "product": "AI2501",
+      "vendor": "mumu",
+      "vendor_evidence": [
+        "mumu"
+      ]
+    },
+    "existing_install": {
+      "active_magisk": false,
+      "config_path": null,
+      "detected": false,
+      "manifest_path": null,
+      "manifest_present": false,
+      "ordinary_magisk": false,
+      "system_mode": false
+    },
+    "generated_at": "2026-10-08T14:00:06Z",
+    "init": {
+      "candidate_directories": [
+        {
+          "exists": true,
+          "kind": "directory",
+          "mode": "0755",
+          "path": "/system/etc/init",
+          "permission_writable": true,
+          "readable": true,
+          "resolved_path": "/system/etc/init",
+          "uid": 0
+        },
+        {
+          "exists": true,
+          "kind": "directory",
+          "mode": "0755",
+          "path": "/system/etc/init/hw",
+          "permission_writable": true,
+          "readable": true,
+          "resolved_path": "/system/etc/init/hw",
+          "uid": 0
+        }
+      ],
+      "import_proof": "proven",
+      "selected_directory": "/system/etc/init"
+    },
+    "layout": {
+      "avb_state": "unknown",
+      "device_mapper": {
+        "layers": [],
+        "probe": "not_applicable"
+      },
+      "dm_verity": false,
+      "dynamic_partitions": false,
+      "ext4_features": [],
+      "ext4_features_method": "superblock",
+      "ext4_features_probe": "observed",
+      "ext4_ro_compat_flags": 1131,
+      "overlayfs": false,
+      "shared_blocks": false,
+      "slot_suffix": "",
+      "system_fs_type": "ext4",
+      "system_source": "/dev/block/sda6",
+      "system_target": "/system",
+      "system_writable_backing": true,
+      "system_writable_view": true
+    },
+    "mounts": [
+      {
+        "exists": true,
+        "fs_type": "tmpfs",
+        "major_minor": "0:16",
+        "mount_options": [
+          "ro",
+          "nodev",
+          "relatime"
+        ],
+        "mount_point": "/",
+        "resolved_path": "/",
+        "root": "/",
+        "source": "tmpfs",
+        "super_options": [
+          "rw",
+          "seclabel"
+        ],
+        "target": "/",
+        "writable_backing": true,
+        "writable_view": false
+      },
+      {
+        "exists": true,
+        "fs_type": "ext4",
+        "major_minor": "8:6",
+        "mount_options": [
+          "rw",
+          "noatime"
+        ],
+        "mount_point": "/system",
+        "resolved_path": "/system",
+        "root": "/",
+        "source": "/dev/block/sda6",
+        "super_options": [
+          "rw",
+          "seclabel"
+        ],
+        "target": "/system",
+        "writable_backing": true,
+        "writable_view": true
+      },
+      {
+        "exists": true,
+        "fs_type": "ext4",
+        "major_minor": "8:6",
+        "mount_options": [
+          "rw",
+          "noatime"
+        ],
+        "mount_point": "/system",
+        "resolved_path": "/system/vendor",
+        "root": "/",
+        "source": "/dev/block/sda6",
+        "super_options": [
+          "rw",
+          "seclabel"
+        ],
+        "target": "/vendor",
+        "writable_backing": true,
+        "writable_view": true
+      },
+      {
+        "exists": true,
+        "fs_type": "tmpfs",
+        "major_minor": "0:16",
+        "mount_options": [
+          "ro",
+          "nodev",
+          "relatime"
+        ],
+        "mount_point": "/",
+        "resolved_path": "/odm",
+        "root": "/",
+        "source": "tmpfs",
+        "super_options": [
+          "rw",
+          "seclabel"
+        ],
+        "target": "/odm",
+        "writable_backing": true,
+        "writable_view": false
+      },
+      {
+        "exists": true,
+        "fs_type": "ext4",
+        "major_minor": "8:6",
+        "mount_options": [
+          "rw",
+          "noatime"
+        ],
+        "mount_point": "/system",
+        "resolved_path": "/system/product",
+        "root": "/",
+        "source": "/dev/block/sda6",
+        "super_options": [
+          "rw",
+          "seclabel"
+        ],
+        "target": "/product",
+        "writable_backing": true,
+        "writable_view": true
+      },
+      {
+        "exists": true,
+        "fs_type": "ext4",
+        "major_minor": "8:6",
+        "mount_options": [
+          "rw",
+          "noatime"
+        ],
+        "mount_point": "/system",
+        "resolved_path": "/system/system_ext",
+        "root": "/",
+        "source": "/dev/block/sda6",
+        "super_options": [
+          "rw",
+          "seclabel"
+        ],
+        "target": "/system_ext",
+        "writable_backing": true,
+        "writable_view": true
+      }
+    ],
+    "persistence": {
+      "backing_write_probe": "passed",
+      "cold_boots": 3,
+      "host_restarts": 0,
+      "proven": true
+    },
+    "probe_version": "1.0.0",
+    "recovery": {
+      "adapter_id": "generic-in-guest",
+      "backup_digest": "1f72e7a21ea85848a2b05bd556d5ae4c8b5286f2027bcdd4f10f6c5c94d3834b",
+      "backup_location": "/c/Users/Jordan/Documents/KitsuneMagisk/out/pr8/mumu12-backups/qualified-policy",
+      "instance_identity_sha256": "d6010223cb84fb5a3063d28b2677dcec164c463182070826ff0b1591065ddb50",
+      "qualification_record": "/kitsune-pr8/mumu12/qualification-policy.json",
+      "qualification_sha256": "7192b0c21e9ec0631414fc655191c6bb0bd6b11c70168bd98a6c0e4aa3a5b248",
+      "restore_command": "/kitsune-pr8/mumu12/restore.sh /c/Users/Jordan/Documents/KitsuneMagisk/out/pr8/mumu12-backups/qualified-policy",
+      "snapshot_id": "mumu12-pr8-policy-20261008",
+      "verified": true
+    },
+    "schema_version": 1,
+    "selinux": {
+      "enabled": true,
+      "policy_candidates": [
+        {
+          "exists": true,
+          "kind": "file",
+          "mode": "0644",
+          "path": "/sepolicy",
+          "permission_writable": false,
+          "readable": true,
+          "resolved_path": "/sepolicy",
+          "sha256": "438989426d2f1200db8ec9e06861cff39e3346e89650c40f42c7920bbfa2e4f5",
+          "size": 508390,
+          "uid": 0
+        },
+        {
+          "exists": true,
+          "kind": "file",
+          "mode": "0644",
+          "path": "/vendor/etc/selinux/precompiled_sepolicy",
+          "permission_writable": true,
+          "readable": true,
+          "resolved_path": "/system/vendor/etc/selinux/precompiled_sepolicy",
+          "sha256": "438989426d2f1200db8ec9e06861cff39e3346e89650c40f42c7920bbfa2e4f5",
+          "size": 508390,
+          "uid": 0
+        },
+        {
+          "exists": true,
+          "kind": "file",
+          "mode": "0644",
+          "path": "/system/etc/selinux/plat_sepolicy.cil",
+          "permission_writable": true,
+          "readable": true,
+          "resolved_path": "/system/etc/selinux/plat_sepolicy.cil",
+          "sha256": "f9ca1376d184dfc33676bf5bd4ab3e1216c105a4ff0ecbb7b2b10623f49ada90",
+          "size": 1816722,
+          "uid": 0
+        },
+        {
+          "exists": true,
+          "kind": "directory",
+          "mode": "0755",
+          "path": "/system/etc/selinux/mapping",
+          "permission_writable": true,
+          "readable": true,
+          "resolved_path": "/system/etc/selinux/mapping",
+          "sha256": null,
+          "size": null,
+          "uid": 0
+        },
+        {
+          "exists": true,
+          "kind": "file",
+          "mode": "0644",
+          "path": "/vendor/etc/selinux/vendor_sepolicy.cil",
+          "permission_writable": true,
+          "readable": true,
+          "resolved_path": "/system/vendor/etc/selinux/vendor_sepolicy.cil",
+          "sha256": "c3e7b35512487eab0730483b2aaa1820b4b95afa4e1be212dfbbdf2ebcf714a5",
+          "size": 87954,
+          "uid": 0
+        },
+        {
+          "exists": true,
+          "kind": "file",
+          "mode": "0644",
+          "path": "/vendor/etc/selinux/precompiled_sepolicy.plat_sepolicy_and_mapping.sha256",
+          "permission_writable": true,
+          "readable": true,
+          "resolved_path": "/system/vendor/etc/selinux/precompiled_sepolicy.plat_sepolicy_and_mapping.sha256",
+          "sha256": "c3cec40bebac88921a7a74f743535f4685189cf46dd433ad9253e6e40b14ac81",
+          "size": 65,
+          "uid": 0
+        }
+      ],
+      "state": "permissive",
+      "strategy": "monolithic"
+    },
+    "source": {
+      "kind": "adb",
+      "probe_sha256": "7073264a9d95455be612fb12847c70f82985b1e4ed637dc3596933b21260b177",
+      "read_only": true,
+      "repository_commit": "99ab2c55d4441bab2dbd3327e7705ac1d43abe47",
+      "repository_dirty": false,
+      "serial_sha256": "ce4d2f4767259d0c1dfad70e69576aba6d80165c57012a63ab84afa2cb29fcf5"
+    },
+    "staging": {
+      "available_bytes": 126410706944,
+      "path": "/data/local/tmp",
+      "required_bytes": 33554432,
+      "sufficient": true
+    }
+  },
+  "lifecycle": {
+    "install": "passed",
+    "cold_boots": 3,
+    "upgrade": "not_run",
+    "reinstall": "not_run",
+    "module_smoke": "passed",
+    "root_policy_smoke": "passed",
+    "uninstall": "passed",
+    "snapshot_restore": "passed"
+  },
+  "notes": [
+    "mumu12-windows 6.8.0; exact source/artifact and detailed limits: docs/system-mode/pr8-windows-2026-10-08.md.",
+    "Disposable Global Android 12 instance 2 used vendor root and writable private system-difference backing. Existing Android 12 instance 1 was not modified; Android 15 instance 0 was excluded.",
+    "The exact APK passed manager install, three vendor-root-off cold boots, module install/disable/re-enable/remove, and 48 ordinary-shell SU requests with eight clients. The owned su alias was in /system/xbin and matched the installed Magisk binary.",
+    "Reinstall qualification rejected the candidate before guest writes: 43515904 bytes available versus a 47713785-byte payload lower bound. Existing BOOT_VERIFIED state remained intact. Neither same-version reinstall nor a distinct-version upgrade is claimed on this stock-capacity target.",
+    "Manager Complete uninstall removed the APK and daemon. A read-only observer verified owned system/rescue removal, preservation of an unowned /data/adb sentinel and unchanged vendor policy. The next cold boot had no manager, daemon, runtime or working su.",
+    "Current-line b416c8ddd900023c8b9dd8d5569395d91bd0dc4c / APK 7a915aff4437f55f7bac4a5b004601c66d80b18a87c34952a6ce30d776c9e8f8 failed at runtime metadata normalization on the same restored baseline. Rollback and complete offline-hash-verified external restore passed; instance 2 is stopped.",
+    "The guest clock was approximately 31 seconds behind the host. A not-yet-valid lease was rejected; waiting within its existing lifetime allowed the unchanged artifact. No lifetime check was relaxed.",
+    "Vendor-root-off runtime boot IDs: 5f9a906f-18d4-44a0-bb85-1ff465039ff4, 3d3a794e-0434-4c9b-8e70-d64a238eac6c, e3a175c5-d9ca-41da-ae82-5355f0706e4e."
+  ]
+}

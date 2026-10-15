@@ -2280,12 +2280,30 @@ class SystemModeTransactionTest(unittest.TestCase):
                 set -e
                 test "$status" = 1
                 chmod 000 "$SM_PROC_ROOT/456/comm"
+                # Root and elevated Windows hosts can bypass DAC. Exercise
+                # that branch where supported, and always inject a failed
+                # read from the still-present process below.
+                if [ ! -r "$SM_PROC_ROOT/456/comm" ]; then
+                  set +e
+                  sm_magisk_daemon_running
+                  status=$?
+                  set -e
+                  test "$status" = 2
+                fi
+                chmod 0600 "$SM_PROC_ROOT/456/comm"
+                failed_comm_read() {
+                  if [ "$1" = cat ] && [ "$2" = "$SM_PROC_ROOT/456/comm" ]; then
+                    return 1
+                  fi
+                  bb "$@"
+                }
+                SM_BB=failed_comm_read
                 set +e
                 sm_magisk_daemon_running
                 status=$?
                 set -e
                 test "$status" = 2
-                chmod 0600 "$SM_PROC_ROOT/456/comm"
+                SM_BB=bb
                 rm "$SM_PROC_ROOT/456/comm"
                 set +e
                 sm_magisk_daemon_running

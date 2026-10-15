@@ -1,0 +1,2212 @@
+{
+  "schema": 1,
+  "scope": "Tracked app/native/scripts/stub delta against each stated upstream base; generated files, docs and host audit tools excluded. Different upstream generations make line counts descriptive, not a correctness or parity score.",
+  "observations": [
+    {
+      "line": "historical",
+      "base": "154121f3dd92e67a3d8e3f518684932c0f9783e6",
+      "tip": "8e854f378ebabe427f02d65615ddee57af5b53d0",
+      "path_count": 172,
+      "native_path_count": 82,
+      "added": 5416,
+      "removed": 4384,
+      "patch_sha256": "67975638523d35e64776e30cdd3a2eefaead30788fce707fb0616e733f6a2af4",
+      "paths": [
+        {
+          "path": "app/build.gradle.kts",
+          "added": 8,
+          "removed": 7
+        },
+        {
+          "path": "app/proguard-rules.pro",
+          "added": 11,
+          "removed": 22
+        },
+        {
+          "path": "app/shared/src/main/AndroidManifest.xml",
+          "added": 5,
+          "removed": 3
+        },
+        {
+          "path": "app/shared/src/main/java/com/topjohnwu/magisk/ProviderInstaller.java",
+          "added": 10,
+          "removed": 1
+        },
+        {
+          "path": "app/shared/src/main/java/com/topjohnwu/magisk/utils/APKInstall.java",
+          "added": 0,
+          "removed": 10
+        },
+        {
+          "path": "app/src/main/AndroidManifest.xml",
+          "added": 5,
+          "removed": 2
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/arch/BaseViewModel.kt",
+          "added": 3,
+          "removed": 1
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/Config.kt",
+          "added": 22,
+          "removed": 7
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/Const.kt",
+          "added": 4,
+          "removed": 2
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/Info.kt",
+          "added": 2,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/JobService.kt",
+          "added": 62,
+          "removed": 19
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/Receiver.kt",
+          "added": 9,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/Service.kt",
+          "added": 38,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/data/NetworkServices.kt",
+          "added": 5,
+          "removed": 1
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/data/SuLogDao.kt",
+          "added": 6,
+          "removed": 2
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/data/magiskdb/PolicyDao.kt",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/di/ServiceLocator.kt",
+          "added": 2,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/download/DownloadEngine.kt",
+          "added": 373,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/download/DownloadService.kt",
+          "added": 0,
+          "removed": 220
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/download/NotificationService.kt",
+          "added": 0,
+          "removed": 128
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/download/Subject.kt",
+          "added": 16,
+          "removed": 16
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/ktx/XJVM.kt",
+          "added": 36,
+          "removed": 2
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/model/module/LocalModule.kt",
+          "added": 3,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/su/TestHandler.kt",
+          "added": 3,
+          "removed": 6
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/tasks/FlashZip.kt",
+          "added": 4,
+          "removed": 4
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/tasks/HideAPK.kt",
+          "added": 6,
+          "removed": 4
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/tasks/MagiskInstaller.kt",
+          "added": 34,
+          "removed": 25
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/utils/BiometricHelper.kt",
+          "added": 58,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/utils/Locales.kt",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/utils/MediaStoreUtils.kt",
+          "added": 0,
+          "removed": 21
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/utils/ShellInit.kt",
+          "added": 7,
+          "removed": 1
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/utils/ZipUtils.kt",
+          "added": 4,
+          "removed": 3
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/databinding/DataBindingAdapters.kt",
+          "added": 11,
+          "removed": 2
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/databinding/MergeObservableList.kt",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/dialog/ManagerInstallDialog.kt",
+          "added": 2,
+          "removed": 2
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/dialog/OnlineModuleInstallDialog.kt",
+          "added": 2,
+          "removed": 5
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/events/BiometricEvent.kt",
+          "added": 38,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/MainActivity.kt",
+          "added": 0,
+          "removed": 23
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/SplashActivity.kt",
+          "added": 49,
+          "removed": 18
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/deny/AppProcessInfo.kt",
+          "added": 7,
+          "removed": 2
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/deny/DenyListFragment.kt",
+          "added": 3,
+          "removed": 1
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/deny/DenyListRvItem.kt",
+          "added": 2,
+          "removed": 2
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/deny/DenyListViewModel.kt",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/flash/FlashFragment.kt",
+          "added": 11,
+          "removed": 5
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/flash/FlashViewModel.kt",
+          "added": 4,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/home/DeveloperItem.kt",
+          "added": 12,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/home/HomeFragment.kt",
+          "added": 2,
+          "removed": 2
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/install/InstallViewModel.kt",
+          "added": 4,
+          "removed": 2
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/module/ActionFragment.kt",
+          "added": 107,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/module/ActionViewModel.kt",
+          "added": 88,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/module/ModuleRvItem.kt",
+          "added": 2,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/module/ModuleViewModel.kt",
+          "added": 6,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/settings/SettingsItems.kt",
+          "added": 51,
+          "removed": 22
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/settings/SettingsViewModel.kt",
+          "added": 12,
+          "removed": 2
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/superuser/SuperuserViewModel.kt",
+          "added": 11,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/surequest/SuRequestViewModel.kt",
+          "added": 8,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/view/Notifications.kt",
+          "added": 2,
+          "removed": 2
+        },
+        {
+          "path": "app/src/main/res/drawable/ic_action_md2.xml",
+          "added": 5,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/res/drawable/ic_logo.xml",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "app/src/main/res/drawable/ic_magisk.xml",
+          "added": 307,
+          "removed": 18
+        },
+        {
+          "path": "app/src/main/res/drawable/ic_magisk_outline.xml",
+          "added": 247,
+          "removed": 18
+        },
+        {
+          "path": "app/src/main/res/drawable/ic_magisk_padded.xml",
+          "added": 307,
+          "removed": 18
+        },
+        {
+          "path": "app/src/main/res/layout/fragment_action_md2.xml",
+          "added": 68,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/res/layout/fragment_home_md2.xml",
+          "added": 9,
+          "removed": 1
+        },
+        {
+          "path": "app/src/main/res/layout/fragment_install_md2.xml",
+          "added": 8,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/res/layout/item_module_md2.xml",
+          "added": 21,
+          "removed": 1
+        },
+        {
+          "path": "app/src/main/res/navigation/main.xml",
+          "added": 21,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/res/raw/manager.sh",
+          "added": 339,
+          "removed": 3
+        },
+        {
+          "path": "app/src/main/res/values-ru/strings.xml",
+          "added": 23,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/res/values-tr/strings.xml",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "app/src/main/res/values-v34/resources.xml",
+          "added": 4,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/res/values-vi/strings.xml",
+          "added": 20,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/res/values-zh-rCN/strings.xml",
+          "added": 16,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/res/values-zh-rTW/strings.xml",
+          "added": 20,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/res/values/arrays.xml",
+          "added": 6,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/res/values/colors.xml",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "app/src/main/res/values/resources.xml",
+          "added": 2,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/res/values/strings.xml",
+          "added": 23,
+          "removed": 0
+        },
+        {
+          "path": "native/build.gradle.kts",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "native/src/Android.mk",
+          "added": 5,
+          "removed": 7
+        },
+        {
+          "path": "native/src/Application.mk",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "native/src/Cargo.lock",
+          "added": 45,
+          "removed": 29
+        },
+        {
+          "path": "native/src/Cargo.toml",
+          "added": 3,
+          "removed": 1
+        },
+        {
+          "path": "native/src/base/Android.mk",
+          "added": 2,
+          "removed": 1
+        },
+        {
+          "path": "native/src/base/cus.cpp",
+          "added": 62,
+          "removed": 0
+        },
+        {
+          "path": "native/src/base/cus.hpp",
+          "added": 10,
+          "removed": 0
+        },
+        {
+          "path": "native/src/base/cxx_extern.rs",
+          "added": 2,
+          "removed": 3
+        },
+        {
+          "path": "native/src/base/files.cpp",
+          "added": 12,
+          "removed": 0
+        },
+        {
+          "path": "native/src/base/files.hpp",
+          "added": 1,
+          "removed": 0
+        },
+        {
+          "path": "native/src/base/include/base.hpp",
+          "added": 2,
+          "removed": 1
+        },
+        {
+          "path": "native/src/base/include/stream.hpp",
+          "added": 26,
+          "removed": 37
+        },
+        {
+          "path": "native/src/base/lib.rs",
+          "added": 2,
+          "removed": 0
+        },
+        {
+          "path": "native/src/base/logging.cpp",
+          "added": 3,
+          "removed": 0
+        },
+        {
+          "path": "native/src/base/logging.hpp",
+          "added": 2,
+          "removed": 0
+        },
+        {
+          "path": "native/src/base/logging.rs",
+          "added": 5,
+          "removed": 203
+        },
+        {
+          "path": "native/src/base/misc.cpp",
+          "added": 32,
+          "removed": 0
+        },
+        {
+          "path": "native/src/base/misc.hpp",
+          "added": 6,
+          "removed": 3
+        },
+        {
+          "path": "native/src/base/result.rs",
+          "added": 195,
+          "removed": 0
+        },
+        {
+          "path": "native/src/base/stream.cpp",
+          "added": 47,
+          "removed": 105
+        },
+        {
+          "path": "native/src/boot/Cargo.toml",
+          "added": 2,
+          "removed": 0
+        },
+        {
+          "path": "native/src/boot/bootimg.cpp",
+          "added": 4,
+          "removed": 4
+        },
+        {
+          "path": "native/src/boot/compress.cpp",
+          "added": 23,
+          "removed": 16
+        },
+        {
+          "path": "native/src/boot/cpio.rs",
+          "added": 2,
+          "removed": 2
+        },
+        {
+          "path": "native/src/boot/magiskboot.hpp",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "native/src/boot/main.cpp",
+          "added": 11,
+          "removed": 3
+        },
+        {
+          "path": "native/src/boot/payload.rs",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "native/src/boot/ramdisk.rs",
+          "added": 0,
+          "removed": 4
+        },
+        {
+          "path": "native/src/boot/sign.rs",
+          "added": 24,
+          "removed": 1
+        },
+        {
+          "path": "native/src/core/applets.cpp",
+          "added": 3,
+          "removed": 3
+        },
+        {
+          "path": "native/src/core/bootstages.cpp",
+          "added": 33,
+          "removed": 46
+        },
+        {
+          "path": "native/src/core/daemon.cpp",
+          "added": 41,
+          "removed": 36
+        },
+        {
+          "path": "native/src/core/db.cpp",
+          "added": 7,
+          "removed": 4
+        },
+        {
+          "path": "native/src/core/deny/cli.cpp",
+          "added": 52,
+          "removed": 23
+        },
+        {
+          "path": "native/src/core/deny/deny.hpp",
+          "added": 13,
+          "removed": 0
+        },
+        {
+          "path": "native/src/core/deny/ptrace.cpp",
+          "added": 633,
+          "removed": 0
+        },
+        {
+          "path": "native/src/core/deny/revert.cpp",
+          "added": 234,
+          "removed": 14
+        },
+        {
+          "path": "native/src/core/deny/utils.cpp",
+          "added": 193,
+          "removed": 23
+        },
+        {
+          "path": "native/src/core/include/core.hpp",
+          "added": 27,
+          "removed": 4
+        },
+        {
+          "path": "native/src/core/include/db.hpp",
+          "added": 12,
+          "removed": 1
+        },
+        {
+          "path": "native/src/core/magisk.cpp",
+          "added": 70,
+          "removed": 3
+        },
+        {
+          "path": "native/src/core/module.cpp",
+          "added": 263,
+          "removed": 157
+        },
+        {
+          "path": "native/src/core/node.hpp",
+          "added": 16,
+          "removed": 20
+        },
+        {
+          "path": "native/src/core/package.cpp",
+          "added": 2,
+          "removed": 1
+        },
+        {
+          "path": "native/src/core/resetprop/persist.rs",
+          "added": 5,
+          "removed": 5
+        },
+        {
+          "path": "native/src/core/selinux.cpp",
+          "added": 4,
+          "removed": 0
+        },
+        {
+          "path": "native/src/core/su/connect.cpp",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "native/src/core/su/su_daemon.cpp",
+          "added": 7,
+          "removed": 1
+        },
+        {
+          "path": "native/src/core/zygisk/api.hpp",
+          "added": 0,
+          "removed": 396
+        },
+        {
+          "path": "native/src/core/zygisk/entry.cpp",
+          "added": 0,
+          "removed": 236
+        },
+        {
+          "path": "native/src/core/zygisk/gen_jni_hooks.py",
+          "added": 0,
+          "removed": 257
+        },
+        {
+          "path": "native/src/core/zygisk/hook.cpp",
+          "added": 0,
+          "removed": 592
+        },
+        {
+          "path": "native/src/core/zygisk/jni_hooks.hpp",
+          "added": 0,
+          "removed": 308
+        },
+        {
+          "path": "native/src/core/zygisk/main.cpp",
+          "added": 0,
+          "removed": 98
+        },
+        {
+          "path": "native/src/core/zygisk/module.cpp",
+          "added": 0,
+          "removed": 466
+        },
+        {
+          "path": "native/src/core/zygisk/module.hpp",
+          "added": 0,
+          "removed": 291
+        },
+        {
+          "path": "native/src/core/zygisk/zygisk.hpp",
+          "added": 0,
+          "removed": 60
+        },
+        {
+          "path": "native/src/exported_sym.txt",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "native/src/external/Android.mk",
+          "added": 19,
+          "removed": 13
+        },
+        {
+          "path": "native/src/external/_xDL",
+          "added": 1,
+          "removed": 0
+        },
+        {
+          "path": "native/src/external/busybox",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "native/src/external/cxx-rs",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "native/src/external/lsplt",
+          "added": 0,
+          "removed": 1
+        },
+        {
+          "path": "native/src/external/parallel-hashmap",
+          "added": 1,
+          "removed": 0
+        },
+        {
+          "path": "native/src/external/system_properties",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "native/src/include/consts.hpp",
+          "added": 13,
+          "removed": 6
+        },
+        {
+          "path": "native/src/include/consts.rs",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "native/src/init/getinfo.cpp",
+          "added": 1,
+          "removed": 7
+        },
+        {
+          "path": "native/src/init/init.cpp",
+          "added": 4,
+          "removed": 0
+        },
+        {
+          "path": "native/src/init/init.hpp",
+          "added": 1,
+          "removed": 0
+        },
+        {
+          "path": "native/src/init/lib.rs",
+          "added": 13,
+          "removed": 0
+        },
+        {
+          "path": "native/src/init/logging.rs",
+          "added": 27,
+          "removed": 31
+        },
+        {
+          "path": "native/src/init/mount.cpp",
+          "added": 79,
+          "removed": 11
+        },
+        {
+          "path": "native/src/init/rootdir.cpp",
+          "added": 32,
+          "removed": 34
+        },
+        {
+          "path": "native/src/init/rootdir.rs",
+          "added": 37,
+          "removed": 0
+        },
+        {
+          "path": "native/src/init/selinux.cpp",
+          "added": 10,
+          "removed": 1
+        },
+        {
+          "path": "native/src/init/twostage.cpp",
+          "added": 32,
+          "removed": 5
+        },
+        {
+          "path": "native/src/lto_fix.lds",
+          "added": 0,
+          "removed": 12
+        },
+        {
+          "path": "native/src/sepolicy/policydb.cpp",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "native/src/sepolicy/rules.cpp",
+          "added": 11,
+          "removed": 0
+        },
+        {
+          "path": "native/src/sepolicy/statement.cpp",
+          "added": 1,
+          "removed": 0
+        },
+        {
+          "path": "scripts/addon.d.sh",
+          "added": 65,
+          "removed": 39
+        },
+        {
+          "path": "scripts/avd_magisk.sh",
+          "added": 1,
+          "removed": 3
+        },
+        {
+          "path": "scripts/avd_test.sh",
+          "added": 48,
+          "removed": 40
+        },
+        {
+          "path": "scripts/boot_patch.sh",
+          "added": 13,
+          "removed": 7
+        },
+        {
+          "path": "scripts/flash_script.sh",
+          "added": 51,
+          "removed": 9
+        },
+        {
+          "path": "scripts/uninstaller.sh",
+          "added": 103,
+          "removed": 2
+        },
+        {
+          "path": "scripts/util_functions.sh",
+          "added": 61,
+          "removed": 7
+        },
+        {
+          "path": "stub/build.gradle.kts",
+          "added": 2,
+          "removed": 3
+        },
+        {
+          "path": "stub/proguard-rules.pro",
+          "added": 7,
+          "removed": 9
+        },
+        {
+          "path": "stub/src/main/AndroidManifest.xml",
+          "added": 2,
+          "removed": 0
+        },
+        {
+          "path": "stub/src/main/java/com/topjohnwu/magisk/DownloadActivity.java",
+          "added": 2,
+          "removed": 4
+        },
+        {
+          "path": "stub/src/main/java/com/topjohnwu/magisk/DynLoad.java",
+          "added": 2,
+          "removed": 1
+        }
+      ]
+    },
+    {
+      "line": "current",
+      "base": "154121f3dd92e67a3d8e3f518684932c0f9783e6",
+      "tip": "b416c8ddd900023c8b9dd8d5569395d91bd0dc4c",
+      "path_count": 192,
+      "native_path_count": 84,
+      "added": 9721,
+      "removed": 4868,
+      "patch_sha256": "c4c99136473f1017ced545e97058094f44864630b7bf8ee0477f18ddb3b9c90c",
+      "paths": [
+        {
+          "path": "app/build.gradle.kts",
+          "added": 10,
+          "removed": 7
+        },
+        {
+          "path": "app/proguard-rules.pro",
+          "added": 11,
+          "removed": 22
+        },
+        {
+          "path": "app/shared/src/main/AndroidManifest.xml",
+          "added": 5,
+          "removed": 3
+        },
+        {
+          "path": "app/shared/src/main/java/com/topjohnwu/magisk/ProviderInstaller.java",
+          "added": 10,
+          "removed": 1
+        },
+        {
+          "path": "app/shared/src/main/java/com/topjohnwu/magisk/utils/APKInstall.java",
+          "added": 151,
+          "removed": 70
+        },
+        {
+          "path": "app/src/main/AndroidManifest.xml",
+          "added": 3,
+          "removed": 2
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/arch/BaseViewModel.kt",
+          "added": 3,
+          "removed": 1
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/App.kt",
+          "added": 1,
+          "removed": 2
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/Config.kt",
+          "added": 27,
+          "removed": 15
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/Const.kt",
+          "added": 7,
+          "removed": 5
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/CoroutineScopes.kt",
+          "added": 8,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/Info.kt",
+          "added": 61,
+          "removed": 4
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/JobService.kt",
+          "added": 127,
+          "removed": 18
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/Receiver.kt",
+          "added": 20,
+          "removed": 4
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/Service.kt",
+          "added": 38,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/base/BaseActivity.kt",
+          "added": 15,
+          "removed": 2
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/data/NetworkServices.kt",
+          "added": 5,
+          "removed": 1
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/data/SuLogDao.kt",
+          "added": 6,
+          "removed": 2
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/data/magiskdb/PolicyDao.kt",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/di/Networking.kt",
+          "added": 8,
+          "removed": 1
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/di/ServiceLocator.kt",
+          "added": 2,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/download/DownloadEngine.kt",
+          "added": 401,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/download/DownloadService.kt",
+          "added": 0,
+          "removed": 220
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/download/NotificationService.kt",
+          "added": 0,
+          "removed": 128
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/download/Subject.kt",
+          "added": 17,
+          "removed": 16
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/ktx/XJVM.kt",
+          "added": 58,
+          "removed": 2
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/model/UpdateInfo.kt",
+          "added": 2,
+          "removed": 1
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/model/module/LocalModule.kt",
+          "added": 3,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/repository/NetworkService.kt",
+          "added": 22,
+          "removed": 34
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/repository/UpdateCheckResult.kt",
+          "added": 85,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/su/TestHandler.kt",
+          "added": 19,
+          "removed": 9
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/tasks/FlashZip.kt",
+          "added": 4,
+          "removed": 4
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/tasks/HideAPK.kt",
+          "added": 116,
+          "removed": 53
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/tasks/MagiskInstaller.kt",
+          "added": 115,
+          "removed": 52
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/utils/BiometricHelper.kt",
+          "added": 58,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/utils/Locales.kt",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/utils/MediaStoreUtils.kt",
+          "added": 0,
+          "removed": 21
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/utils/NetworkObserver.kt",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/utils/ShellInit.kt",
+          "added": 7,
+          "removed": 1
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/core/utils/ZipUtils.kt",
+          "added": 4,
+          "removed": 3
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/databinding/DataBindingAdapters.kt",
+          "added": 11,
+          "removed": 2
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/databinding/MergeObservableList.kt",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/dialog/ManagerInstallDialog.kt",
+          "added": 11,
+          "removed": 8
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/dialog/OnlineModuleInstallDialog.kt",
+          "added": 2,
+          "removed": 5
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/dialog/SystemModeWarningDialog.kt",
+          "added": 25,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/events/BiometricEvent.kt",
+          "added": 38,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/MainActivity.kt",
+          "added": 7,
+          "removed": 24
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/SplashActivity.kt",
+          "added": 59,
+          "removed": 18
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/deny/AppProcessInfo.kt",
+          "added": 7,
+          "removed": 2
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/deny/DenyListFragment.kt",
+          "added": 3,
+          "removed": 1
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/deny/DenyListRvItem.kt",
+          "added": 2,
+          "removed": 2
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/deny/DenyListViewModel.kt",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/flash/FlashFragment.kt",
+          "added": 11,
+          "removed": 5
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/flash/FlashViewModel.kt",
+          "added": 4,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/home/DeveloperItem.kt",
+          "added": 12,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/home/HomeFragment.kt",
+          "added": 2,
+          "removed": 2
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/home/HomeViewModel.kt",
+          "added": 25,
+          "removed": 3
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/install/InstallViewModel.kt",
+          "added": 67,
+          "removed": 12
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/module/ActionFragment.kt",
+          "added": 107,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/module/ActionViewModel.kt",
+          "added": 88,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/module/ModuleRvItem.kt",
+          "added": 2,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/module/ModuleViewModel.kt",
+          "added": 6,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/settings/SettingsItems.kt",
+          "added": 69,
+          "removed": 25
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/settings/SettingsViewModel.kt",
+          "added": 12,
+          "removed": 2
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/superuser/SuperuserViewModel.kt",
+          "added": 11,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/surequest/SuRequestActivity.kt",
+          "added": 4,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/ui/surequest/SuRequestViewModel.kt",
+          "added": 8,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/java/com/topjohnwu/magisk/view/Notifications.kt",
+          "added": 2,
+          "removed": 2
+        },
+        {
+          "path": "app/src/main/res/drawable/ic_action_md2.xml",
+          "added": 5,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/res/drawable/ic_logo.xml",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "app/src/main/res/drawable/ic_magisk.xml",
+          "added": 307,
+          "removed": 18
+        },
+        {
+          "path": "app/src/main/res/drawable/ic_magisk_outline.xml",
+          "added": 247,
+          "removed": 18
+        },
+        {
+          "path": "app/src/main/res/drawable/ic_magisk_padded.xml",
+          "added": 307,
+          "removed": 18
+        },
+        {
+          "path": "app/src/main/res/layout/fragment_action_md2.xml",
+          "added": 68,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/res/layout/fragment_home_md2.xml",
+          "added": 9,
+          "removed": 1
+        },
+        {
+          "path": "app/src/main/res/layout/fragment_install_md2.xml",
+          "added": 8,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/res/layout/item_module_md2.xml",
+          "added": 21,
+          "removed": 1
+        },
+        {
+          "path": "app/src/main/res/navigation/main.xml",
+          "added": 21,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/res/raw/manager.sh",
+          "added": 822,
+          "removed": 24
+        },
+        {
+          "path": "app/src/main/res/values-ru/strings.xml",
+          "added": 23,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/res/values-tr/strings.xml",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "app/src/main/res/values-v34/resources.xml",
+          "added": 4,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/res/values-vi/strings.xml",
+          "added": 20,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/res/values-zh-rCN/strings.xml",
+          "added": 16,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/res/values-zh-rTW/strings.xml",
+          "added": 20,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/res/values/arrays.xml",
+          "added": 6,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/res/values/colors.xml",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "app/src/main/res/values/resources.xml",
+          "added": 2,
+          "removed": 0
+        },
+        {
+          "path": "app/src/main/res/values/strings.xml",
+          "added": 27,
+          "removed": 0
+        },
+        {
+          "path": "app/src/test/java/com/topjohnwu/magisk/core/repository/UpdateChannelPolicyTest.kt",
+          "added": 138,
+          "removed": 0
+        },
+        {
+          "path": "native/build.gradle.kts",
+          "added": 6,
+          "removed": 1
+        },
+        {
+          "path": "native/src/Android.mk",
+          "added": 12,
+          "removed": 7
+        },
+        {
+          "path": "native/src/Application.mk",
+          "added": 25,
+          "removed": 2
+        },
+        {
+          "path": "native/src/Cargo.lock",
+          "added": 45,
+          "removed": 29
+        },
+        {
+          "path": "native/src/Cargo.toml",
+          "added": 3,
+          "removed": 1
+        },
+        {
+          "path": "native/src/base/Android.mk",
+          "added": 2,
+          "removed": 1
+        },
+        {
+          "path": "native/src/base/compat/compat.cpp",
+          "added": 24,
+          "removed": 0
+        },
+        {
+          "path": "native/src/base/cus.cpp",
+          "added": 24,
+          "removed": 0
+        },
+        {
+          "path": "native/src/base/cus.hpp",
+          "added": 7,
+          "removed": 0
+        },
+        {
+          "path": "native/src/base/cxx_extern.rs",
+          "added": 2,
+          "removed": 3
+        },
+        {
+          "path": "native/src/base/files.cpp",
+          "added": 12,
+          "removed": 0
+        },
+        {
+          "path": "native/src/base/files.hpp",
+          "added": 1,
+          "removed": 0
+        },
+        {
+          "path": "native/src/base/include/base.hpp",
+          "added": 2,
+          "removed": 1
+        },
+        {
+          "path": "native/src/base/include/stream.hpp",
+          "added": 26,
+          "removed": 37
+        },
+        {
+          "path": "native/src/base/lib.rs",
+          "added": 2,
+          "removed": 0
+        },
+        {
+          "path": "native/src/base/logging.cpp",
+          "added": 3,
+          "removed": 0
+        },
+        {
+          "path": "native/src/base/logging.hpp",
+          "added": 2,
+          "removed": 0
+        },
+        {
+          "path": "native/src/base/logging.rs",
+          "added": 5,
+          "removed": 203
+        },
+        {
+          "path": "native/src/base/misc.cpp",
+          "added": 32,
+          "removed": 0
+        },
+        {
+          "path": "native/src/base/misc.hpp",
+          "added": 6,
+          "removed": 3
+        },
+        {
+          "path": "native/src/base/result.rs",
+          "added": 195,
+          "removed": 0
+        },
+        {
+          "path": "native/src/base/stream.cpp",
+          "added": 47,
+          "removed": 105
+        },
+        {
+          "path": "native/src/boot/Cargo.toml",
+          "added": 2,
+          "removed": 0
+        },
+        {
+          "path": "native/src/boot/bootimg.cpp",
+          "added": 137,
+          "removed": 60
+        },
+        {
+          "path": "native/src/boot/compress.cpp",
+          "added": 23,
+          "removed": 16
+        },
+        {
+          "path": "native/src/boot/cpio.rs",
+          "added": 4,
+          "removed": 4
+        },
+        {
+          "path": "native/src/boot/magiskboot.hpp",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "native/src/boot/main.cpp",
+          "added": 11,
+          "removed": 3
+        },
+        {
+          "path": "native/src/boot/payload.rs",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "native/src/boot/ramdisk.rs",
+          "added": 0,
+          "removed": 4
+        },
+        {
+          "path": "native/src/boot/sign.rs",
+          "added": 24,
+          "removed": 1
+        },
+        {
+          "path": "native/src/core/applets.cpp",
+          "added": 3,
+          "removed": 3
+        },
+        {
+          "path": "native/src/core/bootstages.cpp",
+          "added": 33,
+          "removed": 46
+        },
+        {
+          "path": "native/src/core/daemon.cpp",
+          "added": 41,
+          "removed": 36
+        },
+        {
+          "path": "native/src/core/db.cpp",
+          "added": 366,
+          "removed": 31
+        },
+        {
+          "path": "native/src/core/db_migrations.hpp",
+          "added": 105,
+          "removed": 0
+        },
+        {
+          "path": "native/src/core/deny/cli.cpp",
+          "added": 52,
+          "removed": 23
+        },
+        {
+          "path": "native/src/core/deny/deny.hpp",
+          "added": 13,
+          "removed": 0
+        },
+        {
+          "path": "native/src/core/deny/ptrace.cpp",
+          "added": 633,
+          "removed": 0
+        },
+        {
+          "path": "native/src/core/deny/revert.cpp",
+          "added": 221,
+          "removed": 14
+        },
+        {
+          "path": "native/src/core/deny/utils.cpp",
+          "added": 194,
+          "removed": 35
+        },
+        {
+          "path": "native/src/core/include/core.hpp",
+          "added": 27,
+          "removed": 4
+        },
+        {
+          "path": "native/src/core/include/db.hpp",
+          "added": 12,
+          "removed": 1
+        },
+        {
+          "path": "native/src/core/magisk.cpp",
+          "added": 73,
+          "removed": 3
+        },
+        {
+          "path": "native/src/core/module.cpp",
+          "added": 263,
+          "removed": 157
+        },
+        {
+          "path": "native/src/core/node.hpp",
+          "added": 16,
+          "removed": 20
+        },
+        {
+          "path": "native/src/core/package.cpp",
+          "added": 3,
+          "removed": 0
+        },
+        {
+          "path": "native/src/core/resetprop/persist.rs",
+          "added": 5,
+          "removed": 5
+        },
+        {
+          "path": "native/src/core/selinux.cpp",
+          "added": 15,
+          "removed": 3
+        },
+        {
+          "path": "native/src/core/su/connect.cpp",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "native/src/core/su/su_daemon.cpp",
+          "added": 12,
+          "removed": 2
+        },
+        {
+          "path": "native/src/core/zygisk/api.hpp",
+          "added": 0,
+          "removed": 396
+        },
+        {
+          "path": "native/src/core/zygisk/entry.cpp",
+          "added": 0,
+          "removed": 236
+        },
+        {
+          "path": "native/src/core/zygisk/gen_jni_hooks.py",
+          "added": 0,
+          "removed": 257
+        },
+        {
+          "path": "native/src/core/zygisk/hook.cpp",
+          "added": 0,
+          "removed": 592
+        },
+        {
+          "path": "native/src/core/zygisk/jni_hooks.hpp",
+          "added": 0,
+          "removed": 308
+        },
+        {
+          "path": "native/src/core/zygisk/main.cpp",
+          "added": 0,
+          "removed": 98
+        },
+        {
+          "path": "native/src/core/zygisk/module.cpp",
+          "added": 0,
+          "removed": 466
+        },
+        {
+          "path": "native/src/core/zygisk/module.hpp",
+          "added": 0,
+          "removed": 291
+        },
+        {
+          "path": "native/src/core/zygisk/zygisk.hpp",
+          "added": 0,
+          "removed": 60
+        },
+        {
+          "path": "native/src/exported_sym.txt",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "native/src/external/Android.mk",
+          "added": 19,
+          "removed": 13
+        },
+        {
+          "path": "native/src/external/_xDL",
+          "added": 1,
+          "removed": 0
+        },
+        {
+          "path": "native/src/external/busybox",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "native/src/external/cxx-rs",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "native/src/external/lsplt",
+          "added": 0,
+          "removed": 1
+        },
+        {
+          "path": "native/src/external/parallel-hashmap",
+          "added": 1,
+          "removed": 0
+        },
+        {
+          "path": "native/src/external/system_properties",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "native/src/include/consts.hpp",
+          "added": 13,
+          "removed": 6
+        },
+        {
+          "path": "native/src/include/consts.rs",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "native/src/init/getinfo.cpp",
+          "added": 1,
+          "removed": 7
+        },
+        {
+          "path": "native/src/init/init.cpp",
+          "added": 4,
+          "removed": 0
+        },
+        {
+          "path": "native/src/init/init.hpp",
+          "added": 1,
+          "removed": 0
+        },
+        {
+          "path": "native/src/init/lib.rs",
+          "added": 13,
+          "removed": 0
+        },
+        {
+          "path": "native/src/init/logging.rs",
+          "added": 32,
+          "removed": 31
+        },
+        {
+          "path": "native/src/init/mount.cpp",
+          "added": 79,
+          "removed": 11
+        },
+        {
+          "path": "native/src/init/rootdir.cpp",
+          "added": 32,
+          "removed": 34
+        },
+        {
+          "path": "native/src/init/rootdir.rs",
+          "added": 37,
+          "removed": 0
+        },
+        {
+          "path": "native/src/init/selinux.cpp",
+          "added": 10,
+          "removed": 1
+        },
+        {
+          "path": "native/src/init/twostage.cpp",
+          "added": 36,
+          "removed": 6
+        },
+        {
+          "path": "native/src/lto_fix.lds",
+          "added": 0,
+          "removed": 12
+        },
+        {
+          "path": "native/src/sepolicy/policydb.cpp",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "native/src/sepolicy/rules.cpp",
+          "added": 11,
+          "removed": 0
+        },
+        {
+          "path": "native/src/sepolicy/statement.cpp",
+          "added": 1,
+          "removed": 0
+        },
+        {
+          "path": "scripts/addon.d.sh",
+          "added": 93,
+          "removed": 42
+        },
+        {
+          "path": "scripts/avd_magisk.sh",
+          "added": 1,
+          "removed": 3
+        },
+        {
+          "path": "scripts/avd_test.sh",
+          "added": 407,
+          "removed": 99
+        },
+        {
+          "path": "scripts/boot_patch.sh",
+          "added": 13,
+          "removed": 7
+        },
+        {
+          "path": "scripts/flash_script.sh",
+          "added": 83,
+          "removed": 24
+        },
+        {
+          "path": "scripts/security_avd_test.sh",
+          "added": 144,
+          "removed": 0
+        },
+        {
+          "path": "scripts/system_mode_transaction.sh",
+          "added": 1377,
+          "removed": 0
+        },
+        {
+          "path": "scripts/system_mode_verify.sh",
+          "added": 91,
+          "removed": 0
+        },
+        {
+          "path": "scripts/uninstaller.sh",
+          "added": 141,
+          "removed": 19
+        },
+        {
+          "path": "scripts/util_functions.sh",
+          "added": 89,
+          "removed": 11
+        },
+        {
+          "path": "stub/build.gradle.kts",
+          "added": 11,
+          "removed": 8
+        },
+        {
+          "path": "stub/proguard-rules.pro",
+          "added": 7,
+          "removed": 9
+        },
+        {
+          "path": "stub/src/main/AndroidManifest.xml",
+          "added": 2,
+          "removed": 0
+        },
+        {
+          "path": "stub/src/main/java/com/topjohnwu/magisk/DownloadActivity.java",
+          "added": 71,
+          "removed": 39
+        },
+        {
+          "path": "stub/src/main/java/com/topjohnwu/magisk/DynLoad.java",
+          "added": 2,
+          "removed": 1
+        },
+        {
+          "path": "stub/src/main/java/com/topjohnwu/magisk/net/Networking.java",
+          "added": 5,
+          "removed": 1
+        },
+        {
+          "path": "stub/src/main/java/com/topjohnwu/magisk/net/Request.java",
+          "added": 8,
+          "removed": 1
+        },
+        {
+          "path": "stub/src/main/res/values/strings.xml",
+          "added": 2,
+          "removed": 0
+        }
+      ]
+    },
+    {
+      "line": "next",
+      "base": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+      "tip": "dd5ca5c12e8447344eef5e89f6080e9e2a0d04c8",
+      "path_count": 70,
+      "native_path_count": 17,
+      "added": 7600,
+      "removed": 576,
+      "patch_sha256": "0b6ba4b078165624bc2369b9116b716ef0e460de5ac1a6094f24e4a9c0b32c39",
+      "paths": [
+        {
+          "path": "app/apk/build.gradle.kts",
+          "added": 2,
+          "removed": 0
+        },
+        {
+          "path": "app/apk/src/main/java/com/topjohnwu/magisk/terminal/TerminalProcess.kt",
+          "added": 16,
+          "removed": 3
+        },
+        {
+          "path": "app/apk/src/main/java/com/topjohnwu/magisk/test/FlashIntentTest.kt",
+          "added": 91,
+          "removed": 0
+        },
+        {
+          "path": "app/apk/src/main/java/com/topjohnwu/magisk/test/TerminalTest.kt",
+          "added": 29,
+          "removed": 0
+        },
+        {
+          "path": "app/apk/src/main/java/com/topjohnwu/magisk/ui/MainActivity.kt",
+          "added": 36,
+          "removed": 9
+        },
+        {
+          "path": "app/apk/src/main/java/com/topjohnwu/magisk/ui/MainScreen.kt",
+          "added": 0,
+          "removed": 1
+        },
+        {
+          "path": "app/apk/src/main/java/com/topjohnwu/magisk/ui/flash/FlashScreen.kt",
+          "added": 4,
+          "removed": 1
+        },
+        {
+          "path": "app/apk/src/main/java/com/topjohnwu/magisk/ui/flash/FlashViewModel.kt",
+          "added": 44,
+          "removed": 9
+        },
+        {
+          "path": "app/apk/src/main/java/com/topjohnwu/magisk/ui/home/HomeScreen.kt",
+          "added": 70,
+          "removed": 53
+        },
+        {
+          "path": "app/apk/src/main/java/com/topjohnwu/magisk/ui/home/HomeViewModel.kt",
+          "added": 4,
+          "removed": 0
+        },
+        {
+          "path": "app/apk/src/main/java/com/topjohnwu/magisk/ui/install/InstallDialog.kt",
+          "added": 35,
+          "removed": 1
+        },
+        {
+          "path": "app/apk/src/main/java/com/topjohnwu/magisk/ui/install/InstallViewModel.kt",
+          "added": 26,
+          "removed": 2
+        },
+        {
+          "path": "app/apk/src/main/java/com/topjohnwu/magisk/ui/module/ModuleViewModel.kt",
+          "added": 2,
+          "removed": 2
+        },
+        {
+          "path": "app/build-logic/src/main/java/Plugin.kt",
+          "added": 45,
+          "removed": 13
+        },
+        {
+          "path": "app/build-logic/src/main/java/Setup.kt",
+          "added": 20,
+          "removed": 6
+        },
+        {
+          "path": "app/build-logic/src/main/java/Stub.kt",
+          "added": 5,
+          "removed": 3
+        },
+        {
+          "path": "app/core/build.gradle.kts",
+          "added": 5,
+          "removed": 2
+        },
+        {
+          "path": "app/core/src/main/aidl/com/topjohnwu/magisk/core/utils/IRootUtils.aidl",
+          "added": 3,
+          "removed": 0
+        },
+        {
+          "path": "app/core/src/main/java/com/topjohnwu/magisk/core/Config.kt",
+          "added": 3,
+          "removed": 1
+        },
+        {
+          "path": "app/core/src/main/java/com/topjohnwu/magisk/core/Const.kt",
+          "added": 5,
+          "removed": 1
+        },
+        {
+          "path": "app/core/src/main/java/com/topjohnwu/magisk/core/Info.kt",
+          "added": 20,
+          "removed": 1
+        },
+        {
+          "path": "app/core/src/main/java/com/topjohnwu/magisk/core/signing/SignApk.java",
+          "added": 48,
+          "removed": 36
+        },
+        {
+          "path": "app/core/src/main/java/com/topjohnwu/magisk/core/tasks/AppMigration.kt",
+          "added": 2,
+          "removed": 2
+        },
+        {
+          "path": "app/core/src/main/java/com/topjohnwu/magisk/core/tasks/FlashZip.kt",
+          "added": 4,
+          "removed": 2
+        },
+        {
+          "path": "app/core/src/main/java/com/topjohnwu/magisk/core/tasks/MagiskInstaller.kt",
+          "added": 306,
+          "removed": 21
+        },
+        {
+          "path": "app/core/src/main/java/com/topjohnwu/magisk/core/utils/RootUtils.kt",
+          "added": 98,
+          "removed": 0
+        },
+        {
+          "path": "app/core/src/main/java/com/topjohnwu/magisk/core/view/Notifications.kt",
+          "added": 16,
+          "removed": 9
+        },
+        {
+          "path": "app/core/src/main/java/com/topjohnwu/magisk/test/AdditionalTest.kt",
+          "added": 55,
+          "removed": 1
+        },
+        {
+          "path": "app/core/src/main/java/com/topjohnwu/magisk/test/Environment.kt",
+          "added": 181,
+          "removed": 5
+        },
+        {
+          "path": "app/core/src/main/java/com/topjohnwu/magisk/test/MagiskAppTest.kt",
+          "added": 42,
+          "removed": 18
+        },
+        {
+          "path": "app/core/src/main/res/values/resources.xml",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "app/core/src/main/res/values/strings.xml",
+          "added": 8,
+          "removed": 0
+        },
+        {
+          "path": "app/shared/src/main/AndroidManifest.xml",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "app/stub/build.gradle.kts",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "app/stub/src/main/java/com/topjohnwu/magisk/DownloadActivity.java",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "app/test/.gitignore",
+          "added": 1,
+          "removed": 0
+        },
+        {
+          "path": "app/test/build.gradle.kts",
+          "added": 17,
+          "removed": 1
+        },
+        {
+          "path": "app/test/src/main/AndroidManifest.xml",
+          "added": 2,
+          "removed": 2
+        },
+        {
+          "path": "app/test/src/main/cpp/CMakeLists.txt",
+          "added": 19,
+          "removed": 0
+        },
+        {
+          "path": "app/test/src/main/cpp/zygisk_test.cpp",
+          "added": 23,
+          "removed": 0
+        },
+        {
+          "path": "app/test/src/main/java/com/topjohnwu/magisk/test/AppMigrationTest.kt",
+          "added": 7,
+          "removed": 3
+        },
+        {
+          "path": "app/test/src/main/java/com/topjohnwu/magisk/test/Runners.kt",
+          "added": 4,
+          "removed": 0
+        },
+        {
+          "path": "native/src/Cargo.lock",
+          "added": 17,
+          "removed": 6
+        },
+        {
+          "path": "native/src/Cargo.toml",
+          "added": 1,
+          "removed": 0
+        },
+        {
+          "path": "native/src/base/Cargo.toml",
+          "added": 1,
+          "removed": 0
+        },
+        {
+          "path": "native/src/core/lib.rs",
+          "added": 31,
+          "removed": 3
+        },
+        {
+          "path": "native/src/core/logging.rs",
+          "added": 11,
+          "removed": 0
+        },
+        {
+          "path": "native/src/core/module.rs",
+          "added": 278,
+          "removed": 21
+        },
+        {
+          "path": "native/src/core/sqlite.cpp",
+          "added": 2,
+          "removed": 3
+        },
+        {
+          "path": "native/src/core/su/connect.rs",
+          "added": 2,
+          "removed": 1
+        },
+        {
+          "path": "native/src/core/su/daemon.rs",
+          "added": 6,
+          "removed": 1
+        },
+        {
+          "path": "native/src/core/su/su.cpp",
+          "added": 2,
+          "removed": 0
+        },
+        {
+          "path": "native/src/core/zygisk/hook.cpp",
+          "added": 85,
+          "removed": 12
+        },
+        {
+          "path": "native/src/core/zygisk/module.cpp",
+          "added": 2,
+          "removed": 0
+        },
+        {
+          "path": "native/src/core/zygisk/module.hpp",
+          "added": 1,
+          "removed": 0
+        },
+        {
+          "path": "native/src/external/cxx-rs",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "native/src/include/codegen.rs",
+          "added": 3,
+          "removed": 1
+        },
+        {
+          "path": "native/src/include/consts.hpp",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "native/src/include/consts.rs",
+          "added": 1,
+          "removed": 1
+        },
+        {
+          "path": "scripts/app_functions.sh",
+          "added": 16,
+          "removed": 1
+        },
+        {
+          "path": "scripts/avd.sh",
+          "added": 394,
+          "removed": 227
+        },
+        {
+          "path": "scripts/cuttlefish.sh",
+          "added": 159,
+          "removed": 21
+        },
+        {
+          "path": "scripts/env.py",
+          "added": 21,
+          "removed": 4
+        },
+        {
+          "path": "scripts/kitsune_system_install.sh",
+          "added": 522,
+          "removed": 0
+        },
+        {
+          "path": "scripts/kitsune_system_launcher.sh",
+          "added": 528,
+          "removed": 0
+        },
+        {
+          "path": "scripts/kitsune_system_rescue.sh",
+          "added": 126,
+          "removed": 0
+        },
+        {
+          "path": "scripts/system_mode_transaction.sh",
+          "added": 3602,
+          "removed": 0
+        },
+        {
+          "path": "scripts/system_mode_verify.sh",
+          "added": 88,
+          "removed": 0
+        },
+        {
+          "path": "scripts/test_common.sh",
+          "added": 384,
+          "removed": 44
+        },
+        {
+          "path": "scripts/util_functions.sh",
+          "added": 13,
+          "removed": 16
+        }
+      ]
+    }
+  ]
+}

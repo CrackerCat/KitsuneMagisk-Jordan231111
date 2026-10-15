@@ -1,6 +1,6 @@
 # KitsuneMagisk development roadmap
 
-> Roadmap last reconciled: 2026-09-10 UTC
+> Roadmap last reconciled: 2026-10-08 UTC
 >
 > Post-PR2 audit snapshot (not the fidelity boundary): `kitsune` at
 > `cf149fcf734539f6077cd6b349d9ffc2496c56ca`
@@ -18,7 +18,8 @@
 > Current maintained-base branch: `next-system`. PR6/PR7 v30.7 records remain historical.
 > **PR7A is complete at production runtime `0d71d9f9742f2cc258e75d74ce90c2b5d6ad3c5c`,**
 > with subsequent test-harness fixes; [GitHub PR #30](https://github.com/Jordan231111/KitsuneMagisk/pull/30)
-> records the accepted v31.0 update. PR8 is next.
+> records the accepted v31.0 update. PR8 is complete locally on `codex/pr8-parity`; its
+> [decision](docs/pr8-branch-decision.md) retains production promotion gates. PR9 is next.
 >
 > Product charter: KitsuneMagisk provides reliable Magisk root on real phones and emulators while
 > preserving useful Kitsune-specific early mounting, hiding/SuList, provider, and module capabilities.
@@ -60,7 +61,7 @@ This section is the authoritative answer to “where am I now?” The detailed P
 below remain the source of acceptance criteria; their historical audit statements are not a second
 execution order.
 
-| Order | Work unit | State on 2026-09-10 | Required next decision or exit |
+| Order | Work unit | State on 2026-10-08 | Required next decision or exit |
 |---:|---|---|---|
 | 1 | Roadmap PR1 / GitHub #22 — product charter and release freeze | **Merged** | Preserve the product charter and experimental-release boundary. |
 | 2 | Roadmap PR2 / GitHub #23 — CI product gate | **Merged** | Keep pull-request build/test publication gates green. |
@@ -73,10 +74,11 @@ execution order.
 | 9 | Roadmap PR6 — pristine official-v30.7 maintained base | **Complete on `next-system` at `eab2968c9`** | Preserve the recorded source/submodule/build identity and ordinary Magisk baseline. |
 | 10 | Roadmap PR7 — System Mode vertical slice | **Complete on the exact prepared MuMu target; experimental** | Preserve the [qualification, upgrade, module, SU, uninstall and restore evidence](docs/system-mode/mumu-pr7-2026-09-09.md). Release/phone/parity claims remain gated. |
 | 11 | Roadmap PR7A — official v31.0 prerelease update | **Complete; merged by GitHub #30** | Preserve the exact v31.0 acceptance below; proceed to PR8 parity. |
-| 12 | Roadmap PR8–PR16 — parity, remaining historical features, qualification, and release | **Not started** | Close every feature-ledger row by PR16; no historical behavior may become an unnamed follow-up. |
+| 12 | Roadmap PR8 — parity and historical feature audit | **Complete locally; production promotion remains gated** | Preserve the [port ledger](docs/port-ledger.md), exact paired outcomes and [reversible development-line decision](docs/pr8-branch-decision.md). |
+| 13 | Roadmap PR9–PR16 — remaining historical features, qualification, and release | **Not started** | Close every feature-ledger row by PR16; no historical behavior may become an unnamed follow-up. |
 
-The next engineering task is **PR8** on `next-system`: compare the v31.0-based implementation with
-the historical Kitsune feature ledger and qualify the selected line. PR7A completed the upstream
+The next planned engineering task is **PR9** on `next-system`. PR8 selected the v31.0-based
+development foundation while retaining historical-feature and release qualification gates. PR7A completed the upstream
 update and inherited lifecycle gates. PR6 established the exact v30.7 baseline, and
 [PR7 completed its prepared-MuMu lifecycle](docs/system-mode/mumu-pr7-2026-09-09.md). PR5A used only MuMu VM index 0, restored the same byte-verified baseline between
 comparisons, and separated player, ADB, Android, and Magisk failures. PR5B supplies the current-line
@@ -270,7 +272,7 @@ However, slowly merging roughly 858 upstream-only commits into the existing bran
 Use a **two-track, test-first hybrid migration**:
 
 1. Freeze automatic/stable publication, but keep the current branch named `kitsune` as the known-working System Mode reference while the port is evaluated.
-2. Characterize the current System Mode behavior with a capability probe, fixtures, install/upgrade/uninstall tests, and actual LDPlayer/MuMu/Nox/BlueStacks evidence before refactoring it.
+2. Characterize the current System Mode behavior with a capability probe, fixtures, install/upgrade/uninstall tests, and actual LDPlayer/MuMu/BlueStacks evidence before refactoring it.
 3. Apply only narrowly scoped fixes to current `kitsune`: the denylist migration, release containment, and any System Mode defect that blocks a build you still intend to ship. Do not modernize the old core twice; if current `kitsune` will not be released again, use it only for characterization and put the fix in `next-system`.
 4. At the branch cut, re-check the latest official stable (currently `v30.7`), create `next-system`
    from that audited release, and port **System Mode first** as one end-to-end vertical slice. This is
@@ -325,7 +327,7 @@ Important follow-up commits include:
 | `5d88f4c1` | Support many OEM/emulator partitions | Preserve as a tested partition-capability layer; upstream now has a redesigned Rust mount engine |
 | `fb1fd3d6` | Dynamically expose MagiskSU under `/system/bin` | Treat as adjacent Hide/SuList behavior, not a prerequisite for persistence |
 | `61926288` | Make the manager operation suspendable | Retain the coroutine/UI behavior on either branch |
-| `dfb66f0a` | Fix `/sbin` creation on NoxPlayer Android 12 | Preserve as a regression case; replace hard-coded `/sbin` assumptions where possible |
+| `dfb66f0a` | Fix `/sbin` creation on Android 12 emulators | Preserve as a regression case; replace hard-coded `/sbin` assumptions where possible |
 
 This patch family is substantial enough that a blind cherry-pick will not work, but bounded enough that a behavior-driven forward-port is realistic.
 
@@ -370,7 +372,7 @@ Time-box the first `next-system` spike to a fixed effort window, such as five to
 
 | Tier | Required environment | Likely examples to qualify | Installation approach |
 |---|---|---|---|
-| A — in-guest writable system | Vendor bootstrap root, working ADB or manager root shell, writable ext4/root image, usable init RC import, policy patch path | LDPlayer builds with Root enabled; MuMu/Nox builds exposing Root and writable system | Manager or ADB-driven Direct-System installation |
+| A — in-guest writable system | Vendor bootstrap root, working ADB or manager root shell, writable ext4/root image, usable init RC import, policy patch path | LDPlayer builds with Root enabled; MuMu builds exposing Root and writable system | Manager or ADB-driven Direct-System installation |
 | B — host-controlled image | ADB exists, but no supported in-guest root/remount; host can stop the VM, mount/rebuild/replace its Android image, and recover snapshots | BlueStacks is initially in this tier because official settings document ADB but not a supported root toggle | Host adapter that patches a copy of the image, never an undocumented in-place manager claim |
 | C — real device/custom ROM | Unlocked/recoverable device, writable ext4 system or controlled image rebuild, compatible init/SELinux, known AVB state | Legacy devices, development devices, selected custom ROMs with `addon.d` | Recovery or host-image System Mode with full stock backup |
 | D — immutable/verified layout | EROFS, active dm-verity/AVB, locked bootloader, inaccessible dynamic partition, or no recoverable write path | Many modern production devices and some emulator images | Explicitly unsupported for Direct-System; use normal boot/init_boot/vendor_boot patching when available |
@@ -379,7 +381,6 @@ Vendor documentation supports treating these as separate adapters:
 
 - LDPlayer documents independent Root and ADB switches, both disabled by default in newer installs.
 - MuMu exposes ADB tooling; MuMuPlayer for Mac even exposes separate `vmRootEnable` and `systemWritable` settings, proving that root and persistent system writability are different capabilities.
-- Nox documents a Root toggle, and the Kitsune history contains a specific NoxPlayer Android 12 `/sbin` regression fix.
 - BlueStacks officially documents ADB, but its public settings documentation does not expose an equivalent supported Root/System Writable switch. Do not advertise one-click in-guest System Mode there until a tested bootstrap or host-image adapter exists.
 
 Root access alone is insufficient. A process can be UID 0 while `/system` remains EROFS, dm-verity protected, an overlay that disappears after restart, or part of an image that the emulator updater replaces.
@@ -390,7 +391,7 @@ Make “support more emulators” an adapter program rather than a growing colle
 
 - `generic-in-guest`: capability-driven install for any emulator/device with bootstrap root, persistent writable backing system, compatible init import, and supported policy path.
 - `generic-host-image`: common stopped-image staging, manifest, digest, backup, and rollback interface.
-- Vendor adapters: only the image discovery, stop/start/snapshot, image conversion, and ADB connection details that genuinely differ for BlueStacks, LDPlayer, MuMu, Nox, and later targets.
+- Vendor adapters: only the image discovery, stop/start/snapshot, image conversion, and ADB connection details that genuinely differ for BlueStacks, LDPlayer, MuMu, and later targets.
 - Negative adapters: known layouts that must be rejected with a precise alternative, such as locked AVB or EROFS without a rebuild path.
 
 Each adapter descriptor should include an immutable adapter schema version, maintainer, tested emulator versions, host OS, Android/API/ABI, image format, bootstrap method, required settings, detection rules, capabilities, install strategy, restore command, fixtures, and last-qualified date. Runtime detection must still confirm capabilities; a matching vendor property must never bypass safety checks.
@@ -399,8 +400,8 @@ Suggested expansion waves:
 
 | Wave | Targets | Goal |
 |---|---|---|
-| 0 | Existing LDPlayer/MuMu/Nox configurations known to users | Preserve current value and turn field knowledge into regression tests |
-| 1 | Current releases of LDPlayer, MuMuPlayer 12, Nox, and BlueStacks | Qualify the named product charter; build the first host adapter where needed |
+| 0 | Existing LDPlayer/MuMu configurations known to users | Preserve current value and turn field knowledge into regression tests |
+| 1 | Current releases of LDPlayer, MuMuPlayer 12, and BlueStacks | Qualify the named product charter; build the first host adapter where needed |
 | 2 | Android Studio AVD/Cuttlefish, Genymotion, MEmu, GameLoop, Waydroid, and other requested platforms | Reuse generic adapters; add vendor code only for demonstrated gaps |
 | Continuous | New vendor versions and Android images | Run `doctor`, clone the prior qualification record, retest, and publish supported/experimental/unsupported status |
 
@@ -518,7 +519,7 @@ Start with current official code, but reuse current Kitsune behavior and fixture
 `next-system` may replace current `kitsune` only when all of the following are true:
 
 - [ ] The same `doctor --json` schema and test driver run against both branches.
-- [ ] At least one current LDPlayer, MuMu, and Nox image completes install, three cold boots, upgrade, reinstall, module smoke, root policy smoke, uninstall, and snapshot restore.
+- [ ] At least one current LDPlayer and MuMu image completes install, three cold boots, upgrade, reinstall, module smoke, root policy smoke, uninstall, and snapshot restore.
 - [ ] BlueStacks is either supported by a reproducible host/bootstrap adapter or explicitly listed as unsupported with the exact missing capability; ADB availability alone is not counted as support.
 - [ ] One real writable-system/custom-ROM target completes the full recovery test if real-device System Mode remains advertised.
 - [ ] One EROFS/AVB/dynamic-partition target is rejected before mutation with the correct reason and points to normal Magisk boot-image installation.
@@ -1092,7 +1093,7 @@ The detailed audit, adapter tiers, and architecture are in “Final-pass strateg
 - [ ] Introduce an external backup, persistent install manifest, staged commit, failure journal, exact-path uninstall, and verified recovery after process death/power loss. PR #26's in-process sidecar/runtime/addon rollback is an interim layer, not completion of this item.
 - [ ] Make `/sbin` versus `/debug_ramdisk` selection layout-aware.
 - [x] Exclude API 23–24 from the current System Mode installer unless a dedicated persistent launch path is later cold-boot proven; ordinary Magisk support remains separate.
-- [ ] Establish disposable snapshots and a repeatable LDPlayer/MuMu/Nox lab before the next System Mode canary.
+- [ ] Establish disposable snapshots and a repeatable LDPlayer/MuMu lab before the next System Mode canary.
 
 ### Acceptance criteria
 
@@ -1180,7 +1181,7 @@ This is the first product feature on `next-system`, and the last gate before dec
 
 ### Acceptance criteria
 
-- At least LDPlayer, MuMu, and Nox representative builds meet the full parity gate.
+- At least LDPlayer and MuMu representative builds meet the full parity gate.
 - BlueStacks has either a reproducible adapter or an honest, reason-coded unsupported result.
 - The port has no unexplained custom changes to Magisk init/sepolicy/module core.
 - Future stable and prerelease Magisk rebases can rerun the same System Mode suite without rewriting it.
@@ -1696,7 +1697,6 @@ Maintain disposable golden instances. Record the exact emulator version, Android
 |---|---|---|---|
 | LDPlayer | Current LDPlayer 9 x64 plus one older still-supported Android image | Vendor Root and local ADB enabled; prove persistent backing writability separately | In-guest install, vendor Root off where possible, three cold boots, module/root/update/uninstall/restore |
 | MuMu | MuMuPlayer 12 Windows; MuMuPlayer Mac only if a maintainer can own that lane | Root/ADB; explicit `systemWritable` where the vendor surface exposes it | Same full flow; record whether writes survive emulator and host restart |
-| Nox | Current Android 9 and Android 12-capable images where available | Vendor Root; exercise the historical `/sbin` regression | Same full flow plus `/sbin`/`/debug_ramdisk` strategy assertion |
 | BlueStacks | Nougat/Pie/Android 11 instance families selected from current supported images | Official ADB is not assumed to be root; expect host/bootstrap adapter until proven otherwise | Reproducible image/snapshot adapter and restore, or an honest reason-coded unsupported result |
 | Negative immutable target | At least one EROFS or active AVB/dm-verity image | Any available root shell | Installer refuses before persistent mutation and recommends the correct alternative |
 
@@ -1888,12 +1888,17 @@ follow every referenced manager/stub asset without trusting a mutable endpoint.
 Provenance is intentionally not overstated: the surviving `os-fork` and `AndnixSH` repositories are
 mirrors, not yet proven original publishing repositories; a release identifier/versionCode is not a
 source commit; and archived bytes are not bound to a source tree or signer until PR8 verifies each
-relationship. Stable `26.4-kitsune-2` APK bytes have not yet been recovered. Those limitations are
-ledger blockers, not reasons to drop the affected users or infer provenance.
+relationship. On 2026-10-08 PR8 recovered stable `26.4-kitsune-2` APK bytes and a companion source
+archive from another mirror; the APK signer matches the pinned Full/Lite artifacts. Original-publisher
+and source-to-APK binding remain explicit [ledger limits](docs/port-ledger.md), not inferred provenance.
 
 PR8's generated audit must accept a versioned release/asset allowlist in addition to Git refs, fail
 when any listed artifact lacks a full digest and provenance record, and add newly discovered original
 Full/Lite releases rather than treating this seed as permission to ignore them.
+Failed mutable endpoints require recorded retrieval evidence and an explicit numbered disposition;
+they must never receive an inferred recovered-byte identity. Unresolved compiled-source, publisher
+and migration dispositions remain PR16 release blockers. The PR8 inventory covers all 108 frozen
+manager/stub references and also records the absent declared stable/beta Lite channels.
 
 For every atomic row PR8 records whether it is effective at `8e854f378` (`E`), older-tag-only and
 removed before that endpoint (`O`), or newer published-tag-only (`N`). A row may carry more than one
@@ -1905,7 +1910,7 @@ status. PR16 must close all three classes.
 | SYS-02 | Recovery/ZIP System Mode entry and legacy `systemmagisk` filename activation | Historical `SYSTEMMODE`, `systemmagisk`, and recovery scripts; ordinary official recovery ZIP is not persistent Direct-System | PR7 permanently removes implicit filename privilege; PR15 adds an explicitly named, signed, recovery-native adapter or records `retired-with-evidence` and migration |
 | SYS-03 | System Mode survival through custom-ROM OTA and `addon.d` | Historical `99-magisk.sh`, `/system/addon.d/magisk`; official addon flow is boot-image-oriented | PR7 makes no claim and transactionally owns legacy residue; PR15 runs a real changed-image/OTA cycle with reauthorization or retires it |
 | SYS-04 | Legacy System Mode layouts, sidecars and activation/config formats | Historical unmanifested payloads, policy `.gz`, old RC/addon/config layouts | PR7A retires automatic legacy conversion: detect unsupported boot paths and require clean installation. Preserve current-format upgrades and data-safe schema rejection; PR8 records affected-user clean-install guidance and PR16 proves latest-forward upgrades. |
-| SYS-05 | Writable-emulator runtime variations including `/sbin`, `/debug_ramdisk`, enforcing/permissive/disabled policy formats and root handoff | Nox fixes `dfb66f0a`/`065953d2`, historical emulator bootstrap | PR7 keeps capability-based safe selection only; PR15 qualifies each exact advertised tuple and rejects brand-level inference |
+| SYS-05 | Writable-emulator runtime variations including `/sbin`, `/debug_ramdisk`, enforcing/permissive/disabled policy formats and root handoff | Emulator fixes `dfb66f0a`/`065953d2`, historical emulator bootstrap | PR7 keeps capability-based safe selection only; PR15 qualifies each exact advertised tuple and rejects brand-level inference |
 | SYS-06 | Historical API 23–24 System Mode availability and user-facing claim despite the absence of an independently qualified persistent launcher | Historical UI and installer eligibility allowed this route; ordinary API 23 Magisk is a separate supported use case | PR7 disables the unsafe route; PR15 either qualifies a dedicated launcher or publishes the retirement/migration; PR16 verifies ordinary API 23 remains intact |
 | HID-01 | Classic MagiskHide process selection and hiding, independently usable without SuList | `native/src/core/deny`, manager Hide UI/CLI; official v30.7 DenyList is not semantically identical | PR12 core/DB/CLI/namespace port or evidence-backed retirement of each behavior; PR13 UI; PR15 runtime matrix |
 | HID-02 | Inverse SuList semantics: only selected apps receive SU/module visibility, with separate list/settings/CLI behavior | Historical `sulist` table and SuList UI/commands; absent from official | PR12 must preserve or explicitly retire selection, inverse policy and migration separately; PR13 UI; PR15 multiuser/runtime evidence |
@@ -1959,7 +1964,7 @@ status. PR16 must close all three classes.
 | BOOT-03 | Boot/recovery tar archives larger than 8 GiB and large-entry extraction/creation | Historical magiskboot/app tar fixes; upstream overlap must be verified | PR8 exact delta; PR15 large corpus and representative Samsung-style package; PR16 regression gate |
 | BOOT-04 | `magiskboot` split/decompression `-n` and related command compatibility | Historical tooling changes used by scripts/modules; upstream CLI may differ | PR8 identifies callers; PR15 corpus/script compatibility or actionable retirement |
 | BOOT-05 | Legacy rootfs/SAR/2SI, second-stage init, `init_boot`, `vendor_boot`, A/B/recovery and Sony/other OEM boot quirks | Historical native init/boot fixes plus ordinary Magisk routes; maintained upstream is newer | PR15 owns exact device/corpus decisions and recovery; PR16 releases only tested claimed layouts |
-| DEV-01 | Nox `/sbin`, debug-ramdisk and PATH compatibility | `dfb66f0a`, `065953d2` | PR7 generic safe runtime selection; PR15 exact Nox version/lifecycle and residual-path evidence |
+| DEV-01 | Emulator `/sbin`, debug-ramdisk and PATH compatibility | `dfb66f0a`, `065953d2` | PR7 generic safe runtime selection; PR15 exact emulator version/lifecycle and residual-path evidence |
 | DEV-02 | Vivo `do_mount_check` kernel workaround | `378965fa`; no maintained generic equivalent proven | PR15 reproduces on owned target/minimized fixture and narrowly ports or retires with affected-device guidance |
 | DEV-03 | Historical Samsung PROCA disable/rename workaround and Samsung-specific boot/package behavior | `e6b3bd6`; v30.7 contains evolved PROCA support but is not automatically equivalent to the shipped workaround | PR8 compares the exact disable/rename delta; PR15 Samsung physical lane proves inherited behavior or ports/retires the remaining workaround |
 | DEV-04 | SELinux-disabled/Waydroid, Sony, MTK, unusual pre-init and other effective OEM/emulator quirks present in fork commits/tags | Historical native/init/app compatibility patches; overlap varies by current upstream | PR8 must create one atomic row per quirk; PR12/PR14 own semantics; PR15 owns exact reproduction or retirement |
@@ -2112,7 +2117,7 @@ closure evidence.
 | `BOOT-004` | `magiskboot split -n` compressed-kernel preservation | PR15 |
 | `BOOT-005` | 2SI transition avoiding `/init` hexpatch when possible | PR15 |
 | `BOOT-006` | Sony `init.real` handling removal and resulting legacy-Sony compatibility | PR15 |
-| `DEV-001` | Nox `/sbin` PATH and missing-directory creation | PR7 generic path, PR15 exact target |
+| `DEV-001` | Emulator `/sbin` PATH and missing-directory creation | PR7 generic path, PR15 exact target |
 | `DEV-002` | Vivo `do_mount_check` kernel workaround | PR15 |
 | `DEV-003` | Historical Samsung PROCA disable/rename workaround | PR15 |
 
@@ -2172,7 +2177,7 @@ This is the developer execution order. Use the relevant parts of P0/P1/P2 as det
 
 - Add the `doctor --json` schema, install-state machine, manifest schema, reason codes, test fixture format, ADB driver, and failure-injection plan.
 - Validate it with synthetic supported/blocked/error fixtures and at least one real read-only target record without changing installer behavior.
-- Keep clean-snapshot LDPlayer, MuMu, Nox, BlueStacks, immutable-negative, install, reboot, and restore qualification in PR15, where the actual installer can satisfy the same contract.
+- Keep clean-snapshot LDPlayer, MuMu, BlueStacks, immutable-negative, install, reboot, and restore qualification in PR15, where the actual installer can satisfy the same contract.
 
 **Exit:** both branch strategies can be judged by the same versioned behavior contract, and a real record proves that the collector works without mutating the target.
 
@@ -2327,7 +2332,7 @@ record is
 with a machine-readable experimental record under `compatibility/records/`.
 
 This is deliberately evidence-first and should be small in repository code. Use one exact
-snapshot-capable LDPlayer, MuMu, Nox, custom writable Android image, or other controlled target.
+snapshot-capable LDPlayer, MuMu, custom writable Android image, or other controlled target.
 Do not create multiple application clones or infer System Mode from ADB/root alone. Reinject each
 comparison artifact into the same restored instance or identical byte-verified snapshots.
 
@@ -2596,8 +2601,20 @@ PR16; passing this PR does not establish complete Kitsune parity or production-p
 
 ## PR 8 — Branch parity decision
 
-**Implementation status: next, not started. PR7/PR7A foundation gates are complete. Compare
-against the updated v31.0-or-newer maintained base.**
+**Implementation status: complete locally from `next-system` at `dd5ca5c12`.** The
+[reversible decision](docs/pr8-branch-decision.md) selects Next for continued development and keeps
+production promotion held. The [port ledger](docs/port-ledger.md) accounts for 192 commits,
+726 commit/path changes, 69 stable-source deltas, 102 atomic rows and all frozen asset references.
+Six unsafe/misleading mechanisms are retired with evidence; the remaining rows have PR9–PR15
+owners. Bounded source/publication ranges and four unresolved archive dispositions are explicit;
+the release audit rejects unresolved work. [Paired Windows results](docs/system-mode/pr8-windows-2026-10-08.md)
+record current-line install failure/rollback and Next root/module/recovery results on LDPlayer and
+MuMu Android 12, plus a reason-coded BlueStacks rejection. This is the requested Windows matrix;
+MuMu Android 15 is excluded. Distinct-version Windows upgrades and MuMu reinstall capacity remain
+PR15 qualification limits, not passes. Earlier Mac/PR7A evidence retains its exact scope.
+Host fixes passed the 242-test suite; the expanded 20-test ledger suite also passed. The
+[early-mount contract](docs/early-mount-pr8.md) includes concrete inert payloads and 75 unexecuted
+route cases; PR14 owns runtime implementation and timing proof. No production APK code changed in PR8.
 
 - Run current and next artifacts on identical snapshots across the complete initial System Mode matrix.
 - Publish the results, remaining gaps, fork-delta comparison, and selected release line.
@@ -2762,7 +2779,7 @@ strand a test device.
 **Implementation status: not started as a full qualification PR. PR3/PR4A/PR5A records are inputs,
 not substitutes for this cross-target release matrix.**
 
-- Complete exact LDPlayer/MuMu/Nox lanes and either a BlueStacks adapter or explicit unsupported result.
+- Complete exact LDPlayer/MuMu lanes and either a BlueStacks adapter or explicit unsupported result.
 - Complete advertised real-device and negative immutable-layout lanes.
 - On physical devices, qualify ordinary patch-file and Direct Install separately from any advertised
   writable-system/custom-ROM System Mode lane, including `boot`, `init_boot`, `vendor_boot`, A/B,
@@ -2777,7 +2794,7 @@ not substitutes for this cross-target release matrix.**
   reauthorization, boot, root, rollback, and stock restoration. Otherwise publish the precise
   retirement and migration path.
 - Reproduce and disposition the Vivo `do_mount_check` workaround on an exact owned target or a
-  minimized kernel fixture; qualify Nox `/sbin`/PATH behavior and SELinux-disabled/Waydroid paths.
+  minimized kernel fixture; qualify Emulator `/sbin`/PATH behavior and SELinux-disabled/Waydroid paths.
 - Validate the selected pre-init storage policy and every retained expanded module partition on
   representative layouts; include negative `/persist`, low-space, wrong-device, and stale-copy cases.
 - Exercise emulator upgrade, host restart, clone, snapshot restore, failure injection, and vendor-root-off behavior.
@@ -2840,7 +2857,7 @@ No release should be called stable until all applicable boxes are checked.
 - [ ] The release identifies whether it came from current `kitsune` or promoted `next-system` and records the exact upstream base/delta.
 - [ ] `doctor` reports the target adapter, ABI, kernel page size, mount sources/filesystems, writability class, verity/AVB state, init strategy, policy strategy, bootstrap root, and recovery path.
 - [ ] Unsupported immutable layouts are rejected before persistent writes.
-- [ ] The advertised LDPlayer, MuMu, Nox, and any BlueStacks lanes name exact tested emulator/image versions; missing adapters are stated as unsupported.
+- [ ] The advertised LDPlayer, MuMu, and any BlueStacks lanes name exact tested emulator/image versions; missing adapters are stated as unsupported.
 - [ ] Install, three cold boots, host reboot, update, reinstall, module/root smoke, uninstall, and snapshot/image restore pass on every advertised lane.
 - [ ] Vendor-provided root can be disabled after installation wherever that workflow is advertised.
 - [ ] Install manifest and external backup digests are verified before commit and after rollback/uninstall.
@@ -2880,7 +2897,7 @@ No release should be called stable until all applicable boxes are checked.
   with manager running, restarted, hidden, and unavailable.
 - [ ] Dynamic `/system/bin` MagiskSU/applet exposure has a keep/retire decision and namespace,
   Hide/SuList, module, ordinary-app, and uninstall visibility tests.
-- [ ] Vivo `do_mount_check`, Nox `/sbin`/PATH, SELinux-disabled/Waydroid, and pre-init storage safety have exact dispositions and qualification evidence.
+- [ ] Vivo `do_mount_check`, Emulator `/sbin`/PATH, SELinux-disabled/Waydroid, and pre-init storage safety have exact dispositions and qualification evidence.
 - [ ] Hidden-manager/package and daemon-socket randomization each have a threat-modelled keep/retire decision and upgrade/recovery tests where retained.
 - [ ] Hidden-manager create, upgrade, launch, signer-failure recovery, and restore pass on every
   advertised target class.
@@ -2979,11 +2996,10 @@ The remaining work prioritizes recoverable rooting, tested historical feature pa
 - [AOSP dynamic-partition and `adb remount` constraints](https://source.android.com/docs/core/ota/dynamic_partitions/implement)
 - [AOSP EROFS read-only filesystem documentation](https://source.android.com/docs/core/architecture/kernel/erofs)
 - [Original Kitsune System Mode commit `05289fb5`](https://github.com/Jordan231111/KitsuneMagisk/commit/05289fb56ca04f09e9a5ad417b8a1a456f8998bf)
-- [NoxPlayer Android 12 `/sbin` System Mode fix `dfb66f0a`](https://github.com/Jordan231111/KitsuneMagisk/commit/dfb66f0a5916673e20aced68fe88b8ffab21cd5e)
+- [Android 12 emulator `/sbin` System Mode fix `dfb66f0a`](https://github.com/Jordan231111/KitsuneMagisk/commit/dfb66f0a5916673e20aced68fe88b8ffab21cd5e)
 - [LDPlayer official Root and ADB settings documentation](https://www.ldplayer.net/blog/introduction-to-version-4.0.37-and-3.102-features.html)
 - [MuMuPlayer official developer settings including Root and System Writable](https://www.mumuplayer.com/help/mac/developer-support-function.html)
 - [MuMuPlayer official Windows ADB documentation](https://www.mumuplayer.com/help/win/developers-essentials-manual.html)
-- [NoxPlayer official Root setting documentation](https://support.bignox.com/en/tsxn/systemsettings)
 - [BlueStacks official ADB documentation](https://support.bluestacks.com/hc/en-us/articles/23925869130381-How-to-enable-Android-Debug-Bridge-on-BlueStacks-5)
 - [ReZygisk commit removing Kitsune/SuList support](https://github.com/PerformanC/ReZygisk/commit/333d423cde1a959958d9fce380bd017cf6c1cf64)
 - [NeoZygisk current Magisk database adapter](https://github.com/JingMatrix/NeoZygisk/blob/master/zygiskd/src/root_impl/magisk.rs)

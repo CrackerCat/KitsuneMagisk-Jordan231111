@@ -4,8 +4,9 @@
 
 This branch is the experimental, maintainable-base rebuild of KitsuneMagisk. It is based directly
 on official Magisk v31.0 prerelease and carries the experimental Direct-System implementation
-and qualification tools. PR7A passed its prepared-MuMu and ordinary emulator gates; PR8 parity is
-next. See the [roadmap and acceptance limits](DEVELOPMENT_ROADMAP.md).
+and qualification tools. PR7A passed its prepared-MuMu and ordinary emulator gates. PR8's
+[branch decision](docs/pr8-branch-decision.md) selects this development foundation; historical
+feature completion and production qualification remain gated by the [roadmap](DEVELOPMENT_ROADMAP.md).
 
 The manager installs as `io.github.huskydg.magisk.next`, reports a
 `31.0-kitsune-next.<source>` version, and uses the `next-system-experimental` channel identity. It
@@ -27,7 +28,7 @@ to off because this branch does not yet have a project-owned update endpoint.
 The exact upstream commit, submodule pins, toolchain, advisories, reviewed source delta, and local
 PR6 qualification evidence are recorded in
 [`docs/next-system-baseline.md`](docs/next-system-baseline.md). The current machine-readable contract is
-[`docs/next-system-pr7a.json`](docs/next-system-pr7a.json).
+[`docs/next-system-pr8.json`](docs/next-system-pr8.json), inheriting PR7A's runtime baseline.
 
 ## Building
 
@@ -36,7 +37,7 @@ Follow this branch's [build and development guide](docs/build.md), then run:
 ```sh
 ./build.py -v all
 ./build.py -vr -c /path/to/external-signing-config.prop all
-python3 tools/next_system_baseline.py --manifest docs/next-system-pr7a.json --source --artifacts out
+python3 tools/next_system_baseline.py --manifest docs/next-system-pr8.json --source --artifacts out
 ```
 
 A release test build must use an external, disposable or production-controlled signing key. The

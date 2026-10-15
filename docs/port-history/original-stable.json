@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "release_metadata": "https://api.github.com/repos/find-xposed-magisk/Magisk/releases/136518586",
+  "mirror": true,
+  "original_publisher_binding": "unverified",
+  "artifacts": [
+    {
+      "name": "26.4-kitsune-2.apk",
+      "url": "https://github.com/find-xposed-magisk/Magisk/releases/download/delta_v26.4-kitsune-2/26.4-kitsune-2.apk",
+      "size": 12776249,
+      "sha256": "00977cf637bafa9e3c01020e10869451614eec5099b337dd2f3a55e0452b0412"
+    },
+    {
+      "name": "26.4-kitsune-2.zip",
+      "url": "https://github.com/find-xposed-magisk/Magisk/releases/download/delta_v26.4-kitsune-2/26.4-kitsune-2.zip",
+      "size": 50008331,
+      "sha256": "78100d2a3e28f5edb45c3386ffb6593d24486b11a59b19c7dfb0d0737864de2a"
+    }
+  ],
+  "signature_valid": true,
+  "certificate_sha256": "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282",
+  "signer_comparison": "Matches all 40 pinned original Full/Lite manager/stub observations.",
+  "package_badging": "package: name='io.github.huskydg.magisk' versionCode='26400' versionName='26.4-kitsune-2' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'",
+  "source_archive": {
+    "top_level": "Magisk/",
+    "entries": 20405,
+    "git_metadata_present": false,
+    "version_code": 26400,
+    "stub_version": 38,
+    "ondk": "r26.1",
+    "binding": "Two packaged shell scripts match the companion source exactly (util_functions.sh after only the documented version substitution). Native/app compiled code and original publisher are not authenticated by that partial match."
+  },
+  "packaged_source_bindings": [
+    {
+      "source_path": "scripts/util_functions.sh",
+      "apk_member": "assets/util_functions.sh",
+      "source_sha256": "2b13d08bde50755baa2c55186523d3693f93e2da3392dfe906fbb08c28f2a0e4",
+      "apk_member_sha256": "e3f2a4d9a8fd114ecad97a2a901a3dd3d44fb093a022fa6e214edeaff8bf09a7",
+      "relationship": "exact-after-recorded-version-substitution"
+    },
+    {
+      "source_path": "app/src/main/res/raw/manager.sh",
+      "apk_member": "res/p9.sh",
+      "source_sha256": "18b7d3804985766edadd3e10a82dbefd1ab67452dd34264e9a3049b2f79342eb",
+      "apk_member_sha256": "18b7d3804985766edadd3e10a82dbefd1ab67452dd34264e9a3049b2f79342eb",
+      "relationship": "exact-bytes"
+    }
+  ],
+  "embedded_stub": {
+    "member": "assets/stub.apk",
+    "size": 29063,
+    "sha256": "c34b2b23fc85f3f4baf79f342ec4dae705e4f1deabdcda1bd617562407b85b58",
+    "signature_valid": true,
+    "certificate_sha256": "15e145f1a1afb56baa29fdb1d46de309e88d68540cbea55dd92fe6d8f828b282",
+    "source": "Extracted from the signature-verified stable APK named above; independently verified with Android build-tools 36.1.0 apksigner."
+  },
+  "dead_endpoints": [
+    {
+      "url": "https://github.com/HuskyDG/download/raw/main/magisk/26.4-kitsune-2.apk",
+      "http_status": 404,
+      "observed_at": "2026-10-08",
+      "recovery": "Digested mirror APK above; original mutable endpoint bytes are not independently authenticated."
+    },
+    {
+      "url": "https://github.com/HuskyDG/download/raw/main/magisk/stub-release.apk",
+      "http_status": 404,
+      "observed_at": "2026-10-08",
+      "recovery": "The stable manager embeds a verified stub, recorded separately. It is not asserted to be identical to the lost mutable download."
+    }
+  ]
+}

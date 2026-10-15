@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+from contextlib import closing
 from pathlib import Path
 import sqlite3
 import subprocess
@@ -79,7 +80,7 @@ int main(int argc, char **argv) {
         cls.temporary.cleanup()
 
     def database(self, path: Path, version=13):
-        with sqlite3.connect(path) as db:
+        with closing(sqlite3.connect(path)) as db, db:
             db.executescript("""
 CREATE TABLE policies(uid INT PRIMARY KEY, policy INT, until INT, logging INT, notification INT);
 CREATE TABLE settings(key TEXT PRIMARY KEY, value INT);
@@ -101,7 +102,7 @@ INSERT INTO hide_migration_v13 VALUES(1,'union-preserve-legacy',2,1,1,1,1,0,1);
             db.execute(f"PRAGMA user_version={version}")
 
     def dump(self, path):
-        with sqlite3.connect(path) as db:
+        with closing(sqlite3.connect(path)) as db, db:
             self.assertEqual("ok", db.execute("PRAGMA integrity_check").fetchone()[0])
             return list(db.iterdump()), db.execute("PRAGMA user_version").fetchone()[0]
 
@@ -126,7 +127,7 @@ INSERT INTO hide_migration_v13 VALUES(1,'union-preserve-legacy',2,1,1,1,1,0,1);
                 path = Path(temporary) / "magisk.db"
                 self.database(path, version)
                 if mutation:
-                    with sqlite3.connect(path) as db:
+                    with closing(sqlite3.connect(path)) as db, db:
                         db.execute(mutation)
                 before = path.read_bytes()
                 self.assertNotEqual(0, self.run_native(path).returncode)

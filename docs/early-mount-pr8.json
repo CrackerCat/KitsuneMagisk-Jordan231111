@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "kind": "synthetic-specification",
+  "implementation_owner": "PR14",
+  "qualification_owner": "PR15",
+  "routes": ["boot", "init_boot", "vendor_boot", "recovery", "system_mode"],
+  "cases": [
+    {"id": "before-first-consumer", "input": "one module replaces a measured consumer's configuration", "expected": "published digest is visible in the consumer namespace before its first open"},
+    {"id": "late-hook", "input": "the first consumer precedes the available hook", "expected": "route is rejected; post-fs-data visibility does not pass"},
+    {"id": "encrypted-data", "input": "module state under /data is unavailable at the hook", "expected": "use qualified pre-init storage or refuse activation without blocking base boot"},
+    {"id": "global-module-conflict", "input": "global and per-module trees replace the same target", "expected": "record historical winner and require the declared compatibility rule"},
+    {"id": "two-module-conflict", "input": "two modules replace the same target in reversed installation order", "expected": "declared precedence is deterministic and migration from historical behavior is explicit"},
+    {"id": "erofs-overlay", "input": "target is on EROFS", "expected": "base image digest remains unchanged and the consumer sees the reversible overlay"},
+    {"id": "readonly-avb", "input": "target is verified and read-only", "expected": "no verification disablement or persistent base write; unsupported hooks refuse"},
+    {"id": "symlink-whiteout", "input": "one symbolic link, one whiteout, and one ordinary file", "expected": "link is retained as a link, only the whiteout removes its target, and ordinary content remains"},
+    {"id": "replace-directory", "input": "a .replace directory and an unrelated sibling", "expected": "replace only the declared directory and preserve the sibling"},
+    {"id": "partition-escape", "input": "symlink or traversal points outside the declared partition", "expected": "reject before any mount publication or base write"},
+    {"id": "publication-interruption", "input": "terminate at each staging/publication boundary", "expected": "previous complete plan or no plan; cold boot and exact restore succeed"},
+    {"id": "disable-remove-safe-mode", "input": "disable, remove, or enter safe mode before first consumption", "expected": "base content is visible to the consumer and unrelated modules remain intact"},
+    {"id": "selinux-enforcing", "input": "valid and invalid labels on an enforcing image", "expected": "valid overlay works without changing enforcement; invalid plan fails with attributable AVCs"},
+    {"id": "namespace-hide", "input": "init, zygote, system_server and selected app namespaces", "expected": "early consumer sees the intended overlay and subsequent Hide/SuList visibility follows its independently tested policy"},
+    {"id": "ota-slot-rollback", "input": "slot switch followed by recovery rollback", "expected": "plan binds to the intended image/slot and stock recovery restores exact original bytes"}
+  ]
+}

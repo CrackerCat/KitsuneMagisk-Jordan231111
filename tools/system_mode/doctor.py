@@ -563,7 +563,10 @@ def _repository_state(repository_root: Path) -> tuple[str, bool]:
 
 def _probe_digest() -> str:
     root = Path(__file__).parent
-    paths = [root / "doctor.py", root / "kitsune.py"]
+    # One driver may compare APKs from separate clean worktrees. Bind every
+    # host module, including qualification and authorization, independently of
+    # the candidate's source commit.
+    paths = sorted(root.glob("*.py"))
     paths.extend(sorted((root / "contracts").glob("*.json")))
     paths.extend(sorted((root / "schemas").glob("*.json")))
     digest = hashlib.sha256()
@@ -572,6 +575,9 @@ def _probe_digest() -> str:
         digest.update(b"\0")
         digest.update(path.read_bytes())
         digest.update(b"\0")
+    artifact_verifier = root.parent / "next_system_baseline.py"
+    digest.update(b"next_system_baseline.py\0")
+    digest.update(artifact_verifier.read_bytes())
     return digest.hexdigest()
 
 

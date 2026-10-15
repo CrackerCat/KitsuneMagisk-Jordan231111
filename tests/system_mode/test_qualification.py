@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import base64
 import copy
+from contextlib import closing
 import hashlib
 import inspect
 import json
@@ -167,7 +168,7 @@ class QualificationTest(unittest.TestCase):
     def test_database_digest_preserves_schema_rows_and_value_types(self) -> None:
         with tempfile.TemporaryDirectory(prefix="kitsune-sqlite-content-") as temporary:
             path = Path(temporary) / "magisk.db"
-            with sqlite3.connect(path) as database:
+            with closing(sqlite3.connect(path)) as database, database:
                 database.executescript(
                     "CREATE TABLE settings(key TEXT PRIMARY KEY, value);"
                     "CREATE TABLE policies(uid INT PRIMARY KEY, policy INT);"
@@ -178,7 +179,7 @@ class QualificationTest(unittest.TestCase):
                 database.execute("INSERT INTO settings VALUES(?,?)", ('quoted"key', b"\0\xff\n"))
             before = path.read_bytes()
             expected = _sqlite_content_digest(before)
-            with sqlite3.connect(path) as database:
+            with closing(sqlite3.connect(path)) as database, database:
                 database.execute("REPLACE INTO settings VALUES('denylist',0)")
             after = path.read_bytes()
             self.assertNotEqual(hashlib.sha256(before).digest(), hashlib.sha256(after).digest())
@@ -193,7 +194,7 @@ class QualificationTest(unittest.TestCase):
             ):
                 with self.subTest(statement=statement):
                     path.write_bytes(before)
-                    with sqlite3.connect(path) as database:
+                    with closing(sqlite3.connect(path)) as database, database:
                         database.execute(statement)
                     self.assertNotEqual(expected, _sqlite_content_digest(path.read_bytes()))
             with self.assertRaises(ProbeError):
@@ -202,7 +203,7 @@ class QualificationTest(unittest.TestCase):
     def test_database_capture_requires_stable_bytes_metadata_and_no_journal(self) -> None:
         with tempfile.TemporaryDirectory(prefix="kitsune-sqlite-capture-") as temporary:
             path = Path(temporary) / "magisk.db"
-            with sqlite3.connect(path) as database:
+            with closing(sqlite3.connect(path)) as database, database:
                 database.execute("CREATE TABLE settings(key TEXT PRIMARY KEY, value INT)")
             data = path.read_bytes()
             node = {
@@ -242,6 +243,42 @@ class QualificationTest(unittest.TestCase):
             _inventory_digest([dict(node, path="/system/etc/init/magisk.rc")])
         ordinary = {key: val for key, val in node.items() if key != "sqlite_content_sha256"}
         self.assertNotEqual(_inventory_digest([ordinary]), _inventory_digest([dict(ordinary, sha256="3" * 64)]))
+
+    def test_ramdisk_policy_copy_mtime_is_incidental_but_persistent_policy_is_not(self) -> None:
+        policy = {
+            "path": "/sepolicy", "kind": "file", "size": 32,
+            "sha256": "a" * 64, "mode": "0644", "uid": 0, "gid": 0,
+            "mtime_epoch": 1, "selinux_context": "u:object_r:tmpfs:s0",
+        }
+        expected = _inventory_digest([policy])
+        self.assertEqual(expected, _inventory_digest([dict(policy, mtime_epoch=2)]))
+        self.assertEqual(1, policy["mtime_epoch"])
+        for field, value in (("sha256", "b" * 64), ("size", 33), ("mode", "0666"),
+                             ("uid", 2000), ("gid", 2000),
+                             ("selinux_context", "u:object_r:system_file:s0")):
+            with self.subTest(field=field):
+                self.assertNotEqual(expected, _inventory_digest([dict(policy, **{field: value})]))
+        for path, label in (("/sepolicy", "u:object_r:system_file:s0"),
+                            ("/vendor/etc/selinux/precompiled_sepolicy", "u:object_r:tmpfs:s0")):
+            persistent = dict(policy, path=path, selinux_context=label)
+            self.assertNotEqual(_inventory_digest([persistent]),
+                                _inventory_digest([dict(persistent, mtime_epoch=2)]))
+
+    def test_regenerated_policy_mtime_is_incidental_but_policy_bytes_and_metadata_are_not(self) -> None:
+        policy = {
+            "path": "/data/adb/sepolicy.rule", "kind": "file", "size": 32,
+            "sha256": "1" * 64, "mode": "0644", "uid": 0, "gid": 0,
+            "mtime_epoch": 1, "selinux_context": "u:object_r:adb_data_file:s0",
+        }
+        expected = _inventory_digest([policy])
+        self.assertEqual(expected, _inventory_digest([dict(policy, mtime_epoch=2)]))
+        self.assertEqual(1, policy["mtime_epoch"])
+        for field, value in (("sha256", "2" * 64), ("size", 33), ("mode", "0666"),
+                             ("uid", 1000), ("gid", 1000), ("selinux_context", None)):
+            with self.subTest(field=field):
+                self.assertNotEqual(expected, _inventory_digest([dict(policy, **{field: value})]))
+        ordinary = dict(policy, path="/system/etc/init/magisk.rc")
+        self.assertNotEqual(_inventory_digest([ordinary]), _inventory_digest([dict(ordinary, mtime_epoch=2)]))
 
     def tearDown(self) -> None:
         os.environ.pop(QUALIFICATION_KEY_ENV, None)
@@ -511,6 +548,37 @@ class QualificationTest(unittest.TestCase):
                     instance_identity_path=backup,
                 )
 
+    def test_persistent_space_failure_precedes_guest_mutation(self) -> None:
+        fixture = json.loads(FIXTURE.read_text(encoding="utf-8"))
+        baseline = fixture_report(fixture["input"])
+        baseline["init"]["import_proof"] = "unproven"
+        baseline["recovery"]["verified"] = False
+        baseline["persistence"]["proven"] = False
+        baseline["assessment"] = classify_report(baseline)
+        with tempfile.TemporaryDirectory(prefix="kitsune-space-preflight-") as temporary:
+            root = Path(temporary).resolve()
+            identity = root / "instance.json"
+            identity.write_text('{"instance":1}\n', encoding="ascii")
+            wrapper = self.executable(root, "lifecycle.sh")
+            with (
+                mock.patch("tools.system_mode.qualification.collect_report", return_value=baseline),
+                mock.patch("tools.system_mode.qualification._policy_from_apk", return_value=("d" * 64, b"policy")),
+                mock.patch("tools.system_mode.artifact_space.persistent_payload_bytes", return_value=48 * 1024 * 1024),
+                mock.patch("tools.system_mode.doctor._df_available_bytes", return_value=24 * 1024 * 1024),
+                mock.patch("tools.system_mode.qualification._write_probe") as write,
+                mock.patch("tools.system_mode.qualification._run_host") as lifecycle,
+            ):
+                with self.assertRaisesRegex(ValueError, "persistent System Mode payload needs"):
+                    qualify_target(
+                        mock.Mock(), output=root / "record.json", backup_location=root / "backup",
+                        snapshot_id="small-system", backup_command=f"{wrapper} {{backup}}",
+                        restore_command=f"{wrapper} {{backup}}", cold_boot_command=str(wrapper),
+                        instance_identity_path=identity, seal_key_path=root / "seal.key",
+                        artifact_path=root / "candidate.apk",
+                    )
+                write.assert_not_called()
+                lifecycle.assert_not_called()
+
     def test_failed_recovery_never_deletes_qualification_backups(self) -> None:
         with tempfile.TemporaryDirectory(prefix="kitsune-retained-recovery-") as temp:
             root = Path(temp)
@@ -734,7 +802,7 @@ class QualificationTest(unittest.TestCase):
             source.index("# The challenge snapshot intentionally contains the anchor.") :
             source.index('run_lifecycle("backup", "clean backup creation"')
         ]
-        clean = challenge_cleanup.index("clean_report = collect_report")
+        clean = challenge_cleanup.index("clean_report = candidate_report")
         contract = challenge_cleanup.index("stable_target_digest(clean_report)")
         inventory = challenge_cleanup.index("_boot_critical_inventory")
         clean_state = challenge_cleanup.index("live_dirty = False")
@@ -747,7 +815,7 @@ class QualificationTest(unittest.TestCase):
             source.index("final_marker_evidence = _write_probe")
         ]
         self.assertLess(
-            clean_backup.index("after_clean_backup = collect_report"),
+            clean_backup.index("after_clean_backup = candidate_report"),
             clean_backup.index("live_dirty = False"),
         )
         self.assertLess(
@@ -1226,6 +1294,8 @@ class QualificationTest(unittest.TestCase):
             with (
                 mock.patch("tools.system_mode.qualification._policy_from_apk",
                            return_value=("d" * 64, b"candidate-policy")),
+                mock.patch("tools.system_mode.artifact_space.persistent_payload_bytes", return_value=1024),
+                mock.patch("tools.system_mode.doctor._df_available_bytes", return_value=4096),
                 mock.patch(
                     "tools.system_mode.qualification.collect_report",
                     side_effect=[
@@ -1235,7 +1305,7 @@ class QualificationTest(unittest.TestCase):
                         copy.deepcopy(baseline),
                         restored,
                     ],
-                ),
+                ) as reports,
                 mock.patch(
                     "tools.system_mode.qualification._boot_id",
                     return_value=str(uuid.UUID(int=1)),
@@ -1290,8 +1360,12 @@ class QualificationTest(unittest.TestCase):
                     endpoint="127.0.0.1:16384",
                     lifecycle_timeout=30,
                     artifact_path=root / "candidate.apk",
+                    repository_root=root,
                 )
 
+            self.assertEqual(5, reports.call_count)
+            self.assertTrue(all(call.kwargs.get("repository_root") == root
+                                for call in reports.call_args_list))
             self.assertEqual("d" * 64, record["init"]["artifact_sha256"])
             self.assertEqual(_sha256(b"candidate-policy"), record["init"]["policy"]["sha256"])
             self.assertTrue(output.is_file())

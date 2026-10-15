@@ -1,0 +1,1231 @@
+{
+  "schema": 1,
+  "archive_sha256": "78100d2a3e28f5edb45c3386ffb6593d24486b11a59b19c7dfb0d0737864de2a",
+  "comparison_commit": "b149cd26f4add6f2b8ae917a656f88316784445b",
+  "scope": "69 project-owned source files differing between the recovered stable companion archive and the first frozen Git release; vendored dependency contents are not recast as original fork features.",
+  "reviews": [
+    {
+      "path": "app/src/main/res/raw/manager.sh",
+      "size": 16981,
+      "sha256": "18b7d3804985766edadd3e10a82dbefd1ab67452dd34264e9a3049b2f79342eb",
+      "features": [
+        "SYS-001",
+        "SYS-002",
+        "SYS-003",
+        "SYS-004",
+        "SYS-005",
+        "SYS-006",
+        "SYS-007",
+        "SYS-008",
+        "SYS-009",
+        "SYS-010",
+        "HID-001",
+        "HID-002",
+        "HID-003",
+        "HID-004",
+        "HID-005",
+        "HID-006",
+        "HID-007",
+        "HID-008",
+        "HID-009",
+        "HID-010",
+        "HID-015",
+        "ZYG-001",
+        "MOD-013",
+        "MOD-014",
+        "MOD-018",
+        "ID-001",
+        "DEV-001"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "db4a9c99cc2a0fac07f536b6f43e1884c491ec2305ca35cbe0e93d3eae3af4c5",
+      "patch_sha256": "551032acd57f143d7b63ac1bb3b4fca77a82c650bc038be603307284c1a0c584"
+    },
+    {
+      "path": "app/src/main/java/com/topjohnwu/magisk/ui/settings/SettingsItems.kt",
+      "size": 13330,
+      "sha256": "b5656fdabc6f46559cf7d6b15a1e0e7ecd1c2eeec9c3cc876fa20fb9bf1922ee",
+      "features": [
+        "HID-001",
+        "HID-002",
+        "HID-003",
+        "HID-004",
+        "HID-005",
+        "HID-006",
+        "HID-007",
+        "HID-008",
+        "HID-009",
+        "HID-010",
+        "HID-015",
+        "ZYG-001",
+        "SU-001",
+        "ID-001"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "d7d8dd6ceb770372fd381e2058922412ccd20882ba77d8582990aa80e1a51a43",
+      "patch_sha256": "c9310fd914b501e4725c9ccb28badc1da0a4300200f4587683d4a0e63d10ef99"
+    },
+    {
+      "path": "app/src/main/java/com/topjohnwu/magisk/ui/settings/SettingsViewModel.kt",
+      "size": 4561,
+      "sha256": "7d1e0463fc4795ae9188cf911a937a329d6857a76824ed8ee6e38a26aae940a8",
+      "features": [
+        "HID-001",
+        "HID-002",
+        "HID-003",
+        "HID-004",
+        "HID-005",
+        "HID-006",
+        "HID-007",
+        "HID-008",
+        "HID-009",
+        "HID-010",
+        "HID-015",
+        "ZYG-001",
+        "ZYG-007",
+        "SU-001",
+        "ID-001"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "2a460e68623e9783705961ee5a38188b6f6a052f86d6f81ca671fb188449852a",
+      "patch_sha256": "4ac6168017710a786356058b3695bc02a73d47de18f4a7052f69f78a191f010d"
+    },
+    {
+      "path": "app/src/main/java/com/topjohnwu/magisk/ui/superuser/SuperuserViewModel.kt",
+      "size": 6337,
+      "sha256": "ee840d6be3073b86c4005d570f0b9a4b02c2e8bcd3f1c7e6e7564460fe708ba3",
+      "features": [
+        "SU-001"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "afea296ebbea8917a5c4dc938d7f291afe0f55fd93cc587c133ed536d40b75a9",
+      "patch_sha256": "b595245e56c956a598113d459099a6b61e1d49efeb3edf40bbf3dcbcca60ff40"
+    },
+    {
+      "path": "app/src/main/java/com/topjohnwu/magisk/ui/surequest/SuRequestViewModel.kt",
+      "size": 6962,
+      "sha256": "57a16060543e7b4efbc2fa38e1a6023cc25eed65605a80febc1bb73ac1141e95",
+      "features": [
+        "SU-001"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "8fcca7bd24f02ec9d3cfd8ad484e078fcedf728ebafeb6464e973afcf8bd1e7e",
+      "patch_sha256": "faf888b97e8d9691bc461d1d441b6b154ed6bb226e7eb6bf1a8601e4f6141bf9"
+    },
+    {
+      "path": "app/src/main/java/com/topjohnwu/magisk/core/di/ServiceLocator.kt",
+      "size": 2249,
+      "sha256": "2e345f88c320e276825adc50834d1279d4cb9bdd4cb8faf1b7e8d22f02acc8f4",
+      "features": [
+        "SU-001"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "d324ba14c7b9febe0cbd95ace421479105f8414e51bc9fb21f0c2f43d3021136",
+      "patch_sha256": "93ddcf1b7afd33687caddd5c041b0533235cba6805c1b4a22a6bdff4a1843b52"
+    },
+    {
+      "path": "app/src/main/java/com/topjohnwu/magisk/core/Config.kt",
+      "size": 7207,
+      "sha256": "591c13936d1c67237cf33e8036a82f613f31e7800c0edb51c4e1fa516af215b6",
+      "features": [
+        "HID-001",
+        "HID-002",
+        "HID-003",
+        "HID-004",
+        "HID-005",
+        "HID-006",
+        "HID-007",
+        "HID-008",
+        "HID-009",
+        "HID-010",
+        "HID-015",
+        "ZYG-001",
+        "SU-001",
+        "ID-001",
+        "APP-004"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "c6f40388a26908dda2187d21e2a0f0845b4a142bf656d7bcc061377788669d93",
+      "patch_sha256": "55982687bca3cc03405370d112dda71f74d1cb26cd3bca4825de4734b1c270fe"
+    },
+    {
+      "path": "app/shared/src/main/java/com/topjohnwu/magisk/ProviderInstaller.java",
+      "size": 732,
+      "sha256": "41f8d9b619ae2af0430c0f1d24d76fe450feda3de152d56122e38530b06b395a",
+      "features": [
+        "APP-007"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "6c9b7ee7b66579a4780435812bd303db6050e6c93874c2268345f28e6533d873",
+      "patch_sha256": "a75b801bc9e434fac5a788689ac9e4ea3770861a70322ed61d1a619a5ef3bd40"
+    },
+    {
+      "path": "scripts/avd_test.sh",
+      "size": 3874,
+      "sha256": "5c8c21815950e89393a838d5ff09644da10f2253ee247b180a058886c425a7b6",
+      "features": [
+        "ZYG-007"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "ce428c911794404638b2dcf8459984427ab948dd56067be6508840ea5116ccba",
+      "patch_sha256": "196e75abf573ce887a2acc6f4b52fed03827c06c69569fb1e3f56e8331ebb063"
+    },
+    {
+      "path": "scripts/avd_magisk.sh",
+      "size": 4441,
+      "sha256": "a79359618070bc3506bc616591f343b9ae4816582009258af8988528f12f88f4",
+      "features": [
+        "MOD-018"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "a05bf1cfc6cc8dad1033db274e0278dac73a2ac823306020e9f91cd5ac179a3f",
+      "patch_sha256": "747c14845051bf07e3a7e4ac04f36240c6e15feadfae712a4358f77303a650fb"
+    },
+    {
+      "path": "native/src/base/include/base.hpp",
+      "size": 223,
+      "sha256": "e63b39ba0b50a5f89f9cb4005b7ac03f1bb246f6691ab69ce70b3d4ba9c263b0",
+      "features": [
+        "HID-001",
+        "HID-002",
+        "HID-003",
+        "HID-004",
+        "HID-005",
+        "HID-006",
+        "HID-007",
+        "HID-008",
+        "HID-009",
+        "HID-010",
+        "HID-015",
+        "ZYG-001",
+        "ZYG-002",
+        "ID-001"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "38b3244030acd8b2cb36f44faf91915990a3b3c262bbf6b3905d007b58a5c916",
+      "patch_sha256": "041410388a3c3d3aa7952c8871e31ce6acb699631931e8d9aa2647315dd784db"
+    },
+    {
+      "path": "native/src/base/include/stream.hpp",
+      "size": 3562,
+      "sha256": "fe947717f622cf1b9dba4665e494a64b9ef663c84d5584a5c0294ee1accc5f7c",
+      "features": [
+        "ORD-001",
+        "ORD-006"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "9fb1dfe871b71262ef048d11f670a4b524fc1e5be062a811fad1472c1d1564f5",
+      "patch_sha256": "511875ab8f4c0bdd909aa40df8411699657faad91140ac67fd9c65d30eb5608b"
+    },
+    {
+      "path": "native/src/base/misc.cpp",
+      "size": 7408,
+      "sha256": "368d0ff6f087e49c363e82e807397487758d9ba27e1a1ea2a2b13d049fce070d",
+      "features": [
+        "HID-013"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "0d11a734081ca95b1ec5866f395a7041058599710674fab933dc69f3a5ee8dd5",
+      "patch_sha256": "a35aeb1561804104250df7fd514dc9846ef91ae7f7715cb62210d0a31dda938d"
+    },
+    {
+      "path": "native/src/base/lib.rs",
+      "size": 1591,
+      "sha256": "77b9355343f9f3dec120479dcf5fa7503fd1e36bad4922a84e580d9a563d154a",
+      "features": [
+        "ORD-006"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "e9904379fed1c9eb574bca9c058a8c3b8ba3eb95bbf5bd83ce3a0f00ba5623e1",
+      "patch_sha256": "615b23a07172240e00627126ba136328aa0ac8e11a0d5fd6bb0f9a0351615adc"
+    },
+    {
+      "path": "native/src/base/stream.cpp",
+      "size": 5437,
+      "sha256": "782c3d183c5886d2619051ad66b02bc8124a06c7bb60031586949412788a6023",
+      "features": [
+        "ORD-001",
+        "ORD-006"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "dfdd1f5850ab223ef0e7033a56052a198d776a7d8e53b727dbce094559bad3f5",
+      "patch_sha256": "02086f173e6e1e6dbebae57657c4c6e9b7bfa7b8ca064c985bad0bd61dbb3800"
+    },
+    {
+      "path": "native/src/base/cxx_extern.rs",
+      "size": 5268,
+      "sha256": "312e2b3264c24a23191ffdf3057c2b6acfa151593705c4cf82a3e718ce4d6be8",
+      "features": [
+        "ORD-006"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "b6e2023e1d1c41109db97f3caaf78958ba7e4f9815f7cf3ab59ca6fc568b556f",
+      "patch_sha256": "851f8f2461269daae119243ec3dcd33c64aa1dd956641c56f7199f77310068cc"
+    },
+    {
+      "path": "native/src/base/cstr.rs",
+      "size": 16902,
+      "sha256": "518c2f12f730598a095b9bd4bbda0f6fedf9202140d7d506c1aa7a5180e2bc62",
+      "features": [
+        "ORD-006"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "CXX Utf8CStr ABI bridge/assertions; no separate advertised user API.",
+      "comparison_sha256": "3eca256992c918caef5c77c90a31b69e8df05d207d21a5761a8c578e266480c4",
+      "patch_sha256": "6db68bdbf42519d6115211d0585a72ee5f2ee75cd6faa4c6b2fb61b71948e07e"
+    },
+    {
+      "path": "native/src/base/logging.cpp",
+      "size": 2289,
+      "sha256": "65836d492a38c64f321ae8ac196c6f5f1bec8f66643094280eb33bb80e532abe",
+      "features": [
+        "HID-001",
+        "HID-002",
+        "HID-003",
+        "HID-004",
+        "HID-005",
+        "HID-006",
+        "HID-007",
+        "HID-008",
+        "HID-009",
+        "HID-010",
+        "HID-015",
+        "ZYG-001",
+        "ID-001"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "af76d2ac15637a6906a475f2b2ece6012002fbba3e81dee2d32ac3005b76e162",
+      "patch_sha256": "c0fa8a8c42516ac9ae21481f9692edfb747da11f8c213057e559a1b645e0859c"
+    },
+    {
+      "path": "native/src/base/logging.rs",
+      "size": 10088,
+      "sha256": "c7347a2d3786aa11a29046334a3445210abcd1a1b90e0d0025af80e5aead5b90",
+      "features": [
+        "ORD-006"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "0a4ec35b9e3f42d606cc96987e77248738dea55b98054debcbffbe0d1737c1c1",
+      "patch_sha256": "4a71dc1e276cbb1be922a49f0c5b865e88c99490f84cb2c9f6032a00f35ed130"
+    },
+    {
+      "path": "native/src/base/files.cpp",
+      "size": 7341,
+      "sha256": "b1a3e5a52b4852d61af6dc9c59e61674c50b45421ddb4abfdf235a9662442736",
+      "features": [
+        "MOD-001",
+        "MOD-003"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "e088c0f0cc23eb414fc141109f47ae4d50ec5e227250184701d7fb1a88a98a66",
+      "patch_sha256": "b1d0f0ea13c22ba9de23d76d3e00c7c664f9567b28298aa2994fbae14b3f96f5"
+    },
+    {
+      "path": "native/src/base/misc.hpp",
+      "size": 10153,
+      "sha256": "cc79250374fc4f622972ad1e24cf4915fd94152fa90fb0df0149b4be78e495b2",
+      "features": [
+        "HID-013",
+        "ORD-001",
+        "ORD-006"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "f7fd458d1d3bcaf10a93c41d89852cc6141f51de3a13730656ab396d0536fa16",
+      "patch_sha256": "35c11e6671043e583f8a42f31ad1993362ef50e0c8669037f886766b4b6f61bd"
+    },
+    {
+      "path": "native/src/init/getinfo.cpp",
+      "size": 7717,
+      "sha256": "9a367fc0e96d99dbcf18cdd2e3f44502e5badaf0a7a5deb0167cffd714aa3b97",
+      "features": [
+        "BOOT-006",
+        "ORD-001",
+        "ORD-006"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "e2c5aa9e9a703258d88c90aaf1f0e2dfed803ccd6ab8c55bfcb726409311df69",
+      "patch_sha256": "013252b798f0f9788112a9a813d80f5c70c25d9195d4203179d0caa0afdc03c8"
+    },
+    {
+      "path": "native/src/init/mount.cpp",
+      "size": 11815,
+      "sha256": "c1c5f0b0ba97b738eb6ee3d6c331bed490f3c7d0339b2a1e67de3261407113ac",
+      "features": [
+        "MOD-001",
+        "MOD-002",
+        "MOD-003",
+        "MOD-018",
+        "DEV-001"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "c345d4f6b1c8d8602104ebe1db0aa9181746c2f0b034d5776ece8a19fed87293",
+      "patch_sha256": "ade1381a6f26e9e8b9b12504601261c3bbe9a96bbd0b25c90ffc479dd626932e"
+    },
+    {
+      "path": "native/src/init/rootdir.cpp",
+      "size": 13465,
+      "sha256": "90ef5ba8e0c1395bfa65da6ecea593fd6684d11c6b3ffa6cc526d9250686cf1b",
+      "features": [
+        "HID-013",
+        "ZYG-006",
+        "MOD-001",
+        "MOD-003",
+        "MOD-018",
+        "ORD-001",
+        "ORD-006"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "05b89a22a3f01e9f6c30fde6c00855a46fca286ab3a4c09d7bdf2bb5ca91262a",
+      "patch_sha256": "f6e6731e2a6d02ca55d24158f4f90b1e67564f5b62d5d28cda70c0f5a6103035"
+    },
+    {
+      "path": "native/src/sepolicy/include/sepolicy.hpp",
+      "size": 2791,
+      "sha256": "4de2022b06fa02c4839618c2ba7122d982e6b033a2fa61cfb932f3c676d0b5b1",
+      "features": [
+        "ORD-006",
+        "MOD-012"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Policy parser C++/Rust string bridge.",
+      "comparison_sha256": "d91e7a9ef9432bb97a80e010c60404ed1030a97c7c37910efae58f9451100efb",
+      "patch_sha256": "e693080c17f5b1f9e835412f7aee58482340ad9fec0916487421ec05baf76115"
+    },
+    {
+      "path": "native/src/sepolicy/lib.rs",
+      "size": 1944,
+      "sha256": "5347e136b16de1c000a7e30569726f9d6f2ba5e91d7e31e2ac84fcff798f9e1e",
+      "features": [
+        "ORD-006",
+        "MOD-012"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Policy rule input and safe string/file bridge; empty-line behavior belongs to MOD-012.",
+      "comparison_sha256": "9630a64add1d11d4f28b4801b95198ac7d181c1b909050fbaa119de4683284c9",
+      "patch_sha256": "ca0b946dd7a27e9ed91850529b77b475b25e193b53c31fce29730c13cb203aa8"
+    },
+    {
+      "path": "native/src/sepolicy/api.cpp",
+      "size": 3736,
+      "sha256": "22b8c01664c86e9852cfd15479301c2de90bbf86bb29087bd7c61029eb00444d",
+      "features": [
+        "ORD-006"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Policy filename FFI bridge.",
+      "comparison_sha256": "f58797ce062589c780efbaaf60d117a2be1d76949a31723f5ecf05c766cd811d",
+      "patch_sha256": "131fd08da5a9919df692244aa333ca08d547ada73b1173779a75fdc49718018b"
+    },
+    {
+      "path": "native/src/sepolicy/statement.cpp",
+      "size": 18058,
+      "sha256": "95420089c79ea42056bddc9256b12669c6452cf33a631146fc75c6659c1b1fbd",
+      "features": [
+        "MOD-012"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "aaf720466905bf841c3179f5a644b9a03f5758422d25abeca46598d127c7f239",
+      "patch_sha256": "529cf88d84265780f2d4bfbf6d49e7a94770fe5aee13c14643f40c306e2f984b"
+    },
+    {
+      "path": "native/src/sepolicy/rules.cpp",
+      "size": 5124,
+      "sha256": "8203dd2ccfb53569ad89f854e04d36243544ca7e5ee2ed6f486e90a01256fa12",
+      "features": [
+        "ZYG-005"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "c2e3184c2f24bf7943b796ec14a023ef63259253833ec9356247307d0a80ffba",
+      "patch_sha256": "5802619820b1fb5953fefd9e7d0a74f0ce07afe2c56770a3dbc1dbe7bbb4fd09"
+    },
+    {
+      "path": "native/src/core/bootstages.cpp",
+      "size": 14942,
+      "sha256": "575d21152129c730c3ec3b33ad0c8c867f72beb723aa9b3c736ba0056a5bb2ae",
+      "features": [
+        "HID-001",
+        "HID-002",
+        "HID-003",
+        "HID-004",
+        "HID-005",
+        "HID-006",
+        "HID-007",
+        "HID-008",
+        "HID-009",
+        "HID-010",
+        "HID-012",
+        "HID-015",
+        "ZYG-001",
+        "ZYG-002",
+        "ZYG-007",
+        "MOD-001",
+        "MOD-003",
+        "MOD-007",
+        "MOD-015",
+        "MOD-017",
+        "MOD-018",
+        "ID-001"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "d6cb71a84853771e042ac10e4709bc29b3b0b543cbcb374eb913510148311fb7",
+      "patch_sha256": "c24e8e72de8757882d25b97b8020a911b8736077fab1e97923ca59ca3b722b63"
+    },
+    {
+      "path": "native/src/core/package.cpp",
+      "size": 9623,
+      "sha256": "5235c9a00bbed7f7a5c1463a74c7cdf541bf6d84d85a46830869e7877f3474bf",
+      "features": [
+        "APP-003",
+        "SEC-002"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "f09219c171fb2ea48553437126c18a506a6550ba00b6ddeef4b59acd7ee75a92",
+      "patch_sha256": "4de9fb896238ab117325da91b927a048383eb8e355747e4ff20ab9b3cdb680ca"
+    },
+    {
+      "path": "native/src/core/db.cpp",
+      "size": 12167,
+      "sha256": "3d5478c2b9809b71f25833697cc86cc63dcd120e74faece5a00de261446c8176",
+      "features": [
+        "HID-001",
+        "HID-002",
+        "HID-003",
+        "HID-004",
+        "HID-005",
+        "HID-006",
+        "HID-007",
+        "HID-008",
+        "HID-009",
+        "HID-010",
+        "HID-015",
+        "ZYG-001",
+        "SU-001",
+        "ID-001"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "301846e9910de96fdf0debb22acb4713afd446921ab25d05f7776fc6cac78d8a",
+      "patch_sha256": "0edd5044a1169e1e48dd6357948aee843324d630c9df6ba014a05706aa7d14c9"
+    },
+    {
+      "path": "native/src/core/include/core.hpp",
+      "size": 3376,
+      "sha256": "fc630321c4166e2f2d84dbee87c969b0d86f3dd0073c7d4addfd3c601a924e52",
+      "features": [
+        "HID-001",
+        "HID-002",
+        "HID-003",
+        "HID-004",
+        "HID-005",
+        "HID-006",
+        "HID-007",
+        "HID-008",
+        "HID-009",
+        "HID-010",
+        "HID-012",
+        "HID-015",
+        "ZYG-001",
+        "ZYG-002",
+        "ZYG-007",
+        "MOD-004",
+        "ID-001"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "28e2bfbddf7d126d2a67ede6e1cddce905d73d91ce093bfaad32bde4ef914222",
+      "patch_sha256": "5681289a70b241e13455b68de9d5c7e9bb5a74c529330495b4a31c363d32b8c8"
+    },
+    {
+      "path": "native/src/core/include/db.hpp",
+      "size": 2624,
+      "sha256": "806a0ac9acc24e15bb79272f99fa046651304b1f702bd2bf48c2be95f724e8a5",
+      "features": [
+        "HID-001",
+        "HID-002",
+        "HID-003",
+        "HID-004",
+        "HID-005",
+        "HID-006",
+        "HID-007",
+        "HID-008",
+        "HID-009",
+        "HID-010",
+        "HID-015",
+        "ZYG-001",
+        "SU-001",
+        "ID-001"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "3d1ff85f988c4cf6d141225fa64360358efa1e01d77dc6ab8313f47a554f17a3",
+      "patch_sha256": "3d5f206a597bbc48a7b7e33089f52ca5fc299cf50a47a2554fcfd10a0f8fa96f"
+    },
+    {
+      "path": "native/src/core/include/resetprop.hpp",
+      "size": 889,
+      "sha256": "3e21fc591e1afd2de5494f26a9f37821a5732417021e396fff590faee99e75fa",
+      "features": [
+        "ORD-006",
+        "ORD-007"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Property callback serial argument and wait API.",
+      "comparison_sha256": "7fb9c9ec24c7c03adda540aaa948ac0369682fce896433bf324ac388eba3c6d7",
+      "patch_sha256": "8b4cc5fad4e4d53d66b6168101bb4e8b06010a2f5fc0ebef5c8f40b487009e62"
+    },
+    {
+      "path": "native/src/core/su/connect.cpp",
+      "size": 6878,
+      "sha256": "4e50a3076c55bf2bc2833faa99723236ec92275f3f14e4f35f40d85fb3f5aebc",
+      "features": [
+        "HID-013"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "cc3ea30daf22fdec62e1f2af6e2071629aea78ff4013cfdab570c405b358c605",
+      "patch_sha256": "d960a1a9d415cec41c7114b37c6a8cc474b354aa1cda440f36deed57dd1c5cf6"
+    },
+    {
+      "path": "native/src/core/su/su.cpp",
+      "size": 8038,
+      "sha256": "187c4e7d71d53331c8cb3922f86de597711994b6186cd20d4c5f9816603e2329",
+      "features": [
+        "SU-002"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "RequestCode protocol enum migration; no independent authorization contract.",
+      "comparison_sha256": "b9dc93c021b35ca893759afd0a5b246583279a5ad4c7f4e94974cc685cd48151",
+      "patch_sha256": "634aa52c98c6617e8b47b977479f19eed8eb7ac7d6b4ed7ed902d43aa7bad96a"
+    },
+    {
+      "path": "native/src/core/su/su_daemon.cpp",
+      "size": 13340,
+      "sha256": "1d1344660a3e8c21f35f9a2080d216aa0e2e3850ad0c0d73ccea9d73ae6bc984",
+      "features": [
+        "HID-014",
+        "SU-004",
+        "SEC-001"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "6524e8c61ffb4b3a235e95177a44f8b03633dccb83744bc3c266bb2ab40f681e",
+      "patch_sha256": "dae37277b71b6b94c06320317e10d67edf8344f96f14f5b2a55ed32454151c5f"
+    },
+    {
+      "path": "native/src/core/magisk.cpp",
+      "size": 7603,
+      "sha256": "6b7749a70443b59b87852f434ebb6bb14716f776bc6ff4f2ac2f31cfce8b7473",
+      "features": [
+        "SYS-001",
+        "SYS-002",
+        "SYS-003",
+        "SYS-004",
+        "SYS-005",
+        "SYS-006",
+        "SYS-007",
+        "SYS-008",
+        "SYS-009",
+        "SYS-010",
+        "HID-001",
+        "HID-002",
+        "HID-003",
+        "HID-004",
+        "HID-005",
+        "HID-006",
+        "HID-007",
+        "HID-008",
+        "HID-009",
+        "HID-010",
+        "HID-015",
+        "ZYG-001",
+        "MOD-018",
+        "ID-001"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "458024a4e3cd48d6a786827c3700daafd9ed0a655147297020b798b656fca3ca",
+      "patch_sha256": "57c74a5c6fe5de6a34d216e52a7b24363c8ae3fbd1d3b4fa149c4ed2dd16145e"
+    },
+    {
+      "path": "native/src/core/module.cpp",
+      "size": 22326,
+      "sha256": "cacc8c34b3232b48549f1909e29e449e8377af115fd8ec656f791d954b0c3af4",
+      "features": [
+        "HID-001",
+        "HID-002",
+        "HID-003",
+        "HID-004",
+        "HID-005",
+        "HID-006",
+        "HID-007",
+        "HID-008",
+        "HID-009",
+        "HID-010",
+        "HID-012",
+        "HID-015",
+        "ZYG-001",
+        "ZYG-002",
+        "ZYG-004",
+        "ZYG-007",
+        "MOD-002",
+        "MOD-004",
+        "MOD-005",
+        "MOD-006",
+        "MOD-007",
+        "MOD-008",
+        "MOD-009",
+        "MOD-011",
+        "MOD-020",
+        "ID-001"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "6752092f1fba9b469ba1a58e0b7545eee34de953da19a894fdfcd779de49e8c2",
+      "patch_sha256": "1e83fcdefe259db426648f2bb60c2a1d2f070ce91555beede491b624c9752ade"
+    },
+    {
+      "path": "native/src/core/deny/revert.cpp",
+      "size": 7158,
+      "sha256": "84dcf0650fb88acfb4582ad230aab2b50e65a55d0f80d5389783e1d2fa5876b0",
+      "features": [
+        "HID-001",
+        "HID-002",
+        "HID-003",
+        "HID-004",
+        "HID-005",
+        "HID-006",
+        "HID-007",
+        "HID-008",
+        "HID-009",
+        "HID-010",
+        "HID-012",
+        "HID-015",
+        "ZYG-001",
+        "MOD-001",
+        "MOD-002",
+        "MOD-003",
+        "MOD-007",
+        "MOD-018",
+        "ID-001"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "43d330f3061385124a83de0ee6d0c2c9c5b38364bc99610922bc0d2f47a6d922",
+      "patch_sha256": "fa92c5cb6099dd9c9754c7d201b7e391a5af2ef74cc136248ce8a330cfa04ee3"
+    },
+    {
+      "path": "native/src/core/deny/ptrace.cpp",
+      "size": 17694,
+      "sha256": "a0f332de31b5584dc241797c78e278cfef0d571b0ff546f226393b5e475e0828",
+      "features": [
+        "HID-001",
+        "HID-002",
+        "HID-003",
+        "HID-004",
+        "HID-005",
+        "HID-006",
+        "HID-007",
+        "HID-008",
+        "HID-009",
+        "HID-010",
+        "HID-012",
+        "HID-014",
+        "HID-015",
+        "ZYG-001",
+        "SU-004",
+        "ID-001"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "6ecc9dd5604e3d2cffbc6aac7956eafd87bf1e3f288aa577d765a5f56c4f2008",
+      "patch_sha256": "5284bc909e42c1ff34236cd76e44d388c1685c6df469f9e80d525bdb97f9368d"
+    },
+    {
+      "path": "native/src/core/deny/cli.cpp",
+      "size": 5185,
+      "sha256": "143df93ea43b296afb354b7dbbf726feec8ed0834491ed477211a96ef90f0b9e",
+      "features": [
+        "HID-001",
+        "HID-002",
+        "HID-003",
+        "HID-004",
+        "HID-005",
+        "HID-006",
+        "HID-007",
+        "HID-008",
+        "HID-009",
+        "HID-010",
+        "HID-015",
+        "ZYG-001",
+        "ID-001"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "eb656da6d847c74523a945fde2d52a13dde4e7ebecbf691953a8ab59cef0290c",
+      "patch_sha256": "3ad6bc8f6505e6d897fde7ec16f088fd971725b14bf595615d2ba26d5ae47ba7"
+    },
+    {
+      "path": "native/src/core/lib.rs",
+      "size": 1922,
+      "sha256": "c3c8274d624d8bf6209f081bfaad41d7acecb9aa02fcaf01ce931181b444effb",
+      "features": [
+        "ORD-006",
+        "SU-002",
+        "MOD-016"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Shared daemon/request/property CXX boundary and serialized boot stages.",
+      "comparison_sha256": "e49877156844d3b23d7f70c7a628b679ddb93bd6411922738d806d56b773b73c",
+      "patch_sha256": "1c45e849b58eb0085b0c4fd1ee6cdd311983941d3ed7b699bfd67b466be6577d"
+    },
+    {
+      "path": "native/src/core/resetprop/resetprop.cpp",
+      "size": 11567,
+      "sha256": "d863ea635a06dfb93d27e365b51b5c0560850cc6a2667cb08c97f86e380470f8",
+      "features": [
+        "ORD-006",
+        "ORD-007"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Property wait mode and long/read-only property mutation; serial semantics separately tracked.",
+      "comparison_sha256": "3e62f0fa3f9c39a166ef6827e2044b5e68722119cf7464272d68ec9011ecc267",
+      "patch_sha256": "fd70d777d5a9e4413796cd92071c16ffebafe6c380ea8d3ff1ff23f11be100af"
+    },
+    {
+      "path": "native/src/core/resetprop/persist.rs",
+      "size": 7662,
+      "sha256": "16b5eb0efcecf36629da15c2937757c87fc6f3baca7dbba566a6699531aa5e68",
+      "features": [
+        "ORD-006"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "2275a0d2f5b9cbc4fec5c658e356ae8696d5cfac130a7080aa7a921c82f0082d",
+      "patch_sha256": "5e13b97c873e7e45fc08b2b095c0f112b28cedfed3b3533aac3a8580d4f2bcbf"
+    },
+    {
+      "path": "native/src/core/node.hpp",
+      "size": 9996,
+      "sha256": "828c853324e65b3b871dbece29206d2d8ac7cc43ee140c7cae07f6022a4b4694",
+      "features": [
+        "MOD-007",
+        "MOD-009",
+        "MOD-020"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "35c34b37f310bf6f313393425c96f5e02bc1bdd7661afd9a1a16d965cdffa6f5",
+      "patch_sha256": "b7b11fa00993bb1a6f1bdffc024bb1911f39d7c9fef44abfdd4aebcc79e47f3d"
+    },
+    {
+      "path": "native/src/core/zygisk/module.hpp",
+      "size": 7097,
+      "sha256": "ab237c4ff41d1321631dff053e29fc1418a5506164c14ba770f7d6ef349a543f",
+      "features": [
+        "HID-001",
+        "HID-002",
+        "HID-003",
+        "HID-004",
+        "HID-005",
+        "HID-006",
+        "HID-007",
+        "HID-008",
+        "HID-009",
+        "HID-010",
+        "HID-015",
+        "ZYG-001",
+        "ZYG-007",
+        "ID-001"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "4352c4a9cd4e3300d08aa7b4d7291e692df48c57ab0e51e98fa2fc9a6862324f",
+      "patch_sha256": "6a4c333e1e711d5cc4ef41322d3740d2e620dc6c287a12a6da560f6c2257ce45"
+    },
+    {
+      "path": "native/src/core/zygisk/hook.cpp",
+      "size": 35466,
+      "sha256": "d801d828244584f8155ff3bf3bf6ebb27f3379cfb88fc82223bbdbf89e9e56f8",
+      "features": [
+        "HID-001",
+        "HID-002",
+        "HID-003",
+        "HID-004",
+        "HID-005",
+        "HID-006",
+        "HID-007",
+        "HID-008",
+        "HID-009",
+        "HID-010",
+        "HID-015",
+        "ZYG-001",
+        "ZYG-002",
+        "ZYG-004",
+        "ZYG-005",
+        "ZYG-007",
+        "ID-001"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "80b58d6b7256c7057de21a823cdbbaccdeec164ec5b36024789fdaa14c42d627",
+      "patch_sha256": "96f50cfdfb837294984f4e3fbbec61dce180fe08f4424cdc1217938570d9462a"
+    },
+    {
+      "path": "native/src/core/zygisk/main.cpp",
+      "size": 3125,
+      "sha256": "4f019e326b2612e038bf6eb0630f282b9173e834a8e41beac5a71057e9c09588",
+      "features": [
+        "ZYG-002",
+        "ZYG-007"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "7ae08ecbcb1d8b4f53d8263ce66f05675ec92198a1244943d9b18519230de5b5",
+      "patch_sha256": "0f5a127875bb1625161f4419bbc239a509f27f24f29238599a8ab1c537189f7d"
+    },
+    {
+      "path": "native/src/core/zygisk/api.hpp",
+      "size": 15928,
+      "sha256": "0b837b5eeae2e44c77d8adb25688c97f1bc36909170c4a64c15e0d08e731eb14",
+      "features": [
+        "ZYG-007"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "97b5c1e356b40ca73328ce54caa1a4e85421020e08ef64b8ba637eeb916c3c47",
+      "patch_sha256": "13cd14f74d09f3a0a9bcb93a6fb24b350ec06ff4d5d3a5a4c8138386c2b22583"
+    },
+    {
+      "path": "native/src/core/zygisk/ptrace.cpp",
+      "size": 9183,
+      "sha256": "9630e4c1a9e62dce01684f650e2fca0ac4ff88c120189a2257e063e69727b742",
+      "features": [
+        "HID-001",
+        "HID-002",
+        "HID-003",
+        "HID-004",
+        "HID-005",
+        "HID-006",
+        "HID-007",
+        "HID-008",
+        "HID-009",
+        "HID-010",
+        "HID-015",
+        "ZYG-001",
+        "ZYG-002",
+        "ZYG-007",
+        "ID-001"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "b38ddf6da6ba4a7ea5df2c5b7352f5ab0fe87471ae1ea735bc321e8e68eda8df",
+      "patch_sha256": "0604df93145338c4c7870ddd4ddb18a1ab3dc16c03755e340276831d5d8dea8e"
+    },
+    {
+      "path": "native/src/core/zygisk/gen_jni_hooks.py",
+      "size": 11943,
+      "sha256": "0a0793bc72982898f767bb2a9abc1dd5703a79b40c8d1a138e7d91a0e267dbaf",
+      "features": [
+        "ZYG-001",
+        "ZYG-003",
+        "ZYG-007"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "224763aa36c273e6a5a623150fffe08c057908df1f95105272e692ab28abb6e5",
+      "patch_sha256": "cf94416c5677cc9690d57073493498ef5937bdac107a78253fd8410e7e8edb5e"
+    },
+    {
+      "path": "native/src/core/zygisk/entry.cpp",
+      "size": 7322,
+      "sha256": "996dd543df15affc2606caa785cbe7b41c893af0e8dcb946aec7b4a41201a31a",
+      "features": [
+        "HID-001",
+        "HID-002",
+        "HID-003",
+        "HID-004",
+        "HID-005",
+        "HID-006",
+        "HID-007",
+        "HID-008",
+        "HID-009",
+        "HID-010",
+        "HID-012",
+        "HID-015",
+        "ZYG-001",
+        "ZYG-002",
+        "ZYG-005",
+        "ZYG-007",
+        "ID-001"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "24dc6c91c35e7b25b826df124786d95975414501c1908e2a62307b84322fd312",
+      "patch_sha256": "b9fe8c55eeb19efb39ecba1ba3fe95e97ebdce7b57fe25f01237b1985c4ca546"
+    },
+    {
+      "path": "native/src/core/zygisk/proc_monitor.cpp",
+      "size": 5924,
+      "sha256": "8c290b36ddda03c0e923c7187dd244d05497ead049f66e6a7dc82468ebffc7c8",
+      "features": [
+        "HID-001",
+        "HID-002",
+        "HID-003",
+        "HID-004",
+        "HID-005",
+        "HID-006",
+        "HID-007",
+        "HID-008",
+        "HID-009",
+        "HID-010",
+        "HID-012",
+        "HID-015",
+        "ZYG-001",
+        "ZYG-002",
+        "ZYG-007",
+        "ID-001"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "609e93aff8c91c118410ababca93a80b784b3795197d20d6fae5c6f03c4129d1",
+      "patch_sha256": "574b4652b0a048b2e83cc6fb6b6e4fea82c56e634f3c2ca0a2d09520bca6a972"
+    },
+    {
+      "path": "native/src/core/zygisk/jni_hooks.hpp",
+      "size": 22146,
+      "sha256": "f9755606fe5ad174d94387094e5ad3652d6a10a8a7abdf143328af24a066a807",
+      "features": [
+        "ZYG-001",
+        "ZYG-003",
+        "ZYG-007"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "b5e62b74bdb80dd1127fe05b14143ab44929bf03c609ccc2ae3de897516556e3",
+      "patch_sha256": "1bcb6897a6cf2f6e5842f19f763000ff471cb2a56e2f0f7a6128107ead404b9b"
+    },
+    {
+      "path": "native/src/core/zygisk/native_bridge.cpp",
+      "size": 710,
+      "sha256": "a4ccf4f969b056470518129913cbfc6000f21b44a9607c811ca6d49783c5ee18",
+      "features": [
+        "ZYG-002"
+      ],
+      "missing_in_first_git": true,
+      "rationale": "Unused alternate bridge source: USE_PTRACE=1 selects ptrace in this archive. File presence does not establish a shipped native-bridge runtime.",
+      "comparison_sha256": null,
+      "patch_sha256": "42448f7b6f28407a714576928d58ebee04a0ac63be4dd21d5b18d32c5d5a1dab"
+    },
+    {
+      "path": "native/src/core/zygisk/zygisk.hpp",
+      "size": 1689,
+      "sha256": "e156d23b063b66967bd3bfaf19b7138f0166a9507c354f066489086f77f44560",
+      "features": [
+        "HID-001",
+        "HID-002",
+        "HID-003",
+        "HID-004",
+        "HID-005",
+        "HID-006",
+        "HID-007",
+        "HID-008",
+        "HID-009",
+        "HID-010",
+        "HID-015",
+        "ZYG-001",
+        "ZYG-002",
+        "ZYG-005",
+        "ZYG-007",
+        "ID-001"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "d7974b7c2a234227171e9cb1c5e06cc76235c773e6b89c93fedb7b46a0bf1b30",
+      "patch_sha256": "0f8e230657ee407dfaebdc9a355fe34f03b556a170f4d56b24071c37e5229a99"
+    },
+    {
+      "path": "native/src/core/scripting.cpp",
+      "size": 6471,
+      "sha256": "d00fa22ab7f577234b7d5d462635e2ec3500c3e47ce205fe57ff74f88671ea38",
+      "features": [
+        "MOD-016",
+        "APP-005"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "BusyBox path fallback, module CLI and asynchronous package operations.",
+      "comparison_sha256": "a99be143cd5e4eae88ae5919924d8b24ef1ad249a485a3a000593499c21c8716",
+      "patch_sha256": "52bc70ca5fcf2c1f8a5288d2f53098835aeafcad03a8ea1936b4bd812d65d211"
+    },
+    {
+      "path": "native/src/core/logging.rs",
+      "size": 12458,
+      "sha256": "db55355884547255adaa1a5cfd56efc5e68543e3d6b1dddcf7a820a373417bd9",
+      "features": [
+        "ORD-006"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Daemon log-pipe API refactoring.",
+      "comparison_sha256": "ee3621bf18c419d2abedfee82c2fe4a19d00805d6337199f5d17c91f88b9294d",
+      "patch_sha256": "07fc87d4451b7be1dabce23a098854370e53b7f99aa581280828fe8f9eafe4ee"
+    },
+    {
+      "path": "native/src/core/daemon.rs",
+      "size": 2278,
+      "sha256": "d382ac54f50d636d172d2bb4d41a3357137a54b585d517b5c88d769e4486c472",
+      "features": [
+        "MOD-016",
+        "ORD-004"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Serialized boot stages, safe mode and recovery/data availability checks.",
+      "comparison_sha256": "1f8c64980273be826c2ea9e21921ea9181735fe79d16f6053c3ec179f8d3baf6",
+      "patch_sha256": "0b63b5b99b482a3908d7ec1aaa3c4d67543832065d7d8b3740f17797b5c8dd1f"
+    },
+    {
+      "path": "native/src/core/daemon.cpp",
+      "size": 14142,
+      "sha256": "3700470e93efd6194fb08040dbc9d4ce15cb703b80af068bafe422a589e9b8c5",
+      "features": [
+        "HID-001",
+        "HID-002",
+        "HID-003",
+        "HID-004",
+        "HID-005",
+        "HID-006",
+        "HID-007",
+        "HID-008",
+        "HID-009",
+        "HID-010",
+        "HID-011",
+        "HID-012",
+        "HID-013",
+        "HID-014",
+        "HID-015",
+        "ZYG-001",
+        "ZYG-007",
+        "SU-004",
+        "ID-001"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "355c09074925997b59b392700d0da35a3ba1b11be51f323eae2ecdce28fce32c",
+      "patch_sha256": "f31267065acd8d05d877ed0b96688ce992d4adec998cca076b62da69d8695fc6"
+    },
+    {
+      "path": "native/src/core/thread.cpp",
+      "size": 2820,
+      "sha256": "8fb154d129e5079dbed14aa21058a4ee269fc988cb0d0080314cd713c654f776",
+      "features": [
+        "SU-002",
+        "ORD-006"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Register atfork pool reset once at initialization.",
+      "comparison_sha256": "f7a7815c2909c8642b8467afaffe3b8b29d3b4187630e83568668422412ce5ec",
+      "patch_sha256": "c456fc485fbd1204a187bed6998c5b86bf45887a355e15bfae7be1ddd69a9e3f"
+    },
+    {
+      "path": "native/src/boot/cpio.rs",
+      "size": 19073,
+      "sha256": "8b78b2a971990bb4084337d4b92d40cb6abfc765ea40e745db9db299bda6acb4",
+      "features": [
+        "BOOT-006",
+        "ORD-006"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "082f5c02f917e90d562072d61332696a53f59dbab13caef5dd3682c175b67b92",
+      "patch_sha256": "611b20866b17e8929b5539c260a517fca05e21953c3b486e469e9d3e83f4fd59"
+    },
+    {
+      "path": "native/src/boot/ramdisk.rs",
+      "size": 6682,
+      "sha256": "75c6c02a32b92f5a1c3300c456720cbcd624a5f2294492de80dc2c52d58a3e23",
+      "features": [
+        "BOOT-006"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "34165eec6a511242613bdb3e95b7b90e2cccc72f2b98f3f138452a2753f7f91d",
+      "patch_sha256": "32182ac18f15415f3756e465e513ab28c8cccd4e198359d6e5b21c8823e8f649"
+    },
+    {
+      "path": "native/src/boot/lib.rs",
+      "size": 2006,
+      "sha256": "c85a35f97f6b5233c54439874b974b164e25c5cfdc45c19dca4c3bf45af34591",
+      "features": [
+        "ORD-001",
+        "ORD-006"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "XZ init compression bridge and Rust iterator capability.",
+      "comparison_sha256": "82ddbfd923deafcc7a124f51fa9fb09951ad8c3d50cc47cb7f88bb8a7d0feb76",
+      "patch_sha256": "238e008e7d662e8a0fe707c3ba7f813c362afccf18490dc7fd90f47da7ef06f4"
+    },
+    {
+      "path": "native/src/boot/dtb.rs",
+      "size": 8678,
+      "sha256": "93803b78fda802e4f8a6a1674d241dd489708e8f20c060cc55c57ba6181b6436",
+      "features": [
+        "ORD-006"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "DTB CLI usage formatting, no new behavior.",
+      "comparison_sha256": "33fe9ed2cb4250035267a138116b7834a8e597105f70f99c7b60c541a67354e6",
+      "patch_sha256": "75d8603fdf5c7895ed1e7480c6209265881d5062b477ca1a0c0cbf46a9753491"
+    },
+    {
+      "path": "native/src/boot/compress.cpp",
+      "size": 22131,
+      "sha256": "693190ce9f1f17109c5ac5caacac59a655d19f54502e1066b9e1e27013dc28ab",
+      "features": [
+        "ORD-001",
+        "ORD-006"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "Archive-to-first-frozen-Git delta assigned to the same behavior owners as the reviewed historical path; source presence does not attest the compiled archive.",
+      "comparison_sha256": "85f144d01c02039c9ee8c551b8562f03d9da4186008eaa5e512de232685e6bb2",
+      "patch_sha256": "3ce5478169f0a213f3ccd1095536ba99a7ce69f585e4f73c4707957e67e0d096"
+    },
+    {
+      "path": "native/src/boot/compress.hpp",
+      "size": 386,
+      "sha256": "74abc9607261e514cd0025b23f2405e7598f80380f4a19ddbb84be84011ed25b",
+      "features": [
+        "ORD-001",
+        "ORD-006"
+      ],
+      "missing_in_first_git": false,
+      "rationale": "XZ init compression API declarations.",
+      "comparison_sha256": "3d6f34010610c5842ee2093bf886aa7be1f8eefbf568d8781a2a33f485bb2d6b",
+      "patch_sha256": "ca7ffef7fd4d7442346c1ee5f35bb6702cbc7d7b14bf05b4279a15ac251f0406"
+    }
+  ]
+}

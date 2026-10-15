@@ -278,10 +278,21 @@ def stable_target_digest(report: Mapping[str, Any]) -> str:
     return _sha256(_canonical_bytes(stable_target_contract(report)))
 
 
-def instance_identity(path: Path) -> dict[str, Any]:
+def instance_identity(path: Path, kind: str = "file") -> dict[str, Any]:
     """Bind qualification to one stable host-owned instance metadata file."""
 
     from tools.system_mode.authorization import stable_regular_file
+
+    if kind == "ldplayer-v1":
+        from tools.system_mode.host_identity import ldplayer_identity
+
+        return ldplayer_identity(path)
+    if kind == "mumu-v1":
+        from tools.system_mode.host_identity import mumu_identity
+
+        return mumu_identity(path)
+    if kind != "file":
+        raise ValueError("unknown host instance identity kind")
 
     identity, _ = stable_regular_file(
         path,
@@ -294,7 +305,7 @@ def instance_identity(path: Path) -> dict[str, Any]:
 
 
 def verify_instance_identity(expected: Mapping[str, Any]) -> None:
-    actual = instance_identity(Path(str(expected["path"])))
+    actual = instance_identity(Path(str(expected["path"])), str(expected.get("kind", "file")))
     if actual != dict(expected):
         raise ValueError("host instance identity changed after qualification")
 
@@ -813,6 +824,16 @@ def _inventory_digest(inventory: list[dict[str, Any]]) -> str:
             # logical contents across boots, retaining mode, owner and label.
             for key in ("sha256", "size", "mtime_epoch"):
                 node.pop(key)
+        elif node["path"] == "/data/adb/sepolicy.rule" and node["kind"] == "file":
+            # Magisk regenerates the aggregate module policy at boot, even
+            # when no rule changes. Retain the observed timestamp in the
+            # record, but still compare every byte, permission and label.
+            node.pop("mtime_epoch")
+        elif (node["path"] == "/sepolicy" and node["kind"] == "file"
+              and node["selinux_context"] == "u:object_r:tmpfs:s0"):
+            # MuMu recreates its ramdisk policy copy on each cold boot. Its
+            # bytes and security metadata must match; its creation time cannot.
+            node.pop("mtime_epoch")
         paths.append(node)
     return _sha256(_canonical_bytes({"paths": paths}))
 
@@ -1538,6 +1559,8 @@ def qualify_target(
     endpoint: str | None = None,
     lifecycle_timeout: int = 300,
     artifact_path: Path | None = None,
+    instance_kind: str = "file",
+    repository_root: Path | None = None,
 ) -> dict[str, Any]:
     """Prove a challenged restore, then retain only a clean proven backup."""
 
@@ -1584,8 +1607,21 @@ def qualify_target(
 
     from tools.system_mode.authorization import digest_backup_path
 
-    identity = instance_identity(instance_identity_path)
-    baseline = collect_report(client, QualificationEvidence())
+    identity = instance_identity(instance_identity_path, instance_kind)
+    if instance_kind == "ldplayer-v1":
+        from tools.system_mode.host_identity import ldplayer_serials
+
+        if client.resolve_serial() not in ldplayer_serials(identity):
+            raise ValueError("ADB transport does not belong to the selected LDPlayer instance")
+    elif instance_kind == "mumu-v1":
+        if client.resolve_serial() != f"127.0.0.1:{identity['adb_port']}":
+            raise ValueError("ADB transport does not belong to the selected MuMu instance")
+
+    def candidate_report() -> dict[str, Any]:
+        options = {} if repository_root is None else {"repository_root": repository_root}
+        return collect_report(client, QualificationEvidence(), **options)
+
+    baseline = candidate_report()
     assessment = classify_report(baseline)
     blockers = (
         set(assessment["reason_codes"])
@@ -1608,6 +1644,17 @@ def qualify_target(
     selected_init = baseline["init"].get("selected_directory")
     if selected_init not in {"/system/etc/init", "/system/etc/init/hw"}:
         raise ValueError("target has no supported writable init directory")
+    if artifact_path is not None:
+        from tools.system_mode.artifact_space import persistent_payload_bytes
+        from tools.system_mode.doctor import _df_available_bytes
+
+        required = persistent_payload_bytes(artifact_path, baseline["device"]["abis"], artifact_digest)
+        available = _df_available_bytes(client, selected_init)
+        if available < required:
+            raise ValueError(
+                f"persistent System Mode payload needs at least {required} bytes; "
+                f"only {available} bytes are available on the init filesystem"
+            )
     baseline_inventory = _boot_critical_inventory(client, selected_init)
     baseline_inventory_sha256 = _inventory_digest(baseline_inventory)
 
@@ -1784,7 +1831,7 @@ def qualify_target(
             raise ProbeError("backup lifecycle changed the pre-backup recovery anchor")
         if _remote_file_evidence(client, data_anchor_path) != data_anchor_before:
             raise ProbeError("backup lifecycle changed the pre-backup /data recovery anchor")
-        after_backup = collect_report(client, QualificationEvidence())
+        after_backup = candidate_report()
         if stable_target_digest(after_backup) != baseline_digest:
             raise ProbeError("backup lifecycle changed the qualified target contract")
 
@@ -1857,7 +1904,7 @@ def qualify_target(
         cleanup_live_without_restore()
         if _inventory_digest(_boot_critical_inventory(client, selected_init)) != baseline_inventory_sha256:
             raise ProbeError("challenge cleanup did not return boot-critical baseline state")
-        clean_report = collect_report(client, QualificationEvidence())
+        clean_report = candidate_report()
         if stable_target_digest(clean_report) != baseline_digest:
             raise ProbeError("challenge cleanup did not return the baseline target contract")
         challenge_verified = True
@@ -1873,7 +1920,7 @@ def qualify_target(
         _assert_qualification_absent(client, residue_paths)
         if _inventory_digest(_boot_critical_inventory(client, selected_init)) != baseline_inventory_sha256:
             raise ProbeError("clean backup lifecycle changed boot-critical state")
-        after_clean_backup = collect_report(client, QualificationEvidence())
+        after_clean_backup = candidate_report()
         if stable_target_digest(after_clean_backup) != baseline_digest:
             raise ProbeError("clean backup lifecycle changed the baseline target contract")
         final_verified = True
@@ -1901,7 +1948,7 @@ def qualify_target(
         )
         _assert_qualification_absent(client, residue_paths)
         final_after = final_before
-        restored_report = collect_report(client, QualificationEvidence())
+        restored_report = candidate_report()
         restored_digest = stable_target_digest(restored_report)
         if restored_digest != baseline_digest:
             raise ValueError("clean external restore did not return the baseline target contract")
@@ -1930,7 +1977,7 @@ def qualify_target(
             def verify_failure_baseline(label: str) -> None:
                 if _inventory_digest(_boot_critical_inventory(client, selected_init)) != baseline_inventory_sha256:
                     raise ProbeError(f"failure recovery {label} inventory mismatch")
-                recovery_report = collect_report(client, QualificationEvidence())
+                recovery_report = candidate_report()
                 if stable_target_digest(recovery_report) != baseline_digest:
                     raise ProbeError(f"failure recovery {label} contract mismatch")
 

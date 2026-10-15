@@ -10,6 +10,12 @@ on:
       - "tests/system_mode/**"
       - "tools/system_mode/**"
       - "tools/next_system_baseline.py"
+      - "tools/port_ledger.py"
+      - "tools/early_mount_fixtures.py"
+      - "tests/test_port_ledger.py"
+      - "docs/port-ledger*"
+      - "docs/port-history/**"
+      - "docs/early-mount-pr8.*"
       - "docs/next-system-*.json"
       - "build.py"
       - ".gitmodules"
@@ -19,6 +25,36 @@ on:
   workflow_dispatch:
 
 jobs:
+  historical-inventory:
+    name: Audit historical Kitsune inventory
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out complete history
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Import preserved original Lite history
+        run: |
+          git bundle verify docs/port-history/original-lite.bundle
+          git fetch --no-tags docs/port-history/original-lite.bundle refs/audit/pr8/original-lite:refs/audit/pr8/original-lite
+
+      - name: Audit release observations and feature ownership
+        run: python3 tools/port_ledger.py --report out/port-ledger-audit.json
+
+      - name: Build early-mount qualification fixtures
+        run: python3 tools/early_mount_fixtures.py --output out/early-mount-fixtures
+
+      - name: Retain audit evidence including open gates
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: port-ledger-audit
+          path: |
+            out/port-ledger-audit.json
+            out/early-mount-fixtures
+          if-no-files-found: error
+
   host-contract:
     name: Test privileged host and transaction contracts
     runs-on: ubuntu-24.04
@@ -53,7 +89,7 @@ jobs:
   build:
     name: Build Magisk artifacts
     runs-on: macos-26
-    needs: [host-contract, security-audit]
+    needs: [host-contract, security-audit, historical-inventory]
     strategy:
       fail-fast: false
     steps:
@@ -71,7 +107,7 @@ jobs:
       - name: Verify next-system source baseline
         run: >-
           python tools/next_system_baseline.py
-          --manifest docs/next-system-pr7a.json --source
+          --manifest docs/next-system-pr8.json --source
 
       - name: Create disposable release signer
         shell: bash
@@ -104,7 +140,7 @@ jobs:
       - name: Verify next-system artifacts
         run: >-
           python tools/next_system_baseline.py
-          --manifest docs/next-system-pr7a.json --source --artifacts out
+          --manifest docs/next-system-pr8.json --source --artifacts out
           --report out/next-system-baseline-report.json
 
       - name: Stop gradle daemon

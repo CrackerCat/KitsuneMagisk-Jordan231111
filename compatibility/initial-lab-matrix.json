@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_at": "2026-08-01T16:43:50Z",
+  "reviewed_at": "2026-10-08T15:06:43Z",
   "lanes": [
     {
       "family": "MuMu",
@@ -10,21 +10,15 @@
     },
     {
       "family": "LDPlayer",
-      "status": "not_run",
-      "record": null,
-      "reason": "No clean LDPlayer snapshot or ADB endpoint was available in this workspace."
-    },
-    {
-      "family": "Nox",
-      "status": "not_run",
-      "record": null,
-      "reason": "No clean Nox snapshot or ADB endpoint was available in this workspace."
+      "status": "experimental",
+      "record": "records/2026-10-08-ldplayer14-pr8.json",
+      "reason": "Prepared LDPlayer 14 passed the exact Next install, root/module, same-version reinstall, backend uninstall and external restore checks. Current-line installation failed and rolled back on the paired baseline; distinct-version upgrade remains unrun."
     },
     {
       "family": "BlueStacks",
-      "status": "not_run",
-      "record": null,
-      "reason": "No stopped-image adapter fixture or clean BlueStacks instance was available in this workspace."
+      "status": "blocked",
+      "record": "records/2026-10-08-bluestacks-tiramisu-pr8.json",
+      "reason": "Read-only paired preflights on rooted BlueStacks 5.22.265.1013 Tiramisu64 reject read-only backing, untrusted init metadata and unqualified policy state. A qualified stopped-image/bootstrap adapter is missing; no candidate APK was installed."
     },
     {
       "family": "immutable-negative",
@@ -37,6 +31,12 @@
       "status": "observed",
       "record": "records/2026-07-22-android-studio-api36-arm64-negative.json",
       "reason": "A fresh Android 16/API 36 Google Play ARM64 AVD exposed EROFS, enforcing AVB/dm-verity, and no bootstrap root; the doctor failed closed without mutation."
+    },
+    {
+      "family": "MuMu-Windows-Android12",
+      "status": "experimental",
+      "record": "records/2026-10-08-mumu12-windows-pr8.json",
+      "reason": "Exact Next install, three vendor-root-off cold boots, root/module smoke, manager uninstall, uninstalled boot and full external restore passed. Reinstall was blocked before writes by capacity; the current-line install failed and rolled back on the paired baseline."
     }
   ]
 }

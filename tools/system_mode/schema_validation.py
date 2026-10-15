@@ -83,6 +83,17 @@ def validate_schema_instance(
         )
         return
 
+    if "oneOf" in schema:
+        matches = 0
+        for choice in schema["oneOf"]:
+            try:
+                validate_schema_instance(instance, choice, root_schema=root, path=path)
+            except SchemaValidationError:
+                continue
+            matches += 1
+        if matches != 1:
+            raise SchemaValidationError(f"{path}: expected exactly one schema alternative")
+
     if "const" in schema and not _json_equal(instance, schema["const"]):
         raise SchemaValidationError(f"{path}: expected constant {schema['const']!r}")
     if "enum" in schema and not any(

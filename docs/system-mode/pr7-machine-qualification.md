@@ -41,6 +41,13 @@ remain in the sealed record; permissions, ownership and SELinux labels must stil
 shared-memory file or rollback journal blocks the generic qualifier until checkpointed. External disk
 backups retain their exact byte digests; other persistent files retain exact byte and metadata checks.
 
+Magisk also regenerates `/data/adb/sepolicy.rule` during a normal boot. Its observed modification
+time is retained in the record but excluded from comparison; its bytes, size, mode, ownership and
+SELinux label must still match. Timestamps of unrelated persistent files remain significant.
+The observed MuMu ramdisk `/sepolicy` copy has the same exception only when it is a regular
+file labelled `u:object_r:tmpfs:s0`: boot recreates that copy with identical policy bytes. Its
+raw timestamp remains recorded and its complete contents and security metadata still match.
+
 The record is authenticated with HMAC-SHA256 using a separate owner-only 32-byte host key. The key
 is created and validated before the first guest mutation; it is never embedded in the record.
 Editing or synthesizing JSON, using another key, weakening key permissions, or losing the key makes
@@ -91,6 +98,39 @@ clean install. Current-format upgrades and recovery remain supported.
 The host verifier requires POSIX `openat`/`O_NOFOLLOW`, process-group, and `/dev/fd` semantics.
 Native reparse-point-safe Windows lifecycle integration belongs to concrete commercial-emulator
 adapters.
+
+PR8 adds explicit `--instance-kind ldplayer-v1` for the observed LDPlayer standalone-system
+layout. It reads the real `vms/leidianN/leidian.vbox`, adjacent vendor configuration, private disk
+layout, and controller executable. Its identity binds the VM UUID, hardware identifiers, media
+registry, canonical paths, controller digest, and the corresponding ADB transport. Vendor metadata
+rewrites during reboot/restore may change an inode without changing those identifiers. This does
+not relax generic file identity, permit arbitrary identity-marker files, or authorize a clone.
+
+`--instance-kind mumu-v1` covers the observed Windows Global Android 12 layout. Select its real
+`vms/MuMuPlayerGlobal-12.0-N/MuMuPlayerGlobal-12.0-N.nemu`. The identity binds the VM UUID,
+phone identifiers, MAC, controller, local ADB forwarding and disk attachments, including the
+full SHA-256 of the shared read-only system base and private system-difference disk layout.
+Changes to those fields fail qualification; routine metadata rewrites do not. Android 15 and
+other backing-chain layouts are rejected. The wrapper must back up the complete private disk
+set and retain/verify the immutable base; it must never overwrite another instance's shared base.
+
+The Windows lab uses MSYS2 with an ACL-enabled private working directory and real POSIX symlink
+semantics. The ordinary native Windows Python interpreter still lacks the required no-follow
+APIs. Lifecycle wrappers must establish the Windows environment needed by the vendor controller,
+including `PATHEXT`, and verify stopped/running postconditions rather than trusting an exit code
+alone. The Windows matrix covers LDPlayer, MuMu Android 12 and BlueStacks. The exact paired
+results and restored baselines are recorded in [the PR8 lab](pr8-windows-2026-10-08.md).
+
+Use `--source-root /absolute/clean/candidate-worktree` on `qualify`, `doctor`, and `authorize` to
+compare clean candidates with one host driver. The candidate commit must still match the APK's
+embedded clean source identity. All host modules, schemas/contracts, and the artifact verifier are
+independently included in the probe digest; changing the driver invalidates prior qualification.
+
+For APK-backed qualification, PR8 checks a candidate-specific persistent-space lower bound before
+writing probes. It includes the full manager APK, selected native payload, scripts and separate
+rescue payload. Filesystem allocation and policy/journal overhead can need more; transactional
+ENOSPC handling remains required. The factory LDPlayer test image exposed this boundary with
+roughly 24 MiB free and a roughly 39 MiB debug APK.
 
 ## Create a qualification
 
