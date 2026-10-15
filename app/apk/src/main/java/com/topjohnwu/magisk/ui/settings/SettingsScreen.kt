@@ -197,8 +197,12 @@ private fun AppSettingsSection(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow)
     ) {
         // Update Channel
+        val updateChannelValues = remember {
+            listOf(Config.Value.STABLE_CHANNEL, Config.Value.BETA_CHANNEL, Config.Value.CUSTOM_CHANNEL)
+        }
         val updateChannelEntries = remember {
-            resources.getStringArray(CoreR.array.update_channel).toList()
+            val labels = resources.getStringArray(CoreR.array.update_channel)
+            updateChannelValues.map { labels[it] }
         }
         var updateChannel by remember {
             mutableIntStateOf(Config.updateChannelIndex)
@@ -208,12 +212,12 @@ private fun AppSettingsSection(
         SettingsDropdown(
             title = stringResource(CoreR.string.settings_update_channel_title),
             items = updateChannelEntries,
-            selectedIndex = updateChannel,
+            selectedIndex = updateChannelValues.indexOf(updateChannel).coerceAtLeast(0),
             onSelectedIndexChange = { index ->
-                updateChannel = index
-                Config.updateChannel = index
+                updateChannel = updateChannelValues[index]
+                Config.updateChannel = updateChannel
                 Info.resetUpdate()
-                if (index == Config.Value.CUSTOM_CHANNEL && Config.customChannelUrl.isBlank()) {
+                if (updateChannel == Config.Value.CUSTOM_CHANNEL && Config.customChannelUrl.isBlank()) {
                     showUrlDialog = true
                 }
             }
@@ -613,14 +617,18 @@ private fun UpdateChannelUrlDialog(
     modifier: Modifier = Modifier
 ) {
     var url by rememberSaveable { mutableStateOf(Config.customChannelUrl) }
+    val valid = remember(url) {
+        runCatching { com.topjohnwu.magisk.update.UpdateClient.channelForUrl(url.trim()) }.isSuccess
+    }
 
     MagiskDialog(
         modifier = modifier,
         onDismissRequest = onDismiss,
         title = stringResource(CoreR.string.settings_update_custom_msg),
         confirmText = stringResource(android.R.string.ok),
+        confirmEnabled = valid,
         onConfirm = {
-            Config.customChannelUrl = url
+            Config.customChannelUrl = url.trim()
             Info.resetUpdate()
             onDismiss()
         },
@@ -631,6 +639,8 @@ private fun UpdateChannelUrlDialog(
             OutlinedTextField(
                 value = url,
                 onValueChange = { url = it },
+                isError = url.isNotBlank() && !valid,
+                supportingText = { Text(stringResource(CoreR.string.update_feed_hint)) },
                 shape = RoundedCornerShape(12.dp),
                 modifier = Modifier.fillMaxWidth()
             )

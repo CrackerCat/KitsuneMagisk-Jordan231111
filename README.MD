@@ -10,8 +10,9 @@ feature completion and production qualification remain gated by the [roadmap](DE
 
 The manager installs as `io.github.huskydg.magisk.next`, reports a
 `0.1.0-dev-kitsune.<source>` version, and uses the `next-system-experimental` channel identity. It
-uses a separate package from official Magisk and the prior Kitsune manager. Automatic update checks default
-to off because this branch does not yet have a project-owned update endpoint.
+uses a separate package from official Magisk and the prior Kitsune manager. Automatic update checks remain off during
+qualification. The [authenticated update service](docs/update-service.md) is being implemented;
+public activation remains gated.
 
 ## Important status
 

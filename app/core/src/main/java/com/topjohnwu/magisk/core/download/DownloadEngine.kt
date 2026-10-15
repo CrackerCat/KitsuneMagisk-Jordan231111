@@ -30,6 +30,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.ensureActive
 import okhttp3.ResponseBody
 import timber.log.Timber
 import java.io.InputStream
@@ -149,8 +151,20 @@ class DownloadEngine(session: DownloadSession) : DownloadSession by session, Dow
         notifyUpdate(subject.notifyId)
         CoroutineScope(job + Dispatchers.IO).launch {
             try {
-                val stream = network.fetchFile(subject.url).toProgressStream(subject)
-                processor.handle(stream, subject)
+                if (subject is Subject.App) {
+                    val coroutine = currentCoroutineContext()
+                    processor.handleApp(subject) { current, total ->
+                        coroutine.ensureActive()
+                        broadcast(current.toFloat() / total, subject)
+                        notifyUpdate(subject.notifyId) {
+                            it.setContentTitle(subject.title)
+                                .setProgress(1000, (current * 1000 / total).toInt(), false)
+                        }
+                    }
+                } else {
+                    val stream = network.fetchFile(subject.url).toProgressStream(subject)
+                    processor.handle(stream, subject)
+                }
                 val activity = AppContext.foregroundActivity
                 if (activity != null && subject.autoLaunch) {
                     notifyRemove(subject.notifyId)

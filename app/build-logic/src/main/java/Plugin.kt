@@ -24,6 +24,7 @@ private val defaultAbis = setOf("armeabi-v7a", "x86", "arm64-v8a", "x86_64")
 object Config {
     lateinit var identity: Map<*, *>
     lateinit var generatedDir: File
+    lateinit var configFile: File
 
     fun buildInfo(variant: String) = File(generatedDir, "build-info-$variant.json").readText().trim()
     fun buildId(variant: String) = (JsonSlurper().parseText(buildInfo(variant)) as Map<*, *>)["build_id"] as String
@@ -67,6 +68,7 @@ class MagiskPlugin : Plugin<Project> {
         // Load config.prop
         val configPath = findProperty("configPath") as String?
         val configFile = rootFile(configPath ?: "config.prop")
+        Config.configFile = configFile
         if (configFile.exists()) {
             configFile.inputStream().use {
                 val config = Properties()

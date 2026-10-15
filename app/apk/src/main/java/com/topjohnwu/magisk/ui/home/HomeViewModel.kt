@@ -129,7 +129,7 @@ class HomeViewModel(
     fun onManagerPressed() {
         when (_uiState.value.appState) {
             State.LOADING -> showSnackbar(CoreR.string.loading)
-            State.INVALID -> showSnackbar(CoreR.string.no_connection)
+            State.INVALID -> showSnackbar(CoreR.string.update_unavailable)
             else -> _uiState.update { it.copy(showManagerInstall = true) }
         }
     }

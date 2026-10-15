@@ -224,8 +224,27 @@ fun Project.setupCoreLib() {
     }
 }
 
-fun Project.setupAppCommon() {
+fun Project.setupAppCommon(requireReleaseSigner: Boolean = true) {
     setupCommon()
+    if (requireReleaseSigner) {
+        val sourceRoot = rootFile(".").canonicalFile.toPath()
+        tasks.matching { it.name == "preReleaseBuild" }.configureEach {
+            doFirst {
+                check(listOf("keyStore", "keyStorePass", "keyAlias", "keyPass").all(Config::contains)) {
+                    "Release APKs require all four external signing properties"
+                }
+                check(!Config["keyAlias"].equals("androiddebugkey", ignoreCase = true)) {
+                    "The Android debug key cannot sign release APKs"
+                }
+                for (file in listOf(Config.configFile, rootFile(Config["keyStore"]!!))) {
+                    check(file.isFile && !file.absoluteFile.toPath().normalize().startsWith(sourceRoot) &&
+                            !file.canonicalFile.toPath().startsWith(sourceRoot)) {
+                        "Release signing configuration and keystore must be outside the checkout"
+                    }
+                }
+            }
+        }
+    }
 
     androidApp {
         signingConfigs {
@@ -284,6 +303,7 @@ fun Project.setupAppCommon() {
                 .toTransformMany(SingleArtifact.APK)
             val signingConfig = androidApp.buildTypes.getByName(variant.buildType!!).signingConfig
             commentTask.configure {
+                updateTrust.set(rootFile("updates/trust.json"))
                 this.transformationRequest = transformationRequest
                 this.signingConfig = signingConfig
                 this.outFolder.set(layout.buildDirectory.dir("outputs/apk/${variant.name}"))
@@ -341,7 +361,8 @@ const val SHAMIKO_CHECKSUM =
     "93754a038c2d8f0e985bad45c7303b96f70a93d8335060e50146f028d3a9b13f"
 
 fun Project.setupTestApk() {
-    setupAppCommon()
+    // Instrumentation is minified as Release even for a debug-signed test run.
+    setupAppCommon(requireReleaseSigner = false)
 
     androidComponents {
         onVariants { variant ->

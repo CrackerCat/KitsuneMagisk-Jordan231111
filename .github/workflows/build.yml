@@ -20,6 +20,10 @@ on:
       - "build.py"
       - "kitsune-build.json"
       - "tools/build_info.py"
+      - "tools/update_service.py"
+      - "tools/UpdateSigner.java"
+      - "updates/**"
+      - "tests/test_update_service.py"
       - "tests/test_build_info.py"
       - ".gitmodules"
       - ".github/workflows/build.yml"
@@ -110,11 +114,12 @@ jobs:
       - name: Verify next-system source baseline
         run: >-
           python tools/next_system_baseline.py
-          --manifest docs/next-system-pr9.json --source
+          --manifest docs/next-system-pr10.json --source
 
       - name: Create disposable release signer
         shell: bash
         run: |
+          umask 077
           keytool -genkeypair -noprompt \
             -keystore "$RUNNER_TEMP/next-system-release.jks" \
             -storepass next-system-local \
@@ -136,6 +141,9 @@ jobs:
       - name: Build debug
         run: ./build.py -v all
 
+      - name: Prepare signed update fault fixtures
+        run: scripts/env.py python3 tools/update_service.py test-fixtures --config "$NEXT_SYSTEM_CONFIG"
+
       - name: Lint the app and its dependencies
         working-directory: app
         run: ../scripts/env.py ./gradlew :apk:lintDebug :shared:lintDebug :stub:lintDebug
@@ -143,7 +151,7 @@ jobs:
       - name: Verify next-system artifacts
         run: >-
           python tools/next_system_baseline.py
-          --manifest docs/next-system-pr9.json --source --artifacts out
+          --manifest docs/next-system-pr10.json --source --artifacts out
           --report out/next-system-baseline-report.json
 
       - name: Stop gradle daemon

@@ -41,7 +41,7 @@ class BuildInfoTest(unittest.TestCase):
             '\nprintf "%s\\n" "$MAGISK_VER_CODE" "$KITSUNE_APP_VERSION_CODE" '
             '"$KITSUNE_PROTOCOL_VERSION" "$KITSUNE_BUILD_ID" "$KITSUNE_SOURCE_DIRTY"',
         ], text=True).splitlines()
-        self.assertEqual(result, ["31000", "31001", "1", info["build_id"], "false"])
+        self.assertEqual(result, ["31000", str(info["app_version_code"]), "1", info["build_id"], "false"])
 
     def test_invalid_specification_is_rejected(self):
         spec = build_info.read_spec()
@@ -110,6 +110,33 @@ class BuildInfoTest(unittest.TestCase):
             before = path.stat().st_mtime_ns
             build_info.write_if_changed(path, "same\n")
             self.assertEqual(before, path.stat().st_mtime_ns)
+
+    def test_release_signing_requires_external_complete_identity(self):
+        with tempfile.TemporaryDirectory() as directory:
+            parent = Path(directory)
+            root = parent / "checkout"
+            root.mkdir()
+            key = parent / "key.p12"
+            key.write_bytes(b"not a real key; path validation only")
+            config = parent / "signing.prop"
+            config.touch()
+            fields = dict(keyStore=str(key), keyStorePass="test", keyAlias="test", keyPass="test")
+            build_info.validate_signing_config(fields, config, root)
+            for field in fields:
+                missing = dict(fields)
+                del missing[field]
+                with self.subTest(missing=field), self.assertRaises(ValueError):
+                    build_info.validate_signing_config(missing, config, root)
+            with self.assertRaises(ValueError):
+                build_info.validate_signing_config(dict(fields, keyAlias="androiddebugkey"), config, root)
+            internal = root / "signing.prop"
+            internal.touch()
+            with self.assertRaises(ValueError):
+                build_info.validate_signing_config(fields, internal, root)
+            internal_key = root / "key.p12"
+            internal_key.write_bytes(b"fixture")
+            with self.assertRaises(ValueError):
+                build_info.validate_signing_config(dict(fields, keyStore=str(internal_key)), config, root)
 
     @unittest.skipUnless(shutil.which("rustc"), "Requires Rust for the native APK parser regression")
     def test_native_manager_compatibility_is_distinct_from_bad_signature(self):

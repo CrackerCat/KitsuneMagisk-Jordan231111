@@ -9,17 +9,22 @@ import com.android.tools.build.apkzlib.zip.ZFile
 import com.android.tools.build.apkzlib.zip.ZFileOptions
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFiles
+import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 import java.io.File
+import java.io.ByteArrayInputStream
 import java.util.jar.JarFile
 
 abstract class TransformApkTask : DefaultTask() {
+    @get:InputFile
+    abstract val updateTrust: RegularFileProperty
     @get:Input
     abstract val signingConfig: Property<ApkSigningConfig>
 
@@ -63,13 +68,15 @@ abstract class TransformApkTask : DefaultTask() {
         }
         outFile.parentFile?.mkdirs()
         inFile.copyTo(outFile, overwrite = true)
-        ZFiles.apk(outFile, options).use {
-            SigningExtension(signingOptions).register(it)
-            it.get(IncrementalPackager.APP_METADATA_ENTRY_PATH)?.delete()
-            it.get(IncrementalPackager.VERSION_CONTROL_INFO_ENTRY_PATH)?.delete()
-            it.get(JarFile.MANIFEST_NAME)?.delete()
-            it.get("assets/PublicSuffixDatabase.list")?.delete()
-            transformations.get().forEach { transform -> transform(it) }
+        ZFiles.apk(outFile, options).use { zip ->
+            SigningExtension(signingOptions).register(zip)
+            zip.get(IncrementalPackager.APP_METADATA_ENTRY_PATH)?.delete()
+            zip.get(IncrementalPackager.VERSION_CONTROL_INFO_ENTRY_PATH)?.delete()
+            zip.get(JarFile.MANIFEST_NAME)?.delete()
+            zip.get("assets/PublicSuffixDatabase.list")?.delete()
+            zip.add("assets/manager-cert.der", ByteArrayInputStream(info.certificate.encoded))
+            updateTrust.get().asFile.inputStream().use { zip.add("assets/update-trust.json", it) }
+            transformations.get().forEach { transform -> transform(zip) }
         }
 
         outFile
