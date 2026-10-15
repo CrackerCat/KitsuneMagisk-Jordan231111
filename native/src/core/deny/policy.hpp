@@ -11,7 +11,7 @@ inline bool valid_name(std::string_view name, bool process) {
         if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') ||
             (c >= '0' && c <= '9') || c == '_') continue;
         if (c == '.') { dot = true; continue; }
-        if (process && (c == ':' || c == '$' || c == '-')) continue;
+        if (process && (c == ':' || c == '$' || c == '-' || c >= 0x80)) continue;
         return false;
     }
     return process || (dot && name.front() != '.' && name.back() != '.');

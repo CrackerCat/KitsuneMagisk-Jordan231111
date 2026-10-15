@@ -18,6 +18,7 @@ int main() {
     assert(valid_pair("com.example", "com.example:worker"));
     assert(valid_pair("isolated", "com.example:service"));
     assert(valid_pair("isolated", "com.example:service:com.example.Container$Service"));
+    assert(valid_pair("isolated", "com.example:service:com.example.服务"));
     assert(valid_pair("webview_zygote", "webview_zygote"));
     for (auto bad : {"", "'", "a;b", "a/b", "a b", "a\\b", "a%", "a\n"}) {
         assert(!valid_pair("com.example", bad));
