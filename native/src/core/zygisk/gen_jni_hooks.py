@@ -100,6 +100,7 @@ jintArray = JArray(jint)
 jstring = JType("jstring", "Ljava/lang/String;")
 jboolean = JType("jboolean", "Z")
 jlong = JType("jlong", "J")
+jlongArray = JArray(jlong)
 void = JType("void", "V")
 
 
@@ -647,6 +648,14 @@ spec_nubia_u = SpecializeApp(
     ],
 )
 
+# GrapheneOS Android 14 and QPR2 append their extra arguments to the corresponding
+# AOSP signatures. Keep both published Kitsune variants; unknown signatures still
+# take the normal fail-closed path.
+fas_graphene_u = ForkApp("graphene_u", [*fas_r.args, Anon(jlongArray)])
+fas_graphene_u_qpr2 = ForkApp("graphene_u_qpr2", [*fas_u.args, Anon(jlongArray)])
+spec_graphene_u = SpecializeApp("graphene_u", [*spec_r.args, Anon(jlongArray)])
+spec_graphene_u_qpr2 = SpecializeApp("graphene_u_qpr2", [*spec_u.args, Anon(jlongArray)])
+
 server_l = ForkServer(
     "l",
     [
@@ -714,6 +723,8 @@ with open("jni_hooks.hpp", "w") as f:
                 fas_p,
                 fas_o,
                 fas_l,
+                fas_graphene_u,
+                fas_graphene_u_qpr2,
                 fas_nubia_u,
                 fas_samsung_p,
                 fas_samsung_o,
@@ -731,6 +742,8 @@ with open("jni_hooks.hpp", "w") as f:
                 spec_u,
                 spec_r,
                 spec_q,
+                spec_graphene_u,
+                spec_graphene_u_qpr2,
                 spec_nubia_u,
                 spec_xr_u,
                 spec_samsung_q,

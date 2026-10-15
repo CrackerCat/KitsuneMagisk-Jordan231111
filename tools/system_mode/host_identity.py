@@ -4,8 +4,11 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 from pathlib import Path
 import re
+import stat
+import struct
 import uuid
 import xml.etree.ElementTree as ET
 
@@ -15,6 +18,7 @@ from .authorization import stable_regular_file
 LDPLAYER_IDENTITY = "ldplayer-v1"
 MAX_METADATA_BYTES = 1024 * 1024
 VBOX = "{http://www.virtualbox.org/}"
+MUMU_MAC_APP = Path("/Applications/MuMuPlayer Pro.app")
 
 
 def _digest(value: object) -> str:
@@ -143,6 +147,111 @@ def ldplayer_identity(path: Path) -> dict[str, object]:
 def ldplayer_serials(identity: dict[str, object]) -> set[str]:
     index = int(identity["index"])
     return {f"127.0.0.1:{5555 + 2 * index}", f"emulator-{5554 + 2 * index}"}
+
+
+def _private_qcow2(path: Path) -> dict[str, object]:
+    """Read immutable layout fields, never hash a live writable disk as its identity."""
+    if path.resolve(strict=True) != path:
+        raise ValueError("MuMu disk path is redirected")
+    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
+    try:
+        before = os.fstat(fd)
+        if not stat.S_ISREG(before.st_mode) or before.st_nlink != 1:
+            raise ValueError("MuMu disk must be a private regular file")
+        header = os.pread(fd, 104, 0)
+        if len(header) != 104 or header[:8] != b"QFI\xfb\x00\x00\x00\x03":
+            raise ValueError("MuMu requires a version 3 QCOW2 disk")
+        backing, backing_size, cluster_bits, size, encryption = struct.unpack_from(
+            ">QIIQI", header, 8
+        )
+        snapshots = struct.unpack_from(">I", header, 60)[0]
+        incompatible, compatible, autoclear, refcount, length = struct.unpack_from(
+            ">QQQII", header, 72
+        )
+        # Dirty refcounts can change while the vendor runs. Corrupt/external-data and
+        # unknown layouts cannot be recovered by copying just these two disk files.
+        if (backing or backing_size or encryption or snapshots or incompatible & ~1
+                or compatible or autoclear or not 9 <= cluster_bits <= 21 or size == 0
+                or refcount != 4 or length not in (104, 112) or before.st_size < length):
+            raise ValueError("unsupported MuMu QCOW2 backing or feature layout")
+        current = path.lstat()
+        if (path.resolve(strict=True) != path or current.st_nlink != 1
+                or (current.st_dev, current.st_ino) != (before.st_dev, before.st_ino)):
+            raise ValueError("MuMu disk replaced while reading its layout")
+        # Metadata updates elsewhere in a running QCOW2 are expected, but the fields
+        # used above must come from one coherent header.
+        after = bytearray(os.pread(fd, 104, 0))
+        expected = bytearray(header)
+        if len(after) != 104 or struct.unpack_from(">Q", after, 72)[0] & ~1:
+            raise ValueError("MuMu disk layout changed during capture")
+        after[72:80] = expected[72:80]  # only the dirty bit may change
+        if after != expected:
+            raise ValueError("MuMu disk layout changed during capture")
+        return {"path": str(path), "version": 3, "cluster_bits": cluster_bits,
+                "virtual_size": size, "header_length": length}
+    finally:
+        os.close(fd)
+
+
+def mumu_macos_identity(path: Path) -> dict[str, object]:
+    """Bind the Mac 1.9 private, standalone QCOW2 layout; ignore only boot/UI state."""
+    bundle = path.parent.parent
+    match = re.fullmatch(r"mumu_(0|[1-9][0-9]*)_[0-9]{8}_[0-9]{6}\.gmad", bundle.name)
+    if (not path.is_absolute() or path.name != "vm.json" or path.parent.name != "setting"
+            or bundle.parent.name != "bundles" or match is None or int(match[1]) > 999):
+        raise ValueError("Mac MuMu identity requires its bundle/setting/vm.json")
+    captured = []
+
+    def read(file: Path, capture: bool = True):
+        identity, content = stable_regular_file(
+            file, purpose="Mac MuMu identity", capture=capture,
+            max_bytes=MAX_METADATA_BYTES if capture else None,
+        )
+        if Path(identity["path"]) != file:
+            raise ValueError("Mac MuMu identity contains a redirected path")
+        captured.append((file, identity))
+        return identity, content
+
+    metadata, raw = read(path)
+    _, version_raw = read(bundle / "config.json")
+    controller, _ = read(MUMU_MAC_APP / "Contents/MacOS/mumutool", False)
+    engine, _ = read(MUMU_MAC_APP / "Contents/MacOS/MuMu Android Device.app/Contents/MacOS/MuMu Android Device", False)
+    try:
+        config = json.loads(raw, object_pairs_hook=_unique_object)
+        version = json.loads(version_raw, object_pairs_hook=_unique_object)["app_version"]
+        if not isinstance(config, dict) or not isinstance(version, str) or not version:
+            raise ValueError("invalid Mac MuMu configuration")
+        hardware = {key: config[key] for key in (
+            "macAddress", "phonePropIMEI", "phonePropMiit", "phonePropBrand", "phonePropModel",
+            "simulationProps", "vmName", "vmDeviceType", "vmCpuCount", "vmMemoryOfMB",
+        )}
+        for key in ("macAddress", "phonePropIMEI", "vmName"):
+            if not isinstance(hardware[key], str) or not hardware[key]:
+                raise ValueError("Mac MuMu lacks a hardware identifier")
+        if type(config.get("systemFilePermissionType")) is not int or config["systemFilePermissionType"] != 1:
+            raise ValueError("Mac MuMu system disk is not configured writable")
+        custom = config["customAdbPort"]
+        index = int(match[1])
+        if type(custom) is not int or custom != 0 and not 1024 <= custom <= 65535:
+            raise ValueError("invalid Mac MuMu custom ADB port")
+        ports = [custom] if custom else [26624 + 32 * index, 26625 + 32 * index]
+        # adbPort retains the automatic allocation even when customAdbPort overrides it.
+        if (type(config["adbPort"]) is not int or not 1024 <= config["adbPort"] <= 65535
+                or not custom and config["adbPort"] not in ports or max(ports) > 65535):
+            raise ValueError("Mac MuMu ADB port is outside the observed instance range")
+    except (KeyError, TypeError, UnicodeError, json.JSONDecodeError) as exc:
+        raise ValueError("cannot parse Mac MuMu vendor metadata") from exc
+    media = [_private_qcow2(bundle / name) for name in ("system.qcow2", "data.qcow2")]
+    result = {"kind": "mumu-macos-v1", "path": metadata["path"], "index": index,
+              "controller_path": controller["path"], "controller_sha256": controller["sha256"],
+              "engine_sha256": engine["sha256"], "version": version, "adb_ports": ports,
+              "hardware_sha256": _digest(hardware), "media_sha256": _digest(media)}
+    for file, expected in captured:
+        current, _ = stable_regular_file(file, purpose="Mac MuMu identity revalidation", capture=False)
+        if current != expected:
+            raise ValueError("Mac MuMu metadata changed during capture")
+    result["sha256"] = _digest(result)
+    return result
 
 
 def mumu_identity(path: Path) -> dict[str, object]:

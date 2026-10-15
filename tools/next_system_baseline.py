@@ -651,6 +651,7 @@ def inspect_test_apk(apk: Path, aapt: Path, apksigner: Path, app_id: str) -> dic
     fixture_contracts = {
         "libzygisk_test.so": b"kitsune-zygisk-test-v1:minimal-resident\0",
         "libzygisk_unload_test.so": b"kitsune-zygisk-test-v1:minimal-dlclose\0",
+        "libzygisk_probe.so": b"kitsune-zygisk-test-v1:api5-companion\0",
     }
     with zipfile.ZipFile(apk) as archive:
         names = archive.namelist()

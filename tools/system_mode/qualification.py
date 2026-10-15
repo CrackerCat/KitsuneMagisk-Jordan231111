@@ -291,6 +291,10 @@ def instance_identity(path: Path, kind: str = "file") -> dict[str, Any]:
         from tools.system_mode.host_identity import mumu_identity
 
         return mumu_identity(path)
+    if kind == "mumu-macos-v1":
+        from tools.system_mode.host_identity import mumu_macos_identity
+
+        return mumu_macos_identity(path)
     if kind != "file":
         raise ValueError("unknown host instance identity kind")
 
@@ -1632,6 +1636,9 @@ def qualify_target(
     elif instance_kind == "mumu-v1":
         if client.resolve_serial() != f"127.0.0.1:{identity['adb_port']}":
             raise ValueError("ADB transport does not belong to the selected MuMu instance")
+    elif instance_kind == "mumu-macos-v1":
+        if client.resolve_serial() not in {f"127.0.0.1:{port}" for port in identity["adb_ports"]}:
+            raise ValueError("ADB transport does not belong to the selected Mac MuMu instance")
 
     def candidate_report() -> dict[str, Any]:
         options = {} if repository_root is None else {"repository_root": repository_root}
@@ -1918,8 +1925,15 @@ def qualify_target(
         # state, and create a separate final backup with zero qualification
         # files or property residue.
         cleanup_live_without_restore()
-        if _inventory_digest(_boot_critical_inventory(client, selected_init)) != baseline_inventory_sha256:
-            raise ProbeError("challenge cleanup did not return boot-critical baseline state")
+        cleaned_inventory = _boot_critical_inventory(client, selected_init)
+        if _inventory_digest(cleaned_inventory) != baseline_inventory_sha256:
+            before = {node["path"]: node for node in baseline_inventory}
+            after = {node["path"]: node for node in cleaned_inventory}
+            changed = sorted(path for path in before.keys() | after.keys()
+                             if path not in before or path not in after
+                             or _inventory_digest([before[path]]) != _inventory_digest([after[path]]))
+            raise ProbeError("challenge cleanup did not return boot-critical baseline state: "
+                             + ", ".join(changed[:8]))
         clean_report = candidate_report()
         if stable_target_digest(clean_report) != baseline_digest:
             raise ProbeError("challenge cleanup did not return the baseline target contract")

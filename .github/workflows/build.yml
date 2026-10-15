@@ -114,7 +114,7 @@ jobs:
       - name: Verify next-system source baseline
         run: >-
           python tools/next_system_baseline.py
-          --manifest docs/next-system-pr10.json --source
+          --manifest docs/next-system-pr11.json --source
 
       - name: Create disposable release signer
         shell: bash
@@ -151,7 +151,7 @@ jobs:
       - name: Verify next-system artifacts
         run: >-
           python tools/next_system_baseline.py
-          --manifest docs/next-system-pr10.json --source --artifacts out
+          --manifest docs/next-system-pr11.json --source --artifacts out
           --report out/next-system-baseline-report.json
 
       - name: Stop gradle daemon

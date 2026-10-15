@@ -6,6 +6,7 @@ import androidx.annotation.Keep
 import androidx.core.net.toUri
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.topjohnwu.magisk.core.BuildConfig.APP_PACKAGE_NAME
+import com.topjohnwu.magisk.core.Config
 import com.topjohnwu.magisk.core.Const
 import com.topjohnwu.magisk.core.download.DownloadNotifier
 import com.topjohnwu.magisk.core.download.DownloadProcessor
@@ -238,6 +239,7 @@ class Environment : BaseTest {
 
     private fun setupValidZygiskModule(root: ExtendedFile) {
         setupZygiskTestModule(root, VALID_ZYGISK, "libzygisk_test.so")
+        setupZygiskTestModule(root, "zygisk_probe", "libzygisk_probe.so")
     }
 
     private fun setupUnloadZygiskModule(root: ExtendedFile) {
@@ -388,6 +390,7 @@ class Environment : BaseTest {
 
     @Test
     fun setupEnvironment() {
+        Config.zygisk = true
         runBlocking {
             assertTrue(
                 "Magisk setup failed",

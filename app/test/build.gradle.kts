@@ -16,6 +16,7 @@ android {
         manifestPlaceholders["magiskAppId"] = APP_ID
         manifestPlaceholders["magiskTestAppId"] = "$APP_ID.test"
         proguardFile("proguard-rules.pro")
+        externalNativeBuild.cmake.arguments += "-DKITSUNE_TEST_PACKAGE=$APP_ID.test"
     }
 
     buildTypes {

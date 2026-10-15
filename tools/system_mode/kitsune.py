@@ -384,7 +384,7 @@ def build_parser() -> argparse.ArgumentParser:
         help="prove init import, three cold boots, and an exact external restore",
     )
     qualify.add_argument("--artifact", help="exact candidate APK; required when bootstrap root lacks the Magisk policy domain")
-    qualify.add_argument("--instance-kind", choices=("file", "ldplayer-v1", "mumu-v1"), default="file",
+    qualify.add_argument("--instance-kind", choices=("file", "ldplayer-v1", "mumu-v1", "mumu-macos-v1"), default="file",
                          help="exact file identity, or qualified vendor identifiers")
     qualify.add_argument("--output", required=True, help="new qualification record path")
     qualify.add_argument("--backup-location", required=True, help="absolute external backup file/tree")

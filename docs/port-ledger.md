@@ -10,8 +10,8 @@ of published contracts and associated source, with per-row evidence limits. They
 globally earliest release dates or compiled-APK/runtime attestations. Discontinuous changes
 remain visible in the per-observation [source review](port-history/shipment-source-review.json).
 
-Recorded source comparisons: 102/102. Reviewed shipment ranges:
-102/102. These are source observations, not runtime acceptance.
+Recorded source comparisons: 105/105. Reviewed shipment ranges:
+105/105. These are source observations, not runtime acceptance.
 The JSON retains exact historical paths/commits, upstream blob digests, affected users,
 migration guidance and observation links for every row.
 
@@ -72,14 +72,17 @@ selects the development foundation while retaining these explicit product gates.
 | `HID-017` | E | MagiskSU exposure delayed until boot complete | `metadata-2976a6f5-note-md` → `k31-25fa2159` | `deferred-to-PR12` | PR12 |
 | `HID-018` | O | Lite product's always-enforced inverse SuList/whitelist and migration to the selected product | `metadata-96724b2e-note_lite-md` → `metadata-64403347-note_lite-md` | `deferred-to-PR12` | PR12 |
 | `HID-019` | O | Lite product's log-based process monitoring lifecycle and visibility contract | `metadata-96724b2e-note_lite-md` → `metadata-64403347-note_lite-md` | `deferred-to-PR12` | PR12 |
-| `ZYG-001` | O | Older-tag built-in API v5, module loading, companion IPC, memfd loading, Riru exclusion, and Hide integration | `b149cd26` → `k27-2-4-archive` | `deferred-to-PR11` | PR11 |
-| `ZYG-002` | O | Ptrace-init injection architecture | `original-stable` → `k27-2-4-archive` | `deferred-to-PR11` | PR11 |
-| `ZYG-003` | O | GrapheneOS Android 14/QPR2 specialization compatibility | `metadata-bb4af859-note-md` → `k27-2-4-archive` | `deferred-to-PR11` | PR11 |
-| `ZYG-004` | O | Futile Hide handling for Zygisk module libraries | `b149cd26` → `k27-2-4-archive` | `deferred-to-PR11` | PR11 |
-| `ZYG-005` | O | Faster revert/unmount path from `7072f9e9` | `b149cd26` → `k27-2-4-archive` | `deferred-to-PR11` | PR11 |
-| `ZYG-006` | E | Zygote restart-monitor reliability fix from `be732edb` | `k27-2-1` → `k31-25fa2159` | `deferred-to-PR11` | PR11 |
-| `ZYG-007` | E | Built-in removal, external-only direction, and exact provider/Hide/SuList migration contract | `k31-70068d25` → `k31-25fa2159` | `deferred-to-PR11` | PR11 |
-| `ZYG-008` | O | Lite product's explicitly no-Zygisk behavior and migration/retirement impact | `metadata-96724b2e-note_lite-md` → `metadata-64403347-note_lite-md` | `deferred-to-PR11` | PR11 |
+| `ZYG-001` | O | Older-tag built-in API v5, module loading, companion IPC, memfd loading, unloading and Riru exclusion | `b149cd26` → `k27-2-4-archive` | `inherited-and-tested` | PR11 |
+| `ZYG-001-hide` | O | Older-tag built-in Zygisk integration with classic Hide/SuList | `b149cd26` → `k27-2-4-archive` | `deferred-to-PR12` | PR12 |
+| `ZYG-002` | O | Ptrace-init injection architecture | `original-stable` → `k27-2-4-archive` | `retired-with-evidence` | PR11 |
+| `ZYG-003` | O | GrapheneOS Android 14/QPR2 JNI specialization descriptors | `metadata-bb4af859-note-md` → `k27-2-4-archive` | `ported-and-tested-in-PR11` | PR11 |
+| `ZYG-003-device` | O | Physical GrapheneOS Android 14/QPR2 injection and recovery qualification | `metadata-bb4af859-note-md` → `k27-2-4-archive` | `deferred-to-PR15` | PR15 |
+| `ZYG-004` | O | Futile Hide handling for Zygisk module libraries | `b149cd26` → `k27-2-4-archive` | `retired-with-evidence` | PR11 |
+| `ZYG-005` | O | Faster revert/unmount path from `7072f9e9` | `b149cd26` → `k27-2-4-archive` | `retired-with-evidence` | PR11 |
+| `ZYG-006` | E | Zygote restart-monitor reliability fix from `be732edb` | `k27-2-1` → `k31-25fa2159` | `inherited-and-tested` | PR11 |
+| `ZYG-007` | E | Built-in removal, mandatory external-only direction and provider boundary | `k31-70068d25` → `k31-25fa2159` | `retired-with-evidence` | PR11 |
+| `ZYG-007-adapter` | E | External-provider Next-manager discovery, Hide/SuList and process-selection integration | `k31-70068d25` → `k31-25fa2159` | `deferred-to-PR12` | PR12 |
+| `ZYG-008` | O | Lite product's explicitly no-Zygisk behavior and migration/retirement impact | `metadata-96724b2e-note_lite-md` → `metadata-64403347-note_lite-md` | `ported-and-tested-in-PR11` | PR11 |
 | `MOD-001` | E | Global early-mount files and ordering | `original-stable` → `k31-25fa2159` | `deferred-to-PR14` | PR14 |
 | `MOD-002` | E | Per-module `early-mount` storage, install, disable, and removal | `original-stable` → `k31-25fa2159` | `deferred-to-PR14` | PR14 |
 | `MOD-003` | E | `initrc.d` init-RC injection | `original-stable` → `k31-25fa2159` | `deferred-to-PR14` | PR14 |

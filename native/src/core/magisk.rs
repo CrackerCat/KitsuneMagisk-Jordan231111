@@ -27,6 +27,7 @@ Options:
    --version-json            print this binary's build identity
    --daemon-version-json     print the running daemon's build identity
    --features                list this binary's compiled Kitsune capabilities
+   --zygisk-status           print the running daemon's Zygisk contract (root)
    --list                    list all available applets
    --remove-modules [-n]     remove all modules, reboot if -n is not provided
    --install-module ZIP      install a module zip file
@@ -67,6 +68,7 @@ enum MagiskAction {
     BuildInfo(BuildInfo),
     DaemonBuildInfo(DaemonBuildInfo),
     Features(Features),
+    ZygiskStatus(ZygiskStatus),
     List(ListApplets),
     RemoveModules(RemoveModules),
     InstallModule(InstallModule),
@@ -109,6 +111,10 @@ struct DaemonBuildInfo {}
 #[derive(FromArgs)]
 #[argh(subcommand, name = "--features")]
 struct Features {}
+
+#[derive(FromArgs)]
+#[argh(subcommand, name = "--zygisk-status")]
+struct ZygiskStatus {}
 
 #[derive(FromArgs)]
 #[argh(subcommand, name = "--list")]
@@ -206,6 +212,11 @@ impl MagiskAction {
         match self {
             BuildInfo(_) => println!("{BUILD_INFO}"),
             Features(_) => println!("{BUILD_FEATURES}"),
+            ZygiskStatus(_) => {
+                let mut fd = connect_daemon(RequestCode::ZYGISK_STATUS, false)?;
+                let status = String::decode(&mut fd)?;
+                println!("{status}");
+            }
             DaemonBuildInfo(_) => {
                 let mut fd = connect_daemon(RequestCode::CHECK_BUILD_INFO, false)?;
                 let info = String::decode(&mut fd)?;

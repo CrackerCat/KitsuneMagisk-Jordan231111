@@ -358,7 +358,7 @@ ksl_prepare_runtime() {
     }
   if "$KSL_BB" awk -v target="$target" '$2 == target && $3 == "tmpfs" { found=1 } END { exit !found }' /proc/mounts &&
      [ -f "$target/.kitsune-system-mode-$SM_INSTALL_ID" ] && [ -x "$target/magisk" ]; then
-    { [ "$SM_VERSION_CODE" = 0 ] || [ "$("$target/magisk" -V 9>&- 2>/dev/null)" = "$SM_VERSION_CODE" ]; } &&
+    sm_verify_daemon_identity "$target/magisk" &&
       ksl_validate_preinit_link "$target"
     return $?
   fi

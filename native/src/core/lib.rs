@@ -70,6 +70,7 @@ pub mod ffi {
 
         // Old daemons reject this without interpreting a privileged fork request.
         CHECK_BUILD_INFO = 0x4b490001,
+        ZYGISK_STATUS = 0x4b490002,
     }
 
     #[repr(i32)]
@@ -153,6 +154,7 @@ pub mod ffi {
         fn unlock_blocks();
         fn update_deny_flags(uid: i32, process: &str, flags: &mut u32);
         fn initialize_denylist();
+        fn is_denylist_enforced() -> bool;
         fn switch_mnt_ns(pid: i32) -> i32;
         fn exec_root_shell(client: i32, pid: i32, req: &mut SuRequest, mode: MntNsMode);
 

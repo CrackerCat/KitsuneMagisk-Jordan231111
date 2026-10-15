@@ -9,7 +9,7 @@
 >
 > Hardening range recorded here: [GitHub PR #26](https://github.com/Jordan231111/KitsuneMagisk/pull/26), branch `codex/production-hardening`, final code commit `530f2a3f8` before this roadmap-only reconciliation
 >
-> Upstream rechecked 2026-09-10: official stable remains `v30.7`; the maintained development base is
+> Upstream rechecked 2026-10-15: official stable remains `v30.7`; the maintained development base is
 > **official `v31.0` prerelease**, tag commit `96221b69fae9910b1c0c75c2f92a4ebb2c2dc698`, released
 > 2026-09-04. PR7A has updated the base; continue tracking official prereleases without waiting
 > for a stable label.
@@ -23,7 +23,8 @@
 > [#32](https://github.com/Jordan231111/KitsuneMagisk/pull/32), and
 > [#33](https://github.com/Jordan231111/KitsuneMagisk/pull/33). The
 > [authenticated beta acceptance](docs/update-service-acceptance.json) records the exact public
-> assets and successful clean-stub update. PR11 is next; production promotion remains gated.
+> assets and successful clean-stub update. PR11 is complete with its [provider ADR and exact runtime evidence](docs/adr/0001-zygisk-provider.md);
+> PR12 is next. Production promotion remains gated.
 >
 > Product charter: KitsuneMagisk provides reliable Magisk root on real phones and emulators while
 > preserving useful Kitsune-specific early mounting, hiding/SuList, provider, and module capabilities.
@@ -81,9 +82,11 @@ execution order.
 | 12 | Roadmap PR8 — parity and historical feature audit | **Complete; merged by GitHub #31; production promotion remains gated** | Preserve the [port ledger](docs/port-ledger.md), exact paired outcomes and [reversible development-line decision](docs/pr8-branch-decision.md). |
 | 13 | Roadmap PR9 — version/build-info separation | **Complete; merged by GitHub #32** | Preserve the [shared identity and migration contract](docs/build-info.md), artifact gates and MuMu manager-update evidence. |
 | 14 | Roadmap PR10 — authenticated update service and stub | **Complete; merged by GitHub #33; experimental beta published** | Preserve the [shared update contract](docs/update-service.md) and [public-download/clean-stub acceptance](docs/update-service-acceptance.json); stable promotion remains PR16. |
-| 15 | Roadmap PR11–PR16 — remaining historical features, qualification, and release | **Not started** | Close every feature-ledger row by PR16; no historical behavior may become an unnamed follow-up. |
+| 15 | Roadmap PR11 / GitHub #34 — Zygisk architecture and adapter boundary | **Complete** | Preserve the [single-provider ADR](docs/adr/0001-zygisk-provider.md), native contract and [runtime evidence](docs/zygisk-pr11.json); PR12 owns Hide/SuList and external adapter integration. |
+| 16 | Roadmap PR12–PR16 — remaining historical features, qualification, and release | **Not started** | Close every feature-ledger row by PR16; no historical behavior may become an unnamed follow-up. |
 
-The next task is **PR11**, on the maintained `next-system` foundation with PR8–PR10 merged.
+The next task is **PR12**, on the maintained `next-system` foundation with PR8–PR10 merged and
+[PR11 completed in GitHub #34](https://github.com/Jordan231111/KitsuneMagisk/pull/34).
 PR8 selected the v31.0-based
 development foundation while retaining historical-feature and release qualification gates. PR7A completed the upstream
 update and inherited lifecycle gates. PR6 established the exact v30.7 baseline, and
@@ -1198,9 +1201,9 @@ This is the first product feature on `next-system`, and the last gate before dec
 
 ## P1.3 Decide the Zygisk architecture explicitly — L
 
-Current Kitsune removed built-in Zygisk and tells users to install ReZygisk/NeoZygisk. Official Magisk v30.7 actively maintains built-in Zygisk, including Android 16 QPR2 and additional device support. This is a product architecture decision, not a minor patch.
+Historical Kitsune removed built-in Zygisk and directed users to external providers. PR11 retains the maintained v31.0 built-in implementation with one provider per boot and an explicit external opt-out; [ADR 0001](docs/adr/0001-zygisk-provider.md) records the decision, ownership and migration.
 
-The current provider state narrows the safe claims considerably. ReZygisk v1.0.0 removed its Kitsune-specific adapter, SuList support, and Kitsune namespace-timing workaround. NeoZygisk still recognizes the Kitsune manager package, but its Magisk adapter queries only the standard `denylist`. Neither current project establishes a supported SuList contract. Treat each provider/version as a pinned, tested external dependency rather than interpreting a successful module load as compatibility.
+The upstream ReZygisk v1.0.0 removal remains historical input. PR11 tested Jordan231111/ReZygisk v1.0.0-554 and NeoZygisk v2.4 on MuMu Android 12 and an enforcing API 35 AVD. Both passed module/companion and selected-mount probes, but kept injecting selected processes and missed the normal Next manager package; hidden-manager recovery passed. Neither establishes Next SuList support. PR12 owns the explicit adapter/Hide/SuList integration, and each provider remains version-pinned.
 
 ### PR #26 local provider/module characterization
 
@@ -1267,12 +1270,12 @@ both AVDs were deleted.
 
 ### Recommendation
 
-Keep upstream built-in Zygisk intact through the System Mode parity gate so the baseline remains testable. Then write an ADR and implement the selected architecture as a contained patch. If external-only remains the goal, support one documented contract first; do not claim compatibility with multiple providers until each is tested.
+PR11 keeps maintained built-in Zygisk as the supported baseline and preserves explicit disabled choices, including a missing setting defaulting off. Its versioned root-only CLI reports configured versus boot-latched state without claiming external health. External comparison results and remaining limitations are explicit; no second build flavor or automatic provider switch was introduced.
 
 ### TODO
 
-- [ ] Write `docs/adr/0001-zygisk-provider.md` with threat model, compatibility goals, and ownership.
-- [ ] Define the database/CLI contract external providers may consume.
+- [x] Write `docs/adr/0001-zygisk-provider.md` with threat model, compatibility goals, and ownership.
+- [x] Define the database/CLI contract external providers may consume; PR12 must close the named Hide/SuList/manager-adapter integration rows.
 - [ ] Publish a provider matrix containing exact provider commit/version, minimum claimed Magisk protocol, selected database table, DenyList behavior, SuList behavior, Android/API range, and tested Zygisk modules.
 - [ ] Pin the tested external provider source/version in CI and release notes; fail diagnostics clearly when an untested major version is installed.
 - [ ] Coordinate a versioned SuList adapter with the selected provider project if SuList is a product requirement. Do not infer it from that provider's DenyList support.
@@ -2040,9 +2043,9 @@ state for every stable ID below and every additional generated row.
 
 | Atomic ID | Independently closable behavior | Terminal owner |
 |---|---|---|
-| `ZYG-001` | Older-tag built-in API v5, module loading, companion IPC, memfd loading, Riru exclusion, and Hide integration | PR11 |
+| `ZYG-001` | Older-tag built-in API v5, module loading, companion IPC, memfd loading and Riru exclusion; Hide integration is the explicit `ZYG-001-hide` child | PR11; child PR12 |
 | `ZYG-002` | Ptrace-init injection architecture | PR11 |
-| `ZYG-003` | GrapheneOS Android 14/QPR2 specialization compatibility | PR11 |
+| `ZYG-003` | GrapheneOS Android 14/QPR2 JNI descriptors; physical qualification is the explicit `ZYG-003-device` child | PR11; child PR15 |
 | `ZYG-004` | Futile Hide handling for Zygisk module libraries | PR11 |
 | `ZYG-005` | Faster revert/unmount path from `7072f9e9` | PR11 |
 | `ZYG-006` | Zygote restart-monitor reliability fix from `be732edb` | PR11 |
@@ -2692,7 +2695,7 @@ bind the external signer, immutable experimental release, and authenticated beta
 Four-ABI release/debug builds, artifact checks, lint, legacy compilation, 274 host tests, 22 MuMu
 tests and all 33 hosted checks pass. On MuMu VM 1, a clean published stub downloaded and installed
 the exact published manager; the full manager also completed its real update flow. Stable promotion,
-independent key backup and remaining feature/device qualification retain their PR11–PR16 gates.**
+independent key backup and remaining feature/device qualification retain their PR12–PR16 gates.**
 
 - Implement metadata schema, digest validation, owned endpoints, and failure tests.
 - Prefer a small static, versioned, authenticated metadata service under this project's ownership
@@ -2706,16 +2709,23 @@ independent key backup and remaining feature/device qualification retain their P
 
 ## PR 11 — Zygisk architecture ADR and adapter boundary
 
-**Implementation status: not started. Depends on System Mode parity; keep PR6/PR7 built-in Zygisk
-unchanged until this decision.**
+**Implementation status: complete in [GitHub #34](https://github.com/Jordan231111/KitsuneMagisk/pull/34).
+[ADR 0001](docs/adr/0001-zygisk-provider.md) and [the exact evidence](docs/zygisk-pr11.json) are authoritative.**
 
-- Keep baseline built-in implementation until the ADR is approved.
-- Add provider abstraction/contract tests if external-only is chosen.
-- Compare built-in and named external provider/version behavior on modern Android, modules, DenyList,
-  SuList, SELinux-disabled targets, and hidden-manager recovery; do not inherit the current external-
-  only deletion by default.
+- Retain maintained built-in Zygisk, one provider per boot, explicit external opt-out and an off
+  default for an absent setting. The root-only v1 status contract separates configuration from
+  the running daemon; it does not claim external injection health or SuList support.
+- Restore both shipped GrapheneOS Android 14 JNI descriptors and retain API v5, companion IPC,
+  memfd loading/unloading, Riru exclusion, DenyList and zygote-restart tests. Physical GrapheneOS
+  qualification remains the named PR15 child; Hide/SuList and Next external adapters remain PR12.
+- Compare the pinned user ReZygisk fork and NeoZygisk on MuMu and enforcing API 35. Preserve
+  normal-manager lookup and selected-process injection differences instead of claiming parity.
+- Fix the app/native version-code comparisons found in System Mode boot verification and doctor,
+  and make denied/malformed DenyList CLI requests fail normally. Preserve the qualified clean
+  install, distinct-source upgrade, cold boots, vendor-root-off, exact uninstall and external restore.
 
-**Exit:** one supported model is explicit and testable.
+**Exit met:** one supported model is explicit and testable. Production promotion, physical-device
+support and the separately named PR12–PR15 gates remain open; no PR11 feature is an unnamed follow-up.
 
 ## PR 12 — MagiskHide/SuList core and DB migration
 
@@ -2986,8 +2996,10 @@ in the detail:
   the explicit manager upgrade/capability contract. **Done and merged — PR10:** the authenticated
   experimental beta is published; public-byte verification and clean-stub acceptance pass.
   **Open — P0.7/PR16:** protected independent key backups and production transition qualification.
-- **Open — PR11–PR14:** port the chosen Zygisk contract, Hide/SuList, focused manager UI, and
-  early-mount only after System Mode parity—not before it.
+- **Done — PR11:** retain maintained built-in Zygisk with the versioned external opt-out and pinned
+  comparisons; preserve the exact runtime and historical disposition evidence.
+- **Open — PR12–PR14:** complete Hide/SuList and external adapter integration, focused manager UI,
+  and early-mount/module closure on this qualified foundation.
 - **Open — PR15/PR16:** complete commercial-emulator and advertised physical-device recovery
   matrices, publish the exact tested candidate with checksum/certificate/source evidence, and
   promote only after all claimed support lanes pass.

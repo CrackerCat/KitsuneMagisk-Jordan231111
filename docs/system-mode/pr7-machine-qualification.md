@@ -121,6 +121,31 @@ including `PATHEXT`, and verify stopped/running postconditions rather than trust
 alone. The Windows matrix covers LDPlayer, MuMu Android 12 and BlueStacks. The exact paired
 results and restored baselines are recorded in [the PR8 lab](pr8-windows-2026-10-08.md).
 
+PR11 adds `--instance-kind mumu-macos-v1` for the observed MuMuPlayer Pro 1.9 standalone
+QCOW2 layout. Select the real `bundles/mumu_N_YYYYMMDD_HHMMSS.gmad/setting/vm.json`.
+The adapter binds the bundle path/index, hardware, vendor version, controller and VM engine,
+and both private disks' immutable layout fields. It rejects backing chains, encryption,
+internal snapshots, external data files, corrupt/unknown formats, links and shared inodes.
+It permits vendor metadata rewrites, UI changes, vendor-root toggling and the observed pair
+of automatic ADB ports. Rapid cycles can exceed that pair and are then refused. Use MuMu's
+`config` command to assign a free fixed `customAdbPort` for repeated qualification; retain
+and restore the user's original setting afterward. The fixed port is bound in the record.
+Lifecycle wrappers must wait for the old VM process to exit before opening it, resolve the
+new endpoint through `mumutool info`, and verify the same named bundle before connecting.
+The backup still contains both complete disks with byte-verified restore; metadata tolerance
+does not waive the guest inventory, three-boot or restore challenges. This is an explicit
+adapter, not a relaxation of generic file identity.
+
+Qualify upgrades and uninstall from a quiescent view of the persistent init filesystem.
+Temporarily disable modules mounting `/system/etc`, cold boot, and retry a mounted-view refusal.
+If an attempted operation already stopped Magisk, restart first to regain root. A disabled
+provider can still rewrite metadata through its global service script: the PR11 lab uninstalled
+its test providers when ReZygisk kept changing `module.prop` timestamps. Keep the byte and
+metadata checks; do not reinterpret a module overlay as persistent storage. Lifecycle wrappers
+should flush the guest, wait for the old process to exit, and require stable Android/ADB
+readiness before returning. Retain and classify player startup errors separately from guest
+and Magisk failures.
+
 Use `--source-root /absolute/clean/candidate-worktree` on `qualify`, `doctor`, and `authorize` to
 compare clean candidates with one host driver. The candidate commit must still match the APK's
 embedded clean source identity. All host modules, schemas/contracts, and the artifact verifier are

@@ -193,6 +193,7 @@ run_tests() {
   local stub="repackaged.$pkg/com.topjohnwu.magisk.test.AppTestRunner"
 
   # Run app tests
+  am_instrument '.ZygiskModuleTest#testInjected' $self
   [ -f "$MAGISK_OUT_DIR/update-fixtures/valid.json" ] || {
     print_error "Missing signed update fixtures; run tools/update_service.py test-fixtures first"
     return 1
@@ -200,13 +201,13 @@ run_tests() {
   adb shell mkdir -p /data/local/tmp/kitsune-update-fixtures
   adb push "$MAGISK_OUT_DIR/update-fixtures/." /data/local/tmp/kitsune-update-fixtures/ >/dev/null
   am_instrument '.UpdateServiceTest' $app
-  am_instrument '.MagiskAppTest,.AdditionalTest,.TerminalTest,.FlashIntentTest,.BuildInfoTest' $app
+  am_instrument '.MagiskAppTest,.AdditionalTest,.TerminalTest,.FlashIntentTest,.BuildInfoTest,.ZygiskProviderTest,.VerifiedUpdatesTest' $app
 
   # Test app hiding
   am_instrument '.AppMigrationTest#testAppHide' $self
 
   # Make sure it still works
-  am_instrument '.MagiskAppTest,.FlashIntentTest' $stub
+  am_instrument '.MagiskAppTest,.FlashIntentTest,.ZygiskProviderTest,.VerifiedUpdatesTest' $stub
 
   # Test app restore
   am_instrument '.AppMigrationTest#testAppRestore' $self

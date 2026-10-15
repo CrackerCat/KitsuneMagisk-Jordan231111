@@ -3,9 +3,11 @@ project(zygisk_test LANGUAGES CXX)
 
 add_library(zygisk_test SHARED zygisk_test.cpp)
 add_library(zygisk_unload_test SHARED zygisk_test.cpp)
+add_library(zygisk_probe SHARED zygisk_probe.cpp)
+target_compile_definitions(zygisk_probe PRIVATE KITSUNE_TEST_PACKAGE="${KITSUNE_TEST_PACKAGE}")
 target_compile_definitions(zygisk_unload_test PRIVATE KITSUNE_ZYGISK_TEST_DLCLOSE=1)
 
-foreach(target zygisk_test zygisk_unload_test)
+foreach(target zygisk_test zygisk_unload_test zygisk_probe)
     target_include_directories(
         ${target}
         PRIVATE ../../../../../native/src/core/zygisk

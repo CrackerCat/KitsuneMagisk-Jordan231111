@@ -73,6 +73,7 @@ void clear_pkg(const char *pkg, int user_id);
 
 // Denylist
 extern std::atomic<bool> denylist_enforced;
+inline bool is_denylist_enforced() { return denylist_enforced.load(); }
 int denylist_cli(rust::Vec<rust::String> &args);
 void denylist_handler(int client);
 void initialize_denylist();

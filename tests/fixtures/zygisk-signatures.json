@@ -1,0 +1,107 @@
+{
+  "schema": 1,
+  "signatures": [
+    {
+      "commit": "ed27581a0f6bd890ebe51108cf0e1c6d21797b0a",
+      "method": "fas_graphene_u",
+      "signature": "(II[II[[IILjava/lang/String;Ljava/lang/String;[I[IZLjava/lang/String;Ljava/lang/String;Z[Ljava/lang/String;[Ljava/lang/String;ZZ[J)I",
+      "arguments": [
+        "jint",
+        "jint",
+        "jintArray",
+        "jint",
+        "jobjectArray",
+        "jint",
+        "jstring",
+        "jstring",
+        "jintArray",
+        "jintArray",
+        "jboolean",
+        "jstring",
+        "jstring",
+        "jboolean",
+        "jobjectArray",
+        "jobjectArray",
+        "jboolean",
+        "jboolean",
+        "jlongArray"
+      ]
+    },
+    {
+      "commit": "ed27581a0f6bd890ebe51108cf0e1c6d21797b0a",
+      "method": "spec_graphene_u",
+      "signature": "(II[II[[IILjava/lang/String;Ljava/lang/String;ZLjava/lang/String;Ljava/lang/String;Z[Ljava/lang/String;[Ljava/lang/String;ZZ[J)V",
+      "arguments": [
+        "jint",
+        "jint",
+        "jintArray",
+        "jint",
+        "jobjectArray",
+        "jint",
+        "jstring",
+        "jstring",
+        "jboolean",
+        "jstring",
+        "jstring",
+        "jboolean",
+        "jobjectArray",
+        "jobjectArray",
+        "jboolean",
+        "jboolean",
+        "jlongArray"
+      ]
+    },
+    {
+      "commit": "3f2e5b4275c7bf67dd02822b8f4ceb774da93efa",
+      "method": "fas_graphene_u_qpr2",
+      "signature": "(II[II[[IILjava/lang/String;Ljava/lang/String;[I[IZLjava/lang/String;Ljava/lang/String;Z[Ljava/lang/String;[Ljava/lang/String;ZZZ[J)I",
+      "arguments": [
+        "jint",
+        "jint",
+        "jintArray",
+        "jint",
+        "jobjectArray",
+        "jint",
+        "jstring",
+        "jstring",
+        "jintArray",
+        "jintArray",
+        "jboolean",
+        "jstring",
+        "jstring",
+        "jboolean",
+        "jobjectArray",
+        "jobjectArray",
+        "jboolean",
+        "jboolean",
+        "jboolean",
+        "jlongArray"
+      ]
+    },
+    {
+      "commit": "3f2e5b4275c7bf67dd02822b8f4ceb774da93efa",
+      "method": "spec_graphene_u_qpr2",
+      "signature": "(II[II[[IILjava/lang/String;Ljava/lang/String;ZLjava/lang/String;Ljava/lang/String;Z[Ljava/lang/String;[Ljava/lang/String;ZZZ[J)V",
+      "arguments": [
+        "jint",
+        "jint",
+        "jintArray",
+        "jint",
+        "jobjectArray",
+        "jint",
+        "jstring",
+        "jstring",
+        "jboolean",
+        "jstring",
+        "jstring",
+        "jboolean",
+        "jobjectArray",
+        "jobjectArray",
+        "jboolean",
+        "jboolean",
+        "jboolean",
+        "jlongArray"
+      ]
+    }
+  ]
+}

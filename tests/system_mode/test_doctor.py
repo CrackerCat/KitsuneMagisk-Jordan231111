@@ -7,7 +7,7 @@ from pathlib import Path
 import subprocess
 import tempfile
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 from tools.system_mode.doctor import (
     AdbClient,
@@ -109,15 +109,34 @@ class VersionedInstallProbeTest(unittest.TestCase):
                 "uid": 0, "mode": "0600"}
 
     def probe(self, *, manifest=None, record=None, config_record=None,
-              config="SYSTEMMODE=true\nRECOVERYMODE=false\n", version="30.7-kitsune-test:MAGISK:D"):
+              config="SYSTEMMODE=true\nRECOVERYMODE=false\n", version="30.7-kitsune-test:MAGISK:D",
+              identity=None):
         text = json.dumps(self.manifest) if manifest is None else manifest
         records = {self.config: config_record or self.record(self.config)}
+        client = Mock()
+        client.shell.return_value = CommandResult(json.dumps(identity), "", 0)
         with patch("tools.system_mode.doctor._read_optional",
                    side_effect=lambda client, path, **kw: text if path == self.path else config), \
              patch("tools.system_mode.doctor._probe_paths", return_value=records):
             return _versioned_install_config(
-                object(), self.path, record or self.record(self.path), version, 30700, root=True
+                client, self.path, record or self.record(self.path), version, 30700, root=True
             )
+
+    def test_split_app_and_native_identity_recognizes_current_install(self):
+        self.manifest["product"]["version_code"] = 31002
+        identity = {"schema": 1, "app_version_code": 31002, "compat_version_code": 30700,
+                    "source_commit": "a" * 40, "upstream_commit": "b" * 40,
+                    "version_name": "30.7-kitsune-test", "source_dirty": False, "variant": "debug"}
+        self.assertEqual(self.config, self.probe(identity=identity))
+        for key, value in (("schema", True), ("schema", 2), ("app_version_code", 31003),
+                           ("compat_version_code", 31002), ("source_commit", "d" * 40),
+                           ("upstream_commit", "e" * 40), ("version_name", "other"),
+                           ("source_dirty", True), ("variant", "release")):
+            with self.subTest(key=key):
+                changed = {**identity, key: value}
+                self.assertIsNone(self.probe(identity=changed))
+        for invalid in (None, {}, [], "unavailable"):
+            self.assertIsNone(self.probe(identity=invalid))
 
     def test_original_permissions_accept_zero_and_special_bits(self):
         original = {
