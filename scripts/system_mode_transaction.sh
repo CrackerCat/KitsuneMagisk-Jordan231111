@@ -3161,6 +3161,21 @@ sm_update_manifest_state() {
   sm_verify_manifest_copies
 }
 
+sm_verify_daemon_identity() {
+  local client="$1" code="${2:-}" binary_version daemon_version
+  if [ -z "$code" ]; then
+    code="$("$SM_BB" timeout 15 "$client" -V 9>&- 2>/dev/null)" || return 1
+  fi
+  case "$code" in *[!0-9]*|'') return 1 ;; esac
+  [ "$code" -gt 0 ] || return 1
+  binary_version="$("$SM_BB" timeout 15 "$client" -c 9>&- 2>/dev/null)" || return 1
+  daemon_version="$("$SM_BB" timeout 15 "$client" -v 9>&- 2>/dev/null)" || return 1
+  # VERSION_CODE in the receipt is the Android app upgrade code. The daemon's
+  # -V is the independent module compatibility epoch. Bind its source/version
+  # and build variant to the verified payload, including pre-build-info clients.
+  [ -n "$daemon_version" ] && [ "$binary_version" = "$daemon_version ($code)" ]
+}
+
 sm_verify_boot() {
   local boot_id staged running_code client_code database_version verify_state root_identity root_digest
   sm_load_transaction || return 1
@@ -3200,7 +3215,7 @@ sm_verify_boot() {
     return 1
   }
   running_code="$("$SM_BB" timeout 15 "$SM_RUNTIME_PATH/magisk" -V 9>&- 2>/dev/null)"
-  [ "$SM_VERSION_CODE" = 0 ] || [ "$running_code" = "$SM_VERSION_CODE" ] || {
+  sm_verify_daemon_identity "$SM_RUNTIME_PATH/magisk" "$running_code" || {
     sm_log "! System Mode daemon version does not match the committed payload"
     if [ "$verify_state" = COMMITTED ]; then sm_update_state ROLLBACK_REQUIRED; else sm_update_state FAILED; fi
     return 1

@@ -464,7 +464,7 @@ class MaintainedBaseSystemModeSafetyTest(unittest.TestCase):
     def test_launcher_runtime_setup_is_idempotent_for_one_boot(self) -> None:
         prepare = function_body(self.launcher, "ksl_prepare_runtime")
         self.assertIn('.kitsune-system-mode-$SM_INSTALL_ID', prepare)
-        self.assertIn('"$target/magisk" -V', prepare)
+        self.assertIn('sm_verify_daemon_identity "$target/magisk"', prepare)
         self.assertLess(prepare.index(".kitsune-system-mode-$SM_INSTALL_ID"), prepare.index('case "$target"'))
 
     def test_socket_directories_remain_traversable_under_init_umask(self) -> None:
@@ -497,18 +497,48 @@ class MaintainedBaseSystemModeSafetyTest(unittest.TestCase):
                 self.assertEqual(0o700, (root / "original").stat().st_mode & 0o777)
                 self.assertEqual(0o600, (root / "originals.tsv").stat().st_mode & 0o777)
 
+    def test_daemon_identity_checks_native_epoch_source_and_variant(self) -> None:
+        helper = function_body(self.transaction, "sm_verify_daemon_identity")
+        with tempfile.TemporaryDirectory() as directory:
+            executable = Path(directory) / "magisk"
+            executable.write_text(
+                '#!/bin/sh\ncase "$1" in -c) echo "$BINARY_VERSION" ;; '
+                '-v) echo "$DAEMON_VERSION" ;; -V) echo "$DAEMON_CODE" ;; esac\n'
+            )
+            executable.chmod(0o755)
+            for daemon, code, valid in (
+                ("fixture:MAGISK:D", "31000", True),
+                ("fixture:MAGISK:D", "31002", False),
+                ("different-source:MAGISK:D", "31000", False),
+                ("fixture:MAGISK:R", "31000", False),
+                ("fixture:MAGISK:D", "", False),
+                ("fixture:MAGISK:D", "0", False),
+            ):
+                script = r'''
+SM_BB=bb
+SM_VERSION_CODE=31002
+export BINARY_VERSION='fixture:MAGISK:D (31000)'
+export DAEMON_VERSION="$2" DAEMON_CODE="$3"
+bb() { shift 2; "$@"; }
+''' + helper + '\nsm_verify_daemon_identity "$1"\n'
+                result = subprocess.run(
+                    ["bash", "-c", script, "verify", str(executable), daemon, code],
+                    capture_output=True, text=True, timeout=10,
+                )
+                self.assertEqual(valid, result.returncode == 0, result.stderr)
+
     def test_boot_verification_rejects_root_only_socket_access(self) -> None:
         verify = function_body(self.transaction, "sm_verify_boot")
-        for state, denied, database_valid in (
-            ("BOOT_VERIFIED", False, True), ("BOOT_VERIFIED", True, True),
-            ("COMMITTED", True, True), ("COMMITTED", False, False),
-            ("BOOT_VERIFIED", False, False),
+        for state, denied, database_valid, app_code in (
+            ("BOOT_VERIFIED", False, True, 30700), ("BOOT_VERIFIED", True, True, 30700),
+            ("COMMITTED", True, True, 30700), ("COMMITTED", False, False, 30700),
+            ("BOOT_VERIFIED", False, False, 30700), ("BOOT_VERIFIED", False, True, 31002),
         ):
-            with self.subTest(state=state, denied=denied, database_valid=database_valid), tempfile.TemporaryDirectory() as directory:
+            with self.subTest(state=state, denied=denied, database_valid=database_valid, app_code=app_code), tempfile.TemporaryDirectory() as directory:
                 root = Path(directory)
                 executable = root / "magisk"
                 executable.write_text(
-                    '#!/bin/sh\nif [ "$1" = --sqlite ]; then [ "$DATABASE_VALID" = true ] || exit 1; printf "user_version=12\\n"; exit; fi\nif [ "$CLIENT_UID" = 2000 ] && [ "$DENIED" = true ]; then exit 1; fi\nprintf "30700\\n"\n'
+                    '#!/bin/sh\nif [ "$1" = --sqlite ]; then [ "$DATABASE_VALID" = true ] || exit 1; printf "user_version=12\\n"; exit; fi\nif [ "$CLIENT_UID" = 2000 ] && [ "$DENIED" = true ]; then exit 1; fi\ncase "$1" in -c) echo "fixture:MAGISK:D (30700)" ;; -v) echo "fixture:MAGISK:D" ;; *) echo 30700 ;; esac\n'
                 )
                 executable.chmod(0o755)
                 (root / "su").write_text('#!/bin/sh\nprintf "uid=0(root)\\n"\n')
@@ -520,7 +550,7 @@ SM_STATE="$2"
 export DENIED="$3"
 export DATABASE_VALID="$4"
 SM_BB=bb
-SM_VERSION_CODE=30700
+SM_VERSION_CODE="$5"
 SM_INSTALL_ID=aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
 bb() {
   case "$1" in
@@ -538,9 +568,9 @@ sm_valid_hex() { :; }
 sm_log() { :; }
 sm_update_state() { SM_STATE="$1"; }
 getprop() { printf '%s\n' "$SM_INSTALL_ID"; }
-''' + verify + '\nsm_verify_boot\nresult=$?\nprintf "%s\\n" "$SM_STATE"\nexit "$result"\n'
+''' + function_body(self.transaction, "sm_verify_daemon_identity") + verify + '\nsm_verify_boot\nresult=$?\nprintf "%s\\n" "$SM_STATE"\nexit "$result"\n'
                 result = subprocess.run(
-                    ["bash", "-c", script, "verify", directory, state, str(denied).lower(), str(database_valid).lower()],
+                    ["bash", "-c", script, "verify", directory, state, str(denied).lower(), str(database_valid).lower(), str(app_code)],
                     capture_output=True, text=True, timeout=10,
                 )
                 rejected = denied or not database_valid
@@ -766,7 +796,7 @@ bb() {
         self.assertIn("SM_COMMIT_BOOT_ID", verify)
         self.assertIn("SM_BOOT_ATTEMPT_ID", verify)
         self.assertIn('magisk" -V', verify)
-        self.assertIn("SM_VERSION_CODE", verify)
+        self.assertIn("sm_verify_daemon_identity", verify)
         self.assertIn('su" -c /system/bin/id', verify)
         self.assertIn("ROOT_IDENTITY_SHA256", verify)
         self.assertIn("kitsune.system_mode.service.ready", verify)
