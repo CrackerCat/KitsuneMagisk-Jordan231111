@@ -68,12 +68,22 @@ class ZygiskProviderTest : BaseTest {
     }
 
     @Test
-    fun testProviderStatusRequiresRoot() {
+    fun testProviderCommandsRequireRoot() {
         val path = Shell.cmd("magisk --path").exec().out.single()
-        val process = ProcessBuilder("$path/magisk", "--zygisk-status")
-            .redirectErrorStream(true).start()
-        val output = process.inputStream.bufferedReader().use { it.readText() }
-        assertTrue(process.waitFor() != 0)
-        assertFalse(output.contains("\"schema\""))
+        for (args in listOf(listOf("--zygisk-status"), listOf("--denylist", "status"))) {
+            val process = ProcessBuilder(listOf("$path/magisk") + args)
+                .redirectErrorStream(true).start()
+            val output = process.inputStream.bufferedReader().use { it.readText() }
+            assertEquals("Unauthorized $args: $output", 1, process.waitFor())
+            assertFalse(output.contains("\"schema\""))
+        }
+    }
+
+    @Test
+    fun testDenylistRejectsMissingSelection() {
+        for (action in listOf("add", "rm")) {
+            val result = Shell.cmd("magisk --denylist $action").exec()
+            assertEquals(1, result.code)
+        }
     }
 }
