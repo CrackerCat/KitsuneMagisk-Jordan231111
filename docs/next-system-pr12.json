@@ -273,6 +273,7 @@
     "tests/system_mode/test_qualification.py",
     "tests/system_mode/test_transaction.py",
     "tests/test_build_info.py",
+    "tests/test_fork_logging.py",
     "tests/test_hide_policy.py",
     "tests/test_next_system_baseline.py",
     "tests/test_port_ledger.py",

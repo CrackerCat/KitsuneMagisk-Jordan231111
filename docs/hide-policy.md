@@ -49,7 +49,9 @@ current private namespace asynchronously. It checks trusted zygote lineage, UID,
 full name, and namespace identity with a bounded 200 ms specialization wait. It
 anchors `/proc` and namespace descriptors, rechecks the parent, rejects init's
 namespace, never SIGSTOPs apps, and has one log reader across enable/disable
-cycles. This engine does not promise cleanup before the first instruction or
+cycles. Cleanup workers use the daemon's existing logging lock when forking,
+so they cannot inherit that mutex from another thread. This engine does not
+promise cleanup before the first instruction or
 callback. A missing log event or expired deadline is not reported as successful
 cleanup. Relaunch after policy changes. On pidfd-capable kernels the core also
 terminates affected ordinary app processes by pidfd; older kernels require an

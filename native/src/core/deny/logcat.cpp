@@ -3,6 +3,7 @@
 #include <sys/syscall.h>
 #include <sys/mount.h>
 #include <sys/stat.h>
+#include <sys/wait.h>
 #include <fcntl.h>
 #include <string>
 #include <map>
@@ -189,11 +190,21 @@ static void clean_process(int pid, int uid, string_view name, bool app_zygote = 
     if (!denylist_enforced || !is_deny_target(uid, name)) { close(fd); return; }
     // Never stop app threads: failure to fork, switch namespaces or unmount must
     // not leave a SIGSTOP'ed app behind. The log engine is asynchronous by design.
-    if (fork_dont_care() == 0) {
+    int worker = fork_with_logging_lock();
+    if (worker == 0) {
+        // Reap only the short-lived intermediate process. The cleanup worker
+        // must not inherit a log mutex held by another daemon thread.
+        int child = fork();
+        if (child != 0) _exit(child < 0 ? 1 : 0);
         if (setns(fd, CLONE_NEWNS) == 0 &&
             mount(nullptr, "/", nullptr, MS_PRIVATE | MS_REC, nullptr) == 0) revert_unmount();
         else PLOGE("hide: namespace cleanup");
         _exit(0);
+    }
+    if (worker > 0) {
+        while (waitpid(worker, nullptr, 0) < 0 && errno == EINTR) {}
+    } else {
+        PLOGE("hide: fork cleanup worker");
     }
     close(fd);
 }

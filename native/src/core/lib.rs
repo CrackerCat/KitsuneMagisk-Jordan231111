@@ -11,7 +11,9 @@
 use crate::ffi::SuRequest;
 use crate::socket::{Decodable, Encodable};
 use daemon::{MagiskD, connect_daemon_for_cxx};
-use logging::{android_logging, zygisk_close_logd, zygisk_get_logd, zygisk_logging};
+use logging::{
+    android_logging, fork_with_logging_lock, zygisk_close_logd, zygisk_get_logd, zygisk_logging,
+};
 use magisk::magisk_main;
 use mount::{revert_unmount, revert_unmount_checked};
 use resetprop::{get_prop, resetprop_main};
@@ -193,6 +195,7 @@ pub mod ffi {
 
     extern "Rust" {
         fn android_logging();
+        fn fork_with_logging_lock() -> i32;
         fn zygisk_logging();
         fn zygisk_close_logd();
         fn zygisk_get_logd() -> i32;
