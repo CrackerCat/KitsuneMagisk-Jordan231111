@@ -169,7 +169,7 @@ static void clean_process(int pid, int uid, string_view name, bool app_zygote = 
     // deadline. The proc directory stays open throughout, so PID reuse is safe.
     for (int attempt = 0; attempt < 100; ++attempt) {
         struct stat st{}, ns{};
-        char command[256]{};
+        char command[1025]{};
         auto fp = open_file_at(proc, "cmdline", "re");
         if (!fp || fstat(proc, &st) || parent_pid(proc) != ppid) break;
         if (fgets(command, sizeof(command), fp.get()) && name == command &&
@@ -210,7 +210,7 @@ static void process_events_buffer(const log_msg &msg, size_t size) {
         event->user.type != 0 || event->pid.type != 0 || event->uid.type != 0 ||
         event->process_name.type != 2) return;
     int length = event->process_name.length;
-    if (length <= 0 || length > 255 ||
+    if (length <= 0 || length > 1024 ||
         static_cast<size_t>(length) > size - sizeof(android_event_am_proc_start)) return;
     string_view name(event->process_name.data, length);
     if (name.find('\0') != string_view::npos) return;
@@ -223,7 +223,7 @@ static void process_main_buffer(log_msg &msg) {
     string_view tag(entry.tag, strnlen(entry.tag, entry.tagLen));
     if (tag != "AppZygoteInit" && tag != "WebViewZygoteInit") return;
     if (tag == "WebViewZygoteInit" && entry.uid != WEBVIEW_ZYGOTE_UID) return;
-    char path[64], name[256]{};
+    char path[64], name[1025]{};
     ssprintf(path, sizeof(path), "/proc/%d/cmdline", msg.entry.pid);
     auto fp = open_file(path, "re");
     if (fp && fgets(name, sizeof(name), fp.get()))

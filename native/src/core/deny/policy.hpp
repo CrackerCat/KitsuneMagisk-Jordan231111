@@ -5,13 +5,13 @@
 namespace hide {
 
 inline bool valid_name(std::string_view name, bool process) {
-    if (name.empty() || name.size() > 255) return false;
+    if (name.empty() || name.size() > (process ? 1024 : 255)) return false;
     bool dot = false;
     for (unsigned char c : name) {
         if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') ||
             (c >= '0' && c <= '9') || c == '_') continue;
         if (c == '.') { dot = true; continue; }
-        if (process && c == ':') continue;
+        if (process && (c == ':' || c == '$' || c == '-')) continue;
         return false;
     }
     return process || (dot && name.front() != '.' && name.back() != '.');

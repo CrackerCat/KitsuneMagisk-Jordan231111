@@ -3,11 +3,14 @@ package com.topjohnwu.magisk.test
 import android.os.Process
 import androidx.annotation.Keep
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.topjohnwu.magisk.StubApk
+import com.topjohnwu.magisk.core.BuildConfig
 import com.topjohnwu.superuser.Shell
 import org.json.JSONObject
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
+import org.junit.Assume.assumeTrue
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -73,5 +76,26 @@ class HidePolicyTest : BaseTest {
         assertTrue(decision.getBoolean("su_eligible"))
         assertEquals(23, Shell.cmd("magisk --hide exec sh -c 'exit 23'").exec().code)
         assertEquals(127, Shell.cmd("magisk --hide exec /does/not/exist").exec().code)
+    }
+
+    @Test
+    fun testHiddenBootstrapDoesNotGrantSuBeforeVerification() {
+        assumeTrue(appContext.packageName != BuildConfig.APP_PACKAGE_NAME)
+        assumeTrue(status().getString("mode") == "sulist")
+        val apk = StubApk.current(appContext).path
+        val saved = "$apk.pr12-test"
+        // The established root shell restores the payload even if the query
+        // fails. No app code is loaded while its backing APK is absent.
+        val result = Shell.cmd(
+            "test ! -e '$saved' && mv '$apk' '$saved' || exit 1; " +
+                "trap \"mv '$saved' '$apk'\" EXIT; " +
+                "magisk --hide check ${Process.myUid()} ${appContext.packageName}; " +
+                "mv '$saved' '$apk'; trap - EXIT"
+        ).exec()
+        assertEquals(0, result.code)
+        val decision = JSONObject(result.out.joinToString("\n"))
+        assertFalse(decision.getBoolean("unmount"))
+        assertFalse(decision.getBoolean("manager"))
+        assertFalse(decision.getBoolean("su_eligible"))
     }
 }

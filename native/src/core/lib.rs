@@ -230,6 +230,7 @@ pub mod ffi {
         fn sdk_int(&self) -> i32;
         fn zygisk_enabled(&self) -> bool;
         fn get_manager_uid(&self, user: i32) -> i32;
+        fn manager_needs_mounts(&self, uid: i32) -> bool;
         fn get_db_setting(&self, key: DbEntryKey) -> i32;
         #[cxx_name = "set_db_setting"]
         fn set_db_setting_for_cxx(&self, key: DbEntryKey, value: i32) -> bool;

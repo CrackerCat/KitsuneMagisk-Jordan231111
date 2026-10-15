@@ -163,7 +163,7 @@ static bool automatic(int uid, string_view process) {
     // Never unmount the system server or the root/bootstrap domain. The manager
     // exception uses the verified installed manager UID, including hidden installs.
     if (uid == 0 || (to_app_id(uid) == 1000 && process == "system_server")) return true;
-    if (MagiskD::Get().get_manager_uid(to_user_id(uid)) == uid) return true;
+    if (MagiskD::Get().manager_needs_mounts(uid)) return true;
     return inverse && to_app_id(uid) == 1000 &&
         (process == "com.android.systemui" || process == "com.android.settings");
 }
@@ -208,7 +208,7 @@ static void restart_selected(const Selection &list, string_view pkg, string_view
         run_finally pid_guard([&] { close(pidfd); });
         struct stat st{};
         if (fstatat(dirfd(proc.get()), entry->d_name, &st, 0) || st.st_uid < 10000) continue;
-        char path[64], name[256]{};
+        char path[64], name[1025]{};
         ssprintf(path, sizeof(path), "/proc/%d/cmdline", pid);
         auto fp = open_file(path, "re");
         if (!fp || !fgets(name, sizeof(name), fp.get())) continue;

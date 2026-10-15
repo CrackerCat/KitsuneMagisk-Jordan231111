@@ -24,6 +24,9 @@ ADB still needs ordinary SU authorization. The verified normal/hidden manager,
 SystemUI and Settings remain usable. System-server mounts are never removed.
 SystemUI/Settings share Android's system UID; SU eligibility applies to that
 security principal, while mount selection remains process-specific.
+The registered, certificate-checked hidden stub retains mount visibility while
+seeding or repairing its full payload. That exception never grants SU or a
+provider's verified-manager flag before the payload signature is accepted.
 
 Package/process rows apply to every installed Android user/profile. Each UID is
 resolved from that user's package directory; a matching app ID in another user

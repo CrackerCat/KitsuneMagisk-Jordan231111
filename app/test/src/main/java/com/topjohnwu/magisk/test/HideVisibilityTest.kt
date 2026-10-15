@@ -45,6 +45,11 @@ class HideIsolatedService : HideProbeService()
 @Keep
 class HideAppZygoteService : HideProbeService()
 
+class HideProbeContainer {
+    @Keep
+    class NestedService : HideProbeService()
+}
+
 @Keep
 @RunWith(AndroidJUnit4::class)
 class HideVisibilityTest {
@@ -63,6 +68,7 @@ class HideVisibilityTest {
         val visible = arguments.getString("visible", "true").toBoolean()
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         val service = when (arguments.getString("service", "isolated")) {
+            "nested" -> HideProbeContainer.NestedService::class.java
             "appzygote" -> HideAppZygoteService::class.java
             "remote" -> HideProbeService::class.java
             else -> HideIsolatedService::class.java

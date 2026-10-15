@@ -497,6 +497,22 @@ impl MagiskD {
         uid
     }
 
+    pub fn manager_needs_mounts(&self, uid: i32) -> bool {
+        let user = crate::daemon::to_user_id(uid);
+        let mut info = self.manager_info.lock();
+        let (verified, _) = info.get_manager(self, user, false);
+        if verified == uid {
+            return true;
+        }
+        // A registered, certificate-checked stub must keep the mount namespace
+        // while it seeds dyn/current.apk on first launch or repairs that payload.
+        // This is visibility only: get_manager_uid still verifies the full APK
+        // before SU authorization or provider manager identity is granted.
+        !info.repackaged_pkg.is_empty()
+            && !info.repackaged_cert.is_empty()
+            && self.get_package_uid(user, &info.repackaged_pkg) == uid
+    }
+
     pub fn get_manager(&self, user: i32, install: bool) -> (i32, String) {
         let mut info = self.manager_info.lock();
         let (uid, pkg) = info.get_manager(self, user, install);

@@ -17,13 +17,14 @@ int main() {
     using namespace hide;
     assert(valid_pair("com.example", "com.example:worker"));
     assert(valid_pair("isolated", "com.example:service"));
+    assert(valid_pair("isolated", "com.example:service:com.example.Container$Service"));
     assert(valid_pair("webview_zygote", "webview_zygote"));
     for (auto bad : {"", "'", "a;b", "a/b", "a b", "a\\b", "a%", "a\n"}) {
         assert(!valid_pair("com.example", bad));
         assert(!valid_pair(bad, "com.example"));
     }
     assert(!valid_pair("webview_zygote", "other"));
-    assert(!valid_name(std::string(256, 'a'), true));
+    assert(!valid_name(std::string(1025, 'a'), true));
     assert(!valid_name(std::string("app\0evil", 8), true));
     assert(isolated_match("com.example:service:Class", "com.example:service"));
     assert(isolated_match("com.example:service", "com.example:"));
