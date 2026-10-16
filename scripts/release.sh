@@ -7,7 +7,7 @@ cd "$(dirname "$0")/.."
 case "${1:-}" in
   verify|metadata)
     scripts/env.py python3 tools/next_system_baseline.py \
-      --manifest docs/next-system-pr10.json --source --artifacts out \
+      --manifest docs/next-system-pr13.json --source --artifacts out \
       --report out/release-info.json
     ;;
   tag-name)

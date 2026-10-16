@@ -2,6 +2,9 @@
   "schema": 1,
   "extends": "next-system-pr12.json",
   "phase": "PR13",
+  "identity": {
+    "version_code": 31003
+  },
   "source_delta": [
     ".gitattributes",
     ".github/actions/setup/sccache.sh",

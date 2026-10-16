@@ -262,7 +262,7 @@ def prepare(args, trust: dict) -> None:
         raise ValueError("Production metadata requires the exact clean, committed source")
     if args.channel == "stable":
         raise ValueError("Stable promotion remains gated by roadmap PR16")
-    manifest = baseline.read_manifest(ROOT / "docs/next-system-pr10.json")
+    manifest = baseline.read_manifest(ROOT / "docs/next-system-pr13.json")
     baseline.verify_source(ROOT, manifest)
     aapt = baseline.find_build_tool("aapt", None)
     apksigner = baseline.find_build_tool("apksigner", None)
