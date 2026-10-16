@@ -58,6 +58,7 @@ fun SettingsScreen(
     viewModel: SettingsViewModel,
     modifier: Modifier = Modifier
 ) {
+    val configRevision by com.topjohnwu.magisk.core.repository.DBConfig.revision.collectAsStateWithLifecycle()
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     val scrollState = rememberScrollState()
     Scaffold(
@@ -78,16 +79,25 @@ fun SettingsScreen(
                 .verticalScroll(scrollState)
                 .padding(horizontal = 16.dp, vertical = 12.dp)
         ) {
-            CustomizationSection(viewModel = viewModel)
-            Spacer(Modifier.height(16.dp))
-            AppSettingsSection()
-            if (Info.env.isActive) {
+            androidx.compose.runtime.key(configRevision) {
+                CustomizationSection(viewModel = viewModel)
                 Spacer(Modifier.height(16.dp))
-                MagiskSection(viewModel = viewModel)
-            }
-            if (Info.showSuperUser) {
-                Spacer(Modifier.height(16.dp))
-                SuperuserSection(viewModel = viewModel)
+                AppSettingsSection()
+                if (Info.isRooted) {
+                    SettingsArrow(
+                        title = stringResource(CoreR.string.system_mode_title),
+                        summary = stringResource(CoreR.string.system_mode_status_summary),
+                        onClick = { viewModel.navigateTo(com.topjohnwu.magisk.ui.navigation.Route.SystemMode) }
+                    )
+                }
+                if (Info.env.isActive) {
+                    Spacer(Modifier.height(16.dp))
+                    MagiskSection(viewModel = viewModel)
+                }
+                if (Info.showSuperUser) {
+                    Spacer(Modifier.height(16.dp))
+                    SuperuserSection(viewModel = viewModel)
+                }
             }
         }
     }
@@ -340,6 +350,8 @@ private fun MagiskSection(
                 color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
             )
 
+            Text(stringResource(CoreR.string.lite_migration), Modifier.padding(16.dp))
+            val status by viewModel.hideStatus.collectAsStateWithLifecycle()
             // Zygisk
             var zygisk by remember { mutableStateOf(Config.zygisk) }
             SettingsSwitch(
@@ -349,10 +361,15 @@ private fun MagiskSection(
                     else CoreR.string.settings_zygisk_summary
                 ),
                 checked = zygisk,
+                enabled = status?.ready == true,
                 onCheckedChange = {
-                    zygisk = it
-                    Config.zygisk = it
-                    viewModel.notifyZygiskChange()
+                    if (it && status?.configuredProvider == "external") {
+                        viewModel.showSnackbar(CoreR.string.hide_provider_error)
+                    } else {
+                        zygisk = it
+                        Config.zygisk = it
+                        viewModel.notifyZygiskChange()
+                    }
                 }
             )
 
@@ -361,26 +378,42 @@ private fun MagiskSection(
                 color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
             )
 
-            // DenyList
-            val denyListEnabled by viewModel.denyListEnabled.collectAsStateWithLifecycle()
-            SettingsSwitch(
-                title = stringResource(CoreR.string.settings_denylist_title),
-                summary = stringResource(CoreR.string.settings_denylist_summary),
-                checked = denyListEnabled,
-                onCheckedChange = { viewModel.toggleDenyList(it) }
-            )
-
-            HorizontalDivider(
-                modifier = Modifier.padding(horizontal = 16.dp),
-                color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
-            )
-
-            // DenyList Config
+            val failure by viewModel.hideFailure.collectAsStateWithLifecycle()
+            val busy by viewModel.hideBusy.collectAsStateWithLifecycle()
+            failure?.let {
+                SettingsArrow(title = stringResource(it), onClick = viewModel::refreshHide)
+            }
+            status?.let { current ->
+                SettingsSwitch(
+                    title = stringResource(CoreR.string.hide_title),
+                    summary = stringResource(if (current.rebootRequired) CoreR.string.hide_restart_required
+                        else if (current.isSuList) CoreR.string.sulist_summary else CoreR.string.hide_summary),
+                    checked = current.enabled,
+                    enabled = !busy && current.ready,
+                    onCheckedChange = { viewModel.configureHide(if (it) "enable" else "disable") }
+                )
+                SettingsDropdown(
+                    title = stringResource(CoreR.string.hide_mode),
+                    items = listOf(stringResource(CoreR.string.hide_title), stringResource(CoreR.string.sulist_title)),
+                    selectedIndex = if (current.configuredMode == "sulist") 1 else 0,
+                    enabled = !busy && current.ready,
+                    onSelectedIndexChange = { viewModel.configureHide("mode", if (it == 1) "sulist" else "hide") }
+                )
+                SettingsDropdown(
+                    title = stringResource(CoreR.string.hide_provider),
+                    items = listOf(stringResource(CoreR.string.hide_provider_core), stringResource(CoreR.string.hide_provider_external)),
+                    selectedIndex = if (current.configuredProvider == "external") 1 else 0,
+                    summary = stringResource(CoreR.string.hide_engine, current.engine),
+                    enabled = !busy && current.ready,
+                    onSelectedIndexChange = { viewModel.configureHide("provider", if (it == 1) "external" else "core") }
+                )
+            }
             SettingsArrow(
-                title = stringResource(CoreR.string.settings_denylist_config_title),
-                summary = stringResource(CoreR.string.settings_denylist_config_summary),
-                onClick = { viewModel.navigateToDenyList() }
+                title = stringResource(CoreR.string.hide_configure),
+                summary = stringResource(CoreR.string.hide_list_summary),
+                onClick = viewModel::navigateToDenyList
             )
+
         }
     }
 }
@@ -400,38 +433,42 @@ private fun SuperuserSection(
         shape = RoundedCornerShape(20.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow)
     ) {
-        // Tapjack (SDK < S)
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
-            var tapjack by remember { mutableStateOf(Config.suTapjack) }
-            SettingsSwitch(
-                title = stringResource(CoreR.string.settings_su_tapjack_title),
-                summary = stringResource(CoreR.string.settings_su_tapjack_summary),
-                checked = tapjack,
-                onCheckedChange = {
-                    tapjack = it
-                    Config.suTapjack = it
-                }
-            )
-            HorizontalDivider(
-                modifier = Modifier.padding(horizontal = 16.dp),
-                color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
-            )
-        }
+        // Keep the consent accessibility choice available on every API.
+        var tapjack by remember { mutableStateOf(Config.suTapjack) }
+        SettingsSwitch(
+            title = stringResource(CoreR.string.settings_su_tapjack_title),
+            summary = stringResource(CoreR.string.su_prompt_protection_summary),
+            checked = tapjack,
+            onCheckedChange = {
+                tapjack = it
+                Config.suTapjack = it
+            }
+        )
+        HorizontalDivider(
+            modifier = Modifier.padding(horizontal = 16.dp),
+            color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
+        )
 
+        Text(stringResource(CoreR.string.su_auth_migration), Modifier.padding(16.dp))
         // Authentication
         var suAuth by remember { mutableStateOf(Config.suAuth) }
         SettingsSwitch(
             title = stringResource(CoreR.string.settings_su_auth_title),
             summary = stringResource(
-                if (Info.isDeviceSecure) CoreR.string.settings_su_auth_summary
-                else CoreR.string.settings_su_auth_insecure
+                if (Info.isDeviceSecure) CoreR.string.su_auth_summary
+                else CoreR.string.su_auth_unavailable
             ),
             checked = suAuth,
             enabled = Info.isDeviceSecure,
             onCheckedChange = { newValue ->
                 viewModel.withAuth {
-                    suAuth = newValue
-                    Config.suAuth = newValue
+                    try {
+                        Config.suAuth = newValue
+                        suAuth = Config.suAuth
+                    } catch (_: java.io.IOException) {
+                        suAuth = Config.suAuth
+                        viewModel.showSnackbar(CoreR.string.hide_operation_error)
+                    }
                 }
             }
         )

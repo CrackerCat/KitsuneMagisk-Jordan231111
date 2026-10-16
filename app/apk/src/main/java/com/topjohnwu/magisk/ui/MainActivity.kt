@@ -71,6 +71,7 @@ class MainActivity : ComponentActivity(), SplashScreenHost {
     override val splashController = SplashController(this)
 
     private val intentState = MutableStateFlow<Intent?>(null)
+    private val requestedTab = MutableStateFlow<Int?>(null)
     internal val showInvalidState = MutableStateFlow(false)
     internal val showUnsupported = MutableStateFlow<List<Pair<Int, Int>>>(emptyList())
     internal val showShortcutPrompt = MutableStateFlow(false)
@@ -81,7 +82,9 @@ class MainActivity : ComponentActivity(), SplashScreenHost {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        intentState.value = intent
+        intentState.value = if (savedInstanceState?.getBoolean("intent_consumed") == true) null else intent
+        requestedTab.value = savedInstanceState?.getInt("pending_tab", -1)?.takeIf { it >= 0 }
+        showInstall.value = savedInstanceState?.getBoolean("pending_install") == true
         extension.onCreate(savedInstanceState)
         splashController.preOnCreate()
         theme.applyStyle(R.style.Main, true)
@@ -97,6 +100,9 @@ class MainActivity : ComponentActivity(), SplashScreenHost {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         extension.onSaveInstanceState(outState)
+        outState.putBoolean("intent_consumed", intentState.value == null)
+        outState.putInt("pending_tab", requestedTab.value ?: -1)
+        outState.putBoolean("pending_install", showInstall.value)
     }
 
     @SuppressLint("InlinedApi")
@@ -111,8 +117,6 @@ class MainActivity : ComponentActivity(), SplashScreenHost {
         }
 
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
-
-        val initialTab = getInitialTab(intent)
 
         setContent {
             MagiskTheme {
@@ -134,12 +138,22 @@ class MainActivity : ComponentActivity(), SplashScreenHost {
                                         viewModelStoreOwner = this@MainActivity, factory = VMFactory
                                     )
                                     MainScreen(
-                                        initialTab = initialTab,
+                                        requestedTab = requestedTab.collectAsStateWithLifecycle().value,
+                                        onTabHandled = { requestedTab.compareAndSet(it, null) },
+                                        openInstall = showInstall.collectAsStateWithLifecycle().value,
+                                        onInstallHandled = { showInstall.value = false },
+                                        onInstallManager = {
+                                            com.topjohnwu.magisk.core.download.DownloadEngine.startWithActivity(
+                                                this@MainActivity, com.topjohnwu.magisk.core.download.Subject.App())
+                                        },
                                         superuserViewModel = superuserVm,
                                         onAuthenticate = { action ->
                                             extension.withAuthentication { if (it) action() }
                                         }
                                     )
+                                }
+                                entry<Route.SystemMode> {
+                                    com.topjohnwu.magisk.ui.systemmode.SystemModeScreen(onBack = { navigator.pop() })
                                 }
                                 entry<Route.DenyList> { _ ->
                                     val vm: DenyListViewModel = viewModel(factory = VMFactory)
@@ -183,11 +197,15 @@ class MainActivity : ComponentActivity(), SplashScreenHost {
                                 }
                                 entry<Route.Action> { key ->
                                     val vm: ActionViewModel = viewModel(factory = VMFactory)
+                                    var started by rememberSaveable { mutableStateOf(false) }
                                     LaunchedEffect(key) {
                                         if (vm.actionId.isEmpty()) {
                                             vm.actionId = key.id
                                             vm.actionName = key.name
-                                            vm.startRunAction()
+                                            if (started) vm.recoverAfterProcessDeath() else {
+                                                started = true
+                                                vm.startRunAction()
+                                            }
                                         }
                                     }
                                     ActionScreen(vm, actionName = key.name, onBack = { navigator.pop() })
@@ -222,8 +240,15 @@ class MainActivity : ComponentActivity(), SplashScreenHost {
         val currentIntent = intentState.collectAsStateWithLifecycle().value
         LaunchedEffect(currentIntent) {
             currentIntent ?: return@LaunchedEffect
+            if (currentIntent.action != Intent.ACTION_MAIN || currentIntent.hasExtra(Const.Key.OPEN_SECTION)) {
+                showShortcutPrompt.value = false
+            }
+            requestedTab.value = getInitialTab(currentIntent)
+            if (navigator.current() != Route.Main && navigator.current() !is Route.Flash && navigator.current() !is Route.Action) {
+                navigator.backStack.clear()
+                navigator.push(Route.Main)
+            }
             if (currentIntent.getStringExtra(Const.Key.OPEN_SECTION) == Const.Nav.INSTALL) {
-                currentIntent.removeExtra(Const.Key.OPEN_SECTION)
                 showInstall.value = true
             }
             if (currentIntent.action == FlashUtils.INTENT_FLASH) {
@@ -233,18 +258,18 @@ class MainActivity : ComponentActivity(), SplashScreenHost {
                 // to run a root operation, even when it came from a notification.
                 if (action != Const.Value.FLASH_ZIP || uri == null ||
                     (uri.scheme != "file" && uri.scheme != "content")) {
-                    currentIntent.action = null
+                    intentState.compareAndSet(currentIntent, null)
                     return@LaunchedEffect
                 }
                 val result = confirmation.awaitConfirm(
                     title = getString(CoreR.string.confirm_install_title),
                     content = getString(CoreR.string.confirm_install, uri.lastPathSegment ?: "module.zip"),
                 )
-                currentIntent.action = null
                 if (result == ConfirmResult.Confirmed) {
                     navigator.push(Route.Flash(Const.Value.FLASH_ZIP, uri.toString()))
                 }
             }
+            intentState.compareAndSet(currentIntent, null)
         }
     }
 
@@ -281,8 +306,15 @@ class MainActivity : ComponentActivity(), SplashScreenHost {
                 showInvalidState.value = true
             } else {
                 lifecycleScope.launch {
-                    if (!AppMigration.restoreApp(this@MainActivity)) {
-                        toast(CoreR.string.failure, Toast.LENGTH_LONG)
+                    if (Info.isRooted) {
+                        if (!AppMigration.restoreApp(this@MainActivity)) {
+                            toast(CoreR.string.failure, Toast.LENGTH_LONG)
+                        }
+                    } else {
+                        showInvalidState.value = true
+                        if (!AppMigration.restoreWithoutRoot(this@MainActivity)) {
+                            toast(CoreR.string.failure, Toast.LENGTH_LONG)
+                        }
                     }
                 }
             }
@@ -314,7 +346,9 @@ class MainActivity : ComponentActivity(), SplashScreenHost {
     }
 
     private fun askForHomeShortcut() {
-        if (isRunningAsStub && !Config.askedHome &&
+        // An optional launcher prompt must not cover a requested destination.
+        if (intent.action == Intent.ACTION_MAIN && !intent.hasExtra(Const.Key.OPEN_SECTION) &&
+            isRunningAsStub && !Config.askedHome &&
             ShortcutManagerCompat.isRequestPinShortcutSupported(this)) {
             Config.askedHome = true
             showShortcutPrompt.value = true
@@ -342,7 +376,8 @@ private fun MainActivityDialogs(
         if (showInvalid) {
             invalidDialog.showConfirm(
                 title = resources.getString(CoreR.string.unsupport_nonroot_stub_title),
-                content = resources.getString(CoreR.string.unsupport_nonroot_stub_msg),
+                content = resources.getString(CoreR.string.unsupport_nonroot_stub_msg) + "\n\n" +
+                    resources.getString(CoreR.string.hidden_restore_defaults),
                 confirm = resources.getString(CoreR.string.install),
             )
         }
@@ -365,13 +400,12 @@ private fun MainActivityDialogs(
         }
     }
 
-    val shortcutDialog = rememberConfirmDialog(
-        onConfirm = onShortcutConfirmed,
-        onDismiss = onShortcutDismissed
-    )
-
-    LaunchedEffect(showShortcut) {
-        if (showShortcut) {
+    if (showShortcut) {
+        val shortcutDialog = rememberConfirmDialog(
+            onConfirm = onShortcutConfirmed,
+            onDismiss = onShortcutDismissed
+        )
+        LaunchedEffect(Unit) {
             shortcutDialog.showConfirm(
                 title = resources.getString(CoreR.string.add_shortcut_title),
                 content = resources.getString(CoreR.string.add_shortcut_msg),

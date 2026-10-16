@@ -46,6 +46,18 @@ class MagiskAppTest : BaseTest {
     }
 
     @Test
+    fun testRootIsAvailableOnTheApplicationPath() {
+        val process = ProcessBuilder("su", "-c", "id").redirectErrorStream(true).start()
+        try {
+            val result = process.inputStream.bufferedReader().use { it.readText() }
+            assertEquals("The application PATH must expose MagiskSU", 0, process.waitFor())
+            assertTrue("The verified manager must retain root: $result", result.contains("uid=0"))
+        } finally {
+            process.destroy()
+        }
+    }
+
+    @Test
     fun testSuNotifications() {
         // Exercise both notifications on every API, including pre-O builders.
         Notifications.suNotification(true, "Kitsune test")
@@ -102,7 +114,7 @@ class MagiskAppTest : BaseTest {
 
         // Check that the database is updated
         runBlocking {
-            // The response FIFO is written before the asynchronous policy update.
+            // A completed request must have a durable daemon-owned policy.
             var observed = ServiceLocator.policyDB.fetch(2000)
             withTimeoutOrNull(TimeUnit.SECONDS.toMillis(10)) {
                 while (observed?.policy != SuPolicy.ALLOW) {

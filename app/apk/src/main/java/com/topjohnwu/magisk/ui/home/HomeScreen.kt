@@ -82,13 +82,10 @@ import com.topjohnwu.magisk.core.BuildConfig
 import com.topjohnwu.magisk.core.Config
 import com.topjohnwu.magisk.core.Const
 import com.topjohnwu.magisk.core.Info
-import com.topjohnwu.magisk.core.download.DownloadEngine
-import com.topjohnwu.magisk.core.download.Subject
 import com.topjohnwu.magisk.core.ktx.reboot
 import com.topjohnwu.magisk.core.ktx.toast
 import com.topjohnwu.magisk.core.tasks.AppMigration
 import com.topjohnwu.magisk.core.tasks.MagiskInstaller
-import com.topjohnwu.magisk.ui.MainActivity
 import com.topjohnwu.magisk.ui.component.MagiskDialog
 import com.topjohnwu.magisk.ui.component.MarkdownTextAsync
 import com.topjohnwu.magisk.ui.component.rememberLoadingDialog
@@ -106,7 +103,10 @@ import com.topjohnwu.magisk.core.R as CoreR
 fun HomeScreen(
     viewModel: HomeViewModel,
     installVm: InstallViewModel,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    openInstall: Boolean = false,
+    onInstallHandled: () -> Unit = {},
+    onInstallManager: () -> Unit = {},
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val context = LocalContext.current
@@ -122,14 +122,10 @@ fun HomeScreen(
     var showRestoreDialog by rememberSaveable { mutableStateOf(false) }
     var showInstallDialog by rememberSaveable { mutableStateOf(false) }
     var envFixCode by remember { mutableIntStateOf(0) }
-    val activity = context as? MainActivity
-    if (activity != null) {
-        val openInstall by activity.showInstall.collectAsStateWithLifecycle()
-        LaunchedEffect(openInstall) {
-            if (openInstall) {
-                showInstallDialog = true
-                activity.showInstall.value = false
-            }
+    LaunchedEffect(openInstall) {
+        if (openInstall) {
+            showInstallDialog = true
+            onInstallHandled()
         }
     }
 
@@ -188,9 +184,7 @@ fun HomeScreen(
             onDismiss = { showManagerDialog = false },
             onInstall = {
                 showManagerDialog = false
-                (context as? MainActivity)?.let {
-                    DownloadEngine.startWithActivity(it, Subject.App())
-                }
+                onInstallManager()
             }
         )
     }
@@ -329,7 +323,7 @@ fun HomeScreen(
 
             item("follow_title") {
                 Text(
-                    text = stringResource(CoreR.string.home_follow_title),
+                    text = stringResource(CoreR.string.kitsune_credits),
                     style = MaterialTheme.typography.labelLarge,
                     fontWeight = FontWeight.SemiBold,
                     color = MaterialTheme.colorScheme.primary,
@@ -451,7 +445,7 @@ private fun NoticeCard(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = stringResource(CoreR.string.home_notice_content),
+                text = stringResource(CoreR.string.kitsune_notice),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onTertiaryContainer,
                 modifier = Modifier
@@ -766,7 +760,7 @@ private fun SupportCard(
     ) {
         Column(modifier = Modifier.padding(18.dp)) {
             Text(
-                text = stringResource(CoreR.string.home_support_content),
+                text = stringResource(CoreR.string.kitsune_upstream_support),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -815,9 +809,15 @@ private data class LinkInfo(val label: Int, val icon: Int, val url: String)
 private data class DeveloperInfo(val name: String, val links: List<LinkInfo>)
 
 private val developers = listOf(
+    DeveloperInfo("KitsuneMagisk", listOf(
+        LinkInfo(CoreR.string.github, CoreR.drawable.ic_github, Const.Url.SOURCE_CODE_URL),
+    )),
+    DeveloperInfo("huskydg", listOf(
+        LinkInfo(CoreR.string.github, CoreR.drawable.ic_github, "https://github.com/HuskyDG"),
+    )),
     DeveloperInfo("topjohnwu", listOf(
         LinkInfo(CoreR.string.twitter, CoreR.drawable.ic_twitter, "https://x.com/topjohnwu"),
-        LinkInfo(CoreR.string.github, CoreR.drawable.ic_github, Const.Url.SOURCE_CODE_URL),
+        LinkInfo(CoreR.string.github, CoreR.drawable.ic_github, "https://github.com/topjohnwu/Magisk"),
     )),
     DeveloperInfo("vvb2060", listOf(
         LinkInfo(CoreR.string.twitter, CoreR.drawable.ic_twitter, "https://x.com/vvb2060"),

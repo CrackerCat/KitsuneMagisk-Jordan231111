@@ -18,11 +18,13 @@ import com.topjohnwu.magisk.core.di.ServiceLocator
 import com.topjohnwu.magisk.core.isRunningAsStub
 import com.topjohnwu.magisk.core.ktx.writeTo
 import com.topjohnwu.magisk.core.tasks.AppMigration
+import com.topjohnwu.magisk.core.tasks.ManagerMigration
 import com.topjohnwu.magisk.core.utils.RootUtils
 import com.topjohnwu.magisk.view.Notifications
 import com.topjohnwu.magisk.view.Shortcuts
 import com.topjohnwu.superuser.Shell
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import timber.log.Timber
 import java.io.File
 import java.io.IOException
@@ -39,6 +41,7 @@ class SplashController<T>(private val activity: T)
 
     companion object {
         private var splashShown = false
+        private var stubUpgradeRequested = false
     }
 
     private var shouldCreateUiOnResume = false
@@ -61,10 +64,18 @@ class SplashController<T>(private val activity: T)
         } else {
             Shell.getShell(Shell.EXECUTOR) {
                 if (isRunningAsStub && !it.isRoot) {
-                    activity.showInvalidStateMessage()
+                    activity.runOnUiThread {
+                        splashShown = true
+                        activity.showInvalidStateMessage()
+                        if (activity.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
+                            doCreateUi(savedInstanceState)
+                        } else {
+                            shouldCreateUiOnResume = true
+                        }
+                    }
                     return@getShell
                 }
-                activity.initializeApp()
+                if (!activity.initializeApp()) return@getShell
                 activity.runOnUiThread {
                     splashShown = true
                     if (isRunningAsStub) {
@@ -91,14 +102,18 @@ class SplashController<T>(private val activity: T)
     private fun doCreateUi(savedInstanceState: Bundle?) {
         shouldCreateUiOnResume = false
         activity.onCreateUi(savedInstanceState)
+        activity.checkStub()
     }
 
-    private fun T.initializeApp() {
-        val prevPkg = launchPackage
-        val prevConfig = intent.getBundleExtra(Const.Key.PREV_CONFIG)
-        val isPackageMigration = prevPkg != null && prevConfig != null
+    private fun T.initializeApp(): Boolean {
+        val handoff = runBlocking {
+            runCatching { ManagerMigration.consume(this@initializeApp, intent, launchPackage) }
+                .onFailure { Timber.e(it, "Cannot authenticate manager migration") }.getOrNull()
+        }
+        val prevPkg = handoff?.source
+        val isPackageMigration = handoff != null
 
-        Config.init(prevConfig)
+        Config.init(handoff?.preferences)
 
         if (packageName != APP_PACKAGE_NAME) {
             runCatching {
@@ -108,7 +123,7 @@ class SplashController<T>(private val activity: T)
             }
         } else {
             if (Config.suManager.isNotEmpty()) {
-                Config.suManager = ""
+                runCatching { Config.suManager = "" }.onFailure { Timber.e(it) }
             }
             if (isPackageMigration) {
                 Shell.cmd("(pm uninstall $prevPkg)& >/dev/null 2>&1").exec()
@@ -120,16 +135,32 @@ class SplashController<T>(private val activity: T)
                 // Relaunch the process after package migration
                 StubApk.restartProcess(this)
             }
-            return
+            return false
         }
 
+        Notifications.setup()
+        JobService.schedule(this)
+        Shortcuts.setupDynamic(this)
+
+        // Pre-fetch network services
+        ServiceLocator.networkService
+
+        // Every rooted UI path, including a stub upgrade, needs this service.
+        RootUtils.Connection.await()
+        return true
+    }
+
+    private fun T.checkStub() {
         // Validate stub APK
-        if (isRunningAsStub && (
+        if (Info.isRooted && isRunningAsStub && !stubUpgradeRequested && (
                 // Version mismatch
                 Info.stub!!.version != BuildConfig.STUB_VERSION ||
                 // Not properly patched
                 intent.component!!.className.contains(AppMigration.PLACEHOLDER))
         ) {
+            // Request permission from the initialized activity, after its splash
+            // recreation. Cancellation leaves the current launcher usable.
+            stubUpgradeRequested = true
             withPermission(REQUEST_INSTALL_PACKAGES) { granted ->
                 if (granted) {
                     lifecycleScope.launch {
@@ -145,17 +176,6 @@ class SplashController<T>(private val activity: T)
                     }
                 }
             }
-            return
         }
-
-        Notifications.setup()
-        JobService.schedule(this)
-        Shortcuts.setupDynamic(this)
-
-        // Pre-fetch network services
-        ServiceLocator.networkService
-
-        // Wait for root service
-        RootUtils.Connection.await()
     }
 }

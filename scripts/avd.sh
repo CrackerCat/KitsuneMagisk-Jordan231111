@@ -3,7 +3,7 @@
 set -e
 . scripts/test_common.sh
 
-emu_args_base="-no-window -no-audio -no-boot-anim -gpu swiftshader_indirect -read-only -no-snapshot -cores $core_count"
+emu_args_base="-no-window -no-audio -no-boot-anim -gpu swiftshader_indirect -no-snapshot -cores $core_count"
 log_args="-show-kernel -logcat ''"
 emu_args=
 emu_pid=
@@ -49,7 +49,23 @@ stop_emulator() {
     return
   fi
   if kill -0 "$emu_pid" >/dev/null 2>&1; then
-    kill -INT "$emu_pid" >/dev/null 2>&1 || true
+    # Console commands require the emulator serial, not its ADB TCP alias.
+    # Verify ownership before flushing and closing that console.
+    python3 - "$emu_port" "$avd_name" <<'PY'
+import subprocess
+import sys
+
+command = ["adb", "-s", f"emulator-{sys.argv[1]}"]
+try:
+    result = subprocess.run(command + ["emu", "avd", "name"],
+                            capture_output=True, text=True, timeout=5)
+    names = result.stdout.splitlines()
+    if result.returncode == 0 and names and names[0].strip() == sys.argv[2]:
+        subprocess.run(command + ["shell", "sync"], capture_output=True, timeout=10)
+        subprocess.run(command + ["emu", "kill"], capture_output=True, timeout=5)
+except (OSError, subprocess.TimeoutExpired):
+    pass
+PY
     local count=0
     while kill -0 "$emu_pid" >/dev/null 2>&1 && [ "$count" -lt 30 ]; do
       sleep 1
@@ -418,8 +434,9 @@ test_emu() {
   launch_emulator "-wipe-data -ramdisk $image -feature -SystemAsRoot"
   run_setup "$variant"
 
-  adb reboot
-  wait_emu
+  # Restart the owned process, preserving userdata and the patched boot image.
+  stop_emulator
+  launch_emulator "-ramdisk $image -feature -SystemAsRoot"
   run_tests
   stop_emulator
 }

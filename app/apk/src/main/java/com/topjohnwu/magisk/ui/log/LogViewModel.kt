@@ -61,40 +61,44 @@ class LogViewModel(
         }
     }
 
+    fun saveDiagnostics() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val filename = "kitsune_diagnostics_%s.json".format(
+                System.currentTimeMillis().toTime(timeFormatStandard))
+            try {
+                val logFile = MediaStoreUtils.getFile(filename)
+                logFile.uri.outputStream().bufferedWriter().use {
+                    it.write(com.topjohnwu.magisk.core.model.ManagerDiagnostics.collect().toString(2))
+                }
+                showSnackbar(logFile.toString())
+            } catch (e: java.io.IOException) {
+                timber.log.Timber.e(e)
+                showSnackbar(R.string.failure)
+            } catch (e: SecurityException) {
+                timber.log.Timber.e(e)
+                showSnackbar(R.string.failure)
+            }
+        }
+    }
+
     fun saveMagiskLog() {
         viewModelScope.launch(Dispatchers.IO) {
-            val filename = "magisk_log_%s.log".format(
+            val filename = "kitsune_log_%s.log".format(
                 System.currentTimeMillis().toTime(timeFormatStandard))
-            val logFile = MediaStoreUtils.getFile(filename)
-            logFile.uri.outputStream().bufferedWriter().use { file ->
-                file.write("---Detected Device Info---\n\n")
-                file.write("isAB=${Info.isAB}\n")
-                file.write("isSAR=${Info.isSAR}\n")
-                file.write("ramdisk=${Info.ramdisk}\n")
-                val uname = Os.uname()
-                file.write("kernel=${uname.sysname} ${uname.machine} ${uname.release} ${uname.version}\n")
-
-                file.write("\n\n---System Properties---\n\n")
-                ProcessBuilder("getprop").start()
-                    .inputStream.reader().use { it.copyTo(file) }
-
-                file.write("\n\n---Environment Variables---\n\n")
-                System.getenv().forEach { (key, value) -> file.write("${key}=${value}\n") }
-
-                file.write("\n\n---System MountInfo---\n\n")
-                FileInputStream("/proc/self/mountinfo").reader().use { it.copyTo(file) }
-
-                file.write("\n---Magisk Logs---\n")
-                file.write("${Info.env.versionString} (${Info.env.versionCode})\n\n")
-                if (Info.env.isActive) file.write(magiskLogRaw)
-
-                file.write("\n---Manager Logs---\n")
-                file.write("${BuildConfig.APP_VERSION_NAME} (${BuildConfig.APP_VERSION_CODE})\n\n")
-                file.write("${BuildConfig.BUILD_INFO_JSON}\n\n")
-                ProcessBuilder("logcat", "-d").start()
-                    .inputStream.reader().use { it.copyTo(file) }
+            try {
+                val file = MediaStoreUtils.getFile(filename)
+                file.uri.outputStream().bufferedWriter().use {
+                    it.write("${Info.env.versionString} (${Info.env.versionCode})\n\n")
+                    it.write(uiState.value.magiskLog)
+                }
+                showSnackbar(file.toString())
+            } catch (e: java.io.IOException) {
+                timber.log.Timber.e(e)
+                showSnackbar(R.string.failure)
+            } catch (e: SecurityException) {
+                timber.log.Timber.e(e)
+                showSnackbar(R.string.failure)
             }
-            showSnackbar(logFile.toString())
         }
     }
 

@@ -38,7 +38,7 @@ pub struct SuInfo {
     pub(super) eval_uid: i32,
     pub(super) mgr_pkg: String,
     pub(super) mgr_uid: i32,
-    cfg: DbSettings,
+    pub(super) cfg: DbSettings,
     access: Mutex<AccessInfo>,
 }
 
@@ -138,12 +138,15 @@ impl MagiskD {
 
             // Talk to su manager
             let mut app = SuAppContext {
+                daemon: self,
+                client: &client,
                 cred,
                 request: &req,
                 info: &info,
                 settings: &mut access.settings,
                 sdk_int: self.sdk_int(),
             };
+            let prompted = app.settings.policy == SuPolicy::Query;
             app.connect_app();
 
             // Before unlocking, refresh the timestamp
@@ -153,10 +156,17 @@ impl MagiskD {
                 req.drop_cap = true;
             }
 
-            if access.settings.policy == SuPolicy::Deny {
+            if access.settings.policy != SuPolicy::Allow
+                && access.settings.policy != SuPolicy::Restrict
+            {
                 warn!("su: request rejected ({})", info.uid);
                 client.write_pod(&SuPolicy::Deny.repr).ok();
                 return;
+            }
+            if prompted {
+                // A one-time grant must never become a three-second cached grant.
+                // Persisted consent is reloaded through the ordinary database path.
+                access.timestamp = Instant::now() - Duration::from_secs(3);
             }
         }
 
@@ -213,13 +223,16 @@ impl MagiskD {
             return Arc::new(SuInfo::allow(AID_ROOT));
         }
 
-        let cached = self.cached_su_info.load();
+        let cached = self.cached_su_info.lock().clone();
         if cached.uid == uid && cached.access.lock().is_fresh() {
             return cached;
         }
 
+        // Serialize publication with CLI invalidation, including the database
+        // read. Never hold this lock while waiting for consent on access.lock().
+        let mut cached = self.cached_su_info.lock();
         let info = self.build_su_info(uid);
-        self.cached_su_info.store(info.clone());
+        *cached = info.clone();
         info
     }
 

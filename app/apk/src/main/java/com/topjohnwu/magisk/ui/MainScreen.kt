@@ -67,7 +67,11 @@ enum class Tab(val titleRes: Int, val iconRes: Int) {
 @Composable
 fun MainScreen(
     modifier: Modifier = Modifier,
-    initialTab: Int = Tab.HOME.ordinal,
+    requestedTab: Int? = null,
+    onTabHandled: (Int) -> Unit = {},
+    openInstall: Boolean = false,
+    onInstallHandled: () -> Unit = {},
+    onInstallManager: () -> Unit = {},
     superuserViewModel: SuperuserViewModel? = null,
     onAuthenticate: ((onSuccess: () -> Unit) -> Unit)? = null,
 ) {
@@ -82,8 +86,15 @@ fun MainScreen(
             }
         }
     }
-    val initialPage = visibleTabs.indexOf(Tab.entries[initialTab]).coerceAtLeast(0)
+    val initialPage = visibleTabs.indexOf(Tab.HOME).coerceAtLeast(0)
     val pagerState = rememberPagerState(initialPage = initialPage, pageCount = { visibleTabs.size })
+    LaunchedEffect(requestedTab) {
+        requestedTab?.let {
+            val target = Tab.entries.getOrNull(it) ?: Tab.HOME
+            pagerState.scrollToPage(visibleTabs.indexOf(target).takeIf { page -> page >= 0 } ?: initialPage)
+            onTabHandled(it)
+        }
+    }
     var moduleFabAction by remember { mutableStateOf<(() -> Unit)?>(null) }
     val isModulesTab = visibleTabs.getOrNull(pagerState.currentPage) == Tab.MODULES
 
@@ -145,7 +156,10 @@ fun MainScreen(
                     }
                     CollectNavEvents(vm, navigator)
                     CollectNavEvents(installVm, navigator)
-                    HomeScreen(vm, installVm)
+                    HomeScreen(vm, installVm,
+                        openInstall = openInstall && isCurrentPage,
+                        onInstallHandled = onInstallHandled,
+                        onInstallManager = onInstallManager)
                 }
                 Tab.SUPERUSER -> {
                     val activity = LocalActivity.current as? ComponentActivity
@@ -190,6 +204,7 @@ fun MainScreen(
                             vm.authenticate = onAuthenticate
                         }
                     }
+                    LaunchedEffect(isCurrentPage) { if (isCurrentPage) vm.refreshHide() }
                     CollectNavEvents(vm, navigator)
                     SettingsScreen(vm)
                 }

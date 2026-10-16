@@ -63,7 +63,7 @@ object AppMigration {
             val idx = random.nextInt(len - 2)
             builder[idx + 1] = '.'
         }
-        return builder.toString()
+        return "com.$builder"
     }
 
     private fun classNameGenerator() = sequence {
@@ -181,17 +181,33 @@ object AppMigration {
         }
     }
 
-    private fun launchApp(context: Context, pkg: String) {
-        val intent = context.packageManager.getLaunchIntentForPackage(pkg) ?: return
-        intent.putExtra(Const.Key.PREV_CONFIG, Config.toBundle())
+    private fun launchApp(context: Context, pkg: String, token: String? = null): Boolean {
+        val intent = context.packageManager.getLaunchIntentForPackage(pkg) ?: return false
+        if (token != null) {
+            intent.putExtra(Const.Key.PREV_CONFIG, Config.toBundle())
+            intent.putExtra(ManagerMigration.EXTRA_TOKEN, token)
+        }
         val options = ActivityOptions.makeBasic()
         if (Build.VERSION.SDK_INT >= 34) {
             options.setShareIdentityEnabled(true)
         }
-        context.startActivity(intent, options.toBundle())
+        try {
+            context.startActivity(intent, options.toBundle())
+        } catch (e: RuntimeException) {
+            Timber.e(e)
+            return false
+        }
         if (context is Activity) {
             context.finish()
         }
+        return true
+    }
+
+    private suspend fun launchMigration(context: Context, pkg: String): Boolean {
+        val token = ManagerMigration.prepare(context, pkg)
+        if (launchApp(context, pkg, token.nonce)) return true
+        ManagerMigration.discard(token)
+        return false
     }
 
     suspend fun patchAndHide(context: Context, label: String, pkg: String? = null): Boolean {
@@ -209,14 +225,19 @@ object AppMigration {
 
         // Check and patch the test APK
         try {
-            val info = context.packageManager.getApplicationInfo(TEST_PKG_NAME, 0)
-            val testApk = File(info.sourceDir)
-            val testRepack = File(context.cacheDir, "test.apk")
-            if (!patchTest(testApk, testRepack, pkg))
-                return false
-            val cmd = "adb_pm_install $testRepack $pkg.test"
-            if (!Shell.cmd(cmd).exec().isSuccess)
-                return false
+            val pm = context.packageManager
+            // Never give an unrelated APK the hidden manager's generated signer
+            // merely because it claimed the instrumentation package name.
+            if (pm.checkSignatures(APP_PACKAGE_NAME, TEST_PKG_NAME) == PackageManager.SIGNATURE_MATCH) {
+                val info = pm.getApplicationInfo(TEST_PKG_NAME, 0)
+                val testApk = File(info.sourceDir)
+                val testRepack = File(context.cacheDir, "test.apk")
+                if (!patchTest(testApk, testRepack, pkg))
+                    return false
+                val cmd = "adb_pm_install $testRepack $pkg.test"
+                if (!Shell.cmd(cmd).exec().isSuccess)
+                    return false
+            }
         } catch (e: PackageManager.NameNotFoundException) {
         }
 
@@ -229,10 +250,16 @@ object AppMigration {
         // Install and auto launch app
         val cmd = "adb_pm_install $repack $pkg"
         if (Shell.cmd(cmd).exec().isSuccess) {
+            val previous = Config.suManager
             Config.suManager = pkg
             Shell.cmd("touch $AppApkPath").exec()
-            launchApp(context, pkg)
-            return true
+            var launched = false
+            try {
+                launched = launchMigration(context, pkg)
+                return launched
+            } finally {
+                if (!launched) Config.suManager = previous
+            }
         } else {
             return false
         }
@@ -247,7 +274,10 @@ object AppMigration {
             show()
         }
         val success = withContext(Dispatchers.IO) {
-            patchAndHide(activity, label)
+            try { patchAndHide(activity, label) } catch (e: IOException) {
+                Timber.e(e)
+                false
+            }
         }
         if (!success) {
             dialog.dismiss()
@@ -255,14 +285,82 @@ object AppMigration {
         }
     }
 
-    suspend fun restoreApp(context: Context): Boolean {
+    @Suppress("DEPRECATION")
+    suspend fun restoreWithoutRoot(context: Context): Boolean = withContext(Dispatchers.IO) {
+        val hiddenPackage = context.applicationContext.packageName
+        if (hiddenPackage == APP_PACKAGE_NAME) return@withContext false
+        val completed = java.util.concurrent.atomic.AtomicBoolean(false)
+        val apk = StubApk.current(context)
+        val session = APKInstall.startSession(context, APP_PACKAGE_NAME,
+            { context.toast(R.string.failure, Toast.LENGTH_LONG) },
+            {
+                val verified = runCatching {
+                    val flags = PackageManager.GET_SIGNATURES
+                    val expected = context.packageManager.getPackageArchiveInfo(apk.path, flags)?.signatures
+                    val actual = context.packageManager.getPackageInfo(APP_PACKAGE_NAME, flags).signatures
+                    expected?.size == 1 && actual?.size == 1 && expected[0] == actual[0]
+                }.getOrDefault(false)
+                if (verified && launchApp(context, APP_PACKAGE_NAME)) {
+                    completed.set(true)
+                    // Android owns both confirmations when no privileged installer exists.
+                    runCatching {
+                        context.startActivity(Intent(Intent.ACTION_DELETE,
+                            android.net.Uri.fromParts("package", hiddenPackage, null))
+                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+                    }.onFailure {
+                        context.toast(R.string.hidden_cleanup, Toast.LENGTH_LONG)
+                        runCatching {
+                            context.startActivity(Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                android.net.Uri.fromParts("package", hiddenPackage, null))
+                                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+                        }
+                    }
+                } else {
+                    context.toast(R.string.failure, Toast.LENGTH_LONG)
+                }
+            })
+        try {
+            session.openStream(context).use { out ->
+                apk.inputStream().use { input -> input.copyTo(out) }
+            }
+            val action = session.waitIntent()
+            if (action != null) {
+                withContext(Dispatchers.Main) { context.startActivity(action) }
+                true
+            } else completed.get()
+        } catch (e: IOException) {
+            Timber.e(e)
+            false
+        } catch (e: SecurityException) {
+            Timber.e(e)
+            false
+        } catch (e: android.content.ActivityNotFoundException) {
+            Timber.e(e)
+            false
+        }
+    }
+
+    suspend fun restoreApp(context: Context): Boolean = try {
+        restoreWithRoot(context)
+    } catch (e: IOException) {
+        Timber.e(e)
+        false
+    }
+
+    private suspend fun restoreWithRoot(context: Context): Boolean {
         val apk = StubApk.current(context)
         val cmd = "adb_pm_install $apk $APP_PACKAGE_NAME"
         if (Shell.cmd(cmd).await().isSuccess) {
+            val previous = Config.suManager
             Config.suManager = ""
             Shell.cmd("touch $AppApkPath").exec()
-            launchApp(context, APP_PACKAGE_NAME)
-            return true
+            var launched = false
+            try {
+                launched = launchMigration(context, APP_PACKAGE_NAME)
+                return launched
+            } finally {
+                if (!launched) Config.suManager = previous
+            }
         }
         return false
     }
