@@ -114,10 +114,13 @@ jobs:
       - name: Test SU consent parser and socket deadlines
         run: python3 -m unittest discover -s tests -p test_su_consent.py -v
 
+      - name: Test module staging and early parser
+        run: scripts/env.py python3 -m unittest discover -s tests -p test_module_contract.py -v
+
       - name: Verify next-system source baseline
         run: >-
           python tools/next_system_baseline.py
-          --manifest docs/next-system-pr13.json --source
+          --manifest docs/next-system-pr14.json --source
 
       - name: Create disposable release signer
         shell: bash
@@ -154,7 +157,7 @@ jobs:
       - name: Verify next-system artifacts
         run: >-
           python tools/next_system_baseline.py
-          --manifest docs/next-system-pr13.json --source --artifacts out
+          --manifest docs/next-system-pr14.json --source --artifacts out
           --report out/next-system-baseline-report.json
 
       - name: Stop gradle daemon

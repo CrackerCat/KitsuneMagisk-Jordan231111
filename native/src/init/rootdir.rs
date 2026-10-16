@@ -98,9 +98,9 @@ impl MagiskInit {
     }
 
     pub(crate) fn restore_overlay_contexts(&self) {
-        self.overlay_con.iter().for_each(|attr| {
-            let OverlayAttr(path, con) = attr;
+        for OverlayAttr(path, con) in &self.overlay_con {
             path.set_secontext(con).log_ok();
-        })
+        }
+        self.finish_early_mounts();
     }
 }

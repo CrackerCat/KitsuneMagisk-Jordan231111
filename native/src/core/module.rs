@@ -24,6 +24,34 @@ const MAGISK_BIN_INJECT_PARTITIONS: [&Utf8CStr; 4] = [
     cstr!("/system_ext/"),
 ];
 
+// Root API v2 accepts existing partition directories only. /apex is deliberately
+// excluded: apexd publishes per-process namespaces after post-fs-data.
+const ROOT_PARTITIONS: &[&str] = &[
+    "system",
+    "vendor",
+    "product",
+    "system_ext",
+    "odm",
+    "system_dlkm",
+    "vendor_dlkm",
+    "odm_dlkm",
+    "oem",
+    "prism",
+    "optics",
+    "my_custom",
+    "my_engineering",
+    "my_heytap",
+    "my_manifest",
+    "my_preload",
+    "my_product",
+    "my_region",
+    "my_stock",
+    "my_version",
+    "my_bigball",
+    "my_carrier",
+    "my_company",
+];
+
 const SECONDARY_READ_ONLY_PARTITIONS: [&Utf8CStr; 3] =
     [cstr!("/vendor"), cstr!("/product"), cstr!("/system_ext")];
 
@@ -128,6 +156,14 @@ impl ModulePaths<'_> {
             real: self.real.reborrow(),
             module: self.module.append(module),
             module_mnt: self.module_mnt.append(module),
+        }
+    }
+
+    fn root_files(&mut self) -> ModulePaths<'_> {
+        ModulePaths {
+            real: self.real.reborrow(),
+            module: self.module.append("root"),
+            module_mnt: self.module_mnt.append("root"),
         }
     }
 
@@ -656,35 +692,20 @@ fn inject_zygisk_bins(name: &str, system: &mut FsNode) {
 }
 
 fn upgrade_modules() -> LoggedResult<()> {
+    let root = Path::new(MODULEROOT);
+    let pending = Path::new(MODULEUPGRADE);
+    crate::module_store::recover(root, ".rollback-").log()?;
+    crate::module_store::recover(pending, ".previous-").log()?;
     let mut upgrade = Directory::open(cstr!(MODULEUPGRADE)).silent()?;
-    let root = Directory::open(cstr!(MODULEROOT))?;
     while let Some(e) = upgrade.read()? {
-        if !e.is_dir() {
+        if !e.is_dir() || e.name().starts_with('.') {
             continue;
         }
-        let module_name = e.name();
-        let mut disable = false;
-        // Cleanup old module if exists
-        if root.contains_path(module_name) {
-            let module = root.open_as_dir_at(module_name)?;
-            // If the old module is disabled, we need to also disable the new one
-            disable = module.contains_path(cstr!("disable"));
-            module.remove_all()?;
-            root.unlink_at(module_name, UnlinkatFlags::RemoveDir)?;
-        }
-        info!("Upgrade / New module: {module_name}");
-        e.rename_to(&root, module_name)?;
-        if disable {
-            let path = cstr::buf::default()
-                .join_path(module_name)
-                .join_path("disable");
-            let _ = root.open_as_file_at(
-                &path,
-                OFlag::O_RDONLY | OFlag::O_CREAT | OFlag::O_CLOEXEC,
-                0,
-            )?;
-        }
+        let name = e.name().as_str();
+        info!("Upgrade / New module: {name}");
+        crate::module_store::publish(root, &pending.join(name), name).log()?;
     }
+    // Hidden staging directories left by interrupted installers were never active.
     upgrade.remove_all()?;
     cstr!(MODULEUPGRADE).remove()?;
     Ok(())
@@ -693,24 +714,117 @@ fn upgrade_modules() -> LoggedResult<()> {
 fn for_each_module(mut func: impl FnMut(&DirEntry) -> LoggedResult<()>) -> LoggedResult<()> {
     let mut root = Directory::open(cstr!(MODULEROOT))?;
     while let Some(ref e) = root.read()? {
-        if e.is_dir() && e.name() != ".core" {
+        if e.is_dir() && !e.name().starts_with('.') {
             func(e)?;
         }
     }
     Ok(())
 }
 
+fn inhibit_preinit() {
+    // Global input must stay disabled across later unrelated module installs.
+    let global = cstr!("/data/adb/early-mount.d");
+    if global.get_attr().is_ok_and(|attr| attr.is_dir()) {
+        let _ = (|| -> LoggedResult<()> {
+            let marker = cstr!("/data/adb/early-mount.d/disable");
+            marker
+                .create(OFlag::O_WRONLY | OFlag::O_CREAT | OFlag::O_NOFOLLOW, 0o600)?
+                .sync_all()
+                .log()?;
+            std::fs::File::open(global.as_str())
+                .and_then(|dir| dir.sync_all())
+                .log()?;
+            Ok(())
+        })()
+        .log();
+    }
+    let mut preinit = std::path::PathBuf::from(get_magisk_tmp().as_str()).join(".magisk/preinit");
+    if !preinit.is_dir()
+        && std::fs::read_to_string("/data/adb/magisk/config")
+            .is_ok_and(|text| text.lines().any(|line| line == "SYSTEMMODE=true"))
+    {
+        preinit = std::path::PathBuf::from("/data/adb");
+    }
+    let temporary = preinit.join(format!(".policy-disabled-{}", std::process::id()));
+    let mut created = false;
+    let result = (|| -> std::io::Result<()> {
+        if preinit.join("kitsune-v2").is_dir() {
+            std::fs::File::create(preinit.join("kitsune-v2/disabled"))?.sync_all()?;
+            std::fs::File::open(preinit.join("kitsune-v2"))?.sync_all()?;
+        }
+        let file = std::fs::OpenOptions::new()
+            .write(true)
+            .create_new(true)
+            .open(&temporary)?;
+        created = true;
+        file.sync_all()?;
+        std::fs::rename(&temporary, preinit.join("sepolicy.rule"))?;
+        std::fs::File::open(&preinit)?.sync_all()
+    })();
+    if created {
+        std::fs::remove_file(temporary).ok();
+    }
+    if preinit.is_dir() {
+        result.log_ok();
+    }
+}
+
+pub fn has_active_preinit_modules() -> bool {
+    let global = cstr!("/data/adb/early-mount.d");
+    if global.get_attr().is_ok_and(|attr| attr.is_dir())
+        && !cstr!("/data/adb/early-mount.d/disable").exists()
+    {
+        return true;
+    }
+    for path in [cstr!(MODULEROOT), cstr!(MODULEUPGRADE)] {
+        let Ok(mut root) = Directory::open(path) else {
+            continue;
+        };
+        while let Ok(Some(e)) = root.read() {
+            if !e.is_dir() || e.name().starts_with('.') {
+                continue;
+            }
+            let Ok(dir) = e.open_as_dir() else {
+                continue;
+            };
+            if !dir.contains_path(cstr!("disable"))
+                && !dir.contains_path(cstr!("remove"))
+                && (dir.contains_path(cstr!("early-mount"))
+                    || dir.contains_path(cstr!("sepolicy.rule")))
+            {
+                return true;
+            }
+        }
+    }
+    false
+}
+
 pub fn disable_modules() {
-    for_each_module(|e| {
-        let dir = e.open_as_dir()?;
-        dir.open_as_file_at(
-            cstr!("disable"),
-            OFlag::O_RDONLY | OFlag::O_CREAT | OFlag::O_CLOEXEC,
-            0,
-        )?;
-        Ok(())
-    })
-    .log_ok();
+    inhibit_preinit();
+    // Safe mode must cover pending new modules too, or leaving safe mode would
+    // activate a module that was never disabled in the installed directory.
+    for path in [cstr!(MODULEROOT), cstr!(MODULEUPGRADE)] {
+        let Ok(mut root) = Directory::open(path) else {
+            continue;
+        };
+        let _ = (|| -> LoggedResult<()> {
+            while let Some(e) = root.read()? {
+                if !e.is_dir() || e.name().starts_with('.') {
+                    continue;
+                }
+                let dir = e.open_as_dir()?;
+                let file = dir.open_as_file_at(
+                    cstr!("disable"),
+                    OFlag::O_RDONLY | OFlag::O_CREAT | OFlag::O_CLOEXEC,
+                    0,
+                )?;
+                file.sync_all().log()?;
+            }
+            nix::unistd::fsync(&root).log()?;
+            Ok(())
+        })()
+        .log();
+    }
 }
 
 fn run_uninstall_script(module_name: &Utf8CStr) {
@@ -927,6 +1041,8 @@ fn copy_module_to_memfd(memfd: i32, fd: i32, elf_class: u8, machine: u16) -> boo
 }
 
 pub fn remove_modules() {
+    inhibit_preinit();
+    cstr!(MODULEUPGRADE).remove_all().log_ok();
     for_each_module(|e| {
         let dir = e.open_as_dir()?;
         if dir.contains_path(cstr!("uninstall.sh")) {
@@ -944,6 +1060,15 @@ fn collect_modules(zygisk_enabled: bool, open_zygisk: bool) -> Vec<ModuleInfo> {
     #[allow(unused_mut)] // It's possible that z32 and z64 are unused
     for_each_module(|e| {
         let name = e.name();
+        let pending = cstr::buf::default()
+            .join_path(MODULEUPGRADE)
+            .join_path(name);
+        if pending.get_attr().is_ok() {
+            // Failed activation must not mix the old ordinary module with its
+            // completely staged new early plan. Retain both versions for retry.
+            warn!("{name}: update still pending, skip old module");
+            return Ok(());
+        }
         let dir = e.open_as_dir()?;
         if dir.contains_path(cstr!("remove")) {
             info!("{name}: remove");
@@ -1030,6 +1155,9 @@ fn collect_modules(zygisk_enabled: bool, open_zygisk: bool) -> Vec<ModuleInfo> {
         Ok(())
     })
     .log_ok();
+
+    // Filesystem enumeration order must not decide script or mount precedence.
+    modules.sort_by(|a, b| a.name.cmp(&b.name));
 
     if zygisk_enabled && open_zygisk {
         let mut use_memfd = true;
@@ -1209,6 +1337,53 @@ impl MagiskD {
             }
         }
         roots.insert("system", system);
+
+        // The root API augments the same mount tree, so Hide removes these mounts
+        // and ordinary module disable/remove/safe-mode decisions apply unchanged.
+        for info in module_list {
+            let mut module = paths.set_module(&info.name);
+            if module.append("skip_mount").module().exists() {
+                continue;
+            }
+            let mut root_files = module.root_files();
+            for &name in ROOT_PARTITIONS {
+                let files = root_files.append(name);
+                if !files.module().get_attr().is_ok_and(|attr| attr.is_dir()) {
+                    continue;
+                }
+                if !files.real().get_attr().is_ok_and(|attr| attr.is_dir()) {
+                    // Older layouts expose these partitions through /system.
+                    let alias = std::fs::read_link(files.real().as_str());
+                    if matches!(name, "vendor" | "product" | "system_ext")
+                        && alias.is_ok_and(|path| {
+                            path == Path::new("/system").join(name)
+                                || path == Path::new("system").join(name)
+                        })
+                        && let Some(children) = roots.get_mut("system").and_then(FsNode::children)
+                    {
+                        children
+                            .entry(name.to_string())
+                            .or_insert_with(FsNode::new_dir)
+                            .collect(files)
+                            .log_ok();
+                    } else {
+                        warn!("{}: root/{} unavailable, skipped", info.name, name);
+                    }
+                    continue;
+                }
+                roots
+                    .entry(name)
+                    .or_insert_with(FsNode::new_dir)
+                    .collect(files)
+                    .log_ok();
+            }
+            if root_files.append("apex").module().exists() {
+                warn!(
+                    "{}: root/apex unsupported; use an APEX-aware module",
+                    info.name
+                );
+            }
+        }
 
         drop(paths);
         let mut paths = MountPaths::new(&mut buf1, &mut buf2);

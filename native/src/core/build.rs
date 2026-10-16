@@ -12,15 +12,26 @@ fn main() {
 
     gen_cxx_binding("core-rs");
 
+    // Cargo runs this script concurrently for each target ABI. pb-rs appends
+    // to mod.rs in several writes, so a shared source directory races readers.
+    let output = std::env::var("OUT_DIR").expect("Cargo did not provide OUT_DIR");
+    // We include the message directly, not pb-rs's module index. Discard a
+    // possibly partial index left by an interrupted invocation.
+    let index = std::path::Path::new(&output).join("mod.rs");
+    if index.exists() {
+        std::fs::remove_file(index).expect("Cannot remove incomplete protobuf module index");
+    }
+    let output = output.as_str();
     let cb = ConfigBuilder::new(
         &["resetprop/proto/persistent_properties.proto"],
         None,
-        Some(&"resetprop/proto"),
+        Some(&output),
         &["."],
     )
     .unwrap();
     FileDescriptor::run(
-        &cb.single_module(true)
+        &cb.headers(false)
+            .single_module(true)
             .dont_use_cow(true)
             .generate_getters(true)
             .build(),

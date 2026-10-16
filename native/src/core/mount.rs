@@ -42,6 +42,10 @@ pub fn setup_preinit_dir() {
                     // Only care about rw mounts
                     continue;
                 }
+                if matches!(info.target.as_str(), "/persist" | "/mnt/vendor/persist") {
+                    warn!("mount: legacy persist pre-init is read-only; repatch the boot image");
+                    continue;
+                }
                 let mut target = info.target;
                 let target = Utf8CStr::from_string(&mut target);
                 let mut preinit_dir = resolve_preinit_dir(target);
@@ -61,6 +65,13 @@ pub fn setup_preinit_dir() {
         }
     }
 
+    // Do not leave an empty tmpfs placeholder looking like persistent storage.
+    let placeholder = cstr::buf::default()
+        .join_path(magisk_tmp)
+        .join_path(PREINITMIRR);
+    if placeholder.get_attr().is_ok_and(|attr| attr.is_dir()) {
+        placeholder.remove().ok();
+    }
     warn!("mount: preinit dir not found");
 }
 
@@ -99,14 +110,13 @@ pub fn clean_mounts() {
 // - cache: size is limited, but still can be safely written
 // - klogdump: available on some Smartisan devices and can be safely written
 // - metadata: size is limited, and it might cause unexpected behavior if written
-// - persist: it's the last resort, as it's dangerous to write to it
+// Persist contains device calibration data and is never selected for new installs.
 #[derive(PartialEq, Eq, PartialOrd, Ord)]
 enum PartId {
     Data,
     Cache,
     Klogdump,
     Metadata,
-    Persist,
 }
 
 enum EncryptType {
@@ -155,7 +165,6 @@ pub fn find_preinit_device() -> String {
             // take data iff it's not encrypted or file-based encrypted without metadata
             // other partitions are always taken
             match info.target.as_str() {
-                "/persist" | "/mnt/vendor/persist" => Some((PartId::Persist, info)),
                 "/metadata" => Some((PartId::Metadata, info)),
                 "/klogdump" => Some((PartId::Klogdump, info)),
                 "/cache" => Some((PartId::Cache, info)),
@@ -237,44 +246,53 @@ pub fn revert_unmount_checked(pid: i32) -> bool {
         debug!("denylist: handling PID=[{}]", pid);
     }
 
-    let mut targets = Vec::new();
+    // Detaching an ordinary directory overlay can reveal older early mounts
+    // beneath it. Rescan the namespace instead of declaring those files hidden.
+    // Fail closed if a privileged actor keeps stacking new mounts concurrently.
+    for _ in 0..16 {
+        let mut targets = Vec::new();
 
-    // Unmount Magisk tmpfs and mounts from module files
-    let mounts = parse_mount_info("self");
-    if mounts.is_empty() {
-        return false;
-    }
-    for info in mounts {
-        if info.source == "magisk" || info.root.starts_with("/adb/modules") {
-            targets.push(info.target);
-        }
-    }
-
-    if targets.is_empty() {
-        return true;
-    }
-
-    let mut prev: Option<PathBuf> = None;
-    targets.sort();
-    targets.retain(|target| {
-        if let Some(prev) = &prev
-            && Path::new(target).starts_with(prev)
-        {
+        // Unmount Magisk tmpfs and mounts from module files
+        let mounts = parse_mount_info("self");
+        if mounts.is_empty() {
             return false;
         }
-        prev = Some(PathBuf::from(target.clone()));
-        true
-    });
+        for info in mounts {
+            if info.source == "magisk" || info.root.starts_with("/adb/modules") {
+                targets.push(info.target);
+            }
+        }
 
-    let mut clean = true;
-    for mut target in targets {
-        let target = Utf8CStr::from_string(&mut target);
-        if target.unmount().is_ok() {
-            debug!("denylist: Unmounted ({})", target);
-        } else {
-            warn!("denylist: Cannot unmount ({})", target);
-            clean = false;
+        if targets.is_empty() {
+            return true;
+        }
+
+        let mut prev: Option<PathBuf> = None;
+        targets.sort();
+        targets.retain(|target| {
+            if let Some(prev) = &prev
+                && Path::new(target).starts_with(prev)
+            {
+                return false;
+            }
+            prev = Some(PathBuf::from(target.clone()));
+            true
+        });
+
+        let mut clean = true;
+        for mut target in targets {
+            let target = Utf8CStr::from_string(&mut target);
+            if target.unmount().is_ok() {
+                debug!("denylist: Unmounted ({})", target);
+            } else {
+                warn!("denylist: Cannot unmount ({})", target);
+                clean = false;
+            }
+        }
+        if !clean {
+            return false;
         }
     }
-    clean
+    warn!("denylist: mount stack did not converge");
+    false
 }
