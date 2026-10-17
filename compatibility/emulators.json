@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "production_qualified": false,
+  "targets": [
+    {
+      "id": "physical-devices",
+      "name": "Physical OEM phones and GrapheneOS",
+      "route": "boot/init_boot/vendor_boot, Direct Install, OTA and recovery",
+      "status": "unqualified",
+      "limits": "No physical phones available. AVD profiles and boot-image fixtures do not qualify OEM hardware.",
+      "evidence": [
+        "docs/device-qualification.md"
+      ]
+    }
+  ]
+}

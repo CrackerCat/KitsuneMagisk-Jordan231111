@@ -28,7 +28,7 @@
 > [its contract and evidence](docs/hide-policy.md) retain the PR14/PR15 target dependencies. PR13's
 > manager implementation and local acceptance are complete in [GitHub #36](https://github.com/Jordan231111/KitsuneMagisk/pull/36),
 > with [scoped evidence](docs/manager-pr13.json), and is merged after passing its checks. PR14 is complete in [GitHub #37](https://github.com/Jordan231111/KitsuneMagisk/pull/37),
-> with [module acceptance and target limits](docs/module-pr14.json). PR15 is next.
+> with [module acceptance and target limits](docs/module-pr14.json). PR15 is in progress.
 > Production promotion remains gated.
 >
 > Product charter: KitsuneMagisk provides reliable Magisk root on real phones and emulators while
@@ -91,9 +91,10 @@ execution order.
 | 16 | Roadmap PR12 / GitHub #35 — Hide/SuList core and DB migration | **Complete** | Preserve the [core contract](docs/hide-policy.md), [qualification](docs/hide-pr12.json), and named PR14/PR15 dependencies. |
 | 17 | Roadmap PR13 / GitHub #36 — manager UI and SU authorization | **Complete; merged by GitHub #36** | Preserve the [manager contract](docs/manager-contract.md), [runtime record](docs/manager-pr13.json), authenticated migration and explicit historical replacements. |
 | 18 | Roadmap PR14 / GitHub #37 — module compatibility and early-mount v2 | **Complete in GitHub #37** | Preserve the [module contract](docs/module-contract.md), [acceptance](docs/module-pr14.json), and explicit device limits. |
-| 19 | Roadmap PR15–PR16 — device qualification and release | **Not started** | Close every remaining feature-ledger row by PR16; no historical behavior may become an unnamed follow-up. |
+| 19 | Roadmap PR15 — emulator and device qualification | **In progress** | Follow the [exact-target contract](docs/device-qualification.md); AVDs, MuMu Android Device-1 and a fresh BlueStacks instance are available. Physical phones remain unqualified. |
+| 20 | Roadmap PR16 — candidate qualification and release | **Not started** | Close every remaining feature-ledger row and physical-release gate before production promotion. |
 
-The next task is **PR15**, on the maintained `next-system` foundation with PR8–PR14 complete.
+The active task is **PR15**, on the maintained `next-system` foundation with PR8–PR14 complete.
 PR14 implements the [versioned module contract](docs/module-contract.md) and closes its 22 historical
 ledger rows with [scoped evidence](docs/module-pr14.json). Physical phones, additional boot/storage
 layouts and release promotion retain their PR15/PR16 gates.
@@ -2829,10 +2830,13 @@ strand a test device.
 
 ## PR 15 — Commercial-emulator and physical-device qualification
 
-**Implementation status: not started as a full qualification PR. PR3/PR4A/PR5A records are inputs,
-not substitutes for this cross-target release matrix.**
+**Implementation status: in progress under the [PR15 qualification contract](docs/device-qualification.md).
+The requested lab is AVDs, MuMu Android Device-1 and a fresh BlueStacks Air instance; LDPlayer/Nox
+are outside this run. Physical targets are unavailable and must remain explicitly unqualified.
+PR3/PR4A/PR5A records are historical inputs, not acceptance of the current artifact.**
 
-- Complete exact LDPlayer/MuMu lanes and either a BlueStacks adapter or explicit unsupported result.
+- Complete exact MuMu and AVD lanes and either a BlueStacks adapter or explicit unsupported result.
+  Preserve earlier LDPlayer observations as historical evidence; do not imply a current rerun.
 - Complete advertised real-device and negative immutable-layout lanes.
 - On physical devices, qualify ordinary patch-file and Direct Install separately from any advertised
   writable-system/custom-ROM System Mode lane, including `boot`, `init_boot`, `vendor_boot`, A/B,

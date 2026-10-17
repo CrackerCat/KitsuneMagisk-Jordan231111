@@ -381,7 +381,11 @@ setup_emu() {
     return 1
   fi
   owned_avd=1
-  echo no | "$avd" create avd -f -n "$avd_name" -k "$avd_pkg"
+  local profile=()
+  if [ -n "${MAGISK_AVD_DEVICE:-}" ]; then
+    profile=(--device "$MAGISK_AVD_DEVICE")
+  fi
+  echo no | "$avd" create avd -f -n "$avd_name" -k "$avd_pkg" "${profile[@]}"
 
   # avdmanager is outdated, it might not set the proper target.
   local ini="$ANDROID_AVD_HOME/$avd_name.ini"
@@ -433,11 +437,26 @@ test_emu() {
   # Each signer/variant gets clean userdata; reboot coverage happens inside the lane.
   launch_emulator "-wipe-data -ramdisk $image -feature -SystemAsRoot"
   run_setup "$variant"
+  if [ -n "${AVD_QUALIFICATION_DIR:-}" ]; then
+    python3 tools/device_qualification.py capture --serial "$ANDROID_SERIAL" \
+      --apk "$MAGISK_OUT_DIR/app-$variant.apk" --phase setup \
+      --output "$AVD_QUALIFICATION_DIR/$avd_name-$variant.json"
+  fi
+  if [ -n "${AVD_BOOT_FIXTURES:-}" ]; then
+    python3 tools/boot_qualification.py --serial "$ANDROID_SERIAL" \
+      --apk "$MAGISK_OUT_DIR/app-$variant.apk" \
+      --output "$test_dir/boot-fixtures-$variant.json"
+  fi
 
   # Restart the owned process, preserving userdata and the patched boot image.
   stop_emulator
   launch_emulator "-ramdisk $image -feature -SystemAsRoot"
   run_tests
+  if [ -n "${AVD_QUALIFICATION_DIR:-}" ]; then
+    python3 tools/device_qualification.py capture --serial "$ANDROID_SERIAL" \
+      --apk "$MAGISK_OUT_DIR/app-$variant.apk" --phase accepted \
+      --output "$AVD_QUALIFICATION_DIR/$avd_name-$variant.json"
+  fi
   stop_emulator
 }
 

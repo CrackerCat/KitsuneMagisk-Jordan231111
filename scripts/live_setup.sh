@@ -44,11 +44,20 @@ if [ -z "$FIRST_STAGE" ]; then
   export ASH_STANDALONE=1
   if [ $(./busybox id -u) -ne 0 ]; then
     # Re-exec script with root
-    exec /system/xbin/su 0 /data/local/tmp/busybox sh $0
+    BOOTSTRAP_SU=$(command -v su) || {
+      echo '! Bootstrap root is required for live setup' >&2
+      exit 1
+    }
+    exec "$BOOTSTRAP_SU" -c 'FIRST_STAGE=1 ASH_STANDALONE=1 /data/local/tmp/busybox sh /data/local/tmp/live_setup.sh'
   else
     # Re-exec script with busybox
     exec ./busybox sh $0
   fi
+fi
+
+if [ "$(id -u)" -ne 0 ]; then
+  echo '! Bootstrap root did not grant access' >&2
+  exit 1
 fi
 
 pm install -r -g $(pwd)/magisk.apk

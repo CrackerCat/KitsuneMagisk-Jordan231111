@@ -12,6 +12,12 @@ on:
       - "tools/next_system_baseline.py"
       - "tools/port_ledger.py"
       - "tools/early_mount_fixtures.py"
+      - "tools/boot_qualification.py"
+      - "tools/device_qualification.py"
+      - "tests/test_device_qualification.py"
+      - "tests/test_live_setup.py"
+      - "docs/device-pr15*"
+      - "compatibility/**"
       - "tests/test_port_ledger.py"
       - "docs/port-ledger*"
       - "docs/port-history/**"
@@ -75,6 +81,9 @@ jobs:
           TMPDIR="$HOME/.kitsune-host-tests" \
             python3 -m unittest discover -s tests -v
 
+      - name: Verify generated compatibility records
+        run: python3 tools/device_qualification.py render --check
+
   security-audit:
     name: Audit native Rust dependencies
     runs-on: ubuntu-24.04
@@ -120,7 +129,7 @@ jobs:
       - name: Verify next-system source baseline
         run: >-
           python tools/next_system_baseline.py
-          --manifest docs/next-system-pr14.json --source
+          --manifest docs/next-system-pr15.json --source
 
       - name: Create disposable release signer
         shell: bash
@@ -157,7 +166,7 @@ jobs:
       - name: Verify next-system artifacts
         run: >-
           python tools/next_system_baseline.py
-          --manifest docs/next-system-pr14.json --source --artifacts out
+          --manifest docs/next-system-pr15.json --source --artifacts out
           --report out/next-system-baseline-report.json
 
       - name: Stop gradle daemon
@@ -237,7 +246,19 @@ jobs:
         timeout-minutes: 30
         env:
           AVD_TEST_LOG: 1
+          AVD_QUALIFICATION_DIR: out/device-qualification
+          AVD_BOOT_FIXTURES: ${{ matrix.version == 35 && '1' || '' }}
         run: scripts/avd.sh test ${{ matrix.version }} ${{ matrix.type }}
+
+      - name: Retain exact guest and boot fixture evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: "device-${{ matrix.version }}-${{ matrix.type }}-x86_64"
+          path: |
+            out/device-qualification
+            boot-fixtures-*.json
+          if-no-files-found: warn
 
       - name: Upload logs on error
         if: ${{ failure() }}
@@ -276,7 +297,19 @@ jobs:
         env:
           FORCE_32_BIT: 1
           AVD_TEST_LOG: 1
+          AVD_QUALIFICATION_DIR: out/device-qualification
+          AVD_BOOT_FIXTURES: ${{ matrix.version == 29 && '1' || '' }}
         run: scripts/avd.sh test ${{ matrix.version }}
+
+      - name: Retain exact guest and boot fixture evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: "device-${{ matrix.version }}-x86"
+          path: |
+            out/device-qualification
+            boot-fixtures-*.json
+          if-no-files-found: warn
 
       - name: Upload logs on error
         if: ${{ failure() }}
