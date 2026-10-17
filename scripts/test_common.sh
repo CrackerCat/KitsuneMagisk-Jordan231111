@@ -95,6 +95,29 @@ except OSError:
 try:
     output, _ = process.communicate(timeout=timeout)
 except subprocess.TimeoutExpired:
+    if os.environ.get("AVD_TIMEOUT_DIAGNOSTICS") == "1":
+        # Capture blocked fork/exec workers before closing the test process.
+        # Never collect process environments or command-line arguments.
+        diagnostics = r'''
+count=0
+for path in /proc/[0-9]*; do
+  name=$(cat "$path/comm" 2>/dev/null) || continue
+  case "$name" in su|magiskd) ;; *) continue ;; esac
+  pid=${path##*/}
+  printf '\nNative worker %s (%s)\n' "$pid" "$name"
+  cat "$path/status" "$path/wchan" "$path/stack" "$path/syscall" 2>/dev/null
+  timeout 3 debuggerd -b "$pid" 2>&1 || true
+  count=$((count + 1))
+  [ "$count" -lt 4 ] || break
+done
+'''
+        try:
+            result = subprocess.run(["adb", "-s", serial, "shell", diagnostics],
+                                    capture_output=True, text=True, timeout=15)
+            sys.stdout.write(result.stdout)
+            sys.stdout.write(result.stderr)
+        except (OSError, subprocess.TimeoutExpired) as error:
+            print(f"Native timeout diagnostics unavailable: {type(error).__name__}")
     stopped, output = stop_process(process)
     sys.stdout.write(output)
     raise SystemExit(124 if stopped else 125)

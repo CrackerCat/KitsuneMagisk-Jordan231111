@@ -343,6 +343,7 @@ jobs:
       CF_HOME: /home/runner/aosp_cf_phone
       AVD_INSTRUMENT_TIMEOUT: 240
       AVD_QUALIFICATION_DIR: out/device-qualification
+      AVD_TIMEOUT_DIAGNOSTICS: 1
     strategy:
       fail-fast: false
       matrix:
