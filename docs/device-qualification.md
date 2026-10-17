@@ -20,6 +20,10 @@ installation routes and unqualified physical targets. Two matching boot IDs cann
 cold boots. Build-only ABIs, permissive SELinux and fixture headers cannot substitute for matching
 runtime evidence. Each accepted run names the exact APK digest and clean source identity.
 
+The [module compatibility matrix](module-compatibility.md) separately records pinned third-party
+ZIPs, ordinary lifecycle checks, selected functional probes and official Magisk controls. A successful
+installation is not proof of working hiding, audio processing, charging control or hardware attestation.
+
 ## Reproducing the checks
 
 Use the repository environment wrapper and a disposable SDK device. `scripts/avd.sh test API TYPE`
@@ -59,6 +63,19 @@ ordinary in-app Direct Install, inactive-slot, OTA or recovery routes on BlueSta
 
 ## Compatibility changes and remaining boundaries
 
+- The maintained manager now uses `io.github.jordan231111.magisk`; the home page retains its
+  existing layout and contributors, with Jordan231111 as the fork owner's name and GitHub link.
+  [Namespace migration](build-info.md#pr15-namespace-migration) requires an explicit installation
+  transition. MuMu also required its own per-app bootstrap-root grant for the newly installed package.
+  The same-package `31011` to `31012` System Mode upgrade preserved the test sentinel and module whiteout.
+- Concurrent update clients can share a newly created state directory. Losing the `mkdirs()` race
+  no longer reports a false storage error; the existing `lstat` check still rejects redirected paths.
+  Android instrumentation exercises repeated concurrent first-use construction.
+- Pre-init budget parsing uses its own field separator. ViPER's installer leaves `IFS` set to
+  newline; inherited parsing incorrectly treated its 790-byte policy and entry count as one
+  integer, then triggered the existing safety fallback. The new parser accepts that valid input
+  while retaining the same size/count limits and rejecting an oversized sparse policy. Candidate
+  `31013` requires its own runtime requalification; earlier records retain their exact artifact IDs.
 - AVB1 ECDSA now uses Android's DER encoding, following
   [upstream 87e72a582](https://github.com/topjohnwu/Magisk/commit/87e72a582e019ae1bb3e65c90c259e994ecd66fa).
   Earlier raw `r || s` EC signatures were not Android-compatible. Repatch and re-sign the matching
@@ -69,6 +86,11 @@ ordinary in-app Direct Install, inactive-slot, OTA or recovery routes on BlueSta
   are required; this is not a manufacturer-name bypass. Samsung PROCA remains an independent patch.
 - Live setup discovers bootstrap `su` through PATH and uses its command interface. A missing
   `/system/xbin/su` must not prevent a rooted emulator with `/system/bin/su` from being tested.
+  An elevated worker reports completion independently of the bootstrap SU connection, since
+  replacing that daemon can close its own caller's socket. Bootstrap denial and worker failure
+  remain failures; an overdue worker retains its diagnostic directory. The
+  [live-setup record](device-pr15/live-setup.json) covers stock cold boot, reinjection, the full
+  release suite and an ordinary-shell PATH bootstrap followed by the API v5/root stress checks.
 - Select-and-Patch on managed System Mode uses a separate workspace and cleans it after success
   or failure. A subsequent boot must not import file-patching tools over the transaction-owned
   runtime. The daemon also preserves that runtime when an old ordinary update inbox remains.
@@ -91,7 +113,24 @@ ordinary in-app Direct Install, inactive-slot, OTA or recovery routes on BlueSta
   live target/host recovery authorization, and an OTA changes the bound image. Use normal image
   patching where available, or restore/requalify the changed writable image before reinstalling.
   Ordinary Magisk recovery and ordinary `addon.d` remain separate inherited routes.
+- Retire the historical Android 6/API 23–24 System Mode availability claim. The maintained
+  transaction requires API 25 or later and the exact target qualification; ordinary Android 6
+  boot-image installation remains covered by its separate CI lanes. Legacy System Mode users
+  need the matching legacy uninstall/recovery procedure and an ordinary installation on that OS.
 - Physical OEM boot, encrypted pre-init storage, A/B OTA, hardware recovery and GrapheneOS device
   claims require actual matching devices. No available emulator result clears these release gates.
   Retain the implementation and existing historical line; do not remove useful compatibility
   code merely because hardware is unavailable.
+
+## Retained CI investigation
+
+[Run 39015915833](https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39015915833)
+timed out in Cuttlefish's hidden-manager application-PATH root check after the native SU request
+was granted. The last child diagnostic was namespace setup; the existing logs do not identify
+which later operation stopped progressing. This is not claimed as a fixed runtime bug or dismissed
+as an emulator fault. Two complete subsequent Cuttlefish attempts in
+[run 39019753847](https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39019753847) passed,
+including normal/hidden manager checks and Direct Install. Their exact boot records are linked
+from the compatibility table. Cuttlefish timeouts now collect bounded native worker stacks and
+syscall state before teardown, without reading process environments or arguments. A recurrence
+still fails the test; no timeout or acceptance condition was relaxed.

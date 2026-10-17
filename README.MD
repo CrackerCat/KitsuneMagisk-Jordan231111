@@ -26,6 +26,8 @@ Production promotion remains gated.
 - [Hide/SuList core and migration](docs/hide-policy.md) are implemented and qualified on the
   recorded emulator tuples, with [manager integration](docs/manager-contract.md) and
   [versioned module APIs](docs/module-contract.md). PR15 owns broader device qualification.
+  The [module compatibility matrix](docs/module-compatibility.md) records pinned third-party
+  modules, working configurations, official Magisk controls, and explicit limitations.
   [The provider decision](docs/adr/0001-zygisk-provider.md) retains maintained built-in Zygisk
   and an explicit, versioned external adapter boundary.
 - Normal upstream Select-and-Patch, Direct Install, inactive-slot, recovery, emulator live setup,

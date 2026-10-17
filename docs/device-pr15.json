@@ -4,12 +4,135 @@
   "status": "in-progress",
   "targets": [
     {
+      "id": "pr15-35-4k",
+      "name": "Android 15 AVD \u2014 Pixel 6 profile, 4 KiB",
+      "route": "Patched copy of SDK ramdisk; debug and production-signed release",
+      "status": "experimental",
+      "limits": "Source 44143a6d2, code 31012. Full 117-test suite, 68 boot-image checks and 48 root requests at concurrency 6 per variant. AVD profile is not physical Pixel hardware. No in-place System Mode on immutable images.",
+      "runs": [
+        "docs/device-pr15/pr15-35-4k-debug.json",
+        "docs/device-pr15/pr15-35-4k-release.json"
+      ],
+      "evidence": [
+        "docs/device-pr15/pr15-35-4k-debug.json",
+        "docs/device-pr15/pr15-35-4k-release.json",
+        "docs/device-pr15/pr15-35-4k-boot-fixtures-debug.json",
+        "docs/device-pr15/pr15-35-4k-boot-fixtures-release.json",
+        "docs/device-pr15/avd-lifecycle.json"
+      ]
+    },
+    {
+      "id": "pr15-35-16k",
+      "name": "Android 15 AVD \u2014 Pixel 8 profile, 16 KiB",
+      "route": "Patched copy of SDK ramdisk; debug and production-signed release",
+      "status": "experimental",
+      "limits": "Source 44143a6d2, code 31012. Full 117-test suite, 68 boot-image checks and 48 root requests at concurrency 6 per variant. AVD profile is not physical Pixel hardware. No in-place System Mode on immutable images.",
+      "runs": [
+        "docs/device-pr15/pr15-35-16k-debug.json",
+        "docs/device-pr15/pr15-35-16k-release.json"
+      ],
+      "evidence": [
+        "docs/device-pr15/pr15-35-16k-debug.json",
+        "docs/device-pr15/pr15-35-16k-release.json",
+        "docs/device-pr15/pr15-35-16k-boot-fixtures-debug.json",
+        "docs/device-pr15/pr15-35-16k-boot-fixtures-release.json",
+        "docs/device-pr15/avd-lifecycle.json"
+      ]
+    },
+    {
+      "id": "pr15-36-1-4k",
+      "name": "Android 16 AVD \u2014 Pixel 9 Pro profile, 4 KiB",
+      "route": "Patched copy of SDK ramdisk; debug and production-signed release",
+      "status": "experimental",
+      "limits": "Source 44143a6d2, code 31012. Full 117-test suite, 68 boot-image checks and 48 root requests at concurrency 6 per variant. Virtual profile is not matching physical hardware; physical OTA and recovery remain unqualified.",
+      "runs": [
+        "docs/device-pr15/pr15-36-1-4k-debug.json",
+        "docs/device-pr15/pr15-36-1-4k-release.json"
+      ],
+      "evidence": [
+        "docs/device-pr15/pr15-36-1-4k-debug.json",
+        "docs/device-pr15/pr15-36-1-4k-release.json",
+        "docs/device-pr15/pr15-36-1-4k-boot-fixtures-debug.json",
+        "docs/device-pr15/pr15-36-1-4k-boot-fixtures-release.json",
+        "docs/device-pr15/avd-lifecycle.json"
+      ]
+    },
+    {
+      "id": "pr15-29-4k",
+      "name": "Android 10 AVD \u2014 Nexus 5X profile, 4 KiB",
+      "route": "Patched copy of SDK ramdisk; debug and production-signed release",
+      "status": "experimental",
+      "limits": "Source 44143a6d2, code 31012. Full 117-test suite, 68 boot-image checks and 48 root requests at concurrency 6 per variant. Virtual profile is not matching physical hardware; physical OTA and recovery remain unqualified.",
+      "runs": [
+        "docs/device-pr15/pr15-29-4k-debug.json",
+        "docs/device-pr15/pr15-29-4k-release.json"
+      ],
+      "evidence": [
+        "docs/device-pr15/pr15-29-4k-debug.json",
+        "docs/device-pr15/pr15-29-4k-release.json",
+        "docs/device-pr15/pr15-29-4k-boot-fixtures-debug.json",
+        "docs/device-pr15/pr15-29-4k-boot-fixtures-release.json",
+        "docs/device-pr15/avd-lifecycle.json"
+      ]
+    },
+    {
+      "id": "mumu-device-1",
+      "name": "MuMuPlayer Pro Android Device-1 \u2014 Android 12 ARM64, 4 KiB",
+      "route": "Qualified debug System Mode; vendor root off",
+      "status": "experimental",
+      "limits": "Source 44143a6d2, code 31012. Fresh namespace transition, upgrade, 117 tests, 48 root requests at concurrency 6, large archive, three cold boots, uninstall and exact original restoration. Permissive SELinux; no physical OEM claim.",
+      "runs": [
+        "docs/device-pr15/mumu-debug.json"
+      ],
+      "evidence": [
+        "docs/device-pr15/mumu-debug.json",
+        "docs/device-pr15/mumu-lifecycle.json",
+        "docs/device-pr15/large-archive.json"
+      ]
+    },
+    {
+      "id": "bluestacks-core-31009",
+      "name": "BlueStacks Air disposable instance \u2014 Android 13 ARM64, 4 KiB",
+      "route": "Original RootMac bootstrap plus experimental host initramfs adapter",
+      "status": "experimental",
+      "limits": "Exact earlier source 0a15ecd2c, code 31009, previous package namespace. Full suite, three cold boots, host unroot/factory restore and disposable-instance deletion passed. Latest namespace retest awaits unlocked host UI. Active permissive SELinux with kernel-domain labels; not a disabled-policy or Samsung phone claim.",
+      "runs": [
+        "docs/device-pr15/bluestacks-debug.json"
+      ],
+      "evidence": [
+        "docs/device-pr15/bluestacks-debug.json",
+        "docs/device-pr15/bluestacks-lifecycle.json"
+      ]
+    },
+    {
+      "id": "cuttlefish-ci",
+      "name": "Cuttlefish x86_64 phone \u2014 CI virtual target",
+      "route": "Actual virtual init_boot/Direct Install, debug and CI-signed release",
+      "status": "experimental",
+      "limits": "Two complete passing attempts of CI run 39019753847, PR merge source 586779a8ab40246941e216025e3c358c59a21033. CI release signer differs from the locally tested production APK. A preceding hidden-manager root-command timeout is retained in the qualification notes; no physical OTA/recovery claim.",
+      "runs": [
+        "docs/device-pr15/cuttlefish-debug.json",
+        "docs/device-pr15/cuttlefish-release.json",
+        "docs/device-pr15/cuttlefish-repeat-debug.json",
+        "docs/device-pr15/cuttlefish-repeat-release.json"
+      ],
+      "evidence": [
+        "docs/device-pr15/cuttlefish-debug.json",
+        "docs/device-pr15/cuttlefish-release.json",
+        "docs/device-qualification.md",
+        "docs/device-pr15/cuttlefish-repeat-debug.json",
+        "docs/device-pr15/cuttlefish-repeat-release.json"
+      ]
+    },
+    {
       "id": "physical-devices",
       "name": "Physical OEM phones and GrapheneOS",
       "route": "boot/init_boot/vendor_boot, Direct Install, OTA and recovery",
       "status": "unqualified",
       "limits": "No physical phones available. AVD profiles and boot-image fixtures do not qualify OEM hardware.",
-      "evidence": ["docs/device-qualification.md"]
+      "evidence": [
+        "docs/device-qualification.md"
+      ]
     }
   ]
 }

@@ -1,0 +1,884 @@
+{
+  "schema": 1,
+  "status": "in-progress",
+  "source_commit": "44143a6d2e70754931f36e21b00cc2069b0a8238",
+  "application_id": "io.github.jordan231111.magisk",
+  "app_version_code": 31012,
+  "release_apk_sha256": "64ac45ddde681c50840c23f22c10b4e2461b8e29dbf338974e0d256dd766de58",
+  "primary_target": "Official API35 aosp_atd ARM64 4KiB, enforcing, Pixel6 profile",
+  "legacy_target": "Official API29 google_apis ARM64 4KiB, enforcing, Pixel6 profile",
+  "method": "Pinned unmodified upstream ZIPs, clean userdata per case, real installation/cold boots/removal, selected functional probes, and official stable failure controls.",
+  "scope": "Representative widely used modules, not an exhaustive ecosystem ranking. AVD profiles do not simulate OEM hardware. Physical audio, charging and hardware attestation are unqualified.",
+  "modules": [
+    {
+      "repository": "LSPosed/ZygiskNext",
+      "tag": "v1.5.2",
+      "release_url": "https://github.com/LSPosed/ZygiskNext/releases/tag/v1.5.2",
+      "asset_url": "https://github.com/LSPosed/ZygiskNext/releases/download/v1.5.2/Zygisk-Next-1.5.2-864-a4a72ce-release.zip",
+      "sha256": "ce50b13fecb9e4456db69ef17b715f7cfbc094004dd9f30f7d6348dfab619a96",
+      "status": "Provider activation and client-module combinations passed",
+      "limits": "Only one provider enabled. Ordinary manager consent passes; stock providers are not the versioned Kitsune SuList adapter and do not imply policy parity.",
+      "lifecycle": [
+        {
+          "core": "kitsune",
+          "apk_sha256": "64ac45ddde681c50840c23f22c10b4e2461b8e29dbf338974e0d256dd766de58",
+          "install_exit": 0,
+          "boots": [
+            "00603237-9ed5-474c-bc6b-2b65e44006b7",
+            "107b340f-9337-4365-b258-b95584cb9b4b",
+            "04895d12-dfaf-4a7d-911c-3d14a5e80765"
+          ],
+          "registered": true,
+          "root": true,
+          "removed": true,
+          "root_after_removal": true,
+          "error": null
+        }
+      ],
+      "legacy_api29": []
+    },
+    {
+      "repository": "PerformanC/ReZygisk",
+      "tag": "v1.0.0",
+      "release_url": "https://github.com/PerformanC/ReZygisk/releases/tag/v1.0.0",
+      "asset_url": "https://github.com/PerformanC/ReZygisk/releases/download/v1.0.0/ReZygisk-v1.0.0-release.zip",
+      "sha256": "7904649b8dcaf2b060c3432df4fee302aeb1258da199d2b425335e82d49510e6",
+      "status": "Provider activation and client-module combinations passed",
+      "limits": "Only one provider enabled. Ordinary manager consent passes; stock providers are not the versioned Kitsune SuList adapter and do not imply policy parity.",
+      "lifecycle": [
+        {
+          "core": "kitsune",
+          "apk_sha256": "64ac45ddde681c50840c23f22c10b4e2461b8e29dbf338974e0d256dd766de58",
+          "install_exit": 0,
+          "boots": [
+            "8aa4b921-f4e1-4079-baab-7356d5ba2f25",
+            "14068116-ef9b-4d29-8799-131a13b50ce6",
+            "8b56e769-2e6d-45ac-9f6f-9a3ad2d6124a"
+          ],
+          "registered": true,
+          "root": true,
+          "removed": true,
+          "root_after_removal": true,
+          "error": null
+        }
+      ],
+      "legacy_api29": []
+    },
+    {
+      "repository": "LSPosed/LSPosed",
+      "tag": "v1.9.2",
+      "release_url": "https://github.com/LSPosed/LSPosed/releases/tag/v1.9.2",
+      "asset_url": "https://github.com/LSPosed/LSPosed/releases/download/v1.9.2/LSPosed-v1.9.2-7024-zygisk-release.zip",
+      "sha256": "0ebc6bcb465d1c4b44b7220ab5f0252e6b4eb7fe43da74650476d2798bb29622",
+      "status": "Manager active on API29; inactive on API35",
+      "limits": "The release declares Android 8.1\u201314 support. Both outcomes match official 30.7 controls.",
+      "lifecycle": [
+        {
+          "core": "kitsune",
+          "apk_sha256": "64ac45ddde681c50840c23f22c10b4e2461b8e29dbf338974e0d256dd766de58",
+          "install_exit": 0,
+          "boots": [
+            "bb83eee4-147a-4e9f-9a8d-3bfe98ca3e76",
+            "5e35271b-5653-4f3c-838b-852648c901c9",
+            "b448d241-020d-4e95-a223-8170b886a24c"
+          ],
+          "registered": true,
+          "root": true,
+          "removed": true,
+          "root_after_removal": true,
+          "error": null
+        },
+        {
+          "core": "stable",
+          "apk_sha256": "e0d32d2123532860f97123d927b1bb86c4e08e6fd8a48bfc6b5bee0afae9ebd5",
+          "install_exit": 0,
+          "boots": [
+            "d42d1f8d-90c1-4b10-a27f-6079df20e4f2",
+            "dc854f30-d925-4575-b542-eac256a48cdb",
+            "0385eee5-fc87-4a75-92b7-1370511b4b9a"
+          ],
+          "registered": true,
+          "root": true,
+          "removed": true,
+          "root_after_removal": true,
+          "error": null
+        }
+      ],
+      "legacy_api29": [
+        {
+          "core": "kitsune",
+          "apk_sha256": "64ac45ddde681c50840c23f22c10b4e2461b8e29dbf338974e0d256dd766de58",
+          "install_exit": 0,
+          "boots": [
+            "56ff444e-55b0-4869-b023-6919107c82b4",
+            "15b9f31a-752b-4eb4-91e8-ef6420e0fd2e",
+            "5824e87b-fa7d-4028-8455-bf961a749e60"
+          ],
+          "registered": true,
+          "root": true,
+          "removed": true,
+          "root_after_removal": true,
+          "error": null
+        },
+        {
+          "core": "stable",
+          "apk_sha256": "e0d32d2123532860f97123d927b1bb86c4e08e6fd8a48bfc6b5bee0afae9ebd5",
+          "install_exit": 0,
+          "boots": [
+            "8b4ebf40-c051-426a-8148-cf2b5c636327",
+            "93d4f18c-164b-48ed-99d0-a406fb06cc3b",
+            "be5656eb-ce3c-4837-96b1-378686ddf3b0"
+          ],
+          "registered": true,
+          "root": true,
+          "removed": true,
+          "root_after_removal": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "repository": "LSPosed/LSPosed.github.io",
+      "tag": "shamiko-414",
+      "release_url": "https://github.com/LSPosed/LSPosed.github.io/releases/tag/shamiko-414",
+      "asset_url": "https://github.com/LSPosed/LSPosed.github.io/releases/download/shamiko-414/Shamiko-v1.2.5-414-release.zip",
+      "sha256": "308d31b2f52a80e49eb58f46bc4c764a6588a79e4b8d101b44860832023f88b4",
+      "status": "Incompatible with this fork",
+      "limits": "1.2.5 refuses both debug and release Kitsune; official 30.7 and 31.0 controls work. Hiding the manager does not fix it. Zygisk Next does not list it as loaded, and selected-app mount hiding fails.",
+      "lifecycle": [
+        {
+          "core": "kitsune",
+          "apk_sha256": "64ac45ddde681c50840c23f22c10b4e2461b8e29dbf338974e0d256dd766de58",
+          "install_exit": 0,
+          "boots": [
+            "f7f24267-22a4-4eb8-972b-5083d75509f1",
+            "566bddb0-9654-45d6-861d-1bf9f88e27df",
+            "416a29e4-f0ff-427d-a409-4bfdb3e5cd74"
+          ],
+          "registered": true,
+          "root": true,
+          "removed": true,
+          "root_after_removal": true,
+          "error": null
+        },
+        {
+          "core": "stable",
+          "apk_sha256": "e0d32d2123532860f97123d927b1bb86c4e08e6fd8a48bfc6b5bee0afae9ebd5",
+          "install_exit": 0,
+          "boots": [
+            "7f63846e-9a78-4f18-819f-deaeb9840592",
+            "427984f3-c2ae-48cb-897f-3321186c4572",
+            "d10d7903-9197-42e4-b792-51f747545cef"
+          ],
+          "registered": true,
+          "root": true,
+          "removed": true,
+          "root_after_removal": true,
+          "error": null
+        },
+        {
+          "core": "upstream31",
+          "apk_sha256": "2c8a488b9a5293e578e95ae4f07e3c57aba4feec4a52ca4dd852a2692d6dd4e8",
+          "install_exit": 0,
+          "boots": [
+            "d6776370-21ae-45b1-ba3d-9096cb77a14b",
+            "c53dc381-1b5d-49b2-b165-b8fab54006e2",
+            "617d50c2-5ffd-4fff-8c02-400894409f62"
+          ],
+          "registered": true,
+          "root": true,
+          "removed": true,
+          "root_after_removal": true,
+          "error": null
+        }
+      ],
+      "legacy_api29": []
+    },
+    {
+      "repository": "snake-4/Zygisk-Assistant",
+      "tag": "v2.1.4",
+      "release_url": "https://github.com/snake-4/Zygisk-Assistant/releases/tag/v2.1.4",
+      "asset_url": "https://github.com/snake-4/Zygisk-Assistant/releases/download/v2.1.4/Zygisk-Assistant-v2.1.4-1013f8a-release.zip",
+      "sha256": "9eca30a269dc676a66f67a9339185dee55cccd47dc1fc8eeea5416124626d67a",
+      "status": "Selected-app mount hiding passed",
+      "limits": "Core enforcement was disabled. A real unprivileged app saw the marker before selection and could not see it after the module took ownership.",
+      "lifecycle": [
+        {
+          "core": "kitsune",
+          "apk_sha256": "64ac45ddde681c50840c23f22c10b4e2461b8e29dbf338974e0d256dd766de58",
+          "install_exit": 0,
+          "boots": [
+            "f9ad698e-d6cf-4f59-bf0b-77cdbd23761a",
+            "211bc767-4bb5-4e48-a55b-24936fee44ef",
+            "02ff1182-1684-4829-aa0f-be6e0954b9e9"
+          ],
+          "registered": true,
+          "root": true,
+          "removed": true,
+          "root_after_removal": true,
+          "error": null
+        }
+      ],
+      "legacy_api29": []
+    },
+    {
+      "repository": "osm0sis/PlayIntegrityFork",
+      "tag": "v18",
+      "release_url": "https://github.com/osm0sis/PlayIntegrityFork/releases/tag/v18",
+      "asset_url": "https://github.com/osm0sis/PlayIntegrityFork/releases/download/v18/PlayIntegrityFork-v18.zip",
+      "sha256": "625ebe65631f761e1521009f10a205d74255adf2e35732923d65106643cad9a6",
+      "status": "Install, cold boot and removal passed",
+      "limits": "Installation and lifecycle only on the account-free AOSP image. No Google integrity verdict or hardware-backed attestation claim.",
+      "lifecycle": [
+        {
+          "core": "kitsune",
+          "apk_sha256": "64ac45ddde681c50840c23f22c10b4e2461b8e29dbf338974e0d256dd766de58",
+          "install_exit": 0,
+          "boots": [
+            "a3681583-c926-4eae-8dc8-9d512cd51ba3",
+            "6925ce43-6884-4533-ae26-73c19ea58b55",
+            "95cfb9e5-18a2-4bf6-9cbb-80adfdb226f3"
+          ],
+          "registered": true,
+          "root": true,
+          "removed": true,
+          "root_after_removal": true,
+          "error": null
+        }
+      ],
+      "legacy_api29": []
+    },
+    {
+      "repository": "KOWX712/PlayIntegrityFix",
+      "tag": "v4.9-inject-s",
+      "release_url": "https://github.com/KOWX712/PlayIntegrityFix/releases/tag/v4.9-inject-s",
+      "asset_url": "https://github.com/KOWX712/PlayIntegrityFix/releases/download/v4.9-inject-s/PlayIntegrityFix_v4.9-inject-s.zip",
+      "sha256": "bc7a9d92638a6bd90a41b70d3aaf86bc549dd8d3a1e5e901b315a6c425852697",
+      "status": "Install, cold boot and removal passed",
+      "limits": "Installation and lifecycle only on the account-free AOSP image. No Google integrity verdict or hardware-backed attestation claim.",
+      "lifecycle": [
+        {
+          "core": "kitsune",
+          "apk_sha256": "64ac45ddde681c50840c23f22c10b4e2461b8e29dbf338974e0d256dd766de58",
+          "install_exit": 0,
+          "boots": [
+            "8f0eccbd-5f4f-40a6-836f-ab38e379cb6e",
+            "75db15e1-5f2a-4383-aed4-1818355c6ed3",
+            "5a2f8f6e-cfbe-43c5-998b-b04a496c4cd0"
+          ],
+          "registered": true,
+          "root": true,
+          "removed": true,
+          "root_after_removal": true,
+          "error": null
+        }
+      ],
+      "legacy_api29": []
+    },
+    {
+      "repository": "5ec1cff/TrickyStore",
+      "tag": "1.4.1",
+      "release_url": "https://github.com/5ec1cff/TrickyStore/releases/tag/1.4.1",
+      "asset_url": "https://github.com/5ec1cff/TrickyStore/releases/download/1.4.1/Tricky-Store-v1.4.1-245-72b2e84-release.zip",
+      "sha256": "2f5e73fcba0e4e43b6e96b38f333cbe394873e3a81cf8fe1b831c2fbd6c46ea9",
+      "status": "Install, cold boot and removal passed",
+      "limits": "Keystore modification and hardware attestation verdicts remain unqualified. The process-name probe was inconclusive on both current and stable cores; no external keybox was obtained.",
+      "lifecycle": [
+        {
+          "core": "kitsune",
+          "apk_sha256": "64ac45ddde681c50840c23f22c10b4e2461b8e29dbf338974e0d256dd766de58",
+          "install_exit": 0,
+          "boots": [
+            "e5e1329b-212c-4b43-a751-9fa597b2c795",
+            "036689f5-925f-479d-b181-b8bbc5ef63d5",
+            "57d89fe2-35e8-449a-a242-96abe8f1bff7"
+          ],
+          "registered": true,
+          "root": true,
+          "removed": true,
+          "root_after_removal": true,
+          "error": null
+        },
+        {
+          "core": "stable",
+          "apk_sha256": "e0d32d2123532860f97123d927b1bb86c4e08e6fd8a48bfc6b5bee0afae9ebd5",
+          "install_exit": 0,
+          "boots": [
+            "ed27f2fb-4e19-4acb-944b-2a0345d27802",
+            "641fcc72-552a-40f0-bbe3-9c310bb04372",
+            "1da45c48-193c-4c31-927b-daaa9002d509"
+          ],
+          "registered": true,
+          "root": true,
+          "removed": true,
+          "root_after_removal": true,
+          "error": null
+        }
+      ],
+      "legacy_api29": []
+    },
+    {
+      "repository": "RikkaApps/Riru",
+      "tag": "v26.1.7",
+      "release_url": "https://github.com/RikkaApps/Riru/releases/tag/v26.1.7",
+      "asset_url": "https://github.com/RikkaApps/Riru/releases/download/v26.1.7/riru-v26.1.7.r530.ab3086ec9f-release.zip",
+      "sha256": "d920783409f452130257273ae80c01f255759f51068d1d0980414edfe1c9baef",
+      "status": "Installed, but injection unqualified",
+      "limits": "Riru reports not loaded on both cores in prepared API35 and API29 comparisons. Lifecycle passes; do not claim working injection.",
+      "lifecycle": [
+        {
+          "core": "kitsune",
+          "apk_sha256": "64ac45ddde681c50840c23f22c10b4e2461b8e29dbf338974e0d256dd766de58",
+          "install_exit": 0,
+          "boots": [
+            "4389aea1-6ba9-4b1f-a7f2-20d15f3a75f3",
+            "549cb0c1-544d-408a-bc38-3ec640265703",
+            "62ffdff8-4b5e-49ee-89c6-2b5f254df1f1"
+          ],
+          "registered": true,
+          "root": true,
+          "removed": true,
+          "root_after_removal": true,
+          "error": null
+        },
+        {
+          "core": "stable",
+          "apk_sha256": "e0d32d2123532860f97123d927b1bb86c4e08e6fd8a48bfc6b5bee0afae9ebd5",
+          "install_exit": 0,
+          "boots": [
+            "0a2e5785-1d68-439d-b81e-07fb05f27000",
+            "90e558cd-517e-4682-b3b1-cdb3c35aaa8e",
+            "58116657-ba2c-4b73-9900-4e7635c791f3"
+          ],
+          "registered": true,
+          "root": true,
+          "removed": true,
+          "root_after_removal": true,
+          "error": null
+        }
+      ],
+      "legacy_api29": [
+        {
+          "core": "kitsune",
+          "apk_sha256": "64ac45ddde681c50840c23f22c10b4e2461b8e29dbf338974e0d256dd766de58",
+          "install_exit": 0,
+          "boots": [
+            "f36c28a8-33f6-4332-b6f8-d316b894c7c3",
+            "ef5da480-02e4-4bc5-8d40-67335495701e",
+            "935b01e8-e351-4c07-8d2b-00c46b4af446"
+          ],
+          "registered": true,
+          "root": true,
+          "removed": true,
+          "root_after_removal": true,
+          "error": null
+        },
+        {
+          "core": "stable",
+          "apk_sha256": "e0d32d2123532860f97123d927b1bb86c4e08e6fd8a48bfc6b5bee0afae9ebd5",
+          "install_exit": 0,
+          "boots": [
+            "2ccf9b0f-afb6-488a-a12f-e6f616461e78",
+            "152a8682-fea6-44a7-96c0-fe6f0ae7ea8c",
+            "1ec17e44-31ff-4c7e-9333-f3128108a632"
+          ],
+          "registered": true,
+          "root": true,
+          "removed": true,
+          "root_after_removal": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "repository": "RikkaApps/Sui",
+      "tag": "v13.5.1",
+      "release_url": "https://github.com/RikkaApps/Sui/releases/tag/v13.5.1",
+      "asset_url": "https://github.com/RikkaApps/Sui/releases/download/v13.5.1/sui-zygisk-v13.5.1-release.zip",
+      "sha256": "d488083c547f81bdeccb55be44e308569070cc8523d4db2aa463d0183e99cddd",
+      "status": "Sui server active; lifecycle passed",
+      "limits": "Server startup verified alone and with Vector/providers; not every downstream Sui client is qualified.",
+      "lifecycle": [
+        {
+          "core": "kitsune",
+          "apk_sha256": "64ac45ddde681c50840c23f22c10b4e2461b8e29dbf338974e0d256dd766de58",
+          "install_exit": 0,
+          "boots": [
+            "ac8f6957-e13f-46a2-8027-3cf1ca5682fc",
+            "d0658c9f-486c-4ec0-8919-f2e1ae0e3b9b",
+            "0e25eaa5-9b01-4860-8fb2-94c6ae84ad60"
+          ],
+          "registered": true,
+          "root": true,
+          "removed": true,
+          "root_after_removal": true,
+          "error": null
+        }
+      ],
+      "legacy_api29": []
+    },
+    {
+      "repository": "Magisk-Modules-Repo/busybox-ndk",
+      "tag": "13614",
+      "release_url": "https://github.com/Magisk-Modules-Repo/busybox-ndk/releases/tag/13614",
+      "asset_url": "https://github.com/Magisk-Modules-Repo/busybox-ndk/releases/download/13614/UPDATE-Busybox.Installer.v1.36.1-ALL-signed.zip",
+      "sha256": "d6b0baeb4f224e994113d29c2d47e6df2413b6cd65fd8b88c2b7d53e0db26c09",
+      "status": "BusyBox executable and lifecycle verified",
+      "limits": "Prepared standalone and combined installations report 1.36.1 and remove cleanly. No claim of exhaustive applet equivalence.",
+      "lifecycle": [
+        {
+          "core": "kitsune",
+          "apk_sha256": "64ac45ddde681c50840c23f22c10b4e2461b8e29dbf338974e0d256dd766de58",
+          "install_exit": 0,
+          "boots": [
+            "367e8639-4c29-4b1e-a483-05fcea3356b2",
+            "f7ca0f3a-e267-424f-abce-cbc0642ac15a",
+            "933a5d50-b439-4f80-803f-e0e33df99737"
+          ],
+          "registered": true,
+          "root": true,
+          "removed": true,
+          "root_after_removal": true,
+          "error": null
+        },
+        {
+          "core": "stable",
+          "apk_sha256": "e0d32d2123532860f97123d927b1bb86c4e08e6fd8a48bfc6b5bee0afae9ebd5",
+          "install_exit": 0,
+          "boots": [
+            "643a3675-ac3b-4441-b04a-1adbff2ce0e3",
+            "42c2133e-f42e-4fb6-b4db-5fedc2f42e3a",
+            "018b1be5-0ef0-46a3-9ebe-d39aac781b55"
+          ],
+          "registered": true,
+          "root": true,
+          "removed": true,
+          "root_after_removal": true,
+          "error": null
+        }
+      ],
+      "legacy_api29": []
+    },
+    {
+      "repository": "programminghoch10/ViPER4AndroidRepackaged",
+      "tag": "v87",
+      "release_url": "https://github.com/programminghoch10/ViPER4AndroidRepackaged/releases/tag/v87",
+      "asset_url": "https://github.com/programminghoch10/ViPER4AndroidRepackaged/releases/download/v87/ViPER4AndroidFX-repackagedhoch87-37dc30d.zip",
+      "sha256": "4dea5d0a5e1b99041398aabea52f14df3db401e7a37bbec877251452f17f4cfb",
+      "status": "Install, cold boot and removal passed",
+      "limits": "Its newline-only IFS made the pre-init budget parser reject a 790-byte policy. The 31013 fix retains the limits. Official30.7 installs and removes it; physical DSP output remains unqualified.",
+      "lifecycle": [
+        {
+          "core": "kitsune",
+          "apk_sha256": "64ac45ddde681c50840c23f22c10b4e2461b8e29dbf338974e0d256dd766de58",
+          "install_exit": 0,
+          "boots": [
+            "a6401cbf-4fe0-4a77-a3c5-609752c01cf5",
+            "e9030395-3b62-47b1-8d49-f8b47649ecc8",
+            "2c787cee-f177-4cb0-bf35-00ef59ba586e"
+          ],
+          "registered": true,
+          "root": true,
+          "removed": null,
+          "root_after_removal": null,
+          "error": "['adb', '-s', 'emulator-5558', 'shell'] exit 1: "
+        },
+        {
+          "core": "stable",
+          "apk_sha256": "e0d32d2123532860f97123d927b1bb86c4e08e6fd8a48bfc6b5bee0afae9ebd5",
+          "install_exit": 0,
+          "boots": [
+            "3c88a611-7989-41f0-a241-ab33b301f529",
+            "02b9b2ff-d3fb-4a59-8e03-e54d9a7aa9b4",
+            "4da17f87-325a-4317-b290-3ab83faa5a72"
+          ],
+          "registered": true,
+          "root": true,
+          "removed": true,
+          "root_after_removal": true,
+          "error": null
+        }
+      ],
+      "legacy_api29": []
+    },
+    {
+      "repository": "Magisk-Modules-Repo/magiskhidepropsconf",
+      "tag": "v6.1.2",
+      "release_url": "https://github.com/Magisk-Modules-Repo/MagiskHidePropsConf/releases/tag/v6.1.2",
+      "asset_url": "https://github.com/Magisk-Modules-Repo/MagiskHidePropsConf/releases/download/v6.1.2/MagiskHidePropsConf-v6.1.2.zip",
+      "sha256": "d6505b804a09410fdcacb2a79b81c4769beec5938daf885d430501ebea64c9d5",
+      "status": "Install, cold boot and removal passed",
+      "limits": "Function-specific hardware behavior is not implied by lifecycle checks.",
+      "lifecycle": [
+        {
+          "core": "kitsune",
+          "apk_sha256": "64ac45ddde681c50840c23f22c10b4e2461b8e29dbf338974e0d256dd766de58",
+          "install_exit": 0,
+          "boots": [
+            "f325b287-2e4b-4bf4-997e-99c1b312f8fa",
+            "9599936f-0e71-489e-be56-4cd8586e5256",
+            "60d3f568-1ac0-48c7-8def-6b6dfc755775"
+          ],
+          "registered": true,
+          "root": true,
+          "removed": true,
+          "root_after_removal": true,
+          "error": null
+        }
+      ],
+      "legacy_api29": []
+    },
+    {
+      "repository": "VR-25/acc",
+      "tag": "v2023.10.16",
+      "release_url": "https://github.com/VR-25/acc/releases/tag/v2023.10.16",
+      "asset_url": "https://github.com/VR-25/acc/releases/download/v2023.10.16/acc_v2023.10.16_202310160.zip",
+      "sha256": "fe071f77a6300f1c14aee1ffc8e22452e448635a7a40e6d97480f3b44fb8c795",
+      "status": "Standard module install and removal passed",
+      "limits": "Initial harness omitted the normal module directory; corrected tests pass both cores. Charging control requires matching physical power-supply hardware.",
+      "lifecycle": [
+        {
+          "core": "kitsune",
+          "apk_sha256": "64ac45ddde681c50840c23f22c10b4e2461b8e29dbf338974e0d256dd766de58",
+          "install_exit": 0,
+          "boots": [
+            "7d1c02cf-c78e-4f0c-a7ec-69f570c2815a",
+            "e261f18e-1b39-4b82-9b4d-8c552df717ac",
+            "1f162208-5e6f-424d-b5d8-416f386bb68f"
+          ],
+          "registered": true,
+          "root": true,
+          "removed": true,
+          "root_after_removal": true,
+          "error": null
+        },
+        {
+          "core": "stable",
+          "apk_sha256": "e0d32d2123532860f97123d927b1bb86c4e08e6fd8a48bfc6b5bee0afae9ebd5",
+          "install_exit": 0,
+          "boots": [
+            "cf1a822d-9e89-460d-898e-073f18b29a19",
+            "0784091e-81e4-4775-9abe-9fa660288af5",
+            "2a9a90d0-2c6f-4a0a-a8ca-031fb6adec60"
+          ],
+          "registered": true,
+          "root": true,
+          "removed": true,
+          "root_after_removal": true,
+          "error": null
+        }
+      ],
+      "legacy_api29": []
+    },
+    {
+      "repository": "JingMatrix/Vector",
+      "tag": "v2.2",
+      "release_url": "https://github.com/JingMatrix/Vector/releases/tag/v2.2",
+      "asset_url": "https://github.com/JingMatrix/Vector/releases/download/v2.2/Vector-v2.2-3080-Release.zip",
+      "sha256": "9ee8323575d615f7b3f1076ff60b2a63a49390ef11881b52632311a37f6f79cc",
+      "status": "Framework and manager active",
+      "limits": "Corrected action category and Compose UI checks pass on both cores. Real root consent also passes with built-in, ReZygisk and NeoZygisk combinations.",
+      "lifecycle": [
+        {
+          "core": "kitsune",
+          "apk_sha256": "64ac45ddde681c50840c23f22c10b4e2461b8e29dbf338974e0d256dd766de58",
+          "install_exit": 0,
+          "boots": [
+            "15f6917b-d42f-4395-b506-08b24468f34a",
+            "b244fb3c-b775-45c1-a1ad-903e641e2d92",
+            "9d81419c-dba0-4866-b333-a15694078017"
+          ],
+          "registered": true,
+          "root": true,
+          "removed": true,
+          "root_after_removal": true,
+          "error": null
+        },
+        {
+          "core": "stable",
+          "apk_sha256": "e0d32d2123532860f97123d927b1bb86c4e08e6fd8a48bfc6b5bee0afae9ebd5",
+          "install_exit": 0,
+          "boots": [
+            "e76cdb6f-02ae-41a4-9214-6c91ee7fecf8",
+            "4ec5c353-1c7c-48a0-a9dd-058c57e70403",
+            "d198da15-454d-4f99-9fb6-7e960c6e2321"
+          ],
+          "registered": true,
+          "root": true,
+          "removed": true,
+          "root_after_removal": true,
+          "error": null
+        }
+      ],
+      "legacy_api29": []
+    },
+    {
+      "repository": "JingMatrix/NeoZygisk",
+      "tag": "v2.4",
+      "release_url": "https://github.com/JingMatrix/NeoZygisk/releases/tag/v2.4",
+      "asset_url": "https://github.com/JingMatrix/NeoZygisk/releases/download/v2.4/NeoZygisk-v2.4-289-release.zip",
+      "sha256": "93a1425c67bb89f58a0dcb9fc823ec93f6472214f221e667a70b67c6a6e061a1",
+      "status": "Provider activation and client-module combinations passed",
+      "limits": "Only one provider enabled. Ordinary manager consent passes; stock providers are not the versioned Kitsune SuList adapter and do not imply policy parity.",
+      "lifecycle": [
+        {
+          "core": "kitsune",
+          "apk_sha256": "64ac45ddde681c50840c23f22c10b4e2461b8e29dbf338974e0d256dd766de58",
+          "install_exit": 0,
+          "boots": [
+            "4ae5954b-e13f-4b86-baf1-2e00b187501e",
+            "24defb59-8f75-4da4-a6b8-4c859dc3e1e6",
+            "40a83db7-a50a-4760-ade7-e1eb8a690cb1"
+          ],
+          "registered": true,
+          "root": true,
+          "removed": true,
+          "root_after_removal": true,
+          "error": null
+        }
+      ],
+      "legacy_api29": []
+    }
+  ],
+  "configurations": [
+    {
+      "name": "builtin-shamiko-hidden",
+      "modules": [
+        "LSPosed/LSPosed.github.io"
+      ],
+      "boot_ids": [
+        "e605f03f-e315-48d7-98dc-d76cea58122b",
+        "96d63d6e-cf62-4bcd-a213-f11f899dc952",
+        "76798bb0-8a3b-49e0-ac6d-4f80e8569fba"
+      ],
+      "manager_consent_passed": true,
+      "all_removed": true,
+      "root_after_removal": true,
+      "shamiko": "unsupported"
+    },
+    {
+      "name": "builtin-general",
+      "modules": [
+        "JingMatrix/Vector",
+        "RikkaApps/Sui",
+        "snake-4/Zygisk-Assistant",
+        "Magisk-Modules-Repo/busybox-ndk"
+      ],
+      "boot_ids": [
+        "97a58768-f11b-4061-9933-ecd8b9edb33a",
+        "373f45ca-a472-43a6-8350-27b77abb772d",
+        "dab57437-314b-461d-ae26-1461cd8f76df"
+      ],
+      "manager_consent_passed": true,
+      "all_removed": true,
+      "root_after_removal": true,
+      "vector_active_ui": true
+    },
+    {
+      "name": "builtin-compat",
+      "modules": [
+        "LSPosed/LSPosed.github.io",
+        "osm0sis/PlayIntegrityFork",
+        "5ec1cff/TrickyStore"
+      ],
+      "boot_ids": [
+        "5b92dbf3-c3dd-461e-971f-603bdb34daae",
+        "dde72479-17ee-4546-ae94-e5c10ec69a43",
+        "73e55af6-a058-426e-82f3-1e541e592ea7"
+      ],
+      "manager_consent_passed": true,
+      "all_removed": true,
+      "root_after_removal": true,
+      "shamiko": "unsupported"
+    },
+    {
+      "name": "zygisknext",
+      "modules": [
+        "LSPosed/ZygiskNext",
+        "JingMatrix/Vector",
+        "RikkaApps/Sui",
+        "LSPosed/LSPosed.github.io"
+      ],
+      "boot_ids": [
+        "1cec8954-6a6c-487f-9b43-78ae165edaf3",
+        "e97167a0-ea77-41f2-9e65-d1b8fc769026",
+        "8a2e9cb0-0d06-4238-961f-29bd8010271f"
+      ],
+      "manager_consent_passed": true,
+      "all_removed": true,
+      "root_after_removal": true,
+      "vector_active_ui": true,
+      "shamiko": "not demonstrated"
+    },
+    {
+      "name": "rezygisk",
+      "modules": [
+        "PerformanC/ReZygisk",
+        "JingMatrix/Vector",
+        "RikkaApps/Sui"
+      ],
+      "boot_ids": [
+        "d8a0d06d-b604-420d-9441-01576288de6d",
+        "495e8746-5d81-4b04-b0f1-e6109e431490",
+        "46087783-a241-4363-81cc-5f87e65b04a6"
+      ],
+      "manager_consent_passed": true,
+      "all_removed": true,
+      "root_after_removal": true,
+      "vector_active_ui": true
+    },
+    {
+      "name": "neozygisk",
+      "modules": [
+        "JingMatrix/NeoZygisk",
+        "JingMatrix/Vector",
+        "RikkaApps/Sui"
+      ],
+      "boot_ids": [
+        "c344ba51-813e-4e4b-834c-d6cf265e9325",
+        "a22f0d72-ea0a-46db-8fa0-55cfdf157f85",
+        "f2292437-6338-4868-8941-7077819721cc"
+      ],
+      "manager_consent_passed": true,
+      "all_removed": true,
+      "root_after_removal": true,
+      "vector_active_ui": true
+    }
+  ],
+  "mount_visibility": [
+    {
+      "configuration": "core-hide",
+      "modules": [],
+      "visible_before": true,
+      "hidden_after_selection": true,
+      "boot_ids": [
+        "f8da47ab-2b0f-4c96-b9fd-101daa4e64d2",
+        "e34acead-4da6-4e38-b808-af5e8f79c6cf",
+        "85a582e8-855b-4462-abcd-ebd40aedb980"
+      ],
+      "core_status": {
+        "schema": 1,
+        "database_version": 12,
+        "boot_ready": true,
+        "enabled": true,
+        "mode": "hide",
+        "configured_mode": "hide",
+        "reboot_required": false,
+        "selection_table": "denylist",
+        "engine": "builtin",
+        "configured_provider": "core",
+        "external_sulist_supported": false
+      },
+      "error": null
+    },
+    {
+      "configuration": "zygisk-assistant",
+      "modules": [
+        "snake-4/Zygisk-Assistant"
+      ],
+      "visible_before": true,
+      "hidden_after_selection": true,
+      "boot_ids": [
+        "7dc3c9b1-3a2a-4af6-b798-7e31251f0613",
+        "eb499238-cc97-4c31-a753-2590e52c5c66",
+        "c365d2e0-0f33-4c48-81c9-d8f48e2bc233"
+      ],
+      "core_status": {
+        "schema": 1,
+        "database_version": 12,
+        "boot_ready": true,
+        "enabled": false,
+        "mode": "hide",
+        "configured_mode": "hide",
+        "reboot_required": false,
+        "selection_table": "denylist",
+        "engine": "builtin",
+        "configured_provider": "core",
+        "external_sulist_supported": false
+      },
+      "error": null
+    },
+    {
+      "configuration": "shamiko-builtin",
+      "modules": [
+        "LSPosed/LSPosed.github.io"
+      ],
+      "visible_before": true,
+      "hidden_after_selection": false,
+      "boot_ids": [
+        "630a6fb4-c026-47a7-a3eb-1fce4e1e59c3",
+        "7e2eb9eb-009d-4bb7-a35a-633f9d6fdd6b",
+        "88326b1e-ff19-4666-a51c-62c963def6d2"
+      ],
+      "core_status": {
+        "schema": 1,
+        "database_version": 12,
+        "boot_ready": true,
+        "enabled": false,
+        "mode": "hide",
+        "configured_mode": "hide",
+        "reboot_required": false,
+        "selection_table": "denylist",
+        "engine": "builtin",
+        "configured_provider": "core",
+        "external_sulist_supported": false
+      },
+      "error": null
+    },
+    {
+      "configuration": "zygisknext-alone",
+      "modules": [
+        "LSPosed/ZygiskNext"
+      ],
+      "visible_before": true,
+      "hidden_after_selection": false,
+      "boot_ids": [
+        "a02c9204-fa4d-4faf-af89-4f661eb95204",
+        "7fc0b427-1b1c-4cc9-877e-3070a481660f",
+        "87de3c4a-b311-4ba7-a26a-7f30cc07e6df"
+      ],
+      "core_status": {
+        "schema": 1,
+        "database_version": 12,
+        "boot_ready": true,
+        "enabled": false,
+        "mode": "hide",
+        "configured_mode": "hide",
+        "reboot_required": false,
+        "selection_table": "denylist",
+        "engine": "logcat",
+        "configured_provider": "core",
+        "external_sulist_supported": false
+      },
+      "error": null
+    },
+    {
+      "configuration": "zygisknext-shamiko",
+      "modules": [
+        "LSPosed/ZygiskNext",
+        "LSPosed/LSPosed.github.io"
+      ],
+      "visible_before": true,
+      "hidden_after_selection": false,
+      "boot_ids": [
+        "49c351cf-4f85-4fbe-a539-8248f2a1bb5d",
+        "69fab528-61fa-4b88-a134-b09b6fe1d201",
+        "f269e49a-2610-46ad-9b78-79434386ce66"
+      ],
+      "core_status": {
+        "schema": 1,
+        "database_version": 12,
+        "boot_ready": true,
+        "enabled": false,
+        "mode": "hide",
+        "configured_mode": "hide",
+        "reboot_required": false,
+        "selection_table": "denylist",
+        "engine": "logcat",
+        "configured_provider": "core",
+        "external_sulist_supported": false
+      },
+      "error": null
+    }
+  ]
+}

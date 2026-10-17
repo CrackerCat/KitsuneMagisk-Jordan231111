@@ -1,0 +1,55 @@
+{
+  "schema": "kitsune.device-qualification.v1",
+  "artifact": {
+    "sha256": "f92b9183ba6621490ebe48a3d3a242af5397e08fc8a51dd73fcde160fd6c3834",
+    "build": {
+      "app_version_code": 31012,
+      "application_id": "io.github.jordan231111.magisk",
+      "build_id": "29f3df6e79bde1425d5adc0d72dcbe587151769fd6e479470ecb6d8e92427605",
+      "capabilities": [
+        "kitsune.boot-completed.v1",
+        "kitsune.build-info.v1",
+        "kitsune.early-mount.v2",
+        "kitsune.hide.v1",
+        "kitsune.module-root.v2",
+        "kitsune.su-consent.v1",
+        "kitsune.system-mode.transaction.v1",
+        "kitsune.zygisk-provider.v1"
+      ],
+      "channel": "next-system-experimental",
+      "compat_version_code": 31000,
+      "product_name": "KitsuneMagisk Next",
+      "product_version": "0.1.0-dev",
+      "protocol_version": 1,
+      "release_tag": "kitsune-canary-44143a6d2e70754931f36e21b00cc2069b0a8238",
+      "schema": 1,
+      "source_commit": "44143a6d2e70754931f36e21b00cc2069b0a8238",
+      "source_digest": "cb57f3fc9e19097c39eac1bce329b9ea8a36db0bd8dd37376d8690b7c170bd6e",
+      "source_dirty": false,
+      "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+      "upstream_version": "31.0",
+      "variant": "debug",
+      "version_name": "0.1.0-dev-kitsune.44143a6d"
+    }
+  },
+  "guest": {
+    "fingerprint": "Android/sdk_slim_arm64/emu64a:15/AE3A.240806.019/12368160:userdebug/test-keys",
+    "api": 35,
+    "abi": "arm64-v8a",
+    "page_size": 4096,
+    "kernel": "6.6.30-android15-8-gdd9c02ccfe27-ab11987101-4k",
+    "selinux": "Enforcing"
+  },
+  "boots": [
+    {
+      "id": "d9e2047f-62e0-4fbb-a328-68fb446aa8f3",
+      "phase": "setup",
+      "at": "2026-10-17T09:13:17.962747+00:00"
+    },
+    {
+      "id": "6a6e7f14-14b8-4a09-9995-4eb0b93bddaa",
+      "phase": "accepted",
+      "at": "2026-10-17T09:16:16.862184+00:00"
+    }
+  ]
+}

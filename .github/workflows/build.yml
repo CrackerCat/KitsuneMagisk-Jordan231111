@@ -16,6 +16,7 @@ on:
       - "tools/device_qualification.py"
       - "tests/test_device_qualification.py"
       - "tests/test_live_setup.py"
+      - "tests/test_preinit_module_environment.py"
       - "docs/device-pr15*"
       - "compatibility/**"
       - "tests/test_port_ledger.py"

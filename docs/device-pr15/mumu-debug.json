@@ -1,0 +1,60 @@
+{
+  "schema": "kitsune.device-qualification.v1",
+  "artifact": {
+    "sha256": "f92b9183ba6621490ebe48a3d3a242af5397e08fc8a51dd73fcde160fd6c3834",
+    "build": {
+      "app_version_code": 31012,
+      "application_id": "io.github.jordan231111.magisk",
+      "build_id": "29f3df6e79bde1425d5adc0d72dcbe587151769fd6e479470ecb6d8e92427605",
+      "capabilities": [
+        "kitsune.boot-completed.v1",
+        "kitsune.build-info.v1",
+        "kitsune.early-mount.v2",
+        "kitsune.hide.v1",
+        "kitsune.module-root.v2",
+        "kitsune.su-consent.v1",
+        "kitsune.system-mode.transaction.v1",
+        "kitsune.zygisk-provider.v1"
+      ],
+      "channel": "next-system-experimental",
+      "compat_version_code": 31000,
+      "product_name": "KitsuneMagisk Next",
+      "product_version": "0.1.0-dev",
+      "protocol_version": 1,
+      "release_tag": "kitsune-canary-44143a6d2e70754931f36e21b00cc2069b0a8238",
+      "schema": 1,
+      "source_commit": "44143a6d2e70754931f36e21b00cc2069b0a8238",
+      "source_digest": "cb57f3fc9e19097c39eac1bce329b9ea8a36db0bd8dd37376d8690b7c170bd6e",
+      "source_dirty": false,
+      "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+      "upstream_version": "31.0",
+      "variant": "debug",
+      "version_name": "0.1.0-dev-kitsune.44143a6d"
+    }
+  },
+  "guest": {
+    "fingerprint": "HUAWEI/ALN-AL00/ALN-AL00:12/W528JS/1136:user/release-keys",
+    "api": 32,
+    "abi": "arm64-v8a",
+    "page_size": 4096,
+    "kernel": "4.19.195-android-arm64-gedae1315d023",
+    "selinux": "Permissive"
+  },
+  "boots": [
+    {
+      "id": "8f8684e5-b0a6-4fa8-8e1d-543285f0607e",
+      "phase": "setup",
+      "at": "2026-10-17T08:16:19.922867+00:00"
+    },
+    {
+      "id": "2a5df1e8-f61d-4107-8a4a-fd8dbea2356e",
+      "phase": "accepted",
+      "at": "2026-10-17T08:19:08.587157+00:00"
+    },
+    {
+      "id": "f4f65da9-fd06-44cb-8d96-3299e1fdcea6",
+      "phase": "accepted",
+      "at": "2026-10-17T08:53:42.259899+00:00"
+    }
+  ]
+}
