@@ -1,23 +1,31 @@
 {
   "schema": 1,
-  "source_commit": "44143a6d2e70754931f36e21b00cc2069b0a8238",
+  "source_commit": "57c9c90813b65015d530ac119141baf32dddb9bd",
   "application_id": "io.github.jordan231111.magisk",
-  "app_version_code": 31012,
+  "app_version_code": 31016,
   "variants": [
     "debug",
     "release"
   ],
   "release_signer_sha256": "9b09eb317c96036185884700d9584e63cc4a2a288825a0172633ba7bfe222ec6",
   "per_variant_checks": {
-    "junit_tests": 117,
-    "boot_fixtures": 68,
+    "junit_tests": 120,
+    "boot_fixtures": 107,
     "root_requests": 48,
     "root_concurrency": 6,
     "distinct_cold_boots": 2,
     "module_whiteout_transaction_checks": true,
-    "native_crash_gate": true
+    "native_crash_gate": true,
+    "property_fixtures": 4
   },
   "cases": [
+    {
+      "name": "pr15-36-1-4k",
+      "image": "google_apis_playstore",
+      "profile": "pixel_9_pro",
+      "page_size": 4096,
+      "exit_code": 0
+    },
     {
       "name": "pr15-35-4k",
       "image": "aosp_atd",
@@ -33,13 +41,6 @@
       "exit_code": 0
     },
     {
-      "name": "pr15-36-1-4k",
-      "image": "google_apis_playstore",
-      "profile": "pixel_9_pro",
-      "page_size": 4096,
-      "exit_code": 0
-    },
-    {
       "name": "pr15-29-4k",
       "image": "google_apis",
       "profile": "Nexus 5X",
@@ -48,6 +49,15 @@
     }
   ],
   "sdk_inputs": [
+    {
+      "case": "pr15-36-1-4k",
+      "image": "google_apis_playstore",
+      "api": "36.1",
+      "sha256": {
+        "ramdisk.img": "61871e7a43bcb2c9a8804fd97cd6b4d53c69015397a073b02b439febe9c88934",
+        "kernel-ranchu": "518c33e1ffd4cd682ecf7eebbb0bf0ca1f6111876cd126fde57e3c9834726d1a"
+      }
+    },
     {
       "case": "pr15-35-4k",
       "image": "aosp_atd",
@@ -67,15 +77,6 @@
       }
     },
     {
-      "case": "pr15-36-1-4k",
-      "image": "google_apis_playstore",
-      "api": "36.1",
-      "sha256": {
-        "ramdisk.img": "61871e7a43bcb2c9a8804fd97cd6b4d53c69015397a073b02b439febe9c88934",
-        "kernel-ranchu": "518c33e1ffd4cd682ecf7eebbb0bf0ca1f6111876cd126fde57e3c9834726d1a"
-      }
-    },
-    {
       "case": "pr15-29-4k",
       "image": "google_apis",
       "api": "29",
@@ -86,5 +87,7 @@
     }
   ],
   "cleanup": "Each owned AVD and patched ramdisk copy removed by the harness; shared SDK images untouched.",
-  "limits": "Real SDK guests and synthetic boot fixtures only. Profiles do not qualify matching OEM phones, physical A/B OTA or recovery."
+  "limits": "Real SDK guests and synthetic boot fixtures only. Profiles do not qualify matching OEM phones, physical A/B OTA or recovery.",
+  "graphics": "host",
+  "play_store_updater": "Disabled only on disposable Store images to prevent package changes during qualification; reapplied after each data wipe."
 }

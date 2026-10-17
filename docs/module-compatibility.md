@@ -4,9 +4,10 @@ Pinned unmodified upstream ZIPs, clean userdata per case, real installation/cold
 
 Representative widely used modules, not an exhaustive ecosystem ranking. AVD profiles do not simulate OEM hardware. Physical audio, charging and hardware attestation are unqualified.
 
-The production-signed candidate uses io.github.jordan231111.magisk, code 31012,
+This earlier qualification baseline uses io.github.jordan231111.magisk, code 31012,
 source 44143a6d2. [The machine record](module-pr15.json) pins each upstream release and SHA-256.
 ViPER was retested on candidate31013 after the field-separator fix; its per-run identity is separate.
+The exact candidate31016 rerun is in progress; results below retain their earlier identities until it completes.
 No module ZIP is redistributed in this repository.
 
 | Module | Version | Observed result | Boundary |

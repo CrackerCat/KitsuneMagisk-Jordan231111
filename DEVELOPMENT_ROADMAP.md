@@ -2849,10 +2849,11 @@ Candidate `31013` passes ViPER on AVD/MuMu and MuMu's full lifecycle. CI also ex
 package-removal race; candidate `31014` fixes it and passes the eight local AVD lanes.
 The user selected v31.0 plus [verified upstream fixes](docs/device-pr15/upstream-fixes.json),
 with interactive SU prompts and Kitsune policy preserved. Candidate `31015` adds the verified
-SU group, compression, Samsung footer, AVB2, ARM32 zImage and filename fixes; its final acceptance
-and commercial-emulator restoration remain in progress.
+SU group, compression, Samsung footer, AVB2, ARM32 zImage and filename fixes.
 The property-override comparison also reproduced an inherited crash in official Magisk 30.7.
-Candidate `31016` adds the verified fix and isolated override-tree regression checks.
+Candidate `31016` adds that fix and passes all eight AVD lanes: 120 app tests, 107 boot-image
+checks, four isolated property checks and 48 root requests per variant. Module comparisons,
+commercial-emulator acceptance and final restoration/cleanup remain in progress.
 Six unavailable device/ROM targets are explicitly `unqualified-target` with PR16 ownership;
 the release audit still rejects them, and their implementations remain available.
 

@@ -1,11 +1,11 @@
 {
   "schema": "kitsune.device-qualification.v1",
   "artifact": {
-    "sha256": "f92b9183ba6621490ebe48a3d3a242af5397e08fc8a51dd73fcde160fd6c3834",
+    "sha256": "f5e98efb5b275f70c4f1bb6a31f21ccd3ce361f2dc48e686674ad38fea6917db",
     "build": {
-      "app_version_code": 31012,
+      "app_version_code": 31016,
       "application_id": "io.github.jordan231111.magisk",
-      "build_id": "29f3df6e79bde1425d5adc0d72dcbe587151769fd6e479470ecb6d8e92427605",
+      "build_id": "c836e35d5e6f0aa6cc4d95c59e17ad8756236908fa941e6a90810f9460786883",
       "capabilities": [
         "kitsune.boot-completed.v1",
         "kitsune.build-info.v1",
@@ -21,15 +21,15 @@
       "product_name": "KitsuneMagisk Next",
       "product_version": "0.1.0-dev",
       "protocol_version": 1,
-      "release_tag": "kitsune-canary-44143a6d2e70754931f36e21b00cc2069b0a8238",
+      "release_tag": "kitsune-canary-57c9c90813b65015d530ac119141baf32dddb9bd",
       "schema": 1,
-      "source_commit": "44143a6d2e70754931f36e21b00cc2069b0a8238",
-      "source_digest": "cb57f3fc9e19097c39eac1bce329b9ea8a36db0bd8dd37376d8690b7c170bd6e",
+      "source_commit": "57c9c90813b65015d530ac119141baf32dddb9bd",
+      "source_digest": "93613e01de69d49324b7dd29f1d549ff005d7caaa36e41ea49263f777bedd4f3",
       "source_dirty": false,
       "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
       "upstream_version": "31.0",
       "variant": "debug",
-      "version_name": "0.1.0-dev-kitsune.44143a6d"
+      "version_name": "0.1.0-dev-kitsune.57c9c908"
     }
   },
   "guest": {
@@ -42,14 +42,14 @@
   },
   "boots": [
     {
-      "id": "d9e2047f-62e0-4fbb-a328-68fb446aa8f3",
+      "id": "f668ef38-05e1-45cb-b670-7366081fd4db",
       "phase": "setup",
-      "at": "2026-10-17T09:13:17.962747+00:00"
+      "at": "2026-10-17T19:18:22.102754+00:00"
     },
     {
-      "id": "6a6e7f14-14b8-4a09-9995-4eb0b93bddaa",
+      "id": "1ec53bed-164b-47c8-85b0-806d48253d1f",
       "phase": "accepted",
-      "at": "2026-10-17T09:16:16.862184+00:00"
+      "at": "2026-10-17T19:21:07.145670+00:00"
     }
   ]
 }

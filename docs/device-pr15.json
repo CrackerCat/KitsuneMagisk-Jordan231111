@@ -8,7 +8,7 @@
       "name": "Android 15 AVD \u2014 Pixel 6 profile, 4 KiB",
       "route": "Patched copy of SDK ramdisk; debug and production-signed release",
       "status": "experimental",
-      "limits": "Source 44143a6d2, code 31012. Full 117-test suite, 68 boot-image checks and 48 root requests at concurrency 6 per variant. AVD profile is not physical Pixel hardware. No in-place System Mode on immutable images.",
+      "limits": "Source 57c9c9081, code 31016. Full 120-test suite, 107 boot-image checks, four isolated property checks and 48 root requests at concurrency 6 per variant. AVD profiles do not qualify OEM phones or physical OTA/recovery; immutable images do not support in-place System Mode.",
       "runs": [
         "docs/device-pr15/pr15-35-4k-debug.json",
         "docs/device-pr15/pr15-35-4k-release.json"
@@ -18,7 +18,9 @@
         "docs/device-pr15/pr15-35-4k-release.json",
         "docs/device-pr15/pr15-35-4k-boot-fixtures-debug.json",
         "docs/device-pr15/pr15-35-4k-boot-fixtures-release.json",
-        "docs/device-pr15/avd-lifecycle.json"
+        "docs/device-pr15/avd-lifecycle.json",
+        "docs/device-pr15/pr15-35-4k-property-fixtures-debug.json",
+        "docs/device-pr15/pr15-35-4k-property-fixtures-release.json"
       ]
     },
     {
@@ -26,7 +28,7 @@
       "name": "Android 15 AVD \u2014 Pixel 8 profile, 16 KiB",
       "route": "Patched copy of SDK ramdisk; debug and production-signed release",
       "status": "experimental",
-      "limits": "Source 44143a6d2, code 31012. Full 117-test suite, 68 boot-image checks and 48 root requests at concurrency 6 per variant. AVD profile is not physical Pixel hardware. No in-place System Mode on immutable images.",
+      "limits": "Source 57c9c9081, code 31016. Full 120-test suite, 107 boot-image checks, four isolated property checks and 48 root requests at concurrency 6 per variant. AVD profiles do not qualify OEM phones or physical OTA/recovery; immutable images do not support in-place System Mode.",
       "runs": [
         "docs/device-pr15/pr15-35-16k-debug.json",
         "docs/device-pr15/pr15-35-16k-release.json"
@@ -36,7 +38,9 @@
         "docs/device-pr15/pr15-35-16k-release.json",
         "docs/device-pr15/pr15-35-16k-boot-fixtures-debug.json",
         "docs/device-pr15/pr15-35-16k-boot-fixtures-release.json",
-        "docs/device-pr15/avd-lifecycle.json"
+        "docs/device-pr15/avd-lifecycle.json",
+        "docs/device-pr15/pr15-35-16k-property-fixtures-debug.json",
+        "docs/device-pr15/pr15-35-16k-property-fixtures-release.json"
       ]
     },
     {
@@ -44,7 +48,7 @@
       "name": "Android 16 AVD \u2014 Pixel 9 Pro profile, 4 KiB",
       "route": "Patched copy of SDK ramdisk; debug and production-signed release",
       "status": "experimental",
-      "limits": "Source 44143a6d2, code 31012. Full 117-test suite, 68 boot-image checks and 48 root requests at concurrency 6 per variant. Virtual profile is not matching physical hardware; physical OTA and recovery remain unqualified.",
+      "limits": "Source 57c9c9081, code 31016. Full 120-test suite, 107 boot-image checks, four isolated property checks and 48 root requests at concurrency 6 per variant. AVD profiles do not qualify OEM phones or physical OTA/recovery; immutable images do not support in-place System Mode.",
       "runs": [
         "docs/device-pr15/pr15-36-1-4k-debug.json",
         "docs/device-pr15/pr15-36-1-4k-release.json"
@@ -54,7 +58,9 @@
         "docs/device-pr15/pr15-36-1-4k-release.json",
         "docs/device-pr15/pr15-36-1-4k-boot-fixtures-debug.json",
         "docs/device-pr15/pr15-36-1-4k-boot-fixtures-release.json",
-        "docs/device-pr15/avd-lifecycle.json"
+        "docs/device-pr15/avd-lifecycle.json",
+        "docs/device-pr15/pr15-36-1-4k-property-fixtures-debug.json",
+        "docs/device-pr15/pr15-36-1-4k-property-fixtures-release.json"
       ]
     },
     {
@@ -62,7 +68,7 @@
       "name": "Android 10 AVD \u2014 Nexus 5X profile, 4 KiB",
       "route": "Patched copy of SDK ramdisk; debug and production-signed release",
       "status": "experimental",
-      "limits": "Source 44143a6d2, code 31012. Full 117-test suite, 68 boot-image checks and 48 root requests at concurrency 6 per variant. Virtual profile is not matching physical hardware; physical OTA and recovery remain unqualified.",
+      "limits": "Source 57c9c9081, code 31016. Full 120-test suite, 107 boot-image checks, four isolated property checks and 48 root requests at concurrency 6 per variant. AVD profiles do not qualify OEM phones or physical OTA/recovery; immutable images do not support in-place System Mode.",
       "runs": [
         "docs/device-pr15/pr15-29-4k-debug.json",
         "docs/device-pr15/pr15-29-4k-release.json"
@@ -72,7 +78,9 @@
         "docs/device-pr15/pr15-29-4k-release.json",
         "docs/device-pr15/pr15-29-4k-boot-fixtures-debug.json",
         "docs/device-pr15/pr15-29-4k-boot-fixtures-release.json",
-        "docs/device-pr15/avd-lifecycle.json"
+        "docs/device-pr15/avd-lifecycle.json",
+        "docs/device-pr15/pr15-29-4k-property-fixtures-debug.json",
+        "docs/device-pr15/pr15-29-4k-property-fixtures-release.json"
       ]
     },
     {

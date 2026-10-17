@@ -212,8 +212,15 @@ to request the legacy ES 2 path described in the emulator's feature configuratio
 Four stock cold boots and all patched-image tests remain required; this configuration
 change is not itself a passing qualification result.
 
-That run's Android 17/API 37.0 16 KiB preview completed the app suites but failed the native-crash
+The [GLES 2 control](https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39062154801)
+confirmed `qemu.opengles.version=131072` but still stalled before Magisk installation.
+The API 23 lanes now select official emulator **35.3.11 / build 12836668** in a private CI
+directory, verified against the SHA-256 from [Android's archive](https://developer.android.com/studio/emulator_archive).
+They use its `swiftshader_indirect` renderer and retain all four stock cold boots and full tests.
+The newer SDK/runtime remains in use for other API levels. No crash signature is exempted.
+
+That run's Android 17/API 37.0 16 KiB SDK image completed the app suites but failed the native-crash
 gate: an `app_process` consent launcher aborted during ART `DestroyJavaVM` with an invalid
 `pthread_join` handle. This is not attributed to the emulator without a matching control.
-The preview lanes now run fifty stock `app_process` AM startup/shutdown checks before installing
+The API 37 lanes now run fifty stock `app_process` AM startup/shutdown checks before installing
 Magisk and retain those results. Their native-crash gate remains active.
