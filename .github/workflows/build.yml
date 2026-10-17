@@ -136,6 +136,9 @@ jobs:
       - name: Test package lookup during manager migration
         run: scripts/env.py python3 -m unittest discover -s tests -p test_package_lookup.py -v
 
+      - name: Test compressed image format detection
+        run: scripts/env.py python3 -m unittest discover -s tests -p test_boot_format.py -v
+
       - name: Verify next-system source baseline
         run: >-
           python tools/next_system_baseline.py
@@ -220,7 +223,7 @@ jobs:
         run: ./app/gradlew --stop
 
   avd-test:
-    name: Test API ${{ matrix.version }} (x86_64)
+    name: Test API ${{ matrix.version }} ${{ matrix.type }} (x86_64)
     runs-on: ubuntu-24.04
     needs: build
     if: ${{ github.event_name != 'push' }}
@@ -263,8 +266,9 @@ jobs:
           AVD_TEST_LOG: 1
           ANDROID_EMULATOR_FEATURES: ${{ (matrix.version == 23 || matrix.version == 24 || matrix.version == 25) && '-GLDMA,-GLDMA2' || '' }}
           AVD_QUALIFICATION_DIR: out/device-qualification
-          AVD_STOCK_BOOT_COUNT: ${{ (matrix.version == 23 || matrix.version == 28 || matrix.version == 29) && '4' || '0' }}
-          AVD_STOCK_FRAMEWORK_RESTART: ${{ (matrix.version == 23 || matrix.version == 28 || matrix.version == 29) && '1' || '0' }}
+          AVD_STOCK_BOOT_COUNT: ${{ (matrix.version == 23 || matrix.version == 28 || matrix.version == 29) && '4' || (startsWith(matrix.version, '37.') && '1' || '0') }}
+          AVD_STOCK_FRAMEWORK_RESTART: ${{ (matrix.version == 28 || matrix.version == 29) && '1' || '0' }}
+          AVD_STOCK_AM_ITERATIONS: ${{ startsWith(matrix.version, '37.') && '50' || '0' }}
           AVD_GPU_MODE: ${{ (matrix.version == 23 || matrix.version == 28 || matrix.version == 29) && 'swiftshader' || 'swiftshader_indirect' }}
           AVD_BOOT_FIXTURES: ${{ matrix.version == 35 && '1' || '' }}
         run: scripts/avd.sh test ${{ matrix.version }} ${{ matrix.type }}
@@ -284,7 +288,7 @@ jobs:
         if: ${{ failure() }}
         uses: actions/upload-artifact@v6
         with:
-          name: "avd-logs-${{ matrix.version }}"
+          name: "avd-logs-${{ matrix.version }}-${{ matrix.type }}"
           path: |
             kernel.log
             logcat.log
@@ -331,7 +335,7 @@ jobs:
           ANDROID_EMULATOR_FEATURES: ${{ (matrix.version == 23 || matrix.version == 24 || matrix.version == 25) && '-GLDMA,-GLDMA2' || '' }}
           AVD_QUALIFICATION_DIR: out/device-qualification
           AVD_STOCK_BOOT_COUNT: ${{ (matrix.version == 23 || matrix.version == 28 || matrix.version == 29) && '4' || '0' }}
-          AVD_STOCK_FRAMEWORK_RESTART: ${{ (matrix.version == 23 || matrix.version == 28 || matrix.version == 29) && '1' || '0' }}
+          AVD_STOCK_FRAMEWORK_RESTART: ${{ (matrix.version == 28 || matrix.version == 29) && '1' || '0' }}
           AVD_GPU_MODE: ${{ (matrix.version == 23 || matrix.version == 28 || matrix.version == 29) && 'swiftshader' || 'swiftshader_indirect' }}
           AVD_BOOT_FIXTURES: ${{ matrix.version == 29 && '1' || '' }}
         run: scripts/avd.sh test ${{ matrix.version }}

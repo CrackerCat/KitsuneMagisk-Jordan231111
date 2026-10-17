@@ -2846,7 +2846,11 @@ records the causal controls and KernelSU Next, SUSFS and Zygisk Next comparison 
 Kitsune policy and the project signer.
 ViPER testing found and reproduced a shell-field-separator bug in pre-init budget parsing.
 Candidate `31013` passes ViPER on AVD/MuMu and MuMu's full lifecycle. CI also exposed a manager
-package-removal race; candidate `31014` fixes it and requires fresh runtime acceptance.
+package-removal race; candidate `31014` fixes it and passes the eight local AVD lanes.
+The user selected v31.0 plus [verified upstream fixes](docs/device-pr15/upstream-fixes.json),
+with interactive SU prompts and Kitsune policy preserved. Candidate `31015` adds the verified
+SU group, compression, Samsung footer, AVB2, ARM32 zImage and filename fixes; its final acceptance
+and commercial-emulator restoration remain in progress.
 
 - Complete exact MuMu and AVD lanes and either a BlueStacks adapter or explicit unsupported result.
   Preserve earlier LDPlayer observations as historical evidence; do not imply a current rerun.

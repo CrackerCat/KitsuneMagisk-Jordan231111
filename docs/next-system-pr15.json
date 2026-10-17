@@ -70,6 +70,7 @@
     "app/core/src/main/java/com/topjohnwu/magisk/core/model/ManagerDiagnostics.kt",
     "app/core/src/main/java/com/topjohnwu/magisk/core/model/UpdateInfo.kt",
     "app/core/src/main/java/com/topjohnwu/magisk/core/model/module/LocalModule.kt",
+    "app/core/src/main/java/com/topjohnwu/magisk/core/model/module/OnlineModule.kt",
     "app/core/src/main/java/com/topjohnwu/magisk/core/repository/DBConfig.kt",
     "app/core/src/main/java/com/topjohnwu/magisk/core/repository/NetworkService.kt",
     "app/core/src/main/java/com/topjohnwu/magisk/core/repository/VerifiedUpdates.kt",
@@ -169,6 +170,7 @@
     "docs/device-pr15/pr15-36-1-4k-release.json",
     "docs/device-pr15/resetprop-comparison.json",
     "docs/device-pr15/shamiko-signing-identity.json",
+    "docs/device-pr15/upstream-fixes.json",
     "docs/device-qualification.md",
     "docs/early-mount-pr8.json",
     "docs/early-mount-pr8.md",
@@ -300,7 +302,14 @@
     "native/src/base/Cargo.toml",
     "native/src/base/boot.cpp",
     "native/src/base/include/base.hpp",
+    "native/src/boot/bootimg.cpp",
+    "native/src/boot/bootimg.hpp",
+    "native/src/boot/compress.rs",
+    "native/src/boot/format.rs",
+    "native/src/boot/lib.rs",
+    "native/src/boot/magiskboot.hpp",
     "native/src/boot/sign.rs",
+    "native/src/boot/zimage.rs",
     "native/src/core/applets.cpp",
     "native/src/core/bootstages.rs",
     "native/src/core/build.rs",
@@ -381,6 +390,7 @@
     "tests/system_mode/test_qualification.py",
     "tests/system_mode/test_transaction.py",
     "tests/system_mode/whiteouts.sh",
+    "tests/test_boot_format.py",
     "tests/test_boot_update.py",
     "tests/test_build_info.py",
     "tests/test_device_qualification.py",
@@ -441,7 +451,7 @@
     "updates/trust.json"
   ],
   "identity": {
-    "version_code": 31014,
+    "version_code": 31015,
     "application_id": "io.github.jordan231111.magisk"
   },
   "update_trust_sha256": "576693b150124ead7487391711da1c43bef7281fbda8750a986ad1b5aa9024d5"

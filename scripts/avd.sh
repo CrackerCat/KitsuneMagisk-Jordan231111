@@ -510,6 +510,41 @@ PYHASH
   while [ "$index" -le "$count" ]; do
     adb shell getprop > "$directory/boot-$index.properties"
     adb shell cat /proc/sys/kernel/random/boot_id > "$directory/boot-$index.id"
+    if [ "${AVD_STOCK_AM_ITERATIONS:-0}" != 0 ]; then
+      # Compare ART command startup/shutdown before installing any Magisk code.
+      adb root > "$directory/boot-$index-am-root.txt"
+      adb wait-for-device
+      [ "$(adb shell id -u | tr -d '\r')" = 0 ] || return 1
+      python3 - "$ANDROID_SERIAL" "$AVD_STOCK_AM_ITERATIONS" \
+        "$directory/boot-$index-am.json" <<'PYAM'
+import json
+from pathlib import Path
+import subprocess
+import sys
+
+serial, raw_count, output = sys.argv[1:]
+count = int(raw_count)
+if not 1 <= count <= 100:
+    raise SystemExit("Invalid stock AM control count")
+command = ["adb", "-s", serial, "shell",
+           "CLASSPATH=/system/framework/am.jar /system/bin/app_process "
+           "/system/bin com.android.commands.am.Am help"]
+results = []
+try:
+    for index in range(count):
+        result = subprocess.run(command, capture_output=True, text=True, timeout=30)
+        results.append({"iteration": index + 1, "exit_code": result.returncode,
+                        "stderr": result.stderr[-4096:]})
+        if result.returncode:
+            raise SystemExit("Stock app_process control failed")
+finally:
+    Path(output).write_text(json.dumps(results, indent=2) + "\n")
+PYAM
+      adb logcat -d -b crash -v threadtime > "$directory/boot-$index-am.crash"
+      assert_no_native_crashes
+      adb unroot >> "$directory/boot-$index-am-root.txt"
+      adb wait-for-device
+    fi
     adb logcat -d -b all -v threadtime > "$directory/boot-$index.log"
     adb logcat -d -b crash -v threadtime > "$directory/boot-$index.crash"
     if [ "${AVD_STOCK_FRAMEWORK_RESTART:-0}" = 1 ]; then

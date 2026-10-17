@@ -8,9 +8,11 @@ OpenSSL is an independent AVB1 signature oracle; no production keys are used.
 from __future__ import annotations
 
 import argparse
+import bz2
 import gzip
 import hashlib
 import json
+import lzma
 from pathlib import Path
 import shlex
 import struct
@@ -18,6 +20,7 @@ import subprocess
 import tempfile
 import uuid
 import zipfile
+import zlib
 
 
 def digest(data: bytes) -> str:
@@ -261,6 +264,120 @@ class Runner:
         self.boot("split", "combined")
         self.check("split:kernel-decompressed", self.get("kernel") == kernel)
 
+    def damaged_compression(self) -> None:
+        ramdisk = cpio({"init": b"compression-fixture" * 100})
+        formats = {"gzip": gzip.compress(ramdisk, mtime=0), "xz": lzma.compress(ramdisk),
+                   "bzip2": bz2.compress(ramdisk)}
+        for name, compressed in formats.items():
+            damaged = compressed[:-8]
+            for part in ("kernel", "ramdisk", "vendor-ramdisk"):
+                self.boot("cleanup")
+                image = boot_image(4 if part == "vendor-ramdisk" else 0,
+                                   damaged if part == "kernel" else b"fixture-kernel",
+                                   damaged if part != "kernel" else ramdisk,
+                                   vendor=part == "vendor-ramdisk")
+                self.put("damaged.img", image)
+                self.boot("unpack", "damaged.img", ok=(1,))
+                output = {"kernel": "kernel", "ramdisk": "ramdisk.cpio",
+                          "vendor-ramdisk": "vendor_ramdisk/init_boot.cpio"}[part]
+                self.shell(f"test ! -e {self.guest}/{output}")
+                self.check(f"{name}:{part}:failure-removes-partial-output", True)
+                self.check(f"{name}:{part}:damaged-input-unchanged", self.get("damaged.img") == image)
+            self.boot("cleanup")
+            self.put("damaged-combined", damaged + dtb())
+            self.boot("split", "damaged-combined", ok=(1,))
+            self.shell(f"test ! -e {self.guest}/kernel")
+            self.check(f"{name}:split-removes-partial-kernel", True)
+
+        for name, compressed in {"gzip": gzip.compress(b"", mtime=0),
+                                 "xz": lzma.compress(b""), "bzip2": bz2.compress(b"")}.items():
+            self.put("empty-compressed", compressed)
+            self.boot("decompress", "empty-compressed", "empty-result")
+            self.check(f"{name}:empty-stream-compatible", self.get("empty-result") == b"")
+
+        self.boot("cleanup")
+        self.put("output-error.img", boot_image(0, gzip.compress(b"fixture-kernel", mtime=0), ramdisk))
+        self.shell(f"mkdir {self.guest}/kernel && echo retained > {self.guest}/kernel/sentinel")
+        try:
+            self.boot("unpack", "output-error.img", ok=(1,))
+            self.check("unpack:output-open-failure-preserves-directory",
+                       self.get("kernel/sentinel") == b"retained\n")
+        finally:
+            self.shell(f"rm -rf {self.guest}/kernel")
+
+    def vendor_footers(self) -> None:
+        self.boot("cleanup")
+        image = boot_image(0, b"fixture-kernel", cpio({"init": b"fixture"}))
+        signer = b"SignerVer02" + bytes(i % 251 for i in range(512 - len(b"SignerVer02")))
+        self.put("samsung.img", image + b"SEANDROIDENFORCE" + signer)
+        self.boot("unpack", "samsung.img")
+        self.boot("repack", "samsung.img", "samsung-repacked.img")
+        result = self.get("samsung-repacked.img")
+        kernel_size = struct.unpack_from("<I", result, 8)[0]
+        ramdisk_size = struct.unpack_from("<I", result, 16)[0]
+        tail = 4096 + kernel_size + (-kernel_size % 4096) + ramdisk_size + (-ramdisk_size % 4096)
+        self.check("samsung:SignerVer02-preserved",
+                   result[tail:tail + 16 + 512] == b"SEANDROIDENFORCE" + signer)
+
+        # An unsigned AVB2 fixture with one real hash descriptor. Repacking may
+        # move vbmeta and grow the AOSP payload, but cannot re-sign that descriptor.
+        self.boot("cleanup")
+        body = struct.pack(">Q", len(image)) + b"sha256".ljust(32, b"\0")
+        body += struct.pack(">4I", 4, 0, 32, 0) + bytes(60) + b"boot" + hashlib.sha256(image).digest()
+        descriptor = struct.pack(">QQ", 2, len(body)) + body
+        header = bytearray(256)
+        struct.pack_into(">4sIIQQI", header, 0, b"AVB0", 1, 0, 0, len(pad(descriptor, 64)), 0)
+        struct.pack_into(">QQ", header, 96, 0, len(descriptor))
+        vbmeta = bytes(header) + pad(descriptor, 64)
+        footer = struct.pack(">4sIIQQQ", b"AVBf", 1, 0, len(image), len(image), len(vbmeta)) + bytes(28)
+        partition_size = 128 * 1024
+        partition = image + vbmeta + bytes(partition_size - 64 - len(image) - len(vbmeta)) + footer
+        self.put("avb2.img", partition)
+        self.boot("unpack", "avb2.img")
+        self.put("ramdisk.cpio", cpio({"init": b"fixture", "larger": bytes(12000)}))
+        self.boot("repack", "avb2.img", "avb2-repacked.img")
+        result = self.get("avb2-repacked.img")
+        _, _, _, image_size, offset, size = struct.unpack_from(">4sIIQQQ", result, len(result) - 64)
+        self.check("avb2:footer-tracks-grown-image", image_size > len(image))
+        self.check("avb2:hash-descriptor-preserved", result[offset:offset + size] == vbmeta)
+        self.check("avb2:source-preserved", self.get("avb2.img") == partition)
+
+    def zimage_payloads(self) -> None:
+        payload = b"ARM32 compressed kernel fixture" * 100
+        compressed = gzip.compress(payload, mtime=0)
+        for start in (256, 257):
+            self.boot("cleanup")
+            end = start + len(compressed)
+            head = bytearray(start)
+            struct.pack_into("<III", head, 0x24, 0x016F2818, 0, end + 64)
+            struct.pack_into("<II", head, 0x34, 0x45454545, 128)
+            struct.pack_into("<III", head, 128, 3, 0x5A534C4B, end - 4)
+            struct.pack_into("<I", head, 192, end - 192 - 4)
+            # A known but non-compressed magic must not mask the actual payload.
+            head[64:72] = b"ANDROID!"
+            kernel = bytes(head) + compressed + bytes(64)
+            image = boot_image(0, kernel, cpio({"init": b"fixture"}))
+            self.put("zimage.img", image)
+            self.boot("unpack", "zimage.img")
+            self.check(f"zimage:{start}:finds-compressed-payload", self.get("kernel") == payload)
+            resized = payload + b"resized kernel fixture"
+            self.put("kernel", resized)
+            self.boot("repack", "zimage.img", "zimage-repacked.img")
+            result = self.get("zimage-repacked.img")
+            size = struct.unpack_from("<I", result, 8)[0]
+            kernel = result[4096:4096 + size]
+            decoder = zlib.decompressobj(wbits=31)
+            self.check(f"zimage:{start}:independent-gzip-round-trip",
+                       decoder.decompress(kernel[start:]) == resized and decoder.eof)
+            payload_end = len(kernel) - len(decoder.unused_data)
+            self.check(f"zimage:{start}:exact-size-pointers",
+                       struct.unpack_from("<I", kernel, 136)[0] == payload_end - 4
+                       and struct.unpack_from("<I", kernel, 192)[0] == payload_end - 192 - 4)
+            self.boot("cleanup")
+            self.boot("unpack", "zimage-repacked.img")
+            self.check(f"zimage:{start}:resized-round-trip", self.get("kernel") == resized)
+            self.check(f"zimage:{start}:source-preserved", self.get("zimage.img") == image)
+
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -275,6 +392,9 @@ def main() -> None:
             runner.setup()
             runner.signatures()
             runner.patch_images()
+            runner.damaged_compression()
+            runner.vendor_footers()
+            runner.zimage_payloads()
             report = {"schema": 1, "kind": "synthetic-boot-fixtures", "apk_sha256": digest(args.apk.read_bytes()),
                       "fingerprint": runner.shell("getprop ro.build.fingerprint").decode().strip(),
                       "checks": runner.checks, "physical_boot_qualified": False}

@@ -43,6 +43,9 @@ tests boot headers v0–v4, init_boot, vendor_boot v3/v4, original-init restorat
 Vivo and Samsung patch signatures, and compressed-kernel `split -n`. OpenSSL independently signs
 and verifies RSA/P-256/P-384/P-521 AVB1 records; tampered and nonstandard raw EC signatures fail.
 Temporary private keys and guest fixture files are removed. These fixtures do not boot OEM kernels.
+The expanded corpus also rejects truncated gzip/XZ/bzip2 inputs, removes partial outputs,
+preserves empty streams, Samsung signing trailers and AVB2 descriptors, and checks ARM32 zImage
+payload relocation against an independent gzip decoder and the exact header pointers.
 
 `scripts/env.py python3 tools/device_qualification.py render` generates both public compatibility
 outputs from `docs/device-pr15.json`. CI checks for stale output and rejects unsupported status
@@ -68,6 +71,11 @@ ordinary in-app Direct Install, inactive-slot, OTA or recovery routes on BlueSta
 
 ## Compatibility changes and remaining boundaries
 
+- PR15 retains the v31.0 baseline plus [verified fixes](device-pr15/upstream-fixes.json), as selected
+  by the user. It preserves interactive SU consent and Kitsune Hide/SuList. Candidate `31015`
+  corrects primary-group precedence, compressed-image error handling, Samsung trailer preservation,
+  AVB2 descriptor preservation, ARM32 payload detection/relocation and module filename controls.
+  Unreleased upstream feature and UI rewrites are outside this qualification candidate.
 - The maintained manager now uses `io.github.jordan231111.magisk`; the home page retains its
   existing layout and contributors, with Jordan231111 as the fork owner's name and GitHub link.
   [Namespace migration](build-info.md#pr15-namespace-migration) requires an explicit installation
@@ -171,8 +179,16 @@ The latter run's API 25/x86 timeout was a guest-kernel panic in
 `goldfish_pipe_dma_clear_lock`, called from `goldfish_interrupt_task`; all ten consent requests
 had been denied before the guest stopped responding. The legacy CI lanes now disable the
 emulator's optional `GLDMA`/`GLDMA2` features, using its ordinary graphics-copy path. This is
-an emulator configuration, not a Magisk or phone-kernel patch. The next run repeats the
-stock restart and full suite with that configuration; it remains unqualified until those
-checks pass. The [emulator feature mapping](https://android.googlesource.com/platform/external/qemu/+/emu-master-dev/android/android-emu/android/opengles.cpp)
+an emulator configuration, not a Magisk or phone-kernel patch. API 24/25 x86 and x86_64 passed
+their full suites in [run 39055905296](https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39055905296).
+The API 23 stock warm restart still timed out with DMA disabled, so its current qualification
+uses four stock cold boots followed by the full patched-image suites. The
+[emulator feature mapping](https://android.googlesource.com/platform/external/qemu/+/emu-master-dev/android/android-emu/android/opengles.cpp)
 and [Goldfish driver](https://android.googlesource.com/kernel/goldfish-modules/+/ca47ac740d16ecf731be3fecdd051d26932f9bdd/goldfish_pipe_v2.c)
 describe the affected transport.
+
+That run's Android 17/API 37.0 16 KiB preview completed the app suites but failed the native-crash
+gate: an `app_process` consent launcher aborted during ART `DestroyJavaVM` with an invalid
+`pthread_join` handle. This is not attributed to the emulator without a matching control.
+The preview lanes now run fifty stock `app_process` AM startup/shutdown checks before installing
+Magisk and retain those results. Their native-crash gate remains active.
