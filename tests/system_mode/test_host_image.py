@@ -32,7 +32,7 @@ class HostImageTest(unittest.TestCase):
                 struct.pack_into("<I", data, 28, 52)
                 struct.pack_into("<HH", data, 42, 32, 1)
                 struct.pack_into("<I", data, 52, 1)
-                struct.pack_into("<I", data, 80, 16384)
+                struct.pack_into("<I", data, 80, 4096)
             return data
         with tempfile.TemporaryDirectory() as directory:
             apk = Path(directory) / "payload.apk"

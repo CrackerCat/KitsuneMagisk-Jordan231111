@@ -125,15 +125,17 @@ def payload(apk: Path) -> tuple[dict[str, bytes], dict]:
         files = {name: archive.read(source) for source, name in mapping.items()}
         if "lib/armeabi-v7a/libmagisk.so" in archive.namelist():
             files["magisk32"] = archive.read("lib/armeabi-v7a/libmagisk.so")
-    binaries = {name: (2, 183) for name in
+    binaries = {name: (2, 183, 16384) for name in
                 ("busybox", "magisk", "magiskboot", "magiskinit", "magiskpolicy")}
     if "magisk32" in files:
-        binaries["magisk32"] = (1, 40)
-    for name, expected in binaries.items():
+        # Android's 32-bit runtime uses 4 KiB pages.
+        binaries["magisk32"] = (1, 40, 4096)
+    for name, (expected_class, expected_machine, alignment) in binaries.items():
         data = files[name]
         elf_class, machine, alignments = elf_identity_and_alignments(data)
-        if (elf_class, machine) != expected or data[5] != 1 or min(alignments) < 16384:
-            raise ValueError(f"{name} has an invalid ARM ELF ABI or 16 KiB load alignment")
+        if ((elf_class, machine) != (expected_class, expected_machine)
+                or data[5] != 1 or min(alignments) < alignment):
+            raise ValueError(f"{name} has an invalid ARM ELF ABI or load alignment")
     if any(not value for value in files.values()):
         raise ValueError("empty APK payload")
     files["config"] = b"RECOVERYMODE=false\n"
