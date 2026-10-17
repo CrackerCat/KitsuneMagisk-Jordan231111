@@ -203,6 +203,15 @@ uses four stock cold boots followed by the full patched-image suites. The
 and [Goldfish driver](https://android.googlesource.com/kernel/goldfish-modules/+/ca47ac740d16ecf731be3fecdd051d26932f9bdd/goldfish_pipe_v2.c)
 describe the affected transport.
 
+[Run 39059527601](https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39059527601)
+also timed out on the second **stock cold boot** of both API 23 architectures, before APK
+installation. The guest reached ActivityManager startup but did not finish boot; its log
+advertised OpenGL ES 3.0. Those two CI lanes now explicitly disable `GLESDynamicVersion`
+to request the legacy ES 2 path described in the emulator's feature configuration and
+[release notes](https://developer.android.com/studio/releases/emulator#26.1.3).
+Four stock cold boots and all patched-image tests remain required; this configuration
+change is not itself a passing qualification result.
+
 That run's Android 17/API 37.0 16 KiB preview completed the app suites but failed the native-crash
 gate: an `app_process` consent launcher aborted during ART `DestroyJavaVM` with an invalid
 `pthread_join` handle. This is not attributed to the emulator without a matching control.

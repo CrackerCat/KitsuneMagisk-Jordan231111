@@ -265,7 +265,7 @@ jobs:
         env:
           AVD_TEST_SKIP_DOWNLOAD: 1
           AVD_TEST_LOG: 1
-          ANDROID_EMULATOR_FEATURES: ${{ (matrix.version == 23 || matrix.version == 24 || matrix.version == 25) && '-GLDMA,-GLDMA2' || '' }}
+          ANDROID_EMULATOR_FEATURES: ${{ matrix.version == 23 && '-GLDMA,-GLDMA2,-GLESDynamicVersion' || ((matrix.version == 24 || matrix.version == 25) && '-GLDMA,-GLDMA2' || '') }}
           AVD_QUALIFICATION_DIR: out/device-qualification
           AVD_STOCK_BOOT_COUNT: ${{ (matrix.version == 23 || matrix.version == 28 || matrix.version == 29) && '4' || (startsWith(matrix.version, '37.') && '1' || '0') }}
           AVD_STOCK_FRAMEWORK_RESTART: ${{ (matrix.version == 28 || matrix.version == 29) && '1' || '0' }}
@@ -334,7 +334,7 @@ jobs:
           AVD_TEST_LOG: 1
           # Old Goldfish kernels can panic in goldfish_pipe_dma_clear_lock.
           # Use the emulator's ordinary copy path; keep all guest crash checks.
-          ANDROID_EMULATOR_FEATURES: ${{ (matrix.version == 23 || matrix.version == 24 || matrix.version == 25) && '-GLDMA,-GLDMA2' || '' }}
+          ANDROID_EMULATOR_FEATURES: ${{ matrix.version == 23 && '-GLDMA,-GLDMA2,-GLESDynamicVersion' || ((matrix.version == 24 || matrix.version == 25) && '-GLDMA,-GLDMA2' || '') }}
           AVD_QUALIFICATION_DIR: out/device-qualification
           AVD_STOCK_BOOT_COUNT: ${{ (matrix.version == 23 || matrix.version == 28 || matrix.version == 29) && '4' || '0' }}
           AVD_STOCK_FRAMEWORK_RESTART: ${{ (matrix.version == 28 || matrix.version == 29) && '1' || '0' }}
