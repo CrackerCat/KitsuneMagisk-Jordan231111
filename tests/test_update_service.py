@@ -8,6 +8,7 @@ import shutil
 import subprocess
 import tempfile
 import unittest
+from unittest import mock
 import urllib.request
 
 from tools import update_service as update
@@ -85,6 +86,61 @@ class MetadataSchemaTest(unittest.TestCase):
                 redirect.redirect_request(request, None, 302, "", {}, target)
         result = redirect.redirect_request(request, None, 302, "", {}, "https://release-assets.githubusercontent.com/file?token=public")
         self.assertEqual(result.host, "release-assets.githubusercontent.com")
+
+
+class PublishedAssetsTest(unittest.TestCase):
+    def setUp(self):
+        self.trust, self.metadata = fixture()
+        self.release = {"prerelease": True, "assets": [{"name": "manager.apk"}, {"name": "stub.apk"}]}
+        self.debug = b"locally tested debug APK"
+        self.digest = hashlib.sha256(self.debug).hexdigest()
+        self.temporary = tempfile.TemporaryDirectory(prefix="kitsune-publication-test-")
+        self.addCleanup(self.temporary.cleanup)
+        self.output = Path(self.temporary.name)
+
+    def verify(self, digest=None):
+        return update.verify_release_assets(self.release, self.metadata, self.trust, self.output, digest)
+
+    def test_release_only_needs_no_debug_pin(self):
+        with mock.patch.object(update, "fetch") as fetch:
+            self.assertEqual(self.verify(), {})
+            fetch.assert_not_called()
+
+    def test_debug_requires_explicit_pin_and_exact_published_bytes(self):
+        self.release["assets"].append({"name": "app-debug.apk"})
+        with mock.patch.object(update, "fetch", return_value=self.debug) as fetch:
+            with self.assertRaises(ValueError):
+                self.verify()
+            fetch.assert_not_called()
+            records = self.verify(self.digest)
+            self.assertEqual(records["debug"], {"sha256": self.digest, "size": len(self.debug), "update_feed": False})
+            self.assertEqual((self.output / "published-debug.apk").read_bytes(), self.debug)
+            fetch.assert_called_once_with(
+                f'https://github.com/{self.trust["repository"]}/releases/download/{self.metadata["tag"]}/app-debug.apk',
+                200 * 1024 * 1024)
+
+    def test_changed_debug_bytes_are_rejected_before_writing(self):
+        self.release["assets"].append({"name": "app-debug.apk"})
+        with mock.patch.object(update, "fetch", return_value=self.debug + b"changed"):
+            with self.assertRaises(ValueError):
+                self.verify(self.digest)
+        self.assertFalse((self.output / "published-debug.apk").exists())
+
+    def test_pin_does_not_approve_missing_or_extra_apks(self):
+        for names in (["manager.apk", "stub.apk"], ["manager.apk", "app-debug.apk"],
+                      ["manager.apk", "stub.apk", "app-debug.apk", "test.apk"]):
+            self.release["assets"] = [{"name": name} for name in names]
+            with self.subTest(names=names), mock.patch.object(update, "fetch") as fetch:
+                with self.assertRaises(ValueError):
+                    self.verify(self.digest)
+                fetch.assert_not_called()
+
+    def test_debug_pin_requires_prerelease_and_valid_digest(self):
+        self.release["assets"].append({"name": "app-debug.apk"})
+        for prerelease, digest in [(False, self.digest), (True, ""), (True, "x" * 64), (True, self.digest + "\n")]:
+            self.release["prerelease"] = prerelease
+            with self.subTest(prerelease=prerelease, digest=digest), self.assertRaises(ValueError):
+                self.verify(digest)
 
 
 @unittest.skipUnless(shutil.which("java") and shutil.which("keytool"), "Requires JDK for actual signature tests")

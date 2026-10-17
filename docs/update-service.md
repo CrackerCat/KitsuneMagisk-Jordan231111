@@ -100,9 +100,14 @@ requires the legacy flag to collect and verify certificates even when modern sig
    ```
 
 4. Enable [GitHub release immutability](https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/establish-provenance-and-integrity/prevent-release-changes)
-   before publication. Create a draft prerelease for the exact fork tag/source, attach only the
-   tested production manager and matching stub plus public evidence, then publish. Do not publish
-   debug/instrumentation APKs, signing configs, private keys or `out/update-fixtures`. Never replace tested bytes.
+   before publication. Create a draft prerelease for the exact fork tag/source, attach the
+   tested production manager and matching stub plus public evidence, then publish. A separately
+   tested `app-debug.apk` may accompany a prerelease for emulator System Mode testing; record its
+   SHA-256 and separate signer in the evidence. The signed update feeds still carry only the
+   production manager/stub. Explain that System Mode requires debug, and switching between the
+   differently signed release/debug apps requires backing up settings and reinstalling the manager.
+   Do not publish instrumentation APKs, signing configs, private keys or `out/update-fixtures`.
+   Never replace tested bytes.
 5. Commit the signed channel file to the separate `update-feed` branch after its assets exist.
    Preserve the previous channel files and compare the remote sequence before changing a feed.
    For a metadata refresh, check out the published source tag and use its exact published APKs
@@ -116,6 +121,10 @@ requires the legacy flag to collect and verify certificates even when modern sig
      --url https://raw.githubusercontent.com/Jordan231111/KitsuneMagisk/update-feed/v1/beta.json \
      --channel beta --output out/published-update-verification
    ```
+
+   When the prerelease includes `app-debug.apk`, add `--debug-apk-sha256` with the SHA-256
+   of the locally verified APK. The verifier rejects extra APKs unless that exact debug asset
+   is explicitly pinned, and checks that the public download matches the tested bytes.
 
 No production key is needed by ordinary CI. CI signs its APKs/fixtures with its disposable key and
 runs the same verifier. `tools/update_service.py test-fixtures --config /path/to/config.prop`

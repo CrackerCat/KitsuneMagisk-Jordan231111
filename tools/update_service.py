@@ -10,6 +10,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import re
 import subprocess
 import tempfile
 import time
@@ -262,7 +263,7 @@ def prepare(args, trust: dict) -> None:
         raise ValueError("Production metadata requires the exact clean, committed source")
     if args.channel == "stable":
         raise ValueError("Stable promotion remains gated by roadmap PR16")
-    manifest = baseline.read_manifest(ROOT / "docs/next-system-pr13.json")
+    manifest = baseline.read_manifest(ROOT / "docs/next-system-pr14.json")
     baseline.verify_source(ROOT, manifest)
     aapt = baseline.find_build_tool("aapt", None)
     apksigner = baseline.find_build_tool("apksigner", None)
@@ -291,16 +292,35 @@ def prepare(args, trust: dict) -> None:
     print(f"Prepared {args.output}; tag {info['release_tag']}; no files were published")
 
 
+def verify_release_assets(release: dict, metadata: dict, trust: dict,
+                          output: Path, debug_sha256: str | None = None) -> dict:
+    expected_apks = {urllib.parse.urlsplit(metadata[kind]["url"]).path.rsplit("/", 1)[-1] for kind in ("manager", "stub")}
+    if debug_sha256 is not None:
+        if re.fullmatch(r"[0-9a-f]{64}", debug_sha256) is None or release.get("prerelease") is not True:
+            raise ValueError("Debug APK verification requires a prerelease and the tested APK's SHA-256")
+        expected_apks.add("app-debug.apk")
+    published_apks = {asset["name"] for asset in release.get("assets", []) if asset["name"].endswith(".apk")}
+    if published_apks != expected_apks:
+        raise ValueError("Release contains missing or unapproved APKs; explicitly pin any debug APK and never distribute instrumentation APKs")
+    if debug_sha256 is None:
+        return {}
+    # The debug side download is explicitly pinned to locally tested bytes. It
+    # never becomes a production-signed manager/stub update feed candidate.
+    url = f'https://github.com/{trust["repository"]}/releases/download/{metadata["tag"]}/app-debug.apk'
+    data = fetch(url, 200 * 1024 * 1024)
+    if hashlib.sha256(data).hexdigest() != debug_sha256:
+        raise ValueError("Published debug APK differs from the tested bytes")
+    output.mkdir(parents=True, exist_ok=True)
+    (output / "published-debug.apk").write_bytes(data)
+    return {"debug": {"sha256": debug_sha256, "size": len(data), "update_feed": False}}
+
+
 def verify_published(args, trust: dict) -> None:
     metadata = verify_envelope(fetch(args.url, MAX_METADATA), trust, channel=args.channel, now=int(time.time()))
     api = f'https://api.github.com/repos/{trust["repository"]}'
     release = strict_json(fetch(f'{api}/releases/tags/{metadata["tag"]}', MAX_METADATA))
     if release.get("immutable") is not True or release.get("draft") is not False:
         raise ValueError("Feed must point to a published immutable GitHub release")
-    expected_apks = {urllib.parse.urlsplit(metadata[kind]["url"]).path.rsplit("/", 1)[-1] for kind in ("manager", "stub")}
-    published_apks = {asset["name"] for asset in release.get("assets", []) if asset["name"].endswith(".apk")}
-    if published_apks != expected_apks:
-        raise ValueError("Release contains missing or unapproved APKs; never distribute instrumentation/debug APKs")
     ref = strict_json(fetch(f'{api}/git/ref/tags/{metadata["tag"]}', MAX_METADATA))["object"]
     for _ in range(4):
         if ref.get("type") != "tag":
@@ -308,7 +328,7 @@ def verify_published(args, trust: dict) -> None:
         ref = strict_json(fetch(f'{api}/git/tags/{ref["sha"]}', MAX_METADATA))["object"]
     if ref.get("type") != "commit" or ref.get("sha") != metadata["source_commit"]:
         raise ValueError("Published release tag does not identify the signed source commit")
-    records = {}
+    records = verify_release_assets(release, metadata, trust, args.output, args.debug_apk_sha256)
     args.output.mkdir(parents=True, exist_ok=True)
     for kind in ("manager", "stub"):
         asset = metadata[kind]
@@ -358,6 +378,7 @@ def main() -> None:
     verify_parser.add_argument("--url", required=True)
     verify_parser.add_argument("--channel", choices=sorted(CHANNELS), required=True)
     verify_parser.add_argument("--output", type=Path, required=True)
+    verify_parser.add_argument("--debug-apk-sha256", help="also verify an explicitly approved prerelease debug APK against its tested SHA-256")
     fixture_parser = commands.add_parser("test-fixtures", help="prepare isolated instrumentation inputs; never publish these")
     fixture_parser.add_argument("--config", type=Path, required=True)
     fixture_parser.add_argument("--apk", type=Path, default=ROOT / "out/app-release.apk")
