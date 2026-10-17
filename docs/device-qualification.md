@@ -54,10 +54,19 @@ after bootstrap root succeeds. Live setup is temporary and must be identified se
   [upstream 87e72a582](https://github.com/topjohnwu/Magisk/commit/87e72a582e019ae1bb3e65c90c259e994ecd66fa).
   Earlier raw `r || s` EC signatures were not Android-compatible. Repatch and re-sign the matching
   original image; do not treat an old MagiskBoot self-verification result as bootloader acceptance.
+  The image algorithm now comes from its signing key rather than the certificate issuer's digest.
+  Mismatched keys/certificates and unsupported signature versions or algorithms fail before writing.
 - Restore the exact historical Vivo `do_mount_check` encoded `/system` replacement. Matching bytes
   are required; this is not a manufacturer-name bypass. Samsung PROCA remains an independent patch.
 - Live setup discovers bootstrap `su` through PATH and uses its command interface. A missing
   `/system/xbin/su` must not prevent a rooted emulator with `/system/bin/su` from being tested.
+- Select-and-Patch on managed System Mode uses a separate workspace and cleans it after success
+  or failure. A subsequent boot must not import file-patching tools over the transaction-owned
+  runtime. The daemon also preserves that runtime when an old ordinary update inbox remains.
+  A previously damaged installation still requires its verified recovery/restore path.
+- System Mode snapshots preserve module whiteouts (character device `0:0`) and module symlinks.
+  The same rules cover restore and rollback cleanup. FIFOs, sockets, other device nodes and
+  whiteouts outside module content remain unsupported; they are never opened to calculate a hash.
 - Managed Direct-System remains an explicit, authorized debug capability. Recovery ZIP
   `SYSTEMMODE` and automatic System Mode `addon.d` replay are not supported: recovery lacks the
   live target/host recovery authorization, and an OTA changes the bound image. Use normal image

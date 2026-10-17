@@ -31,7 +31,7 @@ production promotion remains gated.
 The exact upstream commit, submodule pins, toolchain, advisories, reviewed source delta, and local
 PR6 qualification evidence are recorded in
 [`docs/next-system-baseline.md`](docs/next-system-baseline.md). The current machine-readable contract is
-[`docs/next-system-pr12.json`](docs/next-system-pr12.json), inheriting PR7A's runtime baseline.
+[`docs/next-system-pr15.json`](docs/next-system-pr15.json), inheriting PR7A's runtime baseline.
 
 ## Building
 
@@ -40,7 +40,7 @@ Follow this branch's [build and development guide](docs/build.md), then run:
 ```sh
 ./build.py -v all
 ./build.py -vr -c /path/to/external-signing-config.prop all
-python3 tools/next_system_baseline.py --manifest docs/next-system-pr12.json --source --artifacts out
+python3 tools/next_system_baseline.py --manifest docs/next-system-pr15.json --source --artifacts out
 ```
 
 A release test build must use an external, disposable or production-controlled signing key. The
