@@ -8,7 +8,7 @@ overrides in `config.prop` or `magisk.versionCode` are rejected.
 | Field | Current contract |
 |---|---|
 | Product version | `0.1.0-dev`; the new maintained Kitsune product sequence |
-| Android app code | `31010` in PR15; increase for new distributed bytes |
+| Android app code | `31011` in PR15; increase for new distributed bytes |
 | Package | `io.github.jordan231111.magisk`; see the one-time namespace migration below |
 | Upstream | Official `v31.0`, commit `96221b69fae9910b1c0c75c2f92a4ebb2c2dc698` |
 | Module compatibility epoch | `31000`, matching that actual upstream implementation |
