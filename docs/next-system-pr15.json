@@ -406,7 +406,7 @@
     "updates/trust.json"
   ],
   "identity": {
-    "version_code": 31011,
+    "version_code": 31012,
     "application_id": "io.github.jordan231111.magisk"
   },
   "update_trust_sha256": "576693b150124ead7487391711da1c43bef7281fbda8750a986ad1b5aa9024d5"
