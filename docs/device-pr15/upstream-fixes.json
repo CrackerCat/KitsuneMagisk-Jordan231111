@@ -74,7 +74,13 @@
       "Samsung SignerVer02 trailer was not preserved",
       "Non-compressed ANDROID magic masked the ARM32 zImage payload"
     ],
-    "final_candidate_acceptance": "Required before PR15 completion; recorded separately with exact APK and source identity."
+    "final_candidate_acceptance": "Exact candidate 31016 passes all eight AVD lanes; commercial-emulator lifecycle records are maintained separately.",
+    "accepted_candidate": {
+      "app_version_code": 31016,
+      "source_commit": "57c9c90813b65015d530ac119141baf32dddb9bd",
+      "avd_acceptance": "docs/device-pr15/avd-lifecycle.json",
+      "ci_acceptance": "docs/device-pr15/ci-acceptance.json"
+    }
   },
   "additional_verified_fix": {
     "area": "ARM32 zImage payload-size relocation",

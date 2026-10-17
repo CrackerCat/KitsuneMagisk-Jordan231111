@@ -88,14 +88,15 @@
       "name": "MuMuPlayer Pro Android Device-1 \u2014 Android 12 ARM64, 4 KiB",
       "route": "Qualified debug System Mode; vendor root off",
       "status": "experimental",
-      "limits": "Source 44143a6d2, code 31012. Fresh namespace transition, upgrade, 117 tests, 48 root requests at concurrency 6, large archive, three cold boots, uninstall and exact original restoration. Permissive SELinux; no physical OEM claim.",
+      "limits": "Source 57c9c9081, code 31016. Fresh installation, 120 tests, 48 root requests in batches of six, both hiding fallbacks, ViPER configuration/removal, uninstall and exact original-disk/settings restoration. Earlier upgrade/archive evidence retains its own identity. Permissive SELinux; no physical OEM claim.",
       "runs": [
         "docs/device-pr15/mumu-debug.json"
       ],
       "evidence": [
         "docs/device-pr15/mumu-debug.json",
         "docs/device-pr15/mumu-lifecycle.json",
-        "docs/device-pr15/large-archive.json"
+        "docs/device-pr15/large-archive.json",
+        "docs/device-pr15/mumu-hiding.json"
       ]
     },
     {
@@ -117,7 +118,7 @@
       "name": "Cuttlefish x86_64 phone \u2014 CI virtual target",
       "route": "Actual virtual init_boot/Direct Install, debug and CI-signed release",
       "status": "experimental",
-      "limits": "Two complete passing attempts of CI run 39019753847, PR merge source 586779a8ab40246941e216025e3c358c59a21033. CI release signer differs from the locally tested production APK. A preceding hidden-manager root-command timeout is retained in the qualification notes; no physical OTA/recovery claim.",
+      "limits": "Current CI run 39064935566, merge source 88d36d8c82f28ca2e5f16838a5410b0d9c35ca2e. Debug/release Direct Install and root/manager suites pass. CI signer differs from the production APK; older repeat records retain their identities. No physical OTA/recovery claim.",
       "runs": [
         "docs/device-pr15/cuttlefish-debug.json",
         "docs/device-pr15/cuttlefish-release.json",
@@ -129,7 +130,28 @@
         "docs/device-pr15/cuttlefish-release.json",
         "docs/device-qualification.md",
         "docs/device-pr15/cuttlefish-repeat-debug.json",
-        "docs/device-pr15/cuttlefish-repeat-release.json"
+        "docs/device-pr15/cuttlefish-repeat-release.json",
+        "docs/device-pr15/ci-acceptance.json"
+      ]
+    },
+    {
+      "id": "legacy-ci-api23",
+      "name": "Android 6 SDK x86/x86_64 \u2014 CI",
+      "route": "Patched SDK ramdisks after stock cold-boot/framework controls",
+      "status": "experimental",
+      "limits": "CI merge source 88d36d8c82f28ca2e5f16838a5410b0d9c35ca2e, code 31016. Four stock cold boots and four framework restarts per architecture; debug/release root and manager suites pass. Legacy SDK mount tests remain skipped below API26. Not ARM32 phone or API23 System Mode qualification.",
+      "runs": [
+        "docs/device-pr15/ci-api23x64-debug.json",
+        "docs/device-pr15/ci-api23x64-release.json",
+        "docs/device-pr15/ci-api23x86-debug.json",
+        "docs/device-pr15/ci-api23x86-release.json"
+      ],
+      "evidence": [
+        "docs/device-pr15/ci-api23x64-debug.json",
+        "docs/device-pr15/ci-api23x64-release.json",
+        "docs/device-pr15/ci-api23x86-debug.json",
+        "docs/device-pr15/ci-api23x86-release.json",
+        "docs/device-pr15/ci-acceptance.json"
       ]
     },
     {

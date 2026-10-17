@@ -67,6 +67,14 @@ This is a file-layout observation, not a runtime qualification or a claim that
 those ABIs use a 16 KiB kernel. ELF imports and strings also cannot establish
 the correctness of an obfuscated provider's internal root-detection logic.
 
+Candidate `31016` additionally passes the real API v5 module-directory, root-companion,
+flags and post-specialization probe with Zygisk Next and ReZygisk on both 4 KiB and 16 KiB
+guests. NeoZygisk 2.4 passes at 4 KiB but fails that probe at 16 KiB on both Kitsune and
+official Magisk. Sui 13.5.1 also lacks a working 16 KiB server, and the third-party
+BusyBox 13614 binary segfaults at 16 KiB under both cores in the tested configurations.
+The [paired controls and ELF layouts](device-pr15/module-16k-limits.json) retain those limits;
+the successful provider probes do not imply compatibility for every client module.
+
 The public Zygisk Next API describes native init-process injection, hook and
 symbol-resolution callbacks, and companion sockets. The HyperOS runtime API is
 native-only and explicitly lacks ART/JNI objects. Its API version is independent
@@ -113,3 +121,10 @@ module removal and cold-boot checks. Kitsune Hide and Zygisk Assistant have
 already passed that visibility probe on their recorded artifacts; this does not
 turn the failing Shamiko result into a pass. Diagnostic instrumentation is kept
 separate from acceptance using the ordinary unmodified module ZIP.
+The final `31016` AVD comparisons repeat both fallback paths on 4 KiB and 16 KiB kernels:
+the selected unprivileged app loses the marker while root retains visibility.
+Zygisk Assistant 2.1.4 explicitly skips apps with `PROCESS_GRANTED_ROOT` in its
+[specialization callback](https://github.com/snake-4/Zygisk-Assistant/blob/v2.1.4/module/jni/main.cpp).
+The commercial-emulator probe therefore removes and later restores its own test UID's
+grant left by the SU suite, and temporarily disables the other hiding fixture. The core
+continues reporting truthful authorization flags; this is test isolation, not a policy bypass.

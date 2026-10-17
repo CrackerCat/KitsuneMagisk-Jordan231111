@@ -88,6 +88,7 @@ ordinary in-app Direct Install, inactive-slot, OTA or recovery routes on BlueSta
   existing layout and contributors, with Jordan231111 as the fork owner's name and GitHub link.
   [Namespace migration](build-info.md#pr15-namespace-migration) requires an explicit installation
   transition. MuMu also required its own per-app bootstrap-root grant for the newly installed package.
+  This run required a full CLI close/open after saving the grant to refresh MuMu's policy service.
   The same-package `31011` to `31012` System Mode upgrade preserved the test sentinel and module whiteout.
 - Concurrent update clients can share a newly created state directory. Losing the `mkdirs()` race
   no longer reports a false storage error; the existing `lstat` check still rejects redirected paths.
@@ -159,6 +160,15 @@ available-lab work and the missing device/ROM evidence explicit.
 
 ## Retained CI investigation
 
+[Run 39064935566](https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566)
+finishes with all 33 jobs passing. The [acceptance record](device-pr15/ci-acceptance.json)
+includes the exact merge-source identity, Cuttlefish records and both Android 6 architectures.
+Android 6 passes four stock cold boots and four framework restarts after the setup persistence
+check described below. API 30/x86_64 needed one retry: its first release boot had an `audioserver`
+SIGSEGV in `AudioPolicyService::AudioCommandThread::changeAudioVolumeGroupCommand` before the
+app tests. The same artifact passed the job on retry. That crash is retained as unexplained,
+not described as fixed or exempted; the native-crash gate still fails a recurrence.
+
 [Run 39015915833](https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39015915833)
 timed out in Cuttlefish's hidden-manager application-PATH root check after the native SU request
 was granted. The last child diagnostic was namespace setup; the existing logs do not identify
@@ -177,7 +187,7 @@ app suites but failed the native-crash gate on a SurfaceFlinger `eglMakeCurrent`
 framework-restart controls now include that image; the crash has not been exempted. A local ARM64
 API 36.1 run passed hidden-manager tests, then the restored manager's final test process crashed;
 that attempt remains failed. Corrected emulator log filtering and bounded failure log capture
-retain evidence for the next run. Candidate `31014` requires fresh runtime acceptance.
+retain evidence for the next run. The final acceptance records identify candidate `31016`.
 
 The Android 6 x86/x86_64 stock controls in
 [run 39048129575](https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39048129575) and
@@ -197,8 +207,8 @@ had been denied before the guest stopped responding. The legacy CI lanes now dis
 emulator's optional `GLDMA`/`GLDMA2` features, using its ordinary graphics-copy path. This is
 an emulator configuration, not a Magisk or phone-kernel patch. API 24/25 x86 and x86_64 passed
 their full suites in [run 39055905296](https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39055905296).
-The API 23 stock warm restart still timed out with DMA disabled, so its current qualification
-uses four stock cold boots followed by the full patched-image suites. The
+The API 23 stock warm restart still timed out with DMA disabled at that stage; the later
+setup persistence check restores the cold-boot and framework-restart coverage. The
 [emulator feature mapping](https://android.googlesource.com/platform/external/qemu/+/emu-master-dev/android/android-emu/android/opengles.cpp)
 and [Goldfish driver](https://android.googlesource.com/kernel/goldfish-modules/+/ca47ac740d16ecf731be3fecdd051d26932f9bdd/goldfish_pipe_v2.c)
 describe the affected transport.
@@ -216,6 +226,8 @@ The [GLES 2 control](https://github.com/Jordan231111/KitsuneMagisk/actions/runs/
 confirmed `qemu.opengles.version=131072` but still stalled before Magisk installation.
 A comparison with official emulator **35.3.11 / build 12836668** was queued using
 [Android's checksum-pinned archive](https://developer.android.com/studio/emulator_archive).
+It could not start on the runner because `libpulse.so.0` was absent, so that attempt supplies
+no guest qualification and the temporary runtime selection was removed.
 The logs then identified a setup persistence race: SdkSetup disabled itself at 19:11:34.822,
 but the VM closed at 19:11:41.551, before Android 6's ten-second PackageManager write delay.
 The next boot launched SdkSetup again and stalled during its self-disable sequence.
@@ -224,9 +236,11 @@ package restrictions before shutdown or framework restart. This follows the
 [setup component](https://android.googlesource.com/platform/development/+/android-6.0.1_r81/apps/SdkSetup/src/com/android/sdksetup/DefaultActivity.java)
 and [PackageManager write schedule](https://android.googlesource.com/platform/frameworks/base/+/android-6.0.1_r81/services/core/java/com/android/server/pm/PackageManagerService.java).
 The current emulator is used again with four cold boots and four stock framework restarts.
-The persisted-state check and full patched-image suite must pass; no crash is exempted.
+Both architectures passed the persisted-state check and full patched-image suites in the
+acceptance run above; no crash is exempted.
 
-That run's Android 17/API 37.0 16 KiB SDK image completed the app suites but failed the native-crash
+[Run 39055905296](https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39055905296)'s
+Android 17/API 37.0 16 KiB SDK image completed the app suites but failed the native-crash
 gate: an `app_process` consent launcher aborted during ART `DestroyJavaVM` with an invalid
 `pthread_join` handle. This is not attributed to the emulator without a matching control.
 The API 37 lanes now run fifty stock `app_process` AM startup/shutdown checks before installing

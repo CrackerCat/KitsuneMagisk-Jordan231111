@@ -2852,8 +2852,14 @@ with interactive SU prompts and Kitsune policy preserved. Candidate `31015` adds
 SU group, compression, Samsung footer, AVB2, ARM32 zImage and filename fixes.
 The property-override comparison also reproduced an inherited crash in official Magisk 30.7.
 Candidate `31016` adds that fix and passes all eight AVD lanes: 120 app tests, 107 boot-image
-checks, four isolated property checks and 48 root requests per variant. Module comparisons,
-commercial-emulator acceptance and final restoration/cleanup remain in progress.
+checks, four isolated property checks and 48 root requests per variant. The 16 pinned module
+comparisons now include explicit Sui/NeoZygisk/third-party BusyBox limits at 16 KiB; matching
+official-Magisk controls reproduce those failures. MuMu's full lifecycle and exact original
+restore pass. BlueStacks passes 120 tests, three recorded cold boots, repeated root stress and
+Kitsune Hide. Its remaining Zygisk Assistant check requires normal secure-ADB authorization
+after that module enabled authentication; the Mac is locked. BlueStacks unroot/factory restore,
+test-instance removal and final lab cleanup remain open. The [CI acceptance](docs/device-pr15/ci-acceptance.json)
+records all 33 passing jobs and the retained API 30 startup-crash retry.
 Six unavailable device/ROM targets are explicitly `unqualified-target` with PR16 ownership;
 the release audit still rejects them, and their implementations remain available.
 
