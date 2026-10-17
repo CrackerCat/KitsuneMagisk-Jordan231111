@@ -29,6 +29,10 @@ case "$1" in
       "$BB" cp "$M/$file" "$T/$file"
     done
     "$BB" chmod 0755 "$T/magisk" "$T/magiskpolicy"
+    if [ -f "$M/magisk32" ]; then
+      "$BB" cp "$M/magisk32" "$T/magisk32"
+      "$BB" chmod 0755 "$T/magisk32"
+    fi
     "$BB" ln -s ./magisk "$T/su"
     "$BB" ln -s ./magisk "$T/resetprop"
     "$BB" ln -s ./magisk "$T/magiskhide"

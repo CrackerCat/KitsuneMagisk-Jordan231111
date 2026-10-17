@@ -1,11 +1,16 @@
 """The host adapter stages only its owned bootstrap files in an offline copy."""
 
 import gzip
+import json
+from pathlib import Path
 import stat
+import struct
+import tempfile
 import unittest
 from unittest import mock
+import zipfile
 
-from tools.system_mode.host_image import Entry, decode, encode, stage
+from tools.system_mode.host_image import Entry, decode, encode, payload, stage
 
 
 def entry(name, data=b"", mode=stat.S_IFREG | 0o700, uid=0):
@@ -13,6 +18,43 @@ def entry(name, data=b"", mode=stat.S_IFREG | 0o700, uid=0):
 
 
 class HostImageTest(unittest.TestCase):
+    def test_payload_keeps_the_32_bit_zygote_binary_and_checks_its_abi(self):
+        def elf(elf_class, machine):
+            data = bytearray(120)
+            data[:6] = b"\x7fELF" + bytes((elf_class, 1))
+            struct.pack_into("<H", data, 18, machine)
+            if elf_class == 2:
+                struct.pack_into("<Q", data, 32, 64)
+                struct.pack_into("<HH", data, 54, 56, 1)
+                struct.pack_into("<I", data, 64, 1)
+                struct.pack_into("<Q", data, 112, 16384)
+            else:
+                struct.pack_into("<I", data, 28, 52)
+                struct.pack_into("<HH", data, 42, 32, 1)
+                struct.pack_into("<I", data, 52, 1)
+                struct.pack_into("<I", data, 80, 16384)
+            return data
+        with tempfile.TemporaryDirectory() as directory:
+            apk = Path(directory) / "payload.apk"
+            for secondary in (None, elf(1, 40), elf(2, 183)):
+                with zipfile.ZipFile(apk, "w") as archive:
+                    archive.writestr("assets/build-info.json", json.dumps({
+                        "source_dirty": False, "protocol_version": 1,
+                        "source_commit": "a" * 40, "application_id": "io.github.huskydg.magisk.next",
+                    }))
+                    for name in ("busybox", "magisk", "magiskboot", "magiskinit", "magiskpolicy"):
+                        archive.writestr(f"lib/arm64-v8a/lib{name}.so", elf(2, 183))
+                    for name in ("stub.apk", "util_functions.sh", "boot_patch.sh", "addon.d.sh", "uninstaller.sh"):
+                        archive.writestr(f"assets/{name}", b"payload")
+                    if secondary is not None:
+                        archive.writestr("lib/armeabi-v7a/libmagisk.so", secondary)
+                if secondary is not None and secondary[4] == 2:
+                    with self.assertRaisesRegex(ValueError, "magisk32"):
+                        payload(apk)
+                else:
+                    files, _ = payload(apk)
+                    self.assertEqual(secondary, files.get("magisk32"))
+
     def original(self):
         return [
             entry("boot/bsr", mode=stat.S_IFDIR | 0o755),
