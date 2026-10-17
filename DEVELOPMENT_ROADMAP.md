@@ -2839,10 +2839,11 @@ The requested [module comparisons](docs/module-compatibility.md) now cover 16 pi
 and official stable controls. [MuMu acceptance](docs/device-pr15/mumu-lifecycle.json) records the
 new namespace, verified upgrade, large-archive regression, uninstall and exact original restore.
 Eight debug/release AVD lanes now pass across Android 10, 15 (4/16 KiB) and 16.
-Live-setup follow-up, a repeated Cuttlefish check and the latest BlueStacks namespace check remain
-in progress; Shamiko 1.2.5 incompatibility is explicit and must not be reported as a passing module.
+Live-setup follow-up and repeated Cuttlefish checks have passed; the latest BlueStacks namespace
+check remains in progress. Shamiko 1.2.5 incompatibility must not be reported as a passing module.
 ViPER testing found and reproduced a shell-field-separator bug in pre-init budget parsing.
-The fix preserves the limits; candidate `31013` is being requalified against the earlier `31012` results.
+Candidate `31013` passes ViPER on AVD/MuMu and MuMu's full lifecycle. CI also exposed a manager
+package-removal race; candidate `31014` fixes it and requires fresh runtime acceptance.
 
 - Complete exact MuMu and AVD lanes and either a BlueStacks adapter or explicit unsupported result.
   Preserve earlier LDPlayer observations as historical evidence; do not imply a current rerun.

@@ -75,7 +75,13 @@ ordinary in-app Direct Install, inactive-slot, OTA or recovery routes on BlueSta
   newline; inherited parsing incorrectly treated its 790-byte policy and entry count as one
   integer, then triggered the existing safety fallback. The new parser accepts that valid input
   while retaining the same size/count limits and rejecting an oversized sparse policy. Candidate
-  `31013` requires its own runtime requalification; earlier records retain their exact artifact IDs.
+  `31013` passes the paired ViPER AVD check and the [MuMu lifecycle](device-pr15/mumu-31013-lifecycle.json),
+  including removal and original-image restoration. Earlier records retain their exact artifact IDs.
+- Manager package lookup tolerates unrelated directories removed during Android package migration.
+  The previous traversal could abort during original-manager removal and clear the hidden manager's
+  registration. A failed scan now preserves that registration without authorizing an unverified app;
+  the certificate and dynamic-APK checks remain required. The host regression reproduces the old
+  `ENOENT` failure and checks the repaired lookup, package-prefix bounds and other I/O errors.
 - AVB1 ECDSA now uses Android's DER encoding, following
   [upstream 87e72a582](https://github.com/topjohnwu/Magisk/commit/87e72a582e019ae1bb3e65c90c259e994ecd66fa).
   Earlier raw `r || s` EC signatures were not Android-compatible. Repatch and re-sign the matching
@@ -134,3 +140,12 @@ including normal/hidden manager checks and Direct Install. Their exact boot reco
 from the compatibility table. Cuttlefish timeouts now collect bounded native worker stacks and
 syscall state before teardown, without reading process environments or arguments. A recurrence
 still fails the test; no timeout or acceptance condition was relaxed.
+
+[Run 39024117895](https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39024117895) passed
+Cuttlefish but exposed the package-removal race on API 36.1. API 29/x86 also failed to observe a
+consent dialog; its next run retains the window hierarchy on failure. API 23/x86_64 completed the
+app suites but failed the native-crash gate on a SurfaceFlinger `eglMakeCurrent` crash. Stock
+framework-restart controls now include that image; the crash has not been exempted. A local ARM64
+API 36.1 run passed hidden-manager tests, then the restored manager's final test process crashed;
+that attempt remains failed. Corrected emulator log filtering and bounded failure log capture
+retain evidence for the next run. Candidate `31014` requires fresh runtime acceptance.

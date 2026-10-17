@@ -253,7 +253,16 @@ class ManagerContractTest : BaseTest {
     }
 
     private fun grantVisibleRequest() {
-        assertTrue("Consent must be visible", device.wait(Until.hasObject(By.text(appContext.getString(CoreR.string.su_warning))), 15000))
+        val visible = device.wait(Until.hasObject(By.text(appContext.getString(CoreR.string.su_warning))), 15000)
+        if (!visible) {
+            // Retain the actual window state when a CI consent dialog is lost.
+            val hierarchy = java.io.ByteArrayOutputStream()
+            runCatching { device.dumpWindowHierarchy(hierarchy) }
+            hierarchy.toString("UTF-8").take(16384).chunked(3000).forEach {
+                android.util.Log.e("ConsentWindow", it)
+            }
+        }
+        assertTrue("Consent must be visible", visible)
         // The one-second consent delay is intentional tapjacking protection.
         android.os.SystemClock.sleep(1200)
         val grant = device.findObject(By.text(appContext.getString(CoreR.string.grant)))

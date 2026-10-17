@@ -9,6 +9,12 @@
   "legacy_target": "Official API29 google_apis ARM64 4KiB, enforcing, Pixel6 profile",
   "method": "Pinned unmodified upstream ZIPs, clean userdata per case, real installation/cold boots/removal, selected functional probes, and official stable failure controls.",
   "scope": "Representative widely used modules, not an exhaustive ecosystem ranking. AVD profiles do not simulate OEM hardware. Physical audio, charging and hardware attestation are unqualified.",
+  "preinit_fix_acceptance": {
+    "source_commit": "95f6f1fd045024b0ad1599a2af6b1a6bf44f973a",
+    "app_version_code": 31013,
+    "module": "programminghoch10/ViPER4AndroidRepackaged",
+    "release_apk_sha256": "89f06e7362f8dc92b5b1ecc6ccccb6486da506b222c14a3458001d5282592a6c"
+  },
   "modules": [
     {
       "repository": "LSPosed/ZygiskNext",
@@ -32,7 +38,35 @@
           "root": true,
           "removed": true,
           "root_after_removal": true,
-          "error": null
+          "error": null,
+          "build": {
+            "app_version_code": 31012,
+            "application_id": "io.github.jordan231111.magisk",
+            "build_id": "4ab3d63e9e84d7ae69ff90068e9e03c31587f1277377513560daf1d3ece465d1",
+            "capabilities": [
+              "kitsune.boot-completed.v1",
+              "kitsune.build-info.v1",
+              "kitsune.early-mount.v2",
+              "kitsune.hide.v1",
+              "kitsune.module-root.v2",
+              "kitsune.su-consent.v1",
+              "kitsune.zygisk-provider.v1"
+            ],
+            "channel": "next-system-experimental",
+            "compat_version_code": 31000,
+            "product_name": "KitsuneMagisk Next",
+            "product_version": "0.1.0-dev",
+            "protocol_version": 1,
+            "release_tag": "kitsune-canary-44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "schema": 1,
+            "source_commit": "44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "source_digest": "cb57f3fc9e19097c39eac1bce329b9ea8a36db0bd8dd37376d8690b7c170bd6e",
+            "source_dirty": false,
+            "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+            "upstream_version": "31.0",
+            "variant": "release",
+            "version_name": "0.1.0-dev-kitsune.44143a6d"
+          }
         }
       ],
       "legacy_api29": []
@@ -59,7 +93,35 @@
           "root": true,
           "removed": true,
           "root_after_removal": true,
-          "error": null
+          "error": null,
+          "build": {
+            "app_version_code": 31012,
+            "application_id": "io.github.jordan231111.magisk",
+            "build_id": "4ab3d63e9e84d7ae69ff90068e9e03c31587f1277377513560daf1d3ece465d1",
+            "capabilities": [
+              "kitsune.boot-completed.v1",
+              "kitsune.build-info.v1",
+              "kitsune.early-mount.v2",
+              "kitsune.hide.v1",
+              "kitsune.module-root.v2",
+              "kitsune.su-consent.v1",
+              "kitsune.zygisk-provider.v1"
+            ],
+            "channel": "next-system-experimental",
+            "compat_version_code": 31000,
+            "product_name": "KitsuneMagisk Next",
+            "product_version": "0.1.0-dev",
+            "protocol_version": 1,
+            "release_tag": "kitsune-canary-44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "schema": 1,
+            "source_commit": "44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "source_digest": "cb57f3fc9e19097c39eac1bce329b9ea8a36db0bd8dd37376d8690b7c170bd6e",
+            "source_dirty": false,
+            "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+            "upstream_version": "31.0",
+            "variant": "release",
+            "version_name": "0.1.0-dev-kitsune.44143a6d"
+          }
         }
       ],
       "legacy_api29": []
@@ -86,7 +148,35 @@
           "root": true,
           "removed": true,
           "root_after_removal": true,
-          "error": null
+          "error": null,
+          "build": {
+            "app_version_code": 31012,
+            "application_id": "io.github.jordan231111.magisk",
+            "build_id": "4ab3d63e9e84d7ae69ff90068e9e03c31587f1277377513560daf1d3ece465d1",
+            "capabilities": [
+              "kitsune.boot-completed.v1",
+              "kitsune.build-info.v1",
+              "kitsune.early-mount.v2",
+              "kitsune.hide.v1",
+              "kitsune.module-root.v2",
+              "kitsune.su-consent.v1",
+              "kitsune.zygisk-provider.v1"
+            ],
+            "channel": "next-system-experimental",
+            "compat_version_code": 31000,
+            "product_name": "KitsuneMagisk Next",
+            "product_version": "0.1.0-dev",
+            "protocol_version": 1,
+            "release_tag": "kitsune-canary-44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "schema": 1,
+            "source_commit": "44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "source_digest": "cb57f3fc9e19097c39eac1bce329b9ea8a36db0bd8dd37376d8690b7c170bd6e",
+            "source_dirty": false,
+            "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+            "upstream_version": "31.0",
+            "variant": "release",
+            "version_name": "0.1.0-dev-kitsune.44143a6d"
+          }
         },
         {
           "core": "stable",
@@ -101,7 +191,8 @@
           "root": true,
           "removed": true,
           "root_after_removal": true,
-          "error": null
+          "error": null,
+          "build": null
         }
       ],
       "legacy_api29": [
@@ -118,7 +209,35 @@
           "root": true,
           "removed": true,
           "root_after_removal": true,
-          "error": null
+          "error": null,
+          "build": {
+            "app_version_code": 31012,
+            "application_id": "io.github.jordan231111.magisk",
+            "build_id": "4ab3d63e9e84d7ae69ff90068e9e03c31587f1277377513560daf1d3ece465d1",
+            "capabilities": [
+              "kitsune.boot-completed.v1",
+              "kitsune.build-info.v1",
+              "kitsune.early-mount.v2",
+              "kitsune.hide.v1",
+              "kitsune.module-root.v2",
+              "kitsune.su-consent.v1",
+              "kitsune.zygisk-provider.v1"
+            ],
+            "channel": "next-system-experimental",
+            "compat_version_code": 31000,
+            "product_name": "KitsuneMagisk Next",
+            "product_version": "0.1.0-dev",
+            "protocol_version": 1,
+            "release_tag": "kitsune-canary-44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "schema": 1,
+            "source_commit": "44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "source_digest": "cb57f3fc9e19097c39eac1bce329b9ea8a36db0bd8dd37376d8690b7c170bd6e",
+            "source_dirty": false,
+            "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+            "upstream_version": "31.0",
+            "variant": "release",
+            "version_name": "0.1.0-dev-kitsune.44143a6d"
+          }
         },
         {
           "core": "stable",
@@ -133,7 +252,8 @@
           "root": true,
           "removed": true,
           "root_after_removal": true,
-          "error": null
+          "error": null,
+          "build": null
         }
       ]
     },
@@ -159,7 +279,35 @@
           "root": true,
           "removed": true,
           "root_after_removal": true,
-          "error": null
+          "error": null,
+          "build": {
+            "app_version_code": 31012,
+            "application_id": "io.github.jordan231111.magisk",
+            "build_id": "4ab3d63e9e84d7ae69ff90068e9e03c31587f1277377513560daf1d3ece465d1",
+            "capabilities": [
+              "kitsune.boot-completed.v1",
+              "kitsune.build-info.v1",
+              "kitsune.early-mount.v2",
+              "kitsune.hide.v1",
+              "kitsune.module-root.v2",
+              "kitsune.su-consent.v1",
+              "kitsune.zygisk-provider.v1"
+            ],
+            "channel": "next-system-experimental",
+            "compat_version_code": 31000,
+            "product_name": "KitsuneMagisk Next",
+            "product_version": "0.1.0-dev",
+            "protocol_version": 1,
+            "release_tag": "kitsune-canary-44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "schema": 1,
+            "source_commit": "44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "source_digest": "cb57f3fc9e19097c39eac1bce329b9ea8a36db0bd8dd37376d8690b7c170bd6e",
+            "source_dirty": false,
+            "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+            "upstream_version": "31.0",
+            "variant": "release",
+            "version_name": "0.1.0-dev-kitsune.44143a6d"
+          }
         },
         {
           "core": "stable",
@@ -174,7 +322,8 @@
           "root": true,
           "removed": true,
           "root_after_removal": true,
-          "error": null
+          "error": null,
+          "build": null
         },
         {
           "core": "upstream31",
@@ -189,7 +338,8 @@
           "root": true,
           "removed": true,
           "root_after_removal": true,
-          "error": null
+          "error": null,
+          "build": null
         }
       ],
       "legacy_api29": []
@@ -216,7 +366,35 @@
           "root": true,
           "removed": true,
           "root_after_removal": true,
-          "error": null
+          "error": null,
+          "build": {
+            "app_version_code": 31012,
+            "application_id": "io.github.jordan231111.magisk",
+            "build_id": "4ab3d63e9e84d7ae69ff90068e9e03c31587f1277377513560daf1d3ece465d1",
+            "capabilities": [
+              "kitsune.boot-completed.v1",
+              "kitsune.build-info.v1",
+              "kitsune.early-mount.v2",
+              "kitsune.hide.v1",
+              "kitsune.module-root.v2",
+              "kitsune.su-consent.v1",
+              "kitsune.zygisk-provider.v1"
+            ],
+            "channel": "next-system-experimental",
+            "compat_version_code": 31000,
+            "product_name": "KitsuneMagisk Next",
+            "product_version": "0.1.0-dev",
+            "protocol_version": 1,
+            "release_tag": "kitsune-canary-44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "schema": 1,
+            "source_commit": "44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "source_digest": "cb57f3fc9e19097c39eac1bce329b9ea8a36db0bd8dd37376d8690b7c170bd6e",
+            "source_dirty": false,
+            "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+            "upstream_version": "31.0",
+            "variant": "release",
+            "version_name": "0.1.0-dev-kitsune.44143a6d"
+          }
         }
       ],
       "legacy_api29": []
@@ -243,7 +421,35 @@
           "root": true,
           "removed": true,
           "root_after_removal": true,
-          "error": null
+          "error": null,
+          "build": {
+            "app_version_code": 31012,
+            "application_id": "io.github.jordan231111.magisk",
+            "build_id": "4ab3d63e9e84d7ae69ff90068e9e03c31587f1277377513560daf1d3ece465d1",
+            "capabilities": [
+              "kitsune.boot-completed.v1",
+              "kitsune.build-info.v1",
+              "kitsune.early-mount.v2",
+              "kitsune.hide.v1",
+              "kitsune.module-root.v2",
+              "kitsune.su-consent.v1",
+              "kitsune.zygisk-provider.v1"
+            ],
+            "channel": "next-system-experimental",
+            "compat_version_code": 31000,
+            "product_name": "KitsuneMagisk Next",
+            "product_version": "0.1.0-dev",
+            "protocol_version": 1,
+            "release_tag": "kitsune-canary-44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "schema": 1,
+            "source_commit": "44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "source_digest": "cb57f3fc9e19097c39eac1bce329b9ea8a36db0bd8dd37376d8690b7c170bd6e",
+            "source_dirty": false,
+            "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+            "upstream_version": "31.0",
+            "variant": "release",
+            "version_name": "0.1.0-dev-kitsune.44143a6d"
+          }
         }
       ],
       "legacy_api29": []
@@ -270,7 +476,35 @@
           "root": true,
           "removed": true,
           "root_after_removal": true,
-          "error": null
+          "error": null,
+          "build": {
+            "app_version_code": 31012,
+            "application_id": "io.github.jordan231111.magisk",
+            "build_id": "4ab3d63e9e84d7ae69ff90068e9e03c31587f1277377513560daf1d3ece465d1",
+            "capabilities": [
+              "kitsune.boot-completed.v1",
+              "kitsune.build-info.v1",
+              "kitsune.early-mount.v2",
+              "kitsune.hide.v1",
+              "kitsune.module-root.v2",
+              "kitsune.su-consent.v1",
+              "kitsune.zygisk-provider.v1"
+            ],
+            "channel": "next-system-experimental",
+            "compat_version_code": 31000,
+            "product_name": "KitsuneMagisk Next",
+            "product_version": "0.1.0-dev",
+            "protocol_version": 1,
+            "release_tag": "kitsune-canary-44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "schema": 1,
+            "source_commit": "44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "source_digest": "cb57f3fc9e19097c39eac1bce329b9ea8a36db0bd8dd37376d8690b7c170bd6e",
+            "source_dirty": false,
+            "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+            "upstream_version": "31.0",
+            "variant": "release",
+            "version_name": "0.1.0-dev-kitsune.44143a6d"
+          }
         }
       ],
       "legacy_api29": []
@@ -297,7 +531,35 @@
           "root": true,
           "removed": true,
           "root_after_removal": true,
-          "error": null
+          "error": null,
+          "build": {
+            "app_version_code": 31012,
+            "application_id": "io.github.jordan231111.magisk",
+            "build_id": "4ab3d63e9e84d7ae69ff90068e9e03c31587f1277377513560daf1d3ece465d1",
+            "capabilities": [
+              "kitsune.boot-completed.v1",
+              "kitsune.build-info.v1",
+              "kitsune.early-mount.v2",
+              "kitsune.hide.v1",
+              "kitsune.module-root.v2",
+              "kitsune.su-consent.v1",
+              "kitsune.zygisk-provider.v1"
+            ],
+            "channel": "next-system-experimental",
+            "compat_version_code": 31000,
+            "product_name": "KitsuneMagisk Next",
+            "product_version": "0.1.0-dev",
+            "protocol_version": 1,
+            "release_tag": "kitsune-canary-44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "schema": 1,
+            "source_commit": "44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "source_digest": "cb57f3fc9e19097c39eac1bce329b9ea8a36db0bd8dd37376d8690b7c170bd6e",
+            "source_dirty": false,
+            "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+            "upstream_version": "31.0",
+            "variant": "release",
+            "version_name": "0.1.0-dev-kitsune.44143a6d"
+          }
         },
         {
           "core": "stable",
@@ -312,7 +574,8 @@
           "root": true,
           "removed": true,
           "root_after_removal": true,
-          "error": null
+          "error": null,
+          "build": null
         }
       ],
       "legacy_api29": []
@@ -339,7 +602,35 @@
           "root": true,
           "removed": true,
           "root_after_removal": true,
-          "error": null
+          "error": null,
+          "build": {
+            "app_version_code": 31012,
+            "application_id": "io.github.jordan231111.magisk",
+            "build_id": "4ab3d63e9e84d7ae69ff90068e9e03c31587f1277377513560daf1d3ece465d1",
+            "capabilities": [
+              "kitsune.boot-completed.v1",
+              "kitsune.build-info.v1",
+              "kitsune.early-mount.v2",
+              "kitsune.hide.v1",
+              "kitsune.module-root.v2",
+              "kitsune.su-consent.v1",
+              "kitsune.zygisk-provider.v1"
+            ],
+            "channel": "next-system-experimental",
+            "compat_version_code": 31000,
+            "product_name": "KitsuneMagisk Next",
+            "product_version": "0.1.0-dev",
+            "protocol_version": 1,
+            "release_tag": "kitsune-canary-44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "schema": 1,
+            "source_commit": "44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "source_digest": "cb57f3fc9e19097c39eac1bce329b9ea8a36db0bd8dd37376d8690b7c170bd6e",
+            "source_dirty": false,
+            "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+            "upstream_version": "31.0",
+            "variant": "release",
+            "version_name": "0.1.0-dev-kitsune.44143a6d"
+          }
         },
         {
           "core": "stable",
@@ -354,7 +645,8 @@
           "root": true,
           "removed": true,
           "root_after_removal": true,
-          "error": null
+          "error": null,
+          "build": null
         }
       ],
       "legacy_api29": [
@@ -371,7 +663,35 @@
           "root": true,
           "removed": true,
           "root_after_removal": true,
-          "error": null
+          "error": null,
+          "build": {
+            "app_version_code": 31012,
+            "application_id": "io.github.jordan231111.magisk",
+            "build_id": "4ab3d63e9e84d7ae69ff90068e9e03c31587f1277377513560daf1d3ece465d1",
+            "capabilities": [
+              "kitsune.boot-completed.v1",
+              "kitsune.build-info.v1",
+              "kitsune.early-mount.v2",
+              "kitsune.hide.v1",
+              "kitsune.module-root.v2",
+              "kitsune.su-consent.v1",
+              "kitsune.zygisk-provider.v1"
+            ],
+            "channel": "next-system-experimental",
+            "compat_version_code": 31000,
+            "product_name": "KitsuneMagisk Next",
+            "product_version": "0.1.0-dev",
+            "protocol_version": 1,
+            "release_tag": "kitsune-canary-44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "schema": 1,
+            "source_commit": "44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "source_digest": "cb57f3fc9e19097c39eac1bce329b9ea8a36db0bd8dd37376d8690b7c170bd6e",
+            "source_dirty": false,
+            "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+            "upstream_version": "31.0",
+            "variant": "release",
+            "version_name": "0.1.0-dev-kitsune.44143a6d"
+          }
         },
         {
           "core": "stable",
@@ -386,7 +706,8 @@
           "root": true,
           "removed": true,
           "root_after_removal": true,
-          "error": null
+          "error": null,
+          "build": null
         }
       ]
     },
@@ -412,7 +733,35 @@
           "root": true,
           "removed": true,
           "root_after_removal": true,
-          "error": null
+          "error": null,
+          "build": {
+            "app_version_code": 31012,
+            "application_id": "io.github.jordan231111.magisk",
+            "build_id": "4ab3d63e9e84d7ae69ff90068e9e03c31587f1277377513560daf1d3ece465d1",
+            "capabilities": [
+              "kitsune.boot-completed.v1",
+              "kitsune.build-info.v1",
+              "kitsune.early-mount.v2",
+              "kitsune.hide.v1",
+              "kitsune.module-root.v2",
+              "kitsune.su-consent.v1",
+              "kitsune.zygisk-provider.v1"
+            ],
+            "channel": "next-system-experimental",
+            "compat_version_code": 31000,
+            "product_name": "KitsuneMagisk Next",
+            "product_version": "0.1.0-dev",
+            "protocol_version": 1,
+            "release_tag": "kitsune-canary-44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "schema": 1,
+            "source_commit": "44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "source_digest": "cb57f3fc9e19097c39eac1bce329b9ea8a36db0bd8dd37376d8690b7c170bd6e",
+            "source_dirty": false,
+            "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+            "upstream_version": "31.0",
+            "variant": "release",
+            "version_name": "0.1.0-dev-kitsune.44143a6d"
+          }
         }
       ],
       "legacy_api29": []
@@ -439,7 +788,35 @@
           "root": true,
           "removed": true,
           "root_after_removal": true,
-          "error": null
+          "error": null,
+          "build": {
+            "app_version_code": 31012,
+            "application_id": "io.github.jordan231111.magisk",
+            "build_id": "4ab3d63e9e84d7ae69ff90068e9e03c31587f1277377513560daf1d3ece465d1",
+            "capabilities": [
+              "kitsune.boot-completed.v1",
+              "kitsune.build-info.v1",
+              "kitsune.early-mount.v2",
+              "kitsune.hide.v1",
+              "kitsune.module-root.v2",
+              "kitsune.su-consent.v1",
+              "kitsune.zygisk-provider.v1"
+            ],
+            "channel": "next-system-experimental",
+            "compat_version_code": 31000,
+            "product_name": "KitsuneMagisk Next",
+            "product_version": "0.1.0-dev",
+            "protocol_version": 1,
+            "release_tag": "kitsune-canary-44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "schema": 1,
+            "source_commit": "44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "source_digest": "cb57f3fc9e19097c39eac1bce329b9ea8a36db0bd8dd37376d8690b7c170bd6e",
+            "source_dirty": false,
+            "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+            "upstream_version": "31.0",
+            "variant": "release",
+            "version_name": "0.1.0-dev-kitsune.44143a6d"
+          }
         },
         {
           "core": "stable",
@@ -454,7 +831,8 @@
           "root": true,
           "removed": true,
           "root_after_removal": true,
-          "error": null
+          "error": null,
+          "build": null
         }
       ],
       "legacy_api29": []
@@ -466,37 +844,66 @@
       "asset_url": "https://github.com/programminghoch10/ViPER4AndroidRepackaged/releases/download/v87/ViPER4AndroidFX-repackagedhoch87-37dc30d.zip",
       "sha256": "4dea5d0a5e1b99041398aabea52f14df3db401e7a37bbec877251452f17f4cfb",
       "status": "Install, cold boot and removal passed",
-      "limits": "Its newline-only IFS made the pre-init budget parser reject a 790-byte policy. The 31013 fix retains the limits. Official30.7 installs and removes it; physical DSP output remains unqualified.",
+      "limits": "The 31013 IFS fix keeps the module enabled, publishes both audio-effect configurations and permits removal. The same ZIP passes official30.7. Physical audio/DSP output remains unqualified.",
       "lifecycle": [
         {
           "core": "kitsune",
-          "apk_sha256": "64ac45ddde681c50840c23f22c10b4e2461b8e29dbf338974e0d256dd766de58",
+          "apk_sha256": "89f06e7362f8dc92b5b1ecc6ccccb6486da506b222c14a3458001d5282592a6c",
           "install_exit": 0,
           "boots": [
-            "a6401cbf-4fe0-4a77-a3c5-609752c01cf5",
-            "e9030395-3b62-47b1-8d49-f8b47649ecc8",
-            "2c787cee-f177-4cb0-bf35-00ef59ba586e"
+            "745ff25a-e625-434c-a492-0cc17726e749",
+            "a9c04851-0f97-4a40-8d2d-36d10a9ab3a8",
+            "ad9a7e1d-a5fd-40cf-8615-610439c14e26"
           ],
           "registered": true,
           "root": true,
-          "removed": null,
-          "root_after_removal": null,
-          "error": "['adb', '-s', 'emulator-5558', 'shell'] exit 1: "
+          "removed": true,
+          "root_after_removal": true,
+          "error": null,
+          "build": {
+            "app_version_code": 31013,
+            "application_id": "io.github.jordan231111.magisk",
+            "build_id": "5b998d5cc3bdfe39916faf5da1aa2205e6e798348100b81960e4b302d54a9869",
+            "capabilities": [
+              "kitsune.boot-completed.v1",
+              "kitsune.build-info.v1",
+              "kitsune.early-mount.v2",
+              "kitsune.hide.v1",
+              "kitsune.module-root.v2",
+              "kitsune.su-consent.v1",
+              "kitsune.zygisk-provider.v1"
+            ],
+            "channel": "next-system-experimental",
+            "compat_version_code": 31000,
+            "product_name": "KitsuneMagisk Next",
+            "product_version": "0.1.0-dev",
+            "protocol_version": 1,
+            "release_tag": "kitsune-canary-95f6f1fd045024b0ad1599a2af6b1a6bf44f973a",
+            "schema": 1,
+            "source_commit": "95f6f1fd045024b0ad1599a2af6b1a6bf44f973a",
+            "source_digest": "6eb346bb05672c02badedb8c99bd86259c486eb95d67b015591ce02951089def",
+            "source_dirty": false,
+            "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+            "upstream_version": "31.0",
+            "variant": "release",
+            "version_name": "0.1.0-dev-kitsune.95f6f1fd"
+          }
         },
         {
           "core": "stable",
           "apk_sha256": "e0d32d2123532860f97123d927b1bb86c4e08e6fd8a48bfc6b5bee0afae9ebd5",
           "install_exit": 0,
           "boots": [
-            "3c88a611-7989-41f0-a241-ab33b301f529",
-            "02b9b2ff-d3fb-4a59-8e03-e54d9a7aa9b4",
-            "4da17f87-325a-4317-b290-3ab83faa5a72"
+            "056b1c8d-127b-48f7-867e-583739754dbe",
+            "ac9dc967-d406-4e26-888c-4f8c6367bfec",
+            "fba445c8-7b8d-4e3d-aa0d-9f0289fc9c41"
           ],
           "registered": true,
           "root": true,
           "removed": true,
           "root_after_removal": true,
-          "error": null
+          "error": null,
+          "build": null
         }
       ],
       "legacy_api29": []
@@ -523,7 +930,35 @@
           "root": true,
           "removed": true,
           "root_after_removal": true,
-          "error": null
+          "error": null,
+          "build": {
+            "app_version_code": 31012,
+            "application_id": "io.github.jordan231111.magisk",
+            "build_id": "4ab3d63e9e84d7ae69ff90068e9e03c31587f1277377513560daf1d3ece465d1",
+            "capabilities": [
+              "kitsune.boot-completed.v1",
+              "kitsune.build-info.v1",
+              "kitsune.early-mount.v2",
+              "kitsune.hide.v1",
+              "kitsune.module-root.v2",
+              "kitsune.su-consent.v1",
+              "kitsune.zygisk-provider.v1"
+            ],
+            "channel": "next-system-experimental",
+            "compat_version_code": 31000,
+            "product_name": "KitsuneMagisk Next",
+            "product_version": "0.1.0-dev",
+            "protocol_version": 1,
+            "release_tag": "kitsune-canary-44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "schema": 1,
+            "source_commit": "44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "source_digest": "cb57f3fc9e19097c39eac1bce329b9ea8a36db0bd8dd37376d8690b7c170bd6e",
+            "source_dirty": false,
+            "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+            "upstream_version": "31.0",
+            "variant": "release",
+            "version_name": "0.1.0-dev-kitsune.44143a6d"
+          }
         }
       ],
       "legacy_api29": []
@@ -550,7 +985,35 @@
           "root": true,
           "removed": true,
           "root_after_removal": true,
-          "error": null
+          "error": null,
+          "build": {
+            "app_version_code": 31012,
+            "application_id": "io.github.jordan231111.magisk",
+            "build_id": "4ab3d63e9e84d7ae69ff90068e9e03c31587f1277377513560daf1d3ece465d1",
+            "capabilities": [
+              "kitsune.boot-completed.v1",
+              "kitsune.build-info.v1",
+              "kitsune.early-mount.v2",
+              "kitsune.hide.v1",
+              "kitsune.module-root.v2",
+              "kitsune.su-consent.v1",
+              "kitsune.zygisk-provider.v1"
+            ],
+            "channel": "next-system-experimental",
+            "compat_version_code": 31000,
+            "product_name": "KitsuneMagisk Next",
+            "product_version": "0.1.0-dev",
+            "protocol_version": 1,
+            "release_tag": "kitsune-canary-44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "schema": 1,
+            "source_commit": "44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "source_digest": "cb57f3fc9e19097c39eac1bce329b9ea8a36db0bd8dd37376d8690b7c170bd6e",
+            "source_dirty": false,
+            "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+            "upstream_version": "31.0",
+            "variant": "release",
+            "version_name": "0.1.0-dev-kitsune.44143a6d"
+          }
         },
         {
           "core": "stable",
@@ -565,7 +1028,8 @@
           "root": true,
           "removed": true,
           "root_after_removal": true,
-          "error": null
+          "error": null,
+          "build": null
         }
       ],
       "legacy_api29": []
@@ -592,7 +1056,35 @@
           "root": true,
           "removed": true,
           "root_after_removal": true,
-          "error": null
+          "error": null,
+          "build": {
+            "app_version_code": 31012,
+            "application_id": "io.github.jordan231111.magisk",
+            "build_id": "4ab3d63e9e84d7ae69ff90068e9e03c31587f1277377513560daf1d3ece465d1",
+            "capabilities": [
+              "kitsune.boot-completed.v1",
+              "kitsune.build-info.v1",
+              "kitsune.early-mount.v2",
+              "kitsune.hide.v1",
+              "kitsune.module-root.v2",
+              "kitsune.su-consent.v1",
+              "kitsune.zygisk-provider.v1"
+            ],
+            "channel": "next-system-experimental",
+            "compat_version_code": 31000,
+            "product_name": "KitsuneMagisk Next",
+            "product_version": "0.1.0-dev",
+            "protocol_version": 1,
+            "release_tag": "kitsune-canary-44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "schema": 1,
+            "source_commit": "44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "source_digest": "cb57f3fc9e19097c39eac1bce329b9ea8a36db0bd8dd37376d8690b7c170bd6e",
+            "source_dirty": false,
+            "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+            "upstream_version": "31.0",
+            "variant": "release",
+            "version_name": "0.1.0-dev-kitsune.44143a6d"
+          }
         },
         {
           "core": "stable",
@@ -607,7 +1099,8 @@
           "root": true,
           "removed": true,
           "root_after_removal": true,
-          "error": null
+          "error": null,
+          "build": null
         }
       ],
       "legacy_api29": []
@@ -634,7 +1127,35 @@
           "root": true,
           "removed": true,
           "root_after_removal": true,
-          "error": null
+          "error": null,
+          "build": {
+            "app_version_code": 31012,
+            "application_id": "io.github.jordan231111.magisk",
+            "build_id": "4ab3d63e9e84d7ae69ff90068e9e03c31587f1277377513560daf1d3ece465d1",
+            "capabilities": [
+              "kitsune.boot-completed.v1",
+              "kitsune.build-info.v1",
+              "kitsune.early-mount.v2",
+              "kitsune.hide.v1",
+              "kitsune.module-root.v2",
+              "kitsune.su-consent.v1",
+              "kitsune.zygisk-provider.v1"
+            ],
+            "channel": "next-system-experimental",
+            "compat_version_code": 31000,
+            "product_name": "KitsuneMagisk Next",
+            "product_version": "0.1.0-dev",
+            "protocol_version": 1,
+            "release_tag": "kitsune-canary-44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "schema": 1,
+            "source_commit": "44143a6d2e70754931f36e21b00cc2069b0a8238",
+            "source_digest": "cb57f3fc9e19097c39eac1bce329b9ea8a36db0bd8dd37376d8690b7c170bd6e",
+            "source_dirty": false,
+            "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+            "upstream_version": "31.0",
+            "variant": "release",
+            "version_name": "0.1.0-dev-kitsune.44143a6d"
+          }
         }
       ],
       "legacy_api29": []

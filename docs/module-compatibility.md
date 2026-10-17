@@ -6,6 +6,7 @@ Representative widely used modules, not an exhaustive ecosystem ranking. AVD pro
 
 The production-signed candidate uses io.github.jordan231111.magisk, code 31012,
 source 44143a6d2. [The machine record](module-pr15.json) pins each upstream release and SHA-256.
+ViPER was retested on candidate31013 after the field-separator fix; its per-run identity is separate.
 No module ZIP is redistributed in this repository.
 
 | Module | Version | Observed result | Boundary |
@@ -21,7 +22,7 @@ No module ZIP is redistributed in this repository.
 | [RikkaApps/Riru](https://github.com/RikkaApps/Riru/releases/tag/v26.1.7) | v26.1.7 | Installed, but injection unqualified | Riru reports not loaded on both cores in prepared API35 and API29 comparisons. Lifecycle passes; do not claim working injection. |
 | [RikkaApps/Sui](https://github.com/RikkaApps/Sui/releases/tag/v13.5.1) | v13.5.1 | Sui server active; lifecycle passed | Server startup verified alone and with Vector/providers; not every downstream Sui client is qualified. |
 | [Magisk-Modules-Repo/busybox-ndk](https://github.com/Magisk-Modules-Repo/busybox-ndk/releases/tag/13614) | 13614 | BusyBox executable and lifecycle verified | Prepared standalone and combined installations report 1.36.1 and remove cleanly. No claim of exhaustive applet equivalence. |
-| [programminghoch10/ViPER4AndroidRepackaged](https://github.com/programminghoch10/ViPER4AndroidRepackaged/releases/tag/v87) | v87 | Install, cold boot and removal passed | Its newline-only IFS made the pre-init budget parser reject a 790-byte policy. The 31013 fix retains the limits. Official30.7 installs and removes it; physical DSP output remains unqualified. |
+| [programminghoch10/ViPER4AndroidRepackaged](https://github.com/programminghoch10/ViPER4AndroidRepackaged/releases/tag/v87) | v87 | Install, cold boot and removal passed | The 31013 IFS fix keeps the module enabled, publishes both audio-effect configurations and permits removal. The same ZIP passes official30.7. Physical audio/DSP output remains unqualified. |
 | [Magisk-Modules-Repo/magiskhidepropsconf](https://github.com/Magisk-Modules-Repo/MagiskHidePropsConf/releases/tag/v6.1.2) | v6.1.2 | Install, cold boot and removal passed | Function-specific hardware behavior is not implied by lifecycle checks. |
 | [VR-25/acc](https://github.com/VR-25/acc/releases/tag/v2023.10.16) | v2023.10.16 | Standard module install and removal passed | Initial harness omitted the normal module directory; corrected tests pass both cores. Charging control requires matching physical power-supply hardware. |
 | [JingMatrix/Vector](https://github.com/JingMatrix/Vector/releases/tag/v2.2) | v2.2 | Framework and manager active | Corrected action category and Compose UI checks pass on both cores. Real root consent also passes with built-in, ReZygisk and NeoZygisk combinations. |

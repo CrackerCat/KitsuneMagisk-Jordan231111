@@ -133,6 +133,9 @@ jobs:
       - name: Test zygote peer identity guards
         run: scripts/env.py python3 -m unittest discover -s tests -p test_zygote_identity.py -v
 
+      - name: Test package lookup during manager migration
+        run: scripts/env.py python3 -m unittest discover -s tests -p test_package_lookup.py -v
+
       - name: Verify next-system source baseline
         run: >-
           python tools/next_system_baseline.py
@@ -254,8 +257,8 @@ jobs:
         env:
           AVD_TEST_LOG: 1
           AVD_QUALIFICATION_DIR: out/device-qualification
-          AVD_STOCK_BOOT_COUNT: ${{ matrix.version == 28 && '4' || '0' }}
-          AVD_STOCK_FRAMEWORK_RESTART: ${{ matrix.version == 28 && '1' || '0' }}
+          AVD_STOCK_BOOT_COUNT: ${{ (matrix.version == 23 || matrix.version == 28) && '4' || '0' }}
+          AVD_STOCK_FRAMEWORK_RESTART: ${{ (matrix.version == 23 || matrix.version == 28) && '1' || '0' }}
           AVD_GPU_MODE: ${{ matrix.version == 28 && 'swiftshader' || 'swiftshader_indirect' }}
           AVD_BOOT_FIXTURES: ${{ matrix.version == 35 && '1' || '' }}
         run: scripts/avd.sh test ${{ matrix.version }} ${{ matrix.type }}

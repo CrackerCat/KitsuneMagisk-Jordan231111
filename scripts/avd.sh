@@ -9,7 +9,7 @@ case "$gpu_mode" in
   *) print_error "! Unsupported AVD graphics mode"; exit 1 ;;
 esac
 emu_args_base="-no-window -no-audio -no-boot-anim -gpu $gpu_mode -no-snapshot -cores $core_count"
-log_args="-show-kernel -logcat ''"
+log_args=(-show-kernel -logcat '*:V')
 emu_args=
 emu_pid=
 wait_pid=
@@ -101,6 +101,20 @@ test_error() {
   trap - EXIT
   set +e
   print_error "! An error occurred"
+  if [ -n "${AVD_TEST_LOG:-}" ] && [ -n "${ANDROID_SERIAL:-}" ]; then
+    python3 - "$ANDROID_SERIAL" "$test_dir/logcat-failure.log" <<'PY'
+from pathlib import Path
+import subprocess
+import sys
+
+try:
+    with Path(sys.argv[2]).open("w") as log:
+        subprocess.run(["adb", "-s", sys.argv[1], "logcat", "-d", "-b", "all", "-v", "threadtime"],
+                       stdout=log, stderr=subprocess.STDOUT, timeout=10)
+except (OSError, subprocess.TimeoutExpired):
+    pass
+PY
+  fi
   if [ -n "$wait_pid" ]; then
     kill "$wait_pid" >/dev/null 2>&1 || true
     wait "$wait_pid" 2>/dev/null || true
@@ -402,7 +416,7 @@ launch_emulator() {
   local image_args=$1
   if [ -n "${AVD_TEST_LOG:-}" ]; then
     rm -f "$kernel_log" "$logcat_log"
-    "$emu" "@$avd_name" $emu_args $log_args -logcat-output "$logcat_log" \
+    "$emu" "@$avd_name" $emu_args "${log_args[@]}" -logcat-output "$logcat_log" \
       $image_args >"$kernel_log" 2>&1 &
   else
     "$emu" "@$avd_name" $emu_args $image_args >/dev/null 2>&1 &
