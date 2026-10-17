@@ -331,6 +331,7 @@ jobs:
     env:
       CF_HOME: /home/runner/aosp_cf_phone
       AVD_INSTRUMENT_TIMEOUT: 240
+      AVD_QUALIFICATION_DIR: out/device-qualification
     strategy:
       fail-fast: false
       matrix:
@@ -359,6 +360,14 @@ jobs:
       - name: Run Cuttlefish test
         timeout-minutes: 30
         run: sudo -E -u $USER scripts/cuttlefish.sh test
+
+      - name: Retain Cuttlefish Direct Install evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: "device-${{ matrix.device }}"
+          path: out/device-qualification
+          if-no-files-found: warn
 
       - name: Upload logs on error
         if: ${{ failure() }}

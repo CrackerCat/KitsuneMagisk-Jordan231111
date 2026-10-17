@@ -11,6 +11,48 @@ ROOT = Path(__file__).resolve().parents[1]
 
 @unittest.skipUnless((Path(os.environ.get("ANDROID_HOME", "")) / "ndk/magisk/ONDK_VERSION").is_file(), "Requires ONDK")
 class ManagedBootUpdateTest(unittest.TestCase):
+    def test_init_rc_selection_requires_the_file_not_just_the_directory(self):
+        source = (ROOT / "native/src/init/rootdir.cpp").read_text()
+        start = source.index("    bool p;\n    if (access(NEW_INITRC_DIR")
+        end = source.index("\n    if (p) patch_fissiond", start)
+        program = r'''
+#include <cassert>
+#include <filesystem>
+#include <fstream>
+#include <string>
+#include <unistd.h>
+namespace fs = std::filesystem;
+fs::path root;
+std::string selected;
+int fixture_access(const char *path, int) {
+    return fs::exists(root / fs::path(path).relative_path()) ? 0 : -1;
+}
+bool patch_rc_scripts(const char *path, const char *, bool) { selected=path; return true; }
+#define access fixture_access
+#define NEW_INITRC_DIR "/system/etc/init/hw"
+#define INIT_RC "init.rc"
+void select_init() {
+    std::string tmp_dir="runtime";
+''' + source[start:end] + r'''
+}
+int main(int argc, char **argv) {
+    assert(argc==2); root=argv[1];
+    fs::create_directories(root);
+    std::ofstream(root/"init.rc") << "original init";
+    select_init(); assert(selected=="/");
+    fs::create_directories(root/"system/etc/init/hw");
+    select_init(); assert(selected=="/");
+    std::ofstream(root/"system/etc/init/hw/init.rc") << "modern init";
+    select_init(); assert(selected==NEW_INITRC_DIR);
+}
+'''
+        with tempfile.TemporaryDirectory(prefix="kitsune-init-path-") as temporary:
+            root = Path(temporary)
+            cpp, binary = root / "test.cpp", root / "test"
+            cpp.write_text(program)
+            subprocess.run([str(ROOT / "scripts/env.py"), "c++", "-std=c++20", str(cpp), "-o", str(binary)], check=True, capture_output=True)
+            subprocess.run([str(binary), str(root / "fs")], check=True, capture_output=True, timeout=10)
+
     def test_existing_redirected_and_unreadable_receipts_protect_runtime(self):
         source = (ROOT / "native/src/core/bootstages.rs").read_text()
         start = source.index("fn managed_runtime()")

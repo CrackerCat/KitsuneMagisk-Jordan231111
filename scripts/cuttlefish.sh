@@ -209,6 +209,11 @@ test_cf() {
   run_setup $variant
   am_instrument '.Environment#testDirectInstallCuttlefish' \
     "$MAGISK_TEST_PACKAGE/com.topjohnwu.magisk.test.AppTestRunner"
+  if [ -n "${AVD_QUALIFICATION_DIR:-}" ]; then
+    python3 tools/device_qualification.py capture --serial "$ANDROID_SERIAL" \
+      --apk "$MAGISK_OUT_DIR/app-$variant.apk" --phase setup \
+      --output "$AVD_QUALIFICATION_DIR/cuttlefish-$variant.json"
+  fi
 
   adb shell sync
   run_cvd_bin stop_cvd || true
@@ -216,6 +221,11 @@ test_cf() {
   timeout $boot_timeout bash -c "run_cvd_bin launch_cvd $cvd_args $magisk_args"
   adb wait-for-device
   run_tests
+  if [ -n "${AVD_QUALIFICATION_DIR:-}" ]; then
+    python3 tools/device_qualification.py capture --serial "$ANDROID_SERIAL" \
+      --apk "$MAGISK_OUT_DIR/app-$variant.apk" --phase accepted \
+      --output "$AVD_QUALIFICATION_DIR/cuttlefish-$variant.json"
+  fi
 }
 
 test_main() {
