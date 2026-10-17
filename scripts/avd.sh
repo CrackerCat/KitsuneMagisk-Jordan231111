@@ -5,7 +5,7 @@ set -e
 
 gpu_mode="${AVD_GPU_MODE:-swiftshader_indirect}"
 case "$gpu_mode" in
-  auto|software|swiftshader|swangle|swiftshader_indirect) ;;
+  auto|host|software|swiftshader|swangle|swiftshader_indirect) ;;
   *) print_error "! Unsupported AVD graphics mode"; exit 1 ;;
 esac
 emu_args_base="-no-window -no-audio -no-boot-anim -gpu $gpu_mode -no-snapshot -cores $core_count"
