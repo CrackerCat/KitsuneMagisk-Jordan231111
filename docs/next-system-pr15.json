@@ -137,6 +137,8 @@
     "docs/build-info.md",
     "docs/build.md",
     "docs/device-pr15.json",
+    "docs/device-pr15/bluestacks-debug.json",
+    "docs/device-pr15/bluestacks-lifecycle.json",
     "docs/device-qualification.md",
     "docs/early-mount-pr8.json",
     "docs/early-mount-pr8.md",
@@ -404,6 +406,8 @@
     "updates/trust.json"
   ],
   "identity": {
-    "version_code": 31009
-  }
+    "version_code": 31010,
+    "application_id": "io.github.jordan231111.magisk"
+  },
+  "update_trust_sha256": "576693b150124ead7487391711da1c43bef7281fbda8750a986ad1b5aa9024d5"
 }

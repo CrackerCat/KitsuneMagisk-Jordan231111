@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "source_commit": "0a15ecd2cbec0182ef410eb8e4ea4937575f7c0d",
+  "host": "BlueStacks Air 5.21.790.7505 on macOS",
+  "instance": "disposable Tiramisu64_1",
+  "route": "RootMac gate with independently staged current host payload",
+  "full_suite": "passed",
+  "junit_tests": 116,
+  "su_stress": {
+    "batches": 8,
+    "parallel_requests": 6,
+    "repeated_after_third_boot": true
+  },
+  "vendor_root_enabled": false,
+  "selinux": {
+    "enforcing": false,
+    "init_domain": "u:r:kernel:s0",
+    "zygote_domain": "u:r:kernel:s0",
+    "classification": "permissive with unlabeled process domains"
+  },
+  "unroot": {
+    "instance": "Tiramisu64_1",
+    "cold_boot_without_kitsune": "passed",
+    "root_gate_cleanup": "BSR_UNROOT_OK",
+    "adb_uid": 2000,
+    "magiskd_absent": true
+  },
+  "cleanup": {
+    "removed_instance": "Tiramisu64_1",
+    "remaining_instances": [
+      "Tiramisu64"
+    ],
+    "primary_root_access": "0",
+    "factory_restore": {
+      "factory_initrd_sha256": "393f386ebc880f21a3c7812d0c851508afa697c016e6537894970e123787329e",
+      "byte_exact_restore": true
+    }
+  },
+  "bootstrap": {
+    "version": "5.21.790.7505",
+    "instance": "Tiramisu64_1",
+    "before_sha256": "7aad507370b19f07f367e269f010bc854914f310bb89dce7513d0897c449315e",
+    "after_sha256": "8a9e21bab2b3472a6d0a6e704f9f8d9153bf2523e1b7e4881614ca560f604fb3",
+    "apk_sha256": "3609bc53e18870a66f204cfaaa14a6f829fe3c552c576bf4d899e4aedebb65b1",
+    "bootstrap_sha256": "a967a3fa66251bbe47096e93c77c4a4d217fa3827da912ac6721338dc7c9d15d",
+    "build": {
+      "app_version_code": 31009,
+      "application_id": "io.github.huskydg.magisk.next",
+      "build_id": "8e44d7cc3357d877f02a2744cb91b1fa8eba40a63fd97aab186062471135513c",
+      "capabilities": [
+        "kitsune.boot-completed.v1",
+        "kitsune.build-info.v1",
+        "kitsune.early-mount.v2",
+        "kitsune.hide.v1",
+        "kitsune.module-root.v2",
+        "kitsune.su-consent.v1",
+        "kitsune.system-mode.transaction.v1",
+        "kitsune.zygisk-provider.v1"
+      ],
+      "channel": "next-system-experimental",
+      "compat_version_code": 31000,
+      "product_name": "KitsuneMagisk Next",
+      "product_version": "0.1.0-dev",
+      "protocol_version": 1,
+      "release_tag": "kitsune-canary-0a15ecd2cbec0182ef410eb8e4ea4937575f7c0d",
+      "schema": 1,
+      "source_commit": "0a15ecd2cbec0182ef410eb8e4ea4937575f7c0d",
+      "source_digest": "13a99ebb392d2caef7405d6c25366221df46b0d0b8480ec58cedb7493b972456",
+      "source_dirty": false,
+      "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+      "upstream_version": "31.0",
+      "variant": "debug",
+      "version_name": "0.1.0-dev-kitsune.0a15ecd2"
+    }
+  },
+  "limits": [
+    "No magiskinit pre-init mounts in this host bootstrap",
+    "Direct-System refused on the read-only system layout",
+    "Host image and manager must be updated together through the external bootstrap workflow",
+    "No physical Samsung claim: the guest fingerprint is an emulator property"
+  ]
+}

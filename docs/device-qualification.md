@@ -48,6 +48,15 @@ Its legacy root and shared host-initramfs hook are bootstrap evidence, not a cla
 Kitsune Direct-System transaction supports BlueStacks. A read-only system remains a refusal even
 after bootstrap root succeeds. Live setup is temporary and must be identified separately.
 
+The experimental host-initramfs route stages an offline copy with
+`tools/system_mode/host_image.py`. It replaces only the owned payload and bootstrap script,
+checks the APK identity and ARM binaries, and preserves unrelated archive entries. Its controller
+must select the disposable instance, flush guest writes before closing it, stop players before
+publishing the image, verify the result and retain a verified factory restore. Root/unroot use the
+existing per-instance RootMac gate. The supplied tool is external and is not redistributed here.
+This route starts at post-fs-data; it does not provide magiskinit pre-init mounting or qualify the
+ordinary in-app Direct Install, inactive-slot, OTA or recovery routes on BlueStacks.
+
 ## Compatibility changes and remaining boundaries
 
 - AVB1 ECDSA now uses Android's DER encoding, following
@@ -67,6 +76,16 @@ after bootstrap root succeeds. Live setup is temporary and must be identified se
 - System Mode snapshots preserve module whiteouts (character device `0:0`) and module symlinks.
   The same rules cover restore and rollback cleanup. FIFOs, sockets, other device nodes and
   whiteouts outside module content remain unsupported; they are never opened to calculate a hash.
+- SU consent launches allow up to fifteen seconds per framework-start attempt, within the existing
+  seventy-second request deadline. A launch never grants consent; stalled children are killed and
+  reaped, and the authenticated response is still required. Cuttlefish exposed the earlier three-second
+  cutoff killing ART before ActivityManager received the request.
+- Normal zygote SELinux-domain authentication remains authoritative. On a permissive image whose
+  init and peer both remain in the kernel domain, the fallback requires UID 0, four root UID fields,
+  a system `app_process` image and verified init-owned zygote ancestry. Pre-specialization fork and
+  USAP children must run the same image as their root zygote parent. Non-root peers, wrong images,
+  unrelated ancestry, enforcing mode and unreadable/malformed state fail. BlueStacks exercises this
+  unusual **permissive** case; it does not prove SELinux-disabled or Waydroid coverage.
 - Managed Direct-System remains an explicit, authorized debug capability. Recovery ZIP
   `SYSTEMMODE` and automatic System Mode `addon.d` replay are not supported: recovery lacks the
   live target/host recovery authorization, and an OTA changes the bound image. Use normal image

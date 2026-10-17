@@ -1,0 +1,60 @@
+{
+  "schema": "kitsune.device-qualification.v1",
+  "artifact": {
+    "sha256": "3609bc53e18870a66f204cfaaa14a6f829fe3c552c576bf4d899e4aedebb65b1",
+    "build": {
+      "app_version_code": 31009,
+      "application_id": "io.github.huskydg.magisk.next",
+      "build_id": "8e44d7cc3357d877f02a2744cb91b1fa8eba40a63fd97aab186062471135513c",
+      "capabilities": [
+        "kitsune.boot-completed.v1",
+        "kitsune.build-info.v1",
+        "kitsune.early-mount.v2",
+        "kitsune.hide.v1",
+        "kitsune.module-root.v2",
+        "kitsune.su-consent.v1",
+        "kitsune.system-mode.transaction.v1",
+        "kitsune.zygisk-provider.v1"
+      ],
+      "channel": "next-system-experimental",
+      "compat_version_code": 31000,
+      "product_name": "KitsuneMagisk Next",
+      "product_version": "0.1.0-dev",
+      "protocol_version": 1,
+      "release_tag": "kitsune-canary-0a15ecd2cbec0182ef410eb8e4ea4937575f7c0d",
+      "schema": 1,
+      "source_commit": "0a15ecd2cbec0182ef410eb8e4ea4937575f7c0d",
+      "source_digest": "13a99ebb392d2caef7405d6c25366221df46b0d0b8480ec58cedb7493b972456",
+      "source_dirty": false,
+      "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+      "upstream_version": "31.0",
+      "variant": "debug",
+      "version_name": "0.1.0-dev-kitsune.0a15ecd2"
+    }
+  },
+  "guest": {
+    "fingerprint": "samsung/p3sxxx/p3s:13/TQ2B.230505.005.A1/jenkins08312143:user/release-keys",
+    "api": 33,
+    "abi": "arm64-v8a",
+    "page_size": 4096,
+    "kernel": "5.15.137-00001-gfdae1bb0ce90",
+    "selinux": "Permissive"
+  },
+  "boots": [
+    {
+      "id": "fee9330c-cf8d-467b-aae7-9ffec33b4395",
+      "phase": "setup",
+      "at": "2026-10-17T06:21:07.441435+00:00"
+    },
+    {
+      "id": "f8e2d8d3-5498-43e6-8edd-06cd8ee7ffdc",
+      "phase": "accepted",
+      "at": "2026-10-17T06:24:05.814134+00:00"
+    },
+    {
+      "id": "abc891f1-6feb-48bc-9d43-478060534b8d",
+      "phase": "accepted",
+      "at": "2026-10-17T06:24:25.719623+00:00"
+    }
+  ]
+}

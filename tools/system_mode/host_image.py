@@ -120,7 +120,7 @@ def payload(apk: Path) -> tuple[dict[str, bytes], dict]:
                 or info["protocol_version"] != 1
                 or not isinstance(info.get("source_commit"), str)
                 or not re.fullmatch(r"[0-9a-f]{40}", info.get("source_commit", ""))
-                or info.get("application_id") != "io.github.huskydg.magisk.next"):
+                or info.get("application_id") != "io.github.jordan231111.magisk"):
             raise ValueError("a clean Kitsune Next protocol-v1 artifact is required")
         files = {name: archive.read(source) for source, name in mapping.items()}
         if "lib/armeabi-v7a/libmagisk.so" in archive.namelist():

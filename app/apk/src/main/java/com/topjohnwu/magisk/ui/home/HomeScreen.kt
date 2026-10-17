@@ -309,18 +309,6 @@ fun HomeScreen(
                 )
             }
 
-            item("support_title") {
-                Text(
-                    text = stringResource(CoreR.string.home_support_title),
-                    style = MaterialTheme.typography.labelLarge,
-                    fontWeight = FontWeight.SemiBold,
-                    color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.padding(start = 16.dp, top = 8.dp, bottom = 4.dp)
-                )
-            }
-
-            item("support") { SupportCard(onLinkClicked = viewModel::onLinkPressed) }
-
             item("follow_title") {
                 Text(
                     text = stringResource(CoreR.string.kitsune_credits),
@@ -748,93 +736,12 @@ private fun StatusCard(
     }
 }
 
-@Composable
-private fun SupportCard(
-    onLinkClicked: (String) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Card(
-        modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(20.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
-    ) {
-        Column(modifier = Modifier.padding(18.dp)) {
-            Text(
-                text = stringResource(CoreR.string.kitsune_upstream_support),
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-            Spacer(Modifier.height(16.dp))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterHorizontally),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                FilledTonalButton(
-                    onClick = { onLinkClicked(Const.Url.PATREON_URL) },
-                    contentPadding = ButtonDefaults.ButtonWithIconContentPadding
-                ) {
-                    Icon(
-                        painter = painterResource(CoreR.drawable.ic_patreon),
-                        contentDescription = null,
-                        modifier = Modifier.size(ButtonDefaults.IconSize),
-                    )
-                    Spacer(Modifier.width(ButtonDefaults.IconSpacing))
-                    Text(
-                        text = stringResource(CoreR.string.patreon),
-                        style = MaterialTheme.typography.labelLarge
-                    )
-                }
-                FilledTonalButton(
-                    onClick = { onLinkClicked("https://paypal.me/magiskdonate") },
-                    contentPadding = ButtonDefaults.ButtonWithIconContentPadding
-                ) {
-                    Icon(
-                        painter = painterResource(CoreR.drawable.ic_paypal),
-                        contentDescription = null,
-                        modifier = Modifier.size(ButtonDefaults.IconSize),
-                    )
-                    Spacer(Modifier.width(ButtonDefaults.IconSpacing))
-                    Text(
-                        text = stringResource(CoreR.string.paypal),
-                        style = MaterialTheme.typography.labelLarge
-                    )
-                }
-            }
-        }
-    }
-}
-
 private data class LinkInfo(val label: Int, val icon: Int, val url: String)
 private data class DeveloperInfo(val name: String, val links: List<LinkInfo>)
 
 private val developers = listOf(
-    DeveloperInfo("KitsuneMagisk", listOf(
-        LinkInfo(CoreR.string.github, CoreR.drawable.ic_github, Const.Url.SOURCE_CODE_URL),
-    )),
-    DeveloperInfo("huskydg", listOf(
-        LinkInfo(CoreR.string.github, CoreR.drawable.ic_github, "https://github.com/HuskyDG"),
-    )),
-    DeveloperInfo("topjohnwu", listOf(
-        LinkInfo(CoreR.string.twitter, CoreR.drawable.ic_twitter, "https://x.com/topjohnwu"),
-        LinkInfo(CoreR.string.github, CoreR.drawable.ic_github, "https://github.com/topjohnwu/Magisk"),
-    )),
-    DeveloperInfo("vvb2060", listOf(
-        LinkInfo(CoreR.string.twitter, CoreR.drawable.ic_twitter, "https://x.com/vvb2060"),
-        LinkInfo(CoreR.string.github, CoreR.drawable.ic_github, "https://github.com/vvb2060"),
-    )),
-    DeveloperInfo("yujincheng08", listOf(
-        LinkInfo(CoreR.string.sponsor, CoreR.drawable.ic_favorite, "https://github.com/sponsors/yujincheng08"),
-        LinkInfo(CoreR.string.twitter, CoreR.drawable.ic_twitter, "https://x.com/shanasaimoe"),
-        LinkInfo(CoreR.string.github, CoreR.drawable.ic_github, "https://github.com/yujincheng08"),
-    )),
-    DeveloperInfo("aviraxp", listOf(
-        LinkInfo(CoreR.string.sponsor, CoreR.drawable.ic_favorite, "https://ko-fi.com/A46115EM"),
-        LinkInfo(CoreR.string.github, CoreR.drawable.ic_github, "https://github.com/aviraxp"),
-    )),
-    DeveloperInfo("canyie", listOf(
-        LinkInfo(CoreR.string.twitter, CoreR.drawable.ic_twitter, "https://x.com/canyie2977"),
-        LinkInfo(CoreR.string.github, CoreR.drawable.ic_github, "https://github.com/canyie"),
+    DeveloperInfo("Jordan231111", listOf(
+        LinkInfo(CoreR.string.github, CoreR.drawable.ic_github, "https://github.com/Jordan231111"),
     )),
 )
 

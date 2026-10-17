@@ -40,7 +40,7 @@ class HostImageTest(unittest.TestCase):
                 with zipfile.ZipFile(apk, "w") as archive:
                     archive.writestr("assets/build-info.json", json.dumps({
                         "source_dirty": False, "protocol_version": 1,
-                        "source_commit": "a" * 40, "application_id": "io.github.huskydg.magisk.next",
+                        "source_commit": "a" * 40, "application_id": "io.github.jordan231111.magisk",
                     }))
                     for name in ("busybox", "magisk", "magiskboot", "magiskinit", "magiskpolicy"):
                         archive.writestr(f"lib/arm64-v8a/lib{name}.so", elf(2, 183))

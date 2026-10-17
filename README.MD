@@ -2,17 +2,20 @@
 
 # KitsuneMagisk Next
 
+Maintained by [Jordan231111](https://github.com/Jordan231111).
+
 This branch is the experimental, maintainable-base rebuild of KitsuneMagisk. It is based directly
 on official Magisk v31.0 prerelease and carries the experimental Direct-System implementation
 and qualification tools. PR7A passed its prepared-MuMu and ordinary emulator gates. PR8's
 [branch decision](docs/pr8-branch-decision.md) selects this development foundation; historical
 feature completion and production qualification remain gated by the [roadmap](DEVELOPMENT_ROADMAP.md).
 
-The manager installs as `io.github.huskydg.magisk.next`, reports a
+The manager installs as `io.github.jordan231111.magisk`, reports a
 `0.1.0-dev-kitsune.<source>` version, and uses the `next-system-experimental` channel identity. It
 uses a separate package from official Magisk and the prior Kitsune manager. Automatic update checks remain off during
-qualification. The [authenticated experimental beta](docs/update-service.md) is published;
-production promotion remains gated.
+qualification. The previous namespace has an [authenticated experimental beta](docs/update-service.md);
+the new namespace uses a separate feed and requires a [one-time migration](docs/build-info.md#pr15-namespace-migration).
+Production promotion remains gated.
 
 ## Important status
 
