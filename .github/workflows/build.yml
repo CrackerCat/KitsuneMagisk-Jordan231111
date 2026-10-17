@@ -13,6 +13,7 @@ on:
       - "tools/port_ledger.py"
       - "tools/early_mount_fixtures.py"
       - "tools/boot_qualification.py"
+      - "tools/property_qualification.py"
       - "tools/device_qualification.py"
       - "tests/test_device_qualification.py"
       - "tests/test_live_setup.py"
@@ -281,6 +282,7 @@ jobs:
           path: |
             out/device-qualification
             boot-fixtures-*.json
+            property-fixtures-*.json
             stock-controls
           if-no-files-found: warn
 
@@ -348,6 +350,7 @@ jobs:
           path: |
             out/device-qualification
             boot-fixtures-*.json
+            property-fixtures-*.json
             stock-controls
           if-no-files-found: warn
 

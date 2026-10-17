@@ -2851,6 +2851,10 @@ The user selected v31.0 plus [verified upstream fixes](docs/device-pr15/upstream
 with interactive SU prompts and Kitsune policy preserved. Candidate `31015` adds the verified
 SU group, compression, Samsung footer, AVB2, ARM32 zImage and filename fixes; its final acceptance
 and commercial-emulator restoration remain in progress.
+The property-override comparison also reproduced an inherited crash in official Magisk 30.7.
+Candidate `31016` adds the verified fix and isolated override-tree regression checks.
+Six unavailable device/ROM targets are explicitly `unqualified-target` with PR16 ownership;
+the release audit still rejects them, and their implementations remain available.
 
 - Complete exact MuMu and AVD lanes and either a BlueStacks adapter or explicit unsupported result.
   Preserve earlier LDPlayer observations as historical evidence; do not imply a current rerun.
@@ -2985,10 +2989,12 @@ No release should be called stable until all applicable boxes are checked.
   compatibility asset (including behavior removed before that endpoint), and every material
   ordinary-Magisk use case with stable ID, exact
   commits/paths/tags, owner, decision, evidence, user impact, and migration fields.
-- [ ] No row is unowned, vaguely triaged, deferred past PR15, or silently lost because official code was assumed equivalent.
+- [ ] No implementation row is unowned, vaguely triaged, deferred past PR15, or silently lost because
+  official code was assumed equivalent. Unavailable device/ROM qualification has a named PR16
+  target, evidence and release blocker; it cannot be recorded as a pass or retirement.
 - [ ] Every PR8 `deferred-to-PR#` row has transitioned to `inherited-and-tested`,
   `ported-and-tested-in-PR#`, or `retired-with-evidence`; the ledger schema/checker rejects every
-  other final state.
+  other production state, including every explicitly unqualified target.
 - [ ] Every retained behavior is tested on the selected implementation; every retirement records user impact, migration guidance, and evidence.
 - [ ] PR16 leaves no required follow-up PR for a faithful production Kitsune release.
 

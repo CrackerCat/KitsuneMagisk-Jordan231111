@@ -72,10 +72,18 @@ ordinary in-app Direct Install, inactive-slot, OTA or recovery routes on BlueSta
 ## Compatibility changes and remaining boundaries
 
 - PR15 retains the v31.0 baseline plus [verified fixes](device-pr15/upstream-fixes.json), as selected
-  by the user. It preserves interactive SU consent and Kitsune Hide/SuList. Candidate `31015`
+  by the user. It preserves interactive SU consent and Kitsune Hide/SuList. Candidate `31016`
   corrects primary-group precedence, compressed-image error handling, Samsung trailer preservation,
   AVB2 descriptor preservation, ARM32 payload detection/relocation and module filename controls.
   Unreleased upstream feature and UI rewrites are outside this qualification candidate.
+- Updating an existing `ro.appcompat_override.*` property now uses the existing recreation path,
+  which translates its name into the override tree. The inherited direct update dereferenced a
+  missing prefixed entry; both candidate `31015` and official Magisk 30.7 reproduced the crash.
+  [Paired controls](device-pr15/property-overrides.json) and `tools/property_qualification.py`
+  check short/long/empty transitions and ordinary updates with independent platform readers.
+  The fixture uses copied property areas in a private mount namespace and verifies the original
+  namespace afterward. Normal property notifications retain the v31 behavior documented in the
+  [serial/waiter comparison](device-pr15/resetprop-comparison.json).
 - The maintained manager now uses `io.github.jordan231111.magisk`; the home page retains its
   existing layout and contributors, with Jordan231111 as the fork owner's name and GitHub link.
   [Namespace migration](build-info.md#pr15-namespace-migration) requires an explicit installation
@@ -140,6 +148,14 @@ ordinary in-app Direct Install, inactive-slot, OTA or recovery routes on BlueSta
   claims require actual matching devices. No available emulator result clears these release gates.
   Retain the implementation and existing historical line; do not remove useful compatibility
   code merely because hardware is unavailable.
+
+The six unavailable target rows are explicit PR16 release blockers: GrapheneOS (`ZYG-003-device`),
+legacy Sony (`BOOT-006`), physical A/B OTA (`ORD-003`), recovery ZIP/stock restoration (`ORD-004`),
+and SELinux-disabled/container Hide and SU lifecycles (`HID-014-device`, `SU-004-device`).
+Their `unqualified-target` ledger state requires a named target, reason and evidence, preserves
+the implementation, and always fails the production release audit. It is separate from an
+implementation deferral, which still cannot be moved past PR15. This keeps the requested
+available-lab work and the missing device/ROM evidence explicit.
 
 ## Retained CI investigation
 

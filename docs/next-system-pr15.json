@@ -168,6 +168,7 @@
     "docs/device-pr15/pr15-36-1-4k-boot-fixtures-release.json",
     "docs/device-pr15/pr15-36-1-4k-debug.json",
     "docs/device-pr15/pr15-36-1-4k-release.json",
+    "docs/device-pr15/property-overrides.json",
     "docs/device-pr15/resetprop-comparison.json",
     "docs/device-pr15/shamiko-signing-identity.json",
     "docs/device-pr15/upstream-fixes.json",
@@ -329,6 +330,7 @@
     "native/src/core/module_store.rs",
     "native/src/core/mount.rs",
     "native/src/core/package.rs",
+    "native/src/core/resetprop/cli.rs",
     "native/src/core/resetprop/mod.rs",
     "native/src/core/scripting.cpp",
     "native/src/core/selinux.rs",
@@ -419,6 +421,7 @@
     "tools/module-template/module.prop",
     "tools/next_system_baseline.py",
     "tools/port_ledger.py",
+    "tools/property_qualification.py",
     "tools/rustup-wrapper/src/main.rs",
     "tools/system_mode/__init__.py",
     "tools/system_mode/adapters.py",
@@ -451,7 +454,7 @@
     "updates/trust.json"
   ],
   "identity": {
-    "version_code": 31015,
+    "version_code": 31016,
     "application_id": "io.github.jordan231111.magisk"
   },
   "update_trust_sha256": "576693b150124ead7487391711da1c43bef7281fbda8750a986ad1b5aa9024d5"

@@ -489,6 +489,12 @@ test_emu() {
   stop_emulator
   launch_emulator "-ramdisk $image -feature -SystemAsRoot"
   run_tests
+  if [ "${AVD_BOOT_FIXTURES:-0}" = 1 ]; then
+    python3 tools/property_qualification.py --serial "$ANDROID_SERIAL" \
+      --apk "$MAGISK_OUT_DIR/app-$variant.apk" \
+      --output "$test_dir/property-fixtures-$variant.json"
+    assert_no_native_crashes
+  fi
   if [ -n "${AVD_QUALIFICATION_DIR:-}" ]; then
     python3 tools/device_qualification.py capture --serial "$ANDROID_SERIAL" \
       --apk "$MAGISK_OUT_DIR/app-$variant.apk" --phase accepted \
