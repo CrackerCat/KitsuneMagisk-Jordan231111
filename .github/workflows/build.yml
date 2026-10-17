@@ -129,6 +129,9 @@ jobs:
       - name: Test managed boot update protection
         run: scripts/env.py python3 -m unittest discover -s tests -p test_boot_update.py -v
 
+      - name: Test zygote peer identity guards
+        run: scripts/env.py python3 -m unittest discover -s tests -p test_zygote_identity.py -v
+
       - name: Verify next-system source baseline
         run: >-
           python tools/next_system_baseline.py

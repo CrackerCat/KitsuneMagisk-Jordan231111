@@ -11,6 +11,8 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class ZygoteIdentityTest(unittest.TestCase):
+    @unittest.skipUnless((Path(os.environ.get("ANDROID_HOME", "")) / "ndk/magisk/ONDK_VERSION").is_file(),
+                         "Requires configured ONDK; also runs in the artifact build job")
     def test_unlabeled_peers_require_root_and_verified_ancestry(self):
         permissive = function('native/src/core/selinux.rs', 'pub(crate) fn unlabeled_permissive()')
         permissive = permissive.replace('unlabeled_permissive()', 'unlabeled_permissive(root: &std::path::Path)')
@@ -110,7 +112,8 @@ fn main() {
             path = Path(directory)
             source = path / 'test.rs'
             source.write_text(prefix + disabled + permissive + peer + identity + main)
-            subprocess.run([str(ROOT / 'scripts/env.py'), 'rustc', '--edition=2024',
-                            str(source), '-o', str(path / 'test')], check=True, capture_output=True)
+            compiled = subprocess.run([str(ROOT / 'scripts/env.py'), 'rustc', '--edition=2024',
+                                       str(source), '-o', str(path / 'test')], capture_output=True, text=True)
+            self.assertEqual(0, compiled.returncode, compiled.stdout + compiled.stderr)
             subprocess.run([str(path / 'test')], check=True, timeout=10,
                            env=dict(os.environ, KITSUNE_ZYGOTE_TEST_ROOT=str(path / 'fs')))
