@@ -25,6 +25,7 @@ import org.apache.commons.compress.archivers.zip.ZipFile
 import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
+import org.junit.Assume.assumeTrue
 import org.junit.BeforeClass
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -440,6 +441,16 @@ class Environment : BaseTest {
     fun recoverSystemMode() {
         assertTrue("System Mode recovery failed", runBlocking {
             MagiskInstaller.SystemModeRecovery(TimberLog, TimberLog).exec()
+        })
+    }
+
+    @Test
+    fun testDirectInstallCuttlefish() {
+        // Only the disposable Cuttlefish lane has a recoverable boot partition.
+        // An SDK ramdisk override cannot exercise ordinary Direct Install.
+        assumeTrue(Build.HARDWARE.contains("cutf") || Build.HARDWARE.contains("vsoc"))
+        assertTrue("Ordinary Direct Install failed", runBlocking {
+            MagiskInstaller.Direct(TimberLog, TimberLog).exec()
         })
     }
 

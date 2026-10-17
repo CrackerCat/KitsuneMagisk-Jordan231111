@@ -207,6 +207,8 @@ test_cf() {
   timeout $boot_timeout bash -c "run_cvd_bin launch_cvd $cvd_args $magisk_args -resume=false"
   adb wait-for-device
   run_setup $variant
+  am_instrument '.Environment#testDirectInstallCuttlefish' \
+    "$MAGISK_TEST_PACKAGE/com.topjohnwu.magisk.test.AppTestRunner"
 
   adb shell sync
   run_cvd_bin stop_cvd || true
