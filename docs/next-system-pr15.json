@@ -345,6 +345,7 @@
     "tests/system_mode/test_mumu_macos_identity.py",
     "tests/system_mode/test_qualification.py",
     "tests/system_mode/test_transaction.py",
+    "tests/system_mode/whiteouts.sh",
     "tests/test_boot_update.py",
     "tests/test_build_info.py",
     "tests/test_device_qualification.py",
@@ -402,6 +403,6 @@
     "updates/trust.json"
   ],
   "identity": {
-    "version_code": 31006
+    "version_code": 31007
   }
 }

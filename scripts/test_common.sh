@@ -203,6 +203,7 @@ run_tests() {
   am_instrument '.UpdateServiceTest' $app
   am_instrument '.MagiskAppTest,.AdditionalTest,.TerminalTest,.FlashIntentTest,.ManagerContractTest,.BuildInfoTest,.ZygiskProviderTest,.HidePolicyTest,.VerifiedUpdatesTest' $app
   am_instrument '.RootPathTest' $self
+  run_transaction_fixtures
 
   # Test app hiding
   am_instrument '.AppMigrationTest#testAppHide' $self
@@ -218,6 +219,18 @@ run_tests() {
 
   run_root_stress
   assert_no_native_crashes
+}
+
+run_transaction_fixtures() {
+  local remote status=0
+  remote=$(adb shell mktemp -d /data/local/tmp/kitsune-transaction.XXXXXX | tr -d '\r') || return 1
+  case "$remote" in /data/local/tmp/kitsune-transaction.*) ;; *) return 1 ;; esac
+  adb push scripts/system_mode_transaction.sh tests/system_mode/whiteouts.sh "$remote/" || status=$?
+  if [ "$status" = 0 ]; then
+    adb shell "PATH=\$PATH:/sbin:/debug_ramdisk su -c 'ASH_STANDALONE=1 /data/adb/magisk/busybox sh $remote/whiteouts.sh $remote/system_mode_transaction.sh /data/adb/magisk/busybox'" || status=$?
+  fi
+  adb shell rm -rf "$remote" || return 1
+  return "$status"
 }
 
 assert_no_native_crashes() {
