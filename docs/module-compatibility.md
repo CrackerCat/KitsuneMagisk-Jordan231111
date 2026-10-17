@@ -31,6 +31,11 @@ No module ZIP is redistributed in this repository.
 Kitsune’s own Hide and Zygisk Assistant both passed the selected-app mount-visibility probe.
 Shamiko did not. With Zygisk Next, the provider did not list Shamiko among loaded modules,
 and the same marker remained visible. Installing successfully is not evidence of working hiding.
+The [signing-identity controls](device-pr15/shamiko-signing-identity.json) now explain the
+rejection: re-signing official Magisk's embedded stub reproduces it with unchanged native code
+and version metadata. A manager and stub signed with the same test key retain working manager
+root but still fail Shamiko's check. Supporting this fork requires acceptance of its signing
+identity by Shamiko; changing Kitsune's authorization or borrowing an official stub is not a fix.
 
 Vector’s manager now uses org.matrix.vector.manager.LAUNCH_MANAGER and Compose UI.
 The initial legacy launch/resource-ID observer was corrected; saved UI state and fresh

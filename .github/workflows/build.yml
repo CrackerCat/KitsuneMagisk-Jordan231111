@@ -252,13 +252,20 @@ jobs:
       - name: Enable KVM group perms
         run: .github/kvm.sh
 
+      - name: Download SDK image
+        timeout-minutes: 30
+        run: scripts/avd.sh dl ${{ matrix.version }} ${{ matrix.type }}
+
       - name: Run AVD test
         timeout-minutes: 30
         env:
+          AVD_TEST_SKIP_DOWNLOAD: 1
           AVD_TEST_LOG: 1
           AVD_QUALIFICATION_DIR: out/device-qualification
           AVD_STOCK_BOOT_COUNT: ${{ (matrix.version == 23 || matrix.version == 28 || matrix.version == 29) && '4' || '0' }}
-          AVD_STOCK_FRAMEWORK_RESTART: ${{ (matrix.version == 23 || matrix.version == 28 || matrix.version == 29) && '1' || '0' }}
+          # API 23's stock framework cannot complete a warm restart on this
+          # emulator. Keep its four cold-boot controls and native crash gate.
+          AVD_STOCK_FRAMEWORK_RESTART: ${{ (matrix.version == 28 || matrix.version == 29) && '1' || '0' }}
           AVD_GPU_MODE: ${{ (matrix.version == 23 || matrix.version == 28 || matrix.version == 29) && 'swiftshader' || 'swiftshader_indirect' }}
           AVD_BOOT_FIXTURES: ${{ matrix.version == 35 && '1' || '' }}
         run: scripts/avd.sh test ${{ matrix.version }} ${{ matrix.type }}
@@ -308,14 +315,21 @@ jobs:
       - name: Enable KVM group perms
         run: .github/kvm.sh
 
+      - name: Download SDK image
+        timeout-minutes: 30
+        env:
+          FORCE_32_BIT: 1
+        run: scripts/avd.sh dl ${{ matrix.version }}
+
       - name: Run AVD test
         timeout-minutes: 30
         env:
           FORCE_32_BIT: 1
+          AVD_TEST_SKIP_DOWNLOAD: 1
           AVD_TEST_LOG: 1
           AVD_QUALIFICATION_DIR: out/device-qualification
           AVD_STOCK_BOOT_COUNT: ${{ (matrix.version == 23 || matrix.version == 28 || matrix.version == 29) && '4' || '0' }}
-          AVD_STOCK_FRAMEWORK_RESTART: ${{ (matrix.version == 23 || matrix.version == 28 || matrix.version == 29) && '1' || '0' }}
+          AVD_STOCK_FRAMEWORK_RESTART: ${{ (matrix.version == 28 || matrix.version == 29) && '1' || '0' }}
           AVD_GPU_MODE: ${{ (matrix.version == 23 || matrix.version == 28 || matrix.version == 29) && 'swiftshader' || 'swiftshader_indirect' }}
           AVD_BOOT_FIXTURES: ${{ matrix.version == 29 && '1' || '' }}
         run: scripts/avd.sh test ${{ matrix.version }}

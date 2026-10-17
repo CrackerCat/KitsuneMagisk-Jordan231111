@@ -300,7 +300,7 @@ validate_emu_port() {
 wait_emu() {
   start_boot_waiter
   local started now status
-  started=$(date +%s)
+  started=$(python3 -c 'import time; print(int(time.monotonic()))')
 
   while kill -0 "$wait_pid" >/dev/null 2>&1; do
     if ! kill -0 "$emu_pid" >/dev/null 2>&1; then
@@ -309,7 +309,7 @@ wait_emu() {
       wait_pid=
       return 1
     fi
-    now=$(date +%s)
+    now=$(python3 -c 'import time; print(int(time.monotonic()))')
     if [ $((now - started)) -ge "$boot_timeout" ]; then
       kill "$wait_pid" >/dev/null 2>&1 || true
       wait "$wait_pid" 2>/dev/null || true

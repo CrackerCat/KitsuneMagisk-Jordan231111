@@ -149,3 +149,15 @@ framework-restart controls now include that image; the crash has not been exempt
 API 36.1 run passed hidden-manager tests, then the restored manager's final test process crashed;
 that attempt remains failed. Corrected emulator log filtering and bounded failure log capture
 retain evidence for the next run. Candidate `31014` requires fresh runtime acceptance.
+
+The Android 6 x86/x86_64 stock controls in
+[run 39048129575](https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39048129575) and
+[run 39051364678](https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39051364678)
+failed a framework-only stop/start before any Magisk payload was installed. Waiting for init
+to reap the old services fixed the observed shutdown/start race, but the restarted stock
+framework still did not complete boot on emulator 37.3.4. Those targets retain four stock
+**cold-boot** controls and the full patched-image suites; warm framework restart is unqualified.
+The native-crash gate on tested Magisk boots remains unchanged. API 29/x86's consent failure
+in the first run was obscured by a Quickstep ANR dialog; subsequent failures also retain Android's
+ANR stacks rather than dismissing the dialog. API 27/x86 exhausted that run's time limit after
+a slow SDK image download, so downloads now have a separate bounded step from device tests.

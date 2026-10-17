@@ -133,7 +133,7 @@
       "asset_url": "https://github.com/LSPosed/LSPosed/releases/download/v1.9.2/LSPosed-v1.9.2-7024-zygisk-release.zip",
       "sha256": "0ebc6bcb465d1c4b44b7220ab5f0252e6b4eb7fe43da74650476d2798bb29622",
       "status": "Manager active on API29; inactive on API35",
-      "limits": "The release declares Android 8.1\u201314 support. Both outcomes match official 30.7 controls.",
+      "limits": "The release declares Android 8.1–14 support. Both outcomes match official 30.7 controls.",
       "lifecycle": [
         {
           "core": "kitsune",
@@ -1401,5 +1401,6 @@
       },
       "error": null
     }
-  ]
+  ],
+  "shamiko_diagnosis": "device-pr15/shamiko-signing-identity.json"
 }

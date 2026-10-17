@@ -2840,7 +2840,10 @@ and official stable controls. [MuMu acceptance](docs/device-pr15/mumu-lifecycle.
 new namespace, verified upgrade, large-archive regression, uninstall and exact original restore.
 Eight debug/release AVD lanes now pass across Android 10, 15 (4/16 KiB) and 16.
 Live-setup follow-up and repeated Cuttlefish checks have passed; the latest BlueStacks namespace
-check remains in progress. Shamiko 1.2.5 incompatibility must not be reported as a passing module.
+check remains in progress. Shamiko 1.2.5 rejects the fork signing identity; the user accepted
+the documented Kitsune Hide / Zygisk Assistant fallback. The [hiding/provider review](docs/hiding-compatibility-review.md)
+records the causal controls and KernelSU Next, SUSFS and Zygisk Next comparison while preserving
+Kitsune policy and the project signer.
 ViPER testing found and reproduced a shell-field-separator bug in pre-init budget parsing.
 Candidate `31013` passes ViPER on AVD/MuMu and MuMu's full lifecycle. CI also exposed a manager
 package-removal race; candidate `31014` fixes it and requires fresh runtime acceptance.
