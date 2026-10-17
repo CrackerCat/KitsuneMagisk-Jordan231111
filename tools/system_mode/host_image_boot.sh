@@ -6,6 +6,11 @@
 set -eu
 M=/boot/bsr/payload
 BB=$M/busybox
+# Android's mksh closes the descriptor used by flock across exec.
+if [ "${KITSUNE_HOST_BOOT_ASH:-}" != 1 ]; then
+  export KITSUNE_HOST_BOOT_ASH=1 ASH_STANDALONE=1
+  exec "$BB" sh "$0" "$@"
+fi
 T=/sbin
 [ -f /data/adb/.bsr_root ] || exit 0
 [ -d "$T" ] || T=/debug_ramdisk
@@ -38,7 +43,10 @@ case "$1" in
     "$BB" ln -s ./magisk "$T/magiskhide"
     "$BB" ln -s ./magiskpolicy "$T/supolicy"
     "$BB" mkdir -p "$T/.magisk/device" "$T/.magisk/worker"
-    "$BB" mount -t tmpfs -o mode=0755 magisk "$T/.magisk/worker"
+    # Match magiskinit: clients can reach the authenticated socket, while the
+    # worker remains private. Do not inherit the bootstrap's restrictive umask.
+    "$BB" chmod 0711 "$T/.magisk" "$T/.magisk/device"
+    "$BB" mount -t tmpfs -o mode=0000 magisk "$T/.magisk/worker"
     "$BB" mount --make-private "$T/.magisk/worker"
     "$BB" touch "$T/.magisk/config" "$T/.magisk/live"
     export MAGISKTMP=$T
