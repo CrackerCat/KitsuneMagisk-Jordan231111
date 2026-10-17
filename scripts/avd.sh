@@ -480,6 +480,27 @@ PYHASH
     adb shell cat /proc/sys/kernel/random/boot_id > "$directory/boot-$index.id"
     adb logcat -d -b all -v threadtime > "$directory/boot-$index.log"
     adb logcat -d -b crash -v threadtime > "$directory/boot-$index.crash"
+    if [ "${AVD_STOCK_FRAMEWORK_RESTART:-0}" = 1 ]; then
+      # Exercise the stock graphics service across a framework restart, too.
+      # Retain the preceding untouched cold-boot logs separately. No Magisk
+      # payload or patched image has been installed at this point.
+      adb root > "$directory/boot-$index-framework.txt"
+      adb wait-for-device
+      [ "$(adb shell id -u | tr -d '\r')" = 0 ] || return 1
+      adb shell setprop sys.boot_completed 0
+      adb shell stop
+      adb shell start
+      wait_emu
+      adb shell am start -W -a android.settings.DISPLAY_SETTINGS \
+        >> "$directory/boot-$index-framework.txt"
+      sleep 3
+      adb shell input keyevent KEYCODE_HOME
+      adb shell dumpsys display > "$directory/boot-$index-display.txt"
+      adb logcat -d -b all -v threadtime > "$directory/boot-$index-framework.log"
+      adb logcat -d -b crash -v threadtime > "$directory/boot-$index-framework.crash"
+      adb unroot >> "$directory/boot-$index-framework.txt"
+      adb wait-for-device
+    fi
     if [ "$index" -lt "$count" ]; then
       stop_emulator
       launch_emulator ""

@@ -254,6 +254,7 @@ jobs:
           AVD_TEST_LOG: 1
           AVD_QUALIFICATION_DIR: out/device-qualification
           AVD_STOCK_BOOT_COUNT: ${{ matrix.version == 28 && '4' || '0' }}
+          AVD_STOCK_FRAMEWORK_RESTART: ${{ matrix.version == 28 && '1' || '0' }}
           AVD_GPU_MODE: ${{ matrix.version == 28 && 'swiftshader' || 'swiftshader_indirect' }}
           AVD_BOOT_FIXTURES: ${{ matrix.version == 35 && '1' || '' }}
         run: scripts/avd.sh test ${{ matrix.version }} ${{ matrix.type }}
@@ -308,6 +309,7 @@ jobs:
           AVD_TEST_LOG: 1
           AVD_QUALIFICATION_DIR: out/device-qualification
           AVD_STOCK_BOOT_COUNT: ${{ matrix.version == 28 && '4' || '0' }}
+          AVD_STOCK_FRAMEWORK_RESTART: ${{ matrix.version == 28 && '1' || '0' }}
           AVD_GPU_MODE: ${{ matrix.version == 28 && 'swiftshader' || 'swiftshader_indirect' }}
           AVD_BOOT_FIXTURES: ${{ matrix.version == 29 && '1' || '' }}
         run: scripts/avd.sh test ${{ matrix.version }}
