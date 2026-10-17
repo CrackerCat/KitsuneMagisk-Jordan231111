@@ -8,6 +8,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.topjohnwu.magisk.core.BuildConfig.APP_PACKAGE_NAME
 import com.topjohnwu.magisk.core.Config
 import com.topjohnwu.magisk.core.Const
+import com.topjohnwu.magisk.core.Info
 import com.topjohnwu.magisk.core.download.DownloadNotifier
 import com.topjohnwu.magisk.core.download.DownloadProcessor
 import com.topjohnwu.magisk.core.ktx.cachedFile
@@ -457,11 +458,19 @@ class Environment : BaseTest {
     @Test
     fun setupEnvironment() {
         Config.zygisk = true
-        runBlocking {
-            assertTrue(
-                "Magisk setup failed",
-                MagiskInstaller.Emulator(TimberLog, TimberLog).exec()
-            )
+        if (Info.isSystemMode) {
+            // The host-authorized installer owns this payload and manifest.
+            // Ordinary environment repair must continue to refuse that route.
+            assertTrue(Shell.cmd(
+                "grep -qx 'STATE=BOOT_VERIFIED' /data/adb/kitsune/system-mode/transaction.env"
+            ).exec().isSuccess)
+        } else {
+            runBlocking {
+                assertTrue(
+                    "Magisk setup failed",
+                    MagiskInstaller.Emulator(TimberLog, TimberLog).exec()
+                )
+            }
         }
 
         val notify = object : DownloadNotifier {

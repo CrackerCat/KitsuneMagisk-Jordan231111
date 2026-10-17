@@ -396,5 +396,8 @@
     "tools/zygisk-adapters/README.md",
     "tools/zygisk-adapters/rezygisk-hide-v1.patch",
     "updates/trust.json"
-  ]
+  ],
+  "identity": {
+    "version_code": 31005
+  }
 }

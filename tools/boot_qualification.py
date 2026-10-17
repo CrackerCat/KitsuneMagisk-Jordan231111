@@ -157,16 +157,26 @@ class Runner:
         if length[0] & 128:
             length = b"\0" + length
         attr = der(0x30, der(0x13, b"/boot") + der(2, length))
+        algorithms = {
+            "prime256v1": bytes.fromhex("300a06082a8648ce3d040302"),
+            "secp384r1": bytes.fromhex("300a06082a8648ce3d040303"),
+            "secp521r1": bytes.fromhex("300a06082a8648ce3d040304"),
+            "rsa": bytes.fromhex("300d06092a864886f70d01010b0500"),
+        }
+        p256_key = b""
         for curve, hash_name in (("prime256v1", "sha256"), ("secp384r1", "sha384"),
                                   ("secp521r1", "sha512"), ("rsa", "sha256")):
             key, cert = self.work / "key.pem", self.work / "cert.pem"
             options = ["rsa:2048"] if curve == "rsa" else ["ec", "-pkeyopt", f"ec_paramgen_curve:{curve}"]
+            cert_hash = "sha384" if hash_name == "sha256" else "sha256"
             self.run(["openssl", "req", "-new", "-x509", "-newkey", *options,
-                      "-nodes", f"-{hash_name}", "-keyout", str(key), "-out", str(cert),
+                      "-nodes", f"-{cert_hash}", "-keyout", str(key), "-out", str(cert),
                       "-days", "1", "-subj", "/CN=Kitsune disposable boot fixture"])
             pk8 = self.run(["openssl", "pkcs8", "-topk8", "-nocrypt", "-in", str(key), "-outform", "DER"])
             certificate = self.run(["openssl", "x509", "-in", str(cert), "-outform", "DER"])
-            alg = der_items(der_items(certificate)[0][1])[1][2]
+            alg = algorithms[curve]
+            if curve == "prime256v1":
+                p256_key = pk8
             payload = self.work / "authenticated.bin"
             payload.write_bytes(image + attr)
             signature = self.run(["openssl", "dgst", f"-{hash_name}", "-sign", str(key), str(payload)])
@@ -180,6 +190,7 @@ class Runner:
             self.boot("sign", "candidate.img", "/boot", "cert.pem", "key.pk8")
             signed = self.get("candidate.img")
             fields = der_items(der_items(signed[len(image):])[0][1])
+            self.check(f"{curve}:algorithm-describes-image-not-issuer", fields[2][2] == alg)
             payload.write_bytes(image + fields[3][2])
             signature_path = self.work / "signature.bin"
             signature_path.write_bytes(fields[4][1])
@@ -191,6 +202,17 @@ class Runner:
             self.put("corrupt.img", image[:4096] + bytes([image[4096] ^ 1]) + image[4097:] + record)
             self.boot("verify", "corrupt.img", ok=(1,))
             self.check(f"{curve}:tamper-rejected", True)
+            for label, version, algorithm in (("version", 2, alg),
+                    ("algorithm", 1, algorithms["secp521r1" if curve == "prime256v1" else "prime256v1"])):
+                invalid = der(0x30, der(2, bytes([version])) + certificate + algorithm + attr + der(4, signature))
+                self.put("invalid.img", image + invalid)
+                self.boot("verify", "invalid.img", ok=(1,))
+                self.check(f"{curve}:wrong-{label}-rejected", True)
+            if curve == "secp521r1":
+                self.put("mismatch.img", image)
+                self.put("wrong.pk8", p256_key)
+                self.boot("sign", "mismatch.img", "/boot", "cert.pem", "wrong.pk8", ok=(1,))
+                self.check("mismatched-certificate:input-untouched", self.get("mismatch.img") == image)
             if curve != "rsa":
                 integers = der_items(der_items(signature)[0][1])
                 width = {"prime256v1": 32, "secp384r1": 48, "secp521r1": 66}[curve]

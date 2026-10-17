@@ -5,11 +5,43 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest import mock
+import subprocess
+import zipfile
 
-from tools.device_qualification import SCHEMA, render
+from tools.device_qualification import SCHEMA, capture, render
 
 
 class QualificationTest(unittest.TestCase):
+    def test_capture_uses_kernel_enforcement_not_vendor_getenforce(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            apk = root / "test.apk"
+            with zipfile.ZipFile(apk, "w") as archive:
+                archive.writestr("assets/build-info.json", "{}")
+            values = {
+                ("cat", "/proc/sys/kernel/random/boot_id"): "a1d3e14b-a145-4e5a-8de3-6ae2afc4e771",
+                ("getprop", "sys.boot_completed"): "1",
+                ("getprop", "ro.build.fingerprint"): "fixture",
+                ("getprop", "ro.build.version.sdk"): "33",
+                ("getprop", "ro.product.cpu.abi"): "arm64-v8a",
+                ("getconf", "PAGESIZE"): "4096",
+                ("uname", "-r"): "fixture",
+                ("getenforce",): "Disabled",
+            }
+            for value, expected in (("0", "Permissive"), ("1", "Enforcing"), (None, "Unknown")):
+                def read(command, **kwargs):
+                    key = tuple(command[4:])
+                    if key == ("cat", "/sys/fs/selinux/enforce"):
+                        if value is None:
+                            raise subprocess.CalledProcessError(1, command)
+                        return value
+                    return values[key]
+                output = root / f"{expected}.json"
+                with mock.patch("tools.device_qualification.subprocess.check_output", side_effect=read):
+                    capture("adb", "fixture", apk, "setup", output)
+                self.assertEqual(expected, json.loads(output.read_text())["guest"]["selinux"])
+
     def test_evidence_gate(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

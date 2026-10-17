@@ -29,11 +29,18 @@ def capture(adb: str, serial: str, apk: Path, phase: str, output: Path) -> None:
     with zipfile.ZipFile(apk) as archive:
         identity = json.loads(archive.read("assets/build-info.json"))
     artifact = {"sha256": hashlib.sha256(apk.read_bytes()).hexdigest(), "build": identity}
+    try:
+        enforce = read("cat", "/sys/fs/selinux/enforce")
+    except subprocess.CalledProcessError:
+        enforce = ""
+    # Some vendor getenforce binaries report Disabled on an active permissive
+    # kernel. Absence alone does not prove a disabled kernel/container either.
+    selinux = {"0": "Permissive", "1": "Enforcing"}.get(enforce, "Unknown")
     guest = {"fingerprint": read("getprop", "ro.build.fingerprint"),
              "api": int(read("getprop", "ro.build.version.sdk")),
              "abi": read("getprop", "ro.product.cpu.abi"),
              "page_size": int(read("getconf", "PAGESIZE")),
-             "kernel": read("uname", "-r"), "selinux": read("getenforce")}
+             "kernel": read("uname", "-r"), "selinux": selinux}
     record = json.loads(output.read_text()) if output.exists() else {
         "schema": SCHEMA, "artifact": artifact, "guest": guest, "boots": []}
     if record.get("schema") != SCHEMA or record["artifact"] != artifact or record["guest"] != guest:
