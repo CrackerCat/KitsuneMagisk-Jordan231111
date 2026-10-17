@@ -147,6 +147,8 @@
     "docs/device-pr15/init-rc-selection.json",
     "docs/device-pr15/large-archive.json",
     "docs/device-pr15/live-setup.json",
+    "docs/device-pr15/mumu-31013-debug.json",
+    "docs/device-pr15/mumu-31013-lifecycle.json",
     "docs/device-pr15/mumu-debug.json",
     "docs/device-pr15/mumu-lifecycle.json",
     "docs/device-pr15/pr15-29-4k-boot-fixtures-debug.json",
@@ -387,6 +389,7 @@
     "tests/test_manager_contract.py",
     "tests/test_module_contract.py",
     "tests/test_next_system_baseline.py",
+    "tests/test_package_lookup.py",
     "tests/test_port_ledger.py",
     "tests/test_preinit_module_environment.py",
     "tests/test_selinux_guard.py",
@@ -436,7 +439,7 @@
     "updates/trust.json"
   ],
   "identity": {
-    "version_code": 31013,
+    "version_code": 31014,
     "application_id": "io.github.jordan231111.magisk"
   },
   "update_trust_sha256": "576693b150124ead7487391711da1c43bef7281fbda8750a986ad1b5aa9024d5"
