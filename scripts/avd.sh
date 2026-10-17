@@ -113,6 +113,15 @@ try:
                        stdout=log, stderr=subprocess.STDOUT, timeout=10)
 except (OSError, subprocess.TimeoutExpired):
     pass
+
+# These are disposable SDK guests. Preserve Android's own ANR stacks when
+# a system dialog obscures a test, without changing or dismissing that dialog.
+try:
+    with Path(sys.argv[2]).with_name("anr-failure.log").open("w") as log:
+        subprocess.run(["adb", "-s", sys.argv[1], "shell", "cat /data/anr/*"],
+                       stdout=log, stderr=subprocess.STDOUT, timeout=10)
+except (OSError, subprocess.TimeoutExpired):
+    pass
 PY
   fi
   if [ -n "$wait_pid" ]; then
@@ -503,6 +512,28 @@ PYHASH
       [ "$(adb shell id -u | tr -d '\r')" = 0 ] || return 1
       adb shell setprop sys.boot_completed 0
       adb shell stop
+      # stop returns after sending init's control messages. Older init can
+      # still be reaping zygote and running its onrestart actions at this
+      # point; starting immediately can leave the new services stopped.
+      python3 - "$ANDROID_SERIAL" <<'PYSTOP'
+import subprocess
+import sys
+import time
+
+command = ["adb", "-s", sys.argv[1], "shell",
+           "getprop init.svc.zygote; getprop init.svc.zygote_secondary; "
+           "getprop init.svc.surfaceflinger; getprop init.svc.netd"]
+deadline = time.monotonic() + 30
+while time.monotonic() < deadline:
+    result = subprocess.run(command, capture_output=True, text=True, timeout=5)
+    states = result.stdout.replace("\r", "").splitlines()
+    if result.returncode == 0 and len(states) == 4 and states[0] == "stopped" \
+            and all(state in ("", "stopped") for state in states[1:]):
+        break
+    time.sleep(0.2)
+else:
+    raise SystemExit("Stock framework services did not stop")
+PYSTOP
       adb shell start
       wait_emu
       adb shell am start -W -a android.settings.DISPLAY_SETTINGS \

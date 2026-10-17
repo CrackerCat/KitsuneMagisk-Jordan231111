@@ -246,8 +246,13 @@ run_tests() {
 
 run_transaction_fixtures() {
   local remote status=0
-  remote=$(adb shell mktemp -d /data/local/tmp/kitsune-transaction.XXXXXX | tr -d '\r') || return 1
-  case "$remote" in /data/local/tmp/kitsune-transaction.*) ;; *) return 1 ;; esac
+  local nonce
+  nonce=$(python3 -c 'import uuid; print(uuid.uuid4().hex)') || return 1
+  case "$nonce" in ''|*[!0-9a-f]*) return 1 ;; esac
+  remote="/data/local/tmp/kitsune-transaction.$nonce"
+  # Old SDK images do not consistently provide a working shell mktemp.
+  # mkdir still creates the private directory exclusively for this run.
+  adb shell "umask 077; mkdir '$remote'" || return 1
   adb push scripts/system_mode_transaction.sh tests/system_mode/whiteouts.sh "$remote/" || status=$?
   if [ "$status" = 0 ]; then
     adb shell "PATH=\$PATH:/sbin:/debug_ramdisk su -c 'ASH_STANDALONE=1 /data/adb/magisk/busybox sh $remote/whiteouts.sh $remote/system_mode_transaction.sh /data/adb/magisk/busybox'" || status=$?

@@ -282,6 +282,8 @@ jobs:
           path: |
             kernel.log
             logcat.log
+            logcat-failure.log
+            anr-failure.log
 
   avd-test-32:
     name: Test API ${{ matrix.version }} (x86)
@@ -337,6 +339,8 @@ jobs:
           path: |
             kernel.log
             logcat.log
+            logcat-failure.log
+            anr-failure.log
 
   cf-test:
     name: Test ${{ matrix.device }}
