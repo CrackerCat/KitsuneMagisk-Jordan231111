@@ -361,6 +361,7 @@
     "tests/test_su_consent.py",
     "tests/test_update_service.py",
     "tests/test_zygisk_provider.py",
+    "tests/test_zygote_identity.py",
     "tools/UpdateSigner.java",
     "tools/boot_qualification.py",
     "tools/build_info.py",
@@ -403,6 +404,6 @@
     "updates/trust.json"
   ],
   "identity": {
-    "version_code": 31008
+    "version_code": 31009
   }
 }

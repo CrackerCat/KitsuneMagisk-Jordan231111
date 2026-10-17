@@ -36,6 +36,26 @@ pub(crate) fn selinux_disabled() -> bool {
     }
 }
 
+pub(crate) fn unlabeled_permissive() -> bool {
+    // Some emulator images load a policy but leave init and its descendants in
+    // the kernel domain. This is not disabled SELinux, and never covers enforcing.
+    let Ok(context) = std::fs::read_to_string("/proc/1/attr/current") else {
+        return false;
+    };
+    if context.trim_matches(['\0', '\n']) != "u:r:kernel:s0" {
+        return false;
+    }
+    let mut found = false;
+    for path in ["/sys/fs/selinux/enforce", "/selinux/enforce"] {
+        match std::fs::read_to_string(path) {
+            Ok(mode) if mode.trim() == "0" => found = true,
+            Err(e) if e.kind() == std::io::ErrorKind::NotFound => {}
+            _ => return false,
+        }
+    }
+    found
+}
+
 const UNLABEL_CON: &Utf8CStr = cstr!("u:object_r:unlabeled:s0");
 const SYSTEM_CON: &Utf8CStr = cstr!("u:object_r:system_file:s0");
 const ADB_CON: &Utf8CStr = cstr!("u:object_r:adb_data_file:s0");
