@@ -32,6 +32,11 @@ emulator process, and exercises SU, modules, Hide/SuList, provider, manager migr
 `MAGISK_AVD_DEVICE` selects an installed hardware profile; `MAGISK_AVD_NAME` and
 `MAGISK_AVD_PORT` isolate the instance. `AVD_QUALIFICATION_DIR` retains exact guest/boot records.
 Set `AVD_BOOT_FIXTURES=1` to run the APK's MagiskBoot tests. No shared SDK ramdisk is overwritten.
+For disposable Play Store images, `AVD_DISABLE_STORE_UPDATES=1` disables the Store updater
+and records that choice in `store-updater-state.txt`. A Play Services update terminated a
+running hidden-manager suite through Android's package-dependency handling. Pinning the guest
+software prevents that environmental change during acceptance; it is not a crash exemption
+or an instruction to disable updates on users' devices. Those temporary AVDs are deleted afterward.
 
 `scripts/env.py python3 tools/boot_qualification.py --serial SERIAL --apk APK --output REPORT`
 tests boot headers v0–v4, init_boot, vendor_boot v3/v4, original-init restoration, unchanged kernels,
@@ -156,8 +161,18 @@ The Android 6 x86/x86_64 stock controls in
 failed a framework-only stop/start before any Magisk payload was installed. Waiting for init
 to reap the old services fixed the observed shutdown/start race, but the restarted stock
 framework still did not complete boot on emulator 37.3.4. Those targets retain four stock
-**cold-boot** controls and the full patched-image suites; warm framework restart is unqualified.
+**cold-boot** controls and the full patched-image suites; that warm-restart configuration is unqualified.
 The native-crash gate on tested Magisk boots remains unchanged. API 29/x86's consent failure
 in the first run was obscured by a Quickstep ANR dialog; subsequent failures also retain Android's
 ANR stacks rather than dismissing the dialog. API 27/x86 exhausted that run's time limit after
 a slow SDK image download, so downloads now have a separate bounded step from device tests.
+
+The latter run's API 25/x86 timeout was a guest-kernel panic in
+`goldfish_pipe_dma_clear_lock`, called from `goldfish_interrupt_task`; all ten consent requests
+had been denied before the guest stopped responding. The legacy CI lanes now disable the
+emulator's optional `GLDMA`/`GLDMA2` features, using its ordinary graphics-copy path. This is
+an emulator configuration, not a Magisk or phone-kernel patch. The next run repeats the
+stock restart and full suite with that configuration; it remains unqualified until those
+checks pass. The [emulator feature mapping](https://android.googlesource.com/platform/external/qemu/+/emu-master-dev/android/android-emu/android/opengles.cpp)
+and [Goldfish driver](https://android.googlesource.com/kernel/goldfish-modules/+/ca47ac740d16ecf731be3fecdd051d26932f9bdd/goldfish_pipe_v2.c)
+describe the affected transport.

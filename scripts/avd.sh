@@ -566,6 +566,15 @@ test_main() {
 
   print_title "* Launching $avd_pkg"
   launch_emulator ""
+  if [ "${AVD_DISABLE_STORE_UPDATES:-0}" = 1 ]; then
+    # Play Services updates kill dependent processes, including an active
+    # hidden-manager instrumentation run. Pin disposable Play Store guests
+    # to the installed image while testing; record this environment choice.
+    adb shell pm disable-user --user 0 com.android.vending \
+      > "$test_dir/store-updater-state.txt"
+    adb shell pm list packages -d --user 0 | tr -d '\r' | \
+      grep -Fx 'package:com.android.vending' >> "$test_dir/store-updater-state.txt"
+  fi
   capture_stock_controls "$ramdisk"
 
   # The emulator resolves modem profiles beside the selected ramdisk.
