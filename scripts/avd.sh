@@ -460,6 +460,29 @@ test_emu() {
   stop_emulator
 }
 
+capture_stock_controls() {
+  local count=${AVD_STOCK_BOOT_COUNT:-0} index=1 directory="$test_dir/stock-controls"
+  case "$count" in 0) return ;; [1-8]) ;; *) return 1 ;; esac
+  mkdir -p "$directory"
+  python3 - "$1" > "$directory/ramdisk.sha256" <<'PYHASH'
+import hashlib
+from pathlib import Path
+import sys
+print(hashlib.sha256(Path(sys.argv[1]).read_bytes()).hexdigest())
+PYHASH
+  while [ "$index" -le "$count" ]; do
+    adb shell getprop > "$directory/boot-$index.properties"
+    adb shell cat /proc/sys/kernel/random/boot_id > "$directory/boot-$index.id"
+    adb logcat -d -b all -v threadtime > "$directory/boot-$index.log"
+    adb logcat -d -b crash -v threadtime > "$directory/boot-$index.crash"
+    if [ "$index" -lt "$count" ]; then
+      stop_emulator
+      launch_emulator ""
+    fi
+    index=$((index + 1))
+  done
+}
+
 test_main() {
   local ver avd_pkg ramdisk
   eval "$(resolve_vars 'ver avd_pkg ramdisk' "$1" "${2:-}")"
@@ -472,6 +495,7 @@ test_main() {
 
   print_title "* Launching $avd_pkg"
   launch_emulator ""
+  capture_stock_controls "$ramdisk"
 
   # The emulator resolves modem profiles beside the selected ramdisk.
   # Preserve that SDK layout without writing into the shared system image.
