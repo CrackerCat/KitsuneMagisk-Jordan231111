@@ -338,12 +338,14 @@
     "tests/system_mode/test_database_migration.py",
     "tests/system_mode/test_doctor.py",
     "tests/system_mode/test_host_identity.py",
+    "tests/system_mode/test_host_image.py",
     "tests/system_mode/test_installer_safety.py",
     "tests/system_mode/test_launcher_recovery.py",
     "tests/system_mode/test_mumu_identity.py",
     "tests/system_mode/test_mumu_macos_identity.py",
     "tests/system_mode/test_qualification.py",
     "tests/system_mode/test_transaction.py",
+    "tests/test_boot_update.py",
     "tests/test_build_info.py",
     "tests/test_device_qualification.py",
     "tests/test_fork_logging.py",
@@ -383,6 +385,8 @@
     "tools/system_mode/fixtures/mumu-writable.json",
     "tools/system_mode/fixtures/nox-debug-ramdisk.json",
     "tools/system_mode/host_identity.py",
+    "tools/system_mode/host_image.py",
+    "tools/system_mode/host_image_boot.sh",
     "tools/system_mode/kitsune.py",
     "tools/system_mode/qualification.py",
     "tools/system_mode/schema_validation.py",
@@ -398,6 +402,6 @@
     "updates/trust.json"
   ],
   "identity": {
-    "version_code": 31005
+    "version_code": 31006
   }
 }
