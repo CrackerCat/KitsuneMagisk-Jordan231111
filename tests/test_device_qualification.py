@@ -41,6 +41,16 @@ class QualificationTest(unittest.TestCase):
                 with mock.patch("tools.device_qualification.subprocess.check_output", side_effect=read):
                     capture("adb", "fixture", apk, "setup", output)
                 self.assertEqual(expected, json.loads(output.read_text())["guest"]["selinux"])
+            # Old adbd reports a missing toolbox command as successful stdout.
+            values[("getconf", "PAGESIZE")] = "/system/bin/sh: getconf: not found"
+            values[("cat", "/proc/self/smaps")] = "KernelPageSize:        4 kB\n"
+            with mock.patch("tools.device_qualification.subprocess.check_output", side_effect=read):
+                output = root / "legacy.json"
+                capture("adb", "fixture", apk, "setup", output)
+                self.assertEqual(4096, json.loads(output.read_text())["guest"]["page_size"])
+                values[("cat", "/proc/self/smaps")] = "Permission denied"
+                with self.assertRaisesRegex(ValueError, "cannot determine"):
+                    capture("adb", "fixture", apk, "setup", root / "missing.json")
 
     def test_evidence_gate(self):
         with tempfile.TemporaryDirectory() as directory:

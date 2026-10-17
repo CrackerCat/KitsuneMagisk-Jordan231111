@@ -30,6 +30,18 @@ def capture(adb: str, serial: str, apk: Path, phase: str, output: Path) -> None:
         identity = json.loads(archive.read("assets/build-info.json"))
     artifact = {"sha256": hashlib.sha256(apk.read_bytes()).hexdigest(), "build": identity}
     try:
+        page_size = int(read("getconf", "PAGESIZE"))
+    except (subprocess.CalledProcessError, ValueError):
+        # Legacy toolbox has no getconf, and old adbd can return its error text
+        # with exit status zero. Read the running process's kernel page size.
+        match = re.search(r"(?m)^KernelPageSize:\s+(\d+)\s+kB\s*$",
+                          read("cat", "/proc/self/smaps"))
+        if match is None:
+            raise ValueError("cannot determine the guest kernel page size")
+        page_size = int(match[1]) * 1024
+    if page_size <= 0 or page_size & (page_size - 1):
+        raise ValueError("invalid guest kernel page size")
+    try:
         enforce = read("cat", "/sys/fs/selinux/enforce")
     except subprocess.CalledProcessError:
         enforce = ""
@@ -39,7 +51,7 @@ def capture(adb: str, serial: str, apk: Path, phase: str, output: Path) -> None:
     guest = {"fingerprint": read("getprop", "ro.build.fingerprint"),
              "api": int(read("getprop", "ro.build.version.sdk")),
              "abi": read("getprop", "ro.product.cpu.abi"),
-             "page_size": int(read("getconf", "PAGESIZE")),
+             "page_size": page_size,
              "kernel": read("uname", "-r"), "selinux": selinux}
     record = json.loads(output.read_text()) if output.exists() else {
         "schema": SCHEMA, "artifact": artifact, "guest": guest, "boots": []}
