@@ -214,10 +214,17 @@ change is not itself a passing qualification result.
 
 The [GLES 2 control](https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39062154801)
 confirmed `qemu.opengles.version=131072` but still stalled before Magisk installation.
-The API 23 lanes now select official emulator **35.3.11 / build 12836668** in a private CI
-directory, verified against the SHA-256 from [Android's archive](https://developer.android.com/studio/emulator_archive).
-They use its `swiftshader_indirect` renderer and retain all four stock cold boots and full tests.
-The newer SDK/runtime remains in use for other API levels. No crash signature is exempted.
+A comparison with official emulator **35.3.11 / build 12836668** was queued using
+[Android's checksum-pinned archive](https://developer.android.com/studio/emulator_archive).
+The logs then identified a setup persistence race: SdkSetup disabled itself at 19:11:34.822,
+but the VM closed at 19:11:41.551, before Android 6's ten-second PackageManager write delay.
+The next boot launched SdkSetup again and stalled during its self-disable sequence.
+The stock-control harness now verifies that the disabled component is present in the on-disk
+package restrictions before shutdown or framework restart. This follows the
+[setup component](https://android.googlesource.com/platform/development/+/android-6.0.1_r81/apps/SdkSetup/src/com/android/sdksetup/DefaultActivity.java)
+and [PackageManager write schedule](https://android.googlesource.com/platform/frameworks/base/+/android-6.0.1_r81/services/core/java/com/android/server/pm/PackageManagerService.java).
+The current emulator is used again with four cold boots and four stock framework restarts.
+The persisted-state check and full patched-image suite must pass; no crash is exempted.
 
 That run's Android 17/API 37.0 16 KiB SDK image completed the app suites but failed the native-crash
 gate: an `app_process` consent launcher aborted during ART `DestroyJavaVM` with an invalid

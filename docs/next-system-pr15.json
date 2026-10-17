@@ -4,7 +4,6 @@
   "phase": "PR15",
   "source_delta": [
     ".gitattributes",
-    ".github/actions/setup-legacy-emulator/action.yml",
     ".github/actions/setup/sccache.sh",
     ".github/workflows/build.yml",
     ".gitignore",

@@ -513,6 +513,53 @@ from pathlib import Path
 import sys
 print(hashlib.sha256(Path(sys.argv[1]).read_bytes()).hexdigest())
 PYHASH
+  if [ "${AVD_STOCK_PROVISIONING_BARRIER:-0}" = 1 ]; then
+    # Android 6 delays this PackageManager write for ten seconds. Boot completion
+    # alone does not prove SdkSetup's disabled component survived to disk.
+    local stock_uid
+    stock_uid=$(adb shell id -u | tr -d '\r')
+    adb root > "$directory/provisioning-adb.txt"
+    adb wait-for-device
+    [ "$(adb shell id -u | tr -d '\r')" = 0 ] || return 1
+    python3 - "$ANDROID_SERIAL" "$directory/provisioning.json" <<'PYPROVISION'
+import hashlib
+import json
+from pathlib import Path
+import subprocess
+import sys
+import time
+import xml.etree.ElementTree as ET
+
+command = ["adb", "-s", sys.argv[1], "exec-out", "cat",
+           "/data/system/users/0/package-restrictions.xml"]
+started = time.monotonic()
+while time.monotonic() - started < 45:
+    try:
+        result = subprocess.run(command, capture_output=True, timeout=5)
+        if result.returncode == 0:
+            document = ET.fromstring(result.stdout)
+            package = next((p for p in document.findall("pkg")
+                            if p.get("name") == "com.android.sdksetup"), None)
+            if package is not None and any(
+                    item.get("name") == "com.android.sdksetup.DefaultActivity"
+                    for item in package.findall("disabled-components/item")):
+                Path(sys.argv[2]).write_text(json.dumps({
+                    "schema": 1, "sdk_setup_disabled_on_disk": True,
+                    "package_restrictions_sha256": hashlib.sha256(result.stdout).hexdigest(),
+                    "wait_seconds": round(time.monotonic() - started, 3),
+                }, indent=2) + "\n")
+                break
+    except (subprocess.TimeoutExpired, ET.ParseError):
+        pass
+    time.sleep(0.2)
+else:
+    raise SystemExit("SDK setup state was not persisted before stock shutdown")
+PYPROVISION
+    if [ "$stock_uid" != 0 ]; then
+      adb unroot >> "$directory/provisioning-adb.txt"
+      adb wait-for-device
+    fi
+  fi
   while [ "$index" -le "$count" ]; do
     adb shell getprop > "$directory/boot-$index.properties"
     adb shell cat /proc/sys/kernel/random/boot_id > "$directory/boot-$index.id"

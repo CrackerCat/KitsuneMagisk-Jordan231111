@@ -12,7 +12,7 @@ MAGISK_OUT_DIR="${MAGISK_OUT_DIR:-out}"
 MAGISK_APP_PACKAGE="${MAGISK_APP_PACKAGE:-io.github.jordan231111.magisk}"
 MAGISK_TEST_PACKAGE="${MAGISK_TEST_PACKAGE:-$MAGISK_APP_PACKAGE.test}"
 
-emu="${AVD_EMULATOR_BINARY:-$ANDROID_HOME/emulator/emulator}"
+emu="$ANDROID_HOME/emulator/emulator"
 sdk="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
 avd="$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager"
 
