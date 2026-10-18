@@ -1,0 +1,100 @@
+{
+  "schema": 1,
+  "status": "in-progress",
+  "candidate": 31018,
+  "source_commit": "34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
+  "mumu": {
+    "device": "Android Device-1",
+    "state": "stopped",
+    "restored_disk_sha256": {
+      "system.qcow2": "5a6bcb206a71039b6e212124e888a76a78acc8181bda18fc279e36c7ba3437ec",
+      "data.qcow2": "d1f204adabe8c6973d7787c6067e4227dab45dc98303e9b6fee4afcc8c67734f"
+    },
+    "settings_match_original": true,
+    "file_modes_match_original": true
+  },
+  "bluestacks": {
+    "instances": {
+      "removed_instance": "Tiramisu64_3",
+      "removed_instances": [
+        "Tiramisu64_3",
+        "Tiramisu64_4"
+      ],
+      "remaining_instances": [
+        "Tiramisu64"
+      ],
+      "primary_running": false,
+      "primary_deliberately_stopped": true,
+      "primary_root_access": "0",
+      "local_adb_preference_restored_to_resumed_session_value": "0",
+      "remote_adb_preference": "0",
+      "disposable_guest_key_removed_with_instance": true,
+      "owned_rootmac_instance_record_removed": true,
+      "user_disposition": "Leave original BlueStacks stopped; preserve the unrelated MuMu Device-0 and existing ports."
+    },
+    "factory_image": {
+      "factory_initrd_sha256": "393f386ebc880f21a3c7812d0c851508afa697c016e6537894970e123787329e",
+      "byte_exact_restore": true,
+      "task_instance_root_record_cleared": true
+    },
+    "staging": {
+      "owned_staging_image_removed": "initrd-3273747a6bcf619e0d3642634d4e818983aef6b936fa547f0761496999e457f2.img",
+      "permanent_recovery_backups_preserved": true
+    }
+  },
+  "waydroid": {
+    "owned_vm": "pr15-waydroid318",
+    "vm_deleted": true,
+    "owned_ssh_tunnel_stopped": true,
+    "private_adb_5050_stopped": true,
+    "preinstalled_host_tools_preserved": true,
+    "global_lima_identity_preserved": true,
+    "pinned_local_images": "Retained only in the owned task cache until final cleanup."
+  },
+  "completed_snapshot_cleanup": {
+    "mumu_original_rechecked": true,
+    "original_backup_preserved_until_final_cleanup": true,
+    "removed_owned_snapshots": [
+      "mumu-tested-final.gmad",
+      "mumu-tested-317.gmad",
+      "mumu-tested-318.gmad",
+      "mumu-317-backup",
+      "mumu-318-backup",
+      "blue316-data-backup.qcow2",
+      "blue318-data-backup.qcow2"
+    ]
+  },
+  "private_adb_servers_stopped": [
+    5050,
+    5052,
+    5054,
+    5056,
+    5058
+  ],
+  "pending": [
+    "Final module AVDs and private ADB 5060",
+    "Owned task cache, including pinned VM images and downloaded module ZIPs",
+    "App/native build intermediates and test APK/fixture outputs",
+    "Owned caffeinate process"
+  ],
+  "preserved": [
+    "Final app/stub debug/release APKs and PR15 provenance/checksums",
+    "Pre-existing PR9/PR10/PR11 output and release/update evidence",
+    "External production signing assets",
+    "RootMac permanent recovery backups",
+    "MuMu Device-0 and global ADB service",
+    "Preinstalled Android/Lima/QEMU/Docker tools and global Lima identity"
+  ],
+  "removed_temporary_files": [
+    {
+      "name": "kitsune-pr15-mumu-startup.txt",
+      "sha256": "b0628a70587f179b1c1a54e44b7b3f39ed0b90bf9c4323a2a8d0d9dc4f314b8c"
+    }
+  ],
+  "managed_worktree": {
+    "archived": true,
+    "path": "~/.codex/worktrees/pr15-candidate/KitsuneMagisk",
+    "source_commit": "34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
+    "clean_before_archival": true
+  }
+}

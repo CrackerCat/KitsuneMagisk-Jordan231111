@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "status": "host-and-eight-avd-lanes-passed; commercial/container/module-qualification-in-progress",
+  "status": "host-and-available-target-runtime-passed; final-module-repeat-in-progress",
   "problem": "SU and synchronous native commands read WEXITSTATUS without first checking whether the child exited normally. A signal-killed child could be reported as success; an interrupted C++ wait could also read an uninitialized status.",
   "official_control": {
     "avd": "pr15-modules317-16k",
@@ -57,9 +57,18 @@
       "Android 10 debug/release",
       "Android 15 4 KiB debug/release",
       "Android 15 16 KiB debug/release",
-      "Android 16 debug/release"
+      "Android 16 debug/release",
+      "MuMu Android 12 debug System Mode",
+      "BlueStacks Air Android 13 debug host bootstrap",
+      "Owned BlueStacks clone across two boots",
+      "Waydroid Android 13 release, SELinux disabled"
     ],
-    "record": "docs/device-pr15/avd-lifecycle.json"
+    "record": "docs/device-pr15/avd-lifecycle.json",
+    "additional_records": [
+      "docs/device-pr15/mumu-lifecycle.json",
+      "docs/device-pr15/bluestacks-lifecycle.json",
+      "docs/device-pr15/waydroid-lifecycle.json"
+    ]
   },
   "probe_correction": "The BusyBox probe must read the command status in a continuing shell; the old SU wait bug can mask a directly exec-ed crash. No zero status alone is accepted as proof that this module works.",
   "references": [

@@ -177,6 +177,18 @@
       "evidence": [
         "docs/device-qualification.md"
       ]
+    },
+    {
+      "id": "api28-default-x64-stock",
+      "name": "Android 9 default SDK x86_64 \u2014 stock graphics crash",
+      "route": "Unmodified SDK system image and patched ramdisk comparison",
+      "status": "unqualified",
+      "limits": "PSR1.180720.012/4923214, kernel 4.4.124+, 4 KiB. Stock cold boots reproduce SurfaceFlinger HIDL DEAD_OBJECT crashes; two candidate attempts hit the same native-crash gate. This exact SDK image is not qualified. The separate Google APIs image must pass its own checks; no physical Android 9 claim.",
+      "runs": [],
+      "evidence": [
+        "docs/device-pr15/ci-acceptance.json",
+        "docs/device-qualification.md"
+      ]
     }
   ]
 }

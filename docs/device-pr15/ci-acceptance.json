@@ -955,5 +955,120 @@
         }
       }
     }
-  }
+  },
+  "additional_runs": [
+    {
+      "workflow_run": 39097039544,
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39097039544",
+      "head_source": "72d09590342c91cb0c2a27d8ce2eeb805fdbb8d1",
+      "tested_merge_source": "51fbcad889468aec1c6a8b860868e37fc33b19bd",
+      "scope": "Documentation-only follow-up to the candidate source; this run uses its own disposable CI artifacts.",
+      "conclusion": "failure",
+      "initial_passed_jobs": 32,
+      "initial_failure": {
+        "job_id": 117589311056,
+        "job": "Test API 28 (x86_64)",
+        "phase": "Debug patched-image cold boot, before app tests; the native-crash gate failed after the otherwise passing normal/hidden-manager suites.",
+        "artifact": {
+          "sha256": "2eabc8e5dfed775a946b7ab9cda8cba913102eb987bc693c33c648be34342d28",
+          "build": {
+            "app_version_code": 31018,
+            "application_id": "io.github.jordan231111.magisk",
+            "build_id": "dce72c0239301a5af866af1368ca30ff0025b152890e3be85982b28463ac6d2f",
+            "capabilities": [
+              "kitsune.boot-completed.v1",
+              "kitsune.build-info.v1",
+              "kitsune.early-mount.v2",
+              "kitsune.hide.v1",
+              "kitsune.module-root.v2",
+              "kitsune.su-consent.v1",
+              "kitsune.system-mode.transaction.v1",
+              "kitsune.zygisk-provider.v1"
+            ],
+            "channel": "next-system-experimental",
+            "compat_version_code": 31000,
+            "product_name": "KitsuneMagisk Next",
+            "product_version": "0.1.0-dev",
+            "protocol_version": 1,
+            "release_tag": "kitsune-canary-51fbcad889468aec1c6a8b860868e37fc33b19bd",
+            "schema": 1,
+            "source_commit": "51fbcad889468aec1c6a8b860868e37fc33b19bd",
+            "source_digest": "a5e37c848d2f528f2c5d67428eebbd21ccd8760ce73fb7ff0487e67cbc54987b",
+            "source_dirty": false,
+            "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+            "upstream_version": "31.0",
+            "variant": "debug",
+            "version_name": "0.1.0-dev-kitsune.51fbcad8"
+          }
+        },
+        "guest": {
+          "fingerprint": "Android/sdk_phone_x86_64/generic_x86_64:9/PSR1.180720.012/4923214:userdebug/test-keys",
+          "api": 28,
+          "abi": "x86_64",
+          "page_size": 4096,
+          "kernel": "4.4.124+",
+          "selinux": "Enforcing"
+        },
+        "observed": "SurfaceFlinger SIGABRT on unchecked HIDL DEAD_OBJECT after the composer service is restarted by the SDK init rule.",
+        "stock_controls": {
+          "magisk_installed": false,
+          "cold_boots_captured": 4,
+          "matching_crashes": {
+            "boot-1.crash": {
+              "sha256": "575335ef4653ccdeec28b8582e4101a054dd6f2d82d2f2f9a28e85b42f81026b",
+              "signatures": [
+                "10-18 04:48:57.077  1744  1744 F libc    : Fatal signal 6 (SIGABRT), code -6 (SI_TKILL) in tid 1744 (surfaceflinger), pid 1744 (surfaceflinger)",
+                "10-18 04:48:57.109  1854  1854 F DEBUG   : pid: 1744, tid: 1744, name: surfaceflinger  >>> /system/bin/surfaceflinger <<<",
+                "10-18 04:48:57.109  1854  1854 F DEBUG   : Abort message: 'Status.cpp:149] Failed HIDL return status not checked: Status(EX_TRANSACTION_FAILED): 'DEAD_OBJECT: ''",
+                "10-18 04:48:57.115  1854  1854 F DEBUG   :     #05 pc 000000000006dd7c  /system/lib64/libsurfaceflinger.so (android::Hwc2::impl::Composer::getActiveConfig(unsigned long, unsigned int*)+124)",
+                "10-18 04:48:57.115  1854  1854 F DEBUG   :     #06 pc 00000000000789f4  /system/lib64/libsurfaceflinger.so (HWC2::Display::getActiveConfig(std::__1::shared_ptr<HWC2::Display::Config const>*) const+52)",
+                "10-18 04:48:57.115  1854  1854 F DEBUG   :     #07 pc 000000000007fde1  /system/lib64/libsurfaceflinger.so (android::HWComposer::getActiveConfig(int) const+113)"
+              ]
+            },
+            "boot-3.crash": {
+              "sha256": "658939bc663a05c6856ee41a562e6713f44d420486f76368e7806d8fc67e8c71",
+              "signatures": [
+                "10-18 04:50:07.196  1700  1704 F libc    : Fatal signal 6 (SIGABRT), code -6 (SI_TKILL) in tid 1704 (Binder:1700_2), pid 1700 (surfaceflinger)",
+                "10-18 04:50:07.205  1877  1877 F DEBUG   : pid: 1700, tid: 1704, name: Binder:1700_2  >>> /system/bin/surfaceflinger <<<",
+                "10-18 04:50:07.205  1877  1877 F DEBUG   : Abort message: 'Status.cpp:149] Failed HIDL return status not checked: Status(EX_TRANSACTION_FAILED): 'DEAD_OBJECT: ''",
+                "10-18 04:50:07.211  1877  1877 F DEBUG   :     #05 pc 000000000006e01c  /system/lib64/libsurfaceflinger.so (android::Hwc2::impl::Composer::getColorModes(unsigned long, std::__1::vector<android::hardware::graphics::common::V1_1::ColorMode, std::__1::allocator<android::hardware::graphics::common::V1_1::ColorMode>>*)+252)",
+                "10-18 04:50:07.211  1877  1877 F DEBUG   :     #06 pc 00000000000806d2  /system/lib64/libsurfaceflinger.so (android::HWComposer::getColorModes(int) const+130)",
+                "10-18 04:50:07.211  1877  1877 F DEBUG   :     #07 pc 00000000000b0d77  /system/lib64/libsurfaceflinger.so (android::SurfaceFlinger::getDisplayColorModes(android::sp<android::IBinder> const&, android::Vector<android::hardware::graphics::common::V1_1::ColorMode>*)+151)"
+              ]
+            }
+          },
+          "finding": "Stock boot 3 has the same Composer::getColorModes stack as the patched boot; stock boot 1 aborts in Composer::getActiveConfig with the same HIDL status. The image reproduces the failure without Magisk."
+        },
+        "log_sha256": {
+          "ci318-docs-api28x64.log": "0e16ba34cd419bff17f6e7334e7effb7abcd304bdaa3d1223aebb8db5d178ddb",
+          "kernel.log": "6de09d2cf7a2c524e2fe5eae3e9811fec8edfcf82b6c21ed8411b29564e416a5",
+          "logcat-failure.log": "c5ed15bab013d109695ff0539eda140fd34507f99ea336465bf32af04df19cf1"
+        },
+        "artifact_ids": {
+          "stock_and_device": 12125337685,
+          "failure_logs": 12125447280
+        },
+        "retry": "One unchanged-artifact retry reproduced the same crash. No crash filter, timeout or product code was changed."
+      },
+      "run_attempt": 2,
+      "retry": {
+        "job_id": 117592249884,
+        "conclusion": "failure",
+        "same_debug_apk_identity": true,
+        "signature": "SurfaceFlinger SIGABRT, unchecked HIDL DEAD_OBJECT, Composer::getColorModes",
+        "job_log_sha256": "87c8c09d40907a8dbd014afd708c11924261c83d569be6f675fc7df32fce6c65",
+        "device_artifact_id": 12125554748,
+        "logs_artifact_id": 12126405802
+      },
+      "replacement_target": {
+        "package": "system-images;android-28;google_apis;x86_64",
+        "observed_revision": 11,
+        "repository_index": "https://dl.google.com/android/repository/sys-img/google_apis/sys-img2-3.xml",
+        "archive": "x86_64-28_r11.zip",
+        "archive_sha1_from_sdk_repository": "1d93bd994e29c4e9bbe71fd9c278addc5418cbee",
+        "status": "qualification-pending",
+        "crash_gate_unchanged": true
+      }
+    }
+  ]
 }

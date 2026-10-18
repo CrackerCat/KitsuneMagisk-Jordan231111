@@ -149,6 +149,7 @@
     "docs/device-pr15/ci-api23x86-release.json",
     "docs/device-pr15/ci-api30-debug.json",
     "docs/device-pr15/ci-api30-release.json",
+    "docs/device-pr15/cleanup.json",
     "docs/device-pr15/cuttlefish-debug.json",
     "docs/device-pr15/cuttlefish-release.json",
     "docs/device-pr15/cuttlefish-repeat-debug.json",

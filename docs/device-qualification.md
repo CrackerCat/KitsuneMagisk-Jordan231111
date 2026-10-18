@@ -169,6 +169,16 @@ available-lab work and the missing device/ROM evidence explicit.
 
 ## Retained CI investigation
 
+[Run 39097039544](https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39097039544)
+passed 32 jobs initially; Android 9/x86_64 failed the native-crash gate after SurfaceFlinger
+aborted on an unchecked HIDL `DEAD_OBJECT` status. The retained stock controls reproduce that
+abort before any Magisk installation: stock boot 3 has the same `Composer::getColorModes`
+stack, and boot 1 fails in `getActiveConfig`. Init restarts the composer after SurfaceFlinger
+has already restarted. The [CI record](device-pr15/ci-acceptance.json) retains both controls,
+exact artifacts and logs. One unchanged-artifact retry reproduced the crash. That default
+SDK image remains unqualified. CI now tests the official API28 x86_64 Google APIs image
+(observed SDK revision 11); its qualification is pending and the crash gate remains enabled.
+
 [Run 39072209066](https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39072209066)
 also passes all 33 jobs on its first attempt at PR head `82142208f`. The earlier
 startup failures below remain part of the record; a successful repeat does not erase them.
@@ -200,7 +210,8 @@ app suites but failed the native-crash gate on a SurfaceFlinger `eglMakeCurrent`
 framework-restart controls now include that image; the crash has not been exempted. A local ARM64
 API 36.1 run passed hidden-manager tests, then the restored manager's final test process crashed;
 that attempt remains failed. Corrected emulator log filtering and bounded failure log capture
-retain evidence for the next run. The final acceptance records identify candidate `31016`.
+retain evidence for the next run. Those investigations preceded candidate `31016`; the current
+acceptance records identify `31018` and preserve the earlier results separately.
 
 The Android 6 x86/x86_64 stock controls in
 [run 39048129575](https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39048129575) and
