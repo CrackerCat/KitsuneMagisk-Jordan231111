@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "kind": "synthetic-boot-fixtures",
-  "apk_sha256": "f5e98efb5b275f70c4f1bb6a31f21ccd3ce361f2dc48e686674ad38fea6917db",
+  "apk_sha256": "3379e1854143613509411bab0811aee1f7b6a9b5d97f6cd53c21bbf3e9a24b29",
   "fingerprint": "Android/sdk_slim_arm64/emu64a:15/AE3A.240806.019/12368160:userdebug/test-keys",
   "checks": {
     "prime256v1:verify-independent-signature": "passed",

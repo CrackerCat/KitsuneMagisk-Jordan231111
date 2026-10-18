@@ -1,8 +1,10 @@
 # PR15 requirement audit
 
 The completed baseline is `31016`, source `57c9c90813b65015d530ac119141baf32dddb9bd`.
-Candidate `31017` adds the [Waydroid fixes](waydroid-diagnosis.json) and still requires a consistent
-signed build and runtime qualification.
+Candidate `31017` adds the [Waydroid fixes](waydroid-diagnosis.json) and still requires
+BlueStacks and module reruns. Its signed build, eight AVD lanes,
+[MuMu lifecycle and original restoration](mumu-lifecycle.json), and
+[Waydroid core lifecycle](waydroid-lifecycle.json) pass.
 The requested AVD, MuMu Device-1 and fresh BlueStacks runs have acceptance evidence.
 That is narrower than every target and lifecycle in the original PR15 checklist.
 This audit keeps those distinctions explicit; moving a row to a release gate does not
@@ -16,9 +18,9 @@ make its test pass. The compatibility table continues to label accepted targets 
 | Authoritative SU policy matrix | Final 120-test app suites, concurrent root requests, [manager contract](../manager-pr13.json) and [CI acceptance](ci-acceptance.json). | Exact tested emulator images and runtime ABIs only; physical/user-profile variants are not inferred. |
 | Hidden-manager lifecycle | Final normal/hidden manager suites, authenticated migration/recovery and the package-removal race regression. | Historical signer/package upgrade records retain their original source identities. No arbitrary predecessor APK or OEM qualification. |
 | Recovery/ZIP System Mode and custom-ROM replay | [Explicit route decisions](../device-qualification.md): managed System Mode requires live target/host authorization; recovery `SYSTEMMODE` and automatic managed `addon.d` replay are unsupported. Ordinary inherited routes remain available. | A real ordinary recovery/OTA cycle is still required before advertising it. |
-| Vivo, emulator PATH, disabled-SELinux/container paths | Exact Vivo signature fixture and emulator PATH/bootstrap checks pass. [Stock SDK attempts](selinux-disabled-attempts.json) demonstrate why the tested kernel does not provide disabled SELinux. | Permissive is not disabled. Waydroid and a suitable SELinux-disabled kernel remain unqualified. |
+| Vivo, emulator PATH, disabled-SELinux/container paths | Exact Vivo signature fixture and emulator PATH/bootstrap checks pass. [Waydroid](waydroid-lifecycle.json) passes the full suite, API5 companion, SU/restorecon, normal/hidden manager, Hide/Assistant visibility, SuList authorization, distinct Linux boots and stock restoration with SELinux absent. | Exact Waydroid 1.6.2/Android 13/Ubuntu kernel tuple through a lab init fixture; no production installer, pre-init or other-kernel claim. [Stock SDK attempts](selinux-disabled-attempts.json) remain negative controls. |
 | Pre-init storage and expanded partitions | [Module contract](../module-contract.md), [PR14 evidence](../module-pr14.json), final module suites and the pre-init parser regression. Negative persist/space/stale-copy and transactional fault cases remain covered. | Only the retained partition API is supported. OEM-specific partitions and encrypted physical recovery require matching targets. |
-| Emulator lifecycle, upgrade, host restart, clone, restore and failure injection | Cold starts, manager/core upgrade records, snapshot/image restoration, module failure cases, vendor-root-off checks, uninstall and original-state restoration are recorded. | A Mac host reboot, vendor emulator-version upgrade and commercial-instance clone survival were **not** qualified. Exact current versions are the unit of support; these lifecycle extensions must not be advertised as passed. |
+| Emulator lifecycle, upgrade, host restart, clone, restore and failure injection | Cold starts, manager/core upgrade records, snapshot/image restoration, module failure cases, vendor-root-off checks, uninstall and original-state restoration are recorded. Waydroid also passes repeated full Linux host boots. | A Mac host reboot, vendor emulator-version upgrade and commercial-instance clone survival were **not** qualified. Exact current versions are the unit of support; these lifecycle extensions must not be advertised as passed. |
 | Machine-readable records and compatibility page | `tools/device_qualification.py render --check` validates the linked records and generated outputs. | Experimental support only; production promotion remains PR16. |
 | One-instance ownership and cleanup | MuMu Device-1 restored byte-for-byte and stopped; fresh BlueStacks instance unrooted/deleted, factory initramfs restored. Original-primary restart hits a port conflict with the unrelated running MuMu Device-0; the user chose to leave BlueStacks stopped. | Final temporary-file cleanup is recorded separately when completed. |
 

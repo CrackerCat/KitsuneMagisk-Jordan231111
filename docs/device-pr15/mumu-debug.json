@@ -1,11 +1,11 @@
 {
   "schema": "kitsune.device-qualification.v1",
   "artifact": {
-    "sha256": "f5e98efb5b275f70c4f1bb6a31f21ccd3ce361f2dc48e686674ad38fea6917db",
+    "sha256": "3379e1854143613509411bab0811aee1f7b6a9b5d97f6cd53c21bbf3e9a24b29",
     "build": {
-      "app_version_code": 31016,
+      "app_version_code": 31017,
       "application_id": "io.github.jordan231111.magisk",
-      "build_id": "c836e35d5e6f0aa6cc4d95c59e17ad8756236908fa941e6a90810f9460786883",
+      "build_id": "e01afd85d045d4ba3d4b96ab6c61da35198742d5be1a78083dfd10b845c1427b",
       "capabilities": [
         "kitsune.boot-completed.v1",
         "kitsune.build-info.v1",
@@ -21,15 +21,15 @@
       "product_name": "KitsuneMagisk Next",
       "product_version": "0.1.0-dev",
       "protocol_version": 1,
-      "release_tag": "kitsune-canary-57c9c90813b65015d530ac119141baf32dddb9bd",
+      "release_tag": "kitsune-canary-a86a70bdf5a019603754d72137665bd5ba302fdc",
       "schema": 1,
-      "source_commit": "57c9c90813b65015d530ac119141baf32dddb9bd",
-      "source_digest": "93613e01de69d49324b7dd29f1d549ff005d7caaa36e41ea49263f777bedd4f3",
+      "source_commit": "a86a70bdf5a019603754d72137665bd5ba302fdc",
+      "source_digest": "7a92c1572f1576f33dde1afb04e1b3fe61f0ca47ab3cf746cafb57695ecfaf26",
       "source_dirty": false,
       "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
       "upstream_version": "31.0",
       "variant": "debug",
-      "version_name": "0.1.0-dev-kitsune.57c9c908"
+      "version_name": "0.1.0-dev-kitsune.a86a70bd"
     }
   },
   "guest": {
@@ -42,19 +42,19 @@
   },
   "boots": [
     {
-      "id": "0af4a45d-552c-434f-9857-107341132c1d",
+      "id": "357cc0fb-1645-4e3b-b05c-811806d17d54",
       "phase": "setup",
-      "at": "2026-10-17T20:56:35.004559+00:00"
+      "at": "2026-10-18T01:21:53.759986+00:00"
     },
     {
-      "id": "9fa158e4-382f-4053-8889-a732f3ce528c",
+      "id": "da0659e3-6328-48a8-a429-960e24c2c834",
       "phase": "accepted",
-      "at": "2026-10-17T20:59:12.460197+00:00"
+      "at": "2026-10-18T01:24:54.175613+00:00"
     },
     {
-      "id": "0c208a4d-b166-4743-8f75-5dd8613906ca",
+      "id": "63cc9cc2-88ac-4c3d-a274-6dc0f72a0648",
       "phase": "accepted",
-      "at": "2026-10-17T21:08:12.855195+00:00"
+      "at": "2026-10-18T01:28:55.589399+00:00"
     }
   ]
 }

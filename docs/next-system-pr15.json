@@ -193,6 +193,8 @@
     "docs/device-pr15/shamiko-signing-identity.json",
     "docs/device-pr15/upstream-fixes.json",
     "docs/device-pr15/waydroid-diagnosis.json",
+    "docs/device-pr15/waydroid-lifecycle.json",
+    "docs/device-pr15/waydroid-release.json",
     "docs/device-qualification.md",
     "docs/early-mount-pr8.json",
     "docs/early-mount-pr8.md",

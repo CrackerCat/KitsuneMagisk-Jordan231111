@@ -1740,7 +1740,8 @@ Emulators cannot validate the riskiest boot paths. Maintain a small, documented 
 - [ ] Samsung device/firmware path, including large image handling and PROCA behavior.
 - [ ] MTK device.
 - [ ] Legacy A-only/SAR device if support remains promised.
-- [ ] Device or environment with SELinux permissive/disabled (including Waydroid if supported).
+- [x] Exact permissive [MuMu](docs/device-pr15/mumu-lifecycle.json) and SELinux-disabled
+  [Waydroid](docs/device-pr15/waydroid-lifecycle.json) environments; the Waydroid route is a lab init fixture.
 - [ ] Work profile/secondary user device for Hide/SuList.
 - [ ] Recovery procedure tested with stock images and module-disable/safe-mode path.
 
@@ -2864,9 +2865,13 @@ records all 33 passing jobs and the retained API 30 startup-crash retry.
 Additional Waydroid testing exposed two [SELinux-disabled Zygisk defects](docs/device-pr15/waydroid-diagnosis.json):
 hidden LSM metadata prevented state detection, and companion socket identity unnecessarily required
 a SELinux label. The diagnostic fixes pass the real API v5 probe with both bundled module fixtures
-enabled, while preserving zygote identity checks. Candidate `31017` is now awaiting a consistent build
-and qualification; all `31016` records above retain their original source/artifact scope.
-Six unavailable device/ROM targets are explicitly `unqualified-target` with PR16 ownership;
+enabled, while preserving zygote identity checks. Candidate `31017` now passes its signed build,
+all eight local AVD lanes and the [Waydroid lifecycle](docs/device-pr15/waydroid-lifecycle.json),
+including SU/restorecon, normal/hidden manager, Hide/Assistant visibility, inverse SuList authorization,
+distinct Linux boots and stock restoration. MuMu's full `31017` lifecycle and exact original restore
+also pass. BlueStacks and module reruns remain in progress;
+all `31016` records above retain their original source/artifact scope.
+Four unavailable device/ROM targets are explicitly `unqualified-target` with PR16 ownership;
 the release audit still rejects them, and their implementations remain available.
 
 - Complete exact MuMu and AVD lanes and either a BlueStacks adapter or explicit unsupported result.

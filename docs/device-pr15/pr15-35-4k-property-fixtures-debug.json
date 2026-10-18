@@ -1,11 +1,11 @@
 {
   "schema": 1,
   "kind": "isolated-appcompat-property-fixtures",
-  "apk_sha256": "f5e98efb5b275f70c4f1bb6a31f21ccd3ce361f2dc48e686674ad38fea6917db",
+  "apk_sha256": "3379e1854143613509411bab0811aee1f7b6a9b5d97f6cd53c21bbf3e9a24b29",
   "build": {
-    "app_version_code": 31016,
+    "app_version_code": 31017,
     "application_id": "io.github.jordan231111.magisk",
-    "build_id": "c836e35d5e6f0aa6cc4d95c59e17ad8756236908fa941e6a90810f9460786883",
+    "build_id": "e01afd85d045d4ba3d4b96ab6c61da35198742d5be1a78083dfd10b845c1427b",
     "capabilities": [
       "kitsune.boot-completed.v1",
       "kitsune.build-info.v1",
@@ -21,15 +21,15 @@
     "product_name": "KitsuneMagisk Next",
     "product_version": "0.1.0-dev",
     "protocol_version": 1,
-    "release_tag": "kitsune-canary-57c9c90813b65015d530ac119141baf32dddb9bd",
+    "release_tag": "kitsune-canary-a86a70bdf5a019603754d72137665bd5ba302fdc",
     "schema": 1,
-    "source_commit": "57c9c90813b65015d530ac119141baf32dddb9bd",
-    "source_digest": "93613e01de69d49324b7dd29f1d549ff005d7caaa36e41ea49263f777bedd4f3",
+    "source_commit": "a86a70bdf5a019603754d72137665bd5ba302fdc",
+    "source_digest": "7a92c1572f1576f33dde1afb04e1b3fe61f0ca47ab3cf746cafb57695ecfaf26",
     "source_dirty": false,
     "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
     "upstream_version": "31.0",
     "variant": "debug",
-    "version_name": "0.1.0-dev-kitsune.57c9c908"
+    "version_name": "0.1.0-dev-kitsune.a86a70bd"
   },
   "fingerprint": "Android/sdk_slim_arm64/emu64a:15/AE3A.240806.019/12368160:userdebug/test-keys",
   "checks": {

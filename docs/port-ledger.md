@@ -149,8 +149,8 @@ selects the development foundation while retaining these explicit product gates.
 | `BOOT-007` | E | Require the full /system/etc/init/hw/init.rc path before selecting the Android 11 init-RC location | `metadata-51fad676-note-md` → `k31-25fa2159` | `inherited-and-tested` | PR15 |
 | `SYS-011` | O | Later Lite selects existing /debug_ramdisk when /sbin is absent instead of creating /sbin | `metadata-64403347-note_lite-md` → `metadata-64403347-note_lite-md` | `ported-and-tested-in-PR15` | PR15 |
 | `HID-010-early` | E | Cleanup of the separately implemented PR14 early-mount and expanded-partition API | `original-stable` → `k31-25fa2159` | `ported-and-tested-in-PR14` | PR14 |
-| `HID-014-device` | E | Exact SELinux-disabled/Waydroid runtime qualification | `k31-70068d25` → `k31-25fa2159` | `unqualified-target` | PR16 |
-| `SU-004-device` | E | SU and restorecon on exact SELinux-disabled/container targets | `original-stable` → `k31-25fa2159` | `unqualified-target` | PR16 |
+| `HID-014-device` | E | Exact SELinux-disabled/Waydroid runtime qualification | `k31-70068d25` → `k31-25fa2159` | `ported-and-tested-in-PR15` | PR15 |
+| `SU-004-device` | E | SU and restorecon on exact SELinux-disabled/container targets | `original-stable` → `k31-25fa2159` | `ported-and-tested-in-PR15` | PR15 |
 
 ## Archive limits
 

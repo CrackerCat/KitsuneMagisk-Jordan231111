@@ -6595,10 +6595,10 @@
         "shipment-source-review"
       ],
       "upstream_overlap": "Official matching includes app IDs and isolated-process prefixes and has built-in Zygisk plus logcat-based monitoring. Historical ptrace/USAP/app-zygote and disabled-SELinux behavior is a separate contract; shared UID, secondary users, restart and namespace timing require PR12/PR15 tests.",
-      "decision": "unqualified-target",
-      "owner_pr": 16,
+      "decision": "ported-and-tested-in-PR15",
+      "owner_pr": 15,
       "affected_users": "Kitsune users relying on enforcing/permissive/disabled-SELinux and Waydroid-style zygote operation.",
-      "migration": "Implementation retained; do not advertise this target as qualified. PR16 requires matching runtime and recovery evidence before production promotion. Available SDK and commercial guests provide enforcing or permissive SELinux, not a verified disabled/container target.",
+      "migration": "Exact Waydroid 1.6.2 Android 13 ARM64-only runtime is qualified through an owned lab init fixture. Keep ordinary SU authorization and zygote identity checks. This is not a production Waydroid installer or a claim about other kernels/containers; require matching installation/recovery evidence before promotion.",
       "first_shipped": "k31-70068d25",
       "last_shipped": "k31-25fa2159",
       "upstream_evidence": [
@@ -6612,12 +6612,7 @@
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
       },
       "parent_feature": "HID-014",
-      "qualification_blocker": {
-        "target": "Kernel with SELinux disabled or matching Waydroid container",
-        "reason": "Available SDK and commercial guests provide enforcing or permissive SELinux, not a verified disabled/container target.",
-        "evidence": "docs/device-qualification.md",
-        "implementation_retained": true
-      }
+      "acceptance_evidence": "docs/device-pr15/waydroid-lifecycle.json and waydroid-release.json: clean 31017 full suite, distinct Linux kernel boots, normal/hidden manager, SU and inverse SuList authorization, restorecon without SELinux writes, API5 companion, actual per-app Hide/Assistant visibility, and removal of the test bootstrap followed by stock boot."
     },
     {
       "id": "SU-004-device",
@@ -6655,10 +6650,10 @@
         "shipment-source-review"
       ],
       "upstream_overlap": "Official daemon authorization, restorecon and SU execution are maintained implementations. They do not establish the fork's SELinux-disabled compatibility. The current-line restorecon failure in the paired LDPlayer run is a concrete reason to keep this row separate from ordinary permissive-root success.",
-      "decision": "unqualified-target",
-      "owner_pr": 16,
+      "decision": "ported-and-tested-in-PR15",
+      "owner_pr": 15,
       "affected_users": "Kitsune users relying on daemon/client authorization, `restorecon`, and SU execution with SELinux disabled.",
-      "migration": "Implementation retained; do not advertise this target as qualified. PR16 requires matching runtime and recovery evidence before production promotion. Available guests do not provide a verified SELinux-disabled kernel/container for this lifecycle.",
+      "migration": "Exact Waydroid 1.6.2 Android 13 ARM64-only runtime is qualified through an owned lab init fixture. Keep ordinary SU authorization and zygote identity checks. This is not a production Waydroid installer or a claim about other kernels/containers; require matching installation/recovery evidence before promotion.",
       "first_shipped": "original-stable",
       "last_shipped": "k31-25fa2159",
       "upstream_evidence": [
@@ -6672,12 +6667,7 @@
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
       },
       "parent_feature": "SU-004",
-      "qualification_blocker": {
-        "target": "SELinux-disabled/container SU authorization and restorecon target",
-        "reason": "Available guests do not provide a verified SELinux-disabled kernel/container for this lifecycle.",
-        "evidence": "docs/device-qualification.md",
-        "implementation_retained": true
-      }
+      "acceptance_evidence": "docs/device-pr15/waydroid-lifecycle.json and waydroid-release.json: clean 31017 full suite, distinct Linux kernel boots, normal/hidden manager, SU and inverse SuList authorization, restorecon without SELinux writes, API5 companion, actual per-app Hide/Assistant visibility, and removal of the test bootstrap followed by stock boot."
     }
   ],
   "path_reviews": [

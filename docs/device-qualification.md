@@ -72,8 +72,10 @@ ordinary in-app Direct Install, inactive-slot, OTA or recovery routes on BlueSta
 ## Compatibility changes and remaining boundaries
 
 Candidate `31017` adds the [Waydroid detection and companion fixes](device-pr15/waydroid-diagnosis.json).
-Its consistent signed build and runtime qualification are pending. Existing `31016` records below
-remain evidence for their exact artifacts, not automatic acceptance of the new candidate.
+Its signed build passes all eight local AVD lanes, [MuMu's full lifecycle and original restoration](device-pr15/mumu-lifecycle.json),
+and the [Waydroid runtime lifecycle](device-pr15/waydroid-lifecycle.json).
+BlueStacks and module reruns remain in progress. Existing `31016` records below retain
+their exact artifact scope until replaced by new acceptance evidence.
 
 - PR15 retains the v31.0 baseline plus [verified fixes](device-pr15/upstream-fixes.json), as selected
   by the user. It preserves interactive SU consent and Kitsune Hide/SuList. Candidate `31016`
@@ -154,9 +156,11 @@ remain evidence for their exact artifacts, not automatic acceptance of the new c
   Retain the implementation and existing historical line; do not remove useful compatibility
   code merely because hardware is unavailable.
 
-The six unavailable target rows are explicit PR16 release blockers: GrapheneOS (`ZYG-003-device`),
-legacy Sony (`BOOT-006`), physical A/B OTA (`ORD-003`), recovery ZIP/stock restoration (`ORD-004`),
-and SELinux-disabled/container Hide and SU lifecycles (`HID-014-device`, `SU-004-device`).
+The four unavailable target rows are explicit PR16 release blockers: GrapheneOS (`ZYG-003-device`),
+legacy Sony (`BOOT-006`), physical A/B OTA (`ORD-003`), and recovery ZIP/stock restoration (`ORD-004`).
+Waydroid's exact SELinux-disabled Hide and SU runtime rows (`HID-014-device`, `SU-004-device`)
+now have linked acceptance and stock-boot restoration; their lab init fixture does not qualify
+a production Waydroid installer or other kernels and containers.
 Their `unqualified-target` ledger state requires a named target, reason and evidence, preserves
 the implementation, and always fails the production release audit. It is separate from an
 implementation deferral, which still cannot be moved past PR15. This keeps the requested
