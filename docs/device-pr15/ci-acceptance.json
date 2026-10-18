@@ -1570,6 +1570,31 @@
         "native_crash_gate": "Unchanged. The Launcher3 crash remains undiagnosed and must be retested.",
         "completion_gate": "All final-head CI jobs must pass before merge."
       }
+    },
+    {
+      "workflow_run": 39112503296,
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39112503296",
+      "head_source": "982aa32bae44b1c059d80bfdc4dac1f37e48ab3f",
+      "conclusion": "failure-observed",
+      "stock_identity_failure": {
+        "jobs": [
+          117636177911,
+          117636178080
+        ],
+        "targets": [
+          "API23 x86",
+          "API23 x86_64"
+        ],
+        "initial_adb_uid": 0,
+        "finding": "The stock framework-control caller incorrectly requested UID2000 after starting at UID0. The new identity verifier rejected the unachieved transition, despite the old SDK client printing that it was restarting as non-root.",
+        "candidate_runtime_started": false,
+        "log_sha256": {
+          "api23-x86-adb-followup.log": "06bdb254291ad289b8959cafbc7a8366890a0359d9fc45e55cbba8da0ad4f542",
+          "api23-x64-adb-followup.log": "09c4445694745ca9ec1aa4e43185f51d1935e2e0c98c8d9e6dcddf81ccc84d4d"
+        }
+      },
+      "correction": "Record the initial SDK ADB identity and restore that exact UID after controls. Keep root/unroot verification strict; do not infer Magisk root from a root-adbd SDK image. Final-head CI remains required.",
+      "additional_observation": "API24 x86_64 and API29 x86_64 both completed successfully in this run. The earlier directory/Launcher3 failures were not reproduced; their causes remain undetermined."
     }
   ]
 }

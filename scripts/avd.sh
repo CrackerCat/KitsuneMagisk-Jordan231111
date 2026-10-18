@@ -535,6 +535,16 @@ capture_stock_controls() {
   local count=${AVD_STOCK_BOOT_COUNT:-0} index=1 directory="$test_dir/stock-controls"
   case "$count" in 0) return ;; [1-8]) ;; *) return 1 ;; esac
   mkdir -p "$directory"
+  local stock_uid restore_adb
+  stock_uid=$(adb exec-out id -u) || return 1
+  stock_uid=$(printf '%s' "$stock_uid" | tr -d '\r')
+  case "$stock_uid" in
+    0) restore_adb=root ;;
+    2000) restore_adb=unroot ;;
+    *) print_error "! Unexpected stock ADB identity: $stock_uid"; return 1 ;;
+  esac
+  printf '{"schema":1,"initial_uid":%s,"restore_action":"%s"}\n' \
+    "$stock_uid" "$restore_adb" > "$directory/adb-identity.json"
   python3 - "$1" > "$directory/ramdisk.sha256" <<'PYHASH'
 import hashlib
 from pathlib import Path
@@ -544,8 +554,6 @@ PYHASH
   if [ "${AVD_STOCK_PROVISIONING_BARRIER:-0}" = 1 ]; then
     # Android 6 delays this PackageManager write for ten seconds. Boot completion
     # alone does not prove SdkSetup's disabled component survived to disk.
-    local stock_uid
-    stock_uid=$(adb shell id -u | tr -d '\r')
     python3 tools/adb_root.py --serial "$ANDROID_SERIAL" root > "$directory/provisioning-adb.txt"
     python3 - "$ANDROID_SERIAL" "$directory/provisioning.json" <<'PYPROVISION'
 import hashlib
@@ -618,7 +626,7 @@ finally:
 PYAM
       adb logcat -d -b crash -v threadtime > "$directory/boot-$index-am.crash"
       assert_no_native_crashes
-      python3 tools/adb_root.py --serial "$ANDROID_SERIAL" unroot >> "$directory/boot-$index-am-root.txt"
+      python3 tools/adb_root.py --serial "$ANDROID_SERIAL" "$restore_adb" >> "$directory/boot-$index-am-root.txt"
     fi
     adb logcat -d -b all -v threadtime > "$directory/boot-$index.log"
     adb logcat -d -b crash -v threadtime > "$directory/boot-$index.crash"
@@ -666,7 +674,9 @@ PYSTOP
       if [ -n "$vendor_fixture_record" ]; then
         assert_no_native_crashes
       fi
-      python3 tools/adb_root.py --serial "$ANDROID_SERIAL" unroot >> "$directory/boot-$index-framework.txt"
+      # Some legacy SDK images start with root adbd. Restore that observed
+      # identity instead of claiming they can become an ordinary shell.
+      python3 tools/adb_root.py --serial "$ANDROID_SERIAL" "$restore_adb" >> "$directory/boot-$index-framework.txt"
     fi
     if [ "$index" -lt "$count" ]; then
       stop_emulator

@@ -62,6 +62,11 @@ raise SystemExit(config.get('probe_status', 0))
         report = transition("owned-serial", "unroot", str(self.adb), timeout=2)
         self.assertEqual(2000, report["verified_uid"])
 
+    def test_unroot_does_not_accept_a_root_identity(self):
+        self.configure(request_status=0, uids=["0"])
+        with self.assertRaisesRegex(RuntimeError, "not confirmed"):
+            transition("owned-serial", "unroot", str(self.adb), timeout=0.3)
+
     def test_failed_identity_query_cannot_confirm_root(self):
         self.configure(request_status=1, uids=["0"], probe_status=1)
         with self.assertRaisesRegex(RuntimeError, "not confirmed"):

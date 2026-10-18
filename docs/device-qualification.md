@@ -181,11 +181,18 @@ Neither failure is asserted to be an emulator or core-code defect without furthe
 
 SDK ADB root/unroot transitions now verify UID0/UID2000 after reconnecting within a bounded
 interval. A closed request connection is accepted only when the requested identity is actually
-observed; a successful client exit with the wrong UID still fails. Five subprocess regressions
+observed; a successful client exit with the wrong UID still fails. Six subprocess regressions
 cover that distinction, delayed identity changes and query failures/timeouts. Transaction-directory
 failures now retain their original status and bounded identity/permission/space diagnostics.
 No instrumentation deadline or native-crash filter is relaxed. The final PR head must pass
 all CI jobs before merge; the [machine record](device-pr15/ci-acceptance.json) retains these failures.
+
+The following run exposed a caller assumption in the stock Android 6 controls: both SDK images
+start with adbd at UID0. Requesting UID2000 after the framework check did not restore their
+original state, and the stricter verifier correctly rejected it. The harness now records the
+initial UID and restores that identity after each stock control. UID2000 remains mandatory
+when `unroot` is requested. Root-adbd SDK observations do not establish Magisk root; the
+ordinary application-path, policy and manager tests remain separate requirements.
 
 [Run 39097039544](https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39097039544)
 passed 32 jobs initially; Android 9/x86_64 failed the native-crash gate after SurfaceFlinger

@@ -2841,7 +2841,7 @@ records the remaining boundaries of the original checklist below. Production pro
 The final candidate passes eight local debug/release AVD lanes across Android 10, 15 (4/16 KiB)
 and 16, with 121 app tests, 107 boot-image checks, four isolated property checks and 48 root
 requests at concurrency six per variant. The 331-test host suite passes with one Linux-only skip
-on macOS, and five additional SDK ADB identity-transition regressions pass. Artifact verification
+on macOS, and six additional SDK ADB identity-transition regressions pass. Artifact verification
 across all four ABIs, both Clippy profiles and all 33 [CI jobs](docs/device-pr15/ci-acceptance.json)
 pass. Each record retains its exact artifact/source identity and signer scope.
 Android 9 x86_64 CI uses an explicit AOSP composer-rule lab fixture; both unmodified SDK
