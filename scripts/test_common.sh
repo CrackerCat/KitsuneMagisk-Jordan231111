@@ -252,7 +252,27 @@ run_transaction_fixtures() {
   remote="/data/local/tmp/kitsune-transaction.$nonce"
   # Old SDK images do not consistently provide a working shell mktemp.
   # mkdir still creates the private directory exclusively for this run.
-  adb shell "umask 077; mkdir '$remote'" || return 1
+  if adb shell "umask 077; mkdir '$remote'"; then
+    :
+  else
+    status=$?
+    print_error "Transaction fixture directory creation failed with status $status"
+    python3 - "$ANDROID_SERIAL" "$remote" <<'PYDIR' || true
+import subprocess
+import sys
+
+serial, directory = sys.argv[1:]
+commands = [["get-state"], ["shell", "id"],
+            ["shell", "ls", "-ldZ", "/data/local/tmp", directory],
+            ["shell", "df", "/data/local/tmp"]]
+for command in commands:
+    try:
+        subprocess.run(["adb", "-s", serial] + command, timeout=5, check=False)
+    except subprocess.TimeoutExpired:
+        print("ADB directory diagnostic timed out: " + command[0], file=sys.stderr)
+PYDIR
+    return "$status"
+  fi
   adb push scripts/system_mode_transaction.sh tests/system_mode/whiteouts.sh "$remote/" || status=$?
   if [ "$status" = 0 ]; then
     adb shell "PATH=\$PATH:/sbin:/debug_ramdisk su -c 'ASH_STANDALONE=1 /data/adb/magisk/busybox sh $remote/whiteouts.sh $remote/system_mode_transaction.sh /data/adb/magisk/busybox'" || status=$?

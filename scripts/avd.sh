@@ -546,9 +546,7 @@ PYHASH
     # alone does not prove SdkSetup's disabled component survived to disk.
     local stock_uid
     stock_uid=$(adb shell id -u | tr -d '\r')
-    adb root > "$directory/provisioning-adb.txt"
-    adb wait-for-device
-    [ "$(adb shell id -u | tr -d '\r')" = 0 ] || return 1
+    python3 tools/adb_root.py --serial "$ANDROID_SERIAL" root > "$directory/provisioning-adb.txt"
     python3 - "$ANDROID_SERIAL" "$directory/provisioning.json" <<'PYPROVISION'
 import hashlib
 import json
@@ -584,8 +582,7 @@ else:
     raise SystemExit("SDK setup state was not persisted before stock shutdown")
 PYPROVISION
     if [ "$stock_uid" != 0 ]; then
-      adb unroot >> "$directory/provisioning-adb.txt"
-      adb wait-for-device
+      python3 tools/adb_root.py --serial "$ANDROID_SERIAL" unroot >> "$directory/provisioning-adb.txt"
     fi
   fi
   while [ "$index" -le "$count" ]; do
@@ -593,9 +590,7 @@ PYPROVISION
     adb shell cat /proc/sys/kernel/random/boot_id > "$directory/boot-$index.id"
     if [ "${AVD_STOCK_AM_ITERATIONS:-0}" != 0 ]; then
       # Compare ART command startup/shutdown before installing any Magisk code.
-      adb root > "$directory/boot-$index-am-root.txt"
-      adb wait-for-device
-      [ "$(adb shell id -u | tr -d '\r')" = 0 ] || return 1
+      python3 tools/adb_root.py --serial "$ANDROID_SERIAL" root > "$directory/boot-$index-am-root.txt"
       python3 - "$ANDROID_SERIAL" "$AVD_STOCK_AM_ITERATIONS" \
         "$directory/boot-$index-am.json" <<'PYAM'
 import json
@@ -623,8 +618,7 @@ finally:
 PYAM
       adb logcat -d -b crash -v threadtime > "$directory/boot-$index-am.crash"
       assert_no_native_crashes
-      adb unroot >> "$directory/boot-$index-am-root.txt"
-      adb wait-for-device
+      python3 tools/adb_root.py --serial "$ANDROID_SERIAL" unroot >> "$directory/boot-$index-am-root.txt"
     fi
     adb logcat -d -b all -v threadtime > "$directory/boot-$index.log"
     adb logcat -d -b crash -v threadtime > "$directory/boot-$index.crash"
@@ -635,9 +629,7 @@ PYAM
       # Exercise the stock graphics service across a framework restart, too.
       # Retain the preceding untouched cold-boot logs separately. No Magisk
       # payload or patched image has been installed at this point.
-      adb root > "$directory/boot-$index-framework.txt"
-      adb wait-for-device
-      [ "$(adb shell id -u | tr -d '\r')" = 0 ] || return 1
+      python3 tools/adb_root.py --serial "$ANDROID_SERIAL" root > "$directory/boot-$index-framework.txt"
       adb shell setprop sys.boot_completed 0
       adb shell stop
       # stop returns after sending init's control messages. Older init can
@@ -674,8 +666,7 @@ PYSTOP
       if [ -n "$vendor_fixture_record" ]; then
         assert_no_native_crashes
       fi
-      adb unroot >> "$directory/boot-$index-framework.txt"
-      adb wait-for-device
+      python3 tools/adb_root.py --serial "$ANDROID_SERIAL" unroot >> "$directory/boot-$index-framework.txt"
     fi
     if [ "$index" -lt "$count" ]; then
       stop_emulator

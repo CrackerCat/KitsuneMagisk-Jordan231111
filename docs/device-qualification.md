@@ -170,6 +170,23 @@ available-lab work and the missing device/ROM evidence explicit.
 
 ## Retained CI investigation
 
+[Run 39108439919](https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39108439919)
+passed 31 jobs initially. API24/x86_64 passed 83 app tests, including both root-path checks,
+then failed an ADB command creating the private transaction-fixture directory without an
+explanatory message. Its unchanged-artifact retry passed; the original cause is undetermined.
+API29/x86_64 hit a Launcher3 SIGSEGV in the heap allocator called from `libhwui` drawing code.
+Its stock controls had no matching native crash. The retry stopped during a stock `adb root`
+transition with a closed transport, before Magisk installation, so it did not retest that crash.
+Neither failure is asserted to be an emulator or core-code defect without further evidence.
+
+SDK ADB root/unroot transitions now verify UID0/UID2000 after reconnecting within a bounded
+interval. A closed request connection is accepted only when the requested identity is actually
+observed; a successful client exit with the wrong UID still fails. Five subprocess regressions
+cover that distinction, delayed identity changes and query failures/timeouts. Transaction-directory
+failures now retain their original status and bounded identity/permission/space diagnostics.
+No instrumentation deadline or native-crash filter is relaxed. The final PR head must pass
+all CI jobs before merge; the [machine record](device-pr15/ci-acceptance.json) retains these failures.
+
 [Run 39097039544](https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39097039544)
 passed 32 jobs initially; Android 9/x86_64 failed the native-crash gate after SurfaceFlinger
 aborted on an unchecked HIDL `DEAD_OBJECT` status. The retained stock controls reproduce that

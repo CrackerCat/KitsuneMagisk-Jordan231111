@@ -1428,6 +1428,148 @@
           ]
         }
       }
+    },
+    {
+      "workflow_run": 39108439919,
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39108439919",
+      "head_source": "535893c4a144d1cd164471d6690edef843548028",
+      "conclusion": "failure",
+      "run_attempt": 2,
+      "passed_jobs": 32,
+      "initial_failures": [
+        {
+          "job_id": 117623306843,
+          "job": "Test API24 x86_64",
+          "phase": "Debug lane, after 83 passing JUnit tests and before transaction fixtures",
+          "failed_command": "ADB shell: create an exclusive UUID-named directory under /data/local/tmp with umask 077",
+          "observed": "The command failed without explanatory output; the harness returned 1. The original command status and guest directory state were not captured.",
+          "root_path_tests_passed": 2,
+          "cause": "Undetermined; no emulator or core-code cause is asserted.",
+          "artifact": {
+            "sha256": "12fd3f16d2c87f0df2488d99b2ca95d4983ec282f840466f03009b1bf66fce06",
+            "build": {
+              "app_version_code": 31018,
+              "application_id": "io.github.jordan231111.magisk",
+              "build_id": "dfe6fd6ebebd4c09a677dac41cb6ad90ac3d5f17aeca5f9fa6b7b6aa8bbebb95",
+              "capabilities": [
+                "kitsune.boot-completed.v1",
+                "kitsune.build-info.v1",
+                "kitsune.early-mount.v2",
+                "kitsune.hide.v1",
+                "kitsune.module-root.v2",
+                "kitsune.su-consent.v1",
+                "kitsune.system-mode.transaction.v1",
+                "kitsune.zygisk-provider.v1"
+              ],
+              "channel": "next-system-experimental",
+              "compat_version_code": 31000,
+              "product_name": "KitsuneMagisk Next",
+              "product_version": "0.1.0-dev",
+              "protocol_version": 1,
+              "release_tag": "kitsune-canary-6328eda2dd10a166812f8a92d0cc91d4337c7e31",
+              "schema": 1,
+              "source_commit": "6328eda2dd10a166812f8a92d0cc91d4337c7e31",
+              "source_digest": "74329f3d227b1c8900f65cfc52d40f2b0bc93ee7c992b57d89bc67c61796e166",
+              "source_dirty": false,
+              "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+              "upstream_version": "31.0",
+              "variant": "debug",
+              "version_name": "0.1.0-dev-kitsune.6328eda2"
+            }
+          },
+          "guest": {
+            "fingerprint": "Android/sdk_phone_x86_64/generic_x86_64:7.0/NYC/4174735:userdebug/test-keys",
+            "api": 24,
+            "abi": "x86_64",
+            "page_size": 4096,
+            "kernel": "3.10.0+",
+            "selinux": "Enforcing"
+          },
+          "job_log_sha256": "d0880dcc0bcd462d5fa9aa7742a65d0c3908042d8171f87984886a050dd54cd9",
+          "artifact_ids": {
+            "logs": 12130185773,
+            "device": 12130160777
+          },
+          "retry": {
+            "job_id": 117626352548,
+            "conclusion": "success",
+            "artifacts_unchanged": true,
+            "cause_still_undetermined": true
+          }
+        },
+        {
+          "job_id": 117623306904,
+          "job": "Test API29 x86_64",
+          "variant": "debug",
+          "phase": "Native-crash gate after app/manager tests",
+          "process": "com.android.launcher3",
+          "signal": "SIGSEGV, address 0x30",
+          "top_frame": "libc.so je_extent_heap_remove",
+          "rendering_caller": "libhwui.so RecordingCanvas::onDrawDrawable",
+          "cause": "Undetermined. Stock controls did not reproduce the native crash; no emulator/core attribution is made.",
+          "checks_unchanged": true,
+          "artifact": {
+            "sha256": "12fd3f16d2c87f0df2488d99b2ca95d4983ec282f840466f03009b1bf66fce06",
+            "build": {
+              "app_version_code": 31018,
+              "application_id": "io.github.jordan231111.magisk",
+              "build_id": "dfe6fd6ebebd4c09a677dac41cb6ad90ac3d5f17aeca5f9fa6b7b6aa8bbebb95",
+              "capabilities": [
+                "kitsune.boot-completed.v1",
+                "kitsune.build-info.v1",
+                "kitsune.early-mount.v2",
+                "kitsune.hide.v1",
+                "kitsune.module-root.v2",
+                "kitsune.su-consent.v1",
+                "kitsune.system-mode.transaction.v1",
+                "kitsune.zygisk-provider.v1"
+              ],
+              "channel": "next-system-experimental",
+              "compat_version_code": 31000,
+              "product_name": "KitsuneMagisk Next",
+              "product_version": "0.1.0-dev",
+              "protocol_version": 1,
+              "release_tag": "kitsune-canary-6328eda2dd10a166812f8a92d0cc91d4337c7e31",
+              "schema": 1,
+              "source_commit": "6328eda2dd10a166812f8a92d0cc91d4337c7e31",
+              "source_digest": "74329f3d227b1c8900f65cfc52d40f2b0bc93ee7c992b57d89bc67c61796e166",
+              "source_dirty": false,
+              "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+              "upstream_version": "31.0",
+              "variant": "debug",
+              "version_name": "0.1.0-dev-kitsune.6328eda2"
+            }
+          },
+          "guest": {
+            "fingerprint": "Android/sdk_phone_x86_64/generic_x86_64:10/QSR1.210820.001/7663313:userdebug/test-keys",
+            "api": 29,
+            "abi": "x86_64",
+            "page_size": 4096,
+            "kernel": "4.14.175-g6f3fc9538452",
+            "selinux": "Enforcing"
+          },
+          "job_log_sha256": "7e0ac1754b0e71f6bec1acca9c2de2e915bcdeb9bf8ac5ce0d7a352795af9191",
+          "artifact_ids": {
+            "logs": 12130221857,
+            "device": 12130401336
+          },
+          "retry": {
+            "job_id": 117626352517,
+            "conclusion": "failure",
+            "phase": "Stock boot 2, before Magisk installation",
+            "message": "adb: unable to connect for root: closed",
+            "candidate_runtime_started": false,
+            "job_log_sha256": "d45c55d3a8b373490442dd98b7d08e267b908bb361a9b69b94198c57afdc3f53"
+          }
+        }
+      ],
+      "harness_followup": {
+        "root_transition": "tools/adb_root.py verifies actual UID0/UID2000 across reconnects; a client error alone is not accepted, and client success without the requested UID fails.",
+        "tests": "Five subprocess-based transition regressions pass locally.",
+        "transaction_diagnostics": "Preserve the original mkdir status and capture bounded ADB identity/directory/space diagnostics; no retry or acceptance relaxation.",
+        "native_crash_gate": "Unchanged. The Launcher3 crash remains undiagnosed and must be retested.",
+        "completion_gate": "All final-head CI jobs must pass before merge."
+      }
     }
   ]
 }
