@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "roadmap_pr": 15,
-  "status": "in-progress",
+  "status": "available-lab-complete",
   "targets": [
     {
       "id": "pr15-35-4k",
@@ -202,6 +202,26 @@
         "docs/device-pr15/ci-acceptance.json",
         "docs/device-qualification.md"
       ]
+    },
+    {
+      "id": "api28-composer-fixture",
+      "name": "Android 9 x86_64 \u2014 AOSP composer-rule lab fixture",
+      "route": "Patched SDK ramdisks and a pinned, modified Google APIs revision-11 vendor copy; CI debug/release",
+      "status": "experimental",
+      "limits": "Full debug/release lanes, four stock cold boots and four framework restarts pass without native crashes. The modified init file is verified in all eight cold boots. Only this explicit lab fixture is qualified; both unmodified SDK images remain unqualified. No physical Android 9 claim.",
+      "runs": [
+        "docs/device-pr15/ci-api28-fixture-debug.json",
+        "docs/device-pr15/ci-api28-fixture-release.json"
+      ],
+      "evidence": [
+        "docs/device-pr15/ci-api28-fixture-debug.json",
+        "docs/device-pr15/ci-api28-fixture-release.json",
+        "docs/device-pr15/ci-api28-composer-fixture.json",
+        "docs/device-pr15/ci-acceptance.json",
+        "docs/device-qualification.md"
+      ]
     }
-  ]
+  ],
+  "requirements_audit": "docs/device-pr15/requirements-audit.md",
+  "cleanup_record": "docs/device-pr15/cleanup.json"
 }

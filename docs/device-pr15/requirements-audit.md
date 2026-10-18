@@ -1,11 +1,12 @@
 # PR15 requirement audit
 
 Candidate `31018` corrects the inherited [child-exit status bug](child-exit-status.json).
-Its build, 331 host tests, eight AVD lanes, 33 CI jobs, [MuMu lifecycle](mumu-lifecycle.json),
+Its build, 331-test host suite (one Linux-only skip), eight AVD lanes, 33 CI jobs, [MuMu lifecycle](mumu-lifecycle.json),
 [BlueStacks lifecycle and owned clone](bluestacks-lifecycle.json), and
 [Waydroid core lifecycle](waydroid-lifecycle.json) pass. Original-state/stock restoration and
-removal of the disposable commercial/container instances are verified. The final module repeat
-and remaining temporary-file cleanup are in progress. Each record identifies its tested artifact.
+removal of the disposable commercial/container instances are verified. The final
+[module matrix](../module-compatibility.md) and [cleanup](cleanup.json) are complete.
+Each record identifies its tested artifact.
 That is narrower than every target and lifecycle in the original PR15 checklist.
 This audit keeps those distinctions explicit; moving a row to a release gate does not
 make its test pass. The compatibility table continues to label accepted targets experimental.
@@ -22,15 +23,15 @@ make its test pass. The compatibility table continues to label accepted targets 
 | Pre-init storage and expanded partitions | [Module contract](../module-contract.md), [PR14 evidence](../module-pr14.json), final module suites and the pre-init parser regression. Negative persist/space/stale-copy and transactional fault cases remain covered. | Only the retained partition API is supported. OEM-specific partitions and encrypted physical recovery require matching targets. |
 | Emulator lifecycle, upgrade, host restart, clone, restore and failure injection | Cold starts, manager/core upgrade records, snapshot/image restoration, module failure cases, vendor-root-off checks, uninstall and original-state restoration are recorded. Waydroid also passes repeated full Linux host boots; BlueStacks 31018 passes clone survival, two clone cold boots, root stress and clone unroot. | A Mac host reboot and vendor emulator-version upgrade were **not** qualified. Exact current versions are the unit of support; these lifecycle extensions must not be advertised as passed. |
 | Machine-readable records and compatibility page | `tools/device_qualification.py render --check` validates the linked records and generated outputs. | Experimental support only; production promotion remains PR16. |
-| One-instance ownership and cleanup | MuMu Device-1 restored byte-for-byte and stopped; fresh BlueStacks instance unrooted/deleted, factory initramfs restored. Original-primary restart hits a port conflict with the unrelated running MuMu Device-0; the user chose to leave BlueStacks stopped. | Final temporary-file cleanup is recorded separately when completed. |
+| One-instance ownership and cleanup | MuMu Device-1 restored byte-for-byte and stopped; fresh BlueStacks instance unrooted/deleted, factory initramfs restored. Original-primary restart hits a port conflict with the unrelated running MuMu Device-0; the user chose to leave BlueStacks stopped. | [Final cleanup](cleanup.json) is complete; permanent keys/recovery assets and pre-existing output are preserved. |
 
 ## Hiding and historical behavior
 
 [Kitsune Hide/SuList](../hide-policy.md) defines the retained behavior, process/UID rules,
 provider ownership and recovery. Tests distinguish namespace visibility from root permission.
 The final module comparisons prove selected-app mount hiding with both the built-in engine and
-Zygisk Assistant on 4/16 KiB AVDs, MuMu and BlueStacks. They do not certify universal detector,
-banking-app or hardware-attestation invisibility. The [independent detector comparison](hiding-detector-comparison.json) records additional mount/injection findings with built-in Zygisk and stock-equivalent findings with no-Zygisk Hide/SuList on one Android 10 SDK image.
+Zygisk Assistant on 4/16 KiB AVDs, MuMu, BlueStacks and the exact Waydroid lab. They do not certify universal detector,
+banking-app or hardware-attestation invisibility. The [independent detector comparison](hiding-detector-comparison.json), scoped to candidate `31016`, records additional mount/injection findings with built-in Zygisk and stock-equivalent findings with no-Zygisk Hide/SuList on one Android 10 SDK image.
 
 The [historical ledger](../port-ledger.md) records preserved behavior, tested replacements and
 explicit retirements. It is not a claim that every historical mechanism was copied: unrestricted

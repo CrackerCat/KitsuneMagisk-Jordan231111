@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "status": "in-progress",
+  "status": "complete",
   "candidate": 31018,
   "source_commit": "34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
   "mumu": {
@@ -49,11 +49,11 @@
     "private_adb_5050_stopped": true,
     "preinstalled_host_tools_preserved": true,
     "global_lima_identity_preserved": true,
-    "pinned_local_images": "Retained only in the owned task cache until final cleanup."
+    "pinned_local_images": "Removed with the owned task cache."
   },
   "completed_snapshot_cleanup": {
     "mumu_original_rechecked": true,
-    "original_backup_preserved_until_final_cleanup": true,
+    "original_backup_preserved_until_final_cleanup": false,
     "removed_owned_snapshots": [
       "mumu-tested-final.gmad",
       "mumu-tested-317.gmad",
@@ -62,7 +62,8 @@
       "mumu-318-backup",
       "blue316-data-backup.qcow2",
       "blue318-data-backup.qcow2"
-    ]
+    ],
+    "original_backup_removed_after_verified_restore": true
   },
   "private_adb_servers_stopped": [
     5050,
@@ -72,10 +73,7 @@
     5058,
     5060
   ],
-  "pending": [
-    "Owned task cache retained for final CI evidence",
-    "Owned caffeinate process"
-  ],
+  "pending": [],
   "preserved": [
     "Final app/stub debug/release APKs and PR15 provenance/checksums",
     "Pre-existing PR9/PR10/PR11 output and release/update evidence",
@@ -171,6 +169,49 @@
     "scope": "Stock API29 ARM64, no Magisk payload; host file-descriptor proof of AVD vendor-image selection",
     "avd_deleted": true,
     "private_adb_5060_stopped": true,
-    "vendor_copy": "Retained in the owned evidence cache until final cleanup."
-  }
+    "vendor_copy": "Removed with the owned task cache."
+  },
+  "owned_caffeinate_stopped": true,
+  "permanent_production_signing_assets_present": true,
+  "owned_cache_removed": "~/.cache/kitsune-pr15",
+  "retained_artifacts_rehashed": true,
+  "preexisting_output_files_unchanged": [
+    "SHA256SUMS",
+    "pr10-beta-notes.md",
+    "pr10-candidate-tag.txt",
+    "pr10-ci-final.json",
+    "pr10-ci-retries.json",
+    "pr10-clean-stub-acceptance.json",
+    "pr10-clean-stub-unavailable.log",
+    "pr10-cleanup.json",
+    "pr10-debug-native-manifest.json",
+    "pr10-debug-native.tar.xz",
+    "pr10-feed-commit.json",
+    "pr10-final-source-check.json",
+    "pr10-live-stub-start.json",
+    "pr10-manager-before-update.json",
+    "pr10-manager-update-acceptance.json",
+    "pr10-port-ledger-audit.json",
+    "pr10-primary-restored.json",
+    "pr10-public-release.json",
+    "pr10-publication.json",
+    "pr10-release-evidence.json",
+    "pr10-second-instance.json",
+    "pr10-staged-feed-verification.json",
+    "pr11-artifacts-bc.json",
+    "pr11-artifacts-bd.json",
+    "pr11-artifacts.json",
+    "pr11-final-source.json",
+    "pr11-network-artifacts.json",
+    "pr11-port-ledger-audit.json",
+    "pr11-source-final.json",
+    "pr11-source-initial.json",
+    "pr11-source.json",
+    "pr9-manager-instrumentation.log",
+    "pr9-manager-upgrade.json",
+    "pr9-mumu-native.json",
+    "pr9-port-ledger-audit.json",
+    "release-info.json"
+  ],
+  "stopped_caffeinate_pid": 53912
 }

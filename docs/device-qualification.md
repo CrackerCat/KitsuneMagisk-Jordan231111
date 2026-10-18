@@ -72,11 +72,12 @@ ordinary in-app Direct Install, inactive-slot, OTA or recovery routes on BlueSta
 ## Compatibility changes and remaining boundaries
 
 Candidate `31018` adds the [child-exit status correction](device-pr15/child-exit-status.json)
-and passes its build, 331 host tests, eight AVD lanes, 33 CI jobs, [MuMu](device-pr15/mumu-lifecycle.json),
+and passes its build, 331-test host suite (one Linux-only skip), eight AVD lanes, 33 CI jobs, [MuMu](device-pr15/mumu-lifecycle.json),
 [BlueStacks and its owned clone](device-pr15/bluestacks-lifecycle.json), and the
 [Waydroid core lifecycle](device-pr15/waydroid-lifecycle.json). Target restoration and disposable-instance
-removal pass. The final module repeat and remaining lab-file cleanup are in progress. Earlier
-records retain their exact artifact scope; they are not relabeled as current acceptance.
+removal pass. The final [module comparisons](module-compatibility.md) and
+[lab cleanup](device-pr15/cleanup.json) are complete. Earlier records retain their exact artifact
+scope; they are not relabeled as current acceptance.
 
 - PR15 retains the v31.0 baseline plus [verified fixes](device-pr15/upstream-fixes.json), as selected
   by the user. It preserves interactive SU consent and Kitsune Hide/SuList. Candidate `31016`
@@ -194,9 +195,11 @@ The first fixture attempt in [run 39102711441](https://github.com/Jordan231111/K
 failed its guest-file check before Magisk setup: init still loaded the original rule despite
 `-vendor`. The harness now binds the owned AVD's `vendor-qemu.img` to the prepared copy,
 matching the [emulator drive layer's AVD image selection](https://android.googlesource.com/platform/external/qemu/+/emu-master-dev/android-qemu2-glue/main.cpp).
-A mismatch retains the observed file and digest. Fixture runtime qualification is pending.
-Any later acceptance applies to that modified lab image, not the original SDK image or a
-physical Android 9 phone.
+A mismatch retains the observed file and digest. The fixture passes debug/release suites, four stock cold boots and four framework restarts
+without native crashes in [run 39104679161](https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39104679161).
+The expected init file was read back in all eight cold boots. All 33 jobs pass.
+Acceptance applies to that modified lab image, not the original SDK image or a physical
+Android 9 phone.
 
 [Run 39072209066](https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39072209066)
 also passes all 33 jobs on its first attempt at PR head `82142208f`. The earlier

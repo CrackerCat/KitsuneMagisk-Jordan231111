@@ -2831,57 +2831,50 @@ strand a test device.
 
 ## PR 15 — Commercial-emulator and physical-device qualification
 
-**Implementation status: in progress under the [PR15 qualification contract](docs/device-qualification.md).
-The requested lab is AVDs, MuMu Android Device-1 and a fresh BlueStacks Air instance; LDPlayer/Nox
-are outside this run. Physical targets are unavailable and must remain explicitly unqualified.
-PR3/PR4A/PR5A records are historical inputs, not acceptance of the current artifact.**
+**Implementation status: available-lab qualification complete under the
+[PR15 qualification contract](docs/device-qualification.md). Candidate `31018` retains v31.0 plus
+verified fixes, interactive SU consent and Kitsune Hide/SuList. The requested AVD, MuMu Android
+Device-1 and fresh BlueStacks lanes are complete; LDPlayer/Nox are outside this run. Physical
+targets remain unqualified. The [requirement audit](docs/device-pr15/requirements-audit.md)
+records the remaining boundaries of the original checklist below. Production promotion is PR16.**
 
-The requested [module comparisons](docs/module-compatibility.md) now cover 16 pinned releases
-and official stable controls. [MuMu acceptance](docs/device-pr15/mumu-lifecycle.json) records the
-new namespace, verified upgrade, large-archive regression, uninstall and exact original restore.
-Eight debug/release AVD lanes now pass across Android 10, 15 (4/16 KiB) and 16.
-Live-setup follow-up, repeated Cuttlefish checks and the final BlueStacks namespace
-check have passed. Shamiko 1.2.5 rejects the fork signing identity; the user accepted
-the documented Kitsune Hide / Zygisk Assistant fallback. The [hiding/provider review](docs/hiding-compatibility-review.md)
-records the causal controls and KernelSU Next, SUSFS and Zygisk Next comparison while preserving
-Kitsune policy and the project signer.
-ViPER testing found and reproduced a shell-field-separator bug in pre-init budget parsing.
-Candidate `31013` passes ViPER on AVD/MuMu and MuMu's full lifecycle. CI also exposed a manager
-package-removal race; candidate `31014` fixes it and passes the eight local AVD lanes.
-The user selected v31.0 plus [verified upstream fixes](docs/device-pr15/upstream-fixes.json),
-with interactive SU prompts and Kitsune policy preserved. Candidate `31015` adds the verified
-SU group, compression, Samsung footer, AVB2, ARM32 zImage and filename fixes.
-The property-override comparison also reproduced an inherited crash in official Magisk 30.7.
-Candidate `31016` adds that fix and passes all eight AVD lanes: 120 app tests, 107 boot-image
-checks, four isolated property checks and 48 root requests per variant. The 16 pinned module
-comparisons now include explicit Sui/NeoZygisk/third-party BusyBox limits at 16 KiB; matching
-official-Magisk controls reproduce those failures. MuMu's full lifecycle and exact original
-restore pass. BlueStacks passes 120 tests, three recorded cold boots, repeated root stress and
-both hiding fallbacks. BlueStacks unroot, byte-exact factory host-image restoration and
-test-instance deletion pass. Reopening the original instance is blocked by the unrelated running
-MuMu Device-0 occupying its port 5555. Final lab cleanup and
-the requirement-by-requirement audit remain in progress. The [CI acceptance](docs/device-pr15/ci-acceptance.json)
-records all 33 passing jobs and the retained API 30 startup-crash retry.
-Additional Waydroid testing exposed two [SELinux-disabled Zygisk defects](docs/device-pr15/waydroid-diagnosis.json):
-hidden LSM metadata prevented state detection, and companion socket identity unnecessarily required
-a SELinux label. The diagnostic fixes pass the real API v5 probe with both bundled module fixtures
-enabled, while preserving zygote identity checks. Candidate `31017` now passes its signed build,
-all eight local AVD lanes and the [Waydroid lifecycle](docs/device-pr15/waydroid-lifecycle.json),
-including SU/restorecon, normal/hidden manager, Hide/Assistant visibility, inverse SuList authorization,
-distinct Linux boots and stock restoration. MuMu's full `31017` lifecycle and exact original restore
-also pass. BlueStacks and module reruns remain in progress;
-all `31016` records above retain their original source/artifact scope.
-The final module repeat also exposed an inherited [child-exit status bug](docs/device-pr15/child-exit-status.json):
-SU and synchronous native commands could report a signal-killed child as successful. Official 30.7
-reproduces it. Candidate `31018` passes its build, 331 host tests, all eight AVD lanes with
-121 app tests per variant, and all 33 CI jobs on the first attempt. MuMu also passes its full
-`31018` lifecycle and exact original restoration. BlueStacks also passes its full suite, owned-clone
-survival/unroot, factory-image restoration and deletion of both test instances. Waydroid passes
-the final `31018` lifecycle and stock restoration; its VM is deleted. The module repeat and
-remaining file cleanup are in progress. Completed `31017` records retain their exact
-artifact identities.
-Four unavailable device/ROM targets are explicitly `unqualified-target` with PR16 ownership;
-the release audit still rejects them, and their implementations remain available.
+The final candidate passes eight local debug/release AVD lanes across Android 10, 15 (4/16 KiB)
+and 16, with 121 app tests, 107 boot-image checks, four isolated property checks and 48 root
+requests at concurrency six per variant. Its 331-test host suite passes with one Linux-only skip on macOS;
+four-ABI artifact verification, both Clippy profiles and all 33 [CI jobs](docs/device-pr15/ci-acceptance.json)
+pass. Each record retains its exact artifact/source identity and signer scope.
+Android 9 x86_64 CI uses an explicit AOSP composer-rule lab fixture; both unmodified SDK
+images remain unqualified because of graphics restart failures.
+
+[MuMu](docs/device-pr15/mumu-lifecycle.json), [BlueStacks](docs/device-pr15/bluestacks-lifecycle.json)
+and [Waydroid](docs/device-pr15/waydroid-lifecycle.json) pass the current candidate's full suites,
+cold boots, root stress, hiding checks and restoration. BlueStacks also passes owned-clone
+survival and unroot. Waydroid covers actual SELinux absence, SU/restorecon, API v5 companions,
+normal/hidden manager, Hide/Assistant and inverse SuList across distinct Linux host boots.
+Its lab init fixture does not qualify a production Waydroid installer or pre-init mounts.
+
+The [module matrix](docs/module-compatibility.md) covers 16 pinned releases, selected 4/16 KiB
+provider/client combinations, actual hiding visibility and official stable controls. Shamiko 1.2.5
+rejects the fork signing identity; the user accepted Kitsune Hide / Zygisk Assistant. The matrix
+also records Sui, NeoZygisk and third-party BusyBox failures at 16 KiB reproduced on official
+Magisk. These results do not promise universal module, detector or hardware-attestation success.
+
+Testing produced the [verified upstream fixes](docs/device-pr15/upstream-fixes.json), property
+override correction, pre-init field-separator correction, manager-removal race fix, managed-runtime
+and whiteout preservation, [Waydroid fixes](docs/device-pr15/waydroid-diagnosis.json), and the
+[signal-exit correction](docs/device-pr15/child-exit-status.json). The latter prevents killed SU/native
+commands from being reported as successful. Earlier investigations retain their original scope.
+
+[Cleanup](docs/device-pr15/cleanup.json) is complete. MuMu Device-1 is restored byte-for-byte;
+both BlueStacks test instances and the Waydroid VM are deleted; BlueStacks' factory image and
+recorded preferences are restored. Its original instance remains stopped by user choice.
+Owned probes, temporary AVDs, downloads and build intermediates are removed; final APKs,
+provenance, pre-existing output and permanent signing/recovery assets are preserved.
+
+Four unavailable device/ROM targets and four historical archive dispositions remain explicit
+production release gates. Mac host reboot and vendor emulator-version upgrades were not
+qualified. The generated compatibility page reports exact experimental tuples, not brand-wide
+or physical-phone support.
 
 - Complete exact MuMu and AVD lanes and either a BlueStacks adapter or explicit unsupported result.
   Preserve earlier LDPlayer observations as historical evidence; do not imply a current rerun.

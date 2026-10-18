@@ -439,6 +439,6 @@
     "private_adb_5050_stopped": true,
     "preinstalled_host_tools_preserved": true,
     "global_lima_identity_preserved": true,
-    "pinned_local_images": "Retained only in the owned task cache until final cleanup."
+    "pinned_local_images": "Removed with the owned task cache; see docs/device-pr15/cleanup.json."
   }
 }

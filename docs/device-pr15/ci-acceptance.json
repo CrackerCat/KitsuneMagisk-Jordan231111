@@ -1158,7 +1158,7 @@
         "logs_artifact_id": 12126717428
       },
       "fixture_followup": {
-        "status": "qualification-pending",
+        "status": "passed-in-run-39104679161",
         "tool": "tools/avd_composer_fixture.py",
         "original_vendor_sha256": "543ce1633b00d48d728bc039555e835304f1d4c9966a8daa2d174fa1f0bbf9bf",
         "fixture_vendor_sha256": "491341812fc71334ef998117f418c3c47c41552bf7098789f62f528862943b0b",
@@ -1187,7 +1187,7 @@
       "workflow_run": 39102711441,
       "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39102711441",
       "head_source": "681ebe106e0b8f512b3bc1495efbebc3b225dd3f",
-      "conclusion": "failure-observed",
+      "conclusion": "failure",
       "fixture_setup_failure": {
         "job_id": 117605495131,
         "phase": "First stock boot; guest init-file verification before Magisk setup",
@@ -1200,7 +1200,7 @@
       "correction": {
         "scope": "Bind the owned AVD vendor-qemu.img path to the prepared image using an absolute target; retain exact guest verification and native-crash gates.",
         "reference": "https://android.googlesource.com/platform/external/qemu/+/emu-master-dev/android-qemu2-glue/main.cpp",
-        "status": "qualification-pending",
+        "status": "passed-in-run-39104679161",
         "host_binding_probe": {
           "scope": "Host file-descriptor verification of the owned AVD vendor-qemu.img selection; stock API29 ARM64, no Magisk payload installed",
           "boot_id": "ec75b107-8609-4b2e-91d4-b5d570e153dc",
@@ -1216,6 +1216,216 @@
           "opened_path": "/Users/jordan/.cache/kitsune-pr15/api29-vendor-binding.img",
           "emulator_pid": 87108,
           "cleanup": "Owned AVD pr15-vendor-binding deleted and private ADB5060 stopped."
+        }
+      }
+    },
+    {
+      "workflow_run": 39104679161,
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39104679161",
+      "head_source": "de99c52d871e58b46acad9092f18254a56f94c9b",
+      "conclusion": "success",
+      "run_attempt": 2,
+      "passed_jobs": 33,
+      "initial_failures": [
+        {
+          "workflow_run": 39104679161,
+          "job_id": 117611675016,
+          "job": "Test API 29 (x86_64)",
+          "phase": "Download SDK image, before AVD creation or candidate installation",
+          "message": "SDK manager: Error on ZipFile unknown archive",
+          "candidate_runtime_started": false,
+          "job_log_sha256": "f277a4481bc00fb6c47673edc057cc61e3ae4d870eb16c0acf2fb90ddfb948bf",
+          "retry": {
+            "job_id": 117615941215,
+            "conclusion": "success",
+            "SDK_image_download_succeeded": true,
+            "existing_build_artifacts_reused": true,
+            "test_or_product_code_changed": false
+          }
+        }
+      ],
+      "scope": "Explicit AOSP composer-rule lab fixture; app/native source unchanged from the tested local 31018 candidate. Unmodified API28 SDK images remain unqualified.",
+      "api28_google_apis": {
+        "job_id": 117615942059,
+        "artifact_id": 12128692581,
+        "artifact_zip_sha256": "29c668bd46b9784a7e034e4cc77602ee785b56df01672960dddb6ca7ac43afd8",
+        "runtime_records": {
+          "debug": {
+            "schema": "kitsune.device-qualification.v1",
+            "artifact": {
+              "sha256": "73c41482dc57cbcb43af7cde7af9b9bfceaa15d6b42677579fcf24085b511f07",
+              "build": {
+                "app_version_code": 31018,
+                "application_id": "io.github.jordan231111.magisk",
+                "build_id": "dbc85977eccb1d65a71329c8893f11546b4201bb51fcfebf59e36f7996970661",
+                "capabilities": [
+                  "kitsune.boot-completed.v1",
+                  "kitsune.build-info.v1",
+                  "kitsune.early-mount.v2",
+                  "kitsune.hide.v1",
+                  "kitsune.module-root.v2",
+                  "kitsune.su-consent.v1",
+                  "kitsune.system-mode.transaction.v1",
+                  "kitsune.zygisk-provider.v1"
+                ],
+                "channel": "next-system-experimental",
+                "compat_version_code": 31000,
+                "product_name": "KitsuneMagisk Next",
+                "product_version": "0.1.0-dev",
+                "protocol_version": 1,
+                "release_tag": "kitsune-canary-ef9f9d44309a7aba561af03966d192745ecadf20",
+                "schema": 1,
+                "source_commit": "ef9f9d44309a7aba561af03966d192745ecadf20",
+                "source_digest": "90168277716a4bf71727fba91d0ee10b7d6feb304404bc9aebae7938a6a4e0ca",
+                "source_dirty": false,
+                "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+                "upstream_version": "31.0",
+                "variant": "debug",
+                "version_name": "0.1.0-dev-kitsune.ef9f9d44"
+              }
+            },
+            "guest": {
+              "fingerprint": "google/sdk_gphone_x86_64/generic_x86_64:9/PSR1.180720.122/6736742:userdebug/dev-keys",
+              "api": 28,
+              "abi": "x86_64",
+              "page_size": 4096,
+              "kernel": "4.4.124+",
+              "selinux": "Enforcing"
+            },
+            "boots": [
+              {
+                "id": "cde3cd1a-c6ed-4cd8-a543-e5e5d61e6ddf",
+                "phase": "setup",
+                "at": "2026-10-18T07:03:49.701790+00:00"
+              },
+              {
+                "id": "e592ca27-911f-48e4-8798-e9405acc078c",
+                "phase": "accepted",
+                "at": "2026-10-18T07:05:55.916617+00:00"
+              }
+            ]
+          },
+          "release": {
+            "schema": "kitsune.device-qualification.v1",
+            "artifact": {
+              "sha256": "4a8873f62816b4cd254bb18a938edc2c05934827efa50119e5082a65e71a8218",
+              "build": {
+                "app_version_code": 31018,
+                "application_id": "io.github.jordan231111.magisk",
+                "build_id": "611a442e391702dccd65909aec372ca96df59f84df74177067752fd0f7c85c77",
+                "capabilities": [
+                  "kitsune.boot-completed.v1",
+                  "kitsune.build-info.v1",
+                  "kitsune.early-mount.v2",
+                  "kitsune.hide.v1",
+                  "kitsune.module-root.v2",
+                  "kitsune.su-consent.v1",
+                  "kitsune.zygisk-provider.v1"
+                ],
+                "channel": "next-system-experimental",
+                "compat_version_code": 31000,
+                "product_name": "KitsuneMagisk Next",
+                "product_version": "0.1.0-dev",
+                "protocol_version": 1,
+                "release_tag": "kitsune-canary-ef9f9d44309a7aba561af03966d192745ecadf20",
+                "schema": 1,
+                "source_commit": "ef9f9d44309a7aba561af03966d192745ecadf20",
+                "source_digest": "90168277716a4bf71727fba91d0ee10b7d6feb304404bc9aebae7938a6a4e0ca",
+                "source_dirty": false,
+                "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+                "upstream_version": "31.0",
+                "variant": "release",
+                "version_name": "0.1.0-dev-kitsune.ef9f9d44"
+              }
+            },
+            "guest": {
+              "fingerprint": "google/sdk_gphone_x86_64/generic_x86_64:9/PSR1.180720.122/6736742:userdebug/dev-keys",
+              "api": 28,
+              "abi": "x86_64",
+              "page_size": 4096,
+              "kernel": "4.4.124+",
+              "selinux": "Enforcing"
+            },
+            "boots": [
+              {
+                "id": "26430374-4145-4825-bc97-2ae9381e841d",
+                "phase": "setup",
+                "at": "2026-10-18T07:07:05.374070+00:00"
+              },
+              {
+                "id": "773c99ec-8547-4a77-9f2d-182e52568ad0",
+                "phase": "accepted",
+                "at": "2026-10-18T07:08:44.300757+00:00"
+              }
+            ]
+          }
+        },
+        "stock_boot_ids": [
+          "8b3f2c0a-907d-46ac-835a-216de241ef09",
+          "c24b3d5f-5204-49e9-a3e1-691bc9070e66",
+          "93e654db-604c-467d-bd7a-bb7984554274",
+          "fd0d9c25-d327-4fb8-a242-0f5684096cc6"
+        ],
+        "stock_crash_buffers": {
+          "boot-1-framework.crash": {
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "native_crash_signatures": 0
+          },
+          "boot-1.crash": {
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "native_crash_signatures": 0
+          },
+          "boot-2-framework.crash": {
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "native_crash_signatures": 0
+          },
+          "boot-2.crash": {
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "native_crash_signatures": 0
+          },
+          "boot-3-framework.crash": {
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "native_crash_signatures": 0
+          },
+          "boot-3.crash": {
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "native_crash_signatures": 0
+          },
+          "boot-4-framework.crash": {
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "native_crash_signatures": 0
+          },
+          "boot-4.crash": {
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "native_crash_signatures": 0
+          }
+        },
+        "stock_cold_boots": 4,
+        "stock_framework_restarts": 4,
+        "native_crash_gate_unchanged": true,
+        "fixture": {
+          "schema": 1,
+          "scope": "Disposable API28 Google APIs x86_64 vendor fixture; no stock-image or phone qualification",
+          "sdk_package": "system-images;android-28;google_apis;x86_64",
+          "sdk_revision": 11,
+          "upstream_rule": "https://android.googlesource.com/platform/hardware/interfaces/+/android-10.0.0_r1/graphics/composer/2.1/default/android.hardware.graphics.composer@2.1-service.rc",
+          "original_vendor_sha256": "543ce1633b00d48d728bc039555e835304f1d4c9966a8daa2d174fa1f0bbf9bf",
+          "fixture_vendor_sha256": "491341812fc71334ef998117f418c3c47c41552bf7098789f62f528862943b0b",
+          "image_size": 102760448,
+          "changed_offset": 69992448,
+          "changed_length": 456,
+          "guest_rc_path": "/vendor/etc/init/android.hardware.graphics.composer@2.1-service.rc",
+          "guest_rc_sha256": "c01818ab0cc542ce12b564a18c351c163b2f1e5dcd275f3d7f5c21572acaca67",
+          "verified_boots": [
+            "8b3f2c0a-907d-46ac-835a-216de241ef09",
+            "c24b3d5f-5204-49e9-a3e1-691bc9070e66",
+            "93e654db-604c-467d-bd7a-bb7984554274",
+            "fd0d9c25-d327-4fb8-a242-0f5684096cc6",
+            "cde3cd1a-c6ed-4cd8-a543-e5e5d61e6ddf",
+            "e592ca27-911f-48e4-8798-e9405acc078c",
+            "26430374-4145-4825-bc97-2ae9381e841d",
+            "773c99ec-8547-4a77-9f2d-182e52568ad0"
+          ]
         }
       }
     }
