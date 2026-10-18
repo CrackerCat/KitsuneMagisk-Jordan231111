@@ -190,8 +190,13 @@ temporary directory, and changes one block-aligned 456-byte init-file region wit
 its length. All other image bytes are verified identical. Every cold boot must read back the
 expected file through ADB; stock cold boots and framework restarts additionally enforce the
 native-crash gate. The installed SDK image and production app/native code are unchanged.
-Fixture runtime qualification is pending. Any later acceptance applies to that modified lab
-image, not the original SDK image or a physical Android 9 phone.
+The first fixture attempt in [run 39102711441](https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39102711441)
+failed its guest-file check before Magisk setup: init still loaded the original rule despite
+`-vendor`. The harness now binds the owned AVD's `vendor-qemu.img` to the prepared copy,
+matching the [emulator drive layer's AVD image selection](https://android.googlesource.com/platform/external/qemu/+/emu-master-dev/android-qemu2-glue/main.cpp).
+A mismatch retains the observed file and digest. Fixture runtime qualification is pending.
+Any later acceptance applies to that modified lab image, not the original SDK image or a
+physical Android 9 phone.
 
 [Run 39072209066](https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39072209066)
 also passes all 33 jobs on its first attempt at PR head `82142208f`. The earlier

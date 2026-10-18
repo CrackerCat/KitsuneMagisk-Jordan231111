@@ -1182,6 +1182,42 @@
         }
       },
       "passed_jobs": 32
+    },
+    {
+      "workflow_run": 39102711441,
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39102711441",
+      "head_source": "681ebe106e0b8f512b3bc1495efbebc3b225dd3f",
+      "conclusion": "failure-observed",
+      "fixture_setup_failure": {
+        "job_id": 117605495131,
+        "phase": "First stock boot; guest init-file verification before Magisk setup",
+        "finding": "The -vendor argument did not select the prepared copy. The guest retained the original SurfaceFlinger-stopped rule, and verification correctly failed. No candidate runtime acceptance is claimed.",
+        "evidence": "Init processed the original /vendor/etc/init/android.hardware.graphics.composer@2.1-service.rc:10 property action; host command line included -vendor with the prepared image.",
+        "log_sha256": "1a1cccd8692ecbe5596bd89efb39486c35e5971c6f68641b19ef6f5519293378",
+        "device_artifact_id": 12127652922,
+        "logs_artifact_id": 12127224631
+      },
+      "correction": {
+        "scope": "Bind the owned AVD vendor-qemu.img path to the prepared image using an absolute target; retain exact guest verification and native-crash gates.",
+        "reference": "https://android.googlesource.com/platform/external/qemu/+/emu-master-dev/android-qemu2-glue/main.cpp",
+        "status": "qualification-pending",
+        "host_binding_probe": {
+          "scope": "Host file-descriptor verification of the owned AVD vendor-qemu.img selection; stock API29 ARM64, no Magisk payload installed",
+          "boot_id": "ec75b107-8609-4b2e-91d4-b5d570e153dc",
+          "guest": {
+            "ro.build.fingerprint": "google/sdk_gphone64_arm64/emulator64_arm64:10/QSR1.211112.011/13135432:userdebug/dev-keys",
+            "ro.build.version.sdk": "29",
+            "ro.product.cpu.abi": "arm64-v8a",
+            "kernel": "4.14.175-gd7103c943974-dirty",
+            "page_size": "4096",
+            "selinux": "Enforcing"
+          },
+          "opened_owned_vendor_copy": true,
+          "opened_path": "/Users/jordan/.cache/kitsune-pr15/api29-vendor-binding.img",
+          "emulator_pid": 87108,
+          "cleanup": "Owned AVD pr15-vendor-binding deleted and private ADB5060 stopped."
+        }
+      }
     }
   ]
 }

@@ -165,5 +165,12 @@
     "tools/__pycache__",
     "tools/system_mode/__pycache__",
     "app/test/.cxx"
-  ]
+  ],
+  "additional_binding_probe": {
+    "name": "pr15-vendor-binding",
+    "scope": "Stock API29 ARM64, no Magisk payload; host file-descriptor proof of AVD vendor-image selection",
+    "avd_deleted": true,
+    "private_adb_5060_stopped": true,
+    "vendor_copy": "Retained in the owned evidence cache until final cleanup."
+  }
 }

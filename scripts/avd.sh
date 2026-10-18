@@ -25,7 +25,6 @@ test_dir="${MAGISK_TEST_DIR:-.}"
 image_dir=
 vendor_fixture_dir=
 vendor_fixture_record=
-vendor_args=()
 debug_image=
 release_image=
 kernel_log="${AVD_KERNEL_LOG:-$test_dir/kernel.log}"
@@ -433,11 +432,16 @@ setup_emu() {
       return 1
     }
     vendor_fixture_dir=$(mktemp -d "$test_dir/.magisk-api28-vendor.XXXXXX")
+    vendor_fixture_dir=$(cd "$vendor_fixture_dir" && pwd -P)
     vendor_fixture_record="${AVD_QUALIFICATION_DIR:-$test_dir}/api28-composer-fixture.json"
     python3 tools/avd_composer_fixture.py create \
       --input "${installed_ramdisk%/*}/vendor.img" \
       --output "$vendor_fixture_dir/vendor.img" --record "$vendor_fixture_record"
-    vendor_args=(-vendor "$vendor_fixture_dir/vendor.img")
+    # The QEMU drive layer resolves the AVD's vendor image independently of
+    # the -vendor option. Bind the owned runtime path before the first boot.
+    local vendor_runtime="$ANDROID_AVD_HOME/$avd_name.avd/vendor-qemu.img"
+    [ ! -e "$vendor_runtime" ] && [ ! -L "$vendor_runtime" ] || return 1
+    ln -s "$vendor_fixture_dir/vendor.img" "$vendor_runtime"
   fi
 }
 
@@ -446,9 +450,9 @@ launch_emulator() {
   if [ -n "${AVD_TEST_LOG:-}" ]; then
     rm -f "$kernel_log" "$logcat_log"
     "$emu" "@$avd_name" $emu_args "${log_args[@]}" -logcat-output "$logcat_log" \
-      "${vendor_args[@]}" $image_args >"$kernel_log" 2>&1 &
+      $image_args >"$kernel_log" 2>&1 &
   else
-    "$emu" "@$avd_name" $emu_args "${vendor_args[@]}" $image_args >/dev/null 2>&1 &
+    "$emu" "@$avd_name" $emu_args $image_args >/dev/null 2>&1 &
   fi
   emu_pid=$!
   wait_emu || return $?

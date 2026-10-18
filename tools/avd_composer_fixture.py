@@ -118,6 +118,14 @@ def verify_guest(record: Path, adb: str, serial: str, boot_id: str) -> None:
         raise ValueError("fixture verification requires the current new cold boot")
     observed = subprocess.check_output(command + [RC_PATH], timeout=20)
     if observed != PATCHED_RC:
+        record.with_name("api28-composer-observed.rc").write_bytes(observed)
+        record.with_name("api28-composer-mismatch.json").write_text(json.dumps({
+            "boot_id": boot_id,
+            "expected_sha256": RC_SHA256,
+            "observed_sha256": hashlib.sha256(observed).hexdigest(),
+            "observed_length": len(observed),
+            "matches_unmodified_sdk_file": observed == OLD_RC,
+        }, indent=2) + "\n")
         raise ValueError("guest did not load the expected composer fixture")
     report["verified_boots"].append(boot_id)
     temporary = record.with_suffix(".tmp")
