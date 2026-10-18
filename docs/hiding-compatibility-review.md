@@ -128,3 +128,34 @@ Zygisk Assistant 2.1.4 explicitly skips apps with `PROCESS_GRANTED_ROOT` in its
 The commercial-emulator probe therefore removes and later restores its own test UID's
 grant left by the SU suite, and temporarily disables the other hiding fixture. The core
 continues reporting truthful authorization flags; this is test isolation, not a policy bypass.
+
+
+## Independent detector comparison
+
+[Native Root Detector 7.7.0](https://github.com/reveny/Android-Native-Root-Detector/releases/tag/v7.7.0)
+was also run unmodified against stock, candidate and official 30.7 Android 10 ARM64 AVDs.
+The [exact APK, boot IDs and observations](device-pr15/hiding-detector-comparison.json) retain
+its default settings: experimental and custom-ROM checks off. Its native implementation is not
+fully public; the report is an independent observation, not a complete security audit.
+
+| Configuration | Findings beyond the stock SDK debug fingerprint |
+| --- | --- |
+| Stock SDK | None |
+| Kitsune, no hiding and no Zygisk | Magisk and SU binary |
+| Kitsune Hide or SuList, built-in Zygisk | Mount gap, built-in Zygisk, suspicious mount |
+| Kitsune plus Assistant, built-in Zygisk | Mount gap and suspicious mount |
+| Official 30.7, built-in Zygisk with DenyList | Mount gap, built-in Zygisk, suspicious mount and recognized root-app flags |
+| Kitsune Hide or SuList, Zygisk disabled | None |
+| Kitsune with Zygisk Next plus Assistant | Mount gap |
+
+The last row records that installed configuration and the detector's result. Its API29 provider
+activation was not separately probed; do not use that row alone to certify working injection.
+The independent Next API v5 probes remain the separately qualified API35 4/16 KiB runs.
+
+For this detector on this image, no-Zygisk Hide/SuList produced the fewest extra findings.
+It also disables modules that require Zygisk. Built-in Hide/SuList still fulfills its tested
+namespace/policy contract, but cannot be described as concealing every injection or mount trace.
+The same trace categories appear on official Magisk; this comparison does not identify a
+Kitsune-specific core regression. No-Zygisk cleanup remains asynchronous, so these observations
+cannot establish a first-instruction guarantee for other applications. Kernel-patched SUSFS
+behavior and hardware attestation remain separate capabilities.

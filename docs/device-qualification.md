@@ -71,6 +71,10 @@ ordinary in-app Direct Install, inactive-slot, OTA or recovery routes on BlueSta
 
 ## Compatibility changes and remaining boundaries
 
+Candidate `31017` adds the [Waydroid detection and companion fixes](device-pr15/waydroid-diagnosis.json).
+Its consistent signed build and runtime qualification are pending. Existing `31016` records below
+remain evidence for their exact artifacts, not automatic acceptance of the new candidate.
+
 - PR15 retains the v31.0 baseline plus [verified fixes](device-pr15/upstream-fixes.json), as selected
   by the user. It preserves interactive SU consent and Kitsune Hide/SuList. Candidate `31016`
   corrects primary-group precedence, compressed-image error handling, Samsung trailer preservation,
@@ -159,6 +163,10 @@ implementation deferral, which still cannot be moved past PR15. This keeps the r
 available-lab work and the missing device/ROM evidence explicit.
 
 ## Retained CI investigation
+
+[Run 39072209066](https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39072209066)
+also passes all 33 jobs on its first attempt at PR head `82142208f`. The earlier
+startup failures below remain part of the record; a successful repeat does not erase them.
 
 [Run 39064935566](https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566)
 finishes with all 33 jobs passing. The [acceptance record](device-pr15/ci-acceptance.json)

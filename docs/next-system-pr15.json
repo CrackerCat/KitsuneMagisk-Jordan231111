@@ -152,6 +152,7 @@
     "docs/device-pr15/cuttlefish-release.json",
     "docs/device-pr15/cuttlefish-repeat-debug.json",
     "docs/device-pr15/cuttlefish-repeat-release.json",
+    "docs/device-pr15/hiding-detector-comparison.json",
     "docs/device-pr15/init-rc-selection.json",
     "docs/device-pr15/large-archive.json",
     "docs/device-pr15/live-setup.json",
@@ -186,9 +187,12 @@
     "docs/device-pr15/pr15-36-1-4k-property-fixtures-release.json",
     "docs/device-pr15/pr15-36-1-4k-release.json",
     "docs/device-pr15/property-overrides.json",
+    "docs/device-pr15/requirements-audit.md",
     "docs/device-pr15/resetprop-comparison.json",
+    "docs/device-pr15/selinux-disabled-attempts.json",
     "docs/device-pr15/shamiko-signing-identity.json",
     "docs/device-pr15/upstream-fixes.json",
+    "docs/device-pr15/waydroid-diagnosis.json",
     "docs/device-qualification.md",
     "docs/early-mount-pr8.json",
     "docs/early-mount-pr8.md",
@@ -426,6 +430,7 @@
     "tests/test_selinux_guard.py",
     "tests/test_su_consent.py",
     "tests/test_update_service.py",
+    "tests/test_zygisk_companion.py",
     "tests/test_zygisk_provider.py",
     "tests/test_zygote_identity.py",
     "tools/UpdateSigner.java",
@@ -471,7 +476,7 @@
     "updates/trust.json"
   ],
   "identity": {
-    "version_code": 31016,
+    "version_code": 31017,
     "application_id": "io.github.jordan231111.magisk"
   },
   "update_trust_sha256": "576693b150124ead7487391711da1c43bef7281fbda8750a986ad1b5aa9024d5"

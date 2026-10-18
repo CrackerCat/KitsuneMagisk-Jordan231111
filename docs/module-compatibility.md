@@ -31,11 +31,9 @@ No module ZIP is redistributed.
 | [JingMatrix/NeoZygisk](https://github.com/JingMatrix/NeoZygisk/releases/tag/v2.4) | v2.4 | API v5 injection passes at 4 KiB; fails at 16 KiB | The same 16 KiB failure occurs on official 30.7. Shipped ARM64 binaries have incompatible 16 KiB load layouts; use a qualified provider at that page size. Stock providers do not implement the Kitsune SuList adapter. |
 
 Kitsune Hide and Zygisk Assistant pass actual selected-app mount visibility on 4 KiB and
-16 KiB AVDs and MuMu Android Device-1. BlueStacks Core Hide passed; its Assistant check
-awaits normal secure-ADB authorization, followed by final cleanup. The marker remains
+16 KiB AVDs, MuMu Android Device-1 and the fresh BlueStacks instance. The marker remains
 visible to root; it is hidden from the selected unprivileged app. Core enforcement is
-disabled when Zygisk Assistant owns hiding. Completed probe runs remove their temporary
-modules and selections; BlueStacks cleanup is still pending.
+disabled when Zygisk Assistant owns hiding. Temporary modules and list entries are removed.
 
 Shamiko 1.2.5 remains incompatible with this signing identity. The user accepted the
 Kitsune Hide / Zygisk Assistant fallback. [Causal controls](device-pr15/shamiko-signing-identity.json)

@@ -28,7 +28,52 @@ pub(crate) fn selinux_disabled() -> bool {
         Err(_) => return false,
     }
     match std::fs::read_to_string("/proc/self/attr/current") {
-        Ok(context) => context.trim_matches(['\0', '\n']).is_empty(),
+        Ok(context) => {
+            let context = context.trim_matches(['\0', '\n']);
+            if context.is_empty() {
+                return true;
+            }
+            // Waydroid can hide securityfs while retaining AppArmor labels.
+            // Require the named AppArmor context and a complete filesystem
+            // list without selinuxfs, which enabled SELinux registers at boot.
+            let Ok(apparmor) = std::fs::read_to_string("/proc/self/attr/apparmor/current") else {
+                return false;
+            };
+            if context.contains(':') || apparmor.trim_matches(['\0', '\n']) != context {
+                return false;
+            }
+            let Ok(filesystems) = std::fs::read_to_string("/proc/filesystems") else {
+                return false;
+            };
+            let mut proc_seen = false;
+            for line in filesystems.lines() {
+                let mut fields = line.split_ascii_whitespace();
+                let Some(first) = fields.next() else {
+                    return false;
+                };
+                let nodev = first == "nodev";
+                let name = if nodev {
+                    let Some(name) = fields.next() else {
+                        return false;
+                    };
+                    name
+                } else {
+                    first
+                };
+                if fields.next().is_some()
+                    || name == "selinuxfs"
+                    || !name.bytes().all(|b| {
+                        b.is_ascii_lowercase()
+                            || b.is_ascii_digit()
+                            || matches!(b, b'_' | b'-' | b'.' | b'+')
+                    })
+                {
+                    return false;
+                }
+                proc_seen |= nodev && name == "proc";
+            }
+            proc_seen
+        }
         Err(e) => matches!(
             e.raw_os_error(),
             Some(libc::ENOENT | libc::EINVAL | libc::ENODEV)

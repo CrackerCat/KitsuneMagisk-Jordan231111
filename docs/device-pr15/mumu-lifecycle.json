@@ -49,7 +49,10 @@
     "hardware_audio_processing_qualified": false
   },
   "hiding_fallback": {
-    "record": "docs/device-pr15/mumu-hiding.json"
+    "record": "docs/module-pr15.json",
+    "targets": [
+      "mumu-fallback316"
+    ]
   },
   "uninstall": {
     "build": {

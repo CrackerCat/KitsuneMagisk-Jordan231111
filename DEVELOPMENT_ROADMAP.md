@@ -2839,8 +2839,8 @@ The requested [module comparisons](docs/module-compatibility.md) now cover 16 pi
 and official stable controls. [MuMu acceptance](docs/device-pr15/mumu-lifecycle.json) records the
 new namespace, verified upgrade, large-archive regression, uninstall and exact original restore.
 Eight debug/release AVD lanes now pass across Android 10, 15 (4/16 KiB) and 16.
-Live-setup follow-up and repeated Cuttlefish checks have passed; the latest BlueStacks namespace
-check remains in progress. Shamiko 1.2.5 rejects the fork signing identity; the user accepted
+Live-setup follow-up, repeated Cuttlefish checks and the final BlueStacks namespace
+check have passed. Shamiko 1.2.5 rejects the fork signing identity; the user accepted
 the documented Kitsune Hide / Zygisk Assistant fallback. The [hiding/provider review](docs/hiding-compatibility-review.md)
 records the causal controls and KernelSU Next, SUSFS and Zygisk Next comparison while preserving
 Kitsune policy and the project signer.
@@ -2856,10 +2856,16 @@ checks, four isolated property checks and 48 root requests per variant. The 16 p
 comparisons now include explicit Sui/NeoZygisk/third-party BusyBox limits at 16 KiB; matching
 official-Magisk controls reproduce those failures. MuMu's full lifecycle and exact original
 restore pass. BlueStacks passes 120 tests, three recorded cold boots, repeated root stress and
-Kitsune Hide. Its remaining Zygisk Assistant check requires normal secure-ADB authorization
-after that module enabled authentication; the Mac is locked. BlueStacks unroot/factory restore,
-test-instance removal and final lab cleanup remain open. The [CI acceptance](docs/device-pr15/ci-acceptance.json)
+both hiding fallbacks. BlueStacks unroot, byte-exact factory host-image restoration and
+test-instance deletion pass. Reopening the original instance is blocked by the unrelated running
+MuMu Device-0 occupying its port 5555. Final lab cleanup and
+the requirement-by-requirement audit remain in progress. The [CI acceptance](docs/device-pr15/ci-acceptance.json)
 records all 33 passing jobs and the retained API 30 startup-crash retry.
+Additional Waydroid testing exposed two [SELinux-disabled Zygisk defects](docs/device-pr15/waydroid-diagnosis.json):
+hidden LSM metadata prevented state detection, and companion socket identity unnecessarily required
+a SELinux label. The diagnostic fixes pass the real API v5 probe with both bundled module fixtures
+enabled, while preserving zygote identity checks. Candidate `31017` is now awaiting a consistent build
+and qualification; all `31016` records above retain their original source/artifact scope.
 Six unavailable device/ROM targets are explicitly `unqualified-target` with PR16 ownership;
 the release audit still rejects them, and their implementations remain available.
 

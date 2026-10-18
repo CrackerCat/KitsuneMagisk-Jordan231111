@@ -1,11 +1,11 @@
 {
   "schema": "kitsune.device-qualification.v1",
   "artifact": {
-    "sha256": "3609bc53e18870a66f204cfaaa14a6f829fe3c552c576bf4d899e4aedebb65b1",
+    "sha256": "f5e98efb5b275f70c4f1bb6a31f21ccd3ce361f2dc48e686674ad38fea6917db",
     "build": {
-      "app_version_code": 31009,
-      "application_id": "io.github.huskydg.magisk.next",
-      "build_id": "8e44d7cc3357d877f02a2744cb91b1fa8eba40a63fd97aab186062471135513c",
+      "app_version_code": 31016,
+      "application_id": "io.github.jordan231111.magisk",
+      "build_id": "c836e35d5e6f0aa6cc4d95c59e17ad8756236908fa941e6a90810f9460786883",
       "capabilities": [
         "kitsune.boot-completed.v1",
         "kitsune.build-info.v1",
@@ -21,15 +21,15 @@
       "product_name": "KitsuneMagisk Next",
       "product_version": "0.1.0-dev",
       "protocol_version": 1,
-      "release_tag": "kitsune-canary-0a15ecd2cbec0182ef410eb8e4ea4937575f7c0d",
+      "release_tag": "kitsune-canary-57c9c90813b65015d530ac119141baf32dddb9bd",
       "schema": 1,
-      "source_commit": "0a15ecd2cbec0182ef410eb8e4ea4937575f7c0d",
-      "source_digest": "13a99ebb392d2caef7405d6c25366221df46b0d0b8480ec58cedb7493b972456",
+      "source_commit": "57c9c90813b65015d530ac119141baf32dddb9bd",
+      "source_digest": "93613e01de69d49324b7dd29f1d549ff005d7caaa36e41ea49263f777bedd4f3",
       "source_dirty": false,
       "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
       "upstream_version": "31.0",
       "variant": "debug",
-      "version_name": "0.1.0-dev-kitsune.0a15ecd2"
+      "version_name": "0.1.0-dev-kitsune.57c9c908"
     }
   },
   "guest": {
@@ -42,19 +42,19 @@
   },
   "boots": [
     {
-      "id": "fee9330c-cf8d-467b-aae7-9ffec33b4395",
+      "id": "fde40791-769c-48a6-b603-1e9c7936c0da",
       "phase": "setup",
-      "at": "2026-10-17T06:21:07.441435+00:00"
+      "at": "2026-10-17T21:13:05.511899+00:00"
     },
     {
-      "id": "f8e2d8d3-5498-43e6-8edd-06cd8ee7ffdc",
+      "id": "e455eee3-3c04-417e-9e1e-5d5cd2cdbe78",
       "phase": "accepted",
-      "at": "2026-10-17T06:24:05.814134+00:00"
+      "at": "2026-10-17T21:16:57.476552+00:00"
     },
     {
-      "id": "abc891f1-6feb-48bc-9d43-478060534b8d",
+      "id": "54ddf88f-fd38-4d61-a625-354d3c21657c",
       "phase": "accepted",
-      "at": "2026-10-17T06:24:25.719623+00:00"
+      "at": "2026-10-17T21:17:13.242311+00:00"
     }
   ]
 }

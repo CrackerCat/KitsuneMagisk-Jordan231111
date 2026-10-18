@@ -88,7 +88,7 @@
       "name": "MuMuPlayer Pro Android Device-1 \u2014 Android 12 ARM64, 4 KiB",
       "route": "Qualified debug System Mode; vendor root off",
       "status": "experimental",
-      "limits": "Source 57c9c9081, code 31016. Fresh installation, 120 tests, 48 root requests in batches of six, both hiding fallbacks, ViPER configuration/removal, uninstall and exact original-disk/settings restoration. Earlier upgrade/archive evidence retains its own identity. Permissive SELinux; no physical OEM claim.",
+      "limits": "Source 57c9c9081, code 31016. Fresh installation, 120 tests, 48 root requests in batches of six, hiding fallback, ViPER configuration/removal, cold boots, uninstall and exact original-disk/settings restoration. Earlier upgrade/archive evidence retains its own identity. Permissive SELinux; no physical OEM claim.",
       "runs": [
         "docs/device-pr15/mumu-debug.json"
       ],
@@ -100,11 +100,11 @@
       ]
     },
     {
-      "id": "bluestacks-core-31009",
+      "id": "bluestacks-core-31016",
       "name": "BlueStacks Air disposable instance \u2014 Android 13 ARM64, 4 KiB",
       "route": "Original RootMac bootstrap plus experimental host initramfs adapter",
       "status": "experimental",
-      "limits": "Exact earlier source 0a15ecd2c, code 31009, previous package namespace. Full suite, three cold boots, host unroot/factory restore and disposable-instance deletion passed. Latest namespace retest awaits unlocked host UI. Active permissive SELinux with kernel-domain labels; not a disabled-policy or Samsung phone claim.",
+      "limits": "Source 57c9c9081, code 31016, current package namespace on fresh Tiramisu64_2. Full 120-test suite, three recorded cold boots, repeated root stress, hiding fallback, unroot, factory host-image restore and instance deletion passed. Active permissive SELinux with kernel-domain labels; not a disabled-policy or physical phone claim.",
       "runs": [
         "docs/device-pr15/bluestacks-debug.json"
       ],
