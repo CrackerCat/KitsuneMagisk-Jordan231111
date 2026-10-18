@@ -1,11 +1,11 @@
 {
   "schema": "kitsune.device-qualification.v1",
   "artifact": {
-    "sha256": "1667c444b341e3a0e96bb541bdd0d41747838d8eeece801ae2684dae86003f84",
+    "sha256": "99bd142889e6620ba8e3133b62e71b6a4b5b024cdd0307ffe941baef721f7948",
     "build": {
-      "app_version_code": 31017,
+      "app_version_code": 31018,
       "application_id": "io.github.jordan231111.magisk",
-      "build_id": "75a47af1d8e8259be28d566ba4246272839120f3cfae93e7106f17f1c4be5aab",
+      "build_id": "c60ffd521f608c9b3673dc5d2a5d5c34dda66be27e43e68d418a9aa9f7402ef8",
       "capabilities": [
         "kitsune.boot-completed.v1",
         "kitsune.build-info.v1",
@@ -21,15 +21,15 @@
       "product_name": "KitsuneMagisk Next",
       "product_version": "0.1.0-dev",
       "protocol_version": 1,
-      "release_tag": "kitsune-canary-53d31f126c7a9f52254b5470de1e7bdad9442326",
+      "release_tag": "kitsune-canary-574fb5884143fc172dc4e62f551a9adec56ba756",
       "schema": 1,
-      "source_commit": "53d31f126c7a9f52254b5470de1e7bdad9442326",
-      "source_digest": "7a92c1572f1576f33dde1afb04e1b3fe61f0ca47ab3cf746cafb57695ecfaf26",
+      "source_commit": "574fb5884143fc172dc4e62f551a9adec56ba756",
+      "source_digest": "3627cb15249812893a2bb5f649cec7d035601d91f83cac80f611b052dab98532",
       "source_dirty": false,
       "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
       "upstream_version": "31.0",
       "variant": "debug",
-      "version_name": "0.1.0-dev-kitsune.53d31f12"
+      "version_name": "0.1.0-dev-kitsune.574fb588"
     }
   },
   "guest": {
@@ -42,14 +42,14 @@
   },
   "boots": [
     {
-      "id": "4c08cf86-bea6-4b05-af2d-9c07eedec306",
+      "id": "8c6962d5-cb7e-48be-917c-572bebd25f11",
       "phase": "setup",
-      "at": "2026-10-18T00:40:24.910256+00:00"
+      "at": "2026-10-18T03:08:35.940739+00:00"
     },
     {
-      "id": "b3d20511-da7c-47fb-b3da-9c812ab9786c",
+      "id": "bbf48087-9aa1-470d-9a53-dad540ae3822",
       "phase": "accepted",
-      "at": "2026-10-18T00:43:04.301752+00:00"
+      "at": "2026-10-18T03:11:22.515324+00:00"
     }
   ]
 }

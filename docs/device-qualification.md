@@ -71,11 +71,12 @@ ordinary in-app Direct Install, inactive-slot, OTA or recovery routes on BlueSta
 
 ## Compatibility changes and remaining boundaries
 
-Candidate `31017` adds the [Waydroid detection and companion fixes](device-pr15/waydroid-diagnosis.json).
-Its signed build passes all eight local AVD lanes, [MuMu's full lifecycle and original restoration](device-pr15/mumu-lifecycle.json),
-and the [Waydroid runtime lifecycle](device-pr15/waydroid-lifecycle.json).
-BlueStacks and module reruns remain in progress. Existing `31016` records below retain
-their exact artifact scope until replaced by new acceptance evidence.
+Candidate `31018` adds the [child-exit status correction](device-pr15/child-exit-status.json)
+and passes its build, 331 host tests, eight AVD lanes, 33 CI jobs, [MuMu](device-pr15/mumu-lifecycle.json),
+[BlueStacks and its owned clone](device-pr15/bluestacks-lifecycle.json), and the
+[Waydroid core lifecycle](device-pr15/waydroid-lifecycle.json). Target restoration and disposable-instance
+removal pass. The final module repeat and remaining lab-file cleanup are in progress. Earlier
+records retain their exact artifact scope; they are not relabeled as current acceptance.
 
 - PR15 retains the v31.0 baseline plus [verified fixes](device-pr15/upstream-fixes.json), as selected
   by the user. It preserves interactive SU consent and Kitsune Hide/SuList. Candidate `31016`

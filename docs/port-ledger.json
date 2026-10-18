@@ -6612,7 +6612,7 @@
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
       },
       "parent_feature": "HID-014",
-      "acceptance_evidence": "docs/device-pr15/waydroid-lifecycle.json and waydroid-release.json: clean 31017 full suite, distinct Linux kernel boots, normal/hidden manager, SU and inverse SuList authorization, restorecon without SELinux writes, API5 companion, actual per-app Hide/Assistant visibility, and removal of the test bootstrap followed by stock boot."
+      "acceptance_evidence": "docs/device-pr15/waydroid-lifecycle.json and waydroid-release.json: clean 31018 full suite, distinct Linux kernel boots, normal/hidden manager, SU and inverse SuList authorization, restorecon without SELinux writes, API5 companion, actual per-app Hide/Assistant visibility, and removal of the test bootstrap followed by stock boot."
     },
     {
       "id": "SU-004-device",
@@ -6667,7 +6667,7 @@
         "limit": "Bounds cover the frozen observations, not an exhaustive first release date. A matching source locator is not compiled-APK or runtime attestation. Variants and gaps within the range remain in the review record."
       },
       "parent_feature": "SU-004",
-      "acceptance_evidence": "docs/device-pr15/waydroid-lifecycle.json and waydroid-release.json: clean 31017 full suite, distinct Linux kernel boots, normal/hidden manager, SU and inverse SuList authorization, restorecon without SELinux writes, API5 companion, actual per-app Hide/Assistant visibility, and removal of the test bootstrap followed by stock boot."
+      "acceptance_evidence": "docs/device-pr15/waydroid-lifecycle.json and waydroid-release.json: clean 31018 full suite, distinct Linux kernel boots, normal/hidden manager, SU and inverse SuList authorization, restorecon without SELinux writes, API5 companion, actual per-app Hide/Assistant visibility, and removal of the test bootstrap followed by stock boot."
     }
   ],
   "path_reviews": [

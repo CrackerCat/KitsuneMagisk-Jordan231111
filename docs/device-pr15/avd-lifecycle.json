@@ -1,15 +1,15 @@
 {
   "schema": 1,
-  "source_commit": "a86a70bdf5a019603754d72137665bd5ba302fdc",
+  "source_commit": "34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
   "application_id": "io.github.jordan231111.magisk",
-  "app_version_code": 31017,
+  "app_version_code": 31018,
   "variants": [
     "debug",
     "release"
   ],
   "release_signer_sha256": "9b09eb317c96036185884700d9584e63cc4a2a288825a0172633ba7bfe222ec6",
   "per_variant_checks": {
-    "junit_tests": 120,
+    "junit_tests": 121,
     "boot_fixtures": 107,
     "root_requests": 48,
     "root_concurrency": 6,
@@ -20,28 +20,28 @@
   },
   "cases": [
     {
-      "name": "pr15-317-36-1-4k",
+      "name": "pr15-318-36-1-4k",
       "image": "google_apis_playstore",
       "profile": "pixel_9_pro",
       "page_size": 4096,
       "exit_code": 0
     },
     {
-      "name": "pr15-317-35-4k",
+      "name": "pr15-318-35-4k",
       "image": "aosp_atd",
       "profile": "pixel_6",
       "page_size": 4096,
       "exit_code": 0
     },
     {
-      "name": "pr15-317-35-16k",
+      "name": "pr15-318-35-16k",
       "image": "google_apis_playstore_ps16k",
       "profile": "pixel_8",
       "page_size": 16384,
       "exit_code": 0
     },
     {
-      "name": "pr15-317-29-4k",
+      "name": "pr15-318-29-4k",
       "image": "google_apis",
       "profile": "Nexus 5X",
       "page_size": 4096,
@@ -50,7 +50,7 @@
   ],
   "sdk_inputs": [
     {
-      "case": "pr15-317-36-1-4k",
+      "case": "pr15-318-36-1-4k",
       "image": "google_apis_playstore",
       "api": "36.1",
       "sha256": {
@@ -59,7 +59,7 @@
       }
     },
     {
-      "case": "pr15-317-35-4k",
+      "case": "pr15-318-35-4k",
       "image": "aosp_atd",
       "api": "35",
       "sha256": {
@@ -68,7 +68,7 @@
       }
     },
     {
-      "case": "pr15-317-35-16k",
+      "case": "pr15-318-35-16k",
       "image": "google_apis_playstore_ps16k",
       "api": "35",
       "sha256": {
@@ -77,7 +77,7 @@
       }
     },
     {
-      "case": "pr15-317-29-4k",
+      "case": "pr15-318-29-4k",
       "image": "google_apis",
       "api": "29",
       "sha256": {

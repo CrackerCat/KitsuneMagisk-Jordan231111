@@ -1,12 +1,12 @@
 {
   "serial": "127.0.0.1:26700",
-  "apk_sha256": "3379e1854143613509411bab0811aee1f7b6a9b5d97f6cd53c21bbf3e9a24b29",
+  "apk_sha256": "c309d7b86299732e5d346bf3090e600e232f9591872ab4bbbe2a840bcfeee26d",
   "module_sha256": "9eca30a269dc676a66f67a9339185dee55cccd47dc1fc8eeea5416124626d67a",
   "cases": [
     {
       "name": "core-hide",
-      "baseline_boot": "e1cb7888-577b-4fd8-b761-611ce015223c",
-      "selected_boot": "29a90970-5daf-490f-a6c8-0134acd871e7",
+      "baseline_boot": "a1d3b31e-ca9d-4d1d-b208-ccd0863ca4b4",
+      "selected_boot": "f363a7c5-167b-4b1c-8696-5ee4f520c923",
       "visible_before": true,
       "hidden_from_selected_app": true,
       "marker_visible_to_root": true,
@@ -26,7 +26,7 @@
     },
     {
       "name": "zygisk-assistant",
-      "selected_boot": "1d692c74-ddb6-4f3b-9e8e-4809a53b53c4",
+      "selected_boot": "cb034803-5b5c-4c61-a1b7-a1ebc41c6478",
       "hidden_from_selected_app": true,
       "marker_visible_to_root": true,
       "core_enforcement_disabled": true,
@@ -46,9 +46,9 @@
     }
   ],
   "build": {
-    "app_version_code": 31017,
+    "app_version_code": 31018,
     "application_id": "io.github.jordan231111.magisk",
-    "build_id": "e01afd85d045d4ba3d4b96ab6c61da35198742d5be1a78083dfd10b845c1427b",
+    "build_id": "efa7120cfcba263072140a9fad5b3ee48a6cc4f183bb70ec04b5866f68ec3fde",
     "capabilities": [
       "kitsune.boot-completed.v1",
       "kitsune.build-info.v1",
@@ -64,15 +64,15 @@
     "product_name": "KitsuneMagisk Next",
     "product_version": "0.1.0-dev",
     "protocol_version": 1,
-    "release_tag": "kitsune-canary-a86a70bdf5a019603754d72137665bd5ba302fdc",
+    "release_tag": "kitsune-canary-34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
     "schema": 1,
-    "source_commit": "a86a70bdf5a019603754d72137665bd5ba302fdc",
-    "source_digest": "7a92c1572f1576f33dde1afb04e1b3fe61f0ca47ab3cf746cafb57695ecfaf26",
+    "source_commit": "34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
+    "source_digest": "3627cb15249812893a2bb5f649cec7d035601d91f83cac80f611b052dab98532",
     "source_dirty": false,
     "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
     "upstream_version": "31.0",
     "variant": "debug",
-    "version_name": "0.1.0-dev-kitsune.a86a70bd"
+    "version_name": "0.1.0-dev-kitsune.34d897b1"
   },
   "probe_policy_before": {
     "uid": 10054,
@@ -86,6 +86,6 @@
     "zygisk_shamiko"
   ],
   "test_policy_and_hiders_restored": true,
-  "cleanup_boot": "dd4bbf42-bf86-4103-96bd-f8039079afac",
+  "cleanup_boot": "f9578bc0-995a-418c-9591-99e38a6b2015",
   "temporary_modules_removed": true
 }

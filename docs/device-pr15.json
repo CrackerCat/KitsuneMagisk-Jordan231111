@@ -8,7 +8,7 @@
       "name": "Android 15 AVD \u2014 Pixel 6 profile, 4 KiB",
       "route": "Patched copy of SDK ramdisk; debug and production-signed release",
       "status": "experimental",
-      "limits": "Source a86a70bdf, code 31017. Full 120-test suite, 107 boot-image checks, four isolated property checks and 48 root requests at concurrency 6 per variant. AVD profiles do not qualify OEM phones or physical OTA/recovery; immutable images do not support in-place System Mode.",
+      "limits": "Source 34d897b1e, code 31018. Full 121-test suite, 107 boot-image checks, four isolated property checks and 48 root requests at concurrency 6 per variant. AVD profiles do not qualify OEM phones or physical OTA/recovery; immutable images do not support in-place System Mode.",
       "runs": [
         "docs/device-pr15/pr15-35-4k-debug.json",
         "docs/device-pr15/pr15-35-4k-release.json"
@@ -28,7 +28,7 @@
       "name": "Android 15 AVD \u2014 Pixel 8 profile, 16 KiB",
       "route": "Patched copy of SDK ramdisk; debug and production-signed release",
       "status": "experimental",
-      "limits": "Source a86a70bdf, code 31017. Full 120-test suite, 107 boot-image checks, four isolated property checks and 48 root requests at concurrency 6 per variant. AVD profiles do not qualify OEM phones or physical OTA/recovery; immutable images do not support in-place System Mode.",
+      "limits": "Source 34d897b1e, code 31018. Full 121-test suite, 107 boot-image checks, four isolated property checks and 48 root requests at concurrency 6 per variant. AVD profiles do not qualify OEM phones or physical OTA/recovery; immutable images do not support in-place System Mode.",
       "runs": [
         "docs/device-pr15/pr15-35-16k-debug.json",
         "docs/device-pr15/pr15-35-16k-release.json"
@@ -48,7 +48,7 @@
       "name": "Android 16 AVD \u2014 Pixel 9 Pro profile, 4 KiB",
       "route": "Patched copy of SDK ramdisk; debug and production-signed release",
       "status": "experimental",
-      "limits": "Source a86a70bdf, code 31017. Full 120-test suite, 107 boot-image checks, four isolated property checks and 48 root requests at concurrency 6 per variant. AVD profiles do not qualify OEM phones or physical OTA/recovery; immutable images do not support in-place System Mode.",
+      "limits": "Source 34d897b1e, code 31018. Full 121-test suite, 107 boot-image checks, four isolated property checks and 48 root requests at concurrency 6 per variant. AVD profiles do not qualify OEM phones or physical OTA/recovery; immutable images do not support in-place System Mode.",
       "runs": [
         "docs/device-pr15/pr15-36-1-4k-debug.json",
         "docs/device-pr15/pr15-36-1-4k-release.json"
@@ -68,7 +68,7 @@
       "name": "Android 10 AVD \u2014 Nexus 5X profile, 4 KiB",
       "route": "Patched copy of SDK ramdisk; debug and production-signed release",
       "status": "experimental",
-      "limits": "Source a86a70bdf, code 31017. Full 120-test suite, 107 boot-image checks, four isolated property checks and 48 root requests at concurrency 6 per variant. AVD profiles do not qualify OEM phones or physical OTA/recovery; immutable images do not support in-place System Mode.",
+      "limits": "Source 34d897b1e, code 31018. Full 121-test suite, 107 boot-image checks, four isolated property checks and 48 root requests at concurrency 6 per variant. AVD profiles do not qualify OEM phones or physical OTA/recovery; immutable images do not support in-place System Mode.",
       "runs": [
         "docs/device-pr15/pr15-29-4k-debug.json",
         "docs/device-pr15/pr15-29-4k-release.json"
@@ -88,7 +88,7 @@
       "name": "MuMuPlayer Pro Android Device-1 \u2014 Android 12 ARM64, 4 KiB",
       "route": "Qualified debug System Mode; vendor root off",
       "status": "experimental",
-      "limits": "Source a86a70bdf, code 31017. Fresh installation, 120-test suite, 48 concurrent root requests, actual Hide/Assistant visibility, ViPER configuration/removal, cold boots, uninstall and exact original disk/settings restoration. Earlier upgrade/archive evidence retains its own identity. Permissive SELinux; no physical OEM claim.",
+      "limits": "Source 34d897b1e, code 31018. Fresh installation, 121 tests, 48 root requests in batches of six, hiding fallback, ViPER configuration/removal, cold boots, uninstall and exact original-disk/settings restoration. Earlier upgrade/archive evidence retains its own identity. Permissive SELinux; no physical OEM claim.",
       "runs": [
         "docs/device-pr15/mumu-debug.json"
       ],
@@ -100,11 +100,11 @@
       ]
     },
     {
-      "id": "bluestacks-core-31016",
+      "id": "bluestacks-core-31018",
       "name": "BlueStacks Air disposable instance \u2014 Android 13 ARM64, 4 KiB",
       "route": "Original RootMac bootstrap plus experimental host initramfs adapter",
       "status": "experimental",
-      "limits": "Source 57c9c9081, code 31016, current package namespace on fresh Tiramisu64_2. Full 120-test suite, three recorded cold boots, repeated root stress, hiding fallback, unroot, factory host-image restore and instance deletion passed. Active permissive SELinux with kernel-domain labels; not a disabled-policy or physical phone claim.",
+      "limits": "Source 34d897b1e, code 31018, current package namespace on fresh Tiramisu64_3. Full 121-test suite, three recorded cold boots, repeated root stress, hiding fallback, owned-instance clone survival/unroot, factory host-image restore and deletion of both test instances passed. Active permissive SELinux with kernel-domain labels; not a disabled-policy or physical phone claim.",
       "runs": [
         "docs/device-pr15/bluestacks-debug.json"
       ],
@@ -118,7 +118,7 @@
       "name": "Cuttlefish x86_64 phone \u2014 CI virtual target",
       "route": "Actual virtual init_boot/Direct Install, debug and CI-signed release",
       "status": "experimental",
-      "limits": "CI source 53d31f126, code 31017, disposable CI signer. Debug/release Direct Install, cold boots and full app suites passed. Initial accessibility-window query failures are retained in the CI record; rerun used unchanged artifacts. Virtual hardware does not qualify physical OTA, encrypted storage or OEM bootloaders.",
+      "limits": "CI source 574fb5884, code 31018, disposable CI signer. Debug/release Direct Install, cold boots and full app suites passed. Earlier CI failures remain under previous acceptance. Virtual hardware does not qualify physical OTA, encrypted storage or OEM bootloaders.",
       "runs": [
         "docs/device-pr15/cuttlefish-debug.json",
         "docs/device-pr15/cuttlefish-release.json",
@@ -139,7 +139,7 @@
       "name": "Android 6 SDK x86/x86_64 \u2014 CI",
       "route": "Patched SDK ramdisks after stock cold-boot/framework controls",
       "status": "experimental",
-      "limits": "CI source 53d31f126, code 31017. Exact Android 6 x86/x86_64 images pass debug/release app suites; four stock cold boots and framework restarts per ABI also pass after persisted SDK provisioning. Ordinary Magisk only; no API23 System Mode or physical legacy-device claim.",
+      "limits": "CI source 574fb5884, code 31018. Exact Android 6 x86/x86_64 images pass debug/release app suites; four stock cold boots and framework restarts per ABI also pass after persisted SDK provisioning. Ordinary Magisk only; no API23 System Mode or physical legacy-device claim.",
       "runs": [
         "docs/device-pr15/ci-api23x64-debug.json",
         "docs/device-pr15/ci-api23x64-release.json",
@@ -155,11 +155,11 @@
       ]
     },
     {
-      "id": "waydroid-core-31017",
+      "id": "waydroid-core-31018",
       "name": "Waydroid 1.6.2 \u2014 Android 13 ARM64-only, 4 KiB",
       "route": "Explicit lab container-init bootstrap; core runtime qualification",
       "status": "experimental",
-      "limits": "Source a86a70bdf, code 31017. Full app suite, normal/hidden manager, SU, restorecon, API5 companion, built-in Hide, Zygisk Assistant and SuList passed with SELinux absent. Test hook removal and stock cold boot passed. No production installer, pre-init, OTA or physical-device claim.",
+      "limits": "Source 34d897b1e, code 31018. Full app suite, normal/hidden manager, SU, restorecon, API5 companion, built-in Hide, Zygisk Assistant and SuList passed with SELinux absent. Test hook removal and stock cold boot passed. No production installer, pre-init, OTA or physical-device claim.",
       "runs": [
         "docs/device-pr15/waydroid-release.json"
       ],

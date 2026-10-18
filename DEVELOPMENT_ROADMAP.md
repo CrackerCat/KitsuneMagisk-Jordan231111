@@ -2873,8 +2873,13 @@ also pass. BlueStacks and module reruns remain in progress;
 all `31016` records above retain their original source/artifact scope.
 The final module repeat also exposed an inherited [child-exit status bug](docs/device-pr15/child-exit-status.json):
 SU and synchronous native commands could report a signal-killed child as successful. Official 30.7
-reproduces it. Host regressions pass for the correction; candidate `31018` requires rebuilding
-and runtime acceptance. The completed `31017` records retain their exact artifact identities.
+reproduces it. Candidate `31018` passes its build, 331 host tests, all eight AVD lanes with
+121 app tests per variant, and all 33 CI jobs on the first attempt. MuMu also passes its full
+`31018` lifecycle and exact original restoration. BlueStacks also passes its full suite, owned-clone
+survival/unroot, factory-image restoration and deletion of both test instances. Waydroid passes
+the final `31018` lifecycle and stock restoration; its VM is deleted. The module repeat and
+remaining file cleanup are in progress. Completed `31017` records retain their exact
+artifact identities.
 Four unavailable device/ROM targets are explicitly `unqualified-target` with PR16 ownership;
 the release audit still rejects them, and their implementations remain available.
 

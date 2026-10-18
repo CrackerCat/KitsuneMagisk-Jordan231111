@@ -1,23 +1,23 @@
 {
   "schema": 1,
   "target": "Waydroid 1.6.2, Lineage20 Android 13 ARM64-only, 4 KiB",
-  "source_commit": "a86a70bdf5a019603754d72137665bd5ba302fdc",
-  "app_version_code": 31017,
-  "apk_sha256": "8cdd0fba2289316377c1aadcc28b0e65bf3322fc7f3d460f220fa3ee7bef52d5",
+  "source_commit": "34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
+  "app_version_code": 31018,
+  "apk_sha256": "553df78598eee3867eef4aa1603f2846960390c04e320ce11a74d12274d14529",
   "route": "Test-only per-container init bootstrap in an owned Lima VZ Ubuntu 24.04 VM, with no host shared mounts",
   "platform": {
     "kernel": "6.8.0-142-generic",
     "page_size": "4096",
     "active_host_lsms": "lockdown,capability,landlock,yama,apparmor",
-    "container_filesystems": "nodev\tsysfs\nnodev\ttmpfs\nnodev\tbdev\nnodev\tproc\nnodev\tcgroup\nnodev\tcgroup2\nnodev\tcpuset\nnodev\tdevtmpfs\nnodev\tconfigfs\nnodev\tdebugfs\nnodev\ttracefs\nnodev\tsecurityfs\nnodev\tsockfs\nnodev\tbpf\nnodev\tpipefs\nnodev\tramfs\nnodev\thugetlbfs\nnodev\tdevpts\n\text3\n\text2\n\text4\n\tsquashfs\n\tvfat\nnodev\tecryptfs\n\tfuseblk\nnodev\tfuse\nnodev\tfusectl\nnodev\tefivarfs\nnodev\tmqueue\nnodev\tpstore\n\tbtrfs\nnodev\tautofs\n\tiso9660\nnodev\tbinfmt_misc\nnodev\tbinder\nnodev\toverlay",
+    "container_filesystems": "nodev\tsysfs\nnodev\ttmpfs\nnodev\tbdev\nnodev\tproc\nnodev\tcgroup\nnodev\tcgroup2\nnodev\tcpuset\nnodev\tdevtmpfs\nnodev\tconfigfs\nnodev\tdebugfs\nnodev\ttracefs\nnodev\tsecurityfs\nnodev\tsockfs\nnodev\tbpf\nnodev\tpipefs\nnodev\tramfs\nnodev\thugetlbfs\nnodev\tdevpts\n\text3\n\text2\n\text4\n\tsquashfs\n\tvfat\nnodev\tecryptfs\n\tfuseblk\nnodev\tfuse\nnodev\tfusectl\nnodev\tefivarfs\nnodev\tmqueue\nnodev\tpstore\n\tbtrfs\nnodev\tautofs\nnodev\tbinfmt_misc\n\tiso9660\nnodev\toverlay\nnodev\tbinder",
     "generic_context": "lxc-waydroid (complain)",
     "apparmor_context": "lxc-waydroid (complain)",
     "getenforce": "Disabled",
-    "boot_id": "4f5cfb68-85d3-4ca6-b0fd-a6d639ba3d39",
+    "boot_id": "0f128ced-9ea1-4f5f-b149-60c2b65be1c5",
     "build": {
-      "app_version_code": 31017,
+      "app_version_code": 31018,
       "application_id": "io.github.jordan231111.magisk",
-      "build_id": "2fac20bb5e4ba497f740e0590a47dbd175856b4f041b999db7f85545c554e082",
+      "build_id": "5f1924caaf2ef96351947371aae32d5849c9c5ddc0fb39ff66c20ca6b3903499",
       "capabilities": [
         "kitsune.boot-completed.v1",
         "kitsune.build-info.v1",
@@ -32,22 +32,27 @@
       "product_name": "KitsuneMagisk Next",
       "product_version": "0.1.0-dev",
       "protocol_version": 1,
-      "release_tag": "kitsune-canary-a86a70bdf5a019603754d72137665bd5ba302fdc",
+      "release_tag": "kitsune-canary-34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
       "schema": 1,
-      "source_commit": "a86a70bdf5a019603754d72137665bd5ba302fdc",
-      "source_digest": "7a92c1572f1576f33dde1afb04e1b3fe61f0ca47ab3cf746cafb57695ecfaf26",
+      "source_commit": "34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
+      "source_digest": "3627cb15249812893a2bb5f649cec7d035601d91f83cac80f611b052dab98532",
       "source_dirty": false,
       "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
       "upstream_version": "31.0",
       "variant": "release",
-      "version_name": "0.1.0-dev-kitsune.a86a70bd"
+      "version_name": "0.1.0-dev-kitsune.34d897b1"
+    },
+    "adb_authentication": {
+      "ro.adb.secure": "1",
+      "private_key_copied": false,
+      "public_key_sha256": "6e9280e0cac93a8a8ed4f563a60deed2b2004a451442de0a844463ee992ab8c8"
     }
   },
   "bootstrap": {
     "build": {
-      "app_version_code": 31017,
+      "app_version_code": 31018,
       "application_id": "io.github.jordan231111.magisk",
-      "build_id": "2fac20bb5e4ba497f740e0590a47dbd175856b4f041b999db7f85545c554e082",
+      "build_id": "5f1924caaf2ef96351947371aae32d5849c9c5ddc0fb39ff66c20ca6b3903499",
       "capabilities": [
         "kitsune.boot-completed.v1",
         "kitsune.build-info.v1",
@@ -62,36 +67,31 @@
       "product_name": "KitsuneMagisk Next",
       "product_version": "0.1.0-dev",
       "protocol_version": 1,
-      "release_tag": "kitsune-canary-a86a70bdf5a019603754d72137665bd5ba302fdc",
+      "release_tag": "kitsune-canary-34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
       "schema": 1,
-      "source_commit": "a86a70bdf5a019603754d72137665bd5ba302fdc",
-      "source_digest": "7a92c1572f1576f33dde1afb04e1b3fe61f0ca47ab3cf746cafb57695ecfaf26",
+      "source_commit": "34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
+      "source_digest": "3627cb15249812893a2bb5f649cec7d035601d91f83cac80f611b052dab98532",
       "source_dirty": false,
       "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
       "upstream_version": "31.0",
       "variant": "release",
-      "version_name": "0.1.0-dev-kitsune.a86a70bd"
+      "version_name": "0.1.0-dev-kitsune.34d897b1"
     },
     "payload_sha256": {
-      "magiskpolicy": "efb1e70fbde3f85b77898d3a5b38ec885a9df2608b460ad8ac1153b6679c4a4c",
-      "magiskboot": "341af55d3bfb5f2c5fc381e77a0ad8fb9f7080d9fbfc18320c8c6a563d40bc7a",
-      "kitsune_system_launcher.sh": "c2bc4627f90e4f099d2bcb00e6ef8a2e7250760d49f003cd7d03db05e52d7ec2",
-      "magisk.apk": "8cdd0fba2289316377c1aadcc28b0e65bf3322fc7f3d460f220fa3ee7bef52d5",
-      "system_mode_transaction.sh": "6b14505bcaa23c703f40cbdc5b6292e665daff2764c0353c992d9ab469bc8144",
-      "magisk": "4802ba804b361cab965bfe328d586e39920f6209e1f25fb1f973067512819a6c",
-      "magiskinit": "a02d022dda4d234f4d53481004dc35ec6fff455bd949ed8c6b83860f6ccadbd3",
-      "config": "1182f322a39c0a0e8201ed43e1f9a82b78ac01906a1da933d8271690a78abcbf",
-      "util_functions.sh": "a39ce75d6c17a5aea934e500b55c72f97c9a4e7931a6bb5584adeaffd8559916",
-      "addon.d.sh": "ab56d64e7d846defb99342be68be063c9471fc88b9245b51ce6f7ea24ff47024",
-      "app_functions.sh": "d72534d4b0011f6593cc0f5960245c8c521b9f7c7cf4cae37a041c60e8641cf5",
       "busybox": "4d60ab3f5a59ebb2ca863f2f514e6924401b581e9b64f602665c008177626651",
-      "stub.apk": "b708a9d05d248e6fc2e344cc06ed6a5991b2f9ff6251f7d1bf7825ac1cfc55e5",
-      "system_mode_verify.sh": "4a1da0c32921040b69d6d3e7f996ac177fd9791ce55605162042b78b0ec811bd",
-      "uninstaller.sh": "74cabed92170d5871eb39d66355deee984c5bd2a3ce4d7b98c069c8e39144109",
-      "kitsune_system_rescue.sh": "e9e742dc26c53a42595760576ae6475117577a99179f16f70293e140c46bbe17",
+      "magisk": "d4ff6957f30aa691f95d1b518032ab5be163d78b50cd2b5b3a873f338a800e87",
+      "magiskboot": "d674735e39d40e6c8bb034c517823584b6056b81f9441e4026d672726c927dbc",
+      "magiskinit": "09c25f18313e7d765812383d815d6e2fa2b1a443ecf0d2d60977ecf244c95ca6",
+      "magiskpolicy": "64c0bb32655fd6c153372475938e87c6abb542f551c277860d141287412eecc3",
+      "stub.apk": "1ced21faf64afc2ab2a8228d1457759eae914d232d051743099bfdf8df8b1e03",
+      "util_functions.sh": "db7ae5e4660ef62c8077e4b26977f632a052031dc6a4590cb85f2640d3ca8cb2",
       "boot_patch.sh": "3b3624d3cf47926f21e6c4b7738826c636b2bf6cc387ed7cb225c796a142ef4f",
-      "kitsune_system_install.sh": "0fc1c83399e527d23ae2ce0665deabcba0fa2362db7971768943e83795cceb1f",
-      "module_installer.sh": "bcf4b1d9913f3af17755569c853e0b5a75b8005f6a18eb3f86dadcc0e968c29d"
+      "addon.d.sh": "ab56d64e7d846defb99342be68be063c9471fc88b9245b51ce6f7ea24ff47024",
+      "uninstaller.sh": "74cabed92170d5871eb39d66355deee984c5bd2a3ce4d7b98c069c8e39144109",
+      "magisk32": "ff7992bca872b6950c114dedb3d7bb58ad6ea1928d6baebb76fdec3c0f4d37a9",
+      "config": "1182f322a39c0a0e8201ed43e1f9a82b78ac01906a1da933d8271690a78abcbf",
+      "magisk.apk": "553df78598eee3867eef4aa1603f2846960390c04e320ce11a74d12274d14529",
+      ".kitsune-host-image.json": "7a87b14606cb2728896c7e92934b96294b0def47eac82fe58eee4eaf91acdba7"
     },
     "bootstrap_sha256": "213f33f65a77ca426585a4425abf65ed8586e5b5e0ece498a6905b3b6a83a574",
     "rc_sha256": "086c4789b49b7d2267961ee2d5abee9ac0440f7674100aa79f44fde225f84a2c",
@@ -102,7 +102,7 @@
     ]
   },
   "full_suite": {
-    "junit_tests": 120,
+    "junit_tests": 121,
     "passed": true,
     "api5_module_directory_and_root_companion": true,
     "normal_and_hidden_manager_round_trip": true,
@@ -116,17 +116,17 @@
     "exit_code": 0,
     "database_mode": "000",
     "selinux_write_attempts": 0,
-    "trace_sha256": "33d48dbc5590a3c9595f4f8724ccfebc57aa6420ef77a3800b8dc75bc442cf62"
+    "trace_sha256": "249db78c2cf7de69c145924947ab20acce42f3553423db7fa17d84e12e16a54f"
   },
   "hiding_fallback": {
     "serial": "127.0.0.1:15887",
-    "apk_sha256": "8cdd0fba2289316377c1aadcc28b0e65bf3322fc7f3d460f220fa3ee7bef52d5",
+    "apk_sha256": "553df78598eee3867eef4aa1603f2846960390c04e320ce11a74d12274d14529",
     "module_sha256": "9eca30a269dc676a66f67a9339185dee55cccd47dc1fc8eeea5416124626d67a",
     "cases": [
       {
         "name": "core-hide",
-        "baseline_boot": "293695d0-0060-45d7-875a-5301c6b87833",
-        "selected_boot": "0e58b91a-949f-4913-843e-20875a24fb6a",
+        "baseline_boot": "f755c143-b01c-4bd6-a799-28153f989f19",
+        "selected_boot": "ae81f66d-4fe6-4ebc-8299-130f5e0e5dec",
         "visible_before": true,
         "hidden_from_selected_app": true,
         "marker_visible_to_root": true,
@@ -146,7 +146,7 @@
       },
       {
         "name": "zygisk-assistant",
-        "selected_boot": "7682795c-fb5b-40ad-84d2-a2d28937d3cd",
+        "selected_boot": "2baec2b0-9a3d-4dd8-a9a8-a192d008012f",
         "hidden_from_selected_app": true,
         "marker_visible_to_root": true,
         "core_enforcement_disabled": true,
@@ -166,9 +166,9 @@
       }
     ],
     "build": {
-      "app_version_code": 31017,
+      "app_version_code": 31018,
       "application_id": "io.github.jordan231111.magisk",
-      "build_id": "2fac20bb5e4ba497f740e0590a47dbd175856b4f041b999db7f85545c554e082",
+      "build_id": "5f1924caaf2ef96351947371aae32d5849c9c5ddc0fb39ff66c20ca6b3903499",
       "capabilities": [
         "kitsune.boot-completed.v1",
         "kitsune.build-info.v1",
@@ -183,15 +183,15 @@
       "product_name": "KitsuneMagisk Next",
       "product_version": "0.1.0-dev",
       "protocol_version": 1,
-      "release_tag": "kitsune-canary-a86a70bdf5a019603754d72137665bd5ba302fdc",
+      "release_tag": "kitsune-canary-34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
       "schema": 1,
-      "source_commit": "a86a70bdf5a019603754d72137665bd5ba302fdc",
-      "source_digest": "7a92c1572f1576f33dde1afb04e1b3fe61f0ca47ab3cf746cafb57695ecfaf26",
+      "source_commit": "34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
+      "source_digest": "3627cb15249812893a2bb5f649cec7d035601d91f83cac80f611b052dab98532",
       "source_dirty": false,
       "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
       "upstream_version": "31.0",
       "variant": "release",
-      "version_name": "0.1.0-dev-kitsune.a86a70bd"
+      "version_name": "0.1.0-dev-kitsune.34d897b1"
     },
     "probe_policy_before": {
       "uid": 10126,
@@ -205,14 +205,14 @@
       "zygisk_shamiko"
     ],
     "test_policy_and_hiders_restored": true,
-    "cleanup_boot": "cca93bca-52d1-4afc-b945-f54c1f501c9a",
+    "cleanup_boot": "61c7e329-26ad-42c1-bd12-31670a189428",
     "temporary_modules_removed": true
   },
   "sulist": {
     "build": {
-      "app_version_code": 31017,
+      "app_version_code": 31018,
       "application_id": "io.github.jordan231111.magisk",
-      "build_id": "2fac20bb5e4ba497f740e0590a47dbd175856b4f041b999db7f85545c554e082",
+      "build_id": "5f1924caaf2ef96351947371aae32d5849c9c5ddc0fb39ff66c20ca6b3903499",
       "capabilities": [
         "kitsune.boot-completed.v1",
         "kitsune.build-info.v1",
@@ -227,17 +227,17 @@
       "product_name": "KitsuneMagisk Next",
       "product_version": "0.1.0-dev",
       "protocol_version": 1,
-      "release_tag": "kitsune-canary-a86a70bdf5a019603754d72137665bd5ba302fdc",
+      "release_tag": "kitsune-canary-34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
       "schema": 1,
-      "source_commit": "a86a70bdf5a019603754d72137665bd5ba302fdc",
-      "source_digest": "7a92c1572f1576f33dde1afb04e1b3fe61f0ca47ab3cf746cafb57695ecfaf26",
+      "source_commit": "34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
+      "source_digest": "3627cb15249812893a2bb5f649cec7d035601d91f83cac80f611b052dab98532",
       "source_dirty": false,
       "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
       "upstream_version": "31.0",
       "variant": "release",
-      "version_name": "0.1.0-dev-kitsune.a86a70bd"
+      "version_name": "0.1.0-dev-kitsune.34d897b1"
     },
-    "excluded_boot": "806813cb-00e7-4922-a0fd-6a414870a647",
+    "excluded_boot": "a45a42cb-dba3-4489-ad72-bc3052706ec5",
     "excluded_decision": {
       "schema": 1,
       "unmount": true,
@@ -246,7 +246,7 @@
     },
     "excluded_invisible": true,
     "excluded_uid_su_denied_despite_allow_policy": true,
-    "selected_boot": "d56cfb2e-b015-4a35-8007-3d7272c21700",
+    "selected_boot": "d8dc97a7-2de8-4637-bd69-f0a2acc6b3d7",
     "selected_decision": {
       "schema": 1,
       "unmount": false,
@@ -255,14 +255,14 @@
     },
     "selected_visible": true,
     "selected_su": true,
-    "cleanup_boot": "44ae969d-3440-46f5-a7e8-d6906e441e33",
+    "cleanup_boot": "e23a9c5c-da16-4f54-9326-f8762d997c2b",
     "cleanup": true
   },
   "host_kernel_boots": [
     {
-      "before": "4f5cfb68-85d3-4ca6-b0fd-a6d639ba3d39",
-      "after": "fd461fe2-344b-4816-b37b-ec52f9f2bc93",
-      "source_commit": "a86a70bdf5a019603754d72137665bd5ba302fdc",
+      "before": "0f128ced-9ea1-4f5f-b149-60c2b65be1c5",
+      "after": "d68003fa-a7c5-4550-97d2-268de9a0ab35",
+      "source_commit": "34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
       "root_uid": 0,
       "active_host_lsms": [
         "lockdown",
@@ -274,9 +274,9 @@
       "android_getenforce": "Disabled"
     },
     {
-      "before": "fd461fe2-344b-4816-b37b-ec52f9f2bc93",
-      "after": "26fb3d19-f8dd-4152-a818-e1f73b2be876",
-      "source_commit": "a86a70bdf5a019603754d72137665bd5ba302fdc",
+      "before": "d68003fa-a7c5-4550-97d2-268de9a0ab35",
+      "after": "ecba6804-8a7f-45af-b2bf-9eabb959ee0b",
+      "source_commit": "34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
       "root_uid": 0,
       "active_host_lsms": [
         "lockdown",
@@ -288,9 +288,9 @@
       "android_getenforce": "Disabled"
     },
     {
-      "before": "26fb3d19-f8dd-4152-a818-e1f73b2be876",
-      "after": "293695d0-0060-45d7-875a-5301c6b87833",
-      "source_commit": "a86a70bdf5a019603754d72137665bd5ba302fdc",
+      "before": "ecba6804-8a7f-45af-b2bf-9eabb959ee0b",
+      "after": "f755c143-b01c-4bd6-a799-28153f989f19",
+      "source_commit": "34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
       "root_uid": 0,
       "active_host_lsms": [
         "lockdown",
@@ -302,9 +302,9 @@
       "android_getenforce": "Disabled"
     },
     {
-      "before": "293695d0-0060-45d7-875a-5301c6b87833",
-      "after": "0e58b91a-949f-4913-843e-20875a24fb6a",
-      "source_commit": "a86a70bdf5a019603754d72137665bd5ba302fdc",
+      "before": "f755c143-b01c-4bd6-a799-28153f989f19",
+      "after": "ae81f66d-4fe6-4ebc-8299-130f5e0e5dec",
+      "source_commit": "34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
       "root_uid": 0,
       "active_host_lsms": [
         "lockdown",
@@ -316,9 +316,9 @@
       "android_getenforce": "Disabled"
     },
     {
-      "before": "0e58b91a-949f-4913-843e-20875a24fb6a",
-      "after": "7682795c-fb5b-40ad-84d2-a2d28937d3cd",
-      "source_commit": "a86a70bdf5a019603754d72137665bd5ba302fdc",
+      "before": "ae81f66d-4fe6-4ebc-8299-130f5e0e5dec",
+      "after": "2baec2b0-9a3d-4dd8-a9a8-a192d008012f",
+      "source_commit": "34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
       "root_uid": 0,
       "active_host_lsms": [
         "lockdown",
@@ -330,9 +330,9 @@
       "android_getenforce": "Disabled"
     },
     {
-      "before": "7682795c-fb5b-40ad-84d2-a2d28937d3cd",
-      "after": "cca93bca-52d1-4afc-b945-f54c1f501c9a",
-      "source_commit": "a86a70bdf5a019603754d72137665bd5ba302fdc",
+      "before": "2baec2b0-9a3d-4dd8-a9a8-a192d008012f",
+      "after": "61c7e329-26ad-42c1-bd12-31670a189428",
+      "source_commit": "34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
       "root_uid": 0,
       "active_host_lsms": [
         "lockdown",
@@ -344,9 +344,9 @@
       "android_getenforce": "Disabled"
     },
     {
-      "before": "cca93bca-52d1-4afc-b945-f54c1f501c9a",
-      "after": "0e6d4b84-17f0-4e5d-86bb-ecc71572f954",
-      "source_commit": "a86a70bdf5a019603754d72137665bd5ba302fdc",
+      "before": "61c7e329-26ad-42c1-bd12-31670a189428",
+      "after": "a45a42cb-dba3-4489-ad72-bc3052706ec5",
+      "source_commit": "34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
       "root_uid": 0,
       "active_host_lsms": [
         "lockdown",
@@ -358,9 +358,9 @@
       "android_getenforce": "Disabled"
     },
     {
-      "before": "0e6d4b84-17f0-4e5d-86bb-ecc71572f954",
-      "after": "144c44d0-bde4-4465-92ed-f7d41b0710d5",
-      "source_commit": "a86a70bdf5a019603754d72137665bd5ba302fdc",
+      "before": "a45a42cb-dba3-4489-ad72-bc3052706ec5",
+      "after": "d8dc97a7-2de8-4637-bd69-f0a2acc6b3d7",
+      "source_commit": "34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
       "root_uid": 0,
       "active_host_lsms": [
         "lockdown",
@@ -372,51 +372,9 @@
       "android_getenforce": "Disabled"
     },
     {
-      "before": "144c44d0-bde4-4465-92ed-f7d41b0710d5",
-      "after": "61eae2a1-4b67-4ab7-ba41-ad0a6968988a",
-      "source_commit": "a86a70bdf5a019603754d72137665bd5ba302fdc",
-      "root_uid": 0,
-      "active_host_lsms": [
-        "lockdown",
-        "capability",
-        "landlock",
-        "yama",
-        "apparmor"
-      ],
-      "android_getenforce": "Disabled"
-    },
-    {
-      "before": "61eae2a1-4b67-4ab7-ba41-ad0a6968988a",
-      "after": "806813cb-00e7-4922-a0fd-6a414870a647",
-      "source_commit": "a86a70bdf5a019603754d72137665bd5ba302fdc",
-      "root_uid": 0,
-      "active_host_lsms": [
-        "lockdown",
-        "capability",
-        "landlock",
-        "yama",
-        "apparmor"
-      ],
-      "android_getenforce": "Disabled"
-    },
-    {
-      "before": "806813cb-00e7-4922-a0fd-6a414870a647",
-      "after": "d56cfb2e-b015-4a35-8007-3d7272c21700",
-      "source_commit": "a86a70bdf5a019603754d72137665bd5ba302fdc",
-      "root_uid": 0,
-      "active_host_lsms": [
-        "lockdown",
-        "capability",
-        "landlock",
-        "yama",
-        "apparmor"
-      ],
-      "android_getenforce": "Disabled"
-    },
-    {
-      "before": "d56cfb2e-b015-4a35-8007-3d7272c21700",
-      "after": "44ae969d-3440-46f5-a7e8-d6906e441e33",
-      "source_commit": "a86a70bdf5a019603754d72137665bd5ba302fdc",
+      "before": "d8dc97a7-2de8-4637-bd69-f0a2acc6b3d7",
+      "after": "e23a9c5c-da16-4f54-9326-f8762d997c2b",
+      "source_commit": "34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
       "root_uid": 0,
       "active_host_lsms": [
         "lockdown",
@@ -430,9 +388,9 @@
   ],
   "stock_restoration": [
     {
-      "before": "44ae969d-3440-46f5-a7e8-d6906e441e33",
-      "after": "e0fd41b8-6bb9-488c-aa79-03c20b9a6fb2",
-      "source_commit": "a86a70bdf5a019603754d72137665bd5ba302fdc",
+      "before": "e23a9c5c-da16-4f54-9326-f8762d997c2b",
+      "after": "4a1abacd-b064-45a4-b438-95e056f72ec0",
+      "source_commit": "34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
       "magiskd_absent": true,
       "root_bootstrap_removed": true,
       "active_host_lsms": [
@@ -464,9 +422,9 @@
     "bundled_hider_restored": true
   },
   "log_sha256": {
-    "waydroid317-full-tests.log": "8d150663c0983a055a7734ea5ea9f105f4f93aef24e04892a845892d8139bffe",
-    "waydroid317-third-stress.log": "07184590b4596401817777971bd6f9772981f9ec83796cbe081f14aae6604f9a",
-    "waydroid317-restorecon.log": "fd9b5fd5f79256697b7cb4a07bf7db0391a531c9dee81d1296732e51a8211488"
+    "waydroid318-full-tests.log": "f1d5cec838af41cb69befe9b5d743bda286d1a98cc8ed2003aca8862c73496cb",
+    "waydroid318-third-stress.log": "07184590b4596401817777971bd6f9772981f9ec83796cbe081f14aae6604f9a",
+    "waydroid318-restorecon.log": "fd9b5fd5f79256697b7cb4a07bf7db0391a531c9dee81d1296732e51a8211488"
   },
   "limits": [
     "Experimental core runtime on this exact Android 13 ARM64-only Waydroid 1.6.2 / Ubuntu 24.04 kernel tuple.",
@@ -475,12 +433,12 @@
     "Built-in Zygisk and the stated hiding paths are qualified here. Other third-party provider/module combinations retain their separately tested target scope."
   ],
   "lab_cleanup": {
-    "owned_vm": "pr15-waydroid",
+    "owned_vm": "pr15-waydroid318",
     "vm_deleted": true,
-    "owned_base_image_cache_removed": true,
-    "private_adb_5050_stopped": true,
     "owned_ssh_tunnel_stopped": true,
+    "private_adb_5050_stopped": true,
     "preinstalled_host_tools_preserved": true,
-    "global_lima_identity_preserved": true
+    "global_lima_identity_preserved": true,
+    "pinned_local_images": "Retained only in the owned task cache until final cleanup."
   }
 }

@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "kind": "synthetic-boot-fixtures",
-  "apk_sha256": "3379e1854143613509411bab0811aee1f7b6a9b5d97f6cd53c21bbf3e9a24b29",
+  "apk_sha256": "c309d7b86299732e5d346bf3090e600e232f9591872ab4bbbe2a840bcfeee26d",
   "fingerprint": "google/sdk_gphone64_arm64/emulator64_arm64:10/QSR1.211112.011/13135432:userdebug/dev-keys",
   "checks": {
     "prime256v1:verify-independent-signature": "passed",
