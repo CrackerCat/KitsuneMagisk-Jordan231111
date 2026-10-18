@@ -28,7 +28,7 @@
 > [its contract and evidence](docs/hide-policy.md) retain the PR14/PR15 target dependencies. PR13's
 > manager implementation and local acceptance are complete in [GitHub #36](https://github.com/Jordan231111/KitsuneMagisk/pull/36),
 > with [scoped evidence](docs/manager-pr13.json), and is merged after passing its checks. PR14 is complete in [GitHub #37](https://github.com/Jordan231111/KitsuneMagisk/pull/37),
-> with [module acceptance and target limits](docs/module-pr14.json). PR15 is next.
+> with [module acceptance and target limits](docs/module-pr14.json). PR15 is in progress.
 > Production promotion remains gated.
 >
 > Product charter: KitsuneMagisk provides reliable Magisk root on real phones and emulators while
@@ -91,9 +91,10 @@ execution order.
 | 16 | Roadmap PR12 / GitHub #35 — Hide/SuList core and DB migration | **Complete** | Preserve the [core contract](docs/hide-policy.md), [qualification](docs/hide-pr12.json), and named PR14/PR15 dependencies. |
 | 17 | Roadmap PR13 / GitHub #36 — manager UI and SU authorization | **Complete; merged by GitHub #36** | Preserve the [manager contract](docs/manager-contract.md), [runtime record](docs/manager-pr13.json), authenticated migration and explicit historical replacements. |
 | 18 | Roadmap PR14 / GitHub #37 — module compatibility and early-mount v2 | **Complete in GitHub #37** | Preserve the [module contract](docs/module-contract.md), [acceptance](docs/module-pr14.json), and explicit device limits. |
-| 19 | Roadmap PR15–PR16 — device qualification and release | **Not started** | Close every remaining feature-ledger row by PR16; no historical behavior may become an unnamed follow-up. |
+| 19 | Roadmap PR15 — emulator and device qualification | **In progress** | Follow the [exact-target contract](docs/device-qualification.md); AVDs, MuMu Android Device-1 and a fresh BlueStacks instance are available. Physical phones remain unqualified. |
+| 20 | Roadmap PR16 — candidate qualification and release | **Not started** | Close every remaining feature-ledger row and physical-release gate before production promotion. |
 
-The next task is **PR15**, on the maintained `next-system` foundation with PR8–PR14 complete.
+The active task is **PR15**, on the maintained `next-system` foundation with PR8–PR14 complete.
 PR14 implements the [versioned module contract](docs/module-contract.md) and closes its 22 historical
 ledger rows with [scoped evidence](docs/module-pr14.json). Physical phones, additional boot/storage
 layouts and release promotion retain their PR15/PR16 gates.
@@ -1739,7 +1740,8 @@ Emulators cannot validate the riskiest boot paths. Maintain a small, documented 
 - [ ] Samsung device/firmware path, including large image handling and PROCA behavior.
 - [ ] MTK device.
 - [ ] Legacy A-only/SAR device if support remains promised.
-- [ ] Device or environment with SELinux permissive/disabled (including Waydroid if supported).
+- [x] Exact permissive [MuMu](docs/device-pr15/mumu-lifecycle.json) and SELinux-disabled
+  [Waydroid](docs/device-pr15/waydroid-lifecycle.json) environments; the Waydroid route is a lab init fixture.
 - [ ] Work profile/secondary user device for Hide/SuList.
 - [ ] Recovery procedure tested with stock images and module-disable/safe-mode path.
 
@@ -2829,10 +2831,54 @@ strand a test device.
 
 ## PR 15 — Commercial-emulator and physical-device qualification
 
-**Implementation status: not started as a full qualification PR. PR3/PR4A/PR5A records are inputs,
-not substitutes for this cross-target release matrix.**
+**Implementation status: available-lab qualification complete under the
+[PR15 qualification contract](docs/device-qualification.md). Candidate `31018` retains v31.0 plus
+verified fixes, interactive SU consent and Kitsune Hide/SuList. The requested AVD, MuMu Android
+Device-1 and fresh BlueStacks lanes are complete; LDPlayer/Nox are outside this run. Physical
+targets remain unqualified. The [requirement audit](docs/device-pr15/requirements-audit.md)
+records the remaining boundaries of the original checklist below. Production promotion is PR16.**
 
-- Complete exact LDPlayer/MuMu lanes and either a BlueStacks adapter or explicit unsupported result.
+The final candidate passes eight local debug/release AVD lanes across Android 10, 15 (4/16 KiB)
+and 16, with 121 app tests, 107 boot-image checks, four isolated property checks and 48 root
+requests at concurrency six per variant. The 331-test host suite passes with one Linux-only skip
+on macOS, and six additional SDK ADB identity-transition regressions pass. Artifact verification
+across all four ABIs, both Clippy profiles and all 33 [CI jobs](docs/device-pr15/ci-acceptance.json)
+pass. Each record retains its exact artifact/source identity and signer scope.
+Android 9 x86_64 CI uses an explicit AOSP composer-rule lab fixture; both unmodified SDK
+images remain unqualified because of graphics restart failures.
+
+[MuMu](docs/device-pr15/mumu-lifecycle.json), [BlueStacks](docs/device-pr15/bluestacks-lifecycle.json)
+and [Waydroid](docs/device-pr15/waydroid-lifecycle.json) pass the current candidate's full suites,
+cold boots, root stress, hiding checks and restoration. BlueStacks also passes owned-clone
+survival and unroot. Waydroid covers actual SELinux absence, SU/restorecon, API v5 companions,
+normal/hidden manager, Hide/Assistant and inverse SuList across distinct Linux host boots.
+Its lab init fixture does not qualify a production Waydroid installer or pre-init mounts.
+
+The [module matrix](docs/module-compatibility.md) covers 16 pinned releases, selected 4/16 KiB
+provider/client combinations, actual hiding visibility and official stable controls. Shamiko 1.2.5
+rejects the fork signing identity; the user accepted Kitsune Hide / Zygisk Assistant. The matrix
+also records Sui, NeoZygisk and third-party BusyBox failures at 16 KiB reproduced on official
+Magisk. These results do not promise universal module, detector or hardware-attestation success.
+
+Testing produced the [verified upstream fixes](docs/device-pr15/upstream-fixes.json), property
+override correction, pre-init field-separator correction, manager-removal race fix, managed-runtime
+and whiteout preservation, [Waydroid fixes](docs/device-pr15/waydroid-diagnosis.json), and the
+[signal-exit correction](docs/device-pr15/child-exit-status.json). The latter prevents killed SU/native
+commands from being reported as successful. Earlier investigations retain their original scope.
+
+[Cleanup](docs/device-pr15/cleanup.json) is complete. MuMu Device-1 is restored byte-for-byte;
+both BlueStacks test instances and the Waydroid VM are deleted; BlueStacks' factory image and
+recorded preferences are restored. Its original instance remains stopped by user choice.
+Owned probes, temporary AVDs, downloads and build intermediates are removed; final APKs,
+provenance, pre-existing output and permanent signing/recovery assets are preserved.
+
+Four unavailable device/ROM targets and four historical archive dispositions remain explicit
+production release gates. Mac host reboot and vendor emulator-version upgrades were not
+qualified. The generated compatibility page reports exact experimental tuples, not brand-wide
+or physical-phone support.
+
+- Complete exact MuMu and AVD lanes and either a BlueStacks adapter or explicit unsupported result.
+  Preserve earlier LDPlayer observations as historical evidence; do not imply a current rerun.
 - Complete advertised real-device and negative immutable-layout lanes.
 - On physical devices, qualify ordinary patch-file and Direct Install separately from any advertised
   writable-system/custom-ROM System Mode lane, including `boot`, `init_boot`, `vendor_boot`, A/B,
@@ -2964,10 +3010,12 @@ No release should be called stable until all applicable boxes are checked.
   compatibility asset (including behavior removed before that endpoint), and every material
   ordinary-Magisk use case with stable ID, exact
   commits/paths/tags, owner, decision, evidence, user impact, and migration fields.
-- [ ] No row is unowned, vaguely triaged, deferred past PR15, or silently lost because official code was assumed equivalent.
+- [ ] No implementation row is unowned, vaguely triaged, deferred past PR15, or silently lost because
+  official code was assumed equivalent. Unavailable device/ROM qualification has a named PR16
+  target, evidence and release blocker; it cannot be recorded as a pass or retirement.
 - [ ] Every PR8 `deferred-to-PR#` row has transitioned to `inherited-and-tested`,
   `ported-and-tested-in-PR#`, or `retired-with-evidence`; the ledger schema/checker rejects every
-  other final state.
+  other production state, including every explicitly unqualified target.
 - [ ] Every retained behavior is tested on the selected implementation; every retirement records user impact, migration guidance, and evidence.
 - [ ] PR16 leaves no required follow-up PR for a faithful production Kitsune release.
 

@@ -1,0 +1,217 @@
+{
+  "schema": 1,
+  "status": "complete",
+  "candidate": 31018,
+  "source_commit": "34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
+  "mumu": {
+    "device": "Android Device-1",
+    "state": "stopped",
+    "restored_disk_sha256": {
+      "system.qcow2": "5a6bcb206a71039b6e212124e888a76a78acc8181bda18fc279e36c7ba3437ec",
+      "data.qcow2": "d1f204adabe8c6973d7787c6067e4227dab45dc98303e9b6fee4afcc8c67734f"
+    },
+    "settings_match_original": true,
+    "file_modes_match_original": true
+  },
+  "bluestacks": {
+    "instances": {
+      "removed_instance": "Tiramisu64_3",
+      "removed_instances": [
+        "Tiramisu64_3",
+        "Tiramisu64_4"
+      ],
+      "remaining_instances": [
+        "Tiramisu64"
+      ],
+      "primary_running": false,
+      "primary_deliberately_stopped": true,
+      "primary_root_access": "0",
+      "local_adb_preference_restored_to_resumed_session_value": "0",
+      "remote_adb_preference": "0",
+      "disposable_guest_key_removed_with_instance": true,
+      "owned_rootmac_instance_record_removed": true,
+      "user_disposition": "Leave original BlueStacks stopped; preserve the unrelated MuMu Device-0 and existing ports."
+    },
+    "factory_image": {
+      "factory_initrd_sha256": "393f386ebc880f21a3c7812d0c851508afa697c016e6537894970e123787329e",
+      "byte_exact_restore": true,
+      "task_instance_root_record_cleared": true
+    },
+    "staging": {
+      "owned_staging_image_removed": "initrd-3273747a6bcf619e0d3642634d4e818983aef6b936fa547f0761496999e457f2.img",
+      "permanent_recovery_backups_preserved": true
+    }
+  },
+  "waydroid": {
+    "owned_vm": "pr15-waydroid318",
+    "vm_deleted": true,
+    "owned_ssh_tunnel_stopped": true,
+    "private_adb_5050_stopped": true,
+    "preinstalled_host_tools_preserved": true,
+    "global_lima_identity_preserved": true,
+    "pinned_local_images": "Removed with the owned task cache."
+  },
+  "completed_snapshot_cleanup": {
+    "mumu_original_rechecked": true,
+    "original_backup_preserved_until_final_cleanup": false,
+    "removed_owned_snapshots": [
+      "mumu-tested-final.gmad",
+      "mumu-tested-317.gmad",
+      "mumu-tested-318.gmad",
+      "mumu-317-backup",
+      "mumu-318-backup",
+      "blue316-data-backup.qcow2",
+      "blue318-data-backup.qcow2"
+    ],
+    "original_backup_removed_after_verified_restore": true
+  },
+  "private_adb_servers_stopped": [
+    5050,
+    5052,
+    5054,
+    5056,
+    5058,
+    5060
+  ],
+  "pending": [],
+  "preserved": [
+    "Final app/stub debug/release APKs and PR15 provenance/checksums",
+    "Pre-existing PR9/PR10/PR11 output and release/update evidence",
+    "External production signing assets",
+    "RootMac permanent recovery backups",
+    "MuMu Device-0 and global ADB service",
+    "Preinstalled Android/Lima/QEMU/Docker tools and global Lima identity"
+  ],
+  "removed_temporary_files": [
+    {
+      "name": "kitsune-pr15-mumu-startup.txt",
+      "sha256": "b0628a70587f179b1c1a54e44b7b3f39ed0b90bf9c4323a2a8d0d9dc4f314b8c"
+    }
+  ],
+  "managed_worktree": {
+    "archived": true,
+    "path": "~/.codex/worktrees/pr15-candidate/KitsuneMagisk",
+    "source_commit": "34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
+    "clean_before_archival": true
+  },
+  "temporary_avds_absent": true,
+  "module_phases_completed": [
+    {
+      "label": "module-final318",
+      "records": 20
+    },
+    {
+      "label": "fallback318-4k",
+      "records": 2
+    },
+    {
+      "label": "fallback318-16k",
+      "records": 2
+    },
+    {
+      "label": "module-final318-16k",
+      "records": 10
+    },
+    {
+      "label": "module-combinations318",
+      "records": 4
+    },
+    {
+      "label": "module-final318-api29",
+      "records": 4
+    },
+    {
+      "label": "module-sui16k-providers318",
+      "records": 2
+    },
+    {
+      "label": "module-sui16k-controls318",
+      "records": 2
+    },
+    {
+      "label": "fallback318-next4k",
+      "records": 1
+    },
+    {
+      "label": "fallback318-next16k",
+      "records": 1
+    }
+  ],
+  "build_cleanup": [
+    {
+      "target": "app",
+      "exit_code": 0,
+      "log_sha256": "4443a6b1b292812c2b7c3bcbbd47cbb7e9c2543b0eed6ee7ae73b81aacd6b2b3"
+    },
+    {
+      "target": "native",
+      "exit_code": 0,
+      "log_sha256": "b916b2cff89eae3e21e6e1f075b03efc1575714062708304c1d5461fe60c4626"
+    }
+  ],
+  "removed_test_outputs": [
+    "test-debug.apk",
+    "test-release.apk",
+    "test.apk",
+    "update-fixtures",
+    "pr15-production-update-fixtures"
+  ],
+  "removed_generated_caches": [
+    "__pycache__",
+    "tests/__pycache__",
+    "tests/system_mode/__pycache__",
+    "tools/__pycache__",
+    "tools/system_mode/__pycache__",
+    "app/test/.cxx"
+  ],
+  "additional_binding_probe": {
+    "name": "pr15-vendor-binding",
+    "scope": "Stock API29 ARM64, no Magisk payload; host file-descriptor proof of AVD vendor-image selection",
+    "avd_deleted": true,
+    "private_adb_5060_stopped": true,
+    "vendor_copy": "Removed with the owned task cache."
+  },
+  "owned_caffeinate_stopped": true,
+  "permanent_production_signing_assets_present": true,
+  "owned_cache_removed": "~/.cache/kitsune-pr15",
+  "retained_artifacts_rehashed": true,
+  "preexisting_output_files_unchanged": [
+    "SHA256SUMS",
+    "pr10-beta-notes.md",
+    "pr10-candidate-tag.txt",
+    "pr10-ci-final.json",
+    "pr10-ci-retries.json",
+    "pr10-clean-stub-acceptance.json",
+    "pr10-clean-stub-unavailable.log",
+    "pr10-cleanup.json",
+    "pr10-debug-native-manifest.json",
+    "pr10-debug-native.tar.xz",
+    "pr10-feed-commit.json",
+    "pr10-final-source-check.json",
+    "pr10-live-stub-start.json",
+    "pr10-manager-before-update.json",
+    "pr10-manager-update-acceptance.json",
+    "pr10-port-ledger-audit.json",
+    "pr10-primary-restored.json",
+    "pr10-public-release.json",
+    "pr10-publication.json",
+    "pr10-release-evidence.json",
+    "pr10-second-instance.json",
+    "pr10-staged-feed-verification.json",
+    "pr11-artifacts-bc.json",
+    "pr11-artifacts-bd.json",
+    "pr11-artifacts.json",
+    "pr11-final-source.json",
+    "pr11-network-artifacts.json",
+    "pr11-port-ledger-audit.json",
+    "pr11-source-final.json",
+    "pr11-source-initial.json",
+    "pr11-source.json",
+    "pr9-manager-instrumentation.log",
+    "pr9-manager-upgrade.json",
+    "pr9-mumu-native.json",
+    "pr9-port-ledger-audit.json",
+    "release-info.json"
+  ],
+  "stopped_caffeinate_pid": 53912
+}

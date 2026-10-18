@@ -113,9 +113,18 @@ int exec_command_sync(exec_t &exec) {
     int pid = exec_command(exec);
     if (pid < 0)
         return -1;
-    int status;
-    waitpid(pid, &status, 0);
-    return WEXITSTATUS(status);
+    for (;;) {
+        int status;
+        int result = waitpid(pid, &status, 0);
+        if (result < 0 && errno == EINTR)
+            continue;
+        if (result <= 0)
+            return -1;
+        if (WIFEXITED(status))
+            return WEXITSTATUS(status);
+        if (WIFSIGNALED(status))
+            return 128 + WTERMSIG(status);
+    }
 }
 
 int new_daemon_thread(thread_entry entry, void *arg) {

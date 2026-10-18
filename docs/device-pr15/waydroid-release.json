@@ -1,0 +1,59 @@
+{
+  "schema": "kitsune.device-qualification.v1",
+  "artifact": {
+    "sha256": "553df78598eee3867eef4aa1603f2846960390c04e320ce11a74d12274d14529",
+    "build": {
+      "app_version_code": 31018,
+      "application_id": "io.github.jordan231111.magisk",
+      "build_id": "5f1924caaf2ef96351947371aae32d5849c9c5ddc0fb39ff66c20ca6b3903499",
+      "capabilities": [
+        "kitsune.boot-completed.v1",
+        "kitsune.build-info.v1",
+        "kitsune.early-mount.v2",
+        "kitsune.hide.v1",
+        "kitsune.module-root.v2",
+        "kitsune.su-consent.v1",
+        "kitsune.zygisk-provider.v1"
+      ],
+      "channel": "next-system-experimental",
+      "compat_version_code": 31000,
+      "product_name": "KitsuneMagisk Next",
+      "product_version": "0.1.0-dev",
+      "protocol_version": 1,
+      "release_tag": "kitsune-canary-34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
+      "schema": 1,
+      "source_commit": "34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
+      "source_digest": "3627cb15249812893a2bb5f649cec7d035601d91f83cac80f611b052dab98532",
+      "source_dirty": false,
+      "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+      "upstream_version": "31.0",
+      "variant": "release",
+      "version_name": "0.1.0-dev-kitsune.34d897b1"
+    }
+  },
+  "guest": {
+    "fingerprint": "waydroid/lineage_waydroid_arm64_only/waydroid_arm64_only:13/TQ3A.230901.001/eng.aleast.20260927.082710:userdebug/test-keys",
+    "api": 33,
+    "abi": "arm64-v8a",
+    "page_size": 4096,
+    "kernel": "6.8.0-142-generic",
+    "selinux": "Unknown"
+  },
+  "boots": [
+    {
+      "id": "0f128ced-9ea1-4f5f-b149-60c2b65be1c5",
+      "phase": "setup",
+      "at": "2026-10-18T04:14:28.321645+00:00"
+    },
+    {
+      "id": "d68003fa-a7c5-4550-97d2-268de9a0ab35",
+      "phase": "accepted",
+      "at": "2026-10-18T04:17:10.528986+00:00"
+    },
+    {
+      "id": "ecba6804-8a7f-45af-b2bf-9eabb959ee0b",
+      "phase": "accepted",
+      "at": "2026-10-18T04:17:43.496757+00:00"
+    }
+  ]
+}

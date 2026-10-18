@@ -1,0 +1,1600 @@
+{
+  "schema": 1,
+  "workflow_run": 39091017402,
+  "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402",
+  "head_source": "34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
+  "tested_merge_source": "574fb5884143fc172dc4e62f551a9adec56ba756",
+  "source_digest_matches_local_candidate": true,
+  "conclusion": "success",
+  "run_attempt": 1,
+  "jobs": [
+    {
+      "name": "Audit native Rust dependencies",
+      "databaseId": 117567596052,
+      "conclusion": "success",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402/job/117567596052"
+    },
+    {
+      "name": "Test building on windows-2025",
+      "databaseId": 117567596122,
+      "conclusion": "success",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402/job/117567596122"
+    },
+    {
+      "name": "Audit historical Kitsune inventory",
+      "databaseId": 117567596150,
+      "conclusion": "success",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402/job/117567596150"
+    },
+    {
+      "name": "Test privileged host and transaction contracts",
+      "databaseId": 117567596152,
+      "conclusion": "success",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402/job/117567596152"
+    },
+    {
+      "name": "Test building on ubuntu-24.04",
+      "databaseId": 117567596222,
+      "conclusion": "success",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402/job/117567596222"
+    },
+    {
+      "name": "Build Magisk artifacts",
+      "databaseId": 117568096778,
+      "conclusion": "success",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402/job/117568096778"
+    },
+    {
+      "name": "Test API 26 (x86)",
+      "databaseId": 117571807081,
+      "conclusion": "success",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402/job/117571807081"
+    },
+    {
+      "name": "Test API 24 (x86)",
+      "databaseId": 117571807082,
+      "conclusion": "success",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402/job/117571807082"
+    },
+    {
+      "name": "Test API 27 (x86)",
+      "databaseId": 117571807091,
+      "conclusion": "success",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402/job/117571807091"
+    },
+    {
+      "name": "Test API 25 (x86)",
+      "databaseId": 117571807097,
+      "conclusion": "success",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402/job/117571807097"
+    },
+    {
+      "name": "Test aosp_cf_x86_64_only_phone",
+      "databaseId": 117571807107,
+      "conclusion": "success",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402/job/117571807107"
+    },
+    {
+      "name": "Test API 29 (x86)",
+      "databaseId": 117571807136,
+      "conclusion": "success",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402/job/117571807136"
+    },
+    {
+      "name": "Test API 28  (x86_64)",
+      "databaseId": 117571807152,
+      "conclusion": "success",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402/job/117571807152"
+    },
+    {
+      "name": "Test API 24  (x86_64)",
+      "databaseId": 117571807153,
+      "conclusion": "success",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402/job/117571807153"
+    },
+    {
+      "name": "Test API 34  (x86_64)",
+      "databaseId": 117571807157,
+      "conclusion": "success",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402/job/117571807157"
+    },
+    {
+      "name": "Test API 23 (x86)",
+      "databaseId": 117571807160,
+      "conclusion": "success",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402/job/117571807160"
+    },
+    {
+      "name": "Test API 32  (x86_64)",
+      "databaseId": 117571807161,
+      "conclusion": "success",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402/job/117571807161"
+    },
+    {
+      "name": "Test API 29  (x86_64)",
+      "databaseId": 117571807164,
+      "conclusion": "success",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402/job/117571807164"
+    },
+    {
+      "name": "Test API 23  (x86_64)",
+      "databaseId": 117571807169,
+      "conclusion": "success",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402/job/117571807169"
+    },
+    {
+      "name": "Test API 30 (x86)",
+      "databaseId": 117571807175,
+      "conclusion": "success",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402/job/117571807175"
+    },
+    {
+      "name": "Test API 28 (x86)",
+      "databaseId": 117571807189,
+      "conclusion": "success",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402/job/117571807189"
+    },
+    {
+      "name": "Test API 25  (x86_64)",
+      "databaseId": 117571807198,
+      "conclusion": "success",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402/job/117571807198"
+    },
+    {
+      "name": "Test API 35  (x86_64)",
+      "databaseId": 117571807205,
+      "conclusion": "success",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402/job/117571807205"
+    },
+    {
+      "name": "Test API 31  (x86_64)",
+      "databaseId": 117571807206,
+      "conclusion": "success",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402/job/117571807206"
+    },
+    {
+      "name": "Test API 36  (x86_64)",
+      "databaseId": 117571807213,
+      "conclusion": "success",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402/job/117571807213"
+    },
+    {
+      "name": "Test API 37.1 google_apis_ps16k (x86_64)",
+      "databaseId": 117571807216,
+      "conclusion": "success",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402/job/117571807216"
+    },
+    {
+      "name": "Test API 37.0 google_apis (x86_64)",
+      "databaseId": 117571807218,
+      "conclusion": "success",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402/job/117571807218"
+    },
+    {
+      "name": "Test API 30  (x86_64)",
+      "databaseId": 117571807223,
+      "conclusion": "success",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402/job/117571807223"
+    },
+    {
+      "name": "Test API 36.1 google_apis (x86_64)",
+      "databaseId": 117571807237,
+      "conclusion": "success",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402/job/117571807237"
+    },
+    {
+      "name": "Test API 33  (x86_64)",
+      "databaseId": 117571807240,
+      "conclusion": "success",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402/job/117571807240"
+    },
+    {
+      "name": "Test API 27  (x86_64)",
+      "databaseId": 117571807252,
+      "conclusion": "success",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402/job/117571807252"
+    },
+    {
+      "name": "Test API 37.0 google_apis_ps16k (x86_64)",
+      "databaseId": 117571807256,
+      "conclusion": "success",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402/job/117571807256"
+    },
+    {
+      "name": "Test API 26  (x86_64)",
+      "databaseId": 117571807314,
+      "conclusion": "success",
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39091017402/job/117571807314"
+    }
+  ],
+  "legacy_stock_controls": [
+    {
+      "target": "api23x64",
+      "cold_boot_ids": [
+        "2f5c60e9-242e-4475-b15b-138083907061",
+        "9e7b1d41-9c87-4b8f-8a33-2e645644dcd0",
+        "f7916454-73e7-45da-9da6-2cda3230efd3",
+        "95bfc0b4-8fed-4844-a9f1-dc21d29e78c5"
+      ],
+      "framework_restarts": 4,
+      "native_crashes_observed": 0,
+      "provisioning": {
+        "schema": 1,
+        "sdk_setup_disabled_on_disk": true,
+        "package_restrictions_sha256": "c3826993e20421129bad78134e86fce9d4b1256a07e64dba0759d1964da9d628",
+        "wait_seconds": 2.903
+      },
+      "stock_ramdisk_sha256": "30f62f5c18886658e4faeabecf761d27943f2fcdad80c15007ac2d821715bb0a"
+    },
+    {
+      "target": "api23x86",
+      "cold_boot_ids": [
+        "734e7846-181c-45aa-be82-fe8d7ac13b17",
+        "6f85f117-5474-4a5e-8d0b-dd4c56c09572",
+        "fcfc2b18-c099-46cd-8c5c-7c4d02a6091d",
+        "c60a3d22-c2fa-4300-b7ea-a8d2a29c3d40"
+      ],
+      "framework_restarts": 4,
+      "native_crashes_observed": 0,
+      "provisioning": {
+        "schema": 1,
+        "sdk_setup_disabled_on_disk": true,
+        "package_restrictions_sha256": "5fbb4297c1bb8070b2c7fd6f447ae2c715f222549da8f27b55d2e88ea502b80b",
+        "wait_seconds": 3.517
+      },
+      "stock_ramdisk_sha256": "b97fb7e82fc6f9f0fee20fd0ad85ee5948605f9bdcd89b1a2df1b9de395616d2"
+    }
+  ],
+  "runtime_records": [
+    "docs/device-pr15/cuttlefish-debug.json",
+    "docs/device-pr15/cuttlefish-release.json",
+    "docs/device-pr15/ci-api23x64-debug.json",
+    "docs/device-pr15/ci-api23x64-release.json",
+    "docs/device-pr15/ci-api23x86-debug.json",
+    "docs/device-pr15/ci-api23x86-release.json",
+    "docs/device-pr15/ci-api30-debug.json",
+    "docs/device-pr15/ci-api30-release.json"
+  ],
+  "initial_failures": [],
+  "downloaded_artifacts": [
+    {
+      "name": "device-aosp_cf_x86_64_only_phone",
+      "artifact_id": 12123607456,
+      "created_at": "2026-10-18T03:25:09Z",
+      "files": 2
+    },
+    {
+      "name": "device-23-x86",
+      "artifact_id": 12123164025,
+      "created_at": "2026-10-18T03:15:56Z",
+      "files": 37
+    },
+    {
+      "name": "device-23--x86_64",
+      "artifact_id": 12123556039,
+      "created_at": "2026-10-18T03:16:39Z",
+      "files": 37
+    },
+    {
+      "name": "device-30-x86",
+      "artifact_id": 12122773906,
+      "created_at": "2026-10-18T03:15:16Z",
+      "files": 2
+    },
+    {
+      "name": "device-30--x86_64",
+      "artifact_id": 12123726059,
+      "created_at": "2026-10-18T03:14:33Z",
+      "files": 2
+    },
+    {
+      "name": "device-37.1-google_apis_ps16k-x86_64",
+      "artifact_id": 12123303417,
+      "created_at": "2026-10-18T03:15:30Z",
+      "files": 10
+    }
+  ],
+  "signing_scope": "CI uses disposable signing identities and retains its merge-source identity. The local release APK uses the project production key; the local debug APK uses a separate debug key. Each local record identifies the exact APK and variant tested.",
+  "previous_acceptance": {
+    "schema": 1,
+    "workflow_run": 39082126909,
+    "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909",
+    "head_source": "a86a70bdf5a019603754d72137665bd5ba302fdc",
+    "tested_merge_source": "53d31f126c7a9f52254b5470de1e7bdad9442326",
+    "source_digest_matches_local_candidate": true,
+    "conclusion": "success",
+    "run_attempt": 2,
+    "jobs": [
+      {
+        "name": "Test aosp_cf_x86_64_only_phone",
+        "databaseId": 117547716043,
+        "conclusion": "success",
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909/job/117547716043"
+      },
+      {
+        "name": "Audit native Rust dependencies",
+        "databaseId": 117547716141,
+        "conclusion": "success",
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909/job/117547716141"
+      },
+      {
+        "name": "Test privileged host and transaction contracts",
+        "databaseId": 117547716445,
+        "conclusion": "success",
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909/job/117547716445"
+      },
+      {
+        "name": "Test API 24 (x86)",
+        "databaseId": 117547716626,
+        "conclusion": "success",
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909/job/117547716626"
+      },
+      {
+        "name": "Build Magisk artifacts",
+        "databaseId": 117547716804,
+        "conclusion": "success",
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909/job/117547716804"
+      },
+      {
+        "name": "Test API 25 (x86)",
+        "databaseId": 117547716829,
+        "conclusion": "success",
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909/job/117547716829"
+      },
+      {
+        "name": "Test API 23 (x86)",
+        "databaseId": 117547716843,
+        "conclusion": "success",
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909/job/117547716843"
+      },
+      {
+        "name": "Test API 24  (x86_64)",
+        "databaseId": 117547716893,
+        "conclusion": "success",
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909/job/117547716893"
+      },
+      {
+        "name": "Test API 25  (x86_64)",
+        "databaseId": 117547716935,
+        "conclusion": "success",
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909/job/117547716935"
+      },
+      {
+        "name": "Test API 27  (x86_64)",
+        "databaseId": 117547716939,
+        "conclusion": "success",
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909/job/117547716939"
+      },
+      {
+        "name": "Test API 28  (x86_64)",
+        "databaseId": 117547716962,
+        "conclusion": "success",
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909/job/117547716962"
+      },
+      {
+        "name": "Test API 23  (x86_64)",
+        "databaseId": 117547716984,
+        "conclusion": "success",
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909/job/117547716984"
+      },
+      {
+        "name": "Test API 27 (x86)",
+        "databaseId": 117547716988,
+        "conclusion": "success",
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909/job/117547716988"
+      },
+      {
+        "name": "Test API 26 (x86)",
+        "databaseId": 117547717005,
+        "conclusion": "success",
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909/job/117547717005"
+      },
+      {
+        "name": "Test API 37.1 google_apis_ps16k (x86_64)",
+        "databaseId": 117547717082,
+        "conclusion": "success",
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909/job/117547717082"
+      },
+      {
+        "name": "Test building on windows-2025",
+        "databaseId": 117547717151,
+        "conclusion": "success",
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909/job/117547717151"
+      },
+      {
+        "name": "Test API 30 (x86)",
+        "databaseId": 117547717157,
+        "conclusion": "success",
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909/job/117547717157"
+      },
+      {
+        "name": "Test API 26  (x86_64)",
+        "databaseId": 117547717274,
+        "conclusion": "success",
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909/job/117547717274"
+      },
+      {
+        "name": "Test API 28 (x86)",
+        "databaseId": 117547717440,
+        "conclusion": "success",
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909/job/117547717440"
+      },
+      {
+        "name": "Test API 29 (x86)",
+        "databaseId": 117547717450,
+        "conclusion": "success",
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909/job/117547717450"
+      },
+      {
+        "name": "Test API 30  (x86_64)",
+        "databaseId": 117547717471,
+        "conclusion": "success",
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909/job/117547717471"
+      },
+      {
+        "name": "Test API 31  (x86_64)",
+        "databaseId": 117547717548,
+        "conclusion": "success",
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909/job/117547717548"
+      },
+      {
+        "name": "Test API 29  (x86_64)",
+        "databaseId": 117547717584,
+        "conclusion": "success",
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909/job/117547717584"
+      },
+      {
+        "name": "Test API 36  (x86_64)",
+        "databaseId": 117547717617,
+        "conclusion": "success",
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909/job/117547717617"
+      },
+      {
+        "name": "Test API 32  (x86_64)",
+        "databaseId": 117547717671,
+        "conclusion": "success",
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909/job/117547717671"
+      },
+      {
+        "name": "Test API 35  (x86_64)",
+        "databaseId": 117547717718,
+        "conclusion": "success",
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909/job/117547717718"
+      },
+      {
+        "name": "Test API 36.1 google_apis (x86_64)",
+        "databaseId": 117547717729,
+        "conclusion": "success",
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909/job/117547717729"
+      },
+      {
+        "name": "Test API 34  (x86_64)",
+        "databaseId": 117547717798,
+        "conclusion": "success",
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909/job/117547717798"
+      },
+      {
+        "name": "Test API 33  (x86_64)",
+        "databaseId": 117547717903,
+        "conclusion": "success",
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909/job/117547717903"
+      },
+      {
+        "name": "Test API 37.0 google_apis_ps16k (x86_64)",
+        "databaseId": 117547718055,
+        "conclusion": "success",
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909/job/117547718055"
+      },
+      {
+        "name": "Test API 37.0 google_apis (x86_64)",
+        "databaseId": 117547718112,
+        "conclusion": "success",
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909/job/117547718112"
+      },
+      {
+        "name": "Test building on ubuntu-24.04",
+        "databaseId": 117547743628,
+        "conclusion": "success",
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909/job/117547743628"
+      },
+      {
+        "name": "Audit historical Kitsune inventory",
+        "databaseId": 117547745018,
+        "conclusion": "success",
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39082126909/job/117547745018"
+      }
+    ],
+    "legacy_stock_controls": [
+      {
+        "target": "api23x64",
+        "cold_boot_ids": [
+          "4030d184-54ca-4fb7-b3d6-9fbdaa7efc1e",
+          "c16b1780-8601-4d8b-bbc4-fbe1072eb563",
+          "47de21e1-66f2-4c2a-ac8e-781532f45709",
+          "b564bd33-d543-47d7-993c-148cf1f9bde0"
+        ],
+        "framework_restarts": 4,
+        "native_crashes_observed": 0,
+        "provisioning": {
+          "schema": 1,
+          "sdk_setup_disabled_on_disk": true,
+          "package_restrictions_sha256": "463165bd172a691e3e1f855d728432be9bbe6a7aaa512f8e260fac97ad722db3",
+          "wait_seconds": 2.487
+        },
+        "stock_ramdisk_sha256": "30f62f5c18886658e4faeabecf761d27943f2fcdad80c15007ac2d821715bb0a"
+      },
+      {
+        "target": "api23x86",
+        "cold_boot_ids": [
+          "f085f88f-2e87-46ff-9726-c4a55c6fdbf6",
+          "45c7a4b8-18f2-45da-907d-c739e0929791",
+          "dc88682b-980a-4624-aaa4-db0bd7d54f87",
+          "a74eac8f-b088-4440-872e-0c66146486e9"
+        ],
+        "framework_restarts": 4,
+        "native_crashes_observed": 0,
+        "provisioning": {
+          "schema": 1,
+          "sdk_setup_disabled_on_disk": true,
+          "package_restrictions_sha256": "7d9c1bcddf9978ff27c6eb923f61b75cec9e9514b64ead722852d2505ea651a3",
+          "wait_seconds": 2.266
+        },
+        "stock_ramdisk_sha256": "b97fb7e82fc6f9f0fee20fd0ad85ee5948605f9bdcd89b1a2df1b9de395616d2"
+      }
+    ],
+    "runtime_records": [
+      "docs/device-pr15/cuttlefish-debug.json",
+      "docs/device-pr15/cuttlefish-release.json",
+      "docs/device-pr15/ci-api23x64-debug.json",
+      "docs/device-pr15/ci-api23x64-release.json",
+      "docs/device-pr15/ci-api23x86-debug.json",
+      "docs/device-pr15/ci-api23x86-release.json",
+      "docs/device-pr15/ci-api30-debug.json",
+      "docs/device-pr15/ci-api30-release.json"
+    ],
+    "initial_failures": [
+      {
+        "workflow_run": 39082126909,
+        "job": 117545179580,
+        "head_source": "a86a70bdf5a019603754d72137665bd5ba302fdc",
+        "ci_merge_source": "53d31f126c7a9f52254b5470de1e7bdad9442326",
+        "image": "android-37.1/google_apis_ps16k/x86_64",
+        "phase": "stock controls before candidate ramdisk patch and installation",
+        "failure": "adb: unable to connect for root: closed",
+        "candidate_installed_at_failure": false,
+        "stock_boot_id": "fec13daa-ed93-4a54-825c-5fd459a46cdd",
+        "job_log_sha256": "4f430fa9f8d82c14803c86b558a245bc305715121c5e995d39ce1a0025da6b79",
+        "diagnosis": "Stock ADB transport closed its root request; guest logging and following shell reads remained available. No native crash identified in the retained stock log. No inference that candidate runtime passed.",
+        "retry": "Passed in run attempt 2 using the unchanged build artifact.",
+        "classification": "Retained first-attempt failure; no test exemption or production authorization change."
+      },
+      {
+        "workflow_run": 39082126909,
+        "initial_job": 117545179369,
+        "head_source": "a86a70bdf5a019603754d72137665bd5ba302fdc",
+        "ci_merge_source": "53d31f126c7a9f52254b5470de1e7bdad9442326",
+        "phase": "debug manager instrumentation, after API5 and update tests passed",
+        "failed_tests": [
+          "testAccessChangeRejectsPendingGrant",
+          "testSuTimeoutAndAuthenticationCannotAutoGrant",
+          "testOnceGrantReplayAndImmediateRevocation",
+          "testUnavailableCredentialRetainsLegacyRequirement"
+        ],
+        "observation": "Cuttlefish AccessibilityManagerService reported window-add timeouts and UiDevice returned null root nodes with repeated five-second delays. Consent activities were launched/displayed; queries outlasted bounded requests. Underlying framework cause not established. No production consent timeout or authorization rule changed.",
+        "first_request_timing": {
+          "test_started": "00:48:43.679",
+          "consent_displayed": "00:48:45.639",
+          "null_window_queries": [
+            "00:48:49.152",
+            "00:48:54.398",
+            "00:48:59.468"
+          ],
+          "consent_not_accepted": "00:49:01.289",
+          "grant_control_assertion_failed": "00:49:05.873"
+        },
+        "fatal_signals_or_exceptions": [],
+        "job_log_sha256": "0fc99c97d7f3487cd1ee835a92a2cc234fd2a1f2b972c36e72b6379fff986e7a",
+        "guest_log_sha256": "d031f0f694e7546d7b276cfa49f2c74bce97afba56b63ce6c8ff5cf0cf03a5d0",
+        "retry_job": 117547716043,
+        "retry": "Passed in run attempt 2 using the unchanged build artifact.",
+        "guest": {
+          "fingerprint": "generic/aosp_cf_x86_64_only_phone/vsoc_x86_64_only:17/CP2A.260605.016/16373615:userdebug/test-keys",
+          "api": 37,
+          "abi": "x86_64",
+          "page_size": 4096,
+          "kernel": "6.12.74-android16-6-g3ec022196c4e-ab15076761",
+          "selinux": "Enforcing"
+        },
+        "same_guest_tuple_as_previous_pass": true,
+        "classification": "Retained first-attempt failure; no test exemption or production authorization change."
+      }
+    ],
+    "downloaded_artifacts": [
+      {
+        "name": "device-aosp_cf_x86_64_only_phone",
+        "artifact_id": 12119913897,
+        "created_at": "2026-10-18T01:10:27Z",
+        "files": 2
+      },
+      {
+        "name": "device-23-x86",
+        "artifact_id": 12119483164,
+        "created_at": "2026-10-18T00:47:37Z",
+        "files": 37
+      },
+      {
+        "name": "device-23--x86_64",
+        "artifact_id": 12120390420,
+        "created_at": "2026-10-18T00:48:47Z",
+        "files": 37
+      },
+      {
+        "name": "device-30-x86",
+        "artifact_id": 12119926943,
+        "created_at": "2026-10-18T00:47:20Z",
+        "files": 2
+      },
+      {
+        "name": "device-30--x86_64",
+        "artifact_id": 12120275430,
+        "created_at": "2026-10-18T00:46:10Z",
+        "files": 2
+      },
+      {
+        "name": "device-37.1-google_apis_ps16k-x86_64",
+        "artifact_id": 12119713994,
+        "created_at": "2026-10-18T01:04:00Z",
+        "files": 10
+      }
+    ],
+    "signing_scope": "CI uses a disposable release signer. The local a86a70bdf release APK uses the project production key, while the debug APK uses a separate debug key. Exact target records identify their variant and APK hash; CI retains its merge-source identity.",
+    "previous_acceptance": {
+      "schema": 1,
+      "workflow_run": 39064935566,
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566",
+      "head_source": "9228e99228f26902febf9c3eb6958e159bfb9288",
+      "tested_merge_source": "88d36d8c82f28ca2e5f16838a5410b0d9c35ca2e",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "Test privileged host and transaction contracts",
+          "databaseId": 117498411077,
+          "conclusion": "success",
+          "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566/job/117498411077"
+        },
+        {
+          "name": "Test API 23 (x86)",
+          "databaseId": 117498411490,
+          "conclusion": "success",
+          "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566/job/117498411490"
+        },
+        {
+          "name": "Test API 23  (x86_64)",
+          "databaseId": 117498411627,
+          "conclusion": "success",
+          "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566/job/117498411627"
+        },
+        {
+          "name": "Audit historical Kitsune inventory",
+          "databaseId": 117498411644,
+          "conclusion": "success",
+          "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566/job/117498411644"
+        },
+        {
+          "name": "Test API 27 (x86)",
+          "databaseId": 117498411706,
+          "conclusion": "success",
+          "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566/job/117498411706"
+        },
+        {
+          "name": "Test API 25 (x86)",
+          "databaseId": 117498411997,
+          "conclusion": "success",
+          "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566/job/117498411997"
+        },
+        {
+          "name": "Test API 27  (x86_64)",
+          "databaseId": 117498412012,
+          "conclusion": "success",
+          "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566/job/117498412012"
+        },
+        {
+          "name": "Test API 24  (x86_64)",
+          "databaseId": 117498412049,
+          "conclusion": "success",
+          "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566/job/117498412049"
+        },
+        {
+          "name": "Test API 28 (x86)",
+          "databaseId": 117498412074,
+          "conclusion": "success",
+          "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566/job/117498412074"
+        },
+        {
+          "name": "Test API 25  (x86_64)",
+          "databaseId": 117498412081,
+          "conclusion": "success",
+          "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566/job/117498412081"
+        },
+        {
+          "name": "Test API 32  (x86_64)",
+          "databaseId": 117498412121,
+          "conclusion": "success",
+          "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566/job/117498412121"
+        },
+        {
+          "name": "Test API 26  (x86_64)",
+          "databaseId": 117498412124,
+          "conclusion": "success",
+          "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566/job/117498412124"
+        },
+        {
+          "name": "Test aosp_cf_x86_64_only_phone",
+          "databaseId": 117498412136,
+          "conclusion": "success",
+          "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566/job/117498412136"
+        },
+        {
+          "name": "Test API 29  (x86_64)",
+          "databaseId": 117498412150,
+          "conclusion": "success",
+          "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566/job/117498412150"
+        },
+        {
+          "name": "Test API 29 (x86)",
+          "databaseId": 117498412168,
+          "conclusion": "success",
+          "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566/job/117498412168"
+        },
+        {
+          "name": "Test API 24 (x86)",
+          "databaseId": 117498412202,
+          "conclusion": "success",
+          "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566/job/117498412202"
+        },
+        {
+          "name": "Test API 30  (x86_64)",
+          "databaseId": 117498412259,
+          "conclusion": "success",
+          "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566/job/117498412259"
+        },
+        {
+          "name": "Test API 26 (x86)",
+          "databaseId": 117498412328,
+          "conclusion": "success",
+          "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566/job/117498412328"
+        },
+        {
+          "name": "Test API 31  (x86_64)",
+          "databaseId": 117498412396,
+          "conclusion": "success",
+          "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566/job/117498412396"
+        },
+        {
+          "name": "Test API 28  (x86_64)",
+          "databaseId": 117498412483,
+          "conclusion": "success",
+          "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566/job/117498412483"
+        },
+        {
+          "name": "Test API 36  (x86_64)",
+          "databaseId": 117498412603,
+          "conclusion": "success",
+          "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566/job/117498412603"
+        },
+        {
+          "name": "Test API 34  (x86_64)",
+          "databaseId": 117498412625,
+          "conclusion": "success",
+          "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566/job/117498412625"
+        },
+        {
+          "name": "Test API 37.1 google_apis_ps16k (x86_64)",
+          "databaseId": 117498412634,
+          "conclusion": "success",
+          "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566/job/117498412634"
+        },
+        {
+          "name": "Test API 35  (x86_64)",
+          "databaseId": 117498412723,
+          "conclusion": "success",
+          "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566/job/117498412723"
+        },
+        {
+          "name": "Test API 30 (x86)",
+          "databaseId": 117498412737,
+          "conclusion": "success",
+          "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566/job/117498412737"
+        },
+        {
+          "name": "Test API 36.1 google_apis (x86_64)",
+          "databaseId": 117498412745,
+          "conclusion": "success",
+          "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566/job/117498412745"
+        },
+        {
+          "name": "Test API 33  (x86_64)",
+          "databaseId": 117498412782,
+          "conclusion": "success",
+          "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566/job/117498412782"
+        },
+        {
+          "name": "Test API 37.0 google_apis_ps16k (x86_64)",
+          "databaseId": 117498412913,
+          "conclusion": "success",
+          "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566/job/117498412913"
+        },
+        {
+          "name": "Test API 37.0 google_apis (x86_64)",
+          "databaseId": 117498413053,
+          "conclusion": "success",
+          "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566/job/117498413053"
+        },
+        {
+          "name": "Audit native Rust dependencies",
+          "databaseId": 117498427826,
+          "conclusion": "success",
+          "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566/job/117498427826"
+        },
+        {
+          "name": "Test building on windows-2025",
+          "databaseId": 117498439977,
+          "conclusion": "success",
+          "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566/job/117498439977"
+        },
+        {
+          "name": "Build Magisk artifacts",
+          "databaseId": 117498442559,
+          "conclusion": "success",
+          "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566/job/117498442559"
+        },
+        {
+          "name": "Test building on ubuntu-24.04",
+          "databaseId": 117498444846,
+          "conclusion": "success",
+          "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39064935566/job/117498444846"
+        }
+      ],
+      "legacy_stock_controls": [
+        {
+          "target": "api23x64",
+          "cold_boot_ids": [
+            "03a01bcc-5d10-4a9f-883e-8d1c16c2b2fa",
+            "ee60aff1-45fd-4513-8991-4349285163ab",
+            "26cc4be6-d75b-4dab-b8a0-077fe93e2734",
+            "663d176c-3fdc-4b6b-9976-f50e6c81b2d9"
+          ],
+          "framework_restarts": 4,
+          "native_crashes_observed": 0,
+          "provisioning": {
+            "schema": 1,
+            "sdk_setup_disabled_on_disk": true,
+            "package_restrictions_sha256": "24f0c6478931c3c1c6b2a4a338d8f009c1196fd19f4d38c88c9438bee9567085",
+            "wait_seconds": 2.868
+          },
+          "stock_ramdisk_sha256": "30f62f5c18886658e4faeabecf761d27943f2fcdad80c15007ac2d821715bb0a"
+        },
+        {
+          "target": "api23x86",
+          "cold_boot_ids": [
+            "2c5e0a6e-2d36-4344-b5dc-45acf6a40a0f",
+            "7e7c9575-ca69-4a0e-b9f3-37a7ec000914",
+            "503994c7-313f-48f3-b319-511141505221",
+            "86523943-59aa-4342-8918-62538d48ee59"
+          ],
+          "framework_restarts": 4,
+          "native_crashes_observed": 0,
+          "provisioning": {
+            "schema": 1,
+            "sdk_setup_disabled_on_disk": true,
+            "package_restrictions_sha256": "7d9c1bcddf9978ff27c6eb923f61b75cec9e9514b64ead722852d2505ea651a3",
+            "wait_seconds": 3.703
+          },
+          "stock_ramdisk_sha256": "b97fb7e82fc6f9f0fee20fd0ad85ee5948605f9bdcd89b1a2df1b9de395616d2"
+        }
+      ],
+      "runtime_records": [
+        "docs/device-pr15/ci-api23x64-debug.json",
+        "docs/device-pr15/ci-api23x64-release.json",
+        "docs/device-pr15/ci-api23x86-debug.json",
+        "docs/device-pr15/ci-api23x86-release.json",
+        "docs/device-pr15/ci-api30-debug.json",
+        "docs/device-pr15/ci-api30-release.json",
+        "docs/device-pr15/cuttlefish-debug.json",
+        "docs/device-pr15/cuttlefish-release.json"
+      ],
+      "api30_retry": {
+        "initial_job": 117494732084,
+        "failure": "audioserver SIGSEGV during release guest startup, in AudioPolicyService::AudioCommandThread::changeAudioVolumeGroupCommand; app suites subsequently passed but the native-crash gate failed.",
+        "retry": "Only the failed job reran, with the same build artifact; debug/release boot records and all checks passed.",
+        "classification": "Cause not established; not declared fixed or exempted. Original failed logs remain in the workflow history."
+      },
+      "signing_scope": "CI release uses a disposable signer; the production-signed 57c9c9081 APKs were separately qualified locally.",
+      "additional_clean_run": {
+        "run_id": 39072209066,
+        "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39072209066",
+        "pull_request_head": "82142208f851661541bbc23d105ab05496ab7883",
+        "run_attempt": 1,
+        "conclusion": "success",
+        "jobs_passed": 33,
+        "scope": "Additional full CI run after the documentation-only module-boundary commit; no failed-job retry in this run. Earlier failure records remain retained.",
+        "job_conclusions": {
+          "Audit historical Kitsune inventory": "success",
+          "Test building on ubuntu-24.04": "success",
+          "Test privileged host and transaction contracts": "success",
+          "Audit native Rust dependencies": "success",
+          "Test building on windows-2025": "success",
+          "Build Magisk artifacts": "success",
+          "Test aosp_cf_x86_64_only_phone": "success",
+          "Test API 24 (x86)": "success",
+          "Test API 25 (x86)": "success",
+          "Test API 23 (x86)": "success",
+          "Test API 26 (x86)": "success",
+          "Test API 29 (x86)": "success",
+          "Test API 27 (x86)": "success",
+          "Test API 30 (x86)": "success",
+          "Test API 28 (x86)": "success",
+          "Test API 23  (x86_64)": "success",
+          "Test API 37.0 google_apis_ps16k (x86_64)": "success",
+          "Test API 36.1 google_apis (x86_64)": "success",
+          "Test API 27  (x86_64)": "success",
+          "Test API 24  (x86_64)": "success",
+          "Test API 37.1 google_apis_ps16k (x86_64)": "success",
+          "Test API 35  (x86_64)": "success",
+          "Test API 37.0 google_apis (x86_64)": "success",
+          "Test API 33  (x86_64)": "success",
+          "Test API 26  (x86_64)": "success",
+          "Test API 36  (x86_64)": "success",
+          "Test API 32  (x86_64)": "success",
+          "Test API 34  (x86_64)": "success",
+          "Test API 28  (x86_64)": "success",
+          "Test API 31  (x86_64)": "success",
+          "Test API 30  (x86_64)": "success",
+          "Test API 29  (x86_64)": "success",
+          "Test API 25  (x86_64)": "success"
+        }
+      }
+    }
+  },
+  "additional_runs": [
+    {
+      "workflow_run": 39097039544,
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39097039544",
+      "head_source": "72d09590342c91cb0c2a27d8ce2eeb805fdbb8d1",
+      "tested_merge_source": "51fbcad889468aec1c6a8b860868e37fc33b19bd",
+      "scope": "Documentation-only follow-up to the candidate source; this run uses its own disposable CI artifacts.",
+      "conclusion": "failure",
+      "initial_passed_jobs": 32,
+      "initial_failure": {
+        "job_id": 117589311056,
+        "job": "Test API 28 (x86_64)",
+        "phase": "Debug patched-image cold boot, before app tests; the native-crash gate failed after the otherwise passing normal/hidden-manager suites.",
+        "artifact": {
+          "sha256": "2eabc8e5dfed775a946b7ab9cda8cba913102eb987bc693c33c648be34342d28",
+          "build": {
+            "app_version_code": 31018,
+            "application_id": "io.github.jordan231111.magisk",
+            "build_id": "dce72c0239301a5af866af1368ca30ff0025b152890e3be85982b28463ac6d2f",
+            "capabilities": [
+              "kitsune.boot-completed.v1",
+              "kitsune.build-info.v1",
+              "kitsune.early-mount.v2",
+              "kitsune.hide.v1",
+              "kitsune.module-root.v2",
+              "kitsune.su-consent.v1",
+              "kitsune.system-mode.transaction.v1",
+              "kitsune.zygisk-provider.v1"
+            ],
+            "channel": "next-system-experimental",
+            "compat_version_code": 31000,
+            "product_name": "KitsuneMagisk Next",
+            "product_version": "0.1.0-dev",
+            "protocol_version": 1,
+            "release_tag": "kitsune-canary-51fbcad889468aec1c6a8b860868e37fc33b19bd",
+            "schema": 1,
+            "source_commit": "51fbcad889468aec1c6a8b860868e37fc33b19bd",
+            "source_digest": "a5e37c848d2f528f2c5d67428eebbd21ccd8760ce73fb7ff0487e67cbc54987b",
+            "source_dirty": false,
+            "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+            "upstream_version": "31.0",
+            "variant": "debug",
+            "version_name": "0.1.0-dev-kitsune.51fbcad8"
+          }
+        },
+        "guest": {
+          "fingerprint": "Android/sdk_phone_x86_64/generic_x86_64:9/PSR1.180720.012/4923214:userdebug/test-keys",
+          "api": 28,
+          "abi": "x86_64",
+          "page_size": 4096,
+          "kernel": "4.4.124+",
+          "selinux": "Enforcing"
+        },
+        "observed": "SurfaceFlinger SIGABRT on unchecked HIDL DEAD_OBJECT after the composer service is restarted by the SDK init rule.",
+        "stock_controls": {
+          "magisk_installed": false,
+          "cold_boots_captured": 4,
+          "matching_crashes": {
+            "boot-1.crash": {
+              "sha256": "575335ef4653ccdeec28b8582e4101a054dd6f2d82d2f2f9a28e85b42f81026b",
+              "signatures": [
+                "10-18 04:48:57.077  1744  1744 F libc    : Fatal signal 6 (SIGABRT), code -6 (SI_TKILL) in tid 1744 (surfaceflinger), pid 1744 (surfaceflinger)",
+                "10-18 04:48:57.109  1854  1854 F DEBUG   : pid: 1744, tid: 1744, name: surfaceflinger  >>> /system/bin/surfaceflinger <<<",
+                "10-18 04:48:57.109  1854  1854 F DEBUG   : Abort message: 'Status.cpp:149] Failed HIDL return status not checked: Status(EX_TRANSACTION_FAILED): 'DEAD_OBJECT: ''",
+                "10-18 04:48:57.115  1854  1854 F DEBUG   :     #05 pc 000000000006dd7c  /system/lib64/libsurfaceflinger.so (android::Hwc2::impl::Composer::getActiveConfig(unsigned long, unsigned int*)+124)",
+                "10-18 04:48:57.115  1854  1854 F DEBUG   :     #06 pc 00000000000789f4  /system/lib64/libsurfaceflinger.so (HWC2::Display::getActiveConfig(std::__1::shared_ptr<HWC2::Display::Config const>*) const+52)",
+                "10-18 04:48:57.115  1854  1854 F DEBUG   :     #07 pc 000000000007fde1  /system/lib64/libsurfaceflinger.so (android::HWComposer::getActiveConfig(int) const+113)"
+              ]
+            },
+            "boot-3.crash": {
+              "sha256": "658939bc663a05c6856ee41a562e6713f44d420486f76368e7806d8fc67e8c71",
+              "signatures": [
+                "10-18 04:50:07.196  1700  1704 F libc    : Fatal signal 6 (SIGABRT), code -6 (SI_TKILL) in tid 1704 (Binder:1700_2), pid 1700 (surfaceflinger)",
+                "10-18 04:50:07.205  1877  1877 F DEBUG   : pid: 1700, tid: 1704, name: Binder:1700_2  >>> /system/bin/surfaceflinger <<<",
+                "10-18 04:50:07.205  1877  1877 F DEBUG   : Abort message: 'Status.cpp:149] Failed HIDL return status not checked: Status(EX_TRANSACTION_FAILED): 'DEAD_OBJECT: ''",
+                "10-18 04:50:07.211  1877  1877 F DEBUG   :     #05 pc 000000000006e01c  /system/lib64/libsurfaceflinger.so (android::Hwc2::impl::Composer::getColorModes(unsigned long, std::__1::vector<android::hardware::graphics::common::V1_1::ColorMode, std::__1::allocator<android::hardware::graphics::common::V1_1::ColorMode>>*)+252)",
+                "10-18 04:50:07.211  1877  1877 F DEBUG   :     #06 pc 00000000000806d2  /system/lib64/libsurfaceflinger.so (android::HWComposer::getColorModes(int) const+130)",
+                "10-18 04:50:07.211  1877  1877 F DEBUG   :     #07 pc 00000000000b0d77  /system/lib64/libsurfaceflinger.so (android::SurfaceFlinger::getDisplayColorModes(android::sp<android::IBinder> const&, android::Vector<android::hardware::graphics::common::V1_1::ColorMode>*)+151)"
+              ]
+            }
+          },
+          "finding": "Stock boot 3 has the same Composer::getColorModes stack as the patched boot; stock boot 1 aborts in Composer::getActiveConfig with the same HIDL status. The image reproduces the failure without Magisk."
+        },
+        "log_sha256": {
+          "ci318-docs-api28x64.log": "0e16ba34cd419bff17f6e7334e7effb7abcd304bdaa3d1223aebb8db5d178ddb",
+          "kernel.log": "6de09d2cf7a2c524e2fe5eae3e9811fec8edfcf82b6c21ed8411b29564e416a5",
+          "logcat-failure.log": "c5ed15bab013d109695ff0539eda140fd34507f99ea336465bf32af04df19cf1"
+        },
+        "artifact_ids": {
+          "stock_and_device": 12125337685,
+          "failure_logs": 12125447280
+        },
+        "retry": "One unchanged-artifact retry reproduced the same crash. No crash filter, timeout or product code was changed."
+      },
+      "run_attempt": 2,
+      "retry": {
+        "job_id": 117592249884,
+        "conclusion": "failure",
+        "same_debug_apk_identity": true,
+        "signature": "SurfaceFlinger SIGABRT, unchecked HIDL DEAD_OBJECT, Composer::getColorModes",
+        "job_log_sha256": "87c8c09d40907a8dbd014afd708c11924261c83d569be6f675fc7df32fce6c65",
+        "device_artifact_id": 12125554748,
+        "logs_artifact_id": 12126405802
+      },
+      "replacement_target": {
+        "package": "system-images;android-28;google_apis;x86_64",
+        "observed_revision": 11,
+        "repository_index": "https://dl.google.com/android/repository/sys-img/google_apis/sys-img2-3.xml",
+        "archive": "x86_64-28_r11.zip",
+        "archive_sha1_from_sdk_repository": "1d93bd994e29c4e9bbe71fd9c278addc5418cbee",
+        "status": "unmodified-image-failed-in-run-39100111200",
+        "crash_gate_unchanged": true
+      }
+    },
+    {
+      "workflow_run": 39100111200,
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39100111200",
+      "head_source": "bf159299619fdc292f9ed018d9689db43d40560d",
+      "conclusion": "failure",
+      "api28_google_apis": {
+        "job_id": 117597431093,
+        "conclusion": "failure",
+        "artifact": {
+          "sha256": "5c2aac99ab228eaac78223f304cd3addf9c81b2c074b259815e05fa5cd5ed6e4",
+          "build": {
+            "app_version_code": 31018,
+            "application_id": "io.github.jordan231111.magisk",
+            "build_id": "c01e64a0601e2baf3e76e2199a51d6f37dc50f7462ceebe8eb9f27258553d51d",
+            "capabilities": [
+              "kitsune.boot-completed.v1",
+              "kitsune.build-info.v1",
+              "kitsune.early-mount.v2",
+              "kitsune.hide.v1",
+              "kitsune.module-root.v2",
+              "kitsune.su-consent.v1",
+              "kitsune.system-mode.transaction.v1",
+              "kitsune.zygisk-provider.v1"
+            ],
+            "channel": "next-system-experimental",
+            "compat_version_code": 31000,
+            "product_name": "KitsuneMagisk Next",
+            "product_version": "0.1.0-dev",
+            "protocol_version": 1,
+            "release_tag": "kitsune-canary-fdf88f569fccb060183bfbe665bdcbe73d42f79d",
+            "schema": 1,
+            "source_commit": "fdf88f569fccb060183bfbe665bdcbe73d42f79d",
+            "source_digest": "bcd2c1fdc0e03170a386204446539a64f98bb3c2d6db573e0371c54e16902cac",
+            "source_dirty": false,
+            "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+            "upstream_version": "31.0",
+            "variant": "debug",
+            "version_name": "0.1.0-dev-kitsune.fdf88f56"
+          }
+        },
+        "guest": {
+          "fingerprint": "google/sdk_gphone_x86_64/generic_x86_64:9/PSR1.180720.122/6736742:userdebug/dev-keys",
+          "api": 28,
+          "abi": "x86_64",
+          "page_size": 4096,
+          "kernel": "4.4.124+",
+          "selinux": "Enforcing"
+        },
+        "stock_crash_buffers": {
+          "boot-4-framework.crash": {
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "native_crash": false
+          },
+          "boot-3.crash": {
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "native_crash": false
+          },
+          "boot-3-framework.crash": {
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "native_crash": false
+          },
+          "boot-1.crash": {
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "native_crash": false
+          },
+          "boot-2-framework.crash": {
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "native_crash": false
+          },
+          "boot-4.crash": {
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "native_crash": false
+          },
+          "boot-2.crash": {
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "native_crash": false
+          },
+          "boot-1-framework.crash": {
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "native_crash": false
+          }
+        },
+        "failure": "Patched debug cold boot: SurfaceFlinger SIGABRT on unchecked HIDL DEAD_OBJECT; the normal/hidden manager tests then completed before the unchanged native-crash gate rejected the run.",
+        "log_sha256": "2001a2f0a3ce2e1ad0a46b955694dff0212f4257a096f5a120ffb915d3b6ac90",
+        "device_artifact_id": 12126623010,
+        "logs_artifact_id": 12126717428
+      },
+      "fixture_followup": {
+        "status": "passed-in-run-39104679161",
+        "tool": "tools/avd_composer_fixture.py",
+        "original_vendor_sha256": "543ce1633b00d48d728bc039555e835304f1d4c9966a8daa2d174fa1f0bbf9bf",
+        "fixture_vendor_sha256": "491341812fc71334ef998117f418c3c47c41552bf7098789f62f528862943b0b",
+        "changed_bytes": 456,
+        "scope": "AOSP Android10 composer restart rule in a disposable copy of the pinned API28 Google APIs vendor image. The SDK input and production app/native code are unchanged. Guest verification on every cold boot and stock native-crash assertions are required.",
+        "host_validation": {
+          "passed": true,
+          "all_bytes_outside_456_byte_region_identical": true,
+          "existing_output_refused": true,
+          "unknown_input_refused": true,
+          "focused_baseline_tests": {
+            "ran": 30,
+            "skipped": 1,
+            "failed": 0
+          },
+          "qualification_tests": {
+            "ran": 2,
+            "failed": 0
+          },
+          "shell_syntax": "passed"
+        }
+      },
+      "passed_jobs": 32
+    },
+    {
+      "workflow_run": 39102711441,
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39102711441",
+      "head_source": "681ebe106e0b8f512b3bc1495efbebc3b225dd3f",
+      "conclusion": "failure",
+      "fixture_setup_failure": {
+        "job_id": 117605495131,
+        "phase": "First stock boot; guest init-file verification before Magisk setup",
+        "finding": "The -vendor argument did not select the prepared copy. The guest retained the original SurfaceFlinger-stopped rule, and verification correctly failed. No candidate runtime acceptance is claimed.",
+        "evidence": "Init processed the original /vendor/etc/init/android.hardware.graphics.composer@2.1-service.rc:10 property action; host command line included -vendor with the prepared image.",
+        "log_sha256": "1a1cccd8692ecbe5596bd89efb39486c35e5971c6f68641b19ef6f5519293378",
+        "device_artifact_id": 12127652922,
+        "logs_artifact_id": 12127224631
+      },
+      "correction": {
+        "scope": "Bind the owned AVD vendor-qemu.img path to the prepared image using an absolute target; retain exact guest verification and native-crash gates.",
+        "reference": "https://android.googlesource.com/platform/external/qemu/+/emu-master-dev/android-qemu2-glue/main.cpp",
+        "status": "passed-in-run-39104679161",
+        "host_binding_probe": {
+          "scope": "Host file-descriptor verification of the owned AVD vendor-qemu.img selection; stock API29 ARM64, no Magisk payload installed",
+          "boot_id": "ec75b107-8609-4b2e-91d4-b5d570e153dc",
+          "guest": {
+            "ro.build.fingerprint": "google/sdk_gphone64_arm64/emulator64_arm64:10/QSR1.211112.011/13135432:userdebug/dev-keys",
+            "ro.build.version.sdk": "29",
+            "ro.product.cpu.abi": "arm64-v8a",
+            "kernel": "4.14.175-gd7103c943974-dirty",
+            "page_size": "4096",
+            "selinux": "Enforcing"
+          },
+          "opened_owned_vendor_copy": true,
+          "opened_path": "/Users/jordan/.cache/kitsune-pr15/api29-vendor-binding.img",
+          "emulator_pid": 87108,
+          "cleanup": "Owned AVD pr15-vendor-binding deleted and private ADB5060 stopped."
+        }
+      }
+    },
+    {
+      "workflow_run": 39104679161,
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39104679161",
+      "head_source": "de99c52d871e58b46acad9092f18254a56f94c9b",
+      "conclusion": "success",
+      "run_attempt": 2,
+      "passed_jobs": 33,
+      "initial_failures": [
+        {
+          "workflow_run": 39104679161,
+          "job_id": 117611675016,
+          "job": "Test API 29 (x86_64)",
+          "phase": "Download SDK image, before AVD creation or candidate installation",
+          "message": "SDK manager: Error on ZipFile unknown archive",
+          "candidate_runtime_started": false,
+          "job_log_sha256": "f277a4481bc00fb6c47673edc057cc61e3ae4d870eb16c0acf2fb90ddfb948bf",
+          "retry": {
+            "job_id": 117615941215,
+            "conclusion": "success",
+            "SDK_image_download_succeeded": true,
+            "existing_build_artifacts_reused": true,
+            "test_or_product_code_changed": false
+          }
+        }
+      ],
+      "scope": "Explicit AOSP composer-rule lab fixture; app/native source unchanged from the tested local 31018 candidate. Unmodified API28 SDK images remain unqualified.",
+      "api28_google_apis": {
+        "job_id": 117615942059,
+        "artifact_id": 12128692581,
+        "artifact_zip_sha256": "29c668bd46b9784a7e034e4cc77602ee785b56df01672960dddb6ca7ac43afd8",
+        "runtime_records": {
+          "debug": {
+            "schema": "kitsune.device-qualification.v1",
+            "artifact": {
+              "sha256": "73c41482dc57cbcb43af7cde7af9b9bfceaa15d6b42677579fcf24085b511f07",
+              "build": {
+                "app_version_code": 31018,
+                "application_id": "io.github.jordan231111.magisk",
+                "build_id": "dbc85977eccb1d65a71329c8893f11546b4201bb51fcfebf59e36f7996970661",
+                "capabilities": [
+                  "kitsune.boot-completed.v1",
+                  "kitsune.build-info.v1",
+                  "kitsune.early-mount.v2",
+                  "kitsune.hide.v1",
+                  "kitsune.module-root.v2",
+                  "kitsune.su-consent.v1",
+                  "kitsune.system-mode.transaction.v1",
+                  "kitsune.zygisk-provider.v1"
+                ],
+                "channel": "next-system-experimental",
+                "compat_version_code": 31000,
+                "product_name": "KitsuneMagisk Next",
+                "product_version": "0.1.0-dev",
+                "protocol_version": 1,
+                "release_tag": "kitsune-canary-ef9f9d44309a7aba561af03966d192745ecadf20",
+                "schema": 1,
+                "source_commit": "ef9f9d44309a7aba561af03966d192745ecadf20",
+                "source_digest": "90168277716a4bf71727fba91d0ee10b7d6feb304404bc9aebae7938a6a4e0ca",
+                "source_dirty": false,
+                "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+                "upstream_version": "31.0",
+                "variant": "debug",
+                "version_name": "0.1.0-dev-kitsune.ef9f9d44"
+              }
+            },
+            "guest": {
+              "fingerprint": "google/sdk_gphone_x86_64/generic_x86_64:9/PSR1.180720.122/6736742:userdebug/dev-keys",
+              "api": 28,
+              "abi": "x86_64",
+              "page_size": 4096,
+              "kernel": "4.4.124+",
+              "selinux": "Enforcing"
+            },
+            "boots": [
+              {
+                "id": "cde3cd1a-c6ed-4cd8-a543-e5e5d61e6ddf",
+                "phase": "setup",
+                "at": "2026-10-18T07:03:49.701790+00:00"
+              },
+              {
+                "id": "e592ca27-911f-48e4-8798-e9405acc078c",
+                "phase": "accepted",
+                "at": "2026-10-18T07:05:55.916617+00:00"
+              }
+            ]
+          },
+          "release": {
+            "schema": "kitsune.device-qualification.v1",
+            "artifact": {
+              "sha256": "4a8873f62816b4cd254bb18a938edc2c05934827efa50119e5082a65e71a8218",
+              "build": {
+                "app_version_code": 31018,
+                "application_id": "io.github.jordan231111.magisk",
+                "build_id": "611a442e391702dccd65909aec372ca96df59f84df74177067752fd0f7c85c77",
+                "capabilities": [
+                  "kitsune.boot-completed.v1",
+                  "kitsune.build-info.v1",
+                  "kitsune.early-mount.v2",
+                  "kitsune.hide.v1",
+                  "kitsune.module-root.v2",
+                  "kitsune.su-consent.v1",
+                  "kitsune.zygisk-provider.v1"
+                ],
+                "channel": "next-system-experimental",
+                "compat_version_code": 31000,
+                "product_name": "KitsuneMagisk Next",
+                "product_version": "0.1.0-dev",
+                "protocol_version": 1,
+                "release_tag": "kitsune-canary-ef9f9d44309a7aba561af03966d192745ecadf20",
+                "schema": 1,
+                "source_commit": "ef9f9d44309a7aba561af03966d192745ecadf20",
+                "source_digest": "90168277716a4bf71727fba91d0ee10b7d6feb304404bc9aebae7938a6a4e0ca",
+                "source_dirty": false,
+                "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+                "upstream_version": "31.0",
+                "variant": "release",
+                "version_name": "0.1.0-dev-kitsune.ef9f9d44"
+              }
+            },
+            "guest": {
+              "fingerprint": "google/sdk_gphone_x86_64/generic_x86_64:9/PSR1.180720.122/6736742:userdebug/dev-keys",
+              "api": 28,
+              "abi": "x86_64",
+              "page_size": 4096,
+              "kernel": "4.4.124+",
+              "selinux": "Enforcing"
+            },
+            "boots": [
+              {
+                "id": "26430374-4145-4825-bc97-2ae9381e841d",
+                "phase": "setup",
+                "at": "2026-10-18T07:07:05.374070+00:00"
+              },
+              {
+                "id": "773c99ec-8547-4a77-9f2d-182e52568ad0",
+                "phase": "accepted",
+                "at": "2026-10-18T07:08:44.300757+00:00"
+              }
+            ]
+          }
+        },
+        "stock_boot_ids": [
+          "8b3f2c0a-907d-46ac-835a-216de241ef09",
+          "c24b3d5f-5204-49e9-a3e1-691bc9070e66",
+          "93e654db-604c-467d-bd7a-bb7984554274",
+          "fd0d9c25-d327-4fb8-a242-0f5684096cc6"
+        ],
+        "stock_crash_buffers": {
+          "boot-1-framework.crash": {
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "native_crash_signatures": 0
+          },
+          "boot-1.crash": {
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "native_crash_signatures": 0
+          },
+          "boot-2-framework.crash": {
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "native_crash_signatures": 0
+          },
+          "boot-2.crash": {
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "native_crash_signatures": 0
+          },
+          "boot-3-framework.crash": {
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "native_crash_signatures": 0
+          },
+          "boot-3.crash": {
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "native_crash_signatures": 0
+          },
+          "boot-4-framework.crash": {
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "native_crash_signatures": 0
+          },
+          "boot-4.crash": {
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "native_crash_signatures": 0
+          }
+        },
+        "stock_cold_boots": 4,
+        "stock_framework_restarts": 4,
+        "native_crash_gate_unchanged": true,
+        "fixture": {
+          "schema": 1,
+          "scope": "Disposable API28 Google APIs x86_64 vendor fixture; no stock-image or phone qualification",
+          "sdk_package": "system-images;android-28;google_apis;x86_64",
+          "sdk_revision": 11,
+          "upstream_rule": "https://android.googlesource.com/platform/hardware/interfaces/+/android-10.0.0_r1/graphics/composer/2.1/default/android.hardware.graphics.composer@2.1-service.rc",
+          "original_vendor_sha256": "543ce1633b00d48d728bc039555e835304f1d4c9966a8daa2d174fa1f0bbf9bf",
+          "fixture_vendor_sha256": "491341812fc71334ef998117f418c3c47c41552bf7098789f62f528862943b0b",
+          "image_size": 102760448,
+          "changed_offset": 69992448,
+          "changed_length": 456,
+          "guest_rc_path": "/vendor/etc/init/android.hardware.graphics.composer@2.1-service.rc",
+          "guest_rc_sha256": "c01818ab0cc542ce12b564a18c351c163b2f1e5dcd275f3d7f5c21572acaca67",
+          "verified_boots": [
+            "8b3f2c0a-907d-46ac-835a-216de241ef09",
+            "c24b3d5f-5204-49e9-a3e1-691bc9070e66",
+            "93e654db-604c-467d-bd7a-bb7984554274",
+            "fd0d9c25-d327-4fb8-a242-0f5684096cc6",
+            "cde3cd1a-c6ed-4cd8-a543-e5e5d61e6ddf",
+            "e592ca27-911f-48e4-8798-e9405acc078c",
+            "26430374-4145-4825-bc97-2ae9381e841d",
+            "773c99ec-8547-4a77-9f2d-182e52568ad0"
+          ]
+        }
+      }
+    },
+    {
+      "workflow_run": 39108439919,
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39108439919",
+      "head_source": "535893c4a144d1cd164471d6690edef843548028",
+      "conclusion": "failure",
+      "run_attempt": 2,
+      "passed_jobs": 32,
+      "initial_failures": [
+        {
+          "job_id": 117623306843,
+          "job": "Test API24 x86_64",
+          "phase": "Debug lane, after 83 passing JUnit tests and before transaction fixtures",
+          "failed_command": "ADB shell: create an exclusive UUID-named directory under /data/local/tmp with umask 077",
+          "observed": "The command failed without explanatory output; the harness returned 1. The original command status and guest directory state were not captured.",
+          "root_path_tests_passed": 2,
+          "cause": "Undetermined; no emulator or core-code cause is asserted.",
+          "artifact": {
+            "sha256": "12fd3f16d2c87f0df2488d99b2ca95d4983ec282f840466f03009b1bf66fce06",
+            "build": {
+              "app_version_code": 31018,
+              "application_id": "io.github.jordan231111.magisk",
+              "build_id": "dfe6fd6ebebd4c09a677dac41cb6ad90ac3d5f17aeca5f9fa6b7b6aa8bbebb95",
+              "capabilities": [
+                "kitsune.boot-completed.v1",
+                "kitsune.build-info.v1",
+                "kitsune.early-mount.v2",
+                "kitsune.hide.v1",
+                "kitsune.module-root.v2",
+                "kitsune.su-consent.v1",
+                "kitsune.system-mode.transaction.v1",
+                "kitsune.zygisk-provider.v1"
+              ],
+              "channel": "next-system-experimental",
+              "compat_version_code": 31000,
+              "product_name": "KitsuneMagisk Next",
+              "product_version": "0.1.0-dev",
+              "protocol_version": 1,
+              "release_tag": "kitsune-canary-6328eda2dd10a166812f8a92d0cc91d4337c7e31",
+              "schema": 1,
+              "source_commit": "6328eda2dd10a166812f8a92d0cc91d4337c7e31",
+              "source_digest": "74329f3d227b1c8900f65cfc52d40f2b0bc93ee7c992b57d89bc67c61796e166",
+              "source_dirty": false,
+              "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+              "upstream_version": "31.0",
+              "variant": "debug",
+              "version_name": "0.1.0-dev-kitsune.6328eda2"
+            }
+          },
+          "guest": {
+            "fingerprint": "Android/sdk_phone_x86_64/generic_x86_64:7.0/NYC/4174735:userdebug/test-keys",
+            "api": 24,
+            "abi": "x86_64",
+            "page_size": 4096,
+            "kernel": "3.10.0+",
+            "selinux": "Enforcing"
+          },
+          "job_log_sha256": "d0880dcc0bcd462d5fa9aa7742a65d0c3908042d8171f87984886a050dd54cd9",
+          "artifact_ids": {
+            "logs": 12130185773,
+            "device": 12130160777
+          },
+          "retry": {
+            "job_id": 117626352548,
+            "conclusion": "success",
+            "artifacts_unchanged": true,
+            "cause_still_undetermined": true
+          }
+        },
+        {
+          "job_id": 117623306904,
+          "job": "Test API29 x86_64",
+          "variant": "debug",
+          "phase": "Native-crash gate after app/manager tests",
+          "process": "com.android.launcher3",
+          "signal": "SIGSEGV, address 0x30",
+          "top_frame": "libc.so je_extent_heap_remove",
+          "rendering_caller": "libhwui.so RecordingCanvas::onDrawDrawable",
+          "cause": "Undetermined. Stock controls did not reproduce the native crash; no emulator/core attribution is made.",
+          "checks_unchanged": true,
+          "artifact": {
+            "sha256": "12fd3f16d2c87f0df2488d99b2ca95d4983ec282f840466f03009b1bf66fce06",
+            "build": {
+              "app_version_code": 31018,
+              "application_id": "io.github.jordan231111.magisk",
+              "build_id": "dfe6fd6ebebd4c09a677dac41cb6ad90ac3d5f17aeca5f9fa6b7b6aa8bbebb95",
+              "capabilities": [
+                "kitsune.boot-completed.v1",
+                "kitsune.build-info.v1",
+                "kitsune.early-mount.v2",
+                "kitsune.hide.v1",
+                "kitsune.module-root.v2",
+                "kitsune.su-consent.v1",
+                "kitsune.system-mode.transaction.v1",
+                "kitsune.zygisk-provider.v1"
+              ],
+              "channel": "next-system-experimental",
+              "compat_version_code": 31000,
+              "product_name": "KitsuneMagisk Next",
+              "product_version": "0.1.0-dev",
+              "protocol_version": 1,
+              "release_tag": "kitsune-canary-6328eda2dd10a166812f8a92d0cc91d4337c7e31",
+              "schema": 1,
+              "source_commit": "6328eda2dd10a166812f8a92d0cc91d4337c7e31",
+              "source_digest": "74329f3d227b1c8900f65cfc52d40f2b0bc93ee7c992b57d89bc67c61796e166",
+              "source_dirty": false,
+              "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+              "upstream_version": "31.0",
+              "variant": "debug",
+              "version_name": "0.1.0-dev-kitsune.6328eda2"
+            }
+          },
+          "guest": {
+            "fingerprint": "Android/sdk_phone_x86_64/generic_x86_64:10/QSR1.210820.001/7663313:userdebug/test-keys",
+            "api": 29,
+            "abi": "x86_64",
+            "page_size": 4096,
+            "kernel": "4.14.175-g6f3fc9538452",
+            "selinux": "Enforcing"
+          },
+          "job_log_sha256": "7e0ac1754b0e71f6bec1acca9c2de2e915bcdeb9bf8ac5ce0d7a352795af9191",
+          "artifact_ids": {
+            "logs": 12130221857,
+            "device": 12130401336
+          },
+          "retry": {
+            "job_id": 117626352517,
+            "conclusion": "failure",
+            "phase": "Stock boot 2, before Magisk installation",
+            "message": "adb: unable to connect for root: closed",
+            "candidate_runtime_started": false,
+            "job_log_sha256": "d45c55d3a8b373490442dd98b7d08e267b908bb361a9b69b94198c57afdc3f53"
+          }
+        }
+      ],
+      "harness_followup": {
+        "root_transition": "tools/adb_root.py verifies actual UID0/UID2000 across reconnects; a client error alone is not accepted, and client success without the requested UID fails.",
+        "tests": "Five subprocess-based transition regressions pass locally.",
+        "transaction_diagnostics": "Preserve the original mkdir status and capture bounded ADB identity/directory/space diagnostics; no retry or acceptance relaxation.",
+        "native_crash_gate": "Unchanged. The Launcher3 crash remains undiagnosed and must be retested.",
+        "completion_gate": "All final-head CI jobs must pass before merge."
+      }
+    },
+    {
+      "workflow_run": 39112503296,
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39112503296",
+      "head_source": "982aa32bae44b1c059d80bfdc4dac1f37e48ab3f",
+      "conclusion": "failure-observed",
+      "stock_identity_failure": {
+        "jobs": [
+          117636177911,
+          117636178080
+        ],
+        "targets": [
+          "API23 x86",
+          "API23 x86_64"
+        ],
+        "initial_adb_uid": 0,
+        "finding": "The stock framework-control caller incorrectly requested UID2000 after starting at UID0. The new identity verifier rejected the unachieved transition, despite the old SDK client printing that it was restarting as non-root.",
+        "candidate_runtime_started": false,
+        "log_sha256": {
+          "api23-x86-adb-followup.log": "06bdb254291ad289b8959cafbc7a8366890a0359d9fc45e55cbba8da0ad4f542",
+          "api23-x64-adb-followup.log": "09c4445694745ca9ec1aa4e43185f51d1935e2e0c98c8d9e6dcddf81ccc84d4d"
+        }
+      },
+      "correction": "Record the initial SDK ADB identity and restore that exact UID after controls. Keep root/unroot verification strict; do not infer Magisk root from a root-adbd SDK image. Final-head CI remains required.",
+      "additional_observation": "API24 x86_64 and API29 x86_64 both completed successfully in this run. The earlier directory/Launcher3 failures were not reproduced; their causes remain undetermined."
+    }
+  ]
+}

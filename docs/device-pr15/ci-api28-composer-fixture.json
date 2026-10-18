@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "scope": "Disposable API28 Google APIs x86_64 vendor fixture; no stock-image or phone qualification",
+  "sdk_package": "system-images;android-28;google_apis;x86_64",
+  "sdk_revision": 11,
+  "upstream_rule": "https://android.googlesource.com/platform/hardware/interfaces/+/android-10.0.0_r1/graphics/composer/2.1/default/android.hardware.graphics.composer@2.1-service.rc",
+  "original_vendor_sha256": "543ce1633b00d48d728bc039555e835304f1d4c9966a8daa2d174fa1f0bbf9bf",
+  "fixture_vendor_sha256": "491341812fc71334ef998117f418c3c47c41552bf7098789f62f528862943b0b",
+  "image_size": 102760448,
+  "changed_offset": 69992448,
+  "changed_length": 456,
+  "guest_rc_path": "/vendor/etc/init/android.hardware.graphics.composer@2.1-service.rc",
+  "guest_rc_sha256": "c01818ab0cc542ce12b564a18c351c163b2f1e5dcd275f3d7f5c21572acaca67",
+  "verified_boots": [
+    "8b3f2c0a-907d-46ac-835a-216de241ef09",
+    "c24b3d5f-5204-49e9-a3e1-691bc9070e66",
+    "93e654db-604c-467d-bd7a-bb7984554274",
+    "fd0d9c25-d327-4fb8-a242-0f5684096cc6",
+    "cde3cd1a-c6ed-4cd8-a543-e5e5d61e6ddf",
+    "e592ca27-911f-48e4-8798-e9405acc078c",
+    "26430374-4145-4825-bc97-2ae9381e841d",
+    "773c99ec-8547-4a77-9f2d-182e52568ad0"
+  ]
+}

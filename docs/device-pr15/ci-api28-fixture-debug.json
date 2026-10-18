@@ -1,0 +1,55 @@
+{
+  "schema": "kitsune.device-qualification.v1",
+  "artifact": {
+    "sha256": "73c41482dc57cbcb43af7cde7af9b9bfceaa15d6b42677579fcf24085b511f07",
+    "build": {
+      "app_version_code": 31018,
+      "application_id": "io.github.jordan231111.magisk",
+      "build_id": "dbc85977eccb1d65a71329c8893f11546b4201bb51fcfebf59e36f7996970661",
+      "capabilities": [
+        "kitsune.boot-completed.v1",
+        "kitsune.build-info.v1",
+        "kitsune.early-mount.v2",
+        "kitsune.hide.v1",
+        "kitsune.module-root.v2",
+        "kitsune.su-consent.v1",
+        "kitsune.system-mode.transaction.v1",
+        "kitsune.zygisk-provider.v1"
+      ],
+      "channel": "next-system-experimental",
+      "compat_version_code": 31000,
+      "product_name": "KitsuneMagisk Next",
+      "product_version": "0.1.0-dev",
+      "protocol_version": 1,
+      "release_tag": "kitsune-canary-ef9f9d44309a7aba561af03966d192745ecadf20",
+      "schema": 1,
+      "source_commit": "ef9f9d44309a7aba561af03966d192745ecadf20",
+      "source_digest": "90168277716a4bf71727fba91d0ee10b7d6feb304404bc9aebae7938a6a4e0ca",
+      "source_dirty": false,
+      "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+      "upstream_version": "31.0",
+      "variant": "debug",
+      "version_name": "0.1.0-dev-kitsune.ef9f9d44"
+    }
+  },
+  "guest": {
+    "fingerprint": "google/sdk_gphone_x86_64/generic_x86_64:9/PSR1.180720.122/6736742:userdebug/dev-keys",
+    "api": 28,
+    "abi": "x86_64",
+    "page_size": 4096,
+    "kernel": "4.4.124+",
+    "selinux": "Enforcing"
+  },
+  "boots": [
+    {
+      "id": "cde3cd1a-c6ed-4cd8-a543-e5e5d61e6ddf",
+      "phase": "setup",
+      "at": "2026-10-18T07:03:49.701790+00:00"
+    },
+    {
+      "id": "e592ca27-911f-48e4-8798-e9405acc078c",
+      "phase": "accepted",
+      "at": "2026-10-18T07:05:55.916617+00:00"
+    }
+  ]
+}

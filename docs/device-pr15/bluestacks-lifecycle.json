@@ -1,0 +1,246 @@
+{
+  "schema": 1,
+  "source_commit": "34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
+  "app_version_code": 31018,
+  "host": "BlueStacks Air 5.21.790.7505 on macOS",
+  "instance": "disposable Tiramisu64_3",
+  "route": "Supplied RootMac bootstrap plus the current host-initramfs adapter",
+  "full_suite": "passed",
+  "junit_tests": 121,
+  "su_stress": {
+    "batches": 8,
+    "parallel_requests": 6,
+    "repeated_after_third_boot": true
+  },
+  "vendor_root_enabled": false,
+  "unroot": {
+    "instance": "Tiramisu64_3",
+    "cold_boot_without_kitsune": "passed",
+    "root_gate_cleanup": "BSR_UNROOT_OK",
+    "adb_uid": 2000,
+    "magiskd_absent": true
+  },
+  "factory_restore": {
+    "factory_initrd_sha256": "393f386ebc880f21a3c7812d0c851508afa697c016e6537894970e123787329e",
+    "byte_exact_restore": true,
+    "task_instance_root_record_cleared": true
+  },
+  "cleanup": {
+    "removed_instance": "Tiramisu64_3",
+    "removed_instances": [
+      "Tiramisu64_3",
+      "Tiramisu64_4"
+    ],
+    "remaining_instances": [
+      "Tiramisu64"
+    ],
+    "primary_running": false,
+    "primary_deliberately_stopped": true,
+    "primary_root_access": "0",
+    "local_adb_preference_restored_to_resumed_session_value": "0",
+    "remote_adb_preference": "0",
+    "disposable_guest_key_removed_with_instance": true,
+    "owned_rootmac_instance_record_removed": true,
+    "user_disposition": "Leave original BlueStacks stopped; preserve the unrelated MuMu Device-0 and existing ports."
+  },
+  "bootstrap": {
+    "version": "5.21.790.7505",
+    "instance": "Tiramisu64_3",
+    "before_sha256": "3273747a6bcf619e0d3642634d4e818983aef6b936fa547f0761496999e457f2",
+    "after_sha256": "aece9c2310db1da86fa2d336ae66b13a0087a100bc986b117ed034d339f19403",
+    "apk_sha256": "c309d7b86299732e5d346bf3090e600e232f9591872ab4bbbe2a840bcfeee26d",
+    "bootstrap_sha256": "a967a3fa66251bbe47096e93c77c4a4d217fa3827da912ac6721338dc7c9d15d",
+    "build": {
+      "app_version_code": 31018,
+      "application_id": "io.github.jordan231111.magisk",
+      "build_id": "efa7120cfcba263072140a9fad5b3ee48a6cc4f183bb70ec04b5866f68ec3fde",
+      "capabilities": [
+        "kitsune.boot-completed.v1",
+        "kitsune.build-info.v1",
+        "kitsune.early-mount.v2",
+        "kitsune.hide.v1",
+        "kitsune.module-root.v2",
+        "kitsune.su-consent.v1",
+        "kitsune.system-mode.transaction.v1",
+        "kitsune.zygisk-provider.v1"
+      ],
+      "channel": "next-system-experimental",
+      "compat_version_code": 31000,
+      "product_name": "KitsuneMagisk Next",
+      "product_version": "0.1.0-dev",
+      "protocol_version": 1,
+      "release_tag": "kitsune-canary-34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
+      "schema": 1,
+      "source_commit": "34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
+      "source_digest": "3627cb15249812893a2bb5f649cec7d035601d91f83cac80f611b052dab98532",
+      "source_dirty": false,
+      "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+      "upstream_version": "31.0",
+      "variant": "debug",
+      "version_name": "0.1.0-dev-kitsune.34d897b1"
+    }
+  },
+  "hiding_fallback": {
+    "serial": "127.0.0.1:5585",
+    "apk_sha256": "c309d7b86299732e5d346bf3090e600e232f9591872ab4bbbe2a840bcfeee26d",
+    "module_sha256": "9eca30a269dc676a66f67a9339185dee55cccd47dc1fc8eeea5416124626d67a",
+    "cases": [
+      {
+        "name": "core-hide",
+        "baseline_boot": "82665be8-9dd2-4000-aa62-c447b106880b",
+        "selected_boot": "ce45129a-9b71-4c91-a0cc-6a90cdb7e8b2",
+        "visible_before": true,
+        "hidden_from_selected_app": true,
+        "marker_visible_to_root": true,
+        "status": {
+          "schema": 1,
+          "database_version": 12,
+          "boot_ready": true,
+          "enabled": true,
+          "mode": "hide",
+          "configured_mode": "hide",
+          "reboot_required": false,
+          "selection_table": "denylist",
+          "engine": "builtin",
+          "configured_provider": "core",
+          "external_sulist_supported": false
+        }
+      },
+      {
+        "name": "zygisk-assistant",
+        "selected_boot": "b4a3c4c2-db86-4343-b109-4359bc569120",
+        "hidden_from_selected_app": true,
+        "marker_visible_to_root": true,
+        "core_enforcement_disabled": true,
+        "status": {
+          "schema": 1,
+          "database_version": 12,
+          "boot_ready": true,
+          "enabled": false,
+          "mode": "hide",
+          "configured_mode": "hide",
+          "reboot_required": false,
+          "selection_table": "denylist",
+          "engine": "builtin",
+          "configured_provider": "core",
+          "external_sulist_supported": false
+        }
+      }
+    ],
+    "build": {
+      "app_version_code": 31018,
+      "application_id": "io.github.jordan231111.magisk",
+      "build_id": "efa7120cfcba263072140a9fad5b3ee48a6cc4f183bb70ec04b5866f68ec3fde",
+      "capabilities": [
+        "kitsune.boot-completed.v1",
+        "kitsune.build-info.v1",
+        "kitsune.early-mount.v2",
+        "kitsune.hide.v1",
+        "kitsune.module-root.v2",
+        "kitsune.su-consent.v1",
+        "kitsune.system-mode.transaction.v1",
+        "kitsune.zygisk-provider.v1"
+      ],
+      "channel": "next-system-experimental",
+      "compat_version_code": 31000,
+      "product_name": "KitsuneMagisk Next",
+      "product_version": "0.1.0-dev",
+      "protocol_version": 1,
+      "release_tag": "kitsune-canary-34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
+      "schema": 1,
+      "source_commit": "34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
+      "source_digest": "3627cb15249812893a2bb5f649cec7d035601d91f83cac80f611b052dab98532",
+      "source_dirty": false,
+      "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+      "upstream_version": "31.0",
+      "variant": "debug",
+      "version_name": "0.1.0-dev-kitsune.34d897b1"
+    },
+    "probe_policy_before": {
+      "uid": 10083,
+      "policy": 2,
+      "until": 0,
+      "logging": 1,
+      "notification": 1
+    },
+    "probe_root_grant_removed": true,
+    "temporarily_disabled_hiders": [
+      "zygisk_shamiko"
+    ],
+    "test_policy_and_hiders_restored": true,
+    "cleanup_boot": "50c7b8f8-1971-4d59-bfcc-affb025eecd2",
+    "temporary_modules_removed": true
+  },
+  "limits": [
+    "No magiskinit pre-init mounts in this host bootstrap.",
+    "Direct-System refused on the read-only system layout.",
+    "Host image and manager update together through the external bootstrap workflow.",
+    "Active permissive SELinux is not SELinux-disabled or Waydroid coverage.",
+    "No physical Samsung claim; the guest fingerprint is an emulator property.",
+    "The local/remote ADB preferences were recorded before this fresh test; restoration is checked explicitly."
+  ],
+  "clone_lifecycle": {
+    "source_instance": "Tiramisu64_3",
+    "clone_instance": "Tiramisu64_4",
+    "clone_port": 5595,
+    "build": {
+      "app_version_code": 31018,
+      "application_id": "io.github.jordan231111.magisk",
+      "build_id": "efa7120cfcba263072140a9fad5b3ee48a6cc4f183bb70ec04b5866f68ec3fde",
+      "capabilities": [
+        "kitsune.boot-completed.v1",
+        "kitsune.build-info.v1",
+        "kitsune.early-mount.v2",
+        "kitsune.hide.v1",
+        "kitsune.module-root.v2",
+        "kitsune.su-consent.v1",
+        "kitsune.system-mode.transaction.v1",
+        "kitsune.zygisk-provider.v1"
+      ],
+      "channel": "next-system-experimental",
+      "compat_version_code": 31000,
+      "product_name": "KitsuneMagisk Next",
+      "product_version": "0.1.0-dev",
+      "protocol_version": 1,
+      "release_tag": "kitsune-canary-34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
+      "schema": 1,
+      "source_commit": "34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
+      "source_digest": "3627cb15249812893a2bb5f649cec7d035601d91f83cac80f611b052dab98532",
+      "source_dirty": false,
+      "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+      "upstream_version": "31.0",
+      "variant": "debug",
+      "version_name": "0.1.0-dev-kitsune.34d897b1"
+    },
+    "boots": [
+      "185dc032-a49d-4a98-b53f-0d2551147bab",
+      "db0e8e6f-c6e6-4e88-a766-b0c2a7026500"
+    ],
+    "clone_unroot_passed": true,
+    "stock_boot": "5257e5e2-708f-4ce8-aeab-752730c95ea4",
+    "sentinel_copied": true,
+    "root_stress_per_boot": 48,
+    "ordinary_app_root_and_signal_status": true,
+    "vendor_root_disabled": true,
+    "primary_stopped": true,
+    "clone_deleted": true
+  },
+  "supplied_rootmac_bootstrap": {
+    "instance": "Tiramisu64_3",
+    "version": "5.21.790.7505",
+    "supplied_program_verified": true,
+    "bootstrap_apk_sha256": "fac319d2de262fcfff1684e13e1a5c61c486d2a773a7a8ffcfdbfe6f763a7fd4",
+    "bootstrap_initrd_sha256": "3273747a6bcf619e0d3642634d4e818983aef6b936fa547f0761496999e457f2",
+    "vendor_root_disabled": true,
+    "primary_stopped": true
+  },
+  "adb_authorization": {
+    "instance": "Tiramisu64_3",
+    "method": "Existing workstation public key provisioned in the disposable guest before enabling Zygisk Assistant.",
+    "public_key_sha256": "6e9280e0cac93a8a8ed4f563a60deed2b2004a451442de0a844463ee992ab8c8",
+    "private_key_copied": false,
+    "authentication_settings_changed": false,
+    "source_commit": "34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
+    "removed_with_disposable_instance": true
+  }
+}
