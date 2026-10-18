@@ -1066,9 +1066,122 @@
         "repository_index": "https://dl.google.com/android/repository/sys-img/google_apis/sys-img2-3.xml",
         "archive": "x86_64-28_r11.zip",
         "archive_sha1_from_sdk_repository": "1d93bd994e29c4e9bbe71fd9c278addc5418cbee",
-        "status": "qualification-pending",
+        "status": "unmodified-image-failed-in-run-39100111200",
         "crash_gate_unchanged": true
       }
+    },
+    {
+      "workflow_run": 39100111200,
+      "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39100111200",
+      "head_source": "bf159299619fdc292f9ed018d9689db43d40560d",
+      "conclusion": "failure",
+      "api28_google_apis": {
+        "job_id": 117597431093,
+        "conclusion": "failure",
+        "artifact": {
+          "sha256": "5c2aac99ab228eaac78223f304cd3addf9c81b2c074b259815e05fa5cd5ed6e4",
+          "build": {
+            "app_version_code": 31018,
+            "application_id": "io.github.jordan231111.magisk",
+            "build_id": "c01e64a0601e2baf3e76e2199a51d6f37dc50f7462ceebe8eb9f27258553d51d",
+            "capabilities": [
+              "kitsune.boot-completed.v1",
+              "kitsune.build-info.v1",
+              "kitsune.early-mount.v2",
+              "kitsune.hide.v1",
+              "kitsune.module-root.v2",
+              "kitsune.su-consent.v1",
+              "kitsune.system-mode.transaction.v1",
+              "kitsune.zygisk-provider.v1"
+            ],
+            "channel": "next-system-experimental",
+            "compat_version_code": 31000,
+            "product_name": "KitsuneMagisk Next",
+            "product_version": "0.1.0-dev",
+            "protocol_version": 1,
+            "release_tag": "kitsune-canary-fdf88f569fccb060183bfbe665bdcbe73d42f79d",
+            "schema": 1,
+            "source_commit": "fdf88f569fccb060183bfbe665bdcbe73d42f79d",
+            "source_digest": "bcd2c1fdc0e03170a386204446539a64f98bb3c2d6db573e0371c54e16902cac",
+            "source_dirty": false,
+            "upstream_commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698",
+            "upstream_version": "31.0",
+            "variant": "debug",
+            "version_name": "0.1.0-dev-kitsune.fdf88f56"
+          }
+        },
+        "guest": {
+          "fingerprint": "google/sdk_gphone_x86_64/generic_x86_64:9/PSR1.180720.122/6736742:userdebug/dev-keys",
+          "api": 28,
+          "abi": "x86_64",
+          "page_size": 4096,
+          "kernel": "4.4.124+",
+          "selinux": "Enforcing"
+        },
+        "stock_crash_buffers": {
+          "boot-4-framework.crash": {
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "native_crash": false
+          },
+          "boot-3.crash": {
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "native_crash": false
+          },
+          "boot-3-framework.crash": {
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "native_crash": false
+          },
+          "boot-1.crash": {
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "native_crash": false
+          },
+          "boot-2-framework.crash": {
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "native_crash": false
+          },
+          "boot-4.crash": {
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "native_crash": false
+          },
+          "boot-2.crash": {
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "native_crash": false
+          },
+          "boot-1-framework.crash": {
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "native_crash": false
+          }
+        },
+        "failure": "Patched debug cold boot: SurfaceFlinger SIGABRT on unchecked HIDL DEAD_OBJECT; the normal/hidden manager tests then completed before the unchanged native-crash gate rejected the run.",
+        "log_sha256": "2001a2f0a3ce2e1ad0a46b955694dff0212f4257a096f5a120ffb915d3b6ac90",
+        "device_artifact_id": 12126623010,
+        "logs_artifact_id": 12126717428
+      },
+      "fixture_followup": {
+        "status": "qualification-pending",
+        "tool": "tools/avd_composer_fixture.py",
+        "original_vendor_sha256": "543ce1633b00d48d728bc039555e835304f1d4c9966a8daa2d174fa1f0bbf9bf",
+        "fixture_vendor_sha256": "491341812fc71334ef998117f418c3c47c41552bf7098789f62f528862943b0b",
+        "changed_bytes": 456,
+        "scope": "AOSP Android10 composer restart rule in a disposable copy of the pinned API28 Google APIs vendor image. The SDK input and production app/native code are unchanged. Guest verification on every cold boot and stock native-crash assertions are required.",
+        "host_validation": {
+          "passed": true,
+          "all_bytes_outside_456_byte_region_identical": true,
+          "existing_output_refused": true,
+          "unknown_input_refused": true,
+          "focused_baseline_tests": {
+            "ran": 30,
+            "skipped": 1,
+            "failed": 0
+          },
+          "qualification_tests": {
+            "ran": 2,
+            "failed": 0
+          },
+          "shell_syntax": "passed"
+        }
+      },
+      "passed_jobs": 32
     }
   ]
 }

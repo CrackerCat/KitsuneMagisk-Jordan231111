@@ -663,5 +663,11 @@
       "align": 4096,
       "congruent16k": false
     }
-  ]
+  ],
+  "candidate318_repeat": {
+    "source_commit": "34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
+    "app_version_code": 31018,
+    "matrix": "docs/module-pr15.json",
+    "scope": "Current exact-candidate standalone probes and paired official-core 16 KiB provider/client controls. Earlier ELF/linker diagnostics retain their original artifact identities."
+  }
 }

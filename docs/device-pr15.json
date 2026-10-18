@@ -190,6 +190,18 @@
         "docs/device-pr15/ci-acceptance.json",
         "docs/device-qualification.md"
       ]
+    },
+    {
+      "id": "api28-google-x64-stock",
+      "name": "Android 9 Google APIs x86_64 \u2014 unmodified image",
+      "route": "Unmodified revision-11 vendor image and patched SDK ramdisk",
+      "status": "unqualified",
+      "limits": "PSR1.180720.122/6736742, kernel 4.4.124+, 4 KiB. Stock controls had no native crash, but the patched debug boot hit the same SurfaceFlinger HIDL abort. A separate opt-in AOSP composer-rule fixture is pending qualification; its result cannot qualify this unmodified image.",
+      "runs": [],
+      "evidence": [
+        "docs/device-pr15/ci-acceptance.json",
+        "docs/device-qualification.md"
+      ]
     }
   ]
 }

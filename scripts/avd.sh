@@ -23,6 +23,9 @@ avd_name="${MAGISK_AVD_NAME:-magisk-test}"
 emu_port="${MAGISK_AVD_PORT:-5556}"
 test_dir="${MAGISK_TEST_DIR:-.}"
 image_dir=
+vendor_fixture_dir=
+vendor_fixture_record=
+vendor_args=()
 debug_image=
 release_image=
 kernel_log="${AVD_KERNEL_LOG:-$test_dir/kernel.log}"
@@ -89,6 +92,10 @@ cleanup() {
   if [ -n "$image_dir" ]; then
     rm -rf "$image_dir"
     image_dir=
+  fi
+  if [ -n "$vendor_fixture_dir" ]; then
+    rm -rf "$vendor_fixture_dir"
+    vendor_fixture_dir=
   fi
   if [ -n "$owned_avd" ]; then
     "$avd" delete avd -n "$avd_name" >/dev/null 2>&1 || true
@@ -419,6 +426,19 @@ setup_emu() {
   local ini="$ANDROID_AVD_HOME/$avd_name.ini"
   sed "s:^[[:space:]]*target[[:space:]]*=.*:target=android-$ver:g" "$ini" > "$ini.new"
   mv "$ini.new" "$ini"
+
+  if [ "${AVD_API28_COMPOSER_FIXTURE:-0}" = 1 ]; then
+    [ "$avd_pkg" = 'system-images;android-28;google_apis;x86_64' ] || {
+      print_error "! Composer fixture requires the pinned API28 x86_64 image"
+      return 1
+    }
+    vendor_fixture_dir=$(mktemp -d "$test_dir/.magisk-api28-vendor.XXXXXX")
+    vendor_fixture_record="${AVD_QUALIFICATION_DIR:-$test_dir}/api28-composer-fixture.json"
+    python3 tools/avd_composer_fixture.py create \
+      --input "${installed_ramdisk%/*}/vendor.img" \
+      --output "$vendor_fixture_dir/vendor.img" --record "$vendor_fixture_record"
+    vendor_args=(-vendor "$vendor_fixture_dir/vendor.img")
+  fi
 }
 
 launch_emulator() {
@@ -426,9 +446,9 @@ launch_emulator() {
   if [ -n "${AVD_TEST_LOG:-}" ]; then
     rm -f "$kernel_log" "$logcat_log"
     "$emu" "@$avd_name" $emu_args "${log_args[@]}" -logcat-output "$logcat_log" \
-      $image_args >"$kernel_log" 2>&1 &
+      "${vendor_args[@]}" $image_args >"$kernel_log" 2>&1 &
   else
-    "$emu" "@$avd_name" $emu_args $image_args >/dev/null 2>&1 &
+    "$emu" "@$avd_name" $emu_args "${vendor_args[@]}" $image_args >/dev/null 2>&1 &
   fi
   emu_pid=$!
   wait_emu || return $?
@@ -451,6 +471,10 @@ if name != expected or str(uuid.UUID(boot)) != boot or boot == previous:
 print(boot)
 PY
   )
+  if [ -n "$vendor_fixture_record" ]; then
+    python3 tools/avd_composer_fixture.py verify-guest --record "$vendor_fixture_record" \
+      --serial "$ANDROID_SERIAL" --boot-id "$prior_boot_id"
+  fi
   if [ "${AVD_DISABLE_STORE_UPDATES:-0}" = 1 ]; then
     # Each variant wipes userdata, so restore this test setting on every boot.
     # Play Services updates kill dependent hidden-manager test processes.
@@ -600,6 +624,9 @@ PYAM
     fi
     adb logcat -d -b all -v threadtime > "$directory/boot-$index.log"
     adb logcat -d -b crash -v threadtime > "$directory/boot-$index.crash"
+    if [ -n "$vendor_fixture_record" ]; then
+      assert_no_native_crashes
+    fi
     if [ "${AVD_STOCK_FRAMEWORK_RESTART:-0}" = 1 ]; then
       # Exercise the stock graphics service across a framework restart, too.
       # Retain the preceding untouched cold-boot logs separately. No Magisk
@@ -640,6 +667,9 @@ PYSTOP
       adb shell dumpsys display > "$directory/boot-$index-display.txt"
       adb logcat -d -b all -v threadtime > "$directory/boot-$index-framework.log"
       adb logcat -d -b crash -v threadtime > "$directory/boot-$index-framework.crash"
+      if [ -n "$vendor_fixture_record" ]; then
+        assert_no_native_crashes
+      fi
       adb unroot >> "$directory/boot-$index-framework.txt"
       adb wait-for-device
     fi

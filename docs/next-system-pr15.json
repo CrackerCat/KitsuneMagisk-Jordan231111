@@ -440,6 +440,7 @@
     "tests/test_zygisk_provider.py",
     "tests/test_zygote_identity.py",
     "tools/UpdateSigner.java",
+    "tools/avd_composer_fixture.py",
     "tools/boot_qualification.py",
     "tools/build_info.py",
     "tools/device_qualification.py",

@@ -15,6 +15,7 @@ on:
       - "tools/boot_qualification.py"
       - "tools/property_qualification.py"
       - "tools/device_qualification.py"
+      - "tools/avd_composer_fixture.py"
       - "tests/test_device_qualification.py"
       - "tests/test_live_setup.py"
       - "tests/test_preinit_module_environment.py"
@@ -234,8 +235,8 @@ jobs:
         version: [23, 24, 25, 26, 27, 29, 30, 31, 32, 33, 34, 35, 36]
         type: [""]
         include:
-          # The default API28 x86_64 image aborts in SurfaceFlinger even stock.
-          # Keep that negative record and qualify the Google APIs image instead.
+          # API28 has a stock composer restart race. Qualify the explicit
+          # AOSP restart-rule fixture; keep the unmodified images unqualified.
           - version: 28
             type: "google_apis"
           - version: "36.1"
@@ -275,6 +276,7 @@ jobs:
           AVD_STOCK_PROVISIONING_BARRIER: ${{ matrix.version == 23 && '1' || '0' }}
           AVD_STOCK_FRAMEWORK_RESTART: ${{ (matrix.version == 23 || matrix.version == 28 || matrix.version == 29) && '1' || '0' }}
           AVD_STOCK_AM_ITERATIONS: ${{ startsWith(matrix.version, '37.') && '50' || '0' }}
+          AVD_API28_COMPOSER_FIXTURE: ${{ matrix.version == 28 && '1' || '0' }}
           AVD_GPU_MODE: ${{ (matrix.version == 23 || matrix.version == 28 || matrix.version == 29) && 'swiftshader' || 'swiftshader_indirect' }}
           AVD_BOOT_FIXTURES: ${{ matrix.version == 35 && '1' || '' }}
         run: scripts/avd.sh test ${{ matrix.version }} ${{ matrix.type }}

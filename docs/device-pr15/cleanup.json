@@ -69,12 +69,11 @@
     5052,
     5054,
     5056,
-    5058
+    5058,
+    5060
   ],
   "pending": [
-    "Final module AVDs and private ADB 5060",
-    "Owned task cache, including pinned VM images and downloaded module ZIPs",
-    "App/native build intermediates and test APK/fixture outputs",
+    "Owned task cache retained for final CI evidence",
     "Owned caffeinate process"
   ],
   "preserved": [
@@ -96,5 +95,75 @@
     "path": "~/.codex/worktrees/pr15-candidate/KitsuneMagisk",
     "source_commit": "34d897b1ea67f00fd4c9dfa8cf5c4134ebe5d102",
     "clean_before_archival": true
-  }
+  },
+  "temporary_avds_absent": true,
+  "module_phases_completed": [
+    {
+      "label": "module-final318",
+      "records": 20
+    },
+    {
+      "label": "fallback318-4k",
+      "records": 2
+    },
+    {
+      "label": "fallback318-16k",
+      "records": 2
+    },
+    {
+      "label": "module-final318-16k",
+      "records": 10
+    },
+    {
+      "label": "module-combinations318",
+      "records": 4
+    },
+    {
+      "label": "module-final318-api29",
+      "records": 4
+    },
+    {
+      "label": "module-sui16k-providers318",
+      "records": 2
+    },
+    {
+      "label": "module-sui16k-controls318",
+      "records": 2
+    },
+    {
+      "label": "fallback318-next4k",
+      "records": 1
+    },
+    {
+      "label": "fallback318-next16k",
+      "records": 1
+    }
+  ],
+  "build_cleanup": [
+    {
+      "target": "app",
+      "exit_code": 0,
+      "log_sha256": "4443a6b1b292812c2b7c3bcbbd47cbb7e9c2543b0eed6ee7ae73b81aacd6b2b3"
+    },
+    {
+      "target": "native",
+      "exit_code": 0,
+      "log_sha256": "b916b2cff89eae3e21e6e1f075b03efc1575714062708304c1d5461fe60c4626"
+    }
+  ],
+  "removed_test_outputs": [
+    "test-debug.apk",
+    "test-release.apk",
+    "test.apk",
+    "update-fixtures",
+    "pr15-production-update-fixtures"
+  ],
+  "removed_generated_caches": [
+    "__pycache__",
+    "tests/__pycache__",
+    "tests/system_mode/__pycache__",
+    "tools/__pycache__",
+    "tools/system_mode/__pycache__",
+    "app/test/.cxx"
+  ]
 }

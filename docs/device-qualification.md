@@ -176,8 +176,22 @@ abort before any Magisk installation: stock boot 3 has the same `Composer::getCo
 stack, and boot 1 fails in `getActiveConfig`. Init restarts the composer after SurfaceFlinger
 has already restarted. The [CI record](device-pr15/ci-acceptance.json) retains both controls,
 exact artifacts and logs. One unchanged-artifact retry reproduced the crash. That default
-SDK image remains unqualified. CI now tests the official API28 x86_64 Google APIs image
-(observed SDK revision 11); its qualification is pending and the crash gate remains enabled.
+SDK image remains unqualified. The API28 x86_64 Google APIs image (SDK revision 11)
+also hit the HIDL abort during a patched debug boot in
+[run 39100111200](https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39100111200),
+although its four stock cold boots and four framework restarts had no native crash.
+That unmodified image is unqualified too.
+
+CI now opts into an explicit [vendor-image fixture](../tools/avd_composer_fixture.py) for this
+one legacy lane. It backports [AOSP Android 10's composer restart rule](https://android.googlesource.com/platform/hardware/interfaces/+/android-10.0.0_r1/graphics/composer/2.1/default/android.hardware.graphics.composer@2.1-service.rc),
+replacing the delayed SurfaceFlinger-stopped trigger with the service's `onrestart` action.
+The helper accepts only the pinned revision-11 vendor-image hash, copies it to an owned
+temporary directory, and changes one block-aligned 456-byte init-file region without changing
+its length. All other image bytes are verified identical. Every cold boot must read back the
+expected file through ADB; stock cold boots and framework restarts additionally enforce the
+native-crash gate. The installed SDK image and production app/native code are unchanged.
+Fixture runtime qualification is pending. Any later acceptance applies to that modified lab
+image, not the original SDK image or a physical Android 9 phone.
 
 [Run 39072209066](https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39072209066)
 also passes all 33 jobs on its first attempt at PR head `82142208f`. The earlier
