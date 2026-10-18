@@ -2871,6 +2871,10 @@ including SU/restorecon, normal/hidden manager, Hide/Assistant visibility, inver
 distinct Linux boots and stock restoration. MuMu's full `31017` lifecycle and exact original restore
 also pass. BlueStacks and module reruns remain in progress;
 all `31016` records above retain their original source/artifact scope.
+The final module repeat also exposed an inherited [child-exit status bug](docs/device-pr15/child-exit-status.json):
+SU and synchronous native commands could report a signal-killed child as successful. Official 30.7
+reproduces it. Host regressions pass for the correction; candidate `31018` requires rebuilding
+and runtime acceptance. The completed `31017` records retain their exact artifact identities.
 Four unavailable device/ROM targets are explicitly `unqualified-target` with PR16 ownership;
 the release audit still rejects them, and their implementations remain available.
 

@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "status": "host-regression-passed; candidate-31018-build-and-runtime-pending",
+  "problem": "SU and synchronous native commands read WEXITSTATUS without first checking whether the child exited normally. A signal-killed child could be reported as success; an interrupted C++ wait could also read an uninitialized status.",
+  "official_control": {
+    "avd": "pr15-modules317-16k",
+    "version": "30.7:MAGISK:R",
+    "boot_id": "27745218-b438-4851-8d40-01b39ffe6967",
+    "cases": [
+      {
+        "case": "ordinary-exit",
+        "exit_code": 23,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "case": "self-sigkill",
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      }
+    ],
+    "daemon_still_available": true
+  },
+  "fork_source_control": {
+    "source_commit": "a86a70bdf5a019603754d72137665bd5ba302fdc",
+    "method": "Execute the unchanged production SU wait block against a real forked child killed by SIGKILL.",
+    "expected_exit": 137,
+    "observed_exit": 0,
+    "test": "tests/test_child_status.py"
+  },
+  "changes": [
+    "Distinguish normal exit from signal termination and return 128 plus the terminating signal.",
+    "Retry waitpid on EINTR and preserve errors without reading an unwritten status.",
+    "Wait through nonterminal child states rather than reporting completion."
+  ],
+  "host_regression": {
+    "passed": true,
+    "implementations": [
+      "Rust SU daemon wait block",
+      "C++ exec_command_sync"
+    ],
+    "cases": [
+      "normal exit 0",
+      "normal exit 23",
+      "SIGKILL 137",
+      "SIGTERM 143",
+      "wait failure -1",
+      "fork failure -1 (C++ caller)",
+      "interrupted wait followed by child exit 7"
+    ]
+  },
+  "android_regression": "RootPathTest.testKilledRootCommandReturnsSignalStatus; pending rebuilt candidate",
+  "probe_correction": "The BusyBox probe must read the command status in a continuing shell; the old SU wait bug can mask a directly exec-ed crash. No zero status alone is accepted as proof that this module works.",
+  "references": [
+    "https://man7.org/linux/man-pages/man2/waitpid.2.html"
+  ]
+}

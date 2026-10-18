@@ -141,6 +141,7 @@
     "docs/device-pr15/avd-lifecycle.json",
     "docs/device-pr15/bluestacks-debug.json",
     "docs/device-pr15/bluestacks-lifecycle.json",
+    "docs/device-pr15/child-exit-status.json",
     "docs/device-pr15/ci-acceptance.json",
     "docs/device-pr15/ci-api23x64-debug.json",
     "docs/device-pr15/ci-api23x64-release.json",
@@ -324,6 +325,7 @@
     "native/src/Cargo.toml",
     "native/src/base/Android.mk",
     "native/src/base/Cargo.toml",
+    "native/src/base/base.cpp",
     "native/src/base/boot.cpp",
     "native/src/base/include/base.hpp",
     "native/src/boot/bootimg.cpp",
@@ -418,6 +420,7 @@
     "tests/test_boot_format.py",
     "tests/test_boot_update.py",
     "tests/test_build_info.py",
+    "tests/test_child_status.py",
     "tests/test_device_qualification.py",
     "tests/test_fork_logging.py",
     "tests/test_hide_failures.py",
@@ -478,7 +481,7 @@
     "updates/trust.json"
   ],
   "identity": {
-    "version_code": 31017,
+    "version_code": 31018,
     "application_id": "io.github.jordan231111.magisk"
   },
   "update_trust_sha256": "576693b150124ead7487391711da1c43bef7281fbda8750a986ad1b5aa9024d5"

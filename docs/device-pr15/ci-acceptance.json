@@ -350,7 +350,7 @@
       "files": 10
     }
   ],
-  "signing_scope": "CI uses a disposable signer. Production-signed a86a70bdf APKs are qualified separately in the local AVD, container and commercial-emulator records; CI metadata retains its merge-source identity.",
+  "signing_scope": "CI uses a disposable release signer. The local a86a70bdf release APK uses the project production key, while the debug APK uses a separate debug key. Exact target records identify their variant and APK hash; CI retains its merge-source identity.",
   "previous_acceptance": {
     "schema": 1,
     "workflow_run": 39064935566,

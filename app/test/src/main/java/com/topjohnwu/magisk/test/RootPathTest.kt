@@ -11,6 +11,18 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class RootPathTest {
     @Test
+    fun testKilledRootCommandReturnsSignalStatus() {
+        val process = ProcessBuilder("su", "-c", "kill -KILL $$")
+            .redirectErrorStream(true).start()
+        try {
+            val output = process.inputStream.bufferedReader().use { it.readText() }
+            assertEquals("A killed root command cannot report success: $output", 137, process.waitFor())
+        } finally {
+            process.destroy()
+        }
+    }
+
+    @Test
     fun testOrdinaryApplicationCanRequestRoot() {
         // This target is a plain application. It has none of AppContext's PATH
         // additions, and the manager's preceding consent test enables auto-allow.

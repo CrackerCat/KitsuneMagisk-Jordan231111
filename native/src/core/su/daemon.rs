@@ -5,7 +5,10 @@ use crate::db::{DbSettings, MultiuserMode, RootAccess};
 use crate::ffi::{SuPolicy, SuRequest, exec_root_shell};
 use crate::logging::{android_logging, fork_with_logging_lock};
 use crate::socket::IpcRead;
-use base::{LoggedResult, ResultExt, WriteExt, debug, error, exit_on_error, libc, warn};
+use base::{
+    LibcReturn, LoggedResult, ResultExt, WriteExt, debug, error, exit_on_error, libc, warn,
+};
+use nix::errno::Errno;
 use std::os::fd::IntoRawFd;
 use std::os::unix::net::{UCred, UnixStream};
 use std::sync::Arc;
@@ -202,11 +205,18 @@ impl MagiskD {
         // Wait result
         debug!("su: waiting child pid=[{}]", child);
         let mut status = 0;
-        let code = unsafe {
-            if libc::waitpid(child, &mut status, 0) > 0 {
-                libc::WEXITSTATUS(status)
-            } else {
-                -1
+        let code = loop {
+            match unsafe { libc::waitpid(child, &mut status, 0) }.check_err() {
+                Err(Errno::EINTR) => continue,
+                Err(_) | Ok(0) => break -1,
+                Ok(_) => {}
+            }
+            if libc::WIFEXITED(status) {
+                break libc::WEXITSTATUS(status);
+            }
+            // Match shell status instead of reporting a killed command as success.
+            if libc::WIFSIGNALED(status) {
+                break 128 + libc::WTERMSIG(status);
             }
         };
         debug!("su: return code=[{}]", code);
