@@ -1,0 +1,322 @@
+{
+  "schema": 1,
+  "status": "experimental-beta-published",
+  "roadmap_pr": 16,
+  "implementation_pr": "https://github.com/Jordan231111/KitsuneMagisk/pull/44",
+  "merge_commit": "9bf1fa1399d7a6314898939495abd2eee9648f9d",
+  "source_commit": "b08538bab4e1d3f7ab6d35d22ab49dede01e008a",
+  "app_version_code": 31021,
+  "upstream": {
+    "version": "31.0",
+    "prerelease": true,
+    "commit": "96221b69fae9910b1c0c75c2f92a4ebb2c2dc698"
+  },
+  "release": {
+    "url": "https://github.com/Jordan231111/KitsuneMagisk/releases/tag/kitsune-canary-b08538bab4e1d3f7ab6d35d22ab49dede01e008a",
+    "immutable": true,
+    "prerelease": true,
+    "assets": [
+      {
+        "name": "app-debug.apk",
+        "sha256": "40a1d7ab05e86c701baf7891e020bc489216ee113b4ebb3d032a5920ef1e8a60",
+        "size": 41079440
+      },
+      {
+        "name": "app-release.apk",
+        "sha256": "9f4d203a883585ce0cd057f23ab4077e49ab7f134623fc7566ebd8e52415da8f",
+        "size": 11638762
+      },
+      {
+        "name": "mapping-release.zip",
+        "sha256": "f7ee67dc264d9715beb6f5cd72154a3a9918f42a24d347fc8168f9d47634119e",
+        "size": 3705977
+      },
+      {
+        "name": "qualification.zip",
+        "sha256": "d011272f279b5c333672dea18370967517f98aec59e0bdc525cb548f9c0ff93c",
+        "size": 189044
+      },
+      {
+        "name": "release-info.json",
+        "sha256": "56078a1f00c5da80cb4cc46c203356d9370840b020b6834b303622e7c30126e4",
+        "size": 44941
+      },
+      {
+        "name": "rust-sbom.cdx.json",
+        "sha256": "507417b3f03663860afb60a1aaafbbb7f6e0fc014b32e30b1d2c537cae8abf65",
+        "size": 36912
+      },
+      {
+        "name": "SHA256SUMS",
+        "sha256": "8182ae818d2dfb0f836f109919223a51d8a966b38abbbd41612b57c442bca97b",
+        "size": 584
+      },
+      {
+        "name": "stub-release.apk",
+        "sha256": "b488b455633d82a34cd5feb5aec18331fd99db4a8df108519803b553ab2dc522",
+        "size": 45689
+      }
+    ]
+  },
+  "production_certificate_sha256": "9b09eb317c96036185884700d9584e63cc4a2a288825a0172633ba7bfe222ec6",
+  "ci": {
+    "url": "https://github.com/Jordan231111/KitsuneMagisk/actions/runs/39179324896",
+    "jobs_passed": 36,
+    "host_tests": 350,
+    "platform_builds": [
+      "macOS",
+      "Linux",
+      "Windows"
+    ],
+    "native_abis": [
+      "armeabi-v7a",
+      "arm64-v8a",
+      "x86",
+      "x86_64"
+    ],
+    "scope": "CI uses its disposable signer; local runtime records identify the exact distributed APKs."
+  },
+  "local_avds": [
+    {
+      "id": "35-4k",
+      "guest": {
+        "fingerprint": "Android/sdk_slim_arm64/emu64a:15/AE3A.240806.019/12368160:userdebug/test-keys",
+        "api": 35,
+        "abi": "arm64-v8a",
+        "page_size": 4096,
+        "kernel": "6.6.30-android15-8-gdd9c02ccfe27-ab11987101-4k",
+        "selinux": "Enforcing"
+      },
+      "variants": [
+        "debug",
+        "release"
+      ],
+      "app_tests_per_variant": 121,
+      "boot_checks_per_variant": 107,
+      "property_checks_per_variant": 4,
+      "su_requests_per_variant": 48,
+      "su_concurrency": 6,
+      "graphics": "swiftshader_indirect",
+      "kernel_override": false
+    },
+    {
+      "id": "35-16k",
+      "guest": {
+        "fingerprint": "google/sdk_gphone16k_arm64/emu64a16k:15/AE3A.240806.041/12890756:user/dev-keys",
+        "api": 35,
+        "abi": "arm64-v8a",
+        "page_size": 16384,
+        "kernel": "6.6.30-android15-8-gdd9c02ccfe27-ab11987101",
+        "selinux": "Enforcing"
+      },
+      "variants": [
+        "debug",
+        "release"
+      ],
+      "app_tests_per_variant": 121,
+      "boot_checks_per_variant": 107,
+      "property_checks_per_variant": 4,
+      "su_requests_per_variant": 48,
+      "su_concurrency": 6,
+      "graphics": "swiftshader_indirect",
+      "kernel_override": false
+    },
+    {
+      "id": "36-4k",
+      "guest": {
+        "fingerprint": "google/sdk_gphone64_arm64/emu64a:16/BE4B.251210.005/14574095:user/release-keys",
+        "api": 36,
+        "abi": "arm64-v8a",
+        "page_size": 4096,
+        "kernel": "6.12.38-android16-5-gbb9513914902-ab13996879-4k",
+        "selinux": "Enforcing"
+      },
+      "variants": [
+        "debug",
+        "release"
+      ],
+      "app_tests_per_variant": 121,
+      "boot_checks_per_variant": 107,
+      "property_checks_per_variant": 4,
+      "su_requests_per_variant": 48,
+      "su_concurrency": 6,
+      "graphics": "host",
+      "kernel_override": true
+    },
+    {
+      "id": "29-4k",
+      "guest": {
+        "fingerprint": "google/sdk_gphone64_arm64/emulator64_arm64:10/QSR1.211112.011/13135432:userdebug/dev-keys",
+        "api": 29,
+        "abi": "arm64-v8a",
+        "page_size": 4096,
+        "kernel": "4.14.175-gd7103c943974-dirty",
+        "selinux": "Enforcing"
+      },
+      "variants": [
+        "debug",
+        "release"
+      ],
+      "app_tests_per_variant": 121,
+      "boot_checks_per_variant": 107,
+      "property_checks_per_variant": 4,
+      "su_requests_per_variant": 48,
+      "su_concurrency": 6,
+      "graphics": "host",
+      "kernel_override": false
+    }
+  ],
+  "mumu": {
+    "schema": 1,
+    "source_commit": "b08538bab4e1d3f7ab6d35d22ab49dede01e008a",
+    "app_version_code": 31021,
+    "apk_sha256": "40a1d7ab05e86c701baf7891e020bc489216ee113b4ebb3d032a5920ef1e8a60",
+    "suite_passed": true,
+    "junit_tests": 121,
+    "upgrade_preserved_data": true,
+    "vendor_root_disabled": true,
+    "vendor_root_off_adb_uid": 2000,
+    "root_stress_requests": 144,
+    "root_concurrency": 6,
+    "uninstall_passed": true,
+    "original_disks_restored": true,
+    "original_settings_restored": true,
+    "checked_at": "2026-10-19T01:07:58.463968+00:00",
+    "limits": [
+      "Exact MuMu target; permissive SELinux; debug System Mode only.",
+      "An initial qualification drift refusal is tracked in issue #46.",
+      "The upgrade module was removed through the normal module lifecycle before the full fixture suite.",
+      "The first uninstall check was made before its asynchronous transaction finished; final checks waited for owned paths, transaction metadata and the manager to disappear."
+    ],
+    "restore": {
+      "schema": 1,
+      "device": "Android Device-1",
+      "state": "stopped",
+      "byte_exact_restore": true,
+      "settings_restored": true,
+      "files": {
+        "system.qcow2": {
+          "sha256": "5a6bcb206a71039b6e212124e888a76a78acc8181bda18fc279e36c7ba3437ec",
+          "mode": "0o666"
+        },
+        "data.qcow2": {
+          "sha256": "d1f204adabe8c6973d7787c6067e4227dab45dc98303e9b6fee4afcc8c67734f",
+          "mode": "0o644"
+        },
+        "setting/vm.json": {
+          "sha256": "f5dcb23b729c4aaf454e3c65f890994d2b2764e8eda5e8a6a775bada4c720bf7",
+          "mode": "0o644"
+        }
+      }
+    },
+    "uninstall": {
+      "schema": 1,
+      "passed": true,
+      "manager_removed": true,
+      "owned_boot_paths_absent": true,
+      "transaction_metadata_absent": true,
+      "user_data_and_module_whiteout_preserved": true,
+      "inspection": "Protected files checked with existing bootstrap ADB root after the uninstall finished.",
+      "cold_boot_id": "a7a731e9-7866-49de-9f3f-ab854fbb153e",
+      "vendor_root_enabled": false,
+      "adb_uid": 2000,
+      "root_request_exit": 127,
+      "root_request_output": "/system/bin/sh: su: inaccessible or not found",
+      "root_absent_after_cold_boot": true
+    }
+  },
+  "public_updates": {
+    "feed_commit": "5885601be2c39c658aba837d2e9479672bdbc714",
+    "beta_verified": true,
+    "canary_verified": true,
+    "sequence": 1,
+    "package": "io.github.jordan231111.magisk",
+    "clean_stub": {
+      "schema": 1,
+      "source_commit": "b08538bab4e1d3f7ab6d35d22ab49dede01e008a",
+      "application_id": "io.github.jordan231111.magisk",
+      "installed_initial_stub_version_code": 1,
+      "installed_full_version_code": 31021,
+      "stub_sha256": "b488b455633d82a34cd5feb5aec18331fd99db4a8df108519803b553ab2dc522",
+      "installed_manager_sha256": "9f4d203a883585ce0cd057f23ab4077e49ab7f134623fc7566ebd8e52415da8f",
+      "published_manager_sha256": "9f4d203a883585ce0cd057f23ab4077e49ab7f134623fc7566ebd8e52415da8f",
+      "feed": "https://raw.githubusercontent.com/Jordan231111/KitsuneMagisk/update-feed/v1/io.github.jordan231111.magisk/beta.json",
+      "passed": true,
+      "route": "Clean public production stub -> authenticated download -> Android package update",
+      "manager_started": true,
+      "displayed_installed_code": 31021,
+      "displayed_latest_code": 31021,
+      "native_root_install_performed": false,
+      "checked_at": "2026-10-19T01:29:48.176940+00:00"
+    }
+  },
+  "sdk_kernel_control": {
+    "schema": 1,
+    "official_archive": "https://dl.google.com/android/repository/sys-img/google_apis_playstore/arm64-v8a-36.1_r04.zip",
+    "published_archive_sha1": "193d86bad80d9ff79fe4272304f3193e7c097e1e",
+    "kernel_sha256": "518c33e1ffd4cd682ecf7eebbb0bf0ca1f6111876cd126fde57e3c9834726d1a",
+    "kernel_size": 15943962,
+    "downloaded_bytes": 15890722,
+    "verification": "ZIP CRC and exact SHA-256 match the retained PR15 kernel; only the required archive ranges were downloaded.",
+    "installed_custom_kernel_sha256": "e9d52ce7388cd7eb0ba6c2a604dd94bde8670f2dfa00da679e851354137d2dba",
+    "installed_custom_kernel_unchanged": true,
+    "scope": "Explicit -kernel override on disposable AVDs only."
+  },
+  "production_qualified": false,
+  "production_blockers": [
+    "https://github.com/Jordan231111/KitsuneMagisk/issues/39",
+    "https://github.com/Jordan231111/KitsuneMagisk/issues/40",
+    "https://github.com/Jordan231111/KitsuneMagisk/issues/41"
+  ],
+  "other_tracked_limits": [
+    "https://github.com/Jordan231111/KitsuneMagisk/issues/42",
+    "https://github.com/Jordan231111/KitsuneMagisk/issues/43",
+    "https://github.com/Jordan231111/KitsuneMagisk/issues/45",
+    "https://github.com/Jordan231111/KitsuneMagisk/issues/46"
+  ],
+  "repository": {
+    "default_branch": "next-system",
+    "active_branches": [
+      "next-system",
+      "update-feed"
+    ],
+    "legacy_line_tag": "archive/kitsune",
+    "superseded_dependency_prs_closed": 16,
+    "unique_development_history_preserved": true
+  },
+  "cleanup": {
+    "status": "complete",
+    "mumu_restored_after_public_stub_check": {
+      "schema": 1,
+      "device": "Android Device-1",
+      "state": "stopped",
+      "byte_exact_restore": true,
+      "settings_restored": true,
+      "files": {
+        "system.qcow2": {
+          "sha256": "5a6bcb206a71039b6e212124e888a76a78acc8181bda18fc279e36c7ba3437ec",
+          "mode": "0o666"
+        },
+        "data.qcow2": {
+          "sha256": "d1f204adabe8c6973d7787c6067e4227dab45dc98303e9b6fee4afcc8c67734f",
+          "mode": "0o644"
+        },
+        "setting/vm.json": {
+          "sha256": "f5dcb23b729c4aaf454e3c65f890994d2b2764e8eda5e8a6a775bada4c720bf7",
+          "mode": "0o644"
+        }
+      }
+    },
+    "temporary_avds_absent": true,
+    "owned_upgrade_worktree_archived": true,
+    "permanent_signing_assets_preserved": true,
+    "generated_repository_build_outputs_removed": true,
+    "private_adb_servers_stopped": [
+      5062,
+      5064
+    ],
+    "owned_task_cache_removed": true,
+    "legacy_output_artifacts_removed": true,
+    "user_sdk_kernel_preserved": true
+  }
+}

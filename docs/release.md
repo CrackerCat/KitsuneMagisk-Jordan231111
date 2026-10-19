@@ -1,5 +1,9 @@
 # Release qualification
 
+[PR16](https://github.com/Jordan231111/KitsuneMagisk/pull/44) is merged. The
+[Beta 4 acceptance](release-pr16.json) records code 31021, immutable assets, public-feed verification
+and a clean production-stub update. Stable promotion remains blocked by the gates below.
+
 Builds use the maintained `next-system` branch. The current release gate is
 [`next-system-pr16.json`](next-system-pr16.json). The upstream base remains official
 Magisk v31.0 prerelease; v30.7 remains official stable as checked on 2026-10-18.
@@ -21,6 +25,8 @@ records remain available. Candidate releases claim only their exact tested targe
    matrix in `release-policy.json`, including 4/16 KiB AVDs and MuMu Device-1. Preserve the exact
    APKs, test logs and `kitsune.device-qualification.v1` records. MuMu requires full CLI close/open,
    current-format upgrade/data preservation, vendor-root-off checks, uninstall and original-image restore.
+   Set `AVD_STRESS_ITERATIONS=8` and `AVD_STRESS_PARALLEL=6` for 48 root requests per variant;
+   the concurrency-only runs also execute `MagiskAppTest#testSuRequest` to authorize the lab shell.
 4. Audit all three owned Rust lockfiles with `scripts/env.py cargo audit --file PATH --json`.
    Retain the raw reports and current lockfile digests. The only accepted finding is
    [RUSTSEC-2023-0071](https://rustsec.org/advisories/RUSTSEC-2023-0071.html) for native `rsa`:
@@ -67,3 +73,7 @@ Never disable certificate checks to make an upgrade succeed.
 Stable metadata additionally requires an empty production-blocker list, a passing complete historical
 ledger and a final semantic product version. Closing an issue alone does not qualify a target.
 Known intermittent lab failures remain tracked in [#43](https://github.com/Jordan231111/KitsuneMagisk/issues/43).
+
+The Android 16.1 acceptance used an explicit temporary `-kernel` override matching the official
+PR15 kernel digest. The installed SDK had a different custom kernel and was preserved. Bind
+SDK inputs before testing; the qualification archive contains the actual harness and kernel record.

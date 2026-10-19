@@ -9,8 +9,8 @@ binds the public APKs, hosted checks and clean-stub installation. The [release g
 The PR10 feed below belongs to the previous `io.github.huskydg.magisk.next`
 package. PR15 isolates the new `io.github.jordan231111.magisk` package under
 `v1/io.github.jordan231111.magisk/` on the same `update-feed` branch. It requires
-a separate publication and acceptance run before activation; automatic checks
-remain off. See the [namespace migration](build-info.md#pr15-namespace-migration).
+its own publication and acceptance. [PR16 / Beta 4](release-pr16.json) has now activated
+its signed beta/canary feeds and passed the clean-stub update; background checks remain off. See the [namespace migration](build-info.md#pr15-namespace-migration).
 The schema and signing certificate remain unchanged. Never publish a new-package
 manifest over an old-package channel.
 
@@ -22,7 +22,7 @@ https://raw.githubusercontent.com/Jordan231111/KitsuneMagisk/update-feed/v1/stab
 https://raw.githubusercontent.com/Jordan231111/KitsuneMagisk/update-feed/v1/canary.json
 ```
 
-The experimental default is `beta`; stable promotion stays blocked until PR16. Existing installs
+The experimental default is `beta`; stable promotion stays blocked by the [production gates](release.md). Existing installs
 remain opted out of background checks. Custom URLs must use HTTPS and end in one of those channel
 filenames, and retain the same pinned project signature. There is no unsigned JSON fallback or
 public debug update channel. Old Debug selections resolve to the default beta channel,
@@ -143,13 +143,15 @@ Local MuMu tests must use full application close/open for any cold boot, never `
 
 Original Full/Lite and moved-tag release provenance remains in the PR8 ledger. Their dead/unsigned
 endpoints are not trusted redirects into the new feed. A matching old version label is not an
-authenticated upgrade path. Users needing unported Lite/SuList/module capabilities keep their
-existing qualified setup until the relevant feature PR closes; this updater does not retire them.
+authenticated upgrade path. The [historical ledger](port-ledger.md), [Hide/SuList contract](hide-policy.md)
+and [module contract](module-contract.md) describe retained behavior and migration. Keep an existing
+qualified setup where the replacement target remains unqualified.
 The [historical module template](port-history/module-template.json) retains its exact 8,537-byte
 digest and immutable archive locator. It is an archival reference for the old module API, not an
-advertised installer/template for the new runtime. PR14 owns that API's tested migration.
+advertised installer/template for the new runtime. The [module contract](module-contract.md) records
+that API's tested migration.
 
-The [experimental release](https://github.com/Jordan231111/KitsuneMagisk/releases/tag/kitsune-canary-a95795049614bd09019af69ddd9c968586ae8f6f)
+The [historical PR10 acceptance](update-service-acceptance.json)
 passed public-feed/asset verification and the clean-stub and manager update flows on MuMu VM 1.
 Independent protected key backup remains a production-promotion requirement under P0.7/PR16.
 This is not proof of physical-phone root qualification.

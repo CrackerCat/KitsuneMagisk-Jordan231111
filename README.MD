@@ -8,9 +8,10 @@ KitsuneMagisk provides Magisk root with Kitsune Hide/SuList, early mounting, mod
 and System Mode for qualified writable targets. The maintained source is based on official Magisk
 v31.0 prerelease. Ordinary boot-image installation and recovery remain central to the project.
 
-This branch is experimental. [Tested targets](compatibility/TESTED.md) identify exact images and
-limits; virtual-device tests do not qualify physical phones. See [release qualification](docs/release.md)
-for the remaining production gates and the [roadmap](DEVELOPMENT_ROADMAP.md) for development status.
+The current [Beta 4](https://github.com/Jordan231111/KitsuneMagisk/releases/tag/kitsune-canary-b08538bab4e1d3f7ab6d35d22ab49dede01e008a)
+is experimental. Its [acceptance record](docs/release-pr16.json) identifies the tested APKs and remaining
+production gates. [Compatibility records](compatibility/TESTED.md) retain their exact tested versions;
+virtual devices do not qualify physical phones. See the [roadmap](DEVELOPMENT_ROADMAP.md) for status.
 
 The manager package is `io.github.jordan231111.magisk`. Builds report their product version,
 source commit and upstream base separately. [Signed updates](docs/update-service.md) use the
